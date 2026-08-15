@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Experiment outputs (large, regenerable)
+results/**/*.npz
+results/**/*.png
+data/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+
+# Reference PDFs and large binaries never go in git
+*.pdf
+
+# Editor / OS
+.DS_Store
+*.swp

@@ -1,0 +1,78 @@
+# CLAUDE.md - read this before doing anything
+
+New repository. AEB under degraded visibility. Owner: Zach. Demo target: Novi, October 2026.
+See `README.md` for what this is and why.
+
+## Write the specification before any code
+
+The deliverable that unblocks everything else is a **safety specification derived from
+primitives**, in the manner of the steering study: `delta_tol = 0.0120` came from lane width,
+vehicle width, wheelbase, speed and a 1.85 s reaction horizon, with no fitted parameter.
+
+Do the same here from stopping distance, minimum TTC and impact speed. It is a document, it
+needs no simulator, and it is the thing most likely to be skipped under expo pressure.
+
+## The statistic is a hypothesis, not an assumption
+
+The working expectation is that the **peak** is the right statistic for AEB, because the
+hazard is a single event, where it was dimensionally wrong for lane keeping because that
+threshold described a *sustained* error.
+
+That is the scientific bet of this repository. It is not a licence to assume it. It gets
+tested blind like everything else, and if it fails, the failure is the result.
+
+## Inherited standing rules
+
+These are measured results from the steering study, not preferences. Violating one silently
+reproduces a bug that has already cost this lab real time.
+
+- **A result that contradicts a pre-registered expectation is a bug until proven otherwise.**
+  It may not be written up as a finding until a written disposition lists the candidate
+  causes that were ruled out.
+- **Verification verdicts are committed to git before the corresponding closed-loop run.**
+  That is what makes a verdict a prediction. Four criteria in the parent study scored 14/14,
+  7/8, 8/8 and 10/10 in-sample and then 2/6, 3/7, 6/10 and 2/4 blind. In-sample agreement
+  means nothing here.
+- **Train on the parameterized family, closed-loop test on points from that family's axis,
+  and verify over that same interval.** If training and verification disagree about what the
+  disturbance is, the comparison is meaningless.
+- **Every closed-loop number is a failure RATE over at least 10 repetitions**, never a single
+  run. Report Wilson intervals.
+- **Keep a known-bad negative control in every experiment.** A model that must fail the
+  conditions it never saw is what catches specification bugs.
+- **Disturbances apply at full sensor resolution, before crop and downsampling**, never to
+  the network input.
+- **Certify against the closed-loop tolerance**, not a per-frame corridor. In the steering
+  study the per-frame corridor was about 3.4x too permissive and a vehicle departed the road
+  with every frame inside it.
+- **The verifiable network stays ReLU-only**, no BatchNorm or Dropout. Width is the capacity
+  lever. Do not collapse to a trivial controller either; it must still drive closed-loop.
+- **Do not vendor `auto_LiRPA`.** Depend on upstream `Verified-Intelligence/auto_LiRPA` via
+  pip. **Do not use SDP-CROWN**; it requires an L2 ball and is vacuous on our sets.
+- **Never trade experimental quality for speed.** No CPU fallback, no lowered simulator
+  quality, no cut epochs. Warn before runs over 1 h.
+
+## The CARLA rule that has bitten five times
+
+> **A read or a placement issued next to a write does not see that write.**
+> `world.set_weather()`, spectator `set_transform()` and sensor delivery are all applied by
+> the simulator on the NEXT TICK. Nothing errors when you get this wrong.
+
+Never read back state you just wrote; construct it. Match sensor frames on the id
+`world.tick()` returns, and never swallow a missing frame.
+
+## CARLA is shared. Operating notes.
+
+- Book it. Zach, three students and the Isuzu project all want the same simulator.
+- **Relaunch the server before every measurement run.** It leaks about 10.5 GiB over 11 h.
+- **Non-default port** on the lab machine. Check before assuming 2000.
+- **Long runs must be detached** (`setsid nohup ... &`). Foreground and harness-waited jobs
+  get killed.
+- **`pkill -f` matches your own command line.** Use bracket patterns or PIDs.
+- **`grep` block-buffers into a file.** Use `--line-buffered`, or a healthy run looks stalled.
+
+## Parent repository
+
+Read before writing code:
+`formal-verification--automated-driving--code/CLAUDE.md`, then `docs/STATE_OF_PLAY.md`
+sections 0, 0b and 0c, then `docs/TRAPS.md` and `docs/CONSTRAINTS.md`.
