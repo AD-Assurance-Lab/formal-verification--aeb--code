@@ -1,4 +1,4 @@
-# formal-verification--emergency-braking--code
+# formal-verification--aeb--code
 
 Formal verification of automatic emergency braking under degraded visibility.
 
