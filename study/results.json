@@ -6,12 +6,12 @@
       "note": "PROTOCOL.md locked and tagged protocol-v1"
     },
     "M1": {
-      "state": "in_progress",
-      "note": "map survey, offline from OpenDRIVE"
+      "state": "done",
+      "note": "Town13 chosen: 401 pedestrian sites, 367 braking sites, declared 30-55 mph. Lit/unlit still unverified"
     },
     "M2": {
       "state": "todo",
-      "note": ""
+      "note": "blocked on CARLA"
     },
     "M3": {
       "state": "todo",

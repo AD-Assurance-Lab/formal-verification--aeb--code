@@ -1,0 +1,163 @@
+[
+  {
+    "map": "Town13",
+    "braking_sites": 367,
+    "pedestrian_sites": 401,
+    "longest_ft": 5771.5,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      30.0,
+      35.0,
+      40.0,
+      50.0,
+      55.0,
+      120.0
+    ],
+    "roads_with_declared_speed": 614,
+    "total_candidate_runs": 614
+  },
+  {
+    "map": "Town12",
+    "braking_sites": 276,
+    "pedestrian_sites": 303,
+    "longest_ft": 7720.4,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      18.6,
+      21.7,
+      24.9,
+      31.1,
+      34.2,
+      74.6
+    ],
+    "roads_with_declared_speed": 432,
+    "total_candidate_runs": 432
+  },
+  {
+    "map": "Town11",
+    "braking_sites": 392,
+    "pedestrian_sites": 133,
+    "longest_ft": 12047.6,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      40.0,
+      55.0
+    ],
+    "roads_with_declared_speed": 489,
+    "total_candidate_runs": 489
+  },
+  {
+    "map": "TownBig",
+    "braking_sites": 8,
+    "pedestrian_sites": 26,
+    "longest_ft": 933.5,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      35.0,
+      50.0,
+      55.0
+    ],
+    "roads_with_declared_speed": 30,
+    "total_candidate_runs": 30
+  },
+  {
+    "map": "Town15",
+    "braking_sites": 5,
+    "pedestrian_sites": 9,
+    "longest_ft": 984.9,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      35.0,
+      40.0,
+      55.0
+    ],
+    "roads_with_declared_speed": 10,
+    "total_candidate_runs": 10
+  },
+  {
+    "map": "Town01",
+    "braking_sites": 5,
+    "pedestrian_sites": 7,
+    "longest_ft": 1006.8,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      25.0
+    ],
+    "roads_with_declared_speed": 7,
+    "total_candidate_runs": 7
+  },
+  {
+    "map": "Town06",
+    "braking_sites": 4,
+    "pedestrian_sites": 0,
+    "longest_ft": 1543.9,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      65.0
+    ],
+    "roads_with_declared_speed": 4,
+    "total_candidate_runs": 4
+  },
+  {
+    "map": "Town04",
+    "braking_sites": 2,
+    "pedestrian_sites": 0,
+    "longest_ft": 748.1,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [
+      65.0
+    ],
+    "roads_with_declared_speed": 2,
+    "total_candidate_runs": 2
+  },
+  {
+    "map": "Town02",
+    "braking_sites": 0,
+    "pedestrian_sites": 0,
+    "longest_ft": 284.8,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [],
+    "roads_with_declared_speed": 0,
+    "total_candidate_runs": 0
+  },
+  {
+    "map": "Town03",
+    "braking_sites": 0,
+    "pedestrian_sites": 0,
+    "longest_ft": 450.3,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [],
+    "roads_with_declared_speed": 0,
+    "total_candidate_runs": 0
+  },
+  {
+    "map": "Town05",
+    "braking_sites": 0,
+    "pedestrian_sites": 0,
+    "longest_ft": 457.3,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [],
+    "roads_with_declared_speed": 0,
+    "total_candidate_runs": 0
+  },
+  {
+    "map": "Town07",
+    "braking_sites": 0,
+    "pedestrian_sites": 0,
+    "longest_ft": 327.9,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [],
+    "roads_with_declared_speed": 0,
+    "total_candidate_runs": 0
+  },
+  {
+    "map": "Town10HD",
+    "braking_sites": 0,
+    "pedestrian_sites": 0,
+    "longest_ft": 189.9,
+    "pedestrian_sites_with_crosswalk": 0,
+    "declared_speeds_mph": [],
+    "roads_with_declared_speed": 0,
+    "total_candidate_runs": 0
+  }
+]
