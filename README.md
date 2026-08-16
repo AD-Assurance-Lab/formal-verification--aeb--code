@@ -60,3 +60,46 @@ The steering study is the parent. Read, in this order:
 The build is larger than it looks and the expo date is fixed. If it slips, the expo demo
 falls back to the twelve canonical steering cells plus the occlusion result. Decide that
 fallback early rather than late.
+
+---
+
+## Running this
+
+The repository is public and is a **proof of concept**, not production code. It is meant to
+be readable by someone outside the lab.
+
+**Without a simulator**, which is most of what exists today:
+
+```bash
+python tools/survey_maps.py           # choose the test map from map geometry alone
+python -m study.protocol_lock         # confirm the frozen design has not moved
+python -m study.status                # where the study stands, in the protocol's terms
+python tools/tidy.py                  # repo hygiene report
+```
+
+`tools/survey_maps.py` needs a CARLA **installation** for its map files, but not a running
+server. Point it anywhere with `--carla`.
+
+**With a simulator:**
+
+```bash
+python tools/carla_jobs.py --list     # what is queued, in dependency order
+python tools/carla_jobs.py --all      # runs them, stops at the first failure
+```
+
+## Layout
+
+| | |
+|---|---|
+| `PROTOCOL.md` | the study design, frozen. Start here |
+| `study/` | the lock, the status report, and recorded results |
+| `tools/` | everything runnable |
+| `docs/` | the paper outline and working notes |
+| `results/` | outputs. Large artefacts are git-ignored |
+| `stale/` | files on their way out, git-ignored. Inspect and delete |
+
+## Housekeeping
+
+Before pushing anything you want read by someone else, run `python tools/tidy.py`. Delete
+nothing by hand in anger: move it to `stale/` instead, look at it later, then remove it.
+Anything that was ever committed stays in git history, so parking a file loses nothing.

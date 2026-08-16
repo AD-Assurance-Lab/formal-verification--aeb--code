@@ -21,3 +21,7 @@ data/
 # Editor / OS
 .DS_Store
 *.swp
+
+# Files on their way out. Inspect, then delete. Anything ever committed stays
+# recoverable from git history, so parking a tracked file here loses nothing.
+stale/

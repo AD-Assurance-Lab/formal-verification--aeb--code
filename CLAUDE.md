@@ -22,6 +22,24 @@ lost twice, both times by drift rather than by decision.
 
 See `README.md` for what this repository is, and `docs/PAPER_OUTLINE.md` for the write-up.
 
+## Repo hygiene
+
+Public repository, proof of concept. The bar is **an outsider can follow it**, not
+production quality. Iterating and trying things is expected; leaving the wreckage behind
+is not.
+
+- **Nothing is deleted in anger. It goes in `stale/`**, which is git-ignored, and Zach
+  inspects and removes it. Parking a tracked file there loses nothing, because anything
+  ever committed stays in git history.
+- **`python tools/tidy.py` before pushing** anything meant to be read. It reports an
+  unclean tree, unpushed commits, oversized files, loose TODOs and unreferenced modules.
+  It never deletes.
+- **Push often.** GitHub is the backup. An experiment worth keeping is worth committing.
+- **Keep `README.md` honest about what runs without a simulator.** Most people reading
+  this will not have CARLA, and a repo that cannot be tried is a repo nobody reads.
+- Do not add CI, formatters or linters. That is production tooling and this is not a
+  production codebase.
+
 ## Write the specification before any code
 
 The deliverable that unblocks everything else is a **safety specification derived from
