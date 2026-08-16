@@ -1,7 +1,26 @@
 # CLAUDE.md - read this before doing anything
 
-New repository. AEB under degraded visibility. Owner: Zach. Demo target: Novi, October 2026.
-See `README.md` for what this is and why.
+AEB under degraded visibility. Owner: Zach. Demo target: Novi, October 2026.
+
+## The protocol is locked. Read it first, and do not edit it.
+
+**`PROTOCOL.md` is the study design and it is frozen.** Run this before interpreting any
+result, and before proposing any change of direction:
+
+    python -m study.protocol_lock
+
+It fails if anything above the Amendments section changed without a recorded amendment.
+
+**When a result and `PROTOCOL.md` disagree about what the study is, `PROTOCOL.md` is right.**
+Findings go in `FINDINGS.md`, current belief goes in `docs/STATE_OF_PLAY.md`, and neither may
+quietly redefine the design.
+
+To change the design: append an `### A<n>` entry under `## Amendments` saying what changed and
+why, then `python -m study.protocol_lock --accept`. The design is allowed to change. It is not
+allowed to change silently while experiments run against it. Study logic in this lab has been
+lost twice, both times by drift rather than by decision.
+
+See `README.md` for what this repository is, and `docs/PAPER_OUTLINE.md` for the write-up.
 
 ## Write the specification before any code
 
