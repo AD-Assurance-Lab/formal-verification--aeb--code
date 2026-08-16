@@ -103,3 +103,7 @@ python tools/carla_jobs.py --all      # runs them, stops at the first failure
 Before pushing anything you want read by someone else, run `python tools/tidy.py`. Delete
 nothing by hand in anger: move it to `stale/` instead, look at it later, then remove it.
 Anything that was ever committed stays in git history, so parking a file loses nothing.
+
+## License
+
+Apache License 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
