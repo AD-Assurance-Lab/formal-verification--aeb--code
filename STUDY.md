@@ -79,7 +79,10 @@ Iteration 1 runs at **40 km/h**, inside every FMVSS pedestrian band.
 <= `r_req`, the certified **lower** bound on commanded deceleration is >= `a_max`.
 
 **A, must not brake.** On the false-activation scenarios, for all `s`, the certified
-**upper** bound on commanded deceleration is <= the nuisance threshold.
+**upper** bound on commanded deceleration is <= **0.25 g (2.45 m/s^2)**. That threshold is
+the standard's own, not one we chose. The steel trench plate is ASTM A36, 2.4 x 3.7 m x
+25 mm, approached in lane at **80 km/h**, so the false-activation cells run at that speed
+rather than at 40.
 
 Both are pointwise conjunctions over a window the hazard geometry defines. Neither is a mean
 nor a lap maximum.
@@ -106,7 +109,8 @@ every cell.
 not be written up as a finding until a written disposition lists the candidate causes ruled
 out.
 
-Iteration 1. Two policies, 40 km/h, one site. Sixteen cells.
+Iteration 1. Two policies, one site. Hazard cells at 40 km/h, false-activation cells at
+80 km/h per the standard. Sixteen cells.
 
 | # | Model | Scenario | Lighting | FV expected | Closed loop expected | Conf | FV measured | CL measured |
 |---|---|---|---|---|---|---|---|---|
@@ -143,6 +147,52 @@ result rather than a retrofit.
   is invisible to any single-sided test.
 - **8, false activation in darkness.** Shadows and wet reflections on a steel plate at night
   are the classic nuisance-braking trigger.
+
+## What this study does NOT cover from the standard
+
+Iteration 1 is a deliberate subset. Stated here so the coverage claim is never overstated in
+a paper or a meeting.
+
+| In the standard | Status here |
+|---|---|
+| Lead vehicle **decelerating** | Not covered |
+| Lead vehicle **slower moving** | Not covered |
+| **Child** pedestrian, and crossing from the left | Not covered |
+| Pedestrian **walking along path** | Not covered |
+| **Pass-through** false activation | Not covered. Trench plate only |
+| Forward collision warning requirements | Not covered. Braking only |
+| Full speed range, to 100 km/h stationary lead and 145 km/h | Iteration 2 covers 20 to 60 km/h |
+
+The claim is therefore about a subset of the FMVSS scenario set, certified over a continuum
+of lighting that the standard does not test. It is not a compliance demonstration and must
+never be described as one.
+
+## Sensing: camera only in iteration 1, fusion in iteration 2
+
+Production AEB is camera plus radar. FMVSS 127 is performance based and sensor agnostic, so
+the standard does not require either. Iteration 1 is camera only, for a scientific reason
+rather than a convenient one.
+
+**Radar is largely invariant to the disturbance we are certifying.** Darkness and fog degrade
+the camera and not the radar, so a fused policy would likely pass every lighting cell and the
+study would have no contrast to measure. Establishing where the *camera channel* provably
+fails is the logically prior question, and it is the input to the fusion decision that
+industry is currently spending money on: thermal, radar, or more camera.
+
+**Iteration 2 adds a third policy, `P_fused`, and this is where the study gets its strongest
+commercial artifact:** a certificate that says the camera-only policy is falsified in
+darkness and the fused policy is certified **quantifies formally what the radar channel
+buys**. That is a claim a Tier 1 selling fusion ECUs can use, and no test campaign produces
+it because a test samples conditions rather than covering them.
+
+Two things to design before that, not during:
+
+- Radar adds few input dimensions (range, range rate, azimuth per detection), so it barely
+  grows the verified set. The cost is in the fusion architecture staying ReLU-only.
+- **CARLA radar is idealized.** No multipath, no clutter, no ghost targets, and those are
+  precisely what causes real phantom braking. A fusion result from idealized radar overstates
+  the benefit, and that has to be stated as a validity threat or measured against a
+  degradation model, not left implicit.
 
 ## Iterations
 
