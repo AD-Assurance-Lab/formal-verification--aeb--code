@@ -1,5 +1,5 @@
 {
-  "sha256": "d47c5c5c91aedf75769adb98061b7f3b3e3efa27c2f0627072b56b41ba393603",
-  "amendments": 0,
-  "note": "protocol-v1, frozen at M0"
+  "sha256": "7d6af7525a953b02607342cc85260c739012300a80122f95ab3460522bab4f98",
+  "amendments": 1,
+  "note": "re-locked at amendment A1"
 }

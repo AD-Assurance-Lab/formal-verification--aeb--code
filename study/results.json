@@ -83,12 +83,12 @@
     }
   },
   "gates": {
-    "A_surrogate": {
+    "capture_check": {
       "state": "todo",
       "value": null,
       "threshold": null
     },
-    "F_family": {
+    "in_between_check": {
       "state": "todo",
       "value": null,
       "threshold": null

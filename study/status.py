@@ -37,7 +37,7 @@ MILESTONE_NAMES = {
     "M2": "Harness and primitives",
     "M3": "Expert and collection",
     "M4": "Two policies pass both endpoints",
-    "M5": "Gates A and F",
+    "M5": "Capture check, in-between check",
     "M6": "Verification, verdicts committed",
     "M7": "Drive the witness",
     "M8": "Demo and writeup",
