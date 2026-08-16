@@ -1,0 +1,104 @@
+{
+  "_comment": "Measured outcomes against PROTOCOL.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here.",
+  "milestones": {
+    "M0": {
+      "state": "done",
+      "note": "PROTOCOL.md locked and tagged protocol-v1"
+    },
+    "M1": {
+      "state": "in_progress",
+      "note": "map survey, offline from OpenDRIVE"
+    },
+    "M2": {
+      "state": "todo",
+      "note": ""
+    },
+    "M3": {
+      "state": "todo",
+      "note": ""
+    },
+    "M4": {
+      "state": "todo",
+      "note": ""
+    },
+    "M5": {
+      "state": "todo",
+      "note": ""
+    },
+    "M6": {
+      "state": "todo",
+      "note": ""
+    },
+    "M7": {
+      "state": "todo",
+      "note": ""
+    },
+    "M8": {
+      "state": "todo",
+      "note": ""
+    }
+  },
+  "cells": {
+    "1": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    },
+    "2": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    },
+    "3": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    },
+    "4": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    },
+    "5": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    },
+    "6": {
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": ""
+    }
+  },
+  "gates": {
+    "A_surrogate": {
+      "state": "todo",
+      "value": null,
+      "threshold": null
+    },
+    "F_family": {
+      "state": "todo",
+      "value": null,
+      "threshold": null
+    }
+  },
+  "primitives": {
+    "a_max": null,
+    "t_lat": null,
+    "d_margin": null,
+    "r_req_40kmh": null,
+    "r_req_80kmh": null
+  }
+}
