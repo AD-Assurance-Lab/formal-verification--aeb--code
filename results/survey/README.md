@@ -2,11 +2,15 @@
 
 `python tools/survey_maps.py`, offline from each map's OpenDRIVE file.
 
-**Town13 is the choice.** 401 pedestrian sites and 367 braking sites, with declared limits
-spanning 30 to 55 mph, which covers both test speeds. Town12 has more long straights but
-its roads are declared in km/h and top out near 34 mph outside one highway, so it cannot
-host the 50 mph false-activation test on an appropriate road. Town11 has the single longest
-straight, 12,048 ft, but only 133 pedestrian sites and just two declared speeds.
+**Town13 is the choice.** 401 pedestrian sites and 367 braking sites, more of each than
+any other map except Town11's braking count. Town12 is second at 303 and 276. Town11 has
+the single longest straight in CARLA, 12,048 ft, and the most braking sites at 392, but
+only 133 pedestrian sites.
+
+Selection is on **geometry alone** (amendment A2). CARLA's posted limits are inconsistent
+between maps and we command both ego and traffic speeds directly, so a road's posted number
+does not constrain what we can test on it. The limits are reported below for description
+only.
 
 **None of the standard towns qualify.** Town10HD's longest straight is 190 ft, and Town02,
 03, 05 and 07 all fall under 460 ft. A 25 mph pedestrian approach needs 500 ft and a 50 mph

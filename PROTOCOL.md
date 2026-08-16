@@ -244,11 +244,15 @@ qualifies on:
   650 ft
 - pedestrian crossing geometry, with sidewalk and walker navmesh on both sides
 - both lit and unlit stretches, since headlamp beam is a test variable
-- declared speed limits spanning the tested range
+- nothing about the posted limit. CARLA's declared limits are inconsistent between maps
+  and we command test speeds directly, so a road's posted number does not constrain the
+  speed we run on it
 
-The declared limit is read from the map's OpenDRIVE file, **not** from
-`get_speed_limit()`, which returns the nearest speed-limit sign prop or a 30 km/h default
-and disagrees with the declared limit on most towns.
+Posted limits are recorded by the survey for description only. Ego speed is commanded and
+other vehicles are commanded, so the site is chosen on geometry alone. Where a limit is
+reported it is read from the map's OpenDRIVE file, never from `get_speed_limit()`, which
+returns the nearest sign prop or a default and disagrees with the declared limit on most
+towns.
 
 **Large maps crash the simulator unless the ego is tagged `role_name='hero'`.** Large maps
 stream terrain tiles around the hero actor, and actors outside the streamed area go
@@ -275,5 +279,19 @@ They were jargon that had to be looked up, in a document whose whole job is to b
 Section 12, site selection, was in the draft and was lost when it was frozen. Restored,
 including the criteria M1 is measured against and the hero-tag warning. This is the
 mechanism working as intended: the omission surfaced the first time the file was edited.
+
+Nothing about the design, the cells or the expectations changed.
+
+### A2. Posted speed limits are not a site criterion
+
+CARLA's declared limits are inconsistent between maps, and we command both the ego speed
+and other vehicles' speeds directly, so a road's posted number does not constrain the
+speed we can test on it. Section 12 now selects sites on geometry alone and records the
+posted limit for description only.
+
+The map choice was re-checked without that criterion and does not change. Town13 leads on
+pedestrian sites, 401 against 303 for Town12 and 133 for Town11, and is second on braking
+sites, 367 against Town11's 392. It was already the leader on geometry; speed coverage was
+a supporting argument, not the deciding one.
 
 Nothing about the design, the cells or the expectations changed.
