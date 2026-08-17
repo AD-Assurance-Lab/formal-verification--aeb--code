@@ -107,6 +107,11 @@ Never read back state you just wrote; construct it. Match sensor frames on the i
   get killed.
 - **`pkill -f` matches your own command line.** Use bracket patterns or PIDs.
 - **`grep` block-buffers into a file.** Use `--line-buffered`, or a healthy run looks stalled.
+- **A wait loop on `pgrep -f` can match ITSELF.** `until ! pgrep -f "[v]erify.py"` looks
+  safe, but if the waiting script's own command line contains the unbracketed text
+  anywhere, for instance in the command it will run next, pgrep finds the wrapper and the
+  loop never exits. Cost an hour of wall clock sleeping on nothing. Wait on a PID or a
+  result file, not on a pattern that appears in your own script.
 - **`tail` buffers too.** Piping a long job through `| tail -N` gives NO output until it
   ends, so progress is invisible and a healthy run looks hung. Do not pipe a job you want
   to watch. Written down after doing it twice in one session.
