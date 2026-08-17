@@ -76,6 +76,38 @@ def connect(load_map: str | None = MAP):
     return client, world
 
 
+def despawn(world, *actors):
+    """Destroy actors and tick. A destroy issued next to a spawn at the same point
+    fails, because the destroy has not been applied yet."""
+    for a in actors:
+        if a is not None:
+            try:
+                a.destroy()
+            except RuntimeError:
+                pass
+    world.tick()
+
+
+def site_transform(world, site: dict, along: float = 0.0):
+    """Turn a surveyed (x, y) into an on-road transform.
+
+    The survey works from the OpenDRIVE and has no elevation, so the road is found by
+    projection rather than by trusting a z we do not have.
+    """
+    carla = carla_module()
+    frac = 0.0 if site["run_m"] == 0 else min(1.0, along / site["run_m"])
+    x = site["x0"] + frac * (site["x1"] - site["x0"])
+    y = site["y0"] + frac * (site["y1"] - site["y0"])
+    wp = world.get_map().get_waypoint(
+        carla.Location(x=x, y=-y, z=0.0), project_to_road=True
+    )
+    if wp is None:
+        raise RuntimeError(f"no road at ({x:.0f}, {y:.0f})")
+    tf = wp.transform
+    tf.location.z += 0.3
+    return tf, wp
+
+
 def spawn_hero(world, transform):
     """Spawn the ego. The hero tag is not cosmetic; see the module docstring."""
     carla = carla_module()
@@ -94,19 +126,34 @@ def speed_of(actor) -> float:
     return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
 
 
-def separation_ft(a, b) -> float:
-    """Gap between two actors' bounding boxes along the line joining them.
+def _support(actor, axis_x: float, axis_y: float) -> float:
+    """How far the actor's bounding box reaches along a world-frame unit axis."""
+    ex = actor.bounding_box.extent.x
+    ey = actor.bounding_box.extent.y
+    yaw = math.radians(actor.get_transform().rotation.yaw)
+    fx, fy = math.cos(yaw), math.sin(yaw)          # forward
+    rx, ry = -math.sin(yaw), math.cos(yaw)         # right
+    return abs(ex * (fx * axis_x + fy * axis_y)) + abs(ey * (rx * axis_x + ry * axis_y))
 
-    This is the contact measure. Negative means interpenetrating. It replaces
-    sensor.other.collision, which cannot be trusted.
+
+def separation_ft(a, b) -> float:
+    """Gap between two bounding boxes along the line joining their centres, in feet.
+
+    Negative means the boxes overlap. This is the contact measure for the whole study,
+    and it replaces sensor.other.collision, which has been observed reporting nothing
+    while a vehicle sat 8 ft inside another body.
+
+    Each box is projected onto the connecting axis rather than using its diagonal. The
+    diagonal over-estimates reach for a head-on approach, which would report contact
+    before it happened and understate every standoff distance we measure.
     """
     la, lb = a.get_transform().location, b.get_transform().location
-    centre = math.sqrt((la.x - lb.x) ** 2 + (la.y - lb.y) ** 2)
-    ea = a.bounding_box.extent
-    eb = b.bounding_box.extent
-    reach_a = math.hypot(ea.x, ea.y)
-    reach_b = math.hypot(eb.x, eb.y)
-    return (centre - reach_a - reach_b) * FT
+    dx, dy = lb.x - la.x, lb.y - la.y
+    centre = math.hypot(dx, dy)
+    if centre < 1e-6:
+        return -_support(a, 1.0, 0.0) * FT
+    ux, uy = dx / centre, dy / centre
+    return (centre - _support(a, ux, uy) - _support(b, ux, uy)) * FT
 
 
 def write(job: str, payload: dict) -> None:
@@ -158,43 +205,114 @@ def job_smoke() -> dict:
             "note": "server survived a sensor attach on a large map with the hero tag",
         }
     finally:
-        ego.destroy()
+        despawn(world, ego)
 
 
 def job_sites() -> dict:
     """The one thing the offline survey could not answer: is the site lit?
 
-    Street lamps are scenery, not road network. Visit the longest Town13 straights at
-    night and photograph them so a site can be fixed on evidence.
+    Street lamps are scenery, not road network, so they are invisible to the OpenDRIVE.
+    This visits the longest Town13 straights and photographs each under the three
+    regulatory lighting conditions, plus a fourth with the headlamps off, which is what
+    actually measures street lighting: with the lamps on you cannot tell an unlit road
+    from a lit one.
+
+    Mean image brightness makes it a number rather than an opinion. It also produces the
+    first real imagery of the disturbance endpoints.
     """
     carla = carla_module()
+    import queue
+
     client, world = connect()
     shots = OUT / "sites"
     shots.mkdir(parents=True, exist_ok=True)
+
+    # day, then the two regulatory darkness conditions, then lamps-off as the control
+    CONDITIONS = [
+        ("day", 60.0, carla.VehicleLightState.NONE),
+        ("night_nolights", -30.0, carla.VehicleLightState.NONE),
+        ("night_lowbeam", -30.0, carla.VehicleLightState.LowBeam),
+        ("night_highbeam", -30.0, carla.VehicleLightState.HighBeam),
+    ]
+
     results = []
-    for i, site in enumerate(top_sites()):
-        for label, altitude in (("day", 60.0), ("night", -30.0)):
-            w = world.get_weather()
-            w.sun_altitude_angle = altitude
-            world.set_weather(w)
-            world.tick()  # weather applies on the next tick
-            results.append(
-                {
-                    "site_index": i,
-                    "road_ids": site["road_id"],
-                    "run_ft": site["run_ft"],
-                    "lighting": label,
-                    "shot": f"site{i:02d}_{label}.png",
-                }
+    for i, site in enumerate(top_sites(6)):
+        try:
+            tf, _ = site_transform(world, site, along=25.0)
+            ego = spawn_hero(world, tf)
+        except RuntimeError as exc:
+            results.append({"site": i, "error": str(exc)})
+            continue
+        cam = None
+        try:
+            bp = world.get_blueprint_library().find("sensor.camera.rgb")
+            bp.set_attribute("image_size_x", "640")
+            bp.set_attribute("image_size_y", "480")
+            bp.set_attribute("fov", "90")
+            images: "queue.Queue" = queue.Queue()
+            cam = world.spawn_actor(
+                bp,
+                carla.Transform(carla.Location(x=1.5, z=1.6)),
+                attach_to=ego,
             )
+            cam.listen(images.put)
+
+            for label, altitude, lights in CONDITIONS:
+                w = world.get_weather()
+                w.sun_altitude_angle = altitude
+                w.cloudiness = 10.0
+                w.precipitation = 0.0
+                world.set_weather(w)
+                ego.set_light_state(carla.VehicleLightState(lights))
+                # Weather, lights and sensor delivery all land on a later tick. Drain a
+                # few frames rather than trusting the first one after the write.
+                for _ in range(12):
+                    world.tick()
+                    try:
+                        images.get(timeout=5.0)
+                    except queue.Empty:
+                        pass
+                world.tick()
+                try:
+                    img = images.get(timeout=10.0)
+                except queue.Empty:
+                    results.append({"site": i, "condition": label, "error": "no frame"})
+                    continue
+                name = f"site{i:02d}_{label}.png"
+                img.save_to_disk(str(shots / name))
+                buf = memoryview(img.raw_data)
+                total = sum(buf[k] for k in range(0, len(buf), 64))  # sample every 16px
+                mean = total / max(1, len(range(0, len(buf), 64)))
+                results.append(
+                    {
+                        "site": i,
+                        "run_ft": site["run_ft"],
+                        "xy": [site["x0"], site["y0"]],
+                        "lanes": site["driving_lanes"],
+                        "condition": label,
+                        "mean_brightness": round(mean, 2),
+                        "image": name,
+                    }
+                )
+        finally:
+            if cam is not None:
+                cam.stop()
+            despawn(world, cam, ego)
+
+    # A site is "lit" if it is meaningfully brighter than pitch dark with lamps off.
+    lit = {}
+    for r in results:
+        if r.get("condition") == "night_nolights":
+            lit[r["site"]] = r["mean_brightness"]
     return {
-        "verdict": "MANUAL",
+        "verdict": "PASS" if lit else "FAIL",
+        "street_lighting_by_site": lit,
         "note": (
-            "Sites need a camera placed on each straight and a screenshot saved. "
-            "Placement needs the site's world coordinates, which the survey does not "
-            "yet export. Add that export before running this job."
+            "night_nolights is the measurement that matters: with headlamps on, an "
+            "unlit road and a lit one look similar ahead of the vehicle. Higher mean "
+            "brightness with the lamps off means street lighting is present."
         ),
-        "candidates": results,
+        "captures": results,
     }
 
 
@@ -206,7 +324,10 @@ def job_braking() -> dict:
     """
     carla = carla_module()
     client, world = connect()
-    spawn = world.get_map().get_spawn_points()[0]
+    # Measure on a surveyed straight, not an arbitrary spawn point. Braking authority
+    # on a grade is not the flat-road number, and grade is recorded per run below.
+    site = top_sites(1)[0]
+    spawn, _ = site_transform(world, site, along=20.0)
     runs = []
     for speed_mph in (HAZARD_MPH, PLATE_MPH):
         target = speed_mph * MPH
@@ -220,7 +341,16 @@ def job_braking() -> dict:
                         z=0.0,
                     )
                 )
+                # Hold the speed through the settle. Coasting for two seconds bleeds
+                # off several mph and the run would not be at the speed it claims.
                 for _ in range(SETTLE_TICKS):
+                    err = target - speed_of(ego)
+                    ego.apply_control(
+                        carla.VehicleControl(
+                            throttle=max(0.0, min(0.6, 0.15 * err)),
+                            brake=0.0,
+                        )
+                    )
                     world.tick()
                 v0 = speed_of(ego)
                 start = ego.get_transform().location
@@ -248,14 +378,19 @@ def job_braking() -> dict:
                         "stop_s": round(stop_time, 3),
                         "t_lat_s": round(t_onset, 3) if t_onset else None,
                         "a_avg_g": round(v0 / stop_time / 9.81, 4) if stop_time else None,
+                        "grade_pct": round(
+                            100.0 * (end.z - start.z) / dist, 2
+                        ) if dist > 1 else None,
                     }
                 )
             finally:
-                ego.destroy()
+                despawn(world, ego)
     accels = [r["a_avg_g"] for r in runs if r["a_avg_g"]]
     lats = [r["t_lat_s"] for r in runs if r["t_lat_s"]]
     return {
         "verdict": "PASS" if len(accels) >= 2 * REPS else "FAIL",
+        "site_run_ft": site["run_ft"],
+        "site_xy": [site["x0"], site["y0"]],
         "a_max_g_worst": round(min(accels), 4) if accels else None,
         "a_max_g_median": round(statistics.median(accels), 4) if accels else None,
         "t_lat_s_worst": round(max(lats), 3) if lats else None,
@@ -274,16 +409,9 @@ def job_contact() -> dict:
     """
     carla = carla_module()
     client, world = connect()
-    spawn_points = world.get_map().get_spawn_points()
-    spawn = spawn_points[0]
-    ahead = carla.Transform(
-        carla.Location(
-            x=spawn.location.x + 40.0 * math.cos(math.radians(spawn.rotation.yaw)),
-            y=spawn.location.y + 40.0 * math.sin(math.radians(spawn.rotation.yaw)),
-            z=spawn.location.z,
-        ),
-        spawn.rotation,
-    )
+    site = top_sites(1)[0]
+    spawn, _ = site_transform(world, site, along=20.0)
+    ahead, _ = site_transform(world, site, along=60.0)
     bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
     target = world.try_spawn_actor(bp, ahead)
     if target is None:
@@ -315,25 +443,112 @@ def job_contact() -> dict:
             ),
         }
     finally:
-        ego.destroy()
-        target.destroy()
+        despawn(world, ego, target)
+
+
+D_MARGIN_M = 1.0  # required standoff at rest. A declared design value, not a fit.
+
+
+def r_req_m(v_mps: float, a_max_g: float, t_lat_s: float) -> float:
+    """PROTOCOL section 3. Every term measured except the declared standoff."""
+    a = a_max_g * 9.81
+    return v_mps * (t_lat_s + FIXED_DT) + v_mps * v_mps / (2.0 * a) + D_MARGIN_M
+
+
+def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
+    """Drive at a stationary lead vehicle, brake when range reaches trigger_m.
+
+    The oracle reads range from simulator ground truth, so it is a perfect perceiver.
+    Braking latches once commanded, which is what the closed-form standoff bound in
+    PROTOCOL section 7 assumes.
+    """
+    carla = carla_module()
+    target_v = speed_mph * MPH
+    ego = lead = None
+    try:
+        tf_ego, _ = site_transform(world, site, along=20.0)
+        tf_lead, _ = site_transform(world, site, along=20.0 + gap_m)
+        bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
+        lead = world.try_spawn_actor(bp, tf_lead)
+        if lead is None:
+            raise RuntimeError("lead vehicle spawn blocked")
+        ego = spawn_hero(world, tf_ego)
+        yaw = math.radians(tf_ego.rotation.yaw)
+        ego.set_target_velocity(
+            carla.Vector3D(x=target_v * math.cos(yaw), y=target_v * math.sin(yaw), z=0.0)
+        )
+        braking = False
+        min_gap_ft = 1e9
+        for _ in range(1200):
+            gap_ft = separation_ft(ego, lead)
+            min_gap_ft = min(min_gap_ft, gap_ft)
+            if not braking and gap_ft / FT <= trigger_m:
+                braking = True
+            if braking:
+                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+            else:
+                err = target_v - speed_of(ego)
+                ego.apply_control(
+                    carla.VehicleControl(throttle=max(0.0, min(0.6, 0.15 * err)))
+                )
+            world.tick()
+            if braking and speed_of(ego) < 0.1:
+                break
+            if gap_ft < -3.0:
+                break
+        return {
+            "min_gap_ft": round(min_gap_ft, 2),
+            "contact": min_gap_ft <= 0.0,
+            "standoff_ok": min_gap_ft >= D_MARGIN_M * FT,
+            "braked": braking,
+        }
+    finally:
+        despawn(world, ego, lead)
 
 
 def job_oracle() -> dict:
     """Sanity-check the harness with a policy whose answer is already known.
 
     A ground-truth braking law that brakes at r_req must pass 10/10. The same law
-    delayed past r_req must fail 10/10. If either comes back mixed, the harness is
-    measuring noise and no policy result from it means anything.
+    delayed must fail 10/10. If either comes back mixed, the harness is measuring noise
+    and no policy result from it means anything.
     """
-    return {
-        "verdict": "TODO",
-        "note": (
-            "Needs r_req, which needs a_max and t_lat from the braking job. Run braking "
-            "first, write the primitives into study/results.json, then implement this "
-            "against them."
-        ),
-    }
+    braking_file = OUT / "braking.json"
+    if not braking_file.exists():
+        return {"verdict": "TODO", "note": "run the braking job first; needs a_max and t_lat"}
+    b = json.loads(braking_file.read_text())
+    a_max_g = b["a_max_g_worst"]
+    t_lat = b["t_lat_s_worst"] or 0.2
+
+    client, world = connect()
+    site = top_sites(1)[0]
+    out = {"a_max_g": a_max_g, "t_lat_s": t_lat, "d_margin_m": D_MARGIN_M, "cases": {}}
+
+    for speed in (HAZARD_MPH,):
+        v = speed * MPH
+        rr = r_req_m(v, a_max_g, t_lat)
+        out[f"r_req_m_at_{speed:g}mph"] = round(rr, 2)
+        out[f"r_req_ft_at_{speed:g}mph"] = round(rr * FT, 1)
+        for label, trigger in (("perfect", rr), ("late", rr * 0.6)):
+            runs = [_approach(world, site, speed, trigger) for _ in range(REPS)]
+            passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
+            out["cases"][f"{label}_{speed:g}mph"] = {
+                "trigger_m": round(trigger, 2),
+                "passes": passes,
+                "of": REPS,
+                "min_gap_ft": [r["min_gap_ft"] for r in runs],
+            }
+
+    perfect = out["cases"].get(f"perfect_{HAZARD_MPH:g}mph", {})
+    late = out["cases"].get(f"late_{HAZARD_MPH:g}mph", {})
+    ok = perfect.get("passes") == REPS and late.get("passes") == 0
+    out["verdict"] = "PASS" if ok else "FAIL"
+    out["note"] = (
+        "PASS requires the perfect oracle 10/10 and the late oracle 0/10. Anything in "
+        "between means the harness is measuring noise, and no policy result from it "
+        "would mean anything."
+    )
+    return out
 
 
 JOBS = {

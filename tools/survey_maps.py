@@ -44,6 +44,11 @@ class Site:
     s_start_m: float
     run_m: float
     run_ft: float
+    x0: float
+    y0: float
+    x1: float
+    y1: float
+    heading_rad: float
     speed_mph: float | None
     driving_lanes: int
     sidewalk_any_side: bool
@@ -128,7 +133,7 @@ def merge_collinear(pieces: list[tuple[tuple, str]]) -> list[tuple[float, list[s
     within a single record measures fragments. Merging in world coordinates sidesteps
     road boundaries and link-following entirely.
 
-    Returns (total length in metres, contributing road ids).
+    Returns (total length, contributing road ids, start point, end point, heading).
     """
     POS_TOL = 0.5      # metres
     HDG_TOL = 0.0087   # radians, half a degree
@@ -167,17 +172,23 @@ def merge_collinear(pieces: list[tuple[tuple, str]]) -> list[tuple[float, list[s
         if i in has_pred or i in visited:
             continue  # start only from the head of a chain
         total, roads, cur = 0.0, [], i
+        head = pieces[i][0]
+        tail = head
         while cur is not None and cur not in visited:
             visited.add(cur)
             total += pieces[cur][0][3]
             roads.append(pieces[cur][1])
+            tail = pieces[cur][0]
             cur = nxt[cur]
-        runs.append((total, roads))
+        ex, ey, _ = end_of(tail)
+        runs.append((total, roads, (head[0], head[1]), (ex, ey), head[2]))
 
     for i in range(len(pieces)):  # any cycle left over
         if i not in visited:
             visited.add(i)
-            runs.append((pieces[i][0][3], [pieces[i][1]]))
+            seg = pieces[i][0]
+            ex, ey, _ = end_of(seg)
+            runs.append((seg[3], [pieces[i][1]], (seg[0], seg[1]), (ex, ey), seg[2]))
     return runs
 
 
@@ -214,7 +225,7 @@ def survey(path: Path) -> list[Site]:
 
     sites: list[Site] = []
     longest_ft = 0.0
-    for run_m, road_ids in merge_collinear(pieces):
+    for run_m, road_ids, p0, p1, hdg in merge_collinear(pieces):
         run_ft = run_m * M_TO_FT
         longest_ft = max(longest_ft, run_ft)
         if run_ft < PED_RUN_FT:
@@ -230,6 +241,11 @@ def survey(path: Path) -> list[Site]:
                 s_start_m=0.0,
                 run_m=round(run_m, 1),
                 run_ft=round(run_ft, 1),
+                x0=round(p0[0], 2),
+                y0=round(p0[1], 2),
+                x1=round(p1[0], 2),
+                y1=round(p1[1], 2),
+                heading_rad=round(hdg, 5),
                 speed_mph=round(max(speeds), 1) if speeds else None,
                 driving_lanes=max(c["driving"] for c in contributing),
                 sidewalk_any_side=any(c["walk_any"] for c in contributing),
