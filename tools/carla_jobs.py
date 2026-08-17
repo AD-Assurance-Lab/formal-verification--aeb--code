@@ -392,90 +392,88 @@ def job_sites() -> dict:
     }
 
 
+def _brake_from(world, ego, spawn, target_mps: float) -> dict:
+    """One full-brake stop from target speed. Returns the measured run."""
+    carla = carla_module()
+    yaw = math.radians(spawn.rotation.yaw)
+    ego.set_target_velocity(
+        carla.Vector3D(x=target_mps * math.cos(yaw), y=target_mps * math.sin(yaw), z=0.0)
+    )
+    # Hold the speed through the settle. Coasting for two seconds bleeds off several
+    # mph, and the run would then not be at the speed it claims.
+    for _ in range(SETTLE_TICKS):
+        err = target_mps - speed_of(ego)
+        ego.apply_control(carla.VehicleControl(throttle=max(0.0, min(0.6, 0.15 * err))))
+        world.tick()
+
+    v0 = speed_of(ego)
+    start = ego.get_transform().location
+    ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+
+    t_onset = None
+    prev = v0
+    ticks = 0
+    while speed_of(ego) > 0.1 and ticks < 400:
+        world.tick()
+        ticks += 1
+        v = speed_of(ego)
+        if t_onset is None and (prev - v) / FIXED_DT > 0.5:
+            t_onset = ticks * FIXED_DT
+        prev = v
+
+    end = ego.get_transform().location
+    dist = math.hypot(end.x - start.x, end.y - start.y)
+    stop_time = ticks * FIXED_DT
+    return {
+        "v0_mph": round(v0 / MPH, 2),
+        "stop_ft": round(dist * FT, 2),
+        "stop_s": round(stop_time, 3),
+        "t_lat_s": round(t_onset, 3) if t_onset else None,
+        # Average over the WHOLE stop, latency included. That makes it the conservative
+        # number the safety budget wants, not the peak the tyres can manage.
+        "a_avg_g": round(v0 / stop_time / 9.81, 4) if stop_time else None,
+        "grade_pct": round(100.0 * (end.z - start.z) / dist, 2) if dist > 1 else None,
+    }
+
+
 def job_braking() -> dict:
     """Measure braking authority and actuation latency. Do not model them.
 
     a_max is the worst average deceleration over the stop, which already contains
     aerodynamic drag at that speed, so no drag model is needed anywhere in the study.
     """
-    carla = carla_module()
     client, world = connect(rendering=False)  # no camera here; physics is unaffected
-    # Measure on a surveyed straight, not an arbitrary spawn point. Braking authority
-    # on a grade is not the flat-road number, and grade is recorded per run below.
+    # Measure on a surveyed straight that is actually flat, not an arbitrary spawn
+    # point. Braking authority on a slope is not the flat-road number.
     site = flattest_site()
     spawn, _ = site_transform(world, site, along=20.0)
-    runs = []
     progress(
-        f"site {site['run_ft']:.0f} ft, grade {site.get('grade_pct')}%, "
-        f"{2 * REPS} runs"
+        f"site {site['run_ft']:.0f} ft, grade {site.get('grade_pct')}%, {2 * REPS} runs"
     )
-    for speed_mph in (HAZARD_MPH, PLATE_MPH):
-        target = speed_mph * MPH
-        for rep in range(REPS):
-            ego = spawn_hero(world, spawn)
-            try:
-                ego.set_target_velocity(
-                    carla.Vector3D(
-                        x=target * math.cos(math.radians(spawn.rotation.yaw)),
-                        y=target * math.sin(math.radians(spawn.rotation.yaw)),
-                        z=0.0,
-                    )
-                )
-                # Hold the speed through the settle. Coasting for two seconds bleeds
-                # off several mph and the run would not be at the speed it claims.
-                for _ in range(SETTLE_TICKS):
-                    err = target - speed_of(ego)
-                    ego.apply_control(
-                        carla.VehicleControl(
-                            throttle=max(0.0, min(0.6, 0.15 * err)),
-                            brake=0.0,
-                        )
-                    )
-                    world.tick()
-                v0 = speed_of(ego)
-                start = ego.get_transform().location
-                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
-                t_command = 0.0
-                t_onset = None
-                prev = v0
-                ticks = 0
-                while speed_of(ego) > 0.1 and ticks < 400:
-                    world.tick()
-                    ticks += 1
-                    v = speed_of(ego)
-                    if t_onset is None and (prev - v) / FIXED_DT > 0.5:
-                        t_onset = ticks * FIXED_DT
-                    prev = v
-                end = ego.get_transform().location
-                dist = math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2)
-                stop_time = ticks * FIXED_DT
-                runs.append(
-                    {
-                        "speed_mph": speed_mph,
-                        "rep": rep,
-                        "v0_mph": round(v0 / MPH, 2),
-                        "stop_ft": round(dist * FT, 2),
-                        "stop_s": round(stop_time, 3),
-                        "t_lat_s": round(t_onset, 3) if t_onset else None,
-                        "a_avg_g": round(v0 / stop_time / 9.81, 4) if stop_time else None,
-                        "grade_pct": round(
-                            100.0 * (end.z - start.z) / dist, 2
-                        ) if dist > 1 else None,
-                    }
-                )
+
+    runs = []
+    ego = spawn_hero(world, spawn)  # spawned ONCE, then reset; see reset_vehicle
+    try:
+        for speed_mph in (HAZARD_MPH, PLATE_MPH):
+            for rep in range(REPS):
+                reset_vehicle(world, ego, spawn)
+                run = _brake_from(world, ego, spawn, speed_mph * MPH)
+                run.update(speed_mph=speed_mph, rep=rep)
+                runs.append(run)
                 progress(
                     f"{speed_mph:g} mph rep {rep + 1}/{REPS}: "
-                    f"v0 {runs[-1]['v0_mph']:.1f} mph, "
-                    f"stop {runs[-1]['stop_ft']:.0f} ft, "
-                    f"{runs[-1]['a_avg_g']} g"
+                    f"v0 {run['v0_mph']:.1f} mph, stop {run['stop_ft']:.0f} ft, "
+                    f"{run['a_avg_g']} g"
                 )
-            finally:
-                despawn(world, ego)
+    finally:
+        despawn(world, ego)
+
     accels = [r["a_avg_g"] for r in runs if r["a_avg_g"]]
     lats = [r["t_lat_s"] for r in runs if r["t_lat_s"]]
     return {
         "verdict": "PASS" if len(accels) >= 2 * REPS else "FAIL",
         "site_run_ft": site["run_ft"],
+        "site_grade_pct": site.get("grade_pct"),
         "site_xy": [site["x0"], site["y0"]],
         "a_max_g_worst": round(min(accels), 4) if accels else None,
         "a_max_g_median": round(statistics.median(accels), 4) if accels else None,

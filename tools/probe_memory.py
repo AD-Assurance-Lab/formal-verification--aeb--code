@@ -64,6 +64,7 @@ def main() -> int:
     prev = base
     held = J.spawn_hero(world, spawn) if a.reuse_hero else None
     for i in range(a.cycles):
+        t0 = time.time()
         if a.reuse_hero:
             J.reset_vehicle(world, held, spawn)
             for _ in range(a.ticks):
@@ -77,8 +78,12 @@ def main() -> int:
                 world.tick()
             J.despawn(world, ego)
         now = server_rss_gb()
-        print(f"  cycle {i+1:2d}: {now:6.2f} GB  (+{now - prev:+.2f} this cycle, "
-              f"{now - base:+.2f} total)", flush=True)
+        dt = max(time.time() - t0, 1e-6)
+        print(
+            f"  cycle {i+1:2d}: {now:6.2f} GB  ({now - prev:+.2f} this cycle, "
+            f"{now - base:+.2f} total)   {dt:6.1f} s   {a.ticks / dt:5.1f} ticks/s",
+            flush=True,
+        )
         prev = now
     if held is not None:
         J.despawn(world, held)
