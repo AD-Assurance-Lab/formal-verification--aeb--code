@@ -296,10 +296,26 @@ def find_maps(carla: Path) -> list[Path]:
 
 
 def main() -> int:
+    global BRAKING_RUN_FT, PED_RUN_FT
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--carla", default="/home/za/carla", type=Path)
     ap.add_argument("--out", default="results/survey", type=Path)
+    ap.add_argument(
+        "--braking-ft",
+        type=float,
+        default=BRAKING_RUN_FT,
+        help="straight needed for the 50 mph false-activation approach",
+    )
+    ap.add_argument(
+        "--ped-ft",
+        type=float,
+        default=PED_RUN_FT,
+        help="straight needed for the 25 mph pedestrian approach",
+    )
     args = ap.parse_args()
+
+    BRAKING_RUN_FT = args.braking_ft
+    PED_RUN_FT = args.ped_ft
 
     maps = find_maps(args.carla)
     if not maps:
