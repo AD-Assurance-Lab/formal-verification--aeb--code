@@ -145,6 +145,47 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
     return states
 
 
+def _save_states(path: Path, states) -> None:
+    path.write_text(
+        json.dumps(
+            [
+                {
+                    "range_m": s["range_m"],
+                    "speed_mps": s["speed_mps"],
+                    "label_decel_mps2": s["label_decel_mps2"],
+                    "ego": _tf_to_list(s["ego"]),
+                    "other": _tf_to_list(s["other"]),
+                }
+                for s in states
+            ],
+            indent=1,
+        )
+        + "\n"
+    )
+
+
+def _tf_to_list(tf):
+    return [
+        tf.location.x, tf.location.y, tf.location.z,
+        tf.rotation.pitch, tf.rotation.yaw, tf.rotation.roll,
+    ]
+
+
+def _load_states(path: Path):
+    carla = J.carla_module()
+
+    def tf(v):
+        return carla.Transform(
+            carla.Location(x=v[0], y=v[1], z=v[2]),
+            carla.Rotation(pitch=v[3], yaw=v[4], roll=v[5]),
+        )
+
+    return [
+        {**s, "ego": tf(s["ego"]), "other": tf(s["other"])}
+        for s in json.loads(path.read_text())
+    ]
+
+
 def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     carla = J.carla_module()
     client, world = J.connect(rendering=not dry_run)
@@ -152,7 +193,20 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
 
     spawn_tf, _ = J.site_transform(world, site, along=10.0, need_m=LEAD_GAP_M + 80.0)
-    states = nominal_states(world, site, scenario, speed_mph, b["a_max_g_worst"])
+
+    # The nominal run is saved and REUSED. It is not bit-identical across process runs:
+    # two knots captured in an earlier invocation differed from the rest by 0.7 mm, and
+    # while that is far below a pixel at these ranges, the pairing guarantee is the
+    # entire reason for replaying rather than driving. Pairing that holds only within
+    # one invocation is not a guarantee.
+    OUT.mkdir(parents=True, exist_ok=True)
+    states_path = OUT / f"states_{scenario}.json"
+    if states_path.exists():
+        states = _load_states(states_path)
+        print(f"  reusing the saved nominal run, {len(states)} states")
+    else:
+        states = nominal_states(world, site, scenario, speed_mph, b["a_max_g_worst"])
+        _save_states(states_path, states)
     per_frame_mb = 640 * 480 * 3 / 1e6
     total_gb = len(states) * len(knots) * per_frame_mb / 1000
     print(
