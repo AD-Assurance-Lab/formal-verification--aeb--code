@@ -14,8 +14,12 @@ import carla_jobs as J
 
 
 def server_rss_gb() -> float:
+    # Matched on the process NAME, not the command line. The kernel truncates comm to
+    # 15 characters, so the server is "CarlaUE4-Linux-". Matching the command line also
+    # matches the shell that launched it, and that shell reports 0.00 GB, which is a
+    # very convincing way to conclude there is no leak.
     out = subprocess.run(
-        ["pgrep", "-f", "[C]arlaUE4-Linux"], capture_output=True, text=True
+        ["pgrep", "-x", "CarlaUE4-Linux-"], capture_output=True, text=True
     ).stdout.split()
     if not out:
         return float("nan")
