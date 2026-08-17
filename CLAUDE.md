@@ -107,6 +107,13 @@ Never read back state you just wrote; construct it. Match sensor frames on the i
   get killed.
 - **`pkill -f` matches your own command line.** Use bracket patterns or PIDs.
 - **`grep` block-buffers into a file.** Use `--line-buffered`, or a healthy run looks stalled.
+- **`tail` buffers too.** Piping a long job through `| tail -N` gives NO output until it
+  ends, so progress is invisible and a healthy run looks hung. Do not pipe a job you want
+  to watch. Written down after doing it twice in one session.
+- **Look at the data, not only at statistics.** Two defects this session survived every
+  numeric check and were obvious in one frame: an exposure six stops too fast, which the
+  clipping check called healthy, and a pedestrian measured at "10.6 m" who was 6 m off to
+  the side. Export a frame and open it.
 
 ## Parent repository
 
