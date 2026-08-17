@@ -89,6 +89,15 @@ python tools/carla_jobs.py --all      # runs them, stops at the first failure
 python tools/probe_memory.py --help   # why a map is or is not usable on this hardware
 ```
 
+## The result
+
+`docs/STUDY_REPORT.md` is the complete methodology and results in one file. The one-line
+version: a policy that passes both FMVSS 127 test points 10/10 fails 0/10 at three dusk
+illuminations between them; the certificate named those illuminations without simulating,
+and the verdicts were committed to version control before any vehicle moved.
+
+Figure: `docs/figures/dusk_gap.html`.
+
 ## Layout
 
 | | |
@@ -96,7 +105,8 @@ python tools/probe_memory.py --help   # why a map is or is not usable on this ha
 | `PROTOCOL.md` | the study design, frozen. Start here |
 | `study/` | the lock, the status report, and recorded results |
 | `tools/` | everything runnable |
-| `docs/` | the paper outline and working notes |
+| `docs/STUDY_REPORT.md` | **complete methodology and results.** Start here for the science |
+| `docs/` | paper outline, session notes, figures |
 | `results/` | outputs. Large artefacts are git-ignored |
 | `stale/` | files on their way out, git-ignored. Inspect and delete |
 
