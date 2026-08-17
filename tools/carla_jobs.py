@@ -812,10 +812,10 @@ def job_inbetween() -> dict:
     shots.mkdir(parents=True, exist_ok=True)
 
     DAY_ALT, NIGHT_ALT = 60.0, -30.0
-    STEPS = [0.0, 0.25, 0.5, 0.75, 1.0]
+    STEPS = [0.0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0]
 
-    site = top_sites(1)[0]
-    tf, _ = site_transform(world, site, along=25.0)
+    site = flattest_site()
+    tf, _ = site_transform(world, site, along=25.0, need_m=60.0)
     ego = spawn_hero(world, tf)
     cam = None
     frames: dict[float, list[int]] = {}

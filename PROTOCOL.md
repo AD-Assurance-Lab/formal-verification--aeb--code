@@ -371,3 +371,51 @@ survey cannot answer it. Measured at night with the lamps off: site 1 (758 ft) r
 and is effectively unlit, site 3 (736 ft) reads 25.7 and is lit. Both are available.
 
 Nothing about the claim, the cells or the expectations changes.
+
+### A5. The in-between check FAILS over the full interval, and why
+
+This is the first result that bears on whether the family in section 4 is sound, and it
+is negative over the interval as declared.
+
+**Over the full daylight-to-darkness interval the blend is wrong by 0.243 of full range
+at the midpoint.** That is a quarter of the dynamic range, not a rounding error. The
+recorded repair in section 4 is shorter intervals with rendered interior endpoints, and
+that repair works, but not for the reason it was written down.
+
+**Width is not the variable. Position is.** Holding the width at 11.25 degrees of sun
+altitude and moving the interval:
+
+| centre | +50 | +35 | +20 | **+5** | -10 | -25 |
+|---|---|---|---|---|---|---|
+| blend error | 0.0025 | 0.0034 | 0.0058 | **0.1527** | 0.0076 | 0.0071 |
+
+Only the interval crossing the horizon fails, by twenty to sixty times. The 90 and 45
+degree intervals failed because they span sunrise, not because they are wide.
+
+**The cause is curvature, concentrated at the horizon.** Mean brightness against sun
+altitude: 179.7 at +6, 151.1 at +3, 120.3 at +1.5, 96.4 at +0.75, 79.5 at 0, 74.8 at
+-0.75, 70.4 at -1.5, 62.7 at -3, 57.7 at -6. Steep above, shallow below, so the second
+derivative peaks right where the sun sets. A linear blend is exactly a second-order
+approximation, so it fails precisely there.
+
+**Shrinking helps but does not fully rescue the twilight band.** Intervals straddling
+zero: 0.1083 at 6 degrees wide, 0.0646 at 3, 0.0368 at 1.5, 0.0298 at 0.75. It flattens
+out near 0.03 rather than going to zero, which suggests a genuine kink at the horizon and
+not merely curvature.
+
+**Consequences for the study.**
+
+- The daylight-to-darkness axis may not be one blended interval. It is composed of
+  sub-intervals, split at the horizon.
+- Away from roughly -3 to +12 degrees, an 11 degree sub-interval blends to within 0.008
+  and needs no special care.
+- Inside that band the sub-intervals must be short, and even then about 0.03 of error
+  remains at the horizon itself. That band is dusk, which is exactly the untested region
+  the study's claim is about, so this is on the critical path rather than off it.
+- **This is image space.** Section 4 is explicit that the check which decides is
+  behavioural. A 0.03 image error may or may not move a policy's output, and that is not
+  knowable until there is a policy. Recorded now because it changes how the family is
+  built, and building it wrong first would waste the training.
+
+Measured with `tools/interval_sweep.py`; raw numbers in
+`results/carla/interval_sweep.json`.
