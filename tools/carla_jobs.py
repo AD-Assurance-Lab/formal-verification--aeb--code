@@ -11,7 +11,7 @@ Standing rules this file already obeys, from PROTOCOL.md and hard experience:
 
   * the ego is tagged role_name='hero'. Large maps stream terrain around the hero and
     actors outside the streamed area go dormant; attaching a sensor to a dormant one
-    kills the server. Town13 is a large map.
+    kills the server. Town01 is used now; the tag still matters if a large map is ever revisited.
   * a read issued next to a write does not see that write. Weather, transforms and
     sensor delivery all apply on the NEXT tick, and nothing errors when you get this
     wrong. Never read back state you just wrote.
@@ -1142,7 +1142,7 @@ def job_capture_check() -> dict:
 
 
 JOBS = {
-    "smoke": (job_smoke, "load Town13, tag hero, attach a sensor, survive"),
+    "smoke": (job_smoke, "load the map, tag hero, attach a sensor, survive"),
     "sites": (job_sites, "photograph candidate straights day and night, settle lighting"),
     "braking": (job_braking, "measure a_max and t_lat over 10 reps at each speed"),
     "contact": (job_contact, "validate the contact detector against a deliberate crash"),
