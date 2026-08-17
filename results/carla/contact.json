@@ -1,0 +1,6 @@
+{
+  "verdict": "PASS",
+  "min_separation_ft": -1.23,
+  "collision_sensor_events": 212,
+  "note": "PASS requires the geometry detector to register contact. The sensor event count is recorded only to document whether it agreed; the study does not depend on it either way."
+}

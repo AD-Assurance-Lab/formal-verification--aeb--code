@@ -640,8 +640,8 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
     target_v = speed_mph * MPH
     ego = lead = None
     try:
-        tf_ego, _ = site_transform(world, site, along=20.0)
-        tf_lead, _ = site_transform(world, site, along=20.0 + gap_m)
+        tf_ego, _ = site_transform(world, site, along=10.0, need_m=gap_m + 80.0)
+        tf_lead, _ = site_transform(world, site, along=10.0 + gap_m)
         bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
         lead = world.try_spawn_actor(bp, tf_lead)
         if lead is None:
@@ -652,18 +652,26 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
             carla.Vector3D(x=target_v * math.cos(yaw), y=target_v * math.sin(yaw), z=0.0)
         )
         braking = False
+        integral = 0.0
         min_gap_ft = 1e9
+        v_at_brake = None
         for _ in range(1200):
             gap_ft = separation_ft(ego, lead)
             min_gap_ft = min(min_gap_ft, gap_ft)
             if not braking and gap_ft / FT <= trigger_m:
                 braking = True
+                v_at_brake = speed_of(ego)
             if braking:
                 ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = target_v - speed_of(ego)
+                integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
+                cmd = 0.5 * err + 0.5 * integral
                 ego.apply_control(
-                    carla.VehicleControl(throttle=max(0.0, min(0.6, 0.15 * err)))
+                    carla.VehicleControl(
+                        throttle=max(0.0, min(1.0, cmd)),
+                        brake=max(0.0, min(1.0, -cmd * 0.2)),
+                    )
                 )
             world.tick()
             if braking and speed_of(ego) < 0.1:
@@ -672,6 +680,7 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
                 break
         return {
             "min_gap_ft": round(min_gap_ft, 2),
+            "v_at_brake_mph": round(v_at_brake / MPH, 1) if v_at_brake else None,
             "contact": min_gap_ft <= 0.0,
             "standoff_ok": min_gap_ft >= D_MARGIN_M * FT,
             "braked": braking,
@@ -695,7 +704,7 @@ def job_oracle() -> dict:
     t_lat = b["t_lat_s_worst"] or 0.2
 
     client, world = connect(rendering=False)  # no camera here; physics is unaffected
-    site = top_sites(1)[0]
+    site = flattest_site()
     out = {"a_max_g": a_max_g, "t_lat_s": t_lat, "d_margin_m": D_MARGIN_M, "cases": {}}
 
     for speed in (HAZARD_MPH,):

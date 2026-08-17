@@ -7,15 +7,15 @@
     },
     "M1": {
       "state": "done",
-      "note": "Town13 chosen: 401 pedestrian sites, 367 braking sites, declared 30-55 mph. Lit/unlit still unverified"
+      "note": "Town01 (amendment A3). Town13 chosen offline, then measured unusable: under 0.6 ticks/s, OOM at 58 GB, render-thread segfault"
     },
     "M2": {
-      "state": "in_progress",
-      "note": "braking measured (20 runs); contact detector and oracle still to do"
+      "state": "done",
+      "note": "a_max 0.868 g, t_lat 0.150 s over 10 reps/speed; contact detector -1.23 ft on a deliberate crash; oracle 10/10 perfect and 0/10 late"
     },
     "M3": {
       "state": "todo",
-      "note": ""
+      "note": "expert and data collection"
     },
     "M4": {
       "state": "todo",

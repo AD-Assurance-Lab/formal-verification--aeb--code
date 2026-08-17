@@ -1,0 +1,45 @@
+{
+  "a_max_g": 0.8678,
+  "t_lat_s": 0.15,
+  "d_margin_m": 1.0,
+  "cases": {
+    "perfect_25mph": {
+      "trigger_m": 10.57,
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99
+      ]
+    },
+    "late_25mph": {
+      "trigger_m": 6.34,
+      "passes": 0,
+      "of": 10,
+      "min_gap_ft": [
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27,
+        -0.27
+      ]
+    }
+  },
+  "r_req_m_at_25mph": 10.57,
+  "r_req_ft_at_25mph": 34.7,
+  "verdict": "PASS",
+  "note": "PASS requires the perfect oracle 10/10 and the late oracle 0/10. Anything in between means the harness is measuring noise, and no policy result from it would mean anything."
+}
