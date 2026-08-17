@@ -6,18 +6,18 @@
   "device": "cuda",
   "policies": {
     "P_pts": {
-      "samples": 1248,
+      "samples": 2496,
       "braking_samples": 180,
       "knots": [
         -30.0,
         60.0
       ],
       "student_params": 310145,
-      "train_mae_mps2": 0.0701,
+      "train_mae_mps2": 0.0525,
       "file": "P_pts_lead.pt"
     },
     "P_cont": {
-      "samples": 1248,
+      "samples": 2496,
       "braking_samples": 180,
       "knots": [
         -30.0,
@@ -34,7 +34,7 @@
         60.0
       ],
       "student_params": 310145,
-      "train_mae_mps2": 0.0975,
+      "train_mae_mps2": 0.1065,
       "file": "P_cont_lead.pt"
     }
   },

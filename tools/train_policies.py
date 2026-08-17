@@ -90,9 +90,19 @@ class Student(nn.Module):
 
 
 def load(scenario: str, knots: list[float] | None, w: int, h: int):
-    """Load captures, crop to the road region, downsample, normalise."""
+    """Load captures, crop to the road region, downsample, normalise.
+
+    Loads the scenario AND the no-target control, the latter labelled zero at every
+    range. Without the control, "a target is there" and "the ego is near the conflict
+    point" are perfectly correlated in the training set, and the network fits the labels
+    by learning position from road geometry without ever looking at the target. Measured
+    before this was added: both policies commanded 2.8 to 5.1 m/s^2 on an empty road, and
+    one of them exceeded the latch threshold. See amendment A10.
+    """
     xs, ys, ks = [], [], []
-    for path in sorted(CAPTURES.glob(f"{scenario}_sun*.npz")):
+    sources = sorted(CAPTURES.glob(f"{scenario}_sun*.npz"))
+    sources += sorted(CAPTURES.glob("none_sun*.npz"))
+    for path in sources:
         d = np.load(path)
         knot = float(d["sun_altitude_deg"])
         if knots is not None and not any(abs(knot - k) < 1e-3 for k in knots):
@@ -111,9 +121,13 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
         # one place (tools/expert_law.py) so training and verification cannot drift
         # apart, and the captures stay valid when the law is corrected.
         rng = d["range_m"]
-        lab = torch.tensor(
-            [label_decel(float(r), R_REQ_M, A_MAX_MPS2) for r in rng]
-        ).float().unsqueeze(1)
+        if path.name.startswith("none_"):
+            # Nothing ahead, so nothing to brake for, at any range.
+            lab = torch.zeros(len(rng), 1)
+        else:
+            lab = torch.tensor(
+                [label_decel(float(r), R_REQ_M, A_MAX_MPS2) for r in rng]
+            ).float().unsqueeze(1)
         ys.append(lab)
         ks += [knot] * len(imgs)
     if not xs:
