@@ -92,7 +92,7 @@
       "state": "blocked",
       "value": 0.243,
       "threshold": null,
-      "note": "image-space only. Full interval fails at 0.243; away from the horizon an 11 deg sub-interval gives 0.003-0.008; straddling the horizon floors near 0.03. Behavioural check waits for a policy. See amendment A5."
+      "note": "Full interval fails at 0.243. Axis now composed of 11 measured sub-intervals (A6); 10 meet the 0.01 tolerance, the 0.14 deg sliver at the horizon errs at 0.0386 at any width and is declared uncovered. Image space; behavioural check waits for a policy."
     }
   },
   "primitives": {

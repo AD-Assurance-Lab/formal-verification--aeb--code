@@ -419,3 +419,46 @@ not merely curvature.
 
 Measured with `tools/interval_sweep.py`; raw numbers in
 `results/carla/interval_sweep.json`.
+
+### A6. The illumination axis, as measured: 11 sub-intervals and one uncovered sliver
+
+A5 said the axis must be cut. This is where, measured by bisecting for the largest step
+whose midpoint blend stays within 0.01 of the render (`tools/build_family_knots.py`,
+113 renders).
+
+| from | to | step, deg | blend error |
+|---|---|---|---|
+| 60.00 | 29.75 | 30.25 | 0.0098 |
+| 29.75 | 13.25 | 16.50 | 0.0099 |
+| 13.25 | 6.18 | 7.08 | 0.0093 |
+| 6.18 | 3.73 | 2.45 | 0.0096 |
+| 3.73 | 2.02 | 1.71 | 0.0094 |
+| 2.02 | 0.81 | 1.21 | 0.0097 |
+| 0.81 | 0.14 | 0.66 | 0.0100 |
+| **0.14** | **0.00** | **0.14** | **0.0386** |
+| 0.00 | -3.73 | 3.73 | 0.0094 |
+| -3.73 | -29.60 | 25.87 | 0.0087 |
+| -29.60 | -30.00 | 0.40 | 0.0070 |
+
+The step size collapses by more than two orders of magnitude approaching the horizon,
+30.25 degrees at the top and 0.14 degrees at the bottom, then opens straight back up to
+25.87 once past it. That shape is the curvature result from A5 stated quantitatively.
+
+**One sub-interval cannot meet tolerance at any width.** The last approach step, 0.14
+degrees wide, still errs at 0.0386, four times the tolerance and consistent with the
+floor A5 measured. This settles the open question in A5: the horizon is a genuine
+discontinuity in the renderer's sky model, not merely a region of high curvature, and no
+step size fixes it.
+
+**Consequences.**
+
+- The certified axis is the union of the ten sub-intervals that meet tolerance. The
+  sliver from 0.14 to 0.00 degrees of sun altitude is **declared uncovered**, and the
+  paper must say so rather than quietly spanning it.
+- Verification cost multiplies by the number of sub-intervals. Each is still a
+  one-dimensional set, so branch and bound remains cheap, but the accounting in the
+  cost section is per sub-interval and not per condition.
+- Training endpoints are these knots. Rendering them once and reusing them is why this
+  was measured before M3 rather than after.
+
+Raw numbers in `results/carla/family_knots.json`.
