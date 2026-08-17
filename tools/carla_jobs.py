@@ -5,8 +5,7 @@
     python tools/carla_jobs.py --job braking      # one job
 
 Each job writes results/carla/<job>.json and prints a verdict. Jobs are ordered so the
-cheapest thing that can kill the whole plan runs first. Nothing here has been run: the
-simulator was busy when it was written, so treat the first pass as debugging.
+cheapest thing that can kill the whole plan runs first.
 
 Standing rules this file already obeys, from PROTOCOL.md and hard experience:
 
@@ -551,15 +550,115 @@ def job_oracle() -> dict:
     return out
 
 
+def job_inbetween() -> dict:
+    """Early look at the in-between check, before any policy exists.
+
+    The family blends a daylight frame with a darkness frame and calls the middle
+    "dusk". Nothing has ever confirmed that a blend resembles rendered dusk. CARLA can
+    render intermediate sun altitudes, so this compares the two at matched poses.
+
+    IMPORTANT: this is an IMAGE-space comparison, and PROTOCOL section 4 says the check
+    that counts is BEHAVIOURAL, because image fidelity is not the property that
+    matters. An analytic fog model once scored R-squared 0.848 on images while driving a
+    policy 23.8 times harder than the real condition. So a good score here proves
+    nothing. A BAD score is still worth having now: it would tell us to shorten the
+    interval before spending weeks training policies against it.
+    """
+    carla = carla_module()
+    import queue
+
+    client, world = connect()
+    shots = OUT / "inbetween"
+    shots.mkdir(parents=True, exist_ok=True)
+
+    DAY_ALT, NIGHT_ALT = 60.0, -30.0
+    STEPS = [0.0, 0.25, 0.5, 0.75, 1.0]
+
+    site = top_sites(1)[0]
+    tf, _ = site_transform(world, site, along=25.0)
+    ego = spawn_hero(world, tf)
+    cam = None
+    frames: dict[float, list[int]] = {}
+    try:
+        bp = world.get_blueprint_library().find("sensor.camera.rgb")
+        bp.set_attribute("image_size_x", "640")
+        bp.set_attribute("image_size_y", "480")
+        images: "queue.Queue" = queue.Queue()
+        cam = world.spawn_actor(
+            bp, carla.Transform(carla.Location(x=1.5, z=1.6)), attach_to=ego
+        )
+        cam.listen(images.put)
+        # Headlamps stay on throughout. At dusk they are on, and the darkness endpoint
+        # is defined with lower beam, so switching them mid-axis would confound the
+        # illumination sweep with a lamp transition.
+        ego.set_light_state(carla.VehicleLightState(carla.VehicleLightState.LowBeam))
+
+        for s in STEPS:
+            w = world.get_weather()
+            w.sun_altitude_angle = DAY_ALT + s * (NIGHT_ALT - DAY_ALT)
+            w.cloudiness = 10.0
+            w.precipitation = 0.0
+            world.set_weather(w)
+            for _ in range(12):
+                world.tick()
+                try:
+                    images.get(timeout=5.0)
+                except queue.Empty:
+                    pass
+            world.tick()
+            img = images.get(timeout=10.0)
+            img.save_to_disk(str(shots / f"rendered_s{s:.2f}.png"))
+            frames[s] = list(memoryview(img.raw_data))
+    finally:
+        if cam is not None:
+            cam.stop()
+        despawn(world, cam, ego)
+
+    day, night = frames[0.0], frames[1.0]
+    n = len(day)
+    rows = []
+    for s in STEPS[1:-1]:
+        rendered = frames[s]
+        # BGRA buffer; skip the alpha channel
+        diffs = []
+        for k in range(0, n, 40):
+            if (k % 4) == 3:
+                continue
+            blended = day[k] + s * (night[k] - day[k])
+            diffs.append(abs(blended - rendered[k]))
+        mae = sum(diffs) / len(diffs)
+        rows.append(
+            {
+                "s": s,
+                "mean_abs_error_0_255": round(mae, 2),
+                "mean_abs_error_normalised": round(mae / 255.0, 4),
+            }
+        )
+
+    worst = max(r["mean_abs_error_normalised"] for r in rows)
+    return {
+        "verdict": "MEASURED",
+        "interval": {"day_sun_alt": DAY_ALT, "night_sun_alt": NIGHT_ALT},
+        "blend_vs_rendered": rows,
+        "worst_normalised_error": worst,
+        "note": (
+            "IMAGE space only. The check that decides the study is behavioural and "
+            "waits for a policy (PROTOCOL section 4). A low number here is not "
+            "evidence the family is valid; a high number is evidence it is not."
+        ),
+    }
+
+
 JOBS = {
     "smoke": (job_smoke, "load Town13, tag hero, attach a sensor, survive"),
     "sites": (job_sites, "photograph candidate straights day and night, settle lighting"),
     "braking": (job_braking, "measure a_max and t_lat over 10 reps at each speed"),
     "contact": (job_contact, "validate the contact detector against a deliberate crash"),
     "oracle": (job_oracle, "perfect oracle 10/10, late oracle 0/10"),
+    "inbetween": (job_inbetween, "does a day/night blend resemble rendered dusk (image space)"),
 }
 
-ORDER = ["smoke", "sites", "braking", "contact", "oracle"]
+ORDER = ["smoke", "sites", "braking", "contact", "oracle", "inbetween"]
 
 
 def main() -> int:
@@ -576,7 +675,7 @@ def main() -> int:
             print(f"  {i}. [{'x' if done else ' '}] {name:<9} {JOBS[name][1]}")
         print(
             "\n  Relaunch the server before a measurement run. Set CARLA_PORT if it is\n"
-            "  not on 2000. Nothing here has been run yet.\n"
+            "  not on 2000. [x] means a result file exists in results/carla/.\n"
         )
         return 0
 
