@@ -26,12 +26,12 @@
       "note": "both gates pass behaviourally: capture 0.191, in-between 0.454 of the decision threshold"
     },
     "M6": {
-      "state": "todo",
-      "note": "verification over the 11 sub-intervals, verdicts committed before driving"
+      "state": "done",
+      "note": "both properties, both policies, verdicts committed before driving. S: P_pts 6/11, P_cont 8/11. A: P_pts 6/11, P_cont 8/11"
     },
     "M7": {
-      "state": "todo",
-      "note": ""
+      "state": "done",
+      "note": "P_pts 10/11 agreement, P_cont 9/11, every disagreement conservative. P_pts drove 0/10 at three dusk illuminations where P_cont drove 10/10, 10/10, 5/10"
     },
     "M8": {
       "state": "todo",
@@ -41,10 +41,10 @@
   "cells": {
     "1": {
       "endpoints": "PASS both",
-      "fv": null,
-      "witness": null,
+      "fv": "FALSIFIED",
+      "witness": "FAIL",
       "width": null,
-      "note": ""
+      "note": "FALSIFIED, drove 0/10 at three dusk illuminations"
     },
     "2": {
       "endpoints": "PASS both",
@@ -55,10 +55,10 @@
     },
     "3": {
       "endpoints": "PASS both",
-      "fv": null,
-      "witness": null,
+      "fv": "CERTIFIED in the shoulder",
+      "witness": "PASS",
       "width": null,
-      "note": ""
+      "note": "CERTIFIED in the shoulder, drove 10/10 where P_pts drove 0/10"
     },
     "4": {
       "endpoints": "PASS both",
