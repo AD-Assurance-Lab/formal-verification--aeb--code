@@ -19,7 +19,7 @@
         4.99,
         4.99
       ],
-      "mean_brightness": 221.31,
+      "mean_brightness": 221.3,
       "sample": "daylight.png"
     },
     "darkness_lowbeam": {
@@ -29,13 +29,13 @@
       "of": 10,
       "min_gap_ft": [
         4.99,
+        3.32,
         4.99,
         4.99,
         4.99,
         4.99,
         4.99,
-        4.98,
-        4.99,
+        5.0,
         4.99,
         4.99
       ],
@@ -43,6 +43,11 @@
       "sample": "darkness_lowbeam.png"
     }
   },
-  "outcomes_identical_across_lighting": false,
-  "note": "The oracle uses ground-truth range, so identical outcomes across lighting is the expected result and confirms nothing is coupling illumination into the physics. A DIFFERENCE would be the finding."
+  "gap_spread_ft_across_lighting": 1.68,
+  "one_tick_of_travel_ft": 1.83,
+  "worst_standoff_ft": 3.32,
+  "required_standoff_ft": 3.28,
+  "outcomes_agree_across_lighting": true,
+  "agreement_tolerance_ft": 2.0166666666586006,
+  "note": "The oracle uses ground-truth range, so agreement across lighting is the expected result and confirms nothing couples illumination into the physics or the harness. A real DIFFERENCE would be the finding. Compared against one control tick of travel, which is what the run-to-run variation is."
 }

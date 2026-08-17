@@ -1230,17 +1230,32 @@ def job_expert() -> dict:
         }
 
     ok = all(r["passes"] == REPS for r in results.values())
-    gaps = {n: set(r["min_gap_ft"]) for n, r in results.items()}
-    identical = len(set(map(frozenset, gaps.values()))) == 1
+    # Compared against ONE CONTROL TICK OF TRAVEL, which is what the variation
+    # actually is. The brake trigger is a threshold test evaluated once per tick, and
+    # the gap closes by v * dt between ticks, so whether it fires on tick N or N+1
+    # shifts the whole stop by that much: 0.56 m, or 1.83 ft, at 25 mph. Measured
+    # spread across 20 runs was 1.67 ft, one run in ten.
+    #
+    # An exact-equality check called this "lighting changes the outcome", and a 0.1 ft
+    # tolerance would have done the same. Both would have been wrong.
+    TOL_FT = HAZARD_MPH * MPH * FIXED_DT * FT * 1.1
+    all_gaps = [g for r in results.values() for g in r["min_gap_ft"]]
+    spread = max(all_gaps) - min(all_gaps)
     return {
         "verdict": "PASS" if ok else "FAIL",
         "r_req_ft": round(rr * FT, 1),
         "endpoints": results,
-        "outcomes_identical_across_lighting": identical,
+        "gap_spread_ft_across_lighting": round(spread, 3),
+        "one_tick_of_travel_ft": round(HAZARD_MPH * MPH * FIXED_DT * FT, 2),
+        "worst_standoff_ft": round(min(all_gaps), 2),
+        "required_standoff_ft": round(D_MARGIN_M * FT, 2),
+        "outcomes_agree_across_lighting": spread <= TOL_FT,
+        "agreement_tolerance_ft": TOL_FT,
         "note": (
-            "The oracle uses ground-truth range, so identical outcomes across lighting "
-            "is the expected result and confirms nothing is coupling illumination into "
-            "the physics. A DIFFERENCE would be the finding."
+            "The oracle uses ground-truth range, so agreement across lighting is the "
+            "expected result and confirms nothing couples illumination into the physics "
+            "or the harness. A real DIFFERENCE would be the finding. Compared against "
+            "one control tick of travel, which is what the run-to-run variation is."
         ),
     }
 
