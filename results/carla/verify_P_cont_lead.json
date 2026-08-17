@@ -1,6 +1,7 @@
 {
   "policy": "P_cont",
   "scenario": "lead",
+  "property": "S",
   "method": "alpha-CROWN",
   "threshold_mps2": 4.2566,
   "r_req_m": 10.571,
@@ -9,147 +10,158 @@
     {
       "from_deg": 60.0,
       "to_deg": 29.75,
-      "worst_lower_bound_mps2": 7.942,
+      "worst_bound_mps2": 7.3463,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.8658,
+      "margin_x_threshold": 1.7259,
       "verdict": "CERTIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 87.3
+      "seconds": 73.2
     },
     {
       "from_deg": 29.75,
       "to_deg": 13.254,
-      "worst_lower_bound_mps2": 7.7755,
+      "worst_bound_mps2": 6.9108,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.8267,
+      "margin_x_threshold": 1.6236,
       "verdict": "CERTIFIED",
-      "witness_pose": 89,
-      "witness_range_m": 10.237,
-      "seconds": 68.2
+      "witness_pose": 100,
+      "witness_range_m": 4.085,
+      "seconds": 74.4
     },
     {
       "from_deg": 13.254,
       "to_deg": 6.178,
-      "worst_lower_bound_mps2": 7.6586,
+      "worst_bound_mps2": 6.0806,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.7992,
+      "margin_x_threshold": 1.4285,
       "verdict": "CERTIFIED",
-      "witness_pose": 96,
-      "witness_range_m": 6.323,
-      "seconds": 73.5
+      "witness_pose": 100,
+      "witness_range_m": 4.085,
+      "seconds": 86.4
     },
     {
       "from_deg": 6.178,
       "to_deg": 3.726,
-      "worst_lower_bound_mps2": 7.8808,
+      "worst_bound_mps2": 7.562,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.8514,
+      "margin_x_threshold": 1.7766,
       "verdict": "CERTIFIED",
-      "witness_pose": 89,
-      "witness_range_m": 10.237,
-      "seconds": 59.4
+      "witness_pose": 100,
+      "witness_range_m": 4.085,
+      "seconds": 82.5
     },
     {
       "from_deg": 3.726,
       "to_deg": 2.016,
-      "worst_lower_bound_mps2": 7.0328,
+      "worst_bound_mps2": 7.3092,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.6522,
+      "margin_x_threshold": 1.7172,
       "verdict": "CERTIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 60.9
+      "seconds": 82.5
     },
     {
       "from_deg": 2.016,
       "to_deg": 0.805,
-      "worst_lower_bound_mps2": 5.432,
+      "worst_bound_mps2": 3.0217,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.2762,
-      "verdict": "CERTIFIED",
+      "margin_x_threshold": 0.7099,
+      "verdict": "FALSIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 61.1
+      "seconds": 87.2
     },
     {
       "from_deg": 0.805,
       "to_deg": 0.143,
-      "worst_lower_bound_mps2": 7.4331,
+      "worst_bound_mps2": 2.8399,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.7463,
-      "verdict": "CERTIFIED",
+      "margin_x_threshold": 0.6672,
+      "verdict": "FALSIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 57.5
+      "seconds": 86.6
     },
     {
       "from_deg": 0.143,
       "to_deg": 0.0,
-      "worst_lower_bound_mps2": 2.3993,
+      "worst_bound_mps2": -0.048,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 0.5637,
+      "margin_x_threshold": -0.0113,
       "verdict": "FALSIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 61.4
+      "seconds": 87.1
     },
     {
       "from_deg": 0.0,
       "to_deg": -3.727,
-      "worst_lower_bound_mps2": 2.1348,
+      "worst_bound_mps2": 5.3411,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 0.5015,
-      "verdict": "FALSIFIED",
+      "margin_x_threshold": 1.2548,
+      "verdict": "CERTIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 82.1
+      "seconds": 81.8
     },
     {
       "from_deg": -3.727,
       "to_deg": -29.597,
-      "worst_lower_bound_mps2": 7.8505,
+      "worst_bound_mps2": 7.5589,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.8443,
+      "margin_x_threshold": 1.7758,
       "verdict": "CERTIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 49.3
+      "seconds": 51.8
     },
     {
       "from_deg": -29.597,
       "to_deg": -30.0,
-      "worst_lower_bound_mps2": 7.8505,
+      "worst_bound_mps2": 7.5589,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 1.8443,
+      "margin_x_threshold": 1.7758,
       "verdict": "CERTIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 33.4
+      "seconds": 45.9
     }
   ],
   "falsified": [
     {
-      "from_deg": 0.143,
-      "to_deg": 0.0,
-      "worst_lower_bound_mps2": 2.3993,
+      "from_deg": 2.016,
+      "to_deg": 0.805,
+      "worst_bound_mps2": 3.0217,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 0.5637,
+      "margin_x_threshold": 0.7099,
       "verdict": "FALSIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 61.4
+      "seconds": 87.2
     },
     {
-      "from_deg": 0.0,
-      "to_deg": -3.727,
-      "worst_lower_bound_mps2": 2.1348,
+      "from_deg": 0.805,
+      "to_deg": 0.143,
+      "worst_bound_mps2": 2.8399,
       "threshold_mps2": 4.2566,
-      "margin_x_threshold": 0.5015,
+      "margin_x_threshold": 0.6672,
       "verdict": "FALSIFIED",
       "witness_pose": 89,
       "witness_range_m": 10.237,
-      "seconds": 82.1
+      "seconds": 86.6
+    },
+    {
+      "from_deg": 0.143,
+      "to_deg": 0.0,
+      "worst_bound_mps2": -0.048,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0113,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 87.1
     }
   ],
   "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. Certified means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
