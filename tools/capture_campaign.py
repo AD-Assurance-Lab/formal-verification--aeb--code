@@ -97,13 +97,21 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
         # point where the target WOULD be. That keeps the pose sequence identical to the
         # lead capture, which is the whole purpose of this control.
         for _ in range(1500):
-            if other is None:
-                loc = ego.get_transform().location
-                gap_m = math.hypot(
-                    tf_target.location.x - loc.x, tf_target.location.y - loc.y
-                ) - ego.bounding_box.extent.x
-            else:
+            loc = ego.get_transform().location
+            to_conflict = math.hypot(
+                tf_target.location.x - loc.x, tf_target.location.y - loc.y
+            ) - ego.bounding_box.extent.x
+            if scenario == "lead":
+                # A stationary lead sits ON the ego's line, so the straight-line gap IS
+                # the longitudinal range.
                 gap_m = J.separation_ft(ego, other) / J.FT
+            else:
+                # For a CROSSING pedestrian it is not. Straight-line distance to the
+                # walker includes their lateral offset, so at "range 10.6 m" the ego was
+                # only 8.7 m from the crossing point while the walker was still 6 m off
+                # to the side, which is visible in the captured frames. PROTOCOL section
+                # 7 says range to the CONFLICT POINT, and that is what this is.
+                gap_m = to_conflict
             if ped is not None and not released:
                 loc = ego.get_transform().location
                 to_conflict = math.hypot(

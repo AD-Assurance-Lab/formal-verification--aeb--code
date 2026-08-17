@@ -462,3 +462,36 @@ step size fixes it.
   was measured before M3 rather than after.
 
 Raw numbers in `results/carla/family_knots.json`.
+
+### A7. The exposure value, and what range means for a crossing pedestrian
+
+Both found by LOOKING at a captured frame. The statistics had said the captures were
+fine.
+
+**Exposure: f/4.0, shutter 200, ISO 100.** A4 required fixed exposure but did not pin
+the values, and CARLA's defaults were kept. They are about six stops too fast for a
+sunlit scene: daylight came out at mean 225 with a 5th percentile of 137, so the entire
+image sat in the top 40 percent of the range and the road markings were washed out.
+Swept f/1.4 through f/16:
+
+| f-stop | 1.4 | 4.0 | 8.0 | 11 | 16 |
+|---|---|---|---|---|---|
+| daylight mean | 225 | **129** | 58 | 32 | 11 |
+| 5th percentile | 137 | 22 | 0 | 0 | 0 |
+
+f/4.0 uses the full range with no clipping, and night stays properly dark at mean 8 with
+the target lit by the headlamps, which is the case the standard is about. A fixed
+exposure cannot serve both ends of the axis equally, and it should not: that difference
+is the disturbance.
+
+**Range, for the crossing pedestrian, is to the CONFLICT POINT.** It was being measured
+as the straight-line gap to the walker, which includes their lateral offset. So at a
+recorded "range 10.6 m" the ego was 8.7 m from the crossing point while the walker was
+still 6 m off to the side, which is plainly visible in the frame. Section 7 says range to
+the conflict point, and the labels and the brake trigger now use that. The lead-vehicle
+case is unaffected: a stationary lead sits on the ego's line, so the two are the same
+quantity.
+
+**Consequence.** Every capture taken before this is discarded and retaken. Roughly an
+hour of simulator time, against training a policy on washed-out frames labelled against
+the wrong range.

@@ -156,10 +156,16 @@ def rgb_camera_bp(world, width: int = 640, height: int = 480, fov: float = 90.0)
     bp.set_attribute("image_size_x", str(width))
     bp.set_attribute("image_size_y", str(height))
     bp.set_attribute("fov", str(fov))
+    # Values MEASURED, not defaulted. CARLA's default f/1.4 is about six stops too fast
+    # for a sunlit scene: daylight came out at mean 225 with p5 137, so the whole image
+    # sat in the top 40 percent of the range and the road markings were washed out.
+    # Swept f/1.4 to f/16: f/4.0 gives mean 129, p5 22, p95 188, no clipping, and night
+    # stays properly dark at mean 8 with the target lit by the headlamps, which is the
+    # case the standard is about.
     bp.set_attribute("exposure_mode", "manual")
     bp.set_attribute("shutter_speed", "200.0")
     bp.set_attribute("iso", "100.0")
-    bp.set_attribute("fstop", "1.4")
+    bp.set_attribute("fstop", "4.0")
     bp.set_attribute("exposure_compensation", "0.0")
     return bp
 
