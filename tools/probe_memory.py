@@ -34,6 +34,11 @@ def main() -> int:
     ap.add_argument("--no-rendering", action="store_true")
     ap.add_argument("--ticks", type=int, default=100)
     ap.add_argument(
+        "--reuse-hero",
+        action="store_true",
+        help="spawn once and reset it each cycle, instead of destroy and respawn",
+    )
+    ap.add_argument(
         "--no-spawn",
         action="store_true",
         help="tick only, never spawn. Separates per-tick growth from per-spawn growth",
@@ -44,15 +49,26 @@ def main() -> int:
     client, world = J.connect(load_map=a.map, rendering=not a.no_rendering)
     spawn = world.get_map().get_spawn_points()[0]
     base = server_rss_gb()
-    mode = "tick only" if a.no_spawn else "spawn + tick + destroy"
+    mode = (
+        "reuse one hero"
+        if a.reuse_hero
+        else "tick only"
+        if a.no_spawn
+        else "spawn + tick + destroy"
+    )
     print(
         f"map {a.map}  rendering={'off' if a.no_rendering else 'on'}  "
         f"{mode}  {a.ticks} ticks/cycle  base {base:.2f} GB",
         flush=True,
     )
     prev = base
+    held = J.spawn_hero(world, spawn) if a.reuse_hero else None
     for i in range(a.cycles):
-        if a.no_spawn:
+        if a.reuse_hero:
+            J.reset_vehicle(world, held, spawn)
+            for _ in range(a.ticks):
+                world.tick()
+        elif a.no_spawn:
             for _ in range(a.ticks):
                 world.tick()
         else:
@@ -64,6 +80,8 @@ def main() -> int:
         print(f"  cycle {i+1:2d}: {now:6.2f} GB  (+{now - prev:+.2f} this cycle, "
               f"{now - base:+.2f} total)", flush=True)
         prev = now
+    if held is not None:
+        J.despawn(world, held)
     print(f"\ngrowth per cycle: {(prev - base) / a.cycles:+.3f} GB", flush=True)
     return 0
 

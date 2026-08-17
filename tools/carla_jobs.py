@@ -155,6 +155,24 @@ def spawn_hero(world, transform):
     return actor
 
 
+def reset_vehicle(world, actor, transform, settle_ticks: int = SETTLE_TICKS):
+    """Put an existing vehicle back at the start instead of respawning it.
+
+    On a large map, destroying the hero un-anchors terrain streaming and the next spawn
+    forces the whole neighbourhood to stream in again. Keeping one hero alive for the
+    whole job avoids that churn entirely, and it is much faster.
+    """
+    carla = carla_module()
+    actor.set_target_velocity(carla.Vector3D(0, 0, 0))
+    actor.set_target_angular_velocity(carla.Vector3D(0, 0, 0))
+    actor.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+    actor.set_transform(transform)
+    for _ in range(settle_ticks):
+        world.tick()
+    actor.apply_control(carla.VehicleControl(throttle=0.0, brake=0.0))
+    return actor
+
+
 def speed_of(actor) -> float:
     v = actor.get_velocity()
     return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
