@@ -34,8 +34,8 @@
       "note": "P_pts 10/11 agreement, P_cont 9/11, every disagreement conservative. P_pts drove 0/10 at three dusk illuminations where P_cont drove 10/10, 10/10, 5/10"
     },
     "M8": {
-      "state": "todo",
-      "note": ""
+      "state": "in_progress",
+      "note": "headline figure built (docs/figures/dusk_gap.html); paper not written"
     }
   },
   "cells": {

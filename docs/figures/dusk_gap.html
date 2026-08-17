@@ -1,0 +1,289 @@
+<title>The Dusk Gap</title>
+<style>
+  .viz-root {
+    color-scheme: light;
+    --surface-1: #fcfcfb;
+    --surface-2: #f3f2ef;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted: #7b7a75;
+    --rule: #dedcd6;
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --band: #f0efec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) .viz-root {
+      color-scheme: dark;
+      --surface-1: #1a1a19;
+      --surface-2: #232322;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted: #8e8d84;
+      --rule: #3a3a37;
+      --series-1: #3987e5;
+      --series-2: #d95926;
+      --band: #262624;
+    }
+  }
+  :root[data-theme="dark"] .viz-root {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --surface-2: #232322;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8e8d84;
+    --rule: #3a3a37;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --band: #262624;
+  }
+  body { margin: 0; background: var(--surface-1); }
+  .viz-root {
+    background: var(--surface-1);
+    color: var(--text-primary);
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 32px 24px 56px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 27px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .sub { color: var(--text-secondary); margin: 0 0 28px; max-width: 66ch; }
+  .lede {
+    border-left: 3px solid var(--series-1);
+    padding: 2px 0 2px 16px; margin: 0 0 30px;
+    font-size: 17px; max-width: 62ch;
+  }
+  .lede b { font-weight: 650; }
+  h2 { font-size: 15px; margin: 30px 0 2px; letter-spacing: 0.01em; }
+  .cap { color: var(--text-muted); font-size: 13px; margin: 0 0 10px; max-width: 74ch; }
+  .legend { display: flex; gap: 20px; align-items: center; margin: 0 0 6px; flex-wrap: wrap; }
+  .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-secondary); }
+  .sw { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+  .wrap { overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; min-width: 620px; }
+  .tick { fill: var(--text-muted); font-size: 11px; }
+  .axl { fill: var(--text-secondary); font-size: 12px; }
+  .dlab { fill: var(--text-primary); font-size: 11px; font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; margin-top: 10px; }
+  th, td { text-align: right; padding: 6px 9px; border-bottom: 1px solid var(--rule); }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--text-secondary); font-weight: 600; }
+  details { margin-top: 26px; }
+  summary { cursor: pointer; color: var(--text-secondary); font-size: 14px; }
+  .notes { color: var(--text-secondary); font-size: 14px; max-width: 72ch; }
+  .notes li { margin-bottom: 7px; }
+  #tip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--surface-2); color: var(--text-primary);
+    border: 1px solid var(--rule); border-radius: 7px;
+    padding: 8px 11px; font-size: 12.5px; line-height: 1.45;
+    box-shadow: 0 4px 14px rgba(0,0,0,.14); z-index: 9; max-width: 260px;
+  }
+</style>
+
+<div class="viz-root">
+  <h1>The Dusk Gap</h1>
+  <p class="sub">Formal verification of automatic emergency braking across illuminations that
+  FMVSS&nbsp;127 does not test. WMU AD Assurance Lab, simulated in CARLA on Town01.</p>
+
+  <p class="lede">A policy that passes <b>both regulatory test points 10/10</b> fails
+  <b>0&nbsp;out&nbsp;of&nbsp;10</b> at three dusk illuminations between them. The certificate
+  named those illuminations without simulating, and the verdicts were committed to version
+  control before any vehicle moved.</p>
+
+  <div class="legend">
+    <span class="lg"><span class="sw" style="background:var(--series-1)"></span>P_pts &mdash; trained on the regulatory test points only</span>
+    <span class="lg"><span class="sw" style="background:var(--series-2)"></span>P_cont &mdash; trained across the illumination continuum</span>
+  </div>
+
+  <h2>Certified margin, per sub-interval</h2>
+  <p class="cap">Lower bound on commanded deceleration, as a multiple of the brake decision
+  threshold. At or above 1.0 the policy is certified to brake in time for every illumination
+  in that sub-interval. Below it, it is not.</p>
+  <div class="wrap"><svg id="s1" viewBox="0 0 900 300" role="img"
+    aria-label="Certified margin by sub-interval for two policies"></svg></div>
+
+  <h2>Driven outcome, ten runs per sub-interval</h2>
+  <p class="cap">Closed-loop runs at each sub-interval's midpoint illumination, a rendered
+  condition rather than an interpolation. Certified sub-intervals were driven too, so the
+  chart can distinguish a working certificate from one that flags everything.</p>
+  <div class="wrap"><svg id="s2" viewBox="0 0 900 230" role="img"
+    aria-label="Driven pass rate out of ten by sub-interval for two policies"></svg></div>
+
+  <details>
+    <summary>Table view</summary>
+    <table id="tbl"><thead><tr>
+      <th>Sub-interval midpoint</th>
+      <th>P_pts margin</th><th>P_pts drove</th>
+      <th>P_cont margin</th><th>P_cont drove</th>
+    </tr></thead><tbody></tbody></table>
+  </details>
+
+  <details open>
+    <summary>What this does and does not establish</summary>
+    <ul class="notes">
+      <li><b>The control is what makes it mean something.</b> The two policies share
+      architecture, training recipe and sample count. Only the illumination levels they saw
+      differ, so the gap is attributable to how that axis was sampled.</li>
+      <li><b>Every disagreement is conservative.</b> Agreement was 10/11 and 9/11; in each
+      miss the verifier called unsafe something that drove cleanly. Nothing was certified and
+      then failed.</li>
+      <li><b>The bound tracks severity, not just a threshold.</b> A margin of 0.99 drove 6/10.
+      Deeply negative margins drove 0/10. Comfortable margins drove 10/10.</li>
+      <li><b>Both policies fail the deepest twilight.</b> Continuum training buys margin in the
+      shoulder and little at the horizon, where illumination changes fastest and the
+      disturbance family is hardest to construct.</li>
+      <li><b>Scope.</b> Simulation only, one map, one speed, one vehicle, camera only, stationary
+      lead vehicle. This is a subset of FMVSS 127 scenarios and is not a compliance
+      demonstration.</li>
+    </ul>
+  </details>
+</div>
+<div id="tip" role="status"></div>
+
+<script>
+const D = [
+  {mid:"+44.9", pts:1.660, ptsD:10, cont:1.726, contD:10},
+  {mid:"+21.5", pts:1.100, ptsD:10, cont:1.624, contD:10},
+  {mid:"+9.7",  pts:0.991, ptsD:6,  cont:1.429, contD:10},
+  {mid:"+5.0",  pts:1.165, ptsD:10, cont:1.777, contD:10},
+  {mid:"+2.9",  pts:0.751, ptsD:10, cont:1.717, contD:10},
+  {mid:"+1.4",  pts:0.031, ptsD:0,  cont:0.710, contD:10},
+  {mid:"+0.5",  pts:0.078, ptsD:0,  cont:0.667, contD:10},
+  {mid:"+0.07", pts:-0.266,ptsD:0,  cont:-0.011,contD:5},
+  {mid:"−1.9", pts:1.673, ptsD:10, cont:1.255, contD:10},
+  {mid:"−16.7",pts:1.896, ptsD:10, cont:1.776, contD:10},
+  {mid:"−29.8",pts:1.896, ptsD:10, cont:1.776, contD:10},
+];
+const TWILIGHT = [5, 7];   // indices of the deep-twilight band
+const tip = document.getElementById('tip');
+const fmt = v => (v < 0 ? "−" : "") + Math.abs(v).toFixed(2);
+
+function show(e, html) {
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const x = Math.min(e.clientX + 14, innerWidth - 272);
+  tip.style.left = x + 'px'; tip.style.top = (e.clientY + 16) + 'px';
+}
+function hide() { tip.style.opacity = 0; }
+
+function svgEl(n, a) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', n);
+  for (const k in a) e.setAttribute(k, a[k]);
+  return e;
+}
+
+function axisBand(svg, L, R, T, B) {
+  const w = (R - L) / D.length;
+  svg.appendChild(svgEl('rect', {
+    x: L + TWILIGHT[0] * w, y: T, width: (TWILIGHT[1] - TWILIGHT[0] + 1) * w,
+    height: B - T, fill: 'var(--band)'
+  }));
+  const t = svgEl('text', {
+    x: L + (TWILIGHT[0] + (TWILIGHT[1] - TWILIGHT[0] + 1) / 2) * w,
+    y: T + 14, class: 'tick', 'text-anchor': 'middle'
+  });
+  t.textContent = 'deep twilight';
+  svg.appendChild(t);
+}
+
+function drawMargins() {
+  const svg = document.getElementById('s1');
+  const L = 58, R = 884, T = 16, B = 246;
+  const yMin = -0.45, yMax = 2.0;
+  const y = v => B - (v - yMin) / (yMax - yMin) * (B - T);
+  axisBand(svg, L, R, T, B);
+
+  [0, 0.5, 1.0, 1.5, 2.0].forEach(g => {
+    svg.appendChild(svgEl('line', {x1: L, x2: R, y1: y(g), y2: y(g),
+      stroke: 'var(--rule)', 'stroke-width': g === 1 ? 0 : 1}));
+    const t = svgEl('text', {x: L - 9, y: y(g) + 4, class: 'tick', 'text-anchor': 'end'});
+    t.textContent = g.toFixed(1); svg.appendChild(t);
+  });
+  // the decision threshold, the only line that carries meaning
+  svg.appendChild(svgEl('line', {x1: L, x2: R, y1: y(1), y2: y(1),
+    stroke: 'var(--text-secondary)', 'stroke-width': 2, 'stroke-dasharray': '6 4'}));
+  const th = svgEl('text', {x: R, y: y(1) - 7, class: 'axl', 'text-anchor': 'end'});
+  th.textContent = 'certified at or above 1.0'; svg.appendChild(th);
+
+  const w = (R - L) / D.length, bw = Math.min(17, w * 0.31), gap = 2;
+  D.forEach((d, i) => {
+    const cx = L + (i + 0.5) * w;
+    [['pts', 'var(--series-1)', -1], ['cont', 'var(--series-2)', 1]].forEach(([k, c, s]) => {
+      const v = d[k], top = Math.min(y(v), y(0)), h = Math.abs(y(v) - y(0));
+      const x = cx + (s < 0 ? -bw - gap / 2 : gap / 2);
+      const r = svgEl('rect', {x, y: top, width: bw, height: Math.max(h, 1.5),
+        rx: 4, fill: c});
+      r.addEventListener('mousemove', e => show(e,
+        `<b>${k === 'pts' ? 'P_pts' : 'P_cont'}</b> &middot; midpoint ${d.mid}°<br>` +
+        `certified margin <b>${fmt(v)}×</b> threshold<br>` +
+        `${v >= 1 ? 'certified' : 'falsified'} &middot; drove ${d[k + 'D']}/10`));
+      r.addEventListener('mouseleave', hide);
+      svg.appendChild(r);
+    });
+    const t = svgEl('text', {x: cx, y: B + 17, class: 'tick', 'text-anchor': 'middle'});
+    t.textContent = d.mid; svg.appendChild(t);
+  });
+  svg.appendChild(svgEl('line', {x1: L, x2: R, y1: y(0), y2: y(0),
+    stroke: 'var(--rule)', 'stroke-width': 1}));
+  const ax = svgEl('text', {x: (L + R) / 2, y: 288, class: 'axl', 'text-anchor': 'middle'});
+  ax.textContent = 'sun altitude at the sub-interval midpoint (degrees)';
+  svg.appendChild(ax);
+  const ay = svgEl('text', {x: 14, y: (T + B) / 2, class: 'axl',
+    'text-anchor': 'middle', transform: `rotate(-90 14 ${(T + B) / 2})`});
+  ay.textContent = '× decision threshold'; svg.appendChild(ay);
+}
+
+function drawDriven() {
+  const svg = document.getElementById('s2');
+  const L = 58, R = 884, T = 16, B = 176;
+  const y = v => B - v / 10 * (B - T);
+  axisBand(svg, L, R, T, B);
+  [0, 5, 10].forEach(g => {
+    svg.appendChild(svgEl('line', {x1: L, x2: R, y1: y(g), y2: y(g),
+      stroke: 'var(--rule)', 'stroke-width': 1}));
+    const t = svgEl('text', {x: L - 9, y: y(g) + 4, class: 'tick', 'text-anchor': 'end'});
+    t.textContent = g; svg.appendChild(t);
+  });
+  const w = (R - L) / D.length;
+  D.forEach((d, i) => {
+    const cx = L + (i + 0.5) * w;
+    [['ptsD', 'var(--series-1)', -1], ['contD', 'var(--series-2)', 1]].forEach(([k, c, s]) => {
+      const v = d[k], px = cx + s * 7;
+      svg.appendChild(svgEl('line', {x1: px, x2: px, y1: y(0), y2: y(v),
+        stroke: c, 'stroke-width': 2, opacity: .45}));
+      const g = svgEl('circle', {cx: px, cy: y(v), r: 6, fill: c,
+        stroke: 'var(--surface-1)', 'stroke-width': 2});
+      g.addEventListener('mousemove', e => show(e,
+        `<b>${k === 'ptsD' ? 'P_pts' : 'P_cont'}</b> &middot; midpoint ${d.mid}°<br>` +
+        `drove <b>${v}/10</b>`));
+      g.addEventListener('mouseleave', hide);
+      svg.appendChild(g);
+      if (v < 10) {   // label only what departs from a clean pass
+        const t = svgEl('text', {x: px, y: y(v) - 11, class: 'dlab', 'text-anchor': 'middle'});
+        t.textContent = v + '/10'; svg.appendChild(t);
+      }
+    });
+    const t = svgEl('text', {x: cx, y: B + 17, class: 'tick', 'text-anchor': 'middle'});
+    t.textContent = d.mid; svg.appendChild(t);
+  });
+  const ay = svgEl('text', {x: 14, y: (T + B) / 2, class: 'axl',
+    'text-anchor': 'middle', transform: `rotate(-90 14 ${(T + B) / 2})`});
+  ay.textContent = 'runs passed of 10'; svg.appendChild(ay);
+  const ax = svgEl('text', {x: (L + R) / 2, y: 218, class: 'axl', 'text-anchor': 'middle'});
+  ax.textContent = 'sun altitude at the sub-interval midpoint (degrees)';
+  svg.appendChild(ax);
+}
+
+function table() {
+  const b = document.querySelector('#tbl tbody');
+  D.forEach(d => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${d.mid}°</td><td>${fmt(d.pts)}</td><td>${d.ptsD}/10</td>` +
+                   `<td>${fmt(d.cont)}</td><td>${d.contD}/10</td>`;
+    b.appendChild(tr);
+  });
+}
+
+drawMargins(); drawDriven(); table();
+</script>
