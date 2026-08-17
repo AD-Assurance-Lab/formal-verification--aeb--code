@@ -54,6 +54,7 @@ class Site:
     sidewalk_any_side: bool
     sidewalk_both_sides: bool
     crosswalk_on_run_roads: bool  # approximate: a contributing road carries one
+    grade_pct: float | None  # approximate: first road start to last road end
     lit: None = None  # not knowable from the road network
 
     def is_braking_site(self) -> bool:
@@ -192,6 +193,21 @@ def merge_collinear(pieces: list[tuple[tuple, str]]) -> list[tuple[float, list[s
     return runs
 
 
+def elevation_at(road: ET.Element, s: float) -> float | None:
+    """Road surface height at station s, from the OpenDRIVE cubic elevation profile."""
+    best = None
+    best_s = -1.0
+    for e in road.findall("./elevationProfile/elevation"):
+        s0 = float(e.get("s", 0.0))
+        if s0 <= s and s0 > best_s:
+            best, best_s = e, s0
+    if best is None:
+        return None
+    ds = s - best_s
+    a, b, c, d = (float(best.get(k, 0.0)) for k in "abcd")
+    return a + b * ds + c * ds**2 + d * ds**3
+
+
 def crosswalk_positions(road: ET.Element) -> list[float]:
     return [
         float(o.get("s", 0.0))
@@ -214,6 +230,8 @@ def survey(path: Path) -> list[Site]:
         if driving == 0:
             continue
         info[rid] = {
+            "elem": road,
+            "length": float(road.get("length", 0.0)),
             "driving": driving,
             "walk_any": walk_any,
             "walk_both": walk_both,
@@ -234,6 +252,16 @@ def survey(path: Path) -> list[Site]:
         if not contributing:
             continue
         speeds = [c["speed"] for c in contributing if c["speed"] is not None]
+        # Approximate: height at the first contributing road's start against the last
+        # one's end, over the run length. Good enough to rank sites by flatness, which
+        # is all it is used for. Braking authority on a slope is not the flat number.
+        z0 = elevation_at(contributing[0]["elem"], 0.0)
+        z1 = elevation_at(contributing[-1]["elem"], contributing[-1]["length"])
+        grade = (
+            round(100.0 * (z1 - z0) / run_m, 2)
+            if (z0 is not None and z1 is not None and run_m > 1.0)
+            else None
+        )
         sites.append(
             Site(
                 map=name,
@@ -251,6 +279,7 @@ def survey(path: Path) -> list[Site]:
                 sidewalk_any_side=any(c["walk_any"] for c in contributing),
                 sidewalk_both_sides=any(c["walk_both"] for c in contributing),
                 crosswalk_on_run_roads=any(c["crosswalks"] > 0 for c in contributing),
+                grade_pct=grade,
             )
         )
     return sites, longest_ft

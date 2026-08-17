@@ -155,10 +155,33 @@ def separation_ft(a, b) -> float:
     return (centre - _support(a, ux, uy) - _support(b, ux, uy)) * FT
 
 
+def progress(msg: str) -> None:
+    """Print and flush. A long job with buffered output looks like a dead one, and on a
+    large map these take minutes."""
+    print(f"    {msg}", flush=True)
+
+
 def write(job: str, payload: dict) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{job}.json").write_text(json.dumps(payload, indent=2) + "\n")
     print(f"  wrote results/carla/{job}.json")
+
+
+def flattest_site(max_grade_pct: float = 0.5) -> dict:
+    """Longest straight that is actually flat.
+
+    Measured: the longest straight in Town13 runs at 1.35 percent, which biases a
+    braking measurement by a couple of percent. The flat-road number is the one the
+    safety budget wants, so length alone is the wrong sort order here.
+    """
+    flat = [
+        s
+        for s in top_sites(200)
+        if s.get("grade_pct") is not None and abs(s["grade_pct"]) <= max_grade_pct
+    ]
+    if not flat:
+        raise RuntimeError(f"no straight flatter than {max_grade_pct}%")
+    return flat[0]
 
 
 def top_sites(n: int = 8) -> list[dict]:
@@ -236,6 +259,7 @@ def job_sites() -> dict:
 
     results = []
     for i, site in enumerate(top_sites(6)):
+        progress(f"site {i}: {site['run_ft']:.0f} ft")
         try:
             tf, _ = site_transform(world, site, along=25.0)
             ego = spawn_hero(world, tf)
@@ -325,9 +349,13 @@ def job_braking() -> dict:
     client, world = connect()
     # Measure on a surveyed straight, not an arbitrary spawn point. Braking authority
     # on a grade is not the flat-road number, and grade is recorded per run below.
-    site = top_sites(1)[0]
+    site = flattest_site()
     spawn, _ = site_transform(world, site, along=20.0)
     runs = []
+    progress(
+        f"site {site['run_ft']:.0f} ft, grade {site.get('grade_pct')}%, "
+        f"{2 * REPS} runs"
+    )
     for speed_mph in (HAZARD_MPH, PLATE_MPH):
         target = speed_mph * MPH
         for rep in range(REPS):
@@ -381,6 +409,12 @@ def job_braking() -> dict:
                             100.0 * (end.z - start.z) / dist, 2
                         ) if dist > 1 else None,
                     }
+                )
+                progress(
+                    f"{speed_mph:g} mph rep {rep + 1}/{REPS}: "
+                    f"v0 {runs[-1]['v0_mph']:.1f} mph, "
+                    f"stop {runs[-1]['stop_ft']:.0f} ft, "
+                    f"{runs[-1]['a_avg_g']} g"
                 )
             finally:
                 despawn(world, ego)
@@ -529,7 +563,13 @@ def job_oracle() -> dict:
         out[f"r_req_m_at_{speed:g}mph"] = round(rr, 2)
         out[f"r_req_ft_at_{speed:g}mph"] = round(rr * FT, 1)
         for label, trigger in (("perfect", rr), ("late", rr * 0.6)):
-            runs = [_approach(world, site, speed, trigger) for _ in range(REPS)]
+            runs = []
+            for rep in range(REPS):
+                runs.append(_approach(world, site, speed, trigger))
+                progress(
+                    f"{label} {speed:g} mph rep {rep + 1}/{REPS}: "
+                    f"min gap {runs[-1]['min_gap_ft']:.1f} ft"
+                )
             passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
             out["cases"][f"{label}_{speed:g}mph"] = {
                 "trigger_m": round(trigger, 2),
@@ -594,6 +634,7 @@ def job_inbetween() -> dict:
         ego.set_light_state(carla.VehicleLightState(carla.VehicleLightState.LowBeam))
 
         for s in STEPS:
+            progress(f"rendering s={s:.2f}")
             w = world.get_weather()
             w.sun_altitude_angle = DAY_ALT + s * (NIGHT_ALT - DAY_ALT)
             w.cloudiness = 10.0
