@@ -21,7 +21,10 @@ is not re-litigated.
 3. **The disturbance family and its validation.** Endpoints rendered at an identical camera
    pose and interpolated between two regulatory test conditions, why an analytic photometric
    model was rejected on behavioral rather than image-fidelity grounds, and the check that the
-   interpolated interior matches rendered intermediate illumination.
+   interpolated interior matches rendered intermediate illumination. **The check fails over
+   the full interval**, so the axis is composed of measured sub-intervals split at the
+   horizon, where the curvature of illumination against sun angle peaks; this is a result,
+   not a detail, and it belongs in the methodology because it is how the family is built.
 4. **Two policies differing only in axis sampling.** Regulatory-points training against
    continuum training, through one teacher-to-student distillation recipe, so that any gap is
    attributable to the sampling and not to capacity.
@@ -68,3 +71,7 @@ designed to produce it.
 - Extension beyond the standard: fog, steam venting.
 - A general treatment of statistic selection, matching the certified statistic to the temporal
   structure of the failure, across sustained, localized and event-shaped hazards.
+- The capture requirements as a standalone caution: scene lighting settling, fixed exposure,
+  and frame matching. Each of them silently corrupts a disturbance endpoint, each was found
+  by one physically impossible result, and the auto-exposure one is the objection this lab
+  has already published against real datasets, reproduced in a simulator.

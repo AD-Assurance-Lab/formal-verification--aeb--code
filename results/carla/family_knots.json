@@ -1,0 +1,21 @@
+{
+  "verdict": "MEASURED",
+  "tolerance": 0.01,
+  "knots_sun_altitude_deg": [
+    60.0,
+    29.75,
+    13.254,
+    6.178,
+    3.726,
+    2.016,
+    0.805,
+    0.143,
+    0.0,
+    -3.727,
+    -29.597,
+    -30.0
+  ],
+  "sub_intervals": 11,
+  "renders_used": 113,
+  "note": "Endpoints to render for training and verification. A knot is forced at the horizon because straddling intervals floor near 0.03 error at any width, which is a kink and not curvature. Image space; the behavioural check in PROTOCOL section 4 still decides."
+}
