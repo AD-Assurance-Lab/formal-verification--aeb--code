@@ -200,10 +200,16 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     # entire reason for replaying rather than driving. Pairing that holds only within
     # one invocation is not a guarantee.
     OUT.mkdir(parents=True, exist_ok=True)
-    states_path = OUT / f"states_{scenario}.json"
+    # The no-target control MUST replay the lead poses, or it is not a control: the
+    # whole point is to isolate what the target contributes at an identical pose.
+    states_path = OUT / f"states_{'lead' if scenario == 'none' else scenario}.json"
     if states_path.exists():
         states = _load_states(states_path)
         print(f"  reusing the saved nominal run, {len(states)} states")
+    elif scenario == "none":
+        raise SystemExit(
+            "capture --scenario lead first: the no-target control replays its poses"
+        )
     else:
         states = nominal_states(world, site, scenario, speed_mph, b["a_max_g_worst"])
         _save_states(states_path, states)

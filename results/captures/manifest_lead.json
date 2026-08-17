@@ -2,13 +2,71 @@
   {
     "knot": 60.0,
     "file": "lead_sun+60.000.npz",
-    "frames": 104,
-    "size_mb": 32.4
+    "skipped": true
   },
   {
     "knot": 29.75,
     "file": "lead_sun+29.750.npz",
+    "skipped": true
+  },
+  {
+    "knot": 13.254,
+    "file": "lead_sun+13.254.npz",
     "frames": 104,
-    "size_mb": 36.2
+    "size_mb": 42.5
+  },
+  {
+    "knot": 6.178,
+    "file": "lead_sun+06.178.npz",
+    "frames": 104,
+    "size_mb": 42.1
+  },
+  {
+    "knot": 3.726,
+    "file": "lead_sun+03.726.npz",
+    "frames": 104,
+    "size_mb": 40.0
+  },
+  {
+    "knot": 2.016,
+    "file": "lead_sun+02.016.npz",
+    "frames": 104,
+    "size_mb": 38.0
+  },
+  {
+    "knot": 0.805,
+    "file": "lead_sun+00.805.npz",
+    "frames": 104,
+    "size_mb": 33.8
+  },
+  {
+    "knot": 0.143,
+    "file": "lead_sun+00.143.npz",
+    "frames": 104,
+    "size_mb": 28.1
+  },
+  {
+    "knot": 0.0,
+    "file": "lead_sun+00.000.npz",
+    "frames": 104,
+    "size_mb": 37.0
+  },
+  {
+    "knot": -3.727,
+    "file": "lead_sun-03.727.npz",
+    "frames": 104,
+    "size_mb": 30.5
+  },
+  {
+    "knot": -29.597,
+    "file": "lead_sun-29.597.npz",
+    "frames": 104,
+    "size_mb": 29.8
+  },
+  {
+    "knot": -30.0,
+    "file": "lead_sun-30.000.npz",
+    "frames": 104,
+    "size_mb": 29.8
   }
 ]
