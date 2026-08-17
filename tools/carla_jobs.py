@@ -1023,6 +1023,124 @@ def job_pedestrian() -> dict:
     return out
 
 
+def job_capture_check() -> dict:
+    """Does a frame captured at a pose match the frame seen driving through it?
+
+    Verification runs on frames captured off-policy, by placing the ego at a pose. If
+    those frames do not reproduce what the vehicle actually sees there, sound bounds on
+    them prove nothing about the vehicle. The parent steering study found exactly this:
+    holding the vehicle at its spawn ride height while relocating it put the camera
+    metres below the road on climbs, and one direction's captures were unusable.
+
+    This is the IMAGE version of that gate. The one that finally matters compares the
+    POLICY OUTPUT at the same poses and waits for a policy; PROTOCOL section 8 calls
+    that the capture check. A large mismatch here is disqualifying now, and a small one
+    is not yet a pass.
+    """
+    carla = carla_module()
+    import queue
+
+    client, world = connect(rendering=True)
+    site = flattest_site()
+    start_tf, _ = site_transform(world, site, along=10.0, need_m=160.0)
+    ego = spawn_hero(world, start_tf)
+    cam = None
+    try:
+        images: "queue.Queue" = queue.Queue()
+        cam = world.spawn_actor(
+            rgb_camera_bp(world),
+            carla.Transform(carla.Location(x=1.5, z=1.6)),
+            attach_to=ego,
+        )
+        cam.listen(images.put)
+        w = world.get_weather()
+        w.sun_altitude_angle = 60.0
+        w.cloudiness = 10.0
+        world.set_weather(w)
+        for _ in range(WEATHER_SETTLE_TICKS):
+            grab_frame(world, images)
+
+        # 1. Drive, recording a frame and the pose it belongs to.
+        target = HAZARD_MPH * MPH
+        yaw = math.radians(start_tf.rotation.yaw)
+        ego.set_target_velocity(
+            carla.Vector3D(x=target * math.cos(yaw), y=target * math.sin(yaw), z=0.0)
+        )
+        integral = 0.0
+        driven = []
+        for i in range(160):
+            err = target - speed_of(ego)
+            integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
+            cmd = 0.5 * err + 0.5 * integral
+            ego.apply_control(
+                carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
+            )
+            img = grab_frame(world, images)
+            if i >= 60 and i % 20 == 0:  # after the launch settles
+                driven.append((ego.get_transform(), list(memoryview(img.raw_data))))
+        progress(f"drove past {len(driven)} sample poses")
+
+        # 2. Place the ego at each recorded pose and capture again.
+        ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+        for _ in range(40):
+            grab_frame(world, images)
+
+        rows = []
+        for k, (pose, driven_px) in enumerate(driven):
+            ego.set_target_velocity(carla.Vector3D(0, 0, 0))
+            ego.set_target_angular_velocity(carla.Vector3D(0, 0, 0))
+            ego.set_transform(pose)
+            # Let the suspension settle onto the surface. Freezing at spawn ride height
+            # is what put the parent study's camera under the road.
+            for _ in range(SETTLE_TICKS):
+                grab_frame(world, images)
+            img = grab_frame(world, images)
+            captured = memoryview(img.raw_data)
+            diffs = [
+                abs(driven_px[j] - captured[j])
+                for j in range(0, len(driven_px), 40)
+                if j % 4 != 3
+            ]
+            mae = sum(diffs) / len(diffs)
+            here = ego.get_transform().location
+            rows.append(
+                {
+                    "pose": k,
+                    "mae_0_255": round(mae, 2),
+                    "mae_normalised": round(mae / 255.0, 4),
+                    "position_error_m": round(
+                        math.dist(
+                            (here.x, here.y, here.z),
+                            (pose.location.x, pose.location.y, pose.location.z),
+                        ),
+                        3,
+                    ),
+                }
+            )
+            progress(
+                f"pose {k}: image {mae / 255.0:.4f}, "
+                f"placement {rows[-1]['position_error_m']:.3f} m"
+            )
+    finally:
+        if cam is not None:
+            cam.stop()
+        despawn(world, cam, ego)
+
+    worst = max(r["mae_normalised"] for r in rows)
+    worst_pos = max(r["position_error_m"] for r in rows)
+    return {
+        "verdict": "MEASURED",
+        "worst_image_error_normalised": worst,
+        "worst_placement_error_m": worst_pos,
+        "poses": rows,
+        "note": (
+            "Image space. The gate that decides compares POLICY OUTPUT at the same "
+            "poses and waits for a policy (PROTOCOL section 8). A large error here is "
+            "disqualifying now; a small one is not yet a pass."
+        ),
+    }
+
+
 JOBS = {
     "smoke": (job_smoke, "load Town13, tag hero, attach a sensor, survive"),
     "sites": (job_sites, "photograph candidate straights day and night, settle lighting"),
@@ -1031,9 +1149,13 @@ JOBS = {
     "oracle": (job_oracle, "perfect oracle 10/10, late oracle 0/10"),
     "inbetween": (job_inbetween, "does a day/night blend resemble rendered dusk (image space)"),
     "pedestrian": (job_pedestrian, "oracle check on the crossing-pedestrian scenario"),
+    "capture_check": (job_capture_check, "does a placed frame match a driven frame"),
 }
 
-ORDER = ["smoke", "sites", "braking", "contact", "oracle", "pedestrian", "inbetween"]
+ORDER = [
+    "smoke", "sites", "braking", "contact", "oracle", "pedestrian",
+    "capture_check", "inbetween",
+]
 
 
 def main() -> int:

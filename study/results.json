@@ -84,9 +84,10 @@
   },
   "gates": {
     "capture_check": {
-      "state": "todo",
-      "value": null,
-      "threshold": null
+      "state": "in_progress",
+      "value": 0.0078,
+      "threshold": null,
+      "note": "image space: placed vs driven frame differs by 0.0065-0.0078 normalised, placement error 0.000 m, on a 0.0 percent grade site. The gate that decides compares policy output and waits for a policy. Elevation is the case that broke the parent study and Town01's site is flat, so this is the easy case."
     },
     "in_between_check": {
       "state": "blocked",
