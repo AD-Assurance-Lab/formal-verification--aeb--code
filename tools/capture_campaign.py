@@ -40,6 +40,8 @@ PED_GAP_M = 120.0
 MIN_RANGE_M = 2.0
 MAX_RANGE_M = 60.0
 DISK_HEADROOM_GB = 20.0
+# Extra head start for the walker beyond r_req. Tuned by measurement, see A9.
+PED_LEAD_MARGIN_M = 8.0
 
 
 def load_knots() -> list[float]:
@@ -89,6 +91,13 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
             cross_m = max(0.0, 6.0 - ego.bounding_box.extent.y)
             ramp_s = 1.5 / S.WALKER_ACCEL_MPS2
             walk_s = ramp_s + max(0.0, cross_m - S.walker_lead_distance(1.5)) / 1.5
+            # The walker has to be IN the ego's path by r_req, not at the conflict point
+            # later. r_req is the last moment braking can still succeed, so a hazard
+            # arriving after it is not one the system could ever have avoided. Timed to
+            # meet the conflict point instead, the walker was measured still 1.70 m to
+            # the side at the closest captured pose, outside the vehicle: no run could
+            # have hit them, so no run was a pedestrian test.
+            lead_m = J.r_req_m(v_target, a_max_g, 0.15) + PED_LEAD_MARGIN_M
 
         released = False
         integral = 0.0
@@ -117,7 +126,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
                 to_conflict = math.hypot(
                     tf_target.location.x - loc.x, tf_target.location.y - loc.y
                 )
-                if to_conflict / max(J.speed_of(ego), 0.1) <= walk_s:
+                if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
                     ctrl.speed = 1.5
                     ped.apply_control(ctrl)
                     released = True

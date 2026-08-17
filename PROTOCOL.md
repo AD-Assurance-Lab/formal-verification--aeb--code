@@ -526,3 +526,29 @@ repeated: comparing the near frame against a FAR frame (they differ everywhere, 
 1.19 at every size), and comparing means over the whole image (dominated by what fraction
 of the frame the target occupies, flat at every size). The peak difference against a
 no-target control at the same pose is the question actually being asked.
+
+### A9. The crossing pedestrian has to be in the path before r_req
+
+Measured from the saved poses, not eyeballed. Timed to meet the ego at the conflict
+point, the walker was still **1.70 m to the side at the closest captured pose**, outside
+a vehicle whose half-width is 0.9 m. No run could have hit them, so no run was a
+pedestrian test, and a policy that never braked at all would have scored a clean pass.
+
+`r_req` is the last moment braking can still succeed, so a hazard that arrives after it
+is not one the system could ever have avoided. The walker is now released early enough to
+be in the path before then. Measured, varying the head start beyond `r_req`:
+
+| head start | walker in path from | verdict |
+|---|---|---|
+| 0 m | 8.98 m | too late, after `r_req` = 10.57 |
+| 4 m | 13.45 m | clears it by 2.9 m |
+| **8 m** | **17.36 m** | clears it by 6.8 m, about 0.6 s |
+| 12 m | 21.27 m | |
+
+**8 m is used.** Four metres only just clears `r_req`, which would make the cell a test of
+reaction latency rather than of whether the policy can see a pedestrian under a given
+illumination, and seeing is what the study is about. Twelve gives the policy more time
+than the hazard warrants.
+
+This is a scenario parameter, declared here, and it is the same for both policies. It is
+not tuned per policy and must never be.
