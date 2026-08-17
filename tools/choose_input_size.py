@@ -51,10 +51,20 @@ def main() -> int:
     args = ap.parse_args()
 
     path = CAPTURES / f"{args.scenario}_sun{args.knot}.npz"
-    if not path.exists():
-        raise SystemExit(f"no capture at {path}; run tools/capture_campaign.py first")
+    control_path = CAPTURES / f"none_sun{args.knot}.npz"
+    for p_ in (path, control_path):
+        if not p_.exists():
+            raise SystemExit(
+                f"missing {p_.name}. Capture the scenario AND the no-target control:\n"
+                "  python tools/capture_campaign.py --scenario lead\n"
+                "  python tools/capture_campaign.py --scenario none"
+            )
     d = np.load(path)
+    ctrl = np.load(control_path)
     images, ranges = d["images"], d["range_m"]
+    control = ctrl["images"]
+    if len(control) != len(images):
+        raise SystemExit("control and scenario have different pose counts")
 
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
     v = J.HAZARD_MPH * J.MPH
@@ -64,26 +74,31 @@ def main() -> int:
     far = int(np.argmax(ranges))
     print(f"\n{args.scenario}, sun {args.knot}")
     print(f"  r_req {rr:.1f} m; closest captured pose {ranges[near]:.1f} m (index {near})")
-    print(f"  farthest pose {ranges[far]:.1f} m, used as the target-free reference\n")
+    print("  control: the SAME pose with no target present\n")
 
-    print(f"  {'input':>12}{'contrast at r_req':>20}{'contrast at far':>18}{'ratio':>8}")
+    print(f"  {'input':>12}{'target signal':>16}{'scene noise':>14}{'ratio':>8}")
     rows = []
     for w, h in CANDIDATES:
-        a = downsample(images[near], w, h)
-        c = downsample(images[far], w, h)
-        diff = np.abs(a - c).mean()
-        # A frame differs from the reference for reasons other than the target too, so
-        # the useful figure is how much MORE it differs where the target is.
-        band = slice(int(h * 0.35), int(h * 0.8))
-        near_c = np.abs(a[band] - c[band]).mean()
-        rows.append((w, h, float(diff), float(near_c)))
-        print(f"  {w:5d} x {h:<4d}{near_c:20.2f}{diff:18.2f}{near_c / max(diff, 1e-6):8.2f}")
+        with_t = downsample(images[near], w, h)
+        without = downsample(control[near], w, h)
+        signal = float(np.abs(with_t - without).mean())
+        # At the farthest pose the target is 60 m away and contributes almost nothing,
+        # so the same difference there is the floor: rendering noise and whatever else
+        # separates the two runs. The ratio is what says the target is visible at all.
+        noise = float(
+            np.abs(
+                downsample(images[far], w, h) - downsample(control[far], w, h)
+            ).mean()
+        )
+        rows.append((w, h, noise, signal))
+        print(f"  {w:5d} x {h:<4d}{signal:16.3f}{noise:14.3f}{signal / max(noise, 1e-6):8.2f}")
 
     print(
-        "\n  Contrast is mean absolute difference in 0-255 units against a frame with\n"
-        "  the target far away. It falls as the input shrinks; the size to choose is\n"
-        "  the smallest where the target is still clearly above the background\n"
-        "  difference, since every extra pixel costs the verifier ReLU neurons.\n"
+        "\n  Signal is the mean absolute difference, in 0-255 units, between the frame\n"
+        "  at r_req and the SAME pose with no target. Noise is that difference at the\n"
+        "  farthest pose, where the target contributes almost nothing. Choose the\n"
+        "  smallest input whose ratio is comfortably above 1, since every extra pixel\n"
+        "  costs the verifier ReLU neurons.\n"
     )
     (J.REPO / "results" / "carla" / f"input_size_{args.scenario}.json").write_text(
         json.dumps(
@@ -91,9 +106,10 @@ def main() -> int:
                 "r_req_m": round(rr, 2),
                 "pose_range_m": float(ranges[near]),
                 "candidates": [
-                    {"w": w, "h": h, "target_band_contrast": round(nc, 3),
-                     "whole_frame_contrast": round(df, 3)}
-                    for w, h, df, nc in rows
+                    {"w": w, "h": h, "target_signal": round(sig, 4),
+                     "scene_noise": round(noi, 4),
+                     "ratio": round(sig / max(noi, 1e-6), 3)}
+                    for w, h, noi, sig in rows
                 ],
             },
             indent=2,
