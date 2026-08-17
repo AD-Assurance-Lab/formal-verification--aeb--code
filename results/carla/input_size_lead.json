@@ -1,0 +1,42 @@
+{
+  "r_req_m": 10.57,
+  "pose_range_m": 10.795700073242188,
+  "candidates": [
+    {
+      "w": 64,
+      "h": 48,
+      "target_band_contrast": 16.845,
+      "whole_frame_contrast": 14.243
+    },
+    {
+      "w": 100,
+      "h": 66,
+      "target_band_contrast": 17.218,
+      "whole_frame_contrast": 14.46
+    },
+    {
+      "w": 128,
+      "h": 96,
+      "target_band_contrast": 17.606,
+      "whole_frame_contrast": 14.735
+    },
+    {
+      "w": 200,
+      "h": 66,
+      "target_band_contrast": 17.417,
+      "whole_frame_contrast": 14.579
+    },
+    {
+      "w": 200,
+      "h": 150,
+      "target_band_contrast": 17.942,
+      "whole_frame_contrast": 15.036
+    },
+    {
+      "w": 320,
+      "h": 240,
+      "target_band_contrast": 18.173,
+      "whole_frame_contrast": 15.215
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# Python 3.10, matching the CARLA 0.9.16 API wheel (cp310).
+#
+# auto_LiRPA declares requires-python ~=3.11, but 0.7.2 imports and runs correctly on
+# 3.10 with torch 2.13, verified by actually bounding the student network. The
+# constraint is conservative, so it is bypassed rather than forcing a second
+# interpreter. CARLA also ships cp311 and cp312 wheels if that ever changes.
+#
+#   pip install --user --no-deps --ignore-requires-python \
+#       git+https://github.com/Verified-Intelligence/auto_LiRPA.git
+#   pip install --user --no-deps graphviz
+#
+# Do NOT vendor auto_LiRPA, and do not use the PyPI release: it is stuck at 0.3 and
+# fails on modern torch with "cannot import name _set_opset_version".
+
+numpy
+torch
+graphviz

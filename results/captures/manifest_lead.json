@@ -1,0 +1,14 @@
+[
+  {
+    "knot": 60.0,
+    "file": "lead_sun+60.000.npz",
+    "frames": 104,
+    "size_mb": 32.4
+  },
+  {
+    "knot": 29.75,
+    "file": "lead_sun+29.750.npz",
+    "frames": 104,
+    "size_mb": 36.2
+  }
+]
