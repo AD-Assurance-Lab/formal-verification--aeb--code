@@ -1,0 +1,48 @@
+{
+  "verdict": "PASS",
+  "r_req_ft": 34.7,
+  "endpoints": {
+    "daylight": {
+      "sun_altitude": 60.0,
+      "lights": "NONE",
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99
+      ],
+      "mean_brightness": 221.31,
+      "sample": "daylight.png"
+    },
+    "darkness_lowbeam": {
+      "sun_altitude": -30.0,
+      "lights": "LowBeam",
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.99,
+        4.98,
+        4.99,
+        4.99,
+        4.99
+      ],
+      "mean_brightness": 57.19,
+      "sample": "darkness_lowbeam.png"
+    }
+  },
+  "outcomes_identical_across_lighting": false,
+  "note": "The oracle uses ground-truth range, so identical outcomes across lighting is the expected result and confirms nothing is coupling illumination into the physics. A DIFFERENCE would be the finding."
+}

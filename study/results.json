@@ -14,12 +14,12 @@
       "note": "a_max 0.868 g, t_lat 0.150 s over 10 reps/speed; contact detector -1.23 ft on a deliberate crash; oracle 10/10 perfect and 0/10 late"
     },
     "M3": {
-      "state": "in_progress",
-      "note": "scenario objects built (trench plate 8.0x12.0 ft, deterministic crossing pedestrian); oracle validated on BOTH lead-vehicle and pedestrian. Expert data collection next"
+      "state": "done",
+      "note": "expert 10/10 at both regulatory endpoints, outcomes identical across lighting; scenario objects built and both oracle checks pass"
     },
     "M4": {
       "state": "todo",
-      "note": ""
+      "note": "needs a decision on capture volume before training"
     },
     "M5": {
       "state": "todo",

@@ -1141,6 +1141,110 @@ def job_capture_check() -> dict:
     }
 
 
+# The two regulatory lighting conditions that bound the certified axis (PROTOCOL 2).
+ENDPOINTS = [
+    ("daylight", 60.0, "NONE"),
+    ("darkness_lowbeam", -30.0, "LowBeam"),
+]
+
+
+def job_expert() -> dict:
+    """M3's exit criterion: the expert drives correctly at BOTH regulatory endpoints.
+
+    Run with rendering ON and a camera attached, which is the configuration data
+    collection will use, so this validates the collection path and not just the physics.
+    The oracle reads ground-truth range, so lighting cannot change its decisions; what is
+    being checked is that the scenario, the capture and the harness behave the same at
+    both ends of the axis. A difference here would mean something is coupling lighting
+    into the run, which is worth knowing before a policy is blamed for it.
+
+    Sample frames only, two per condition. Bulk collection is M4's problem and needs a
+    decision about volume first.
+    """
+    carla = carla_module()
+    import queue
+
+    braking_file = OUT / "braking.json"
+    if not braking_file.exists():
+        return {"verdict": "TODO", "note": "run the braking job first"}
+    b = json.loads(braking_file.read_text())
+    rr = r_req_m(HAZARD_MPH * MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
+
+    client, world = connect(rendering=True)
+    site = flattest_site()
+    shots = OUT / "expert"
+    shots.mkdir(parents=True, exist_ok=True)
+
+    results = {}
+    for name, altitude, lights in ENDPOINTS:
+        w = world.get_weather()
+        w.sun_altitude_angle = altitude
+        w.cloudiness = 10.0
+        w.precipitation = 0.0
+        world.set_weather(w)
+        for _ in range(WEATHER_SETTLE_TICKS):
+            world.tick()
+
+        runs = []
+        for rep in range(REPS):
+            runs.append(_approach(world, site, HAZARD_MPH, rr))
+        passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
+        progress(f"{name}: {passes}/{REPS} pass, min gap {runs[0]['min_gap_ft']:.1f} ft")
+
+        # One sample frame, to prove the capture path works at this endpoint.
+        tf, _ = site_transform(world, site, along=25.0, need_m=60.0)
+        ego = spawn_hero(world, tf)
+        cam = None
+        brightness = None
+        try:
+            images: "queue.Queue" = queue.Queue()
+            cam = world.spawn_actor(
+                rgb_camera_bp(world),
+                carla.Transform(carla.Location(x=1.5, z=1.6)),
+                attach_to=ego,
+            )
+            cam.listen(images.put)
+            ego.set_light_state(
+                carla.VehicleLightState(getattr(carla.VehicleLightState, lights))
+            )
+            for _ in range(WEATHER_SETTLE_TICKS):
+                grab_frame(world, images)
+            img = grab_frame(world, images)
+            img.save_to_disk(str(shots / f"{name}.png"))
+            buf = memoryview(img.raw_data)
+            idx = range(0, len(buf), 64)
+            brightness = round(sum(buf[k] for k in idx) / len(list(idx)), 2)
+        finally:
+            if cam is not None:
+                cam.stop()
+            despawn(world, cam, ego)
+
+        results[name] = {
+            "sun_altitude": altitude,
+            "lights": lights,
+            "passes": passes,
+            "of": REPS,
+            "min_gap_ft": [r["min_gap_ft"] for r in runs],
+            "mean_brightness": brightness,
+            "sample": f"{name}.png",
+        }
+
+    ok = all(r["passes"] == REPS for r in results.values())
+    gaps = {n: set(r["min_gap_ft"]) for n, r in results.items()}
+    identical = len(set(map(frozenset, gaps.values()))) == 1
+    return {
+        "verdict": "PASS" if ok else "FAIL",
+        "r_req_ft": round(rr * FT, 1),
+        "endpoints": results,
+        "outcomes_identical_across_lighting": identical,
+        "note": (
+            "The oracle uses ground-truth range, so identical outcomes across lighting "
+            "is the expected result and confirms nothing is coupling illumination into "
+            "the physics. A DIFFERENCE would be the finding."
+        ),
+    }
+
+
 JOBS = {
     "smoke": (job_smoke, "load the map, tag hero, attach a sensor, survive"),
     "sites": (job_sites, "photograph candidate straights day and night, settle lighting"),
@@ -1150,11 +1254,12 @@ JOBS = {
     "inbetween": (job_inbetween, "does a day/night blend resemble rendered dusk (image space)"),
     "pedestrian": (job_pedestrian, "oracle check on the crossing-pedestrian scenario"),
     "capture_check": (job_capture_check, "does a placed frame match a driven frame"),
+    "expert": (job_expert, "M3: the expert drives correctly at both regulatory endpoints"),
 }
 
 ORDER = [
     "smoke", "sites", "braking", "contact", "oracle", "pedestrian",
-    "capture_check", "inbetween",
+    "capture_check", "inbetween", "expert",
 ]
 
 
