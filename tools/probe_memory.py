@@ -33,19 +33,33 @@ def main() -> int:
     ap.add_argument("--cycles", type=int, default=12)
     ap.add_argument("--no-rendering", action="store_true")
     ap.add_argument("--ticks", type=int, default=100)
+    ap.add_argument(
+        "--no-spawn",
+        action="store_true",
+        help="tick only, never spawn. Separates per-tick growth from per-spawn growth",
+    )
     a = ap.parse_args()
 
     J.MAP = a.map
     client, world = J.connect(load_map=a.map, rendering=not a.no_rendering)
     spawn = world.get_map().get_spawn_points()[0]
     base = server_rss_gb()
-    print(f"map {a.map}  rendering={'off' if a.no_rendering else 'on'}  base {base:.2f} GB", flush=True)
+    mode = "tick only" if a.no_spawn else "spawn + tick + destroy"
+    print(
+        f"map {a.map}  rendering={'off' if a.no_rendering else 'on'}  "
+        f"{mode}  {a.ticks} ticks/cycle  base {base:.2f} GB",
+        flush=True,
+    )
     prev = base
     for i in range(a.cycles):
-        ego = J.spawn_hero(world, spawn)
-        for _ in range(a.ticks):
-            world.tick()
-        J.despawn(world, ego)
+        if a.no_spawn:
+            for _ in range(a.ticks):
+                world.tick()
+        else:
+            ego = J.spawn_hero(world, spawn)
+            for _ in range(a.ticks):
+                world.tick()
+            J.despawn(world, ego)
         now = server_rss_gb()
         print(f"  cycle {i+1:2d}: {now:6.2f} GB  (+{now - prev:+.2f} this cycle, "
               f"{now - base:+.2f} total)", flush=True)
