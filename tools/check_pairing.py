@@ -52,7 +52,12 @@ def check(scenario: str) -> bool:
             )
             ok = False
 
-    lo, hi = np.load(files[0]), np.load(files[-1])
+    # Compare the EXTREME knots by sun altitude, not the first and last filenames.
+    # Sorted as strings, "+00.000" comes first and "-30.000" last, so this was comparing
+    # the horizon against full darkness and reporting a 6/255 change as if it were the
+    # whole axis.
+    order = sorted(range(len(files)), key=lambda i: knots[i])
+    lo, hi = np.load(files[order[0]]), np.load(files[order[-1]])
     mid = len(ref) // 2
     spread = float(
         np.abs(lo["images"][mid].astype(np.float32) - hi["images"][mid].astype(np.float32)).mean()
@@ -62,7 +67,10 @@ def check(scenario: str) -> bool:
         f"{len(ref)} poses each, range {ref.max():.1f} to {ref.min():.1f} m"
     )
     print(f"  pose pairing: {'exact' if ok else 'BROKEN'}")
-    print(f"  image change across the axis at mid-approach: {spread:.1f} / 255")
+    print(
+        f"  image change from {knots[order[0]]:+.1f} to {knots[order[-1]]:+.1f} deg "
+        f"at mid-approach: {spread:.1f} / 255"
+    )
     if spread < 5.0:
         print("  WARNING: barely any change across the axis; nothing to certify against")
         ok = False
