@@ -1,0 +1,42 @@
+{
+  "input": [
+    128,
+    96
+  ],
+  "device": "cuda",
+  "policies": {
+    "P_pts": {
+      "samples": 1248,
+      "braking_samples": 180,
+      "knots": [
+        -30.0,
+        60.0
+      ],
+      "student_params": 310145,
+      "train_mae_mps2": 0.0701,
+      "file": "P_pts_lead.pt"
+    },
+    "P_cont": {
+      "samples": 1248,
+      "braking_samples": 180,
+      "knots": [
+        -30.0,
+        -29.597000122070312,
+        -3.7269999980926514,
+        0.0,
+        0.14300000667572021,
+        0.8050000071525574,
+        2.0160000324249268,
+        3.7260000705718994,
+        6.177999973297119,
+        13.253999710083008,
+        29.75,
+        60.0
+      ],
+      "student_params": 310145,
+      "train_mae_mps2": 0.0975,
+      "file": "P_cont_lead.pt"
+    }
+  },
+  "note": "Identical architecture, recipe, epochs and frame count. The ONLY difference is which illumination knots the frames came from. Train MAE is not a result; the result is whether each policy passes the regulatory endpoints closed loop, which is milestone M4."
+}
