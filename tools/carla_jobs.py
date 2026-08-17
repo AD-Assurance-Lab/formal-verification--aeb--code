@@ -83,6 +83,9 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     settings.no_rendering_mode = not rendering
     world.apply_settings(settings)
     world.tick()  # the settings take effect on the next tick, not on the call
+    left = clear_actors(world)
+    if left:
+        print(f"  cleared {left} actors left by an earlier run", flush=True)
     return client, world
 
 
@@ -116,6 +119,27 @@ def site_transform(world, site: dict, along: float = 0.0):
     tf = wp.transform
     tf.location.z += 0.3
     return tf, wp
+
+
+def clear_actors(world) -> int:
+    """Destroy every vehicle, walker and sensor left over from a previous run.
+
+    A job that is killed mid-run leaves its actors in the world, and the next run then
+    fails with "spawn blocked" at a point that is perfectly fine. Always start clean.
+    """
+    doomed = [
+        a
+        for a in world.get_actors()
+        if a.type_id.startswith(("vehicle.", "walker.", "sensor."))
+    ]
+    for a in doomed:
+        try:
+            a.destroy()
+        except RuntimeError:
+            pass
+    if doomed:
+        world.tick()
+    return len(doomed)
 
 
 def spawn_hero(world, transform):
