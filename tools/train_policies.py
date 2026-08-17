@@ -30,9 +30,14 @@ import torch.nn as nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
+from expert_law import label_decel  # noqa: E402
 
 CAPTURES = J.REPO / "results" / "captures"
 MODELS = J.REPO / "results" / "models"
+
+_b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+A_MAX_MPS2 = _b["a_max_g_worst"] * 9.81
+R_REQ_M = J.r_req_m(J.HAZARD_MPH * J.MPH, _b["a_max_g_worst"], _b["t_lat_s_worst"] or 0.2)
 
 # The two regulatory endpoints present in the captures. Darkness with upper beam is a
 # third regulatory point and is not captured yet; see the note in the results file.
@@ -102,7 +107,14 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
             t, size=(h, w), mode="area"
         )
         xs.append(t)
-        ys.append(torch.from_numpy(d["label_decel_mps2"]).float().unsqueeze(1))
+        # Labels are RECOMPUTED from range, not read from the capture. The law lives in
+        # one place (tools/expert_law.py) so training and verification cannot drift
+        # apart, and the captures stay valid when the law is corrected.
+        rng = d["range_m"]
+        lab = torch.tensor(
+            [label_decel(float(r), R_REQ_M, A_MAX_MPS2) for r in rng]
+        ).float().unsqueeze(1)
+        ys.append(lab)
         ks += [knot] * len(imgs)
     if not xs:
         raise SystemExit(f"no captures for {scenario} at the requested knots")
