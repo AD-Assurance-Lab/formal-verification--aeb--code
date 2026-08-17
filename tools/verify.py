@@ -80,22 +80,40 @@ def main() -> int:
 
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--policy", required=True)
-    ap.add_argument("--scenario", default="lead")
+    ap.add_argument("--scenario", default="lead", help="which captured frames to use")
+    ap.add_argument(
+        "--policy-scenario", default="lead",
+        help="which trained policy to load. Property A evaluates the SAME policy on the "
+             "no-target frames, so this stays 'lead' while --scenario is 'none'",
+    )
     ap.add_argument("--method", default="alpha-CROWN")
+    ap.add_argument(
+        "--property", choices=["S", "A"], default="S",
+        help="S: must brake inside r_req. A: must NOT brake on the false-activation "
+             "scenario, upper bound at most 0.25 g, PROTOCOL section 7",
+    )
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    model, w, h = load_policy(args.policy, args.scenario, dev)
+    model, w, h = load_policy(args.policy, args.policy_scenario, dev)
     b = json.loads((OUT / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81
     threshold = a_max * BRAKE_THRESHOLD_FRACTION
     rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
     knots = json.loads((OUT / "family_knots.json").read_text())["knots_sun_altitude_deg"]
 
-    states = json.loads((CAPTURES / f"states_{args.scenario}.json").read_text())
+    # The no-target control replays the LEAD poses, so it has no states file of its own.
+    states_name = "lead" if args.scenario == "none" else args.scenario
+    states = json.loads((CAPTURES / f"states_{states_name}.json").read_text())
     ranges = np.array([s["range_m"] for s in states])
-    # The property quantifies over poses INSIDE r_req and nowhere else.
-    poses = [i for i, r in enumerate(ranges) if r <= rr]
+    if args.property == "S":
+        # Property S quantifies over poses INSIDE r_req and nowhere else.
+        poses = [i for i, r in enumerate(ranges) if r <= rr]
+    else:
+        # Property A holds EVERYWHERE: with nothing in front there is no range at which
+        # braking is warranted. The limit is the standard's own 0.25 g.
+        poses = list(range(len(states)))
+        threshold = 0.25 * 9.81
     print(
         f"\n{args.policy} / {args.scenario}: {len(poses)} poses inside r_req "
         f"({rr:.2f} m), {len(knots) - 1} sub-intervals, threshold {threshold:.3f} m/s^2",
@@ -125,16 +143,22 @@ def main() -> int:
                 x_L=torch.full_like(s, -1.0),
                 x_U=torch.full_like(s, 1.0),
             )
-            lb, _ = bm.compute_bounds(x=(BoundedTensor(s, ptb),), method=args.method)
-            lb = float(lb.item())
-            if worst_lb is None or lb < worst_lb:
-                worst_lb, witness = lb, i
-        certified = worst_lb >= threshold
+            lb, ub = bm.compute_bounds(x=(BoundedTensor(s, ptb),), method=args.method)
+            # S wants the LOWEST output (does it always brake?); A wants the HIGHEST
+            # (does it ever brake when it should not?).
+            val = float(lb.item()) if args.property == "S" else float(ub.item())
+            if worst_lb is None or (
+                val < worst_lb if args.property == "S" else val > worst_lb
+            ):
+                worst_lb, witness = val, i
+        certified = (
+            worst_lb >= threshold if args.property == "S" else worst_lb <= threshold
+        )
         cells.append(
             {
                 "from_deg": hi_alt,
                 "to_deg": lo_alt,
-                "worst_lower_bound_mps2": round(worst_lb, 4),
+                "worst_bound_mps2": round(worst_lb, 4),
                 "threshold_mps2": round(threshold, 4),
                 "margin_x_threshold": round(worst_lb / threshold, 4),
                 "verdict": "CERTIFIED" if certified else "FALSIFIED",
@@ -144,7 +168,7 @@ def main() -> int:
             }
         )
         print(
-            f"  {hi_alt:+8.3f} to {lo_alt:+8.3f}  lower bound {worst_lb:8.3f}  "
+            f"  {hi_alt:+8.3f} to {lo_alt:+8.3f}  bound {worst_lb:8.3f}  "
             f"{worst_lb / threshold:6.2f}x threshold  "
             f"{'CERTIFIED' if certified else 'FALSIFIED'}"
             f"{'' if certified else f'  witness pose {witness} at {ranges[witness]:.1f} m'}"
@@ -155,6 +179,7 @@ def main() -> int:
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
+        "property": args.property,
         "method": args.method,
         "threshold_mps2": round(threshold, 4),
         "r_req_m": round(rr, 3),
@@ -168,7 +193,8 @@ def main() -> int:
             "BEFORE ANY DRIVING; that ordering is what makes these predictions."
         ),
     }
-    path = OUT / f"verify_{args.policy}_{args.scenario}.json"
+    suffix = "" if args.property == "S" else "_A"
+    path = OUT / f"verify_{args.policy}_{args.scenario}{suffix}.json"
     path.write_text(json.dumps(payload, indent=2) + "\n")
     n_bad = len(payload["falsified"])
     print(

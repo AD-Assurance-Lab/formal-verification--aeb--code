@@ -552,3 +552,39 @@ than the hazard warrants.
 
 This is a scenario parameter, declared here, and it is the same for both policies. It is
 not tuned per policy and must never be.
+
+### A10. Training must include the no-target case, or the policy learns position
+
+Found by verifying property A, which is what property A is for.
+
+With **nothing in front of it**, both policies command substantial braking at short range:
+
+| range | P_pts, target | P_pts, none | P_cont, target | P_cont, none |
+|---|---|---|---|---|
+| 10.2 m | 8.19 | **4.51** | 8.16 | **5.08** |
+| 6.9 m | 8.51 | **3.63** | 8.03 | **4.81** |
+| 2.4 m | 8.39 | **2.79** | 8.32 | **4.96** |
+
+The latch threshold is 4.26, so `P_cont` would brake on an empty road.
+
+**The cause is the capture design, not the policies.** In the lead captures the target is
+present at every pose, so "a target is there" and "the ego is near the conflict point" are
+perfectly correlated. A network can fit the labels by learning position from scene cues,
+the road geometry and the buildings, without ever looking at the car. Training rewarded
+that and nothing penalised it.
+
+**Consequence for what has been measured.** The certificate still predicted driving
+correctly, so the METHOD result stands: verdicts committed before driving agreed 10/11 for
+`P_pts`. But the claim those policies support is weaker than it appeared. A failure at
+twilight may be the position cues degrading rather than the vehicle becoming invisible,
+and the two cannot be separated with policies trained this way.
+
+**The fix, using data already captured.** The `none` scenario replays the identical poses
+with no target and is already captured at all 12 knots. Those frames enter training with
+label 0 at every range, which makes position uninformative and forces the target to carry
+the decision. Retrain, re-verify, re-drive.
+
+**The general lesson.** Property A is not a secondary nicety next to property S. Here it
+was the only thing that could detect that the policy was not solving the task at all, and
+a study that verified only "does it brake in time" would have reported a clean result
+about a position detector.
