@@ -18,12 +18,12 @@
       "note": "expert 10/10 at both regulatory endpoints, outcomes identical across lighting; scenario objects built and both oracle checks pass"
     },
     "M4": {
-      "state": "todo",
-      "note": "needs a decision on capture volume before training"
+      "state": "done",
+      "note": "both policies 10/10 at both regulatory endpoints, braking at 33.6 ft against r_req 34.7, standoff 5.4-5.5 ft"
     },
     "M5": {
       "state": "todo",
-      "note": ""
+      "note": "capture check and in-between check on the trained policies"
     },
     "M6": {
       "state": "todo",
@@ -40,42 +40,42 @@
   },
   "cells": {
     "1": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
       "note": ""
     },
     "2": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
       "note": ""
     },
     "3": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
       "note": ""
     },
     "4": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
       "note": ""
     },
     "5": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
       "note": ""
     },
     "6": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,

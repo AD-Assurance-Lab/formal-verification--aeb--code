@@ -34,7 +34,14 @@ from train_policies import Student  # noqa: E402
 
 MODELS = J.REPO / "results" / "models"
 CONDITIONS = {"daylight": (60.0, "NONE"), "darkness_lowbeam": (-30.0, "LowBeam")}
-BRAKE_THRESHOLD = 0.5  # m/s^2 demanded before braking latches
+# Latch at HALF of full braking authority, derived rather than picked. The label is a
+# step between 0 and a_max, so anything below that is the policy saying "not yet".
+# A 0.5 m/s^2 threshold latched on noise at 375 ft.
+BRAKE_THRESHOLD_FRACTION = 0.5
+# A policy that stops the moment it starts satisfies "no contact with standoff", but it
+# has not performed AEB, it has performed a nuisance stop. Anything beyond this multiple
+# of r_req counts as premature and fails the cell.
+PREMATURE_MULTIPLE = 3.0
 
 
 def load_policy(name: str, scenario: str, dev):
@@ -57,7 +64,7 @@ def preprocess(img, w: int, h: int, dev):
     return torch.nn.functional.interpolate(t, size=(h, w), mode="area").to(dev)
 
 
-def one_run(world, site, model, w, h, dev, a_max, speed_mph, gap_m=120.0):
+def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0):
     carla = J.carla_module()
     v_target = speed_mph * J.MPH
     ego = lead = cam = None
@@ -77,6 +84,13 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, gap_m=120.0):
             attach_to=ego,
         )
         cam.listen(images.put)
+        # The headlamps MUST match the capture, or the policy is shown a different world
+        # from the one it was trained on. Measured: without this, both policies passed
+        # daylight 10/10 and failed darkness 0/10 and 2/10, because every night training
+        # frame was headlamp-lit and every night test frame was not.
+        ego.set_light_state(
+            carla.VehicleLightState(getattr(carla.VehicleLightState, lights))
+        )
         for _ in range(J.SETTLE_TICKS):
             J.grab_frame(world, images)
 
@@ -94,15 +108,16 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, gap_m=120.0):
                 demand = float(model(preprocess(img, w, h, dev)).item())
 
             min_gap_ft = min(min_gap_ft, J.separation_ft(ego, lead))
-            if not braking and demand >= BRAKE_THRESHOLD:
+            if not braking and demand >= a_max * BRAKE_THRESHOLD_FRACTION:
                 braking = True
                 demand_at_brake = round(J.separation_ft(ego, lead), 2)
             if braking:
-                ego.apply_control(
-                    carla.VehicleControl(
-                        throttle=0.0, brake=float(min(1.0, max(0.0, demand / a_max)))
-                    )
-                )
+                # FULL braking once latched. The label is a step to a_max and the
+                # certificate's property is that the commanded deceleration is at least
+                # a_max inside r_req, so applying a fraction of the demand contradicts
+                # both. Applying demand/a_max meant a demand of 0.5 produced 6 percent
+                # braking and the vehicle coasted into the lead having "braked".
+                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = v_target - J.speed_of(ego)
                 integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
@@ -161,19 +176,33 @@ def main() -> int:
                 world.tick()
 
             runs = [
-                one_run(world, site, model, w, h, dev, a_max, args.speed_mph)
+                one_run(world, site, model, w, h, dev, a_max, args.speed_mph, lights)
                 for _ in range(J.REPS)
             ]
-            passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
+            r_req_ft = J.r_req_m(
+                args.speed_mph * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2
+            ) * J.FT
+            for r in runs:
+                r["premature"] = (
+                    r["brake_range_ft"] is not None
+                    and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE
+                )
+            passes = sum(
+                1 for r in runs
+                if not r["contact"] and r["standoff_ok"] and not r["premature"]
+            )
             never = sum(1 for r in runs if not r["braked"])
+            early = sum(1 for r in runs if r["premature"])
             J.progress(
                 f"{pol} / {cond}: {passes}/{J.REPS} pass"
                 f"{f', {never} never braked' if never else ''}"
+                f"{f', {early} braked prematurely' if early else ''}"
             )
             out["cells"][f"{pol}|{cond}"] = {
                 "passes": passes,
                 "of": J.REPS,
                 "never_braked": never,
+                "premature_brakes": early,
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],
                 "brake_range_ft": [r["brake_range_ft"] for r in runs],
             }
