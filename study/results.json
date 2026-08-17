@@ -101,6 +101,8 @@
     "t_lat_s": 0.15,
     "d_margin_ft": 3.28,
     "r_req_ft_at_25mph": 34.7,
-    "r_req_ft_at_50mph": 114.2
+    "r_req_ft_at_50mph": 114.2,
+    "input_w": 128,
+    "input_h": 96
   }
 }

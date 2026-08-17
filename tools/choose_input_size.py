@@ -76,29 +76,37 @@ def main() -> int:
     print(f"  r_req {rr:.1f} m; closest captured pose {ranges[near]:.1f} m (index {near})")
     print("  control: the SAME pose with no target present\n")
 
-    print(f"  {'input':>12}{'target signal':>16}{'scene noise':>14}{'ratio':>8}")
+    # The measure is the PEAK difference, not the mean. The control has no target at
+    # all, so every difference is the target; the question is only whether it survives
+    # downsampling. A mean over the whole image answers a different question, namely
+    # what fraction of the frame the target occupies, and it came back flat at every
+    # size because the answer is "a small one" regardless.
+    print(
+        f"  {'input':>12}{'peak diff':>12}{'99.9th pct':>12}"
+        f"{'px over 20':>12}{'same at 60 m':>14}"
+    )
     rows = []
     for w, h in CANDIDATES:
-        with_t = downsample(images[near], w, h)
-        without = downsample(control[near], w, h)
-        signal = float(np.abs(with_t - without).mean())
-        # At the farthest pose the target is 60 m away and contributes almost nothing,
-        # so the same difference there is the floor: rendering noise and whatever else
-        # separates the two runs. The ratio is what says the target is visible at all.
-        noise = float(
-            np.abs(
-                downsample(images[far], w, h) - downsample(control[far], w, h)
-            ).mean()
+        d_near = np.abs(
+            downsample(images[near], w, h) - downsample(control[near], w, h)
         )
-        rows.append((w, h, noise, signal))
-        print(f"  {w:5d} x {h:<4d}{signal:16.3f}{noise:14.3f}{signal / max(noise, 1e-6):8.2f}")
+        d_far = np.abs(
+            downsample(images[far], w, h) - downsample(control[far], w, h)
+        )
+        peak = float(d_near.max())
+        p999 = float(np.percentile(d_near, 99.9))
+        over = int((d_near > 20).sum())
+        rows.append((w, h, peak, p999, over, float(d_far.max())))
+        print(
+            f"  {w:5d} x {h:<4d}{peak:12.1f}{p999:12.1f}{over:12d}{d_far.max():14.1f}"
+        )
 
     print(
-        "\n  Signal is the mean absolute difference, in 0-255 units, between the frame\n"
-        "  at r_req and the SAME pose with no target. Noise is that difference at the\n"
-        "  farthest pose, where the target contributes almost nothing. Choose the\n"
-        "  smallest input whose ratio is comfortably above 1, since every extra pixel\n"
-        "  costs the verifier ReLU neurons.\n"
+        "\n  Every difference IS the target: the control has none. Peak difference in\n"
+        "  0-255 units says whether it survives downsampling at r_req, the last moment\n"
+        "  braking can still succeed. The 60 m column is the same target much further\n"
+        "  away, for scale. Choose the smallest input that still resolves it, since\n"
+        "  every extra pixel costs the verifier ReLU neurons.\n"
     )
     (J.REPO / "results" / "carla" / f"input_size_{args.scenario}.json").write_text(
         json.dumps(
@@ -106,10 +114,10 @@ def main() -> int:
                 "r_req_m": round(rr, 2),
                 "pose_range_m": float(ranges[near]),
                 "candidates": [
-                    {"w": w, "h": h, "target_signal": round(sig, 4),
-                     "scene_noise": round(noi, 4),
-                     "ratio": round(sig / max(noi, 1e-6), 3)}
-                    for w, h, noi, sig in rows
+                    {"w": w, "h": h, "peak_diff": round(pk, 2),
+                     "pct999": round(p9, 2), "px_over_20": ov,
+                     "peak_diff_at_60m": round(fr, 2)}
+                    for w, h, pk, p9, ov, fr in rows
                 ],
             },
             indent=2,

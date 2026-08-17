@@ -5,38 +5,50 @@
     {
       "w": 64,
       "h": 48,
-      "target_band_contrast": 16.845,
-      "whole_frame_contrast": 14.243
+      "peak_diff": 138.77,
+      "pct999": 124.74,
+      "px_over_20": 152,
+      "peak_diff_at_60m": 26.6
     },
     {
       "w": 100,
       "h": 66,
-      "target_band_contrast": 17.218,
-      "whole_frame_contrast": 14.46
+      "peak_diff": 144.29,
+      "pct999": 124.24,
+      "px_over_20": 331,
+      "peak_diff_at_60m": 45.55
     },
     {
       "w": 128,
       "h": 96,
-      "target_band_contrast": 17.606,
-      "whole_frame_contrast": 14.735
+      "peak_diff": 155.44,
+      "pct999": 126.11,
+      "px_over_20": 625,
+      "peak_diff_at_60m": 57.08
     },
     {
       "w": 200,
       "h": 66,
-      "target_band_contrast": 17.417,
-      "whole_frame_contrast": 14.579
+      "peak_diff": 149.81,
+      "pct999": 126.45,
+      "px_over_20": 679,
+      "peak_diff_at_60m": 60.36
     },
     {
       "w": 200,
       "h": 150,
-      "target_band_contrast": 17.942,
-      "whole_frame_contrast": 15.036
+      "peak_diff": 162.0,
+      "pct999": 130.17,
+      "px_over_20": 1613,
+      "peak_diff_at_60m": 87.92
     },
     {
       "w": 320,
       "h": 240,
-      "target_band_contrast": 18.173,
-      "whole_frame_contrast": 15.215
+      "peak_diff": 165.25,
+      "pct999": 131.25,
+      "px_over_20": 4177,
+      "peak_diff_at_60m": 98.75
     }
   ]
 }

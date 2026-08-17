@@ -495,3 +495,34 @@ quantity.
 **Consequence.** Every capture taken before this is discarded and retaken. Roughly an
 hour of simulator time, against training a policy on washed-out frames labelled against
 the wrong range.
+
+### A8. Network input size: 128 x 96, measured
+
+Section 1 left the input size open, to be fixed and recorded. Measured against a
+no-target control at the same poses, so every difference IS the target
+(`tools/choose_input_size.py`):
+
+| input | peak diff at r_req | px over 20 | peak diff at 60 m |
+|---|---|---|---|
+| 64 x 48 | 138.8 | 152 | 26.6 |
+| 100 x 66 | 144.3 | 331 | 45.5 |
+| **128 x 96** | **155.4** | **625** | **57.1** |
+| 200 x 150 | 162.0 | 1613 | 87.9 |
+| 320 x 240 | 165.2 | 4177 | 98.8 |
+
+At `r_req` the target is resolvable at every candidate, peak 139 to 165 out of 255, so
+that alone does not choose. What separates them is long range: the policy has to *not*
+brake at 60 m as well as brake at 10.6, and the target's signature there falls from 99 to
+27 as the input shrinks.
+
+**128 x 96** keeps a peak of 57 at 60 m, five times the smallest input's margin over
+nothing, and it is the size already proven tractable for the verifier: alpha-CROWN bounds
+it in 13 s per pose using 1.66 GB, measured in `results/carla/verifier_feasibility.json`.
+Larger inputs buy a stronger long-range signature at a cost in ReLU neurons that the
+verifier pays on every pose of every cell.
+
+Two earlier attempts at this measurement were wrong and are recorded so the method is not
+repeated: comparing the near frame against a FAR frame (they differ everywhere, ratio
+1.19 at every size), and comparing means over the whole image (dominated by what fraction
+of the frame the target occupies, flat at every size). The peak difference against a
+no-target control at the same pose is the question actually being asked.
