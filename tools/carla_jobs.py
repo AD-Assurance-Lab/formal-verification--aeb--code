@@ -883,6 +883,146 @@ def job_inbetween() -> dict:
     }
 
 
+def _approach_pedestrian(world, site, speed_mph, trigger_m, gap_m=120.0,
+                         ped_speed=1.5, lateral_m=6.0):
+    """Ego approaches a pedestrian who crosses into its path.
+
+    The pedestrian is RELEASED on the ego's time-to-conflict, not on a wall clock, so
+    the conflict happens at the same geometry every run regardless of how the approach
+    went. Its ramp is compensated: a walker released at the geometrically correct moment
+    arrives late, because it accelerates at about 2.22 m/s^2 rather than starting at
+    speed (see tools/scenarios.py).
+    """
+    import scenarios as S
+
+    carla = carla_module()
+    target_v = speed_mph * MPH
+    ego = ped = None
+    try:
+        tf_ego, _ = site_transform(world, site, along=10.0, need_m=gap_m + 80.0)
+        tf_conflict, wp_conflict = site_transform(world, site, along=10.0 + gap_m)
+        ped, direction = S.spawn_crossing_pedestrian(
+            world, wp_conflict, lateral_m=lateral_m
+        )
+        ego = spawn_hero(world, tf_ego)
+
+        yaw = math.radians(tf_ego.rotation.yaw)
+        ego.set_target_velocity(
+            carla.Vector3D(x=target_v * math.cos(yaw), y=target_v * math.sin(yaw), z=0.0)
+        )
+        # Time for the walker to reach the ego's path, ramp included.
+        cross_m = max(0.0, lateral_m - ego.bounding_box.extent.y)
+        ramp_s = ped_speed / S.WALKER_ACCEL_MPS2
+        ramp_m = S.walker_lead_distance(ped_speed)
+        walk_s = ramp_s + max(0.0, cross_m - ramp_m) / ped_speed
+
+        ctrl = carla.WalkerControl()
+        ctrl.direction = carla.Vector3D(x=direction[0], y=direction[1], z=0.0)
+
+        braking = False
+        released = False
+        integral = 0.0
+        min_gap_ft = 1e9
+        for _ in range(1500):
+            gap_ft = separation_ft(ego, ped)
+            min_gap_ft = min(min_gap_ft, gap_ft)
+
+            if not released:
+                loc = ego.get_transform().location
+                to_conflict = math.hypot(
+                    tf_conflict.location.x - loc.x, tf_conflict.location.y - loc.y
+                )
+                v = max(speed_of(ego), 0.1)
+                if to_conflict / v <= walk_s:
+                    ctrl.speed = ped_speed
+                    ped.apply_control(ctrl)
+                    released = True
+
+            if not braking and gap_ft / FT <= trigger_m:
+                braking = True
+            if braking:
+                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+            else:
+                err = target_v - speed_of(ego)
+                integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
+                cmd = 0.5 * err + 0.5 * integral
+                ego.apply_control(
+                    carla.VehicleControl(
+                        throttle=max(0.0, min(1.0, cmd)),
+                        brake=max(0.0, min(1.0, -cmd * 0.2)),
+                    )
+                )
+            world.tick()
+            if braking and speed_of(ego) < 0.1:
+                break
+            if gap_ft < -2.0:
+                break
+        return {
+            "min_gap_ft": round(min_gap_ft, 2),
+            "contact": min_gap_ft <= 0.0,
+            "standoff_ok": min_gap_ft >= D_MARGIN_M * FT,
+            "braked": braking,
+            "released": released,
+        }
+    finally:
+        despawn(world, ego, ped)
+
+
+def job_pedestrian() -> dict:
+    """Same oracle check, on the crossing-pedestrian scenario.
+
+    The lead-vehicle oracle proved the harness can separate a correct braking law from a
+    late one against a STATIONARY target on the ego's own line. A crossing pedestrian
+    adds a moving conflict and a release that has to be timed, so it is a different
+    thing to get wrong and gets its own validation before any policy is trained on it.
+    """
+    braking_file = OUT / "braking.json"
+    if not braking_file.exists():
+        return {"verdict": "TODO", "note": "run the braking job first"}
+    b = json.loads(braking_file.read_text())
+    a_max_g, t_lat = b["a_max_g_worst"], (b["t_lat_s_worst"] or 0.2)
+
+    client, world = connect(rendering=False)
+    site = flattest_site()
+    v = HAZARD_MPH * MPH
+    rr = r_req_m(v, a_max_g, t_lat)
+    out = {
+        "r_req_m": round(rr, 2),
+        "r_req_ft": round(rr * FT, 1),
+        "cases": {},
+    }
+    for label, trigger in (("perfect", rr), ("late", rr * 0.5)):
+        runs = []
+        for rep in range(REPS):
+            runs.append(_approach_pedestrian(world, site, HAZARD_MPH, trigger))
+            progress(
+                f"{label} rep {rep + 1}/{REPS}: min gap {runs[-1]['min_gap_ft']:.1f} ft"
+                f"{'' if runs[-1]['released'] else '  PEDESTRIAN NEVER RELEASED'}"
+            )
+        passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
+        out["cases"][label] = {
+            "trigger_m": round(trigger, 2),
+            "passes": passes,
+            "of": REPS,
+            "all_released": all(r["released"] for r in runs),
+            "min_gap_ft": [r["min_gap_ft"] for r in runs],
+        }
+
+    ok = (
+        out["cases"]["perfect"]["passes"] == REPS
+        and out["cases"]["late"]["passes"] == 0
+        and out["cases"]["perfect"]["all_released"]
+        and out["cases"]["late"]["all_released"]
+    )
+    out["verdict"] = "PASS" if ok else "FAIL"
+    out["note"] = (
+        "PASS needs the perfect oracle 10/10, the late oracle 0/10, and the pedestrian "
+        "released on every run. A run where the pedestrian never crossed is not a "
+        "pedestrian test, however good its standoff looks."
+    )
+    return out
+
+
 JOBS = {
     "smoke": (job_smoke, "load Town13, tag hero, attach a sensor, survive"),
     "sites": (job_sites, "photograph candidate straights day and night, settle lighting"),
@@ -890,9 +1030,10 @@ JOBS = {
     "contact": (job_contact, "validate the contact detector against a deliberate crash"),
     "oracle": (job_oracle, "perfect oracle 10/10, late oracle 0/10"),
     "inbetween": (job_inbetween, "does a day/night blend resemble rendered dusk (image space)"),
+    "pedestrian": (job_pedestrian, "oracle check on the crossing-pedestrian scenario"),
 }
 
-ORDER = ["smoke", "sites", "braking", "contact", "oracle", "inbetween"]
+ORDER = ["smoke", "sites", "braking", "contact", "oracle", "pedestrian", "inbetween"]
 
 
 def main() -> int:
