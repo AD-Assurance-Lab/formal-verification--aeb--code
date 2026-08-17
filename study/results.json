@@ -22,12 +22,12 @@
       "note": "both policies 10/10 at both regulatory endpoints, braking at 33.6 ft against r_req 34.7, standoff 5.4-5.5 ft"
     },
     "M5": {
-      "state": "todo",
-      "note": "capture check and in-between check on the trained policies"
+      "state": "done",
+      "note": "both gates pass behaviourally: capture 0.191, in-between 0.454 of the decision threshold"
     },
     "M6": {
       "state": "todo",
-      "note": ""
+      "note": "verification over the 11 sub-intervals, verdicts committed before driving"
     },
     "M7": {
       "state": "todo",
@@ -84,16 +84,16 @@
   },
   "gates": {
     "capture_check": {
-      "state": "in_progress",
-      "value": 0.0078,
-      "threshold": null,
-      "note": "image space: placed vs driven frame differs by 0.0065-0.0078 normalised, placement error 0.000 m, on a 0.0 percent grade site. The gate that decides compares policy output and waits for a policy. Elevation is the case that broke the parent study and Town01's site is flat, so this is the easy case."
+      "state": "done",
+      "value": 0.191,
+      "threshold": 1.0,
+      "note": "BEHAVIOURAL: policy output placed vs driven, 20 poses around r_req, worst 0.812 m/s2 = 0.191 of the brake decision threshold"
     },
     "in_between_check": {
-      "state": "blocked",
-      "value": 0.243,
-      "threshold": null,
-      "note": "Full interval fails at 0.243. Axis now composed of 11 measured sub-intervals (A6); 10 meet the 0.01 tolerance, the 0.14 deg sliver at the horizon errs at 0.0386 at any width and is declared uncovered. Image space; behavioural check waits for a policy."
+      "state": "done",
+      "value": 0.454,
+      "threshold": 1.0,
+      "note": "BEHAVIOURAL: policy output on a blend vs a render at the same illumination, worst 0.454 of the decision threshold, in the two sub-intervals adjacent to the horizon. Everywhere else 0.02-0.17, as A5 predicted from image space."
     }
   },
   "primitives": {

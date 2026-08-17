@@ -1,0 +1,11 @@
+{
+  "policy": "P_cont",
+  "gate": "capture",
+  "poses_matched": 20,
+  "decision_threshold_mps2": 4.257,
+  "max_abs_diff_mps2": 0.8124,
+  "mean_abs_diff_mps2": 0.0917,
+  "as_fraction_of_threshold": 0.1909,
+  "verdict": "PASS",
+  "note": "Policy output on a PLACED frame against the same policy driving through the same spot. Verification runs on placed frames, so a large difference here means sound bounds on them say nothing about the vehicle."
+}
