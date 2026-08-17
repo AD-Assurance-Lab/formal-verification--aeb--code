@@ -68,7 +68,9 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
     ego = target = ped = None
     states = []
     try:
-        if scenario == "lead":
+        if scenario == "none":
+            target = None
+        elif scenario == "lead":
             bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
             target = world.try_spawn_actor(bp, tf_target)
             if target is None:
@@ -91,8 +93,17 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
         released = False
         integral = 0.0
         other = target if target is not None else ped
+        # With no target there is nothing to measure range to, so range is taken to the
+        # point where the target WOULD be. That keeps the pose sequence identical to the
+        # lead capture, which is the whole purpose of this control.
         for _ in range(1500):
-            gap_m = J.separation_ft(ego, other) / J.FT
+            if other is None:
+                loc = ego.get_transform().location
+                gap_m = math.hypot(
+                    tf_target.location.x - loc.x, tf_target.location.y - loc.y
+                ) - ego.bounding_box.extent.x
+            else:
+                gap_m = J.separation_ft(ego, other) / J.FT
             if ped is not None and not released:
                 loc = ego.get_transform().location
                 to_conflict = math.hypot(
@@ -108,7 +119,11 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
                     {
                         "range_m": round(gap_m, 4),
                         "ego": ego.get_transform(),
-                        "other": other.get_transform(),
+                        "other": (
+                            other.get_transform()
+                            if other is not None
+                            else ego.get_transform()
+                        ),
                         "speed_mps": round(J.speed_of(ego), 4),
                         "label_decel_mps2": round(
                             expert_decel(gap_m, J.speed_of(ego), a_max), 4
@@ -176,21 +191,23 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
         cam = None
         frames = []
         try:
-            lifted = carla.Transform(
-                carla.Location(
-                    x=states[0]["other"].location.x,
-                    y=states[0]["other"].location.y,
-                    z=states[0]["other"].location.z + 0.5,
-                ),
-                states[0]["other"].rotation,
-            )
-            if scenario == "lead":
-                bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
+            if scenario == "none":
+                other = None
             else:
-                bp = world.get_blueprint_library().filter("walker.pedestrian.*")[0]
-            other = world.try_spawn_actor(bp, lifted)
-            if other is None:
-                raise RuntimeError(f"could not place the {scenario} target")
+                lifted = carla.Transform(
+                    carla.Location(
+                        x=states[0]["other"].location.x,
+                        y=states[0]["other"].location.y,
+                        z=states[0]["other"].location.z + 0.5,
+                    ),
+                    states[0]["other"].rotation,
+                )
+                bp = world.get_blueprint_library().filter(
+                    "vehicle.audi.tt" if scenario == "lead" else "walker.pedestrian.*"
+                )[0]
+                other = world.try_spawn_actor(bp, lifted)
+                if other is None:
+                    raise RuntimeError(f"could not place the {scenario} target")
             images: "queue.Queue" = queue.Queue()
             cam = world.spawn_actor(
                 J.rgb_camera_bp(world),
@@ -212,7 +229,8 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
                 ego.set_target_velocity(carla.Vector3D(0, 0, 0))
                 ego.set_target_angular_velocity(carla.Vector3D(0, 0, 0))
                 ego.set_transform(st["ego"])
-                other.set_transform(st["other"])
+                if other is not None:
+                    other.set_transform(st["other"])
                 for _ in range(J.SETTLE_TICKS):
                     J.grab_frame(world, images)
                 img = J.grab_frame(world, images)
@@ -249,7 +267,13 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--scenario", choices=["lead", "ped"], default="lead")
+    ap.add_argument(
+        "--scenario",
+        choices=["lead", "ped", "none"],
+        default="lead",
+        help="'none' repeats the lead poses with NO target: the control that isolates "
+             "what the target contributes to a frame, and the false-activation baseline",
+    )
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     ap.add_argument("--plan", action="store_true", help="size it, capture nothing")
     ap.add_argument("--limit-knots", type=int, default=0, help="0 means all")
