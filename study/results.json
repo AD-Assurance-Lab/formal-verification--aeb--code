@@ -10,8 +10,8 @@
       "note": "Town13 chosen: 401 pedestrian sites, 367 braking sites, declared 30-55 mph. Lit/unlit still unverified"
     },
     "M2": {
-      "state": "todo",
-      "note": "blocked on CARLA"
+      "state": "in_progress",
+      "note": "braking measured (20 runs); contact detector and oracle still to do"
     },
     "M3": {
       "state": "todo",
@@ -95,10 +95,10 @@
     }
   },
   "primitives": {
-    "a_max": null,
-    "t_lat": null,
-    "d_margin": null,
-    "r_req_40kmh": null,
-    "r_req_80kmh": null
+    "a_max_g": 0.8678,
+    "t_lat_s": 0.15,
+    "d_margin_ft": 3.28,
+    "r_req_ft_at_25mph": 34.7,
+    "r_req_ft_at_50mph": 114.2
   }
 }

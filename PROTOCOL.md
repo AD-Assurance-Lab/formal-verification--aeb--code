@@ -240,8 +240,9 @@ it rather than discovering later that it cannot.
 One large map, several sites within it, chosen by survey rather than by eye. A site
 qualifies on:
 
-- straight clear run long enough to reach steady speed and stop from 50 mph, roughly 500 to
-  650 ft
+- straight clear run long enough to settle at speed and stop from 50 mph. The ego is
+  launched at cruise speed rather than accelerated, so this is the settle distance plus
+  `r_req`: about 310 ft at 50 mph, and 400 ft is used with margin
 - pedestrian crossing geometry, with sidewalk and walker navmesh on both sides
 - both lit and unlit stretches, since headlamp beam is a test variable
 - nothing about the posted limit. CARLA's declared limits are inconsistent between maps
@@ -254,10 +255,9 @@ reported it is read from the map's OpenDRIVE file, never from `get_speed_limit()
 returns the nearest sign prop or a default and disagrees with the declared limit on most
 towns.
 
-**Large maps crash the simulator unless the ego is tagged `role_name='hero'`.** Large maps
-stream terrain tiles around the hero actor, and actors outside the streamed area go
-dormant; attaching a sensor to a dormant one kills the server. This cost another project
-in this lab several weeks.
+**Large maps are not usable on this hardware at all.** The hero tag is still required, and
+still works, but it is not sufficient. See amendment A3 for the measurement that moved this
+study to Town01.
 
 ---
 
@@ -295,3 +295,39 @@ sites, 367 against Town11's 392. It was already the leader on geometry; speed co
 a supporting argument, not the deciding one.
 
 Nothing about the design, the cells or the expectations changed.
+
+### A3. The map moves from Town13 to Town01, on measurement
+
+Town13 was chosen in M1 on geometry read from the OpenDRIVE, without a simulator. With the
+simulator it does not work on this hardware, and the numbers are not marginal.
+
+Same probe, same 140 ticks per cycle, rendering off (`tools/probe_memory.py`):
+
+| | Town13 | Town01 |
+|---|---|---|
+| tick rate | did not finish one cycle in 231 s, so under 0.6 ticks/s | **720 to 760 ticks/s** |
+| server memory over 6 cycles | see below | flat at 3.2 GB, slightly falling |
+| loaded footprint | 14 to 15 GB | 3.2 to 6.4 GB |
+
+Two crashes on Town13 before that, both the renderer rather than the physics:
+
+- **OOM killed at 58 GB resident** during a spawn, settle, brake, destroy loop, on a 64 GB
+  machine.
+- **Segfault** with `GameThread timed out waiting for RenderThread after 60.00 secs`, at
+  only 15 GB.
+
+The ego was tagged `role_name='hero'` throughout, so this is not the known large-map
+dormancy crash. A smoke test on Town13 passes; it is sustained work that kills it. The
+hardware is an RTX 4070 with 12 GB, and the 5090 is not here yet.
+
+Speed settles it even setting the crashes aside: at under 0.6 ticks/s the twenty-run
+braking measurement alone is about two hours, and the full study is out of reach.
+
+**Town01 instead.** The site requirement that ruled the standard towns out was wrong. It
+assumed the ego accelerates up to test speed, and section 1 launches it at cruise speed.
+Corrected to settle distance plus `r_req`, about 310 ft at 50 mph, Town01 offers 9
+pedestrian sites and 7 braking sites with a 1,007 ft longest straight. Fewer than Town13
+claimed, and enough: the study needs one site per scenario.
+
+Nothing about the claim, the cells or the expectations changes. This is where the study
+runs, not what it tests.

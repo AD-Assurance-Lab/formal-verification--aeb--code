@@ -38,13 +38,15 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "results" / "carla"
 
-MAP = "Town13"
+MAP = "Town01"
 FIXED_DT = 0.05  # 20 Hz, PROTOCOL section 1
 MPH = 0.44704  # mph -> m/s
 FT = 3.280839895  # m -> ft
 HAZARD_MPH = 25.0
 PLATE_MPH = 50.0
 SETTLE_TICKS = 40
+MAX_SETTLE_TICKS = 400  # the PI hold exits early once it is at speed
+SETTLE_TOLERANCE_MPS = 0.15
 REPS = 10
 
 
@@ -72,7 +74,9 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     host = os.environ.get("CARLA_HOST", "127.0.0.1")
     port = int(os.environ.get("CARLA_PORT", "2000"))
     client = carla.Client(host, port)
-    client.set_timeout(120.0)
+    # Map loads dominate this timeout. Town13 takes minutes, and switching AWAY from it
+    # is slower still, which times out a 120 s client while the server is working fine.
+    client.set_timeout(float(os.environ.get("CARLA_TIMEOUT", "600")))
     world = client.get_world()
     if load_map and not world.get_map().name.endswith(load_map):
         print(f"  loading {load_map} (large maps take a while)", flush=True)
@@ -101,31 +105,11 @@ def despawn(world, *actors):
     world.tick()
 
 
-def site_transform(world, site: dict, along: float = 0.0):
-    """Turn a surveyed (x, y) into an on-road transform.
-
-    The survey works from the OpenDRIVE and has no elevation, so the road is found by
-    projection rather than by trusting a z we do not have.
-    """
-    carla = carla_module()
-    frac = 0.0 if site["run_m"] == 0 else min(1.0, along / site["run_m"])
-    x = site["x0"] + frac * (site["x1"] - site["x0"])
-    y = site["y0"] + frac * (site["y1"] - site["y0"])
-    wp = world.get_map().get_waypoint(
-        carla.Location(x=x, y=-y, z=0.0), project_to_road=True
-    )
-    if wp is None:
-        raise RuntimeError(f"no road at ({x:.0f}, {y:.0f})")
-    tf = wp.transform
-    tf.location.z += 0.3
-    return tf, wp
-
-
 def clear_actors(world) -> int:
     """Destroy every vehicle, walker and sensor left over from a previous run.
 
-    A job that is killed mid-run leaves its actors in the world, and the next run then
-    fails with "spawn blocked" at a point that is perfectly fine. Always start clean.
+    A job killed mid-run leaves its actors in the world, and the next run then fails
+    with "spawn blocked" at a point that is perfectly fine. Always start clean.
     """
     doomed = [
         a
@@ -140,6 +124,87 @@ def clear_actors(world) -> int:
     if doomed:
         world.tick()
     return len(doomed)
+
+
+def usable_run_m(world, wp, limit: float = 400.0, step: float = 2.0) -> float:
+    """How far you can actually drive from this waypoint before a junction.
+
+    The offline survey knows the road geometry; it does not know where the drivable
+    lane goes. Walking the lane in the simulator does, and it is what catches a site
+    that runs out after 30 m.
+    """
+    travelled = 0.0
+    cur = wp
+    while travelled < limit:
+        nxt = cur.next(step)
+        if not nxt or nxt[0].is_junction:
+            break
+        cur = nxt[0]
+        travelled += step
+    return travelled
+
+
+def site_transform(world, site: dict, along: float = 0.0, need_m: float = 0.0):
+    """Turn a surveyed site into an on-road transform pointing DOWN the straight.
+
+    Two things have to be right and neither is automatic:
+
+    1. **Direction.** `get_waypoint` returns the nearest lane, which is as likely to be
+       the opposing one. Launching along it drives off the end of the straight within
+       seconds. Measured: a site running at 90 degrees projected to a lane facing 270,
+       and the ego hit a junction 30 m later at 21 m/s, which the braking job then
+       recorded as 4.94 g of braking authority.
+    2. **Room.** The straight has to still be there ahead of the vehicle, which is a
+       question about lanes and junctions, not about the road reference line.
+
+    So both site endpoints are tried, and the one whose lane actually runs into the
+    straight, with at least `need_m` of junction-free lane ahead, is used.
+    """
+    carla = carla_module()
+    ends = [
+        (site["x0"], site["y0"], site["x1"], site["y1"]),
+        (site["x1"], site["y1"], site["x0"], site["y0"]),
+    ]
+    best = None
+    for x_from, y_from, x_to, y_to in ends:
+        found = world.get_map().get_waypoint(
+            carla.Location(x=x_from, y=-y_from, z=0.0), project_to_road=True
+        )
+        if found is None:
+            continue
+        # The nearest lane is often the opposing one. Measured at the Town01 site:
+        # the projected lane faced 270 with 84 m of run, and its LEFT lane faced 90
+        # with 392 m. So consider the neighbours, not just the nearest.
+        candidates = [found]
+        for neighbour in (found.get_left_lane(), found.get_right_lane()):
+            if neighbour is not None and neighbour.lane_type == carla.LaneType.Driving:
+                candidates.append(neighbour)
+
+        want = math.atan2(-(y_to - y_from), x_to - x_from)
+        for wp in candidates:
+            have = math.radians(wp.transform.rotation.yaw)
+            if math.cos(want - have) <= 0.0:
+                continue  # points back out of the straight
+            run = usable_run_m(world, wp, limit=max(need_m, 50.0) + 100.0)
+            if best is None or run > best[1]:
+                best = (wp, run)
+
+    if best is None:
+        raise RuntimeError(
+            f"no lane at site ({site['x0']:.0f}, {site['y0']:.0f}) runs along the straight"
+        )
+    wp, run = best
+    if need_m and run < need_m:
+        raise RuntimeError(
+            f"site has only {run:.0f} m of junction-free lane, needs {need_m:.0f} m"
+        )
+    if along:
+        nxt = wp.next(along)
+        if nxt:
+            wp = nxt[0]
+    tf = wp.transform
+    tf.location.z += 0.3
+    return tf, wp
 
 
 def spawn_hero(world, transform):
@@ -399,12 +464,26 @@ def _brake_from(world, ego, spawn, target_mps: float) -> dict:
     ego.set_target_velocity(
         carla.Vector3D(x=target_mps * math.cos(yaw), y=target_mps * math.sin(yaw), z=0.0)
     )
-    # Hold the speed through the settle. Coasting for two seconds bleeds off several
-    # mph, and the run would then not be at the speed it claims.
-    for _ in range(SETTLE_TICKS):
+    # Hold the speed through the settle, with an integral term.
+    #
+    # A proportional-only hold leaves steady-state error, because at the target the
+    # throttle it commands is zero and the car coasts down until drag balances a small
+    # throttle. Measured: it settled at 76 percent of the commanded speed at BOTH test
+    # speeds, so runs labelled 25 and 50 mph were driven at 19 and 38.
+    integral = 0.0
+    for _ in range(MAX_SETTLE_TICKS):
         err = target_mps - speed_of(ego)
-        ego.apply_control(carla.VehicleControl(throttle=max(0.0, min(0.6, 0.15 * err))))
+        integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
+        cmd = 0.5 * err + 0.5 * integral
+        ego.apply_control(
+            carla.VehicleControl(
+                throttle=max(0.0, min(1.0, cmd)),
+                brake=max(0.0, min(1.0, -cmd * 0.2)),
+            )
+        )
         world.tick()
+        if abs(err) < SETTLE_TOLERANCE_MPS:
+            break
 
     v0 = speed_of(ego)
     start = ego.get_transform().location
@@ -446,7 +525,8 @@ def job_braking() -> dict:
     # Measure on a surveyed straight that is actually flat, not an arbitrary spawn
     # point. Braking authority on a slope is not the flat-road number.
     site = flattest_site()
-    spawn, _ = site_transform(world, site, along=20.0)
+    # Settle at 50 mph is 2 s = 45 m, the stop is about 50 m, plus margin.
+    spawn, _ = site_transform(world, site, along=10.0, need_m=160.0)
     progress(
         f"site {site['run_ft']:.0f} ft, grade {site.get('grade_pct')}%, {2 * REPS} runs"
     )
@@ -470,8 +550,18 @@ def job_braking() -> dict:
 
     accels = [r["a_avg_g"] for r in runs if r["a_avg_g"]]
     lats = [r["t_lat_s"] for r in runs if r["t_lat_s"]]
+    # A passenger car on dry pavement cannot average much over 1 g, and a run that
+    # reports more has hit something. This check exists because a run that drove into a
+    # junction at 21 m/s was recorded as 4.94 g and reported PASS.
+    implausible = [r for r in runs if r["a_avg_g"] and r["a_avg_g"] > 1.3]
+    speed_short = [
+        r for r in runs if r["v0_mph"] < 0.9 * r["speed_mph"]
+    ]
+    ok = len(accels) >= 2 * REPS and not implausible and not speed_short
     return {
-        "verdict": "PASS" if len(accels) >= 2 * REPS else "FAIL",
+        "verdict": "PASS" if ok else "FAIL",
+        "implausible_runs": len(implausible),
+        "runs_below_commanded_speed": len(speed_short),
         "site_run_ft": site["run_ft"],
         "site_grade_pct": site.get("grade_pct"),
         "site_xy": [site["x0"], site["y0"]],

@@ -1,4 +1,217 @@
 {
-  "verdict": "ERROR",
-  "error": "time-out of 120000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:3000"
+  "verdict": "PASS",
+  "implausible_runs": 0,
+  "runs_below_commanded_speed": 0,
+  "site_run_ft": 1006.8,
+  "site_grade_pct": 0.0,
+  "site_xy": [
+    -0.03,
+    -9.96
+  ],
+  "a_max_g_worst": 0.8678,
+  "a_max_g_median": 0.8976,
+  "t_lat_s_worst": 0.15,
+  "note": "a_max is the WORST average over the stop, not the median. Use the worst.",
+  "runs": [
+    {
+      "v0_mph": 25.99,
+      "stop_ft": 36.19,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8773,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 0
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 1
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 2
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 3
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 4
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 5
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 6
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 7
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 8
+    },
+    {
+      "v0_mph": 25.71,
+      "stop_ft": 35.44,
+      "stop_s": 1.35,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.8678,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 9
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.59,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 0
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.6,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 1
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.61,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 2
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.6,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 3
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.59,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 4
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.59,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 5
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.6,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 6
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.57,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 7
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.6,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 8
+    },
+    {
+      "v0_mph": 50.36,
+      "stop_ft": 107.6,
+      "stop_s": 2.5,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.9179,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 9
+    }
+  ]
 }
