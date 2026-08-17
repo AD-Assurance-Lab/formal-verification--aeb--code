@@ -59,8 +59,15 @@ def carla_module():
     return carla
 
 
-def connect(load_map: str | None = MAP):
-    """Connect, load the map, and put the world in fixed-step synchronous mode."""
+def connect(load_map: str | None = MAP, rendering: bool = True):
+    """Connect, load the map, and put the world in fixed-step synchronous mode.
+
+    `rendering=False` turns off rendering entirely. Physics is unaffected, so it is
+    correct for jobs that measure vehicle dynamics and use no camera, and on a large
+    map it is the difference between a measurement run taking minutes and taking hours.
+    It is NOT a quality reduction on any perception measurement, because those jobs
+    need frames and therefore keep rendering on.
+    """
     carla = carla_module()
     host = os.environ.get("CARLA_HOST", "127.0.0.1")
     port = int(os.environ.get("CARLA_PORT", "2000"))
@@ -68,11 +75,12 @@ def connect(load_map: str | None = MAP):
     client.set_timeout(120.0)
     world = client.get_world()
     if load_map and not world.get_map().name.endswith(load_map):
-        print(f"  loading {load_map} (large maps take a while)")
+        print(f"  loading {load_map} (large maps take a while)", flush=True)
         world = client.load_world(load_map)
     settings = world.get_settings()
     settings.synchronous_mode = True
     settings.fixed_delta_seconds = FIXED_DT
+    settings.no_rendering_mode = not rendering
     world.apply_settings(settings)
     world.tick()  # the settings take effect on the next tick, not on the call
     return client, world
@@ -349,7 +357,7 @@ def job_braking() -> dict:
     aerodynamic drag at that speed, so no drag model is needed anywhere in the study.
     """
     carla = carla_module()
-    client, world = connect()
+    client, world = connect(rendering=False)  # no camera here; physics is unaffected
     # Measure on a surveyed straight, not an arbitrary spawn point. Braking authority
     # on a grade is not the flat-road number, and grade is recorded per run below.
     site = flattest_site()
@@ -444,7 +452,7 @@ def job_contact() -> dict:
     validated against a deliberate crash before it is trusted.
     """
     carla = carla_module()
-    client, world = connect()
+    client, world = connect(rendering=False)  # no camera here; physics is unaffected
     site = top_sites(1)[0]
     spawn, _ = site_transform(world, site, along=20.0)
     ahead, _ = site_transform(world, site, along=60.0)
@@ -556,7 +564,7 @@ def job_oracle() -> dict:
     a_max_g = b["a_max_g_worst"]
     t_lat = b["t_lat_s_worst"] or 0.2
 
-    client, world = connect()
+    client, world = connect(rendering=False)  # no camera here; physics is unaffected
     site = top_sites(1)[0]
     out = {"a_max_g": a_max_g, "t_lat_s": t_lat, "d_margin_m": D_MARGIN_M, "cases": {}}
 
