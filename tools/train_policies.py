@@ -121,13 +121,48 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
     return torch.cat(xs), torch.cat(ys), ks
 
 
-def fit(model, x, y, epochs: int, lr: float, dev, tag: str, teacher=None):
+def equalise(sets):
+    """Give every policy the same number of training samples.
+
+    P_pts draws from 2 illumination knots and P_cont from 12, so without this P_cont
+    sees six times the frames and any difference between them could be attributed to
+    DATA VOLUME rather than to how the axis was sampled. PROTOCOL section 5 requires
+    them identical in everything except which knots the frames came from, and this is
+    the part that is easy to get wrong silently.
+
+    The smaller set is oversampled rather than the larger one truncated, so P_cont keeps
+    the diversity that is the whole point of it.
+    """
+    target = max(len(x) for x, _, _ in sets)
+    out = []
+    for x, y, ks in sets:
+        if len(x) < target:
+            idx = torch.arange(target) % len(x)
+            x, y = x[idx], y[idx]
+        out.append((x, y, ks))
+    return out
+
+
+def class_weights(y, a_max: float):
+    """The step label is heavily imbalanced: only poses inside r_req are positive.
+
+    Measured on the lead capture, about 15 of 104 poses. Unweighted MSE on a step with a
+    6:1 imbalance biases the model toward never braking, which is the failure that
+    matters most here.
+    """
+    pos = (y > a_max * 0.5).float()
+    frac = float(pos.mean().clamp(1e-3, 1 - 1e-3))
+    w = torch.where(pos > 0, (1 - frac) / frac, torch.ones_like(pos))
+    return w / w.mean()
+
+
+def fit(model, x, y, epochs: int, lr: float, dev, tag: str, teacher=None, w=None):
     model.to(dev).train()
     opt = torch.optim.Adam(model.parameters(), lr=lr)
-    loss_fn = nn.MSELoss()
     n = len(x)
     idx = torch.randperm(n)
     x, y = x[idx].to(dev), y[idx].to(dev)
+    w = (torch.ones_like(y) if w is None else w[idx]).to(dev)
     if teacher is not None:
         teacher.eval()
         with torch.no_grad():
@@ -138,7 +173,7 @@ def fit(model, x, y, epochs: int, lr: float, dev, tag: str, teacher=None):
         for i in range(0, n, 32):
             b = perm[i:i + 32]
             opt.zero_grad()
-            loss = loss_fn(model(x[b]), y[b])
+            loss = (w[b] * (model(x[b]) - y[b]) ** 2).mean()
             loss.backward()
             opt.step()
             total += loss.item() * len(b)
@@ -160,16 +195,28 @@ def main() -> int:
     MODELS.mkdir(parents=True, exist_ok=True)
     report = {"input": [args.input_w, args.input_h], "device": dev, "policies": {}}
 
-    for name, knots in (("P_pts", REGULATORY_KNOTS), ("P_cont", None)):
-        x, y, ks = load(args.scenario, knots, args.input_w, args.input_h)
-        print(f"\n{name}: {len(x)} frames from {len(set(ks))} illumination knots")
+    raw = [
+        load(args.scenario, knots, args.input_w, args.input_h)
+        for _, knots in (("P_pts", REGULATORY_KNOTS), ("P_cont", None))
+    ]
+    print(f"  before equalising: {[len(x) for x, _, _ in raw]} frames")
+    balanced = equalise(raw)
+
+    for (name, _), (x, y, ks) in zip(
+        (("P_pts", None), ("P_cont", None)), balanced
+    ):
+        w = class_weights(y, A_MAX_MPS2)
+        print(
+            f"\n{name}: {len(x)} samples from {len(set(ks))} knots, "
+            f"{int((y > A_MAX_MPS2 * 0.5).sum())} braking"
+        )
         teacher = fit(
             Teacher(args.input_w, args.input_h), x, y, args.epochs, args.lr, dev,
-            f"{name} teacher",
+            f"{name} teacher", w=w,
         )
         student = fit(
             Student(args.input_w, args.input_h), x, y, args.epochs, args.lr, dev,
-            f"{name} student", teacher=teacher,
+            f"{name} student", teacher=teacher, w=w,
         )
         path = MODELS / f"{name}_{args.scenario}.pt"
         torch.save(
@@ -185,7 +232,8 @@ def main() -> int:
         params = sum(p.numel() for p in student.parameters())
         print(f"  {name}: student {params} params, train MAE {err:.4f} m/s^2 -> {path.name}")
         report["policies"][name] = {
-            "frames": len(x),
+            "samples": len(x),
+            "braking_samples": int((y > A_MAX_MPS2 * 0.5).sum()),
             "knots": sorted(set(ks)),
             "student_params": params,
             "train_mae_mps2": round(err, 4),
