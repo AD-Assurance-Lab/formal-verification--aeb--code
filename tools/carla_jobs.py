@@ -18,6 +18,9 @@ Standing rules this file already obeys, from PROTOCOL.md and hard experience:
   * contact is measured from geometry, never from sensor.other.collision, which has
     been observed reporting nothing while a vehicle sat 8 ft inside another body.
   * relaunch the server before every measurement run. It leaks memory over hours.
+  * ONE client at a time. In synchronous mode the job owns the tick, and a second
+    script calling get_world() blocks until it times out, which looks like a dead
+    server rather than a busy one.
   * every closed-loop number is a rate over at least 10 repetitions.
 """
 
