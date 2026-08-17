@@ -74,6 +74,7 @@ be readable by someone outside the lab.
 python tools/survey_maps.py           # choose the test map from map geometry alone
 python -m study.protocol_lock         # confirm the frozen design has not moved
 python -m study.status                # where the study stands, in the protocol's terms
+python tools/record_primitives.py     # braking runs -> the safety budget
 python tools/tidy.py                  # repo hygiene report
 ```
 
@@ -85,6 +86,7 @@ server. Point it anywhere with `--carla`.
 ```bash
 python tools/carla_jobs.py --list     # what is queued, in dependency order
 python tools/carla_jobs.py --all      # runs them, stops at the first failure
+python tools/probe_memory.py --help   # why a map is or is not usable on this hardware
 ```
 
 ## Layout

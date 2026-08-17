@@ -92,6 +92,8 @@ def main() -> int:
         p = REPO / rel
         if p.suffix != ".py" or not p.is_file():
             continue
+        if rel == "tools/tidy.py":
+            continue  # this file necessarily contains the words it searches for
         for i, line in enumerate(p.read_text(errors="ignore").splitlines(), 1):
             if any(m in line for m in ("TODO", "FIXME", "XXX", "HACK")):
                 marks.append(f"{rel}:{i}  {line.strip()[:70]}")
