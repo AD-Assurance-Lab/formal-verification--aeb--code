@@ -7,7 +7,7 @@
     },
     "M1": {
       "state": "done",
-      "note": "Town01 (amendment A3). Town13 chosen offline, then measured unusable: under 0.6 ticks/s, OOM at 58 GB, render-thread segfault"
+      "note": "Town01 (A3). Lit/unlit resolved (A4): site 1 unlit at 4.5, site 3 lit at 25.7 mean brightness, night lamps off"
     },
     "M2": {
       "state": "done",

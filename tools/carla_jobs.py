@@ -47,6 +47,12 @@ PLATE_MPH = 50.0
 SETTLE_TICKS = 40
 MAX_SETTLE_TICKS = 400  # the PI hold exits early once it is at speed
 SETTLE_TOLERANCE_MPS = 0.15
+# Scene lighting takes far longer to settle after a sun-altitude change than a "few
+# ticks" intuition suggests. Measured on Town01, day (221) to night (42.5): still 74.4
+# at 12 ticks, 60.1 at 20, 45.2 at 40, settled by 80, flat from 80 to 400. Capturing a
+# darkness endpoint at 12 ticks makes it 75 percent too bright, and the disturbance
+# family interpolates between endpoints, so that error would land in the verified set.
+WEATHER_SETTLE_TICKS = 120
 REPS = 10
 
 
@@ -103,6 +109,59 @@ def despawn(world, *actors):
             except RuntimeError:
                 pass
     world.tick()
+
+
+def grab_frame(world, images, timeout: float = 20.0):
+    """Tick once and return THE frame that tick produced.
+
+    Matched on the id `world.tick()` returns, and a missing frame raises rather than
+    being skipped. This repository's own notes say so, and ignoring them cost a full
+    set of lighting captures: a `except queue.Empty: pass` left the queue one frame
+    ahead, so every image afterwards belonged to the previous condition. The captures
+    then said headlamps make the road DARKER, monotonically, which is backwards and was
+    entirely an artefact of reading stale frames.
+    """
+    import queue as _queue
+
+    frame_id = world.tick()
+    while True:
+        try:
+            img = images.get(timeout=timeout)
+        except _queue.Empty:
+            raise RuntimeError(f"no camera frame for tick {frame_id}")
+        if img.frame == frame_id:
+            return img
+        if img.frame > frame_id:
+            raise RuntimeError(
+                f"camera is ahead of the world: got frame {img.frame}, wanted {frame_id}"
+            )
+
+
+def rgb_camera_bp(world, width: int = 640, height: int = 480, fov: float = 90.0):
+    """A camera with FIXED exposure.
+
+    CARLA's default `exposure_mode` is `histogram`, which is auto-exposure. That is
+    exactly the defect this lab published about ACDC: auto-exposed, so absolute
+    photometry is gone. It matters more here than there, because the disturbance family
+    interpolates absolute pixel values between a daylight frame and a darkness frame. If
+    the camera re-exposes between them, the two endpoints are not on a common scale and
+    the interval between them means nothing.
+
+    Measured with auto-exposure on: turning the headlamps ON made the mean image
+    *darker*, 54.9 to 40.0 to 33.2 across off, low beam and high beam, because the
+    bright patch pulled the exposure down. That ordering is backwards and it is the
+    camera, not the scene.
+    """
+    bp = world.get_blueprint_library().find("sensor.camera.rgb")
+    bp.set_attribute("image_size_x", str(width))
+    bp.set_attribute("image_size_y", str(height))
+    bp.set_attribute("fov", str(fov))
+    bp.set_attribute("exposure_mode", "manual")
+    bp.set_attribute("shutter_speed", "200.0")
+    bp.set_attribute("iso", "100.0")
+    bp.set_attribute("fstop", "1.4")
+    bp.set_attribute("exposure_compensation", "0.0")
+    return bp
 
 
 def clear_actors(world) -> int:
@@ -324,9 +383,7 @@ def job_smoke() -> dict:
     spawn = world.get_map().get_spawn_points()[0]
     ego = spawn_hero(world, spawn)
     try:
-        bp = world.get_blueprint_library().find("sensor.camera.rgb")
-        bp.set_attribute("image_size_x", "640")
-        bp.set_attribute("image_size_y", "480")
+        bp = rgb_camera_bp(world)
         cam = world.spawn_actor(
             bp, carla.Transform(carla.Location(x=1.5, z=1.6)), attach_to=ego
         )
@@ -379,7 +436,7 @@ def job_sites() -> dict:
     for i, site in enumerate(top_sites(6)):
         progress(f"site {i}: {site['run_ft']:.0f} ft")
         try:
-            tf, _ = site_transform(world, site, along=25.0)
+            tf, _ = site_transform(world, site, along=25.0, need_m=60.0)
             ego = spawn_hero(world, tf)
         except RuntimeError as exc:
             results.append({"site": i, "error": str(exc)})
@@ -407,18 +464,11 @@ def job_sites() -> dict:
                 ego.set_light_state(carla.VehicleLightState(lights))
                 # Weather, lights and sensor delivery all land on a later tick. Drain a
                 # few frames rather than trusting the first one after the write.
-                for _ in range(12):
-                    world.tick()
-                    try:
-                        images.get(timeout=5.0)
-                    except queue.Empty:
-                        pass
-                world.tick()
-                try:
-                    img = images.get(timeout=10.0)
-                except queue.Empty:
-                    results.append({"site": i, "condition": label, "error": "no frame"})
-                    continue
+                # Weather, lights and sensor delivery land on later ticks, and the
+                # sky itself takes about 80 ticks to settle. See WEATHER_SETTLE_TICKS.
+                for _ in range(WEATHER_SETTLE_TICKS):
+                    grab_frame(world, images)
+                img = grab_frame(world, images)
                 name = f"site{i:02d}_{label}.png"
                 img.save_to_disk(str(shots / name))
                 buf = memoryview(img.raw_data)
@@ -770,9 +820,7 @@ def job_inbetween() -> dict:
     cam = None
     frames: dict[float, list[int]] = {}
     try:
-        bp = world.get_blueprint_library().find("sensor.camera.rgb")
-        bp.set_attribute("image_size_x", "640")
-        bp.set_attribute("image_size_y", "480")
+        bp = rgb_camera_bp(world)
         images: "queue.Queue" = queue.Queue()
         cam = world.spawn_actor(
             bp, carla.Transform(carla.Location(x=1.5, z=1.6)), attach_to=ego
@@ -790,14 +838,9 @@ def job_inbetween() -> dict:
             w.cloudiness = 10.0
             w.precipitation = 0.0
             world.set_weather(w)
-            for _ in range(12):
-                world.tick()
-                try:
-                    images.get(timeout=5.0)
-                except queue.Empty:
-                    pass
-            world.tick()
-            img = images.get(timeout=10.0)
+            for _ in range(WEATHER_SETTLE_TICKS):
+                grab_frame(world, images)
+            img = grab_frame(world, images)
             img.save_to_disk(str(shots / f"rendered_s{s:.2f}.png"))
             frames[s] = list(memoryview(img.raw_data))
     finally:

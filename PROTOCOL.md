@@ -331,3 +331,43 @@ claimed, and enough: the study needs one site per scenario.
 
 Nothing about the claim, the cells or the expectations changes. This is where the study
 runs, not what it tests.
+
+### A4. Capture requirements for the disturbance endpoints, all measured
+
+The family interpolates absolute pixel values between a daylight frame and a darkness
+frame at an identical pose. Three things have to be true for those endpoints to mean
+anything, and none of them is the default. All three were found by capturing lighting
+that came out backwards, with headlamps apparently making the road darker.
+
+**1. Scene lighting must be allowed to settle after a sun change: 120 ticks.** Measured on
+Town01, switching from day to night with the lamps off, mean image brightness against
+ticks since the change:
+
+| ticks | 1 | 12 | 20 | 40 | 80 | 150 | 400 |
+|---|---|---|---|---|---|---|---|
+| mean | 104.0 | 74.4 | 60.1 | 45.2 | 42.6 | 42.6 | 42.5 |
+
+Settled value is 42.5. A capture 12 ticks after the change reads **75 percent too bright**.
+Twelve ticks is what "weather applies on the next tick, so drain a few frames" leads you
+to, and it is not enough by an order of magnitude. 120 is used, with margin over the
+measured 80.
+
+**2. The camera must use fixed exposure.** CARLA's default `exposure_mode` is `histogram`,
+which is auto-exposure. This lab has published that ACDC is unusable partly because it is
+auto-exposed and absolute photometry is gone; the same objection applies to our own
+captures, and more sharply, because the family interpolates absolute values. Cameras are
+built with `exposure_mode=manual` and fixed shutter, iso and fstop.
+
+**3. Frames are matched on the id `world.tick()` returns, and a missing frame is an
+error.** A `except queue.Empty: pass` leaves the queue one frame ahead, and every image
+after it belongs to the previous condition. Already in this repository's notes; still
+written, still cost a full set of captures.
+
+With all three in place the captures are physical, dark < low beam < high beam at every
+site, where before they were monotonically backwards.
+
+**Site lighting, resolved.** Section 12 asks for lit and unlit stretches and says the
+survey cannot answer it. Measured at night with the lamps off: site 1 (758 ft) reads 4.5
+and is effectively unlit, site 3 (736 ft) reads 25.7 and is lit. Both are available.
+
+Nothing about the claim, the cells or the expectations changes.
