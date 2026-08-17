@@ -1,0 +1,156 @@
+{
+  "policy": "P_cont",
+  "scenario": "lead",
+  "method": "alpha-CROWN",
+  "threshold_mps2": 4.2566,
+  "r_req_m": 10.571,
+  "poses_inside_r_req": 15,
+  "cells": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 29.75,
+      "worst_lower_bound_mps2": 7.942,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.8658,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 87.3
+    },
+    {
+      "from_deg": 29.75,
+      "to_deg": 13.254,
+      "worst_lower_bound_mps2": 7.7755,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.8267,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 68.2
+    },
+    {
+      "from_deg": 13.254,
+      "to_deg": 6.178,
+      "worst_lower_bound_mps2": 7.6586,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.7992,
+      "verdict": "CERTIFIED",
+      "witness_pose": 96,
+      "witness_range_m": 6.323,
+      "seconds": 73.5
+    },
+    {
+      "from_deg": 6.178,
+      "to_deg": 3.726,
+      "worst_lower_bound_mps2": 7.8808,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.8514,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 59.4
+    },
+    {
+      "from_deg": 3.726,
+      "to_deg": 2.016,
+      "worst_lower_bound_mps2": 7.0328,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.6522,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 60.9
+    },
+    {
+      "from_deg": 2.016,
+      "to_deg": 0.805,
+      "worst_lower_bound_mps2": 5.432,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.2762,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 61.1
+    },
+    {
+      "from_deg": 0.805,
+      "to_deg": 0.143,
+      "worst_lower_bound_mps2": 7.4331,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.7463,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 57.5
+    },
+    {
+      "from_deg": 0.143,
+      "to_deg": 0.0,
+      "worst_lower_bound_mps2": 2.3993,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5637,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 61.4
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -3.727,
+      "worst_lower_bound_mps2": 2.1348,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5015,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 82.1
+    },
+    {
+      "from_deg": -3.727,
+      "to_deg": -29.597,
+      "worst_lower_bound_mps2": 7.8505,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.8443,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 49.3
+    },
+    {
+      "from_deg": -29.597,
+      "to_deg": -30.0,
+      "worst_lower_bound_mps2": 7.8505,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.8443,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 33.4
+    }
+  ],
+  "falsified": [
+    {
+      "from_deg": 0.143,
+      "to_deg": 0.0,
+      "worst_lower_bound_mps2": 2.3993,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5637,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 61.4
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -3.727,
+      "worst_lower_bound_mps2": 2.1348,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5015,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.237,
+      "seconds": 82.1
+    }
+  ],
+  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. Certified means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
+}
