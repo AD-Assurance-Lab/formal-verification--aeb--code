@@ -123,5 +123,5 @@ Never read back state you just wrote; construct it. Match sensor frames on the i
 ## Parent repository
 
 Read before writing code:
-`formal-verification--automated-driving--code/CLAUDE.md`, then `docs/STATE_OF_PLAY.md`
+`formal-verification--steering--code/CLAUDE.md`, then `docs/STATE_OF_PLAY.md`
 sections 0, 0b and 0c, then `docs/TRAPS.md` and `docs/CONSTRAINTS.md`.

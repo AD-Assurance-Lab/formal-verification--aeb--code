@@ -50,9 +50,9 @@ either result alone, and it is the reason to run this as a study rather than onl
 
 The steering study is the parent. Read, in this order:
 
-- `formal-verification--automated-driving--code/CLAUDE.md`
-- `formal-verification--automated-driving--code/docs/STATE_OF_PLAY.md`, sections 0, 0b, 0c
-- `formal-verification--automated-driving--code/docs/TRAPS.md` and `docs/CONSTRAINTS.md`
+- `formal-verification--steering--code/CLAUDE.md`
+- `formal-verification--steering--code/docs/STATE_OF_PLAY.md`, sections 0, 0b, 0c
+- `formal-verification--steering--code/docs/TRAPS.md` and `docs/CONSTRAINTS.md`
 - `lab--future-plans--docs/RESEARCH_DIRECTIONS.md`, entry A1
 
 ## Risk
