@@ -23,7 +23,7 @@
     },
     "M5": {
       "state": "done",
-      "note": "both gates pass behaviourally: capture 0.191, in-between 0.454 of the decision threshold"
+      "note": "both gates pass behaviourally for BOTH policies: capture 0.191 (P_cont) / 0.260 (P_pts); in-between worst 0.454 (P_cont) / 0.578 (P_pts) over covered sub-intervals, failing only inside the A6-excluded sliver (FINDINGS F2)"
     },
     "M6": {
       "state": "done",

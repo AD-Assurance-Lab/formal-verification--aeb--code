@@ -1,11 +1,11 @@
 {
   "verdict": "PASS",
   "street_lighting_by_site": {
-    "0": 14.03,
-    "1": 4.55,
-    "3": 25.71,
-    "4": 13.15,
-    "5": 23.51
+    "0": 3.34,
+    "1": 0.23,
+    "3": 9.86,
+    "4": 3.36,
+    "5": 9.71
   },
   "note": "night_nolights is the measurement that matters: with headlamps on, an unlit road and a lit one look similar ahead of the vehicle. Higher mean brightness with the lamps off means street lighting is present.",
   "captures": [
@@ -18,7 +18,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 185.41,
+      "mean_brightness": 128.33,
       "image": "site00_day.png"
     },
     {
@@ -30,7 +30,7 @@
       ],
       "lanes": 2,
       "condition": "night_nolights",
-      "mean_brightness": 14.03,
+      "mean_brightness": 3.34,
       "image": "site00_night_nolights.png"
     },
     {
@@ -42,7 +42,7 @@
       ],
       "lanes": 2,
       "condition": "night_lowbeam",
-      "mean_brightness": 26.04,
+      "mean_brightness": 8.65,
       "image": "site00_night_lowbeam.png"
     },
     {
@@ -54,7 +54,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 29.71,
+      "mean_brightness": 12.21,
       "image": "site00_night_highbeam.png"
     },
     {
@@ -66,7 +66,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 168.0,
+      "mean_brightness": 109.19,
       "image": "site01_day.png"
     },
     {
@@ -78,7 +78,7 @@
       ],
       "lanes": 2,
       "condition": "night_nolights",
-      "mean_brightness": 4.55,
+      "mean_brightness": 0.23,
       "image": "site01_night_nolights.png"
     },
     {
@@ -90,7 +90,7 @@
       ],
       "lanes": 2,
       "condition": "night_lowbeam",
-      "mean_brightness": 16.53,
+      "mean_brightness": 4.03,
       "image": "site01_night_lowbeam.png"
     },
     {
@@ -102,7 +102,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 20.68,
+      "mean_brightness": 7.35,
       "image": "site01_night_highbeam.png"
     },
     {
@@ -118,7 +118,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 191.97,
+      "mean_brightness": 133.45,
       "image": "site03_day.png"
     },
     {
@@ -130,7 +130,7 @@
       ],
       "lanes": 2,
       "condition": "night_nolights",
-      "mean_brightness": 25.71,
+      "mean_brightness": 9.86,
       "image": "site03_night_nolights.png"
     },
     {
@@ -142,7 +142,7 @@
       ],
       "lanes": 2,
       "condition": "night_lowbeam",
-      "mean_brightness": 34.05,
+      "mean_brightness": 15.26,
       "image": "site03_night_lowbeam.png"
     },
     {
@@ -154,7 +154,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 36.09,
+      "mean_brightness": 17.1,
       "image": "site03_night_highbeam.png"
     },
     {
@@ -166,7 +166,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 172.83,
+      "mean_brightness": 111.96,
       "image": "site04_day.png"
     },
     {
@@ -178,7 +178,7 @@
       ],
       "lanes": 2,
       "condition": "night_nolights",
-      "mean_brightness": 13.15,
+      "mean_brightness": 3.36,
       "image": "site04_night_nolights.png"
     },
     {
@@ -190,7 +190,7 @@
       ],
       "lanes": 2,
       "condition": "night_lowbeam",
-      "mean_brightness": 23.6,
+      "mean_brightness": 6.73,
       "image": "site04_night_lowbeam.png"
     },
     {
@@ -202,7 +202,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 27.64,
+      "mean_brightness": 9.8,
       "image": "site04_night_highbeam.png"
     },
     {
@@ -214,7 +214,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 145.12,
+      "mean_brightness": 91.83,
       "image": "site05_day.png"
     },
     {
@@ -226,7 +226,7 @@
       ],
       "lanes": 2,
       "condition": "night_nolights",
-      "mean_brightness": 23.51,
+      "mean_brightness": 9.71,
       "image": "site05_night_nolights.png"
     },
     {
@@ -238,7 +238,7 @@
       ],
       "lanes": 2,
       "condition": "night_lowbeam",
-      "mean_brightness": 31.75,
+      "mean_brightness": 14.92,
       "image": "site05_night_lowbeam.png"
     },
     {
@@ -250,7 +250,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 34.22,
+      "mean_brightness": 17.04,
       "image": "site05_night_highbeam.png"
     }
   ]
