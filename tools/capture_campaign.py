@@ -45,9 +45,13 @@ PED_LEAD_MARGIN_M = 8.0
 
 
 def load_knots() -> list[float]:
-    path = J.REPO / "results" / "carla" / "family_knots.json"
+    # FINDINGS F2: any capture campaign from 2026-08-25 onward uses the knots
+    # measured under the corrected three-channel blend metric. The original
+    # family_knots.json (blue-only metric) remains as the committed lead
+    # campaign's record and must not seed new captures.
+    path = J.REPO / "results" / "carla" / "family_knots_rgb.json"
     if not path.exists():
-        raise SystemExit("run tools/build_family_knots.py first")
+        raise SystemExit("run tools/build_family_knots.py first (writes the RGB knots)")
     return json.loads(path.read_text())["knots_sun_altitude_deg"]
 
 
@@ -219,13 +223,14 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     OUT.mkdir(parents=True, exist_ok=True)
     # The no-target control MUST replay the lead poses, or it is not a control: the
     # whole point is to isolate what the target contributes at an identical pose.
-    states_path = OUT / f"states_{'lead' if scenario == 'none' else scenario}.json"
+    base = {"none": "lead", "none_ped": "ped"}.get(scenario, scenario)
+    states_path = OUT / f"states_{base}.json"
     if states_path.exists():
         states = _load_states(states_path)
         print(f"  reusing the saved nominal run, {len(states)} states")
-    elif scenario == "none":
+    elif scenario in ("none", "none_ped"):
         raise SystemExit(
-            "capture --scenario lead first: the no-target control replays its poses"
+            f"capture --scenario {base} first: the no-target control replays its poses"
         )
     else:
         states = nominal_states(world, site, scenario, speed_mph, b["a_max_g_worst"])
@@ -268,7 +273,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
         cam = None
         frames = []
         try:
-            if scenario == "none":
+            if scenario in ("none", "none_ped"):
                 other = None
             else:
                 lifted = carla.Transform(
@@ -346,10 +351,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
         "--scenario",
-        choices=["lead", "ped", "none"],
+        choices=["lead", "ped", "none", "none_ped"],
         default="lead",
-        help="'none' repeats the lead poses with NO target: the control that isolates "
-             "what the target contributes to a frame, and the false-activation baseline",
+        help="'none' repeats the lead poses with NO target; 'none_ped' repeats the "
+             "ped poses the same way. The control isolates what the target contributes "
+             "to a frame (A10) and is the false-activation baseline for property A",
     )
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     ap.add_argument("--plan", action="store_true", help="size it, capture nothing")

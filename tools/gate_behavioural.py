@@ -68,16 +68,39 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
     driven = {}
     ego = other = cam = None
     try:
-        bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
-        first = states[0]["other"]
-        other = world.try_spawn_actor(
-            bp,
-            carla.Transform(
-                carla.Location(x=first[0], y=first[1], z=first[2] + 0.5),
-                carla.Rotation(pitch=first[3], yaw=first[4], roll=first[5]),
-            ),
-        )
+        if args.scenario == "lead":
+            bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
+            first = states[0]["other"]
+            other = world.try_spawn_actor(
+                bp,
+                carla.Transform(
+                    carla.Location(x=first[0], y=first[1], z=first[2] + 0.5),
+                    carla.Rotation(pitch=first[3], yaw=first[4], roll=first[5]),
+                ),
+            )
+            tf_conflict = None
+        else:
+            # The ped capture gate drives the ACTUAL scenario (walker released with
+            # the A9 timing) and matches poses on conflict-point range, because the
+            # stored states have the walker mid-crossing at each pose.
+            import scenarios as S
+            from run_policy import A9_HEAD_START_M
+            b = json.loads((OUT / "braking.json").read_text())
+            rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"],
+                           b["t_lat_s_worst"] or 0.2)
+            tf_conflict, wp_target = J.site_transform(world, site, along=10.0 + 120.0)
+            other, _direction = S.spawn_crossing_pedestrian(world, wp_target)
+            _pctrl = J.carla_module().WalkerControl()
+            _pctrl.direction = J.carla_module().Vector3D(
+                x=_direction[0], y=_direction[1], z=0.0)
+            _released = False
+            _cross = None  # filled after ego spawn
         ego = J.spawn_hero(world, spawn_tf)
+        if args.scenario == "ped":
+            _cross_m = max(0.0, 6.0 - ego.bounding_box.extent.y)
+            _ramp_s = 1.5 / S.WALKER_ACCEL_MPS2
+            _walk_s = _ramp_s + max(0.0, _cross_m - S.walker_lead_distance(1.5)) / 1.5
+            _lead_m = rr + A9_HEAD_START_M
         images: "_q.Queue" = _q.Queue()
         cam = world.spawn_actor(
             J.rgb_camera_bp(world),
@@ -102,7 +125,18 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
         integral = 0.0
         for _ in range(1500):
             img = J.grab_frame(world, images)
-            gap = J.separation_ft(ego, other) / J.FT
+            if args.scenario == "lead":
+                gap = J.separation_ft(ego, other) / J.FT
+            else:
+                loc = ego.get_transform().location
+                to_conflict = math.hypot(tf_conflict.location.x - loc.x,
+                                         tf_conflict.location.y - loc.y)
+                gap = to_conflict - ego.bounding_box.extent.x
+                if not _released and (to_conflict - _lead_m) / max(
+                        J.speed_of(ego), 0.1) <= _walk_s:
+                    _pctrl.speed = 1.5
+                    other.apply_control(_pctrl)
+                    _released = True
             for i, r in list(want.items()):
                 if abs(gap - r) < 0.30 and i not in driven:
                     a = np.frombuffer(img.raw_data, dtype=np.uint8)
@@ -144,7 +178,8 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
             "here means sound bounds on them say nothing about the vehicle."
         ),
     }
-    (OUT / f"gate_capture_{args.policy}.json").write_text(
+    _sfx = "" if args.scenario == "lead" else f"_{args.scenario}"
+    (OUT / f"gate_capture_{args.policy}{_sfx}.json").write_text(
         json.dumps(payload, indent=2) + "\n"
     )
     print(
@@ -163,11 +198,8 @@ def main() -> int:
         help="which of the two M5 gates to run",
     )
     args = ap.parse_args()
-    if args.scenario != "lead":
-        raise SystemExit(
-            f"scenario {args.scenario!r}: the placement/target spawner here is "
-            f"lead-only (audit F3); gate the pedestrian scenario only once its "
-            f"harness exists")
+    if args.scenario not in ("lead", "ped"):
+        raise SystemExit(f"scenario {args.scenario!r}: no gate harness")
 
 
     carla = J.carla_module()
@@ -177,7 +209,8 @@ def main() -> int:
     a_max = b["a_max_g_worst"] * 9.81
     threshold = a_max * BRAKE_THRESHOLD_FRACTION
     rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
-    knots = json.loads((OUT / "family_knots.json").read_text())["knots_sun_altitude_deg"]
+    _kf = "family_knots.json" if args.scenario == "lead" else "family_knots_rgb.json"
+    knots = json.loads((OUT / _kf).read_text())["knots_sun_altitude_deg"]
 
     states = json.loads((CAPTURES / f"states_{args.scenario}.json").read_text())
     ranges = np.array([s["range_m"] for s in states])
@@ -196,7 +229,9 @@ def main() -> int:
         cam = None
         frames = {}
         try:
-            bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
+            bp = world.get_blueprint_library().filter(
+                "vehicle.audi.tt" if args.scenario == "lead" else "walker.pedestrian.*"
+            )[0]
             first = states[0]["other"]
             other = world.try_spawn_actor(
                 bp,
@@ -303,11 +338,12 @@ def main() -> int:
             "declared."
         ),
     }
-    (OUT / f"gate_inbetween_{args.policy}.json").write_text(
+    _sfx = "" if args.scenario == "lead" else f"_{args.scenario}"
+    (OUT / f"gate_inbetween_{args.policy}{_sfx}.json").write_text(
         json.dumps(payload, indent=2) + "\n"
     )
     print(f"\n  worst {worst:.3f} of the decision threshold -> {payload['verdict']}")
-    print(f"  wrote results/carla/gate_inbetween_{args.policy}.json")
+    print(f"  wrote results/carla/gate_inbetween_{args.policy}{_sfx}.json")
     return 0
 
 

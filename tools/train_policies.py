@@ -101,7 +101,10 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
     """
     xs, ys, ks = [], [], []
     sources = sorted(CAPTURES.glob(f"{scenario}_sun*.npz"))
-    sources += sorted(CAPTURES.glob("none_sun*.npz"))
+    # The A10 control must replay THIS scenario's poses, or position stays
+    # informative: none replays the lead poses, none_ped the ped poses.
+    ctrl = "none_ped" if scenario == "ped" else "none"
+    sources += sorted(CAPTURES.glob(f"{ctrl}_sun*.npz"))
     for path in sources:
         d = np.load(path)
         knot = float(d["sun_altitude_deg"])
@@ -121,7 +124,7 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
         # one place (tools/expert_law.py) so training and verification cannot drift
         # apart, and the captures stay valid when the law is corrected.
         rng = d["range_m"]
-        if path.name.startswith("none_"):
+        if path.name.startswith(("none_sun", "none_ped_sun")):
             # Nothing ahead, so nothing to brake for, at any range.
             lab = torch.zeros(len(rng), 1)
         else:

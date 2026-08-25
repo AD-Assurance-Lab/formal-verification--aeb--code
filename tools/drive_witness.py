@@ -58,10 +58,8 @@ def main() -> int:
     ap.add_argument("--reps", type=int, default=J.REPS)
     args = ap.parse_args()
 
-    if args.scenario != "lead":
-        raise SystemExit(
-            f"scenario {args.scenario!r} is not drivable: one_run always spawns the "
-            f"lead vehicle (audit F3); only 'lead' until the pedestrian harness lands")
+    if args.scenario not in ("lead", "ped"):
+        raise SystemExit(f"scenario {args.scenario!r} is not drivable")
 
     verdicts_path = OUT / f"verify_{args.policy}_{args.scenario}.json"
     if not verdicts_path.exists():
@@ -107,7 +105,8 @@ def main() -> int:
         lights = "LowBeam" if mid < 5.0 else "NONE"
 
         runs = [
-            one_run(world, site, model, w, h, dev, a_max, J.HAZARD_MPH, lights)
+            one_run(world, site, model, w, h, dev, a_max, J.HAZARD_MPH, lights,
+                    scenario=args.scenario, release_r_req_m=r_req_ft / J.FT)
             for _ in range(args.reps)
         ]
         for r in runs:

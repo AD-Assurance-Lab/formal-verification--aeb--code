@@ -64,17 +64,37 @@ def preprocess(img, w: int, h: int, dev):
     return torch.nn.functional.interpolate(t, size=(h, w), mode="area").to(dev)
 
 
-def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0):
+# A9: extra head start for the walker beyond r_req, a frozen scenario parameter.
+# Must equal capture_campaign.PED_LEAD_MARGIN_M; asserted at import in main().
+A9_HEAD_START_M = 8.0
+
+
+def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0,
+            scenario="lead", release_r_req_m=None):
+    """One closed-loop run. `scenario` is 'lead' (stationary vehicle) or 'ped'
+    (crossing pedestrian with the A9-timed release, range to the CONFLICT POINT)."""
+    import scenarios as S
     carla = J.carla_module()
     v_target = speed_mph * J.MPH
     ego = lead = cam = None
     try:
         tf_ego, _ = J.site_transform(world, site, along=10.0, need_m=gap_m + 80.0)
-        tf_lead, _ = J.site_transform(world, site, along=10.0 + gap_m)
-        bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
-        lead = world.try_spawn_actor(bp, tf_lead)
-        if lead is None:
-            raise RuntimeError("lead vehicle spawn blocked")
+        tf_lead, wp_target = J.site_transform(world, site, along=10.0 + gap_m)
+        if scenario == "lead":
+            bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
+            lead = world.try_spawn_actor(bp, tf_lead)
+            if lead is None:
+                raise RuntimeError("lead vehicle spawn blocked")
+            ped_ctrl = released = None
+        elif scenario == "ped":
+            if release_r_req_m is None:
+                raise RuntimeError("ped runs need release_r_req_m (A9 release timing)")
+            lead, direction = S.spawn_crossing_pedestrian(world, wp_target)
+            ped_ctrl = carla.WalkerControl()
+            ped_ctrl.direction = carla.Vector3D(x=direction[0], y=direction[1], z=0.0)
+            released = False
+        else:
+            raise RuntimeError(f"scenario {scenario!r} is not drivable")
         ego = J.spawn_hero(world, tf_ego)
 
         images: "queue.Queue" = queue.Queue()
@@ -102,15 +122,38 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
         integral = 0.0
         min_gap_ft = 1e9
         demand_at_brake = None
+        # Release timing, mirrored from capture_campaign.nominal_states so the driven
+        # scenario is the one the captures recorded (A9: in the path before r_req).
+        if scenario == "ped":
+            cross_m = max(0.0, 6.0 - ego.bounding_box.extent.y)
+            ramp_s = 1.5 / S.WALKER_ACCEL_MPS2
+            walk_s = ramp_s + max(0.0, cross_m - S.walker_lead_distance(1.5)) / 1.5
+            lead_m = release_r_req_m + A9_HEAD_START_M
+        min_conflict_m = 1e9
         for _ in range(1500):
             img = J.grab_frame(world, images)
             with torch.no_grad():
                 demand = float(model(preprocess(img, w, h, dev)).item())
 
+            loc = ego.get_transform().location
+            to_conflict = math.hypot(
+                tf_lead.location.x - loc.x, tf_lead.location.y - loc.y
+            )
+            min_conflict_m = min(min_conflict_m, to_conflict)
+            if scenario == "ped" and not released:
+                if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
+                    ped_ctrl.speed = 1.5
+                    lead.apply_control(ped_ctrl)
+                    released = True
+
             min_gap_ft = min(min_gap_ft, J.separation_ft(ego, lead))
+            # brake_range: the lead scenario's separation IS the range; the crossing
+            # scenario's range is to the CONFLICT POINT (A7).
+            range_now_ft = (J.separation_ft(ego, lead) if scenario == "lead"
+                            else (to_conflict - ego.bounding_box.extent.x) * J.FT)
             if not braking and demand >= a_max * BRAKE_THRESHOLD_FRACTION:
                 braking = True
-                demand_at_brake = round(J.separation_ft(ego, lead), 2)
+                demand_at_brake = round(range_now_ft, 2)
             if braking:
                 # FULL braking once latched. The label is a step to a_max and the
                 # certificate's property is that the commanded deceleration is at least
@@ -129,13 +172,21 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                 break
             if min_gap_ft < -2.0:
                 break
-        return {
+            # A non-braking ped run ends once the ego has blown through the conflict
+            # point; there is nothing left to measure.
+            if (scenario == "ped" and not braking and min_conflict_m < 3.0
+                    and to_conflict > min_conflict_m + 20.0):
+                break
+        out = {
             "min_gap_ft": round(min_gap_ft, 2),
             "contact": min_gap_ft <= 0.0,
             "standoff_ok": min_gap_ft >= J.D_MARGIN_M * J.FT,
             "braked": braking,
             "brake_range_ft": demand_at_brake,
         }
+        if scenario == "ped":
+            out["released"] = bool(released)
+        return out
     finally:
         if cam is not None:
             cam.stop()
@@ -151,13 +202,10 @@ def main() -> int:
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     args = ap.parse_args()
 
-    if args.scenario != "lead":
-        raise SystemExit(
-            f"scenario {args.scenario!r} is not implemented in one_run: it would "
-            f"silently spawn the stationary lead vehicle and label the result "
-            f"{args.scenario!r} (audit F3). Only 'lead' is drivable until the "
-            f"pedestrian harness lands."
-        )
+    if args.scenario not in ("lead", "ped"):
+        raise SystemExit(f"scenario {args.scenario!r} is not drivable")
+    import capture_campaign as CC
+    assert A9_HEAD_START_M == CC.PED_LEAD_MARGIN_M, "A9 head start drifted"
     policies = ["P_pts", "P_cont"] if args.all else [args.policy]
     conditions = list(CONDITIONS) if args.all else [args.condition]
     if None in policies or None in conditions:
@@ -182,13 +230,15 @@ def main() -> int:
             for _ in range(J.WEATHER_SETTLE_TICKS):
                 world.tick()
 
+            r_req_m = J.r_req_m(
+                args.speed_mph * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2
+            )
+            r_req_ft = r_req_m * J.FT
             runs = [
-                one_run(world, site, model, w, h, dev, a_max, args.speed_mph, lights)
+                one_run(world, site, model, w, h, dev, a_max, args.speed_mph, lights,
+                        scenario=args.scenario, release_r_req_m=r_req_m)
                 for _ in range(J.REPS)
             ]
-            r_req_ft = J.r_req_m(
-                args.speed_mph * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2
-            ) * J.FT
             for r in runs:
                 r["premature"] = (
                     r["brake_range_ft"] is not None
@@ -221,7 +271,8 @@ def main() -> int:
         "setup: the claim is that a policy which SATISFIES the standard is unsafe "
         "between its test points."
     )
-    path = J.REPO / "results" / "carla" / "policy_endpoints.json"
+    suffix = "" if args.scenario == "lead" else f"_{args.scenario}"
+    path = J.REPO / "results" / "carla" / f"policy_endpoints{suffix}.json"
     path.write_text(json.dumps(out, indent=2) + "\n")
     print(f"\n  wrote {path.relative_to(J.REPO)}")
     return 0

@@ -120,10 +120,13 @@ def main() -> int:
     a_max = b["a_max_g_worst"] * 9.81
     threshold = a_max * BRAKE_THRESHOLD_FRACTION
     rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
-    knots = json.loads((OUT / "family_knots.json").read_text())["knots_sun_altitude_deg"]
+    # The committed lead campaign used family_knots.json (blue-only metric, its
+    # record); every later campaign uses the RGB knots (FINDINGS F2).
+    _kf = "family_knots.json" if args.scenario in ("lead", "none") else "family_knots_rgb.json"
+    knots = json.loads((OUT / _kf).read_text())["knots_sun_altitude_deg"]
 
     # The no-target control replays the LEAD poses, so it has no states file of its own.
-    states_name = "lead" if args.scenario == "none" else args.scenario
+    states_name = {"none": "lead", "none_ped": "ped"}.get(args.scenario, args.scenario)
     states = json.loads((CAPTURES / f"states_{states_name}.json").read_text())
     ranges = np.array([s["range_m"] for s in states])
     if args.property == "S":
