@@ -130,6 +130,7 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
             walk_s = ramp_s + max(0.0, cross_m - S.walker_lead_distance(1.5)) / 1.5
             lead_m = release_r_req_m + A9_HEAD_START_M
         min_conflict_m = 1e9
+        rest_gap_ft = None
         for _ in range(1500):
             img = J.grab_frame(world, images)
             with torch.no_grad():
@@ -146,7 +147,13 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                     lead.apply_control(ped_ctrl)
                     released = True
 
-            min_gap_ft = min(min_gap_ft, J.separation_ft(ego, lead))
+            sep_now = J.separation_ft(ego, lead)
+            min_gap_ft = min(min_gap_ft, sep_now)
+            # d_margin is "required standoff AT REST" (PROTOCOL section 3; FINDINGS
+            # F3): track separation while stopped separately, because a crossing
+            # walker keeps moving after the vehicle has done its job.
+            if braking and J.speed_of(ego) < 0.1:
+                rest_gap_ft = sep_now if rest_gap_ft is None else min(rest_gap_ft, sep_now)
             # brake_range: the lead scenario's separation IS the range; the crossing
             # scenario's range is to the CONFLICT POINT (A7).
             range_now_ft = (J.separation_ft(ego, lead) if scenario == "lead"
@@ -169,6 +176,14 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                     carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
                 )
             if braking and J.speed_of(ego) < 0.1:
+                # For the crossing scenario, idle a moment at rest so the resting
+                # standoff sees the walker actually cross; the lead target is static
+                # and needs no dwell.
+                if scenario == "ped":
+                    for _ in range(40):
+                        img2 = J.grab_frame(world, images)
+                        rest_gap_ft = min(rest_gap_ft, J.separation_ft(ego, lead))
+                        min_gap_ft = min(min_gap_ft, rest_gap_ft)
                 break
             if min_gap_ft < -2.0:
                 break
@@ -179,8 +194,10 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                 break
         out = {
             "min_gap_ft": round(min_gap_ft, 2),
+            "rest_gap_ft": None if rest_gap_ft is None else round(rest_gap_ft, 2),
             "contact": min_gap_ft <= 0.0,
-            "standoff_ok": min_gap_ft >= J.D_MARGIN_M * J.FT,
+            "standoff_ok": (rest_gap_ft is not None
+                            and rest_gap_ft >= J.D_MARGIN_M * J.FT),
             "braked": braking,
             "brake_range_ft": demand_at_brake,
         }

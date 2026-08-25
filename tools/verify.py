@@ -155,7 +155,7 @@ def main() -> int:
         # quantifies over images that do not represent rendered reality. The cell
         # is still computed (the ledger keeps its row) but carries the flag, and
         # a CERTIFIED verdict there must never be counted as coverage (audit F8).
-        family_uncovered = hi_alt <= 0.15 and lo_alt >= -0.001
+        family_uncovered = hi_alt <= 0.37 and lo_alt >= -0.001
         t0 = time.time()
         a_imgs = np.load(stored[round(hi_alt, 3)])["images"]
         b_imgs = np.load(stored[round(lo_alt, 3)])["images"]

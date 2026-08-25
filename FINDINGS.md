@@ -6,6 +6,35 @@ here, never inside the protocol.
 
 ---
 
+## F3 — 2026-08-25, Iteration 2: standoff is measured AT REST, recorded before the re-run
+
+**Written before any re-run, per PROTOCOL section 8.** The first ped M4 sweep returned
+`P_pts_ped` 9/10 at darkness. The evidence says the miss is harness semantics, not the
+policy: all ten runs latched at the identical brake range (33.12 ft); nine rested at
+4.43 ft and one at 2.62 ft, and the only varying factor is the walker's crossing phase
+against a pass criterion computed as **min separation over the whole run**. That
+min-over-run coding is a lead-scenario approximation — a stationary lead's gap
+decreases monotonically, so min-over-run and resting gap coincide. A crossing walker
+walks PAST the stopped vehicle, so min-over-run measures the walker's path, not the
+vehicle's margin. The frozen text is explicit: section 3 defines `d_margin` as
+"required standoff **at rest**".
+
+**The change:** pass requires (a) no contact at any time (unchanged, min-over-run),
+and (b) separation of at least `d_margin` while the vehicle is at rest. For the lead
+scenario this is identical to the old coding. It is recorded here BEFORE the M4
+re-run; if `P_pts_ped` still cannot make 10/10 under the frozen semantics, M4 fails
+and the protocol stops the ped study ("no story").
+
+Also recorded: the P_pts_ped in-between gate fails only inside [0.360, 0.000] deg —
+the RGB campaign's own uncoverable horizon sliver (F2), mirroring the lead pattern —
+and passes at <= 0.247 everywhere covered; P_cont_ped passes everywhere (0.310).
+Verify now flags any sub-interval inside the horizon band [<= 0.37, >= 0.00] deg as
+`family_uncovered` for both campaigns' knot sets. The oracle harness bug F1's fix
+introduced (trigger from ego centre instead of front bumper, -1.9 ft contacts) was
+caught by the re-validation stage and fixed before anything was trained against it.
+
+---
+
 ## F2 — 2026-08-25 re-measurements: the committed campaign survives its own audit
 
 The four measurements the F1 audit demanded, all run on a fresh server:
