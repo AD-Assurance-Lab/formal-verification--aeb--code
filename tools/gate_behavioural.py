@@ -163,6 +163,12 @@ def main() -> int:
         help="which of the two M5 gates to run",
     )
     args = ap.parse_args()
+    if args.scenario != "lead":
+        raise SystemExit(
+            f"scenario {args.scenario!r}: the placement/target spawner here is "
+            f"lead-only (audit F3); gate the pedestrian scenario only once its "
+            f"harness exists")
+
 
     carla = J.carla_module()
     dev = "cuda" if torch.cuda.is_available() else "cpu"

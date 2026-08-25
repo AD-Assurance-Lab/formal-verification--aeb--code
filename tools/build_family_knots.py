@@ -73,10 +73,14 @@ def main() -> int:
 
         def blend_error(hi: float, lo: float) -> float:
             a, b, m = render(hi), render(lo), render((hi + lo) / 2.0)
+            # BGRA buffer: sample all three colour channels per stride. The old
+            # form strided by 40 (divisible by 4) with a dead alpha guard, so it
+            # measured the BLUE channel only -- dusk sky is chromatic exactly
+            # where the axis is cut (audit F1; knots need re-measuring under this).
             diffs = [
-                abs((a[k] + b[k]) / 2.0 - m[k])
-                for k in range(0, len(a), 40)
-                if k % 4 != 3
+                abs((a[base + c] + b[base + c]) / 2.0 - m[base + c])
+                for base in range(0, len(a) - 3, 40)
+                for c in (0, 1, 2)
             ]
             return sum(diffs) / len(diffs) / 255.0
 

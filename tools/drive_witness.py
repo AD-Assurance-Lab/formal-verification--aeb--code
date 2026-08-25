@@ -31,6 +31,26 @@ from run_policy import load_policy, one_run, PREMATURE_MULTIPLE  # noqa: E402
 OUT = J.REPO / "results" / "carla"
 
 
+
+def _provenance(model_path=None):
+    """Attribution for result artifacts: which code, which network, when.
+
+    The A10 retrain overwrote models and verdicts in place; without this nothing
+    ties a committed verdict to the network it describes (audit F6/F12)."""
+    import datetime
+    import hashlib
+    import subprocess
+    p = {"timestamp": datetime.datetime.now().astimezone().isoformat(timespec="seconds")}
+    try:
+        p["git_sha"] = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True,
+            cwd=str(J.REPO), timeout=10).stdout.strip() or None
+    except Exception:
+        p["git_sha"] = None
+    if model_path is not None:
+        p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+    return p
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--policy", required=True)
@@ -38,9 +58,27 @@ def main() -> int:
     ap.add_argument("--reps", type=int, default=J.REPS)
     args = ap.parse_args()
 
+    if args.scenario != "lead":
+        raise SystemExit(
+            f"scenario {args.scenario!r} is not drivable: one_run always spawns the "
+            f"lead vehicle (audit F3); only 'lead' until the pedestrian harness lands")
+
     verdicts_path = OUT / f"verify_{args.policy}_{args.scenario}.json"
     if not verdicts_path.exists():
         raise SystemExit(f"no verdicts at {verdicts_path}; run tools/verify.py first")
+    # A verdict is a prediction only if it is COMMITTED before this drive
+    # (PROTOCOL section 8). The old check accepted any file on disk.
+    import subprocess as _sp
+    rel = str(verdicts_path.relative_to(J.REPO))
+    tracked = _sp.run(["git", "ls-files", "--error-unmatch", rel],
+                      capture_output=True, cwd=str(J.REPO)).returncode == 0
+    dirty = _sp.run(["git", "status", "--porcelain", "--", rel],
+                    capture_output=True, text=True, cwd=str(J.REPO)).stdout.strip()
+    if not tracked or dirty:
+        raise SystemExit(
+            f"{rel} is {'untracked' if not tracked else 'modified since commit'}: "
+            f"commit the verdicts first -- an uncommitted verdict is not a prediction "
+            f"(PROTOCOL section 8; python -m study.ledger --check-order)")
     verdicts = json.loads(verdicts_path.read_text())
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
@@ -105,9 +143,13 @@ def main() -> int:
             f"drove {passes}/{args.reps}  {'agree' if matched else 'DISAGREE'}"
         )
 
+    _prov = _provenance(str(J.REPO / "results" / "models" /
+                            f"{args.policy}_{args.scenario}.pt"))
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
+        "model_sha256": _prov.get("model_sha256"),
+        "provenance": _prov,
         "agreement": f"{agree}/{len(rows)}",
         "cells": rows,
         "note": (

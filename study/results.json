@@ -41,31 +41,36 @@
   "cells": {
     "1": {
       "endpoints": "PASS both",
-      "fv": "FALSIFIED",
-      "witness": "FAIL",
+      "fv": null,
+      "witness": null,
       "width": null,
-      "note": "FALSIFIED, drove 0/10 at three dusk illuminations"
+      "note": "pedestrian policy not trained yet (STUDY_REPORT); scenario captured and validated"
     },
     "2": {
+      "endpoints": "PASS both",
+      "fv": "FALSIFIED",
+      "witness": "FAIL",
+      "width": 10.802,
+      "note": "FALSIFIED, drove 0/10 at three dusk illuminations",
+      "artifact": "results/carla/verify_P_pts_lead.json",
+      "witness_artifact": "results/carla/witness_P_pts_lead.json",
+      "width_note": "total width of the falsified sub-intervals, degrees of sun altitude (axis 60 to -30)"
+    },
+    "3": {
       "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
-      "note": ""
+      "note": "pedestrian policy not trained yet (STUDY_REPORT); scenario captured and validated"
     },
-    "3": {
+    "4": {
       "endpoints": "PASS both",
       "fv": "CERTIFIED in the shoulder",
       "witness": "PASS",
       "width": null,
-      "note": "CERTIFIED in the shoulder, drove 10/10 where P_pts drove 0/10"
-    },
-    "4": {
-      "endpoints": "PASS both",
-      "fv": null,
-      "witness": null,
-      "width": null,
-      "note": ""
+      "note": "CERTIFIED in the shoulder, drove 10/10 where P_pts drove 0/10",
+      "artifact": "results/carla/verify_P_cont_lead.json",
+      "witness_artifact": "results/carla/witness_P_cont_lead.json"
     },
     "5": {
       "endpoints": "PASS both",

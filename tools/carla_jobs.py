@@ -449,10 +449,11 @@ def job_sites() -> dict:
             continue
         cam = None
         try:
-            bp = world.get_blueprint_library().find("sensor.camera.rgb")
-            bp.set_attribute("image_size_x", "640")
-            bp.set_attribute("image_size_y", "480")
-            bp.set_attribute("fov", "90")
+            # Fixed exposure, like every measurement camera (A4). This block was
+            # built raw and inherited CARLA's auto-exposure default, so the
+            # lit/unlit site numbers quoted in A4 were not absolute photometry
+            # (audit F2).
+            bp = rgb_camera_bp(world)
             images: "queue.Queue" = queue.Queue()
             cam = world.spawn_actor(
                 bp,
@@ -478,8 +479,8 @@ def job_sites() -> dict:
                 name = f"site{i:02d}_{label}.png"
                 img.save_to_disk(str(shots / name))
                 buf = memoryview(img.raw_data)
-                total = sum(buf[k] for k in range(0, len(buf), 64))  # sample every 16px
-                mean = total / max(1, len(range(0, len(buf), 64)))
+                idx = [b + c for b in range(0, len(buf) - 3, 64) for c in (0, 1, 2)]
+                mean = sum(buf[k] for k in idx) / max(1, len(idx))
                 results.append(
                     {
                         "site": i,
@@ -714,7 +715,13 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
         for _ in range(1200):
             gap_ft = separation_ft(ego, lead)
             min_gap_ft = min(min_gap_ft, gap_ft)
-            if not braking and gap_ft / FT <= trigger_m:
+            # Trigger on range to the CONFLICT POINT (A7), not the straight-line
+            # walker distance, which includes the lateral offset (audit F4).
+            loc_now = ego.get_transform().location
+            conflict_range_m = math.hypot(
+                tf_conflict.location.x - loc_now.x, tf_conflict.location.y - loc_now.y
+            )
+            if not braking and conflict_range_m <= trigger_m:
                 braking = True
                 v_at_brake = speed_of(ego)
             if braking:
@@ -859,13 +866,13 @@ def job_inbetween() -> dict:
     rows = []
     for s in STEPS[1:-1]:
         rendered = frames[s]
-        # BGRA buffer; skip the alpha channel
+        # BGRA buffer: all three colour channels per stride; the old stride-40
+        # form sampled blue only (audit F1).
         diffs = []
-        for k in range(0, n, 40):
-            if (k % 4) == 3:
-                continue
-            blended = day[k] + s * (night[k] - day[k])
-            diffs.append(abs(blended - rendered[k]))
+        for base in range(0, n - 3, 40):
+            for c in (0, 1, 2):
+                blended = day[base + c] + s * (night[base + c] - day[base + c])
+                diffs.append(abs(blended - rendered[base + c]))
         mae = sum(diffs) / len(diffs)
         rows.append(
             {
@@ -944,7 +951,13 @@ def _approach_pedestrian(world, site, speed_mph, trigger_m, gap_m=120.0,
                     ped.apply_control(ctrl)
                     released = True
 
-            if not braking and gap_ft / FT <= trigger_m:
+            # Trigger on range to the CONFLICT POINT (A7), not the straight-line
+            # walker distance, which includes the lateral offset (audit F4).
+            loc_now = ego.get_transform().location
+            conflict_range_m = math.hypot(
+                tf_conflict.location.x - loc_now.x, tf_conflict.location.y - loc_now.y
+            )
+            if not braking and conflict_range_m <= trigger_m:
                 braking = True
             if braking:
                 ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
@@ -1102,10 +1115,11 @@ def job_capture_check() -> dict:
                 grab_frame(world, images)
             img = grab_frame(world, images)
             captured = memoryview(img.raw_data)
+            # All three colour channels per stride (audit F1).
             diffs = [
-                abs(driven_px[j] - captured[j])
-                for j in range(0, len(driven_px), 40)
-                if j % 4 != 3
+                abs(driven_px[base + c] - captured[base + c])
+                for base in range(0, len(driven_px) - 3, 40)
+                for c in (0, 1, 2)
             ]
             mae = sum(diffs) / len(diffs)
             here = ego.get_transform().location
@@ -1218,8 +1232,8 @@ def job_expert() -> dict:
             img = grab_frame(world, images)
             img.save_to_disk(str(shots / f"{name}.png"))
             buf = memoryview(img.raw_data)
-            idx = range(0, len(buf), 64)
-            brightness = round(sum(buf[k] for k in idx) / len(list(idx)), 2)
+            idx = [b + c for b in range(0, len(buf) - 3, 64) for c in (0, 1, 2)]
+            brightness = round(sum(buf[k] for k in idx) / len(idx), 2)
         finally:
             if cam is not None:
                 cam.stop()

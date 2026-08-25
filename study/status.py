@@ -22,14 +22,33 @@ from study import protocol_lock as lock
 REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "study" / "results.json"
 
-EXPECTED = {
-    "1": ("P_pts",  "ped cross",    "PASS both", "FALSIFIED", "FAIL", "high"),
-    "2": ("P_pts",  "lead stop",    "PASS both", "FALSIFIED", "FAIL", "med"),
-    "3": ("P_cont", "ped cross",    "PASS both", "CERTIFIED", "PASS", "high"),
-    "4": ("P_cont", "lead stop",    "PASS both", "CERTIFIED", "PASS", "high"),
-    "5": ("P_pts",  "trench plate", "PASS both", "CERTIFIED", "PASS", "low"),
-    "6": ("P_cont", "trench plate", "PASS both", "CERTIFIED", "PASS", "low"),
-}
+def _expected_from_protocol() -> dict:
+    """Parse the ledger expectations out of the FROZEN section 9 table.
+
+    A hard-coded duplicate lived here before: editable without tripping the
+    protocol lock, which defeats the point of freezing the expectations. The
+    frozen table is the single source; if it cannot be parsed, that is an error,
+    not a fallback."""
+    text = (REPO / "PROTOCOL.md").read_text()
+    frozen, _ = lock.split_protocol(text)
+    start = frozen.find("## 9. The ledger")
+    section = frozen[start:]
+    end = section.find("\n## ", 1)
+    section = section[:end] if end != -1 else section
+    out = {}
+    for line in section.split("\n"):
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) >= 7 and cells[0].isdigit():
+            cid, policy, scenario, endpoints, fv, witness, conf = cells[:7]
+            fv_word = fv.split(",")[0].strip()
+            out[cid] = (policy, scenario, endpoints, fv_word, witness, conf)
+    if len(out) != 6:
+        raise SystemExit(
+            f"could not parse the 6 ledger rows from PROTOCOL section 9 (got {len(out)})")
+    return out
+
+
+EXPECTED = _expected_from_protocol()
 
 MILESTONE_NAMES = {
     "M0": "Specification, locked",

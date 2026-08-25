@@ -74,11 +74,12 @@ def main() -> int:
             width = 11.25
             hi, lo = centre + width / 2.0, centre - width / 2.0
             a, b, mid = render(hi), render(lo), render(centre)
+            # All three colour channels per stride; the old stride-40 form
+            # sampled blue only (audit F1).
             diffs = []
-            for k in range(0, len(a), 40):
-                if k % 4 == 3:
-                    continue
-                diffs.append(abs((a[k] + b[k]) / 2.0 - mid[k]))
+            for base in range(0, len(a) - 3, 40):
+                for c in (0, 1, 2):
+                    diffs.append(abs((a[base + c] + b[base + c]) / 2.0 - mid[base + c]))
             mae = sum(diffs) / len(diffs)
             rows.append(
                 {
@@ -102,12 +103,11 @@ def main() -> int:
             hi, lo = centre + width / 2.0, centre - width / 2.0
             a, b, mid = render(hi), render(lo), render(centre)
             n = len(a)
+            # All three colour channels per stride (audit F1).
             diffs = []
-            for k in range(0, n, 40):
-                if k % 4 == 3:
-                    continue  # alpha
-                blended = (a[k] + b[k]) / 2.0
-                diffs.append(abs(blended - mid[k]))
+            for base in range(0, n - 3, 40):
+                for c in (0, 1, 2):
+                    diffs.append(abs((a[base + c] + b[base + c]) / 2.0 - mid[base + c]))
             mae = sum(diffs) / len(diffs)
             rows.append(
                 {

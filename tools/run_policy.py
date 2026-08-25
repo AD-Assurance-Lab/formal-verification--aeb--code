@@ -151,6 +151,13 @@ def main() -> int:
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     args = ap.parse_args()
 
+    if args.scenario != "lead":
+        raise SystemExit(
+            f"scenario {args.scenario!r} is not implemented in one_run: it would "
+            f"silently spawn the stationary lead vehicle and label the result "
+            f"{args.scenario!r} (audit F3). Only 'lead' is drivable until the "
+            f"pedestrian harness lands."
+        )
     policies = ["P_pts", "P_cont"] if args.all else [args.policy]
     conditions = list(CONDITIONS) if args.all else [args.condition]
     if None in policies or None in conditions:

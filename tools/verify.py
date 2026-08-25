@@ -71,6 +71,26 @@ def prepare(arr: np.ndarray, w: int, h: int) -> torch.Tensor:
     return torch.nn.functional.interpolate(t, size=(h, w), mode="area")[0]
 
 
+
+def _provenance(model_path=None):
+    """Attribution for result artifacts: which code, which network, when.
+
+    The A10 retrain overwrote models and verdicts in place; without this nothing
+    ties a committed verdict to the network it describes (audit F6/F12)."""
+    import datetime
+    import hashlib
+    import subprocess
+    p = {"timestamp": datetime.datetime.now().astimezone().isoformat(timespec="seconds")}
+    try:
+        p["git_sha"] = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True,
+            cwd=str(J.REPO), timeout=10).stdout.strip() or None
+    except Exception:
+        p["git_sha"] = None
+    if model_path is not None:
+        p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+    return p
+
 def main() -> int:
     import warnings
 
@@ -127,6 +147,12 @@ def main() -> int:
 
     cells = []
     for hi_alt, lo_alt in zip(knots[:-1], knots[1:]):
+        # A6 declares [0.143, 0.000] deg UNCOVERED: no step size meets the blend
+        # tolerance across the horizon discontinuity, so a bound over that blend
+        # quantifies over images that do not represent rendered reality. The cell
+        # is still computed (the ledger keeps its row) but carries the flag, and
+        # a CERTIFIED verdict there must never be counted as coverage (audit F8).
+        family_uncovered = hi_alt <= 0.15 and lo_alt >= -0.001
         t0 = time.time()
         a_imgs = np.load(stored[round(hi_alt, 3)])["images"]
         b_imgs = np.load(stored[round(lo_alt, 3)])["images"]
@@ -156,6 +182,7 @@ def main() -> int:
         )
         cells.append(
             {
+                **({"family_uncovered": True} if family_uncovered else {}),
                 "from_deg": hi_alt,
                 "to_deg": lo_alt,
                 "worst_bound_mps2": round(worst_lb, 4),
@@ -176,9 +203,13 @@ def main() -> int:
             flush=True,
         )
 
+    _prov = _provenance(str(J.REPO / "results" / "models" /
+                            f"{args.policy}_{args.policy_scenario}.pt"))
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
+        "model_sha256": _prov.get("model_sha256"),
+        "provenance": _prov,
         "property": args.property,
         "method": args.method,
         "threshold_mps2": round(threshold, 4),

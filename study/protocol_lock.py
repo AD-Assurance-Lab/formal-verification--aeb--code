@@ -39,16 +39,31 @@ def digest(frozen: str) -> str:
     return hashlib.sha256("\n".join(lines).strip().encode()).hexdigest()
 
 
+def amendment_hashes(amendments_text: str) -> list[str]:
+    """One digest per '### A<n>' block, in order.
+
+    Amendments are load-bearing (the certified sub-interval knots live only in A6,
+    the walker head start only in A9), and "append, never edit" was previously a
+    sentence rather than a check: the lock hashed only the frozen prefix, so any
+    amendment could be rewritten wholesale and the lock stayed green. Hashing each
+    block pins them: an edit to a recorded amendment fails the check; appending a
+    new one is the only change that passes."""
+    starts = [m.start() for m in AMENDMENT_ENTRY.finditer(amendments_text)]
+    blocks = [amendments_text[a:b] for a, b in zip(starts, starts[1:] + [len(amendments_text)])]
+    return [digest(b) for b in blocks]
+
+
 def read_lock() -> dict:
     if not LOCK.exists():
         raise SystemExit("study/protocol.lock is missing. The protocol was never locked.")
     return json.loads(LOCK.read_text())
 
 
-def write_lock(sha: str, amendments: int, note: str) -> None:
+def write_lock(sha: str, amendments: int, note: str, hashes: list[str]) -> None:
     LOCK.write_text(
         json.dumps(
-            {"sha256": sha, "amendments": amendments, "note": note},
+            {"sha256": sha, "amendments": amendments,
+             "amendment_hashes": hashes, "note": note},
             indent=2,
         )
         + "\n"
@@ -92,31 +107,58 @@ def main() -> int:
     text = PROTOCOL.read_text()
     frozen, amendments_text = split_protocol(text)
     sha = digest(frozen)
-    count = len(AMENDMENT_ENTRY.findall(amendments_text))
+    hashes = amendment_hashes(amendments_text)
+    count = len(hashes)
     lock = read_lock()
+    recorded = lock.get("amendment_hashes", [])
 
     unchanged = sha == lock["sha256"]
-    new_amendment = count > lock["amendments"]
+    # A recorded amendment must never change: compare pairwise, not by count.
+    edited = [f"A{i + 1}" for i, (h, r) in enumerate(zip(hashes, recorded)) if h != r]
+    truncated = count < len(recorded)
+    appended = count > len(recorded)
 
     if args.accept:
-        if unchanged:
+        if edited or truncated:
+            print(
+                "REFUSED. Recorded amendments were edited or removed: "
+                + (", ".join(edited) or "count shrank")
+                + "\nAmendments are append-only. Restore them, then append a new entry.",
+                file=sys.stderr,
+            )
+            return 2
+        if unchanged and not appended:
             print("Protocol unchanged. Nothing to re-lock.")
             return 0
-        if not new_amendment:
+        if not unchanged and not appended:
             print(
-                "REFUSED. The protocol changed but no new amendment was appended.\n"
-                f"  amendments recorded: {lock['amendments']}, found: {count}\n"
+                "REFUSED. The frozen text changed but no new amendment was appended\n"
+                f"  amendments recorded: {len(recorded)}, found: {count}\n"
                 "Append an '### A<n>' entry under '## Amendments' saying what changed\n"
                 "and why, then run --accept again.",
                 file=sys.stderr,
             )
             return 2
-        write_lock(sha, count, f"re-locked at amendment A{count}")
-        print(f"Re-locked at amendment A{count}.")
+        write_lock(sha, count, f"re-locked at amendment A{count}", hashes)
+        print(f"Re-locked at amendment A{count} ({count - len(recorded)} new "
+              f"amendment(s) recorded).")
         return 0
 
+    if edited or truncated:
+        print(
+            "AMENDMENT TAMPERING. Recorded amendments changed: "
+            + (", ".join(edited) or "count shrank")
+            + "\nAmendments are append-only; a recorded entry may never be edited.",
+            file=sys.stderr,
+        )
+        return 1
+
     if unchanged:
-        print(f"Protocol locked and intact ({sha[:12]}, {count} amendments).")
+        msg = f"Protocol locked and intact ({sha[:12]}, {count} amendments)."
+        if appended:
+            msg += (f"\n  NOTE: {count - len(recorded)} amendment(s) appended since "
+                    f"the last --accept; run --accept to record their hashes.")
+        print(msg)
         if not args.quiet:
             print_ledger(frozen)
         return 0
@@ -127,7 +169,7 @@ def main() -> int:
         f"  current: {sha[:12]}\n",
         file=sys.stderr,
     )
-    if new_amendment:
+    if appended:
         print(
             "An amendment is present. If the change is intended, run:\n"
             "  python -m study.protocol_lock --accept",

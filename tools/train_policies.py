@@ -206,8 +206,15 @@ def main() -> int:
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
+    # Seed every RNG in use: weight init and torch.randperm were nondeterministic,
+    # so "retrain, re-verify, re-drive" (A10) could not be reproduced (audit F12).
+    import random as _random
+    torch.manual_seed(0)
+    _random.seed(0)
+    np.random.seed(0)
     MODELS.mkdir(parents=True, exist_ok=True)
-    report = {"input": [args.input_w, args.input_h], "device": dev, "policies": {}}
+    report = {"input": [args.input_w, args.input_h], "device": dev, "seed": 0,
+              "policies": {}}
 
     raw = [
         load(args.scenario, knots, args.input_w, args.input_h)
