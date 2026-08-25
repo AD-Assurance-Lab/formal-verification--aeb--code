@@ -1,6 +1,6 @@
 {
   "sha256": "a80d8c8dd4580d680a48137183ce083c533c3957f5acdc3785886e8bc39c3160",
-  "amendments": 10,
+  "amendments": 11,
   "amendment_hashes": [
     "67a6452abd173d92b7f125d6ba354f8e456e595b47fda2e6b1a5218112b18532",
     "0856ce792f00c70f4b5d1238cb6cf24fd7e09637672fb96be2aeb47efdc9d5d9",
@@ -11,7 +11,8 @@
     "f8a2e6986d23bc9046ad80b0796aa7cc8f12af5feef2a383fd18beb2ff4a35f7",
     "97362d6f301efc97c9c17d32bef4f7f0c216305fdae42127689c244aba83ea6d",
     "a1321f98a445762fd084226482cf8cea30f8c2c78a794140b64a06ab153af0df",
-    "c6161b227423af8cdea57d6dc126ab023d5434f0e1b1139d756172f6b02a8cf4"
+    "c6161b227423af8cdea57d6dc126ab023d5434f0e1b1139d756172f6b02a8cf4",
+    "ba4f7147eff66be54d20caf93a4e2e50bf8b91f09ea956783c7aaf363f0d6d6c"
   ],
-  "note": "re-locked at amendment A10"
+  "note": "re-locked at amendment A11"
 }

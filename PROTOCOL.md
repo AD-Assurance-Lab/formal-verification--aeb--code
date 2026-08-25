@@ -588,3 +588,37 @@ the decision. Retrain, re-verify, re-drive.
 was the only thing that could detect that the policy was not solving the task at all, and
 a study that verified only "does it brake in time" would have reported a clean result
 about a position detector.
+
+### A11. Property S certifies the brake DECISION threshold, not a_max, and the composition still closes
+
+Section 7 states property S as "the certified lower bound on commanded deceleration is
+at least `a_max`". The implementation (`tools/verify.py`, since M6) certifies against
+the brake decision threshold instead: `a_max * 0.5`, the same latch threshold
+`tools/run_policy.py` drives with. Every committed verdict in `verify_*.json` is a
+certificate of that property. This amendment records the substitution rather than
+leaving it as drift between the frozen text and the instrument; a 2026-08-25 audit
+surfaced it as an unrecorded spec change.
+
+**Why the certified property is the right one.** The closed loop latches: when the
+commanded deceleration crosses the decision threshold, braking is commanded at full
+authority and is never withdrawn (section 1). So the network's continuous output only
+ever answers one question — brake or not yet — and the deceleration the vehicle then
+achieves is the measured `a_max` of the platform, not the network's output value.
+Requiring the certified lower bound to clear `a_max` itself would demand the network
+COMMAND a number the vehicle supplies physically, a property the closed loop never
+uses. The stopping-distance composition in section 7 closes exactly as written: latch
+inside `r_req` at full authority is what `r_req` was derived from.
+
+**What is given up.** A certificate at the latch threshold says braking WILL be
+commanded, not that the commanded magnitude is calibrated. That is the honest
+property for a latching controller, and it is the one the witness drives tested:
+10/11 and 9/11 agreement are agreements about this property.
+
+**The threshold is not tuned.** 0.5 was set in M2 with the latch design, before any
+policy existed (`run_policy.py`: the observed command distribution is bimodal, and a
+0.5 m/s^2 threshold latched on noise at 375 ft). It is the same constant for both
+policies and both properties' harnesses, and property A's 0.25 g limit is unchanged —
+it comes from the standard.
+
+Nothing about the cells, the expectations, or any committed verdict changes; this
+records what the committed verdicts already mean.

@@ -1,9 +1,16 @@
 # formal-verification--aeb--code
 
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](tools/)
+[![CARLA 0.9.16](https://img.shields.io/badge/CARLA-0.9.16-orange.svg)](https://carla.org)
+[![Verifier: α-CROWN](https://img.shields.io/badge/Verifier-%CE%B1--CROWN%20%2B%20BaB-8A2BE2.svg)](https://github.com/Verified-Intelligence/auto_LiRPA)
+
 Formal verification of automatic emergency braking under degraded visibility.
 
-**Owner:** Zach. **Status:** new, empty. **First milestone:** demo at the automotive
-technology expo, Novi, October 2026.
+**Owner:** Zach. **Status:** Iteration 1 complete on the stopped-lead-vehicle scenario
+(see The result, below); pedestrian and trench-plate cells are captured or specified
+but not yet driven. **First milestone:** demo at the automotive technology expo, Novi,
+October 2026.
 
 ## What this is for
 
@@ -17,12 +24,12 @@ The commercial artifact is one sentence:
 
 ## Why AEB, and why first
 
-1. **Regulatory anchor with a date.** US rulemaking mandates AEB including pedestrian
-   detection in darkness for light vehicles, and Euro NCAP already scores night pedestrian
-   AEB. **Verify the rule number, scope and compliance date against the source before this
-   appears in any deck or proposal.** It has not been checked here. Also settle the vehicle
-   class question: the light-vehicle rule may not cover truck platforms, and heavy-vehicle
-   AEB is separate rulemaking.
+1. **Regulatory anchor with a date.** FMVSS No. 127 (final rule, 89 FR 39686, May 9,
+   2024, docket NHTSA-2023-0021) mandates AEB including pedestrian detection in darkness
+   for light vehicles, compliance 1 September 2029 (small-volume 2030); Euro NCAP already
+   scores night pedestrian AEB. Verified against the published rule 2026-08-25. The
+   light-vehicle rule does not cover truck platforms; heavy-vehicle AEB is separate
+   rulemaking.
 2. **We already have the hard half.** The steering study established that night and shadows
    break a perception model that is fine in clear weather. That is exactly the condition the
    regulation targets.
@@ -92,11 +99,16 @@ python tools/probe_memory.py --help   # why a map is or is not usable on this ha
 ## The result
 
 `docs/STUDY_REPORT.md` is the complete methodology and results in one file. The one-line
-version: a policy that passes both FMVSS 127 test points 10/10 fails 0/10 at three dusk
-illuminations between them; the certificate named those illuminations without simulating,
-and the verdicts were committed to version control before any vehicle moved.
+version: a policy that passes both endpoint lighting conditions 10/10 fails 0/10 at three
+dusk illuminations between them; the certificate named those illuminations without
+simulating, and the verdicts were committed to version control before any vehicle moved
+(`python -m study.ledger --check-order` verifies that ordering against git).
 
-Figure: `docs/figures/dusk_gap.html`.
+<p align="center">
+  <img src="docs/figures/dusk_gap.png" width="640" alt="Certified bound against illumination, with the two endpoint test conditions marked and the violation between them">
+</p>
+
+Interactive version: `docs/figures/dusk_gap.html`.
 
 ## Layout
 
