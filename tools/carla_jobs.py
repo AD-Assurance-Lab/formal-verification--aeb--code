@@ -716,11 +716,14 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
             gap_ft = separation_ft(ego, lead)
             min_gap_ft = min(min_gap_ft, gap_ft)
             # Trigger on range to the CONFLICT POINT (A7), not the straight-line
-            # walker distance, which includes the lateral offset (audit F4).
+            # walker distance, which includes the lateral offset (audit F4). Range is
+            # from the FRONT BUMPER, as the captures and labels measure it: without
+            # the extent subtraction the trigger fires ~2.4 m late and the "perfect"
+            # oracle contacts at -1.9 ft on every rep (measured 2026-08-25).
             loc_now = ego.get_transform().location
             conflict_range_m = math.hypot(
                 tf_conflict.location.x - loc_now.x, tf_conflict.location.y - loc_now.y
-            )
+            ) - ego.bounding_box.extent.x
             if not braking and conflict_range_m <= trigger_m:
                 braking = True
                 v_at_brake = speed_of(ego)
@@ -952,11 +955,14 @@ def _approach_pedestrian(world, site, speed_mph, trigger_m, gap_m=120.0,
                     released = True
 
             # Trigger on range to the CONFLICT POINT (A7), not the straight-line
-            # walker distance, which includes the lateral offset (audit F4).
+            # walker distance, which includes the lateral offset (audit F4). Range is
+            # from the FRONT BUMPER, as the captures and labels measure it: without
+            # the extent subtraction the trigger fires ~2.4 m late and the "perfect"
+            # oracle contacts at -1.9 ft on every rep (measured 2026-08-25).
             loc_now = ego.get_transform().location
             conflict_range_m = math.hypot(
                 tf_conflict.location.x - loc_now.x, tf_conflict.location.y - loc_now.y
-            )
+            ) - ego.bounding_box.extent.x
             if not braking and conflict_range_m <= trigger_m:
                 braking = True
             if braking:
