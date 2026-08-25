@@ -1,0 +1,131 @@
+{
+  "policy": "P_cont",
+  "scenario": "ped",
+  "decision_threshold_mps2": 4.257,
+  "poses_used": 20,
+  "verdict": "PASS",
+  "worst_as_fraction_of_threshold": 0.3103,
+  "sub_intervals": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 39.047,
+      "midpoint_deg": 49.523,
+      "max_abs_diff_mps2": 1.1353,
+      "mean_abs_diff_mps2": 0.1608,
+      "as_fraction_of_threshold": 0.2667
+    },
+    {
+      "from_deg": 39.047,
+      "to_deg": 25.899,
+      "midpoint_deg": 32.473,
+      "max_abs_diff_mps2": 1.1233,
+      "mean_abs_diff_mps2": 0.1819,
+      "as_fraction_of_threshold": 0.2639
+    },
+    {
+      "from_deg": 25.899,
+      "to_deg": 16.668,
+      "midpoint_deg": 21.284,
+      "max_abs_diff_mps2": 1.2868,
+      "mean_abs_diff_mps2": 0.2065,
+      "as_fraction_of_threshold": 0.3023
+    },
+    {
+      "from_deg": 16.668,
+      "to_deg": 9.6,
+      "midpoint_deg": 13.134,
+      "max_abs_diff_mps2": 0.5976,
+      "mean_abs_diff_mps2": 0.136,
+      "as_fraction_of_threshold": 0.1404
+    },
+    {
+      "from_deg": 9.6,
+      "to_deg": 5.972,
+      "midpoint_deg": 7.786,
+      "max_abs_diff_mps2": 1.3209,
+      "mean_abs_diff_mps2": 0.4169,
+      "as_fraction_of_threshold": 0.3103
+    },
+    {
+      "from_deg": 5.972,
+      "to_deg": 4.617,
+      "midpoint_deg": 5.295,
+      "max_abs_diff_mps2": 0.4614,
+      "mean_abs_diff_mps2": 0.1425,
+      "as_fraction_of_threshold": 0.1084
+    },
+    {
+      "from_deg": 4.617,
+      "to_deg": 4.117,
+      "midpoint_deg": 4.367,
+      "max_abs_diff_mps2": 0.5312,
+      "mean_abs_diff_mps2": 0.1321,
+      "as_fraction_of_threshold": 0.1248
+    },
+    {
+      "from_deg": 4.117,
+      "to_deg": 2.26,
+      "midpoint_deg": 3.188,
+      "max_abs_diff_mps2": 0.3507,
+      "mean_abs_diff_mps2": 0.1037,
+      "as_fraction_of_threshold": 0.0824
+    },
+    {
+      "from_deg": 2.26,
+      "to_deg": 1.568,
+      "midpoint_deg": 1.914,
+      "max_abs_diff_mps2": 0.4104,
+      "mean_abs_diff_mps2": 0.1156,
+      "as_fraction_of_threshold": 0.0964
+    },
+    {
+      "from_deg": 1.568,
+      "to_deg": 0.934,
+      "midpoint_deg": 1.251,
+      "max_abs_diff_mps2": 0.4384,
+      "mean_abs_diff_mps2": 0.1051,
+      "as_fraction_of_threshold": 0.103
+    },
+    {
+      "from_deg": 0.934,
+      "to_deg": 0.36,
+      "midpoint_deg": 0.647,
+      "max_abs_diff_mps2": 0.2808,
+      "mean_abs_diff_mps2": 0.1201,
+      "as_fraction_of_threshold": 0.066
+    },
+    {
+      "from_deg": 0.36,
+      "to_deg": 0.0,
+      "midpoint_deg": 0.18,
+      "max_abs_diff_mps2": 1.1753,
+      "mean_abs_diff_mps2": 0.2614,
+      "as_fraction_of_threshold": 0.2761
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -0.961,
+      "midpoint_deg": -0.48,
+      "max_abs_diff_mps2": 0.682,
+      "mean_abs_diff_mps2": 0.1367,
+      "as_fraction_of_threshold": 0.1602
+    },
+    {
+      "from_deg": -0.961,
+      "to_deg": -29.554,
+      "midpoint_deg": -15.257,
+      "max_abs_diff_mps2": 0.9054,
+      "mean_abs_diff_mps2": 0.2167,
+      "as_fraction_of_threshold": 0.2127
+    },
+    {
+      "from_deg": -29.554,
+      "to_deg": -30.0,
+      "midpoint_deg": -29.777,
+      "max_abs_diff_mps2": 0.5117,
+      "mean_abs_diff_mps2": 0.0987,
+      "as_fraction_of_threshold": 0.1202
+    }
+  ],
+  "note": "A blend differs from a render by this much in POLICY OUTPUT. Expressed against the decision threshold because a difference only matters if it can move the brake decision. At or above 1.0 the family's interior can flip an outcome the certificate quantifies over, and the interval is not usable as declared."
+}
