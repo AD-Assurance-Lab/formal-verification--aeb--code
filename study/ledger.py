@@ -118,7 +118,10 @@ def check_order() -> list[str]:
                             f"record")
             continue
         if not w_rel:
-            problems.append(f"cell {cid}: witness recorded but no witness artifact")
+            if cell.get("witness") is not None:
+                problems.append(f"cell {cid}: witness recorded but no witness artifact")
+            # A committed verdict awaiting its drive is the blind protocol working,
+            # not a problem: the verdict sits on record before CARLA is available.
             continue
         w_path = REPO / w_rel
         if not w_path.exists():
