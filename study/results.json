@@ -27,7 +27,7 @@
     },
     "M6": {
       "state": "done",
-      "note": "both properties, both policies, verdicts committed before driving. S: P_pts 6/11, P_cont 8/11. A: P_pts 6/11, P_cont 8/11"
+      "note": "lead: both properties, both policies, committed before driving (S 6/11, 8/11). ped: S committed before driving -- P_pts 5/15, P_cont 14/15 covered; A: P_cont 3/15, P_pts queued on GPU availability"
     },
     "M7": {
       "state": "done",
@@ -41,10 +41,12 @@
   "cells": {
     "1": {
       "endpoints": "PASS both",
-      "fv": null,
+      "fv": "FALSIFIED",
       "witness": null,
-      "width": null,
-      "note": "pedestrian policy not trained yet (STUDY_REPORT); scenario captured and validated"
+      "width": 25.539,
+      "width_note": "contiguous falsified band +25.899 to +0.360 deg over the covered sub-intervals; the uncoverable [0.36, 0.00] sliver is excluded from the width as it is from the coverage claim (F2/F3)",
+      "artifact": "results/carla/verify_P_pts_ped.json",
+      "note": "FALSIFIED across 25.5 deg of dusk between the endpoints; certified only at the extremes. Witness drives pending CARLA handback."
     },
     "2": {
       "endpoints": "PASS both",
@@ -58,10 +60,11 @@
     },
     "3": {
       "endpoints": "PASS both",
-      "fv": null,
+      "fv": "CERTIFIED",
       "witness": null,
       "width": null,
-      "note": "pedestrian policy not trained yet (STUDY_REPORT); scenario captured and validated"
+      "artifact": "results/carla/verify_P_cont_ped.json",
+      "note": "certified in ALL 14 covered sub-intervals; the only falsification is the declared-uncovered horizon sliver. Witness drives pending CARLA handback."
     },
     "4": {
       "endpoints": "PASS both",

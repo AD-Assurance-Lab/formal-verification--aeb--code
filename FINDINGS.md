@@ -6,6 +6,31 @@ here, never inside the protocol.
 
 ---
 
+## F4 — 2026-08-25, Iteration 2 verdicts: the dusk gap reappears for the pedestrian, 25.5 degrees wide
+
+Committed at `ea1700c` BEFORE any witness drive (CARLA is lent out; the drives are
+provably later). Property S over the 15 RGB sub-intervals:
+
+- **Cell 1 (`P_pts_ped`): FALSIFIED**, as pre-registered — and the shape is stark: a
+  single CONTIGUOUS falsified band from +25.899 to +0.360 deg, 25.5 degrees of dusk
+  between the regulatory endpoints, certified only at the extremes (60 to 25.9 above,
+  0 to −30 below). The lead campaign's falsified band was 10.8 deg; sampling only the
+  test points costs the pedestrian hazard more than twice the axis.
+- **Cell 3 (`P_cont_ped`): CERTIFIED** in every covered sub-interval, as
+  pre-registered; the only falsification is the declared-uncovered horizon sliver.
+  Cleaner than the lead campaign (no shoulder caveat).
+- **Property A, `P_cont_ped`: 3/15** — the section 9 "sleeper" is live: the
+  continuum-trained pedestrian policy cannot be certified quiet on an empty road
+  across most of the axis, despite training with the A10 no-target control. Whether
+  that surfaces as premature braking in the witness drives is exactly what M7 will
+  show. `P_pts`'s property-A sweep is queued on GPU availability (no ordering
+  constraint; property A has no witness drive).
+
+M7 remains: drive the witnesses at each sub-interval midpoint once CARLA is handed
+back (`tools/drive_witness.py --policy P_pts --scenario ped`, then P_cont).
+
+---
+
 ## F3 — 2026-08-25, Iteration 2: standoff is measured AT REST, recorded before the re-run
 
 **Written before any re-run, per PROTOCOL section 8.** The first ped M4 sweep returned
