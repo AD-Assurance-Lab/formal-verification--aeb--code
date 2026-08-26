@@ -1,0 +1,297 @@
+{
+  "policy": "P_pts",
+  "scenario": "ped",
+  "model_sha256": "69576d9ca7380e0f4d92352006acd40f6b6d3c47fe1140730a598b0382a698e5",
+  "provenance": {
+    "timestamp": "2026-08-25T19:31:42-04:00",
+    "git_sha": "968253e2725748a53ba1e4acd5e667ea28e25295",
+    "model_sha256": "69576d9ca7380e0f4d92352006acd40f6b6d3c47fe1140730a598b0382a698e5"
+  },
+  "property": "S",
+  "method": "alpha-CROWN",
+  "threshold_mps2": 4.2566,
+  "r_req_m": 10.571,
+  "poses_inside_r_req": 15,
+  "cells": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 39.047,
+      "worst_bound_mps2": 6.2858,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.4767,
+      "verdict": "CERTIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 62.3
+    },
+    {
+      "from_deg": 39.047,
+      "to_deg": 25.899,
+      "worst_bound_mps2": 4.6554,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.0937,
+      "verdict": "CERTIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 62.0
+    },
+    {
+      "from_deg": 25.899,
+      "to_deg": 16.668,
+      "worst_bound_mps2": 3.0667,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.7205,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 49.3
+    },
+    {
+      "from_deg": 16.668,
+      "to_deg": 9.6,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 101,
+      "witness_range_m": 3.392,
+      "seconds": 66.0
+    },
+    {
+      "from_deg": 9.6,
+      "to_deg": 5.972,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 101,
+      "witness_range_m": 3.392,
+      "seconds": 58.8
+    },
+    {
+      "from_deg": 5.972,
+      "to_deg": 4.617,
+      "worst_bound_mps2": 2.6188,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.6152,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 65.9
+    },
+    {
+      "from_deg": 4.617,
+      "to_deg": 4.117,
+      "worst_bound_mps2": 2.3924,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5621,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 60.3
+    },
+    {
+      "from_deg": 4.117,
+      "to_deg": 2.26,
+      "worst_bound_mps2": 0.8921,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.2096,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 69.6
+    },
+    {
+      "from_deg": 2.26,
+      "to_deg": 1.568,
+      "worst_bound_mps2": 0.505,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.1186,
+      "verdict": "FALSIFIED",
+      "witness_pose": 94,
+      "witness_range_m": 7.304,
+      "seconds": 74.3
+    },
+    {
+      "from_deg": 1.568,
+      "to_deg": 0.934,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.098,
+      "seconds": 75.7
+    },
+    {
+      "from_deg": 0.934,
+      "to_deg": 0.36,
+      "worst_bound_mps2": -0.0448,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0105,
+      "verdict": "FALSIFIED",
+      "witness_pose": 91,
+      "witness_range_m": 8.98,
+      "seconds": 86.4
+    },
+    {
+      "family_uncovered": true,
+      "from_deg": 0.36,
+      "to_deg": 0.0,
+      "worst_bound_mps2": -0.2082,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0489,
+      "verdict": "FALSIFIED",
+      "witness_pose": 90,
+      "witness_range_m": 9.539,
+      "seconds": 83.0
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -0.961,
+      "worst_bound_mps2": 6.771,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.5907,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.098,
+      "seconds": 66.6
+    },
+    {
+      "from_deg": -0.961,
+      "to_deg": -29.554,
+      "worst_bound_mps2": 5.7993,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.3624,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.098,
+      "seconds": 67.5
+    },
+    {
+      "from_deg": -29.554,
+      "to_deg": -30.0,
+      "worst_bound_mps2": 6.9547,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 1.6339,
+      "verdict": "CERTIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.098,
+      "seconds": 65.2
+    }
+  ],
+  "falsified": [
+    {
+      "from_deg": 25.899,
+      "to_deg": 16.668,
+      "worst_bound_mps2": 3.0667,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.7205,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 49.3
+    },
+    {
+      "from_deg": 16.668,
+      "to_deg": 9.6,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 101,
+      "witness_range_m": 3.392,
+      "seconds": 66.0
+    },
+    {
+      "from_deg": 9.6,
+      "to_deg": 5.972,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 101,
+      "witness_range_m": 3.392,
+      "seconds": 58.8
+    },
+    {
+      "from_deg": 5.972,
+      "to_deg": 4.617,
+      "worst_bound_mps2": 2.6188,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.6152,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 65.9
+    },
+    {
+      "from_deg": 4.617,
+      "to_deg": 4.117,
+      "worst_bound_mps2": 2.3924,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.5621,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 60.3
+    },
+    {
+      "from_deg": 4.117,
+      "to_deg": 2.26,
+      "worst_bound_mps2": 0.8921,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.2096,
+      "verdict": "FALSIFIED",
+      "witness_pose": 100,
+      "witness_range_m": 3.951,
+      "seconds": 69.6
+    },
+    {
+      "from_deg": 2.26,
+      "to_deg": 1.568,
+      "worst_bound_mps2": 0.505,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": 0.1186,
+      "verdict": "FALSIFIED",
+      "witness_pose": 94,
+      "witness_range_m": 7.304,
+      "seconds": 74.3
+    },
+    {
+      "from_deg": 1.568,
+      "to_deg": 0.934,
+      "worst_bound_mps2": -0.0087,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0021,
+      "verdict": "FALSIFIED",
+      "witness_pose": 89,
+      "witness_range_m": 10.098,
+      "seconds": 75.7
+    },
+    {
+      "from_deg": 0.934,
+      "to_deg": 0.36,
+      "worst_bound_mps2": -0.0448,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0105,
+      "verdict": "FALSIFIED",
+      "witness_pose": 91,
+      "witness_range_m": 8.98,
+      "seconds": 86.4
+    },
+    {
+      "family_uncovered": true,
+      "from_deg": 0.36,
+      "to_deg": 0.0,
+      "worst_bound_mps2": -0.2082,
+      "threshold_mps2": 4.2566,
+      "margin_x_threshold": -0.0489,
+      "verdict": "FALSIFIED",
+      "witness_pose": 90,
+      "witness_range_m": 9.539,
+      "seconds": 83.0
+    }
+  ],
+  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. Certified means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
+}
