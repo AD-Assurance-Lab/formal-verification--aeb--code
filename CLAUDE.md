@@ -1,5 +1,11 @@
 # CLAUDE.md - read this before doing anything
 
+
+> **PENDING — CARLA determinism defect.** Read `CARLA_DETERMINISM_PENDING.md`
+> before running or trusting any closed-loop measurement in this repo. Two defects
+> found on 2026-08-28 affect every CARLA study in the lab; the rework is queued
+> behind Town06 and must not be started without talking to Zach.
+
 AEB under degraded visibility. Owner: Zach. Demo target: Novi, October 2026.
 
 ## The protocol is locked. Read it first, and do not edit it.
