@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "map": "Carla/Maps/Town13/Town13",
+  "map": "Carla/Maps/Town01",
   "frames_received": 100,
   "note": "server survived a sensor attach on a large map with the hero tag"
 }

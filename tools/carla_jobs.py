@@ -1360,6 +1360,20 @@ def main() -> int:
         return 0
 
     todo = ORDER if args.all else [args.job]
+
+    # DETERMINISM PREFLIGHT, before any job writes a result file. The flags that matter
+    # (-notexturestreaming, -quality-level) are launch-time and invisible over RPC, so a
+    # server started by hand answers perfectly normally and quietly makes every
+    # measurement noisier. Checking the lock and the server's real /proc argv here means a
+    # misconfigured run cannot produce a result at all, rather than producing a plausible
+    # one. Launch with tools/carla_launch.sh.
+    try:
+        require_deterministic()
+    except SystemExit as exc:
+        print(str(exc))
+        print("\n  Launch the server with tools/carla_launch.sh and re-run.")
+        return 1
+
     for name in todo:
         print(f"\n=== {name}: {JOBS[name][1]}")
         try:
