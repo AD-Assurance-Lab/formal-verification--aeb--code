@@ -622,3 +622,47 @@ it comes from the standard.
 
 Nothing about the cells, the expectations, or any committed verdict changes; this
 records what the committed verdicts already mean.
+
+### A12. The simulator harness was wrong; every measured artifact is rebuilt
+
+**Date:** 2026-08-30. **Requested by:** Zach, after the same correction in the steering study.
+
+**What changed.** Nothing in the study DESIGN. The sections above are untouched: the
+scenarios, the properties, the ledger, the gates and the primitives' definitions all
+stand. What changed is the instrument, and every artifact this study produced by
+*measuring* is discarded and rebuilt: the primitives, both policies, the capture campaign,
+the verification verdicts, and the witness drives.
+
+**Why.** Two defects in the CARLA harness, measured open loop in
+`formal-verification--steering--code` (T06-F22) and now packaged as `carla-determinism`:
+
+1. **`apply_control` is fire-and-forget and races `world.tick()`.** Synchronous mode
+   synchronises the tick, not the command queue feeding it. The race is invisible while a
+   command is unchanged, so it bites only on a step where the command CHANGES -- which for
+   a braking policy is every step that matters. Measured with the feedback cut and an
+   identical scripted command sequence, three repetitions finished 60 m apart. This study
+   used the raw call at 16 sites.
+2. **UE4 streams texture mips asynchronously**, so which mip is resident when a frame
+   renders depends on load timing rather than on world state. `-notexturestreaming` cut the
+   steering noise the renderer injects by 168x. This study never passed the flag.
+
+Rule D-11 follows: data captured under a violating harness is not reusable. **It bites
+hardest here of the three studies.** This study's central claim is a falsified band
+BETWEEN two rendered illuminations, and the texture-streaming defect changes precisely the
+frames that claim is computed from.
+
+**What is NOT affected.** `PROTOCOL.md` above this line, and therefore the lock. The map
+survey (M1) is offline geometry and stands. The committed verdicts remain in git history
+at `ea1700c` and are not rewritten -- they are superseded, and the comparison between old
+and rebuilt numbers is itself worth recording.
+
+**The blind ordering survives, and must be preserved.** M7's witness drives for the
+pedestrian cells had not been run, and the lead cells' were. Both are discarded. The
+rebuilt sequence is unchanged: verify, commit the verdicts, then drive. A rebuilt verdict
+is a prediction only if it is committed before its rebuilt witness.
+
+**What this does not relax.** Every closed-loop number remains a rate over repetitions.
+Bit-exact closed-loop replay is unreachable even on the corrected harness
+(`carla-determinism` D-7: a scene where nothing moves still renders ~30 differing pixels
+per frame across repetitions), so the corrections shrink the noise and name its source;
+they do not remove it.
