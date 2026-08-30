@@ -30,6 +30,8 @@ import argparse
 import json
 import math
 import os
+
+import carla_determinism as cd
 import statistics
 import sys
 import time
@@ -67,6 +69,28 @@ def carla_module():
     return carla
 
 
+
+def apply_control(actor, control):
+    """Vehicle/walker command through the acknowledged path (carla-determinism D-2).
+
+    `actor.apply_control()` is fire-and-forget and races `world.tick()`. The race is
+    invisible while a command is unchanged, so it only bites on a step where the command
+    CHANGES -- which for a braking policy is every step that matters.
+    """
+    cd.apply_control(actor, control)
+
+
+def require_deterministic(world=None):
+    """Refuse to measure on a misconfigured simulator (carla-determinism D-1..D-6).
+
+    D-3 and D-5 are LAUNCH flags and invisible over RPC, so this reads the server's real
+    command line from /proc. A server started without them answers normally and quietly
+    produces noisier results -- which is exactly how a study fails to notice.
+    """
+    cd.require_deterministic(int(os.environ.get("CARLA_PORT", "2000")), world,
+                             fixed_dt=FIXED_DT, deterministic_control=True)
+
+
 def connect(load_map: str | None = MAP, rendering: bool = True):
     """Connect, load the map, and put the world in fixed-step synchronous mode.
 
@@ -90,9 +114,22 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     settings = world.get_settings()
     settings.synchronous_mode = True
     settings.fixed_delta_seconds = FIXED_DT
+    # SUBSTEPPING MADE EXPLICIT (carla-determinism D-1). CARLA's defaults
+    # (10 x 0.01 s = 0.10 s) do cover FIXED_DT = 0.05, so nothing was broken here -- but
+    # relying on a default for the property "physics advances the whole step" is how the
+    # steering study lost measurements when its dt changed. State it.
+    settings.substepping = True
+    settings.max_substeps = 16
+    settings.max_substep_delta_time = FIXED_DT / 16
     settings.no_rendering_mode = not rendering
     world.apply_settings(settings)
     world.tick()  # the settings take effect on the next tick, not on the call
+
+    # D-2: register the client so apply_control() below issues an ACKNOWLEDGED command.
+    # Fire-and-forget apply_control races world.tick(); synchronous mode synchronises the
+    # tick, not the command queue feeding it. Measured in the steering study: three
+    # repetitions of one identical scripted command sequence finished 60 m apart.
+    cd.bind_client(client)
     left = clear_actors(world)
     if left:
         print(f"  cleared {left} actors left by an earlier run", flush=True)
@@ -295,11 +332,11 @@ def reset_vehicle(world, actor, transform, settle_ticks: int = SETTLE_TICKS):
     carla = carla_module()
     actor.set_target_velocity(carla.Vector3D(0, 0, 0))
     actor.set_target_angular_velocity(carla.Vector3D(0, 0, 0))
-    actor.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+    apply_control(actor, carla.VehicleControl(throttle=0.0, brake=1.0))
     actor.set_transform(transform)
     for _ in range(settle_ticks):
         world.tick()
-    actor.apply_control(carla.VehicleControl(throttle=0.0, brake=0.0))
+    apply_control(actor, carla.VehicleControl(throttle=0.0, brake=0.0))
     return actor
 
 
@@ -532,7 +569,7 @@ def _brake_from(world, ego, spawn, target_mps: float) -> dict:
         err = target_mps - speed_of(ego)
         integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
         cmd = 0.5 * err + 0.5 * integral
-        ego.apply_control(
+        apply_control(ego, 
             carla.VehicleControl(
                 throttle=max(0.0, min(1.0, cmd)),
                 brake=max(0.0, min(1.0, -cmd * 0.2)),
@@ -544,7 +581,7 @@ def _brake_from(world, ego, spawn, target_mps: float) -> dict:
 
     v0 = speed_of(ego)
     start = ego.get_transform().location
-    ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+    apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
 
     t_onset = None
     prev = v0
@@ -654,7 +691,7 @@ def job_contact() -> dict:
         coll = world.spawn_actor(cbp, carla.Transform(), attach_to=ego)
         coll.listen(lambda e: sensor_events.append(e.frame))
         min_gap = 1e9
-        ego.apply_control(carla.VehicleControl(throttle=1.0))
+        apply_control(ego, carla.VehicleControl(throttle=1.0))
         for _ in range(300):
             world.tick()
             min_gap = min(min_gap, separation_ft(ego, target))
@@ -728,12 +765,12 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
                 braking = True
                 v_at_brake = speed_of(ego)
             if braking:
-                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+                apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = target_v - speed_of(ego)
                 integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
                 cmd = 0.5 * err + 0.5 * integral
-                ego.apply_control(
+                apply_control(ego, 
                     carla.VehicleControl(
                         throttle=max(0.0, min(1.0, cmd)),
                         brake=max(0.0, min(1.0, -cmd * 0.2)),
@@ -951,7 +988,7 @@ def _approach_pedestrian(world, site, speed_mph, trigger_m, gap_m=120.0,
                 v = max(speed_of(ego), 0.1)
                 if to_conflict / v <= walk_s:
                     ctrl.speed = ped_speed
-                    ped.apply_control(ctrl)
+                    apply_control(ped, ctrl)
                     released = True
 
             # Trigger on range to the CONFLICT POINT (A7), not the straight-line
@@ -966,12 +1003,12 @@ def _approach_pedestrian(world, site, speed_mph, trigger_m, gap_m=120.0,
             if not braking and conflict_range_m <= trigger_m:
                 braking = True
             if braking:
-                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+                apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = target_v - speed_of(ego)
                 integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
                 cmd = 0.5 * err + 0.5 * integral
-                ego.apply_control(
+                apply_control(ego, 
                     carla.VehicleControl(
                         throttle=max(0.0, min(1.0, cmd)),
                         brake=max(0.0, min(1.0, -cmd * 0.2)),
@@ -1097,7 +1134,7 @@ def job_capture_check() -> dict:
             err = target - speed_of(ego)
             integral = max(-20.0, min(20.0, integral + err * FIXED_DT))
             cmd = 0.5 * err + 0.5 * integral
-            ego.apply_control(
+            apply_control(ego, 
                 carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
             )
             img = grab_frame(world, images)
@@ -1106,7 +1143,7 @@ def job_capture_check() -> dict:
         progress(f"drove past {len(driven)} sample poses")
 
         # 2. Place the ego at each recorded pose and capture again.
-        ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+        apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
         for _ in range(40):
             grab_frame(world, images)
 

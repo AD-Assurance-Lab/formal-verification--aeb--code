@@ -15,3 +15,7 @@
 numpy
 torch
 graphviz
+
+# CARLA determinism rules and preflight, pinned to an exact tag so a rule change cannot
+# arrive silently mid-study. See its RULES.md for D-1..D-11.
+carla-determinism @ git+https://github.com/AD-Assurance-Lab/carla-determinism--simulation--package@v1.0.0

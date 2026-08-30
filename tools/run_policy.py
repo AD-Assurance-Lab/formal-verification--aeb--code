@@ -144,7 +144,7 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
             if scenario == "ped" and not released:
                 if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
                     ped_ctrl.speed = 1.5
-                    lead.apply_control(ped_ctrl)
+                    carla_jobs.apply_control(lead, ped_ctrl)
                     released = True
 
             sep_now = J.separation_ft(ego, lead)
@@ -167,12 +167,12 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                 # a_max inside r_req, so applying a fraction of the demand contradicts
                 # both. Applying demand/a_max meant a demand of 0.5 produced 6 percent
                 # braking and the vehicle coasted into the lead having "braked".
-                ego.apply_control(carla.VehicleControl(throttle=0.0, brake=1.0))
+                carla_jobs.apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = v_target - J.speed_of(ego)
                 integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
                 cmd = 0.5 * err + 0.5 * integral
-                ego.apply_control(
+                carla_jobs.apply_control(ego, 
                     carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
                 )
             if braking and J.speed_of(ego) < 0.1:

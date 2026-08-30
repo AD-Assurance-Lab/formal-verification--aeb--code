@@ -132,7 +132,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
                 )
                 if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
                     ctrl.speed = 1.5
-                    ped.apply_control(ctrl)
+                    carla_jobs.apply_control(ped, ctrl)
                     released = True
 
             if MIN_RANGE_M <= gap_m <= MAX_RANGE_M:
@@ -157,7 +157,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
             err = v_target - J.speed_of(ego)
             integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
             cmd = 0.5 * err + 0.5 * integral
-            ego.apply_control(
+            carla_jobs.apply_control(ego, 
                 carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
             )
             world.tick()

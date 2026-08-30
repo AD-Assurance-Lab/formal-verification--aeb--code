@@ -99,7 +99,7 @@ def calibrate_walker_speed(
     ctrl = carla.WalkerControl()
     ctrl.direction = carla.Vector3D(x=direction[0], y=direction[1], z=0.0)
     ctrl.speed = commanded
-    walker.apply_control(ctrl)
+    carla_jobs.apply_control(walker, ctrl)
     for _ in range(warmup):
         world.tick()
     p0 = walker.get_transform().location
@@ -108,7 +108,7 @@ def calibrate_walker_speed(
     p1 = walker.get_transform().location
     achieved = math.hypot(p1.x - p0.x, p1.y - p0.y) / (ticks * J.FIXED_DT)
     ctrl.speed = 0.0
-    walker.apply_control(ctrl)
+    carla_jobs.apply_control(walker, ctrl)
     world.tick()
     return achieved, (commanded / achieved if achieved > 0.01 else 1.0)
 
