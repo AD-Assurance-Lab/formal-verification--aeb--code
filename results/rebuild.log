@@ -1,0 +1,3 @@
+[2026-08-30 09:40:24] START sites
+[2026-08-30 09:50:25] DONE  sites rc=1 verdict=ERROR
+[2026-08-30 09:50:25] stopping: sites did not pass

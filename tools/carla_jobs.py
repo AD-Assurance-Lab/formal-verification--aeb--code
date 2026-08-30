@@ -130,6 +130,29 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     # tick, not the command queue feeding it. Measured in the steering study: three
     # repetitions of one identical scripted command sequence finished 60 m apart.
     cd.bind_client(client)
+
+    # SESSION HYGIENE AT THE CHOKE POINT (carla-determinism >= 1.1, RULES.md section 5).
+    #
+    # Every AEB measurement passes through connect(), so the checks live here rather than
+    # in each job. The steering study learned this the expensive way: R-SIM-1 lived in
+    # prose and was re-typed into each driver script, so one capture driver restarted per
+    # capture while its sibling restarted NOT AT ALL and took all 24 verification captures
+    # behind a certificate in a single server session. Nothing downstream could see it.
+    #
+    #   install_cleanup_handlers  SIGTERM skips Python cleanup, so a killed job leaves its
+    #                             vehicle and camera alive and the NEXT job renders a road
+    #                             with a parked car on it.
+    #   require_fresh_server      a server that has been up for hours keeps answering and
+    #                             stops advancing physics correctly. R-SIM-1 as a check.
+    cd.install_cleanup_handlers()
+    _age = cd.require_fresh_server(int(os.environ.get("CARLA_PORT", "2000")))
+    if _age is not None:
+        print(f"  server age {_age / 60:.0f} min (R-SIM-1 ok)", flush=True)
+
+    # D-1..D-6 asserted on EVERY connect, not only in the job runner. It was called from
+    # one place, so any job that connected directly measured without asserting anything.
+    require_deterministic(world)
+
     left = clear_actors(world)
     if left:
         print(f"  cleared {left} actors left by an earlier run", flush=True)

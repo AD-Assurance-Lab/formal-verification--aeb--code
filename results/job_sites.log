@@ -1,0 +1,4 @@
+
+=== sites: photograph candidate straights day and night, settle lighting
+  ERROR: time-out of 600000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:3000
+  wrote results/carla/sites.json
