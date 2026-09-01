@@ -62,3 +62,52 @@ command line from `/proc`, because those are launch flags and invisible over RPC
 ## Order of work
 
 Town06 first, then Town04 steering, then AEB, then the rest. Set by Zach on 2026-08-28.
+
+---
+
+## Also pending: the LAP protocol (added 2026-09-01)
+
+Adopting deterministic control is not the whole of what this repo owes. The steering
+study's `PROTOCOL.md` amendment A-4 changed what a repetition IS, and this repo has not
+adopted it. Zach has said it will.
+
+**A lap is the repetition.** One traversal of all the unique scored road, and it fails if
+any scored span departs. Sections are not repetitions: six sections driven twice is six
+different roads sampled twice, not twelve trials of one experiment. Pooling them produced
+a cell reporting 2/12 = 17% when the SAME section had failed in BOTH passes — a 100%
+failure of every attempt, diluted by five sections that were never in question.
+
+**Three laps, not ten.** On the corrected harness, rep-to-rep verdict disagreement was
+**0 of 48 section-pairs**. Three laps is a REPRODUCIBILITY CHECK, not a sample for
+estimating a rate. The old floor was measured on the broken harness, where single runs
+were wrong about one time in eight — that premise no longer holds.
+
+**Conditional on the harness, and the condition is not optional:** a clean server restart
+before EVERY lap (not before every group of laps — the steering repo's own teacher gate
+was doing 3 restarts for 12 laps until 2026-09-01), a fresh vehicle and camera per lap,
+one process per lap, the determinism preflight green on each fresh server, one client per
+port. Where that is not enforced, enforce it — do not compensate with more laps. A larger
+sample drawn through a harness known to be wrong measures the harness, and it still has
+the shape of a result.
+
+**Report the margin with every verdict**, and **if the laps disagree that is a BUG**, not a
+reason to run more laps. A cell whose laps disagree is void, not uncertain.
+
+**Cells must record the harness they ran under.** D-11 makes data from a violating harness
+unusable, which is enforceable only if the artifact says which harness produced it:
+deterministic control on/off, the package version and RULES digest, `check_lock()`, and the
+server's actual command line read from the running process. See
+`scripts/closed_loop_ledger.py:_determinism_provenance` in the steering repo.
+
+### Unresolved, and it affects the text above this section
+
+This file (and D-7 in the `carla-determinism` package, which is hash-locked) says
+closed-loop numbers remain **rates over at least 10 repetitions**. A-4 supersedes that with
+three laps. The two do not collide on the facts — D-7 measured that rendering never reaches
+bit-identity, which A-4 does not dispute; A-4 disputes the INFERENCE from that to a
+repetition floor, on the grounds that verdict stability rather than frame identity is what
+the floor protected.
+
+Resolving it needs the package's section 4 amendment procedure, and it is lab-wide: this
+repo's already-collected numbers were taken under the ten-repetition reading. Do not change
+either document unilaterally. Flagged for Zach 2026-09-01.
