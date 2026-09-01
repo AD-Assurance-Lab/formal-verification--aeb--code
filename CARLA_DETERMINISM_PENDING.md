@@ -111,3 +111,35 @@ the floor protected.
 Resolving it needs the package's section 4 amendment procedure, and it is lab-wide: this
 repo's already-collected numbers were taken under the ten-repetition reading. Do not change
 either document unilaterally. Flagged for Zach 2026-09-01.
+
+### Adoption checklist — what to port, and from where
+
+Measured in this repo on 2026-09-01: the determinism package is referenced in almost
+nothing here, there is no lap bridging, and `study/ledger.py` (blind order) is present.
+Source for every item is `formal-verification--steering--code`, which is the reference
+implementation.
+
+1. **Bind the client and route every command.** `cd.bind_client`, `cd.require_deterministic`
+   inside the sync-mode helper so no driver can skip it, and `cd.apply_control` at ONE
+   choke point every driving loop calls — see `pipeline/carla_env.py:apply_control`. A raw
+   `vehicle.apply_control()` anywhere else is the defect.
+2. **Launch flags.** `-notexturestreaming -quality-level=Epic`, windowed on `DISPLAY=:0`
+   (Zach watches runs). `scripts/carla_launch.sh`.
+3. **Restart before EVERY lap**, one process per lap, fresh vehicle and camera. Not before
+   every group of laps — the steering repo's own teacher gate was doing 3 restarts for 12
+   laps until this was caught.
+4. **Bridging, if the route crosses road the ODD excludes.** Steer by pure pursuit there
+   and exclude those steps from scoring, in EVERY driving loop. Open routes must not use
+   index arithmetic modulo the route length — see `pipeline/route.py:route_is_closed`.
+5. **Cells record the harness.** `closed_loop_ledger.py:_determinism_provenance` —
+   deterministic control, package version, RULES digest, `check_lock()`, and the server's
+   real command line read from the running process. Unknown is recorded as null, never as
+   false. Without this, D-11 is unenforceable after the fact.
+6. **The blind-order check must RUN.** `study/ledger.py` exists here, but in the steering
+   repo the prune deleted it and nobody noticed for an entire study, because a rule naming
+   a missing command fails the way a passing check looks. Wire it into whatever this repo
+   runs on every commit, and confirm it actually executes.
+7. **Report in LAPS**, with the margin, and treat disagreeing laps as a bug.
+
+None of this is automated across repos. It is a manual port and it is owed; nothing here
+fails if it is skipped, which is exactly why it is written down.
