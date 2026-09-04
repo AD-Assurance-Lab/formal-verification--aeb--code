@@ -38,6 +38,8 @@ import torch
 import torch.nn as nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 from run_policy import load_policy, BRAKE_THRESHOLD_FRACTION  # noqa: E402
 
@@ -114,7 +116,11 @@ def main() -> int:
     )
     args = ap.parse_args()
 
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    # require_cuda, not is_available(): the flag is False while CARLA initialises on
+    # the same device, and TRUE on a card whose kernels the installed torch does not
+    # carry (sm_120 vs an sm_90 build). Both end in a silent CPU run that still prints
+    # numbers. See tools/gpu.py.
+    dev = require_cuda()
     model, w, h = load_policy(args.policy, args.policy_scenario, dev)
     b = json.loads((OUT / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81

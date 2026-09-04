@@ -29,6 +29,8 @@ import torch
 import torch.nn as nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 from expert_law import label_decel  # noqa: E402
 
@@ -208,7 +210,11 @@ def main() -> int:
     ap.add_argument("--lr", type=float, default=1e-3)
     args = ap.parse_args()
 
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    # require_cuda, not is_available(): the flag is False while CARLA initialises on
+    # the same device, and TRUE on a card whose kernels the installed torch does not
+    # carry (sm_120 vs an sm_90 build). Both end in a silent CPU run that still prints
+    # numbers. See tools/gpu.py.
+    dev = require_cuda()
     # Seed every RNG in use: weight init and torch.randperm were nondeterministic,
     # so "retrain, re-verify, re-drive" (A10) could not be reproduced (audit F12).
     import random as _random

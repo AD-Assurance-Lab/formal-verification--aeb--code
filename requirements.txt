@@ -1,19 +1,41 @@
-# Python 3.10, matching the CARLA 0.9.16 API wheel (cp310).
+# DO NOT install this file by hand. Run:
 #
-# auto_LiRPA declares requires-python ~=3.11, but 0.7.2 imports and runs correctly on
-# 3.10 with torch 2.13, verified by actually bounding the student network. The
-# constraint is conservative, so it is bypassed rather than forcing a second
-# interpreter. CARLA also ships cp311 and cp312 wheels if that ever changes.
+#     bash scripts/bootstrap_env.sh          # builds .venv and PROVES it works
 #
-#   pip install --user --no-deps --ignore-requires-python \
+# Python 3.12, CUDA 13.0. Updated 2026-09-04 with the lab desktop migration; the pins
+# match formal-verification--steering--code, whose committed certificates record the
+# stack they actually ran under. This repo has no published bounds of its own yet, so it
+# inherits that environment rather than inventing one.
+#
+#   python 3.12.3   torch 2.13.0+cu130   numpy 1.26.4   auto_LiRPA 0.7.2
+#
+# THE CUDA BUILD MUST MATCH THE CARD'S COMPUTE CAPABILITY. torch 2.5.1+cu121 builds for
+# sm_50..sm_90 and the lab's RTX 5090 is sm_120: torch.cuda.is_available() returns True,
+# get_device_name() answers correctly, and then EVERY kernel dies with "no kernel image is
+# available for execution on the device". Check torch.cuda.get_arch_list() against
+# torch.cuda.get_device_capability(); is_available() cannot tell you. Every tool here now
+# selects its device through tools/gpu.py, which proves the device by operating on a
+# tensor.
+#
+# This file previously said "Python 3.10, matching the CARLA 0.9.16 API wheel (cp310)".
+# CARLA ships cp310, cp311 AND cp312 wheels side by side in
+# $CARLA_ROOT/PythonAPI/carla/dist/ -- the one matching the interpreter must be picked
+# explicitly, and a bare glob takes cp310 first, which pip rejects as unsupported.
+#
+# auto_LiRPA declares requires-python ~=3.11 and is bypassed with
+# --ignore-requires-python. Install it from UPSTREAM GIT with --no-deps: the PyPI release
+# is stuck at 0.3 and fails on modern torch ("cannot import name _set_opset_version"),
+# and without --no-deps pip rewrites torch underneath you. --no-deps then means its own
+# import-time deps are absent, so appdirs, tqdm and graphviz go in separately.
+#
+#   pip install --no-deps --ignore-requires-python \
 #       git+https://github.com/Verified-Intelligence/auto_LiRPA.git
-#   pip install --user --no-deps graphviz
+#   pip install --no-deps appdirs tqdm graphviz
 #
-# Do NOT vendor auto_LiRPA, and do not use the PyPI release: it is stuck at 0.3 and
-# fails on modern torch with "cannot import name _set_opset_version".
+# Do NOT vendor auto_LiRPA.
 
-numpy
-torch
+numpy==1.26.4
+torch==2.13.0        # from https://download.pytorch.org/whl/cu130, not plain PyPI
 graphviz
 
 # CARLA determinism rules and preflight, pinned to an exact tag so a rule change cannot
