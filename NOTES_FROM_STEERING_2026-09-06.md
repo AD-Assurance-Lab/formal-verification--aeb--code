@@ -30,37 +30,92 @@ near the boundary is the kind that can move.**
 draft is shared, not after a reviewer asks whether the results reproduce on current
 hardware. It converts an unexamined assumption into a reproducibility result you can quote.
 
-## 2. Check whether you have more than one driver, and whether they agree
+## 2. The steering drivers disagreed, and the cause turned out to be a MISSING GUARD
 
-The steering repo has two committed drivers — `closed_loop_ledger.py` (writes the scored
-ledger) and `evaluate.py` (used by the sweeps and the selection gate). **They disagree, per
-cell, in both directions, by enough to flip a verdict:**
+**Updated 2026-09-06 after the cause was found.** This started as "two committed drivers
+report different numbers for the same checkpoint, cause unknown":
 
 ```
   same checkpoint, same GPU, same night
-    fog      evaluate.py 1.08 ft   ledger 1.34 ft   (+0.26)
-    low sun  evaluate.py 2.12 ft   ledger 1.30 ft   (-0.82)   gate-failing vs comfortably passing
+    fog      evaluate.py 1.08 ft   ledger 1.34 ft
+    low sun  evaluate.py 2.12 ft   ledger 1.30 ft   gate-failing vs comfortably passing
 ```
 
-Ruled out by measurement: scoring scope (both exclude bridged spans), route, spawn, warmup.
-**Cause still unidentified.** Nothing in that study is invalidated because every comparison
-was kept driver-consistent within itself — but the two families of numbers are not
-interchangeable, and it went unnoticed for the whole study.
+**The cause was six `world.tick()` calls.** `evaluate.py` ticked six times before driving to
+grab a rendered frame for its condition check; the scored ledger did not. Six ticks of extra
+settling moved where warmup ended by about a millimetre, and the closed loop amplified that
+into a different discrete basin. Neither driver was scoring anything wrongly.
 
-**If AEB has a screening driver and a scored driver, run the same checkpoint through both
-and diff.** It is an hour, and finding out later that a gate number and a ledger number were
-never comparable is much worse.
+**The real finding was underneath it.** That rendered-frame check is R-SIM-4 — *"verify the
+rendered condition from a FRAME, every run"* — and it existed **only in the sweep/gate
+driver**. The driver that writes the published ledger never did it. A rule stated as "every
+run" was enforced on the diagnostic path and not the authoritative one, for the whole study,
+and the only visible symptom was two drivers quietly disagreeing.
 
-## 3. A number that survived two measurements still died on the third
+**It cost something real:** one of my overnight conclusions was inverted by it. I reported
+that the paper's "drives fog at 0.98 ft" did not replicate — measured 1.42 ft twelve times —
+and recommended removing the number. On the corrected driver the same checkpoint drives
+0.97/0.97/0.98, and the paper's number was right all along.
 
-`sec_results.tex` in the steering paper quotes a student that "drives fog at 0.98 ft". It
-measured 0.98 twice. On the third measurement, through the scored driver, it drove
-**1.42 ft in twelve of twelve laps** and cleared the margin gate **zero** times.
+**The transferable lesson is not "check your drivers agree". It is: verify each guard on the
+binary that produces the published numbers, not on the study as a whole.** "The study
+enforces R-SIM-4" was true and useless.
 
-That was the fifth single-draw claim in that study to weaken under a sweep. **AEB's
-`docs/STUDY_REPORT.md` and the arXiv draft should be scanned for any number quoted from a
-single run**, especially any that a Limitations or Conclusion sentence rests on. The fix is
-cheap: quote the arm and its interval, not the seed.
+## 2b. AEB's specific exposure, checked 2026-09-06
+
+I looked, so this is about your code and not a generic warning.
+
+**What is fine.** Both illumination call sites settle properly after writing the weather —
+`world.set_weather(wx)` followed by `for _ in range(J.WEATHER_SETTLE_TICKS)` in
+`tools/interval_sweep.py` and `tools/gate_behavioural.py`. The next-tick trap that bit the
+steering study is handled here.
+
+**What is missing.** There is **no frame-level verification anywhere in this repo** —
+no signature check, no assertion that the rendered scene is the illumination that was asked
+for. `grep` for `condition_signature|assert_condition` returns nothing.
+
+**Why that matters more for AEB than it did for steering.** Illumination is not a nuisance
+parameter here, it is *the independent variable*: the headline is a policy that passes both
+FMVSS 127 lighting endpoints and fails between them. The steering failure this guard exists
+to catch (T06-F35) was exactly this shape — sun altitude was swept while the declared
+**exposure** belonged to a different condition, so daylight scenes were rendered through a
+night camera. **Every run completed, every number was plausible, every step count was
+normal.** Nothing downstream could reveal it.
+
+**And there are six entry points that tick the world** (`scenarios.py`, `carla_jobs.py`,
+`run_policy.py`, `drive_witness.py`, `capture_campaign.py`, `probe_memory.py`). The steering
+study had two and they diverged. Six is more surface, not less.
+
+**Cheap, proportionate fix:** record a photometric signature of one rendered frame per
+illumination — mean, sigma, low percentile is enough — and assert it against a reference, or
+at minimum record it in the artifact so a wrong illumination is recoverable after the fact
+instead of invisible. The steering version (`scripts/condition_signature.py`) classified
+24/24 held-out captures correctly and costs one frame.
+
+## 3. Single-draw numbers are the recurring failure, but check your instrument first
+
+Four claims in the steering study weakened once they were swept rather than drawn once:
+
+* a resolution trend (`168x28 6.85 ft` vs `168x56 11.15 ft`) that turned out to span
+  1.47–30.48 and 1.56–41.54 ft over six seeds;
+* KD error figures quoted from the favourable end of a six-seed range;
+* a learning-rate effect that was 6x on six seeds and landed at p = 0.055 on fifteen;
+* a balancing result at n = 6 that needed n = 12 to reach p = 0.012.
+
+**So: scan `docs/STUDY_REPORT.md` and the arXiv draft for any number quoted from a single
+run**, especially one a Limitations or Conclusion sentence rests on. Quote the arm and its
+interval.
+
+**But the cautionary tale here is the opposite one, and it is the more useful half.** I
+reported a fifth such failure overnight — the paper's "drives fog at 0.98 ft" measured
+1.42 ft twelve times, so I recommended removing it. **That was my instrument, not the
+number.** The scored driver was missing the guard described in §2, which put every one of
+those twelve laps in a different basin. On the corrected driver it reads 0.97/0.97/0.98 and
+the paper was right.
+
+**Before concluding that a published number failed to replicate, confirm the thing measuring
+it has not changed.** A disagreement between a new measurement and an old one is a claim
+about *two* instruments, and the new one is not automatically the trustworthy one.
 
 ## 4. Watch your own analysis code as hard as the experiment
 
