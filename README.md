@@ -132,6 +132,7 @@ Interactive version: `docs/figures/dusk_gap.html`.
 | `PROTOCOL.md` | the study design, frozen. Start here |
 | `study/` | the lock, the status report, and recorded results |
 | `tools/` | everything runnable |
+| `docs/STATE_OF_PLAY.md` | **current belief and what is open.** Start here if you are picking this up |
 | `docs/STUDY_REPORT.md` | **complete methodology and results.** Start here for the science |
 | `docs/` | paper outline, session notes, figures |
 | `results/` | outputs. Large artefacts are git-ignored |
