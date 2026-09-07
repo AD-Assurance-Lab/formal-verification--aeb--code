@@ -60,6 +60,19 @@
     }
   },
   {
+    "knot": 10.128,
+    "file": "lead_sun+10.128.npz",
+    "frames": 104,
+    "size_mb": 34.0,
+    "signature": {
+      "mean": 0.36922,
+      "sigma": 0.23423,
+      "p01": 0.0,
+      "p99": 0.98431,
+      "frac_dark": 0.02359
+    }
+  },
+  {
     "knot": 7.715,
     "file": "lead_sun+07.715.npz",
     "skipped": true,

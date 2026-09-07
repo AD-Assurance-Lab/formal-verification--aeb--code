@@ -62,7 +62,22 @@ def cell_row(policy: str, scenario: str) -> dict:
 
     vpath = OUT / f"verify_{policy}_{scenario}.json"
     if not vpath.exists():
-        row["note"] = "not measured"
+        # Say WHICH part is missing. "not measured" on a cell whose endpoints are
+        # measured 10/10 understates the state, and on a cell with no harness at all it
+        # overstates it -- the same two words for "waiting on a verifier" and "nobody has
+        # built this scenario" is exactly the ambiguity a ledger exists to remove.
+        if scenario == "plate":
+            row["note"] = (
+                "NO HARNESS. The FMVSS 127 false-activation scenario is specified in "
+                "PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles "
+                "the trench plate to the standard's dimensions and nothing drives it. "
+                "See docs/STATE_OF_PLAY.md for what it needs. Property A is currently "
+                "verified on the no-target control, which is a legitimate must-not-brake "
+                "property and is NOT the standard's false-activation scenario.")
+        elif ep:
+            row["note"] = "endpoints measured; verification pending"
+        else:
+            row["note"] = "not measured"
         return row
     v = json.loads(vpath.read_text())
     row["artifact"] = str(vpath.relative_to(J.REPO))

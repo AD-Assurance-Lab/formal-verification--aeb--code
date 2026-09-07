@@ -14,8 +14,8 @@
         60.0
       ],
       "student_params": 310145,
-      "train_mae_mps2": 0.0251,
-      "file": "P_pts_lead.pt"
+      "train_mae_mps2": 0.0289,
+      "file": "P_pts_ped.pt"
     },
     "P_cont": {
       "samples": 3744,
@@ -41,10 +41,10 @@
         60.0
       ],
       "student_params": 310145,
-      "train_mae_mps2": 0.0669,
-      "file": "P_cont_lead.pt"
+      "train_mae_mps2": 0.1734,
+      "file": "P_cont_ped.pt"
     }
   },
-  "scenario": "lead",
+  "scenario": "ped",
   "note": "Identical architecture, recipe, epochs and frame count. The ONLY difference is which illumination knots the frames came from. Train MAE is not a result; the result is whether each policy passes the regulatory endpoints closed loop, which is milestone M4."
 }

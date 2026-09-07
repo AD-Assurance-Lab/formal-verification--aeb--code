@@ -1,14 +1,144 @@
 /home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
   warnings.warn(
 
-P_pts / lead: 25 poses inside r_req (15.85 m), 16 sub-intervals, threshold 2.476 m/s^2
+P_pts / lead: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
-   +60.000 to  +42.766  bound    3.143    1.27x threshold  CERTIFIED  [17s]
-Early stop at 13th iter due to 10 iterations no improvement!
-   +42.766 to  +28.397  bound    3.123    1.26x threshold  CERTIFIED  [17s]
-   +28.397 to  +18.743  bound    3.259    1.32x threshold  CERTIFIED  [18s]
-   +18.743 to  +12.542  bound    1.986    0.80x threshold  FALSIFIED  witness pose 103 at 2.4 m  [19s]
-   +12.542 to   +7.715  bound    0.590    0.24x threshold  FALSIFIED  witness pose 103 at 2.4 m  [19s]
-    +7.715 to   +5.298  bound    0.611    0.25x threshold  FALSIFIED  witness pose 101 at 3.5 m  [18s]
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    2.548    1.03x threshold  CERTIFIED  [25 domains, 39s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+[W907 05:26:26.496566431 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 501219328 bytes (free: 846266368, total: 33661911040).
+   +42.766 to  +28.397  bound    2.551    1.03x threshold  CERTIFIED  [25 domains, 45s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
-    +5.298 to   +4.198  bound    0.549    0.22x threshold  FALSIFIED  witness pose 96 at 6.3 m  [18s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+   +28.397 to  +18.743  bound    2.304    0.93x threshold  FALSIFIED  witness pose 79 at 15.8 m, s=+1.0000  [25 domains, 45s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+[W907 05:27:58.673066300 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 612368384 bytes (free: 768671744, total: 33661911040).
+[W907 05:28:02.903477156 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 771751936 bytes (free: 963706880, total: 33661911040).
+[W907 05:28:03.612736739 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 819986432 bytes (free: 787546112, total: 33661911040).
+   +18.743 to  +12.542  bound    1.223    0.49x threshold  FALSIFIED  witness pose 103 at 2.4 m, s=+0.0000  [25 domains, 46s]
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    0.120    0.05x threshold  FALSIFIED  witness pose 103 at 2.4 m, s=-1.0000  [25 domains, 42s]
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+[W907 05:29:36.913893546 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 824180736 bytes (free: 772866048, total: 33661911040).
+[W907 05:29:38.954385598 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 985661440 bytes (free: 766574592, total: 33661911040).
+   +10.128 to   +7.715  bound    0.084    0.03x threshold  FALSIFIED  witness pose 103 at 2.4 m, s=-1.0000  [25 domains, 53s]
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+    +7.715 to   +5.298  bound    0.151    0.06x threshold  FALSIFIED  witness pose 103 at 2.4 m, s=-1.0000  [25 domains, 52s]
+Early stop at 12th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    0.750    0.30x threshold  FALSIFIED  witness pose 98 at 5.2 m, s=-1.0000  [25 domains, 46s]
+Early stop at 15th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.745    0.30x threshold  FALSIFIED  witness pose 98 at 5.2 m, s=-1.0000  [25 domains, 45s]
+    +3.525 to   +1.891  bound    0.063    0.03x threshold  FALSIFIED  witness pose 98 at 5.2 m, s=-1.0000  [33 domains, 67s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+    +1.891 to   +1.391  bound    0.852    0.34x threshold  FALSIFIED  witness pose 96 at 6.3 m, s=-1.0000  [33 domains, 59s]
+    +1.391 to   +0.779  bound    0.629    0.25x threshold  FALSIFIED  witness pose 99 at 4.6 m, s=-1.0000  [37 domains, 70s]
+    +0.779 to   +0.026  bound    0.043    0.02x threshold  FALSIFIED  witness pose 87 at 11.3 m, s=+0.0000  [35 domains, 74s]
+    +0.026 to   +0.000  bound   -0.279   -0.11x threshold  FALSIFIED  witness pose 92 at 8.6 m, s=-1.0000  [49 domains, 109s]
+    +0.000 to   -0.961  bound    4.289    1.73x threshold  CERTIFIED  [25 domains, 50s]
+    -0.961 to  -29.554  bound    4.263    1.72x threshold  CERTIFIED  [25 domains, 58s]
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    4.825    1.95x threshold  CERTIFIED  [25 domains, 27s]
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts_lead.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  5/17 sub-intervals certified, 12 falsified with an exhibited witness, 0 undecided
+  wrote results/carla/verify_P_pts_lead.json

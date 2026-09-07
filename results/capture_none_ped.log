@@ -2,43 +2,28 @@
   server age 0 min (R-SIM-1 ok)
   reusing the saved nominal run, 104 states
 
-none_ped: 104 states x 17 knots = 1768 frames, about 1.63 GB raw
-    signature: mean 0.5109 sigma 0.1870 p99 0.7686 dark 0.006
-  sun  +60.000: 104 frames,   36.8 MB,  25.9 s
-    signature: mean 0.5313 sigma 0.2295 p99 0.9647 dark 0.006
-  sun  +42.766: 104 frames,   38.3 MB,  25.8 s
-    signature: mean 0.5223 sigma 0.2578 p99 0.9922 dark 0.008
-  sun  +28.397: 104 frames,   38.5 MB,  26.2 s
-    signature: mean 0.4605 sigma 0.2559 p99 0.9882 dark 0.012
-  sun  +18.743: 104 frames,   37.1 MB,  27.2 s
-    signature: mean 0.4039 sigma 0.2460 p99 0.9882 dark 0.019
-  sun  +12.542: 104 frames,   35.4 MB,  28.5 s
-    signature: mean 0.3361 sigma 0.2237 p99 0.9686 dark 0.031
-  sun   +7.715: 104 frames,   31.3 MB,  30.3 s
-    signature: mean 0.2612 sigma 0.2014 p99 0.9216 dark 0.062
-  sun   +5.298: 104 frames,   25.3 MB,  32.4 s
-    signature: mean 0.2281 sigma 0.1718 p99 0.8471 dark 0.092
-  sun   +4.198: 104 frames,   24.2 MB,  34.7 s
-    signature: mean 0.2085 sigma 0.1645 p99 0.7843 dark 0.114
-  sun   +3.525: 104 frames,   22.8 MB,  35.5 s
-    signature: mean 0.1337 sigma 0.1292 p99 0.6000 dark 0.212
-  sun   +1.891: 104 frames,   18.1 MB,  36.0 s
-    signature: mean 0.1065 sigma 0.1144 p99 0.5294 dark 0.275
-  sun   +1.391: 104 frames,   16.1 MB,  35.8 s
-    signature: mean 0.0738 sigma 0.0954 p99 0.4392 dark 0.401
-  sun   +0.779: 104 frames,   13.2 MB,  35.5 s
-    signature: mean 0.0356 sigma 0.0646 p99 0.3020 dark 0.643
-  sun   +0.026: 104 frames,    8.9 MB,  35.3 s
-    signature: mean 0.0653 sigma 0.0813 p99 0.3451 dark 0.425
-  sun   +0.000: 104 frames,   14.4 MB,  53.8 s
-    signature: mean 0.0488 sigma 0.0701 p99 0.2863 dark 0.533
-  sun   -0.961: 104 frames,   12.9 MB,  53.8 s
-    signature: mean 0.0401 sigma 0.0697 p99 0.2863 dark 0.657
-  sun  -29.554: 104 frames,    8.8 MB,  40.7 s
-    signature: mean 0.0401 sigma 0.0697 p99 0.2863 dark 0.657
-  sun  -30.000: 104 frames,    8.8 MB,  40.7 s
+none_ped: 104 states x 18 knots = 1872 frames, about 1.73 GB raw
+  none_ped_sun+60.000.npz exists, skipping
+  none_ped_sun+42.766.npz exists, skipping
+  none_ped_sun+28.397.npz exists, skipping
+  none_ped_sun+18.743.npz exists, skipping
+  none_ped_sun+12.542.npz exists, skipping
+    signature: mean 0.3711 sigma 0.2339 p99 0.9843 dark 0.023
+  sun  +10.128: 104 frames,   34.0 MB,  29.2 s
+  none_ped_sun+07.715.npz exists, skipping
+  none_ped_sun+05.298.npz exists, skipping
+  none_ped_sun+04.198.npz exists, skipping
+  none_ped_sun+03.525.npz exists, skipping
+  none_ped_sun+01.891.npz exists, skipping
+  none_ped_sun+01.391.npz exists, skipping
+  none_ped_sun+00.779.npz exists, skipping
+  none_ped_sun+00.026.npz exists, skipping
+  none_ped_sun+00.000.npz exists, skipping
+  none_ped_sun-00.961.npz exists, skipping
+  none_ped_sun-29.554.npz exists, skipping
+  none_ped_sun-30.000.npz exists, skipping
 
-  illumination axis OK: 17 knots, span 0.4957 of full range, worst inversion 4.1% of span (limit 12%), total 4.1% (limit 25%)
+  illumination axis OK: 18 knots, span 0.4957 of full range, worst inversion 4.1% of span (limit 12%), total 4.1% (limit 25%)
     recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5109 -> 0.5313 (4.1% of the axis span)
     recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0356 -> 0.0653 (6.0% of the axis span)  [declared uncovered]
 

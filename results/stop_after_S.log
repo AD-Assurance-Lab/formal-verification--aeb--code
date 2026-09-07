@@ -1,0 +1,7 @@
+watch ended at Mon Sep  7 05:05:56 AM EDT 2026
+[2026-09-07 05:05:51]     python tools/record_cells.py --write
+[2026-09-07 05:05:51]     git add results/carla/verify_*.json study/results.json && git commit
+[2026-09-07 05:05:51]     bash scripts/rebuild_all.sh witness      # simulator
+[2026-09-07 05:05:51]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
+[2026-09-07 05:05:51] A verdict is a prediction only if it was written down first;
+[2026-09-07 05:05:51] tools/drive_witness.py refuses to run against an uncommitted one.

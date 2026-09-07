@@ -64,6 +64,17 @@
    }
   },
   {
+   "sun_altitude_deg": 10.128,
+   "spread": 0.00193,
+   "frac_of_span": 0.0039,
+   "means": {
+    "lead": 0.36922,
+    "none": 0.36927,
+    "none_ped": 0.37115,
+    "ped": 0.37114
+   }
+  },
+  {
    "sun_altitude_deg": 7.715,
    "spread": 0.00116,
    "frac_of_span": 0.0023,

@@ -22,12 +22,12 @@
       "note": "A12 rebuild: policies not yet retrained on the rebuilt captures"
     },
     "M5": {
-      "state": "todo",
-      "note": "A12 rebuild: behavioural gates await the rebuilt policies"
+      "state": "done",
+      "note": "REBUILT. All eight behavioural gates pass over the COVERED axis: capture 0.108-0.544, in-between 0.156-0.678. The in-between gate first failed for P_pts/ped at [+12.542, +7.715] deg (1.016); PROTOCOL section 4's repair split it at +10.128 and the halves read 0.268 and 0.368 (FINDINGS F7)"
     },
     "M6": {
-      "state": "todo",
-      "note": "A12 rebuild: verdicts await the rebuilt policies"
+      "state": "done",
+      "note": "REBUILT with the input-space branch and bound PROTOCOL section 6 has always specified and tools/verify.py never implemented (FINDINGS F8). Property S: P_pts 5/16 and 3/16 certified over the covered axis, P_cont 16/16 and 16/16. Zero undecided; every falsification carries an exhibited concrete witness. Committed before any driving"
     },
     "M7": {
       "state": "todo",
@@ -40,60 +40,78 @@
   },
   "cells": {
     "1": {
-      "endpoints": null,
-      "fv": null,
+      "endpoints": "PASS both",
+      "fv": "FALSIFIED",
       "witness": null,
-      "width": null,
-      "note": "A12 rebuild pending"
+      "width": 57.925,
+      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "artifact": "results/carla/verify_P_pts_ped.json",
+      "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
+      "certified_of_covered": "3/16",
+      "margin_worst_x_threshold": -0.1252,
+      "margin_best_x_threshold": 1.9295
     },
     "2": {
-      "endpoints": null,
-      "fv": null,
+      "endpoints": "PASS both",
+      "fv": "FALSIFIED",
       "witness": null,
-      "width": null,
-      "note": "A12 rebuild pending"
+      "width": 28.371,
+      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "artifact": "results/carla/verify_P_pts_lead.json",
+      "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
+      "certified_of_covered": "5/16",
+      "margin_worst_x_threshold": 0.0174,
+      "margin_best_x_threshold": 1.9487
     },
     "3": {
-      "endpoints": null,
-      "fv": null,
+      "endpoints": "PASS both",
+      "fv": "CERTIFIED",
       "witness": null,
       "width": null,
-      "note": "A12 rebuild pending"
+      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "artifact": "results/carla/verify_P_cont_ped.json",
+      "certified_of_covered": "16/16",
+      "margin_worst_x_threshold": 1.0032,
+      "margin_best_x_threshold": 1.8658
     },
     "4": {
-      "endpoints": null,
-      "fv": null,
+      "endpoints": "PASS both",
+      "fv": "CERTIFIED",
       "witness": null,
       "width": null,
-      "note": "A12 rebuild pending"
+      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "artifact": "results/carla/verify_P_cont_lead.json",
+      "certified_of_covered": "16/16",
+      "margin_worst_x_threshold": 1.0077,
+      "margin_best_x_threshold": 1.9741
     },
     "5": {
       "endpoints": null,
       "fv": null,
       "witness": null,
       "width": null,
-      "note": "A12 rebuild pending"
+      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
     },
     "6": {
       "endpoints": null,
       "fv": null,
       "witness": null,
       "width": null,
-      "note": "A12 rebuild pending"
+      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
     }
   },
   "gates": {
     "capture_check": {
-      "state": "todo",
-      "value": null,
+      "state": "done",
+      "value": 0.544,
       "threshold": 1.0,
-      "note": "A12 rebuild: re-measured after the policies are retrained"
+      "note": "BEHAVIOURAL, worst of the four policy-scenario pairs: policy output on a placed frame against the same policy driving through that spot. 0.108 / 0.112 / 0.331 / 0.544"
     },
     "in_between_check": {
-      "state": "todo",
-      "value": null,
+      "state": "done",
+      "value": 0.678,
       "threshold": 1.0,
-      "note": "A12 rebuild: re-measured after the policies are retrained"
+      "note": "BEHAVIOURAL, worst over COVERED sub-intervals of the four pairs: 0.156 / 0.222 / 0.506 / 0.678. A sub-interval the knot measurement declares uncovered is excluded from the coverage claim and so cannot fail a gate about that claim"
     }
   },
   "primitives": {

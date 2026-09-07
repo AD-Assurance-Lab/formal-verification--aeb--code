@@ -14,11 +14,33 @@ answering the wrong question.
 
 **How.** The disturbance enters as a single `nn.Linear` from the scalar `s` to flattened
 pixels, which keeps bound propagation in patches mode, then alpha-CROWN bounds the
-network output over `s` in [-1, 1] (the sub-interval's two endpoints, midpoint zero).
+network output over `s` in [-1, 1] (the sub-interval's two endpoints, midpoint zero),
+**with input-space branch and bound**: a domain whose bound does not decide the property
+is bisected and its halves are bounded in turn.
 
-A cell is CERTIFIED when the lower bound clears the threshold at every pose, and
-FALSIFIED otherwise, with the worst pose reported as the witness. The witness is the
-single frame worth driving, and driving it is M7.
+**The branch and bound is not optional, and it was missing.** PROTOCOL section 6 has
+specified "alpha-CROWN with input-space branch and bound over s" since M0, and until
+2026-09-07 this file made a single `compute_bounds` call per pose over the whole
+sub-interval. On a wide sub-interval that is not a certificate about the policy, it is a
+report on the looseness of one interval bound. Measured on `P_cont`/lead over
+[-0.961, -29.554] deg, a 28.6-degree sub-interval, worst lower bound by number of input
+sub-domains:
+
+    1 (what this file used to do)   2.2321   0.90x threshold   FALSIFIED
+    2                               3.4548   1.40x threshold   CERTIFIED
+    4                               4.1036   1.66x threshold   CERTIFIED
+    8                               4.2932   1.73x threshold   CERTIFIED
+
+One bisection flips it. The policy was never the problem, and a tool that answers
+"unsafe" because its own bound is loose is answering a different question from the one
+the study sells.
+
+**Three outcomes, not two.** A domain that neither certifies nor yields a concrete
+counterexample is UNDECIDED, and saying so is the point: the old code called that
+FALSIFIED, which conflates "we exhibited an illumination where the policy does not brake"
+with "our bound did not clear". FALSIFIED now requires a CONCRETE `s` whose actual network
+output violates the property -- an exhibited witness, not a failure to prove. The witness
+is the single frame worth driving, and driving it is M7.
 
 **The verdicts are written before any driving.** `python -m study.ledger --check-order`
 checks that against git history. That ordering is the whole reason a verdict counts as a
@@ -74,6 +96,80 @@ def prepare(arr: np.ndarray, w: int, h: int) -> torch.Tensor:
 
 
 
+def certify_pose(fam, s_template, ptb_cls, prop: str, threshold: float,
+                 method: str, max_domains: int, min_width: float, dev=None):
+    """Input-space branch and bound over `s` for ONE pose. PROTOCOL section 6.
+
+    Returns (verdict, margin_bound, witness_s, domains_used).
+
+      CERTIFIED  every sub-domain's bound satisfies the property. `margin_bound` is the
+                 WORST bound over the sub-domains, so the reported margin is still the
+                 tightest true statement about the whole sub-interval.
+      FALSIFIED  a CONCRETE s was found whose actual network output violates it.
+                 `witness_s` is that value. This is an exhibited counterexample.
+      UNDECIDED  the budget ran out with neither. Reported honestly rather than as a
+                 falsification: the difference between "the policy fails here" and "our
+                 bound is loose here" is the entire credibility of the tool.
+    """
+    import torch as _t
+    queue = [(-1.0, 1.0)]
+    worst = None
+    domains = 0
+
+    def bounds_on(lo, hi):
+        """One alpha-CROWN bound over the sub-domain [lo, hi] of s.
+
+        A FRESH BoundedModule per sub-domain. Reusing one across sub-domains is the
+        obvious optimisation and it is wrong: alpha-CROWN caches per-node alpha
+        coefficients keyed by start node, and the second call into a reused module dies
+        with KeyError '/input-23' partway through a run. Rebuilding costs little next to
+        the alpha optimisation itself -- measured at 0.58 s per bound with the rebuild
+        against 0.64 s with reuse -- so there is nothing to buy here anyway.
+        """
+        from auto_LiRPA import BoundedModule, BoundedTensor
+        bm = BoundedModule(fam, s_template, device=dev)
+        ptb = ptb_cls(norm=float("inf"),
+                      x_L=_t.full_like(s_template, lo),
+                      x_U=_t.full_like(s_template, hi))
+        lb, ub = bm.compute_bounds(x=(BoundedTensor(s_template, ptb),), method=method)
+        return float(lb.item()), float(ub.item())
+
+    def concrete(lo, hi):
+        """Actual outputs at concrete s. A violation here is a real counterexample.
+
+        Sampled at the ends and the middle of the domain, which is where branch and
+        bound has already concentrated the search: the domain is only split when its
+        bound failed, so by the time a domain is this small the interesting s is inside
+        it.
+        """
+        out = []
+        with _t.no_grad():
+            for v in (lo, (lo + hi) / 2.0, hi):
+                y = float(fam(_t.full_like(s_template, v)).item())
+                out.append((v, y))
+        return out
+
+    while queue:
+        lo, hi = queue.pop()
+        lb, ub = bounds_on(lo, hi)
+        domains += 1
+        satisfied = (lb >= threshold) if prop == "S" else (ub <= threshold)
+        bound_val = lb if prop == "S" else ub
+        if satisfied:
+            worst = bound_val if worst is None else (
+                min(worst, bound_val) if prop == "S" else max(worst, bound_val))
+            continue
+        for v, y in concrete(lo, hi):
+            if (y < threshold) if prop == "S" else (y > threshold):
+                return "FALSIFIED", bound_val, v, domains
+        if domains >= max_domains or (hi - lo) <= min_width:
+            return "UNDECIDED", bound_val, None, domains
+        mid = (lo + hi) / 2.0
+        queue.append((lo, mid))
+        queue.append((mid, hi))
+    return "CERTIFIED", worst, None, domains
+
+
 def _provenance(model_path=None):
     """Attribution for result artifacts: which code, which network, when.
 
@@ -109,6 +205,12 @@ def main() -> int:
              "no-target frames, so this stays 'lead' while --scenario is 'none'",
     )
     ap.add_argument("--method", default="alpha-CROWN")
+    ap.add_argument(
+        "--max-domains", type=int, default=32,
+        help="input-space branch-and-bound budget per pose (PROTOCOL section 6)")
+    ap.add_argument(
+        "--min-domain-width", type=float, default=2.0 / 64,
+        help="stop splitting below this width in s; s spans [-1, 1]")
     ap.add_argument(
         "--property", choices=["S", "A"], default="S",
         help="S: must brake inside r_req. A: must NOT brake on the false-activation "
@@ -180,48 +282,75 @@ def main() -> int:
         b_imgs = np.load(stored[round(lo_alt, 3)])["images"]
         worst_lb = None
         witness = None
+        witness_s = None
+        pose_verdicts = {"CERTIFIED": 0, "FALSIFIED": 0, "UNDECIDED": 0}
+        undecided_pose = None
+        domains_total = 0
         for i in poses:
             lo = prepare(a_imgs[i], w, h).to(dev)
             hi = prepare(b_imgs[i], w, h).to(dev)
             fam = Family(lo, hi, model).to(dev).eval()
             s = torch.zeros(1, 1, device=dev)
-            bm = BoundedModule(fam, s, device=dev)
-            ptb = PerturbationLpNorm(
-                norm=float("inf"),
-                x_L=torch.full_like(s, -1.0),
-                x_U=torch.full_like(s, 1.0),
-            )
-            lb, ub = bm.compute_bounds(x=(BoundedTensor(s, ptb),), method=args.method)
+            verdict_i, val, w_s, n_dom = certify_pose(
+                fam, s, PerturbationLpNorm, args.property, threshold,
+                args.method, args.max_domains, args.min_domain_width, dev=dev)
+            pose_verdicts[verdict_i] += 1
+            domains_total += n_dom
+            if verdict_i == "UNDECIDED" and undecided_pose is None:
+                undecided_pose = i
             # S wants the LOWEST output (does it always brake?); A wants the HIGHEST
-            # (does it ever brake when it should not?).
-            val = float(lb.item()) if args.property == "S" else float(ub.item())
-            if worst_lb is None or (
+            # (does it ever brake when it should not?). The reported margin is the worst
+            # over poses, and over the sub-domains within each pose.
+            if val is not None and (worst_lb is None or (
                 val < worst_lb if args.property == "S" else val > worst_lb
-            ):
+            )):
                 worst_lb, witness = val, i
-        certified = (
-            worst_lb >= threshold if args.property == "S" else worst_lb <= threshold
-        )
+                if w_s is not None:
+                    witness_s = w_s
+            if verdict_i == "FALSIFIED" and witness_s is None:
+                witness, witness_s = i, w_s
+
+        # A sub-interval is CERTIFIED only if every pose in it certified. One exhibited
+        # counterexample falsifies it; anything else undecided leaves it UNDECIDED.
+        if pose_verdicts["FALSIFIED"]:
+            verdict = "FALSIFIED"
+        elif pose_verdicts["UNDECIDED"]:
+            verdict = "UNDECIDED"
+            witness = undecided_pose if witness is None else witness
+        else:
+            verdict = "CERTIFIED"
         cells.append(
             {
                 **({"family_uncovered": True} if family_uncovered else {}),
                 "from_deg": hi_alt,
                 "to_deg": lo_alt,
-                "worst_bound_mps2": round(worst_lb, 4),
+                "worst_bound_mps2": round(worst_lb, 4) if worst_lb is not None else None,
                 "threshold_mps2": round(threshold, 4),
-                "margin_x_threshold": round(worst_lb / threshold, 4),
-                "verdict": "CERTIFIED" if certified else "FALSIFIED",
+                "margin_x_threshold": (round(worst_lb / threshold, 4)
+                                       if worst_lb is not None else None),
+                "verdict": verdict,
+                "poses": dict(pose_verdicts),
+                "bab_domains": domains_total,
                 "witness_pose": witness,
-                "witness_range_m": round(float(ranges[witness]), 3),
+                "witness_s": witness_s,
+                "witness_range_m": (round(float(ranges[witness]), 3)
+                                    if witness is not None else None),
                 "seconds": round(time.time() - t0, 1),
             }
         )
+        _wit = ""
+        if verdict == "FALSIFIED":
+            _wit = (f"  witness pose {witness} at {ranges[witness]:.1f} m, "
+                    f"s={witness_s:+.4f}")
+        elif verdict == "UNDECIDED":
+            _wit = (f"  {pose_verdicts['UNDECIDED']} pose(s) undecided at the "
+                    f"{args.max_domains}-domain budget")
         print(
-            f"  {hi_alt:+8.3f} to {lo_alt:+8.3f}  bound {worst_lb:8.3f}  "
-            f"{worst_lb / threshold:6.2f}x threshold  "
-            f"{'CERTIFIED' if certified else 'FALSIFIED'}"
-            f"{'' if certified else f'  witness pose {witness} at {ranges[witness]:.1f} m'}"
-            f"  [{time.time() - t0:.0f}s]",
+            f"  {hi_alt:+8.3f} to {lo_alt:+8.3f}  bound "
+            f"{worst_lb if worst_lb is not None else float('nan'):8.3f}  "
+            f"{(worst_lb / threshold) if worst_lb is not None else float('nan'):6.2f}x "
+            f"threshold  {verdict:<9}{_wit}"
+            f"  [{domains_total} domains, {time.time() - t0:.0f}s]",
             flush=True,
         )
 
@@ -237,12 +366,23 @@ def main() -> int:
         "threshold_mps2": round(threshold, 4),
         "r_req_m": round(rr, 3),
         "poses_inside_r_req": len(poses),
+        "branch_and_bound": {
+            "max_domains_per_pose": args.max_domains,
+            "min_domain_width": args.min_domain_width,
+            "note": ("PROTOCOL section 6's input-space branch and bound. Absent from "
+                     "this file until 2026-09-07, which produced FALSIFIED verdicts on "
+                     "wide sub-intervals that one bisection certifies (FINDINGS F8)."),
+        },
         "cells": cells,
         "falsified": [c for c in cells if c["verdict"] == "FALSIFIED"],
+        "undecided": [c for c in cells if c["verdict"] == "UNDECIDED"],
         "note": (
             "Property S from PROTOCOL section 7, on the same threshold the closed-loop "
-            "controller latches at. Certified means the lower bound clears it at every "
-            "pose inside r_req for every illumination in the sub-interval. WRITTEN "
+            "controller latches at. CERTIFIED means the lower bound clears it at every "
+            "pose inside r_req for every illumination in the sub-interval, under "
+            "input-space branch and bound. FALSIFIED means a concrete s was exhibited "
+            "whose actual output violates it. UNDECIDED means neither, at the stated "
+            "budget, and is reported as itself rather than as a falsification. WRITTEN "
             "BEFORE ANY DRIVING; that ordering is what makes these predictions."
         ),
     }
@@ -250,9 +390,10 @@ def main() -> int:
     path = OUT / f"verify_{args.policy}_{args.scenario}{suffix}.json"
     path.write_text(json.dumps(payload, indent=2) + "\n")
     n_bad = len(payload["falsified"])
+    n_und = len(payload["undecided"])
     print(
-        f"\n  {len(cells) - n_bad}/{len(cells)} sub-intervals certified, "
-        f"{n_bad} falsified"
+        f"\n  {len(cells) - n_bad - n_und}/{len(cells)} sub-intervals certified, "
+        f"{n_bad} falsified with an exhibited witness, {n_und} undecided"
     )
     print(f"  wrote {path.relative_to(J.REPO)}")
     return 0

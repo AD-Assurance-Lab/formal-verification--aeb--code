@@ -183,12 +183,29 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # put four hours of work in front of the commit that lets the drives start, for no
       # reason. `bash scripts/rebuild_all.sh verifyA` runs it, and it can run at the same
       # time as `witness`: one wants the GPU, the other wants the simulator.
+      # CONCURRENTLY, for the same reason property A is: four independent jobs, no
+      # simulator, no shared output, and alpha-CROWN at batch 1 on a 310k-parameter
+      # network is latency-bound rather than throughput-bound, so a 32 GB card runs all
+      # four for about the cost of one.
+      pids=""; names=""
       for pol in P_pts P_cont; do
         for sc in lead ped; do
-          run "verify_${pol}_${sc}_S" "$PY" -u tools/verify.py --policy "$pol" \
-              --scenario "$sc" --policy-scenario "$sc" --property S
+          say "START verify_${pol}_${sc}_S (background)"
+          "$PY" -u tools/verify.py --policy "$pol" --scenario "$sc" \
+              --policy-scenario "$sc" --property S \
+              > "$REPO/results/verify_${pol}_${sc}_S.log" 2>&1 &
+          pids="$pids $!"; names="$names verify_${pol}_${sc}_S"
         done
       done
+      vfail=0
+      set -- $names
+      for pid in $pids; do
+        wait "$pid"; rc=$?
+        say "DONE  $1 rc=$rc"
+        [ $rc -ne 0 ] && { vfail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
+        shift
+      done
+      [ $vfail -ne 0 ] && { say "stopping: a property S job failed"; exit 1; }
       say ""
       say "M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:"
       say "    python tools/record_cells.py --write"

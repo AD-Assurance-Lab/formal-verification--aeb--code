@@ -1,37 +1,37 @@
-  before equalising: [416, 3536] frames
+  before equalising: [416, 3744] frames
 
-P_pts: 3536 samples from 2 knots, 450 braking
-    P_pts teacher epoch   0  mse 8.36662
-    P_pts teacher epoch  10  mse 0.05696
-    P_pts teacher epoch  20  mse 0.00383
-    P_pts teacher epoch  30  mse 0.00577
-    P_pts teacher epoch  40  mse 0.00580
-    P_pts teacher epoch  50  mse 0.00255
-    P_pts teacher epoch  59  mse 0.01526
-    P_pts student epoch   0  mse 5.28022
-    P_pts student epoch  10  mse 0.03109
-    P_pts student epoch  20  mse 0.00447
-    P_pts student epoch  30  mse 0.01132
-    P_pts student epoch  40  mse 0.00280
-    P_pts student epoch  50  mse 0.00061
-    P_pts student epoch  59  mse 0.00576
-  P_pts: student 310145 params, train MAE 0.0302 m/s^2 -> P_pts_lead.pt
+P_pts: 3744 samples from 2 knots, 450 braking
+    P_pts teacher epoch   0  mse 6.68759
+    P_pts teacher epoch  10  mse 0.13037
+    P_pts teacher epoch  20  mse 0.00448
+    P_pts teacher epoch  30  mse 0.05501
+    P_pts teacher epoch  40  mse 0.01779
+    P_pts teacher epoch  50  mse 0.02329
+    P_pts teacher epoch  59  mse 0.00226
+    P_pts student epoch   0  mse 5.26624
+    P_pts student epoch  10  mse 0.06964
+    P_pts student epoch  20  mse 0.08096
+    P_pts student epoch  30  mse 0.01277
+    P_pts student epoch  40  mse 0.00584
+    P_pts student epoch  50  mse 0.01486
+    P_pts student epoch  59  mse 0.04347
+  P_pts: student 310145 params, train MAE 0.0251 m/s^2 -> P_pts_lead.pt
 
-P_cont: 3536 samples from 17 knots, 425 braking
-    P_cont teacher epoch   0  mse 7.23781
-    P_cont teacher epoch  10  mse 0.17297
-    P_cont teacher epoch  20  mse 0.13030
-    P_cont teacher epoch  30  mse 0.00964
-    P_cont teacher epoch  40  mse 0.00104
-    P_cont teacher epoch  50  mse 0.00102
-    P_cont teacher epoch  59  mse 0.00762
-    P_cont student epoch   0  mse 6.33199
-    P_cont student epoch  10  mse 0.17255
-    P_cont student epoch  20  mse 0.09392
-    P_cont student epoch  30  mse 0.05163
-    P_cont student epoch  40  mse 0.04279
-    P_cont student epoch  50  mse 0.02268
-    P_cont student epoch  59  mse 0.03808
-  P_cont: student 310145 params, train MAE 0.0425 m/s^2 -> P_cont_lead.pt
+P_cont: 3744 samples from 18 knots, 450 braking
+    P_cont teacher epoch   0  mse 6.99630
+    P_cont teacher epoch  10  mse 0.18315
+    P_cont teacher epoch  20  mse 0.04873
+    P_cont teacher epoch  30  mse 0.03456
+    P_cont teacher epoch  40  mse 0.00162
+    P_cont teacher epoch  50  mse 0.00171
+    P_cont teacher epoch  59  mse 0.07096
+    P_cont student epoch   0  mse 5.63128
+    P_cont student epoch  10  mse 0.14682
+    P_cont student epoch  20  mse 0.05750
+    P_cont student epoch  30  mse 0.05847
+    P_cont student epoch  40  mse 0.01621
+    P_cont student epoch  50  mse 0.01537
+    P_cont student epoch  59  mse 0.01277
+  P_cont: student 310145 params, train MAE 0.0669 m/s^2 -> P_cont_lead.pt
 
   wrote results/carla/training.json

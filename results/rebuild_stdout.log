@@ -1,1 +1,16 @@
-[2026-09-07 04:12:07] restarting CARLA on 3000
+[2026-09-07 05:25:09] START verify_P_pts_lead_S (background)
+[2026-09-07 05:25:09] START verify_P_pts_ped_S (background)
+[2026-09-07 05:25:09] START verify_P_cont_lead_S (background)
+[2026-09-07 05:25:09] START verify_P_cont_ped_S (background)
+[2026-09-07 05:40:36] DONE  verify_P_pts_lead_S rc=0
+[2026-09-07 05:42:36] DONE  verify_P_pts_ped_S rc=0
+[2026-09-07 05:42:36] DONE  verify_P_cont_lead_S rc=0
+[2026-09-07 05:44:25] DONE  verify_P_cont_ped_S rc=0
+[2026-09-07 05:44:25] 
+[2026-09-07 05:44:25] M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:
+[2026-09-07 05:44:25]     python tools/record_cells.py --write
+[2026-09-07 05:44:25]     git add results/carla/verify_*.json study/results.json && git commit
+[2026-09-07 05:44:25]     bash scripts/rebuild_all.sh witness      # simulator
+[2026-09-07 05:44:25]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
+[2026-09-07 05:44:25] A verdict is a prediction only if it was written down first;
+[2026-09-07 05:44:25] tools/drive_witness.py refuses to run against an uncommitted one.

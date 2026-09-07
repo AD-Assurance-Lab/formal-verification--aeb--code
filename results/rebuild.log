@@ -181,3 +181,166 @@ Terminated
 Terminated
 [2026-09-07 04:12:07] restarting CARLA on 3000
 ==> CARLA_TAKEOVER: stopping whatever holds 3000
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1443718 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:13:24] START capture_lead
+[2026-09-07 04:13:56] DONE  capture_lead rc=0
+[2026-09-07 04:13:56] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1444177 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:15:13] START capture_none
+[2026-09-07 04:15:45] DONE  capture_none rc=0
+[2026-09-07 04:15:45] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1444744 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:17:02] START capture_ped
+[2026-09-07 04:17:35] DONE  capture_ped rc=0
+[2026-09-07 04:17:35] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1445227 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:18:52] START capture_none_ped
+[2026-09-07 04:19:23] DONE  capture_none_ped rc=0
+[2026-09-07 04:19:23] START pairing
+[2026-09-07 04:19:25] DONE  pairing rc=0
+[2026-09-07 04:19:25] START illumination
+[2026-09-07 04:19:25] DONE  illumination rc=0
+[2026-09-07 04:19:25] START train_lead
+[2026-09-07 04:19:59] DONE  train_lead rc=0
+[2026-09-07 04:19:59] START train_ped
+[2026-09-07 04:20:33] DONE  train_ped rc=0
+[2026-09-07 04:20:33] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1445879 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:21:51] START endpoints_lead
+[2026-09-07 04:23:35] DONE  endpoints_lead rc=0
+[2026-09-07 04:23:35] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1455245 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:24:53] START endpoints_ped
+[2026-09-07 04:26:51] DONE  endpoints_ped rc=0
+[2026-09-07 04:26:51] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1464857 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:28:08] START gate_capture_P_pts_lead
+[2026-09-07 04:28:14] DONE  gate_capture_P_pts_lead rc=0
+[2026-09-07 04:28:14] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1465498 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:29:31] START gate_inbetween_P_pts_lead
+[2026-09-07 04:31:41] DONE  gate_inbetween_P_pts_lead rc=0
+[2026-09-07 04:31:41] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1465980 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:32:58] START gate_capture_P_pts_ped
+[2026-09-07 04:33:04] DONE  gate_capture_P_pts_ped rc=0
+[2026-09-07 04:33:04] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1466616 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:34:22] START gate_inbetween_P_pts_ped
+[2026-09-07 04:36:33] DONE  gate_inbetween_P_pts_ped rc=0
+[2026-09-07 04:36:33] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1467111 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:37:51] START gate_capture_P_cont_lead
+[2026-09-07 04:37:56] DONE  gate_capture_P_cont_lead rc=0
+[2026-09-07 04:37:56] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1467747 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:39:14] START gate_inbetween_P_cont_lead
+[2026-09-07 04:41:22] DONE  gate_inbetween_P_cont_lead rc=0
+[2026-09-07 04:41:22] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1468229 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:42:39] START gate_capture_P_cont_ped
+[2026-09-07 04:42:45] DONE  gate_capture_P_cont_ped rc=0
+[2026-09-07 04:42:45] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1468864 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 04:44:03] START gate_inbetween_P_cont_ped
+[2026-09-07 04:46:14] DONE  gate_inbetween_P_cont_ped rc=0
+[2026-09-07 04:46:14] START verify_P_pts_lead_S
+[2026-09-07 04:51:09] DONE  verify_P_pts_lead_S rc=0
+[2026-09-07 04:51:09] START verify_P_pts_ped_S
+[2026-09-07 04:56:13] DONE  verify_P_pts_ped_S rc=0
+[2026-09-07 04:56:13] START verify_P_cont_lead_S
+[2026-09-07 05:01:02] DONE  verify_P_cont_lead_S rc=0
+[2026-09-07 05:01:02] START verify_P_cont_ped_S
+[2026-09-07 05:05:51] DONE  verify_P_cont_ped_S rc=0
+[2026-09-07 05:05:51] 
+[2026-09-07 05:05:51] M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:
+[2026-09-07 05:05:51]     python tools/record_cells.py --write
+[2026-09-07 05:05:51]     git add results/carla/verify_*.json study/results.json && git commit
+[2026-09-07 05:05:51]     bash scripts/rebuild_all.sh witness      # simulator
+[2026-09-07 05:05:51]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
+[2026-09-07 05:05:51] A verdict is a prediction only if it was written down first;
+[2026-09-07 05:05:51] tools/drive_witness.py refuses to run against an uncommitted one.
+[2026-09-07 05:25:09] START verify_P_pts_lead_S (background)
+[2026-09-07 05:25:09] START verify_P_pts_ped_S (background)
+[2026-09-07 05:25:09] START verify_P_cont_lead_S (background)
+[2026-09-07 05:25:09] START verify_P_cont_ped_S (background)
+[2026-09-07 05:40:36] DONE  verify_P_pts_lead_S rc=0
+[2026-09-07 05:42:36] DONE  verify_P_pts_ped_S rc=0
+[2026-09-07 05:42:36] DONE  verify_P_cont_lead_S rc=0
+[2026-09-07 05:44:25] DONE  verify_P_cont_ped_S rc=0
+[2026-09-07 05:44:25] 
+[2026-09-07 05:44:25] M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:
+[2026-09-07 05:44:25]     python tools/record_cells.py --write
+[2026-09-07 05:44:25]     git add results/carla/verify_*.json study/results.json && git commit
+[2026-09-07 05:44:25]     bash scripts/rebuild_all.sh witness      # simulator
+[2026-09-07 05:44:25]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
+[2026-09-07 05:44:25] A verdict is a prediction only if it was written down first;
+[2026-09-07 05:44:25] tools/drive_witness.py refuses to run against an uncommitted one.

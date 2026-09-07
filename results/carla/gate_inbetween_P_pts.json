@@ -2,35 +2,35 @@
   "policy": "P_pts",
   "scenario": "lead",
   "illumination": {
-    "knots": 16,
-    "axis_span_mean": 0.44892,
+    "knots": 17,
+    "axis_span_mean": 0.44948,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [
       {
         "from_deg": 51.383,
         "to_deg": 35.581,
-        "from_mean": 0.4917,
-        "to_mean": 0.49776,
-        "rise": 0.00606,
-        "frac_of_span": 0.0135,
+        "from_mean": 0.49168,
+        "to_mean": 0.49779,
+        "rise": 0.00611,
+        "frac_of_span": 0.0136,
         "declared_uncovered": false,
-        "detail": "sun fell 51.383 -> 35.581 deg and the frame got BRIGHTER, 0.4917 -> 0.4978 (1.3% of the axis span)"
+        "detail": "sun fell 51.383 -> 35.581 deg and the frame got BRIGHTER, 0.4917 -> 0.4978 (1.4% of the axis span)"
       },
       {
         "from_deg": 0.013,
         "to_deg": -0.48,
-        "from_mean": 0.04884,
-        "to_mean": 0.07839,
-        "rise": 0.02955,
-        "frac_of_span": 0.0658,
+        "from_mean": 0.04831,
+        "to_mean": 0.07861,
+        "rise": 0.0303,
+        "frac_of_span": 0.0674,
         "declared_uncovered": true,
-        "detail": "sun fell 0.013 -> -0.480 deg and the frame got BRIGHTER, 0.0488 -> 0.0784 (6.6% of the axis span)"
+        "detail": "sun fell 0.013 -> -0.480 deg and the frame got BRIGHTER, 0.0483 -> 0.0786 (6.7% of the axis span)"
       }
     ],
-    "worst_inversion_frac": 0.0135,
+    "worst_inversion_frac": 0.0136,
     "max_inversion_frac": 0.12,
-    "total_rise_frac": 0.0135,
+    "total_rise_frac": 0.0136,
     "max_total_rise_frac": 0.25,
     "monotone_violations": [],
     "monotone_ok": true,
@@ -41,12 +41,12 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 51.383,
-        "mean": 0.4917,
+        "mean": 0.49168,
         "lamps": false
       },
       {
         "sun_altitude_deg": 35.581,
-        "mean": 0.49776,
+        "mean": 0.49779,
         "lamps": false
       },
       {
@@ -60,53 +60,58 @@
         "lamps": false
       },
       {
-        "sun_altitude_deg": 10.128,
-        "mean": 0.34808,
+        "sun_altitude_deg": 11.335,
+        "mean": 0.36285,
+        "lamps": false
+      },
+      {
+        "sun_altitude_deg": 8.921,
+        "mean": 0.33346,
         "lamps": false
       },
       {
         "sun_altitude_deg": 6.506,
-        "mean": 0.27315,
+        "mean": 0.27366,
         "lamps": false
       },
       {
         "sun_altitude_deg": 4.748,
-        "mean": 0.24959,
+        "mean": 0.25023,
         "lamps": true
       },
       {
         "sun_altitude_deg": 3.862,
-        "mean": 0.22421,
+        "mean": 0.22367,
         "lamps": true
       },
       {
         "sun_altitude_deg": 2.708,
-        "mean": 0.1806,
+        "mean": 0.18089,
         "lamps": true
       },
       {
         "sun_altitude_deg": 1.641,
-        "mean": 0.1302,
+        "mean": 0.12906,
         "lamps": true
       },
       {
         "sun_altitude_deg": 1.085,
-        "mean": 0.10031,
+        "mean": 0.09898,
         "lamps": true
       },
       {
         "sun_altitude_deg": 0.403,
-        "mean": 0.06493,
+        "mean": 0.06658,
         "lamps": true
       },
       {
         "sun_altitude_deg": 0.013,
-        "mean": 0.04884,
+        "mean": 0.04831,
         "lamps": true
       },
       {
         "sun_altitude_deg": -0.48,
-        "mean": 0.07839,
+        "mean": 0.07861,
         "lamps": true
       },
       {
@@ -122,138 +127,165 @@
     ],
     "ok": true
   },
+  "worst_over_covered_sub_intervals": 0.1559,
+  "failing_covered_sub_intervals": [],
   "decision_threshold_mps2": 2.476,
   "poses_used": 20,
-  "verdict": "FAIL",
-  "worst_as_fraction_of_threshold": 1.015,
+  "verdict": "PASS",
+  "worst_as_fraction_of_threshold": 1.2323,
   "sub_intervals": [
     {
       "from_deg": 60.0,
       "to_deg": 42.766,
       "midpoint_deg": 51.383,
-      "max_abs_diff_mps2": 0.133,
-      "mean_abs_diff_mps2": 0.0434,
-      "as_fraction_of_threshold": 0.0537
+      "max_abs_diff_mps2": 0.1748,
+      "mean_abs_diff_mps2": 0.0563,
+      "as_fraction_of_threshold": 0.0706,
+      "family_uncovered": false
     },
     {
       "from_deg": 42.766,
       "to_deg": 28.397,
       "midpoint_deg": 35.581,
-      "max_abs_diff_mps2": 0.129,
-      "mean_abs_diff_mps2": 0.0281,
-      "as_fraction_of_threshold": 0.0521
+      "max_abs_diff_mps2": 0.1434,
+      "mean_abs_diff_mps2": 0.0493,
+      "as_fraction_of_threshold": 0.0579,
+      "family_uncovered": false
     },
     {
       "from_deg": 28.397,
       "to_deg": 18.743,
       "midpoint_deg": 23.57,
-      "max_abs_diff_mps2": 0.3046,
-      "mean_abs_diff_mps2": 0.1265,
-      "as_fraction_of_threshold": 0.123
+      "max_abs_diff_mps2": 0.1761,
+      "mean_abs_diff_mps2": 0.0498,
+      "as_fraction_of_threshold": 0.0711,
+      "family_uncovered": false
     },
     {
       "from_deg": 18.743,
       "to_deg": 12.542,
       "midpoint_deg": 15.642,
-      "max_abs_diff_mps2": 0.137,
-      "mean_abs_diff_mps2": 0.0346,
-      "as_fraction_of_threshold": 0.0553
+      "max_abs_diff_mps2": 0.1391,
+      "mean_abs_diff_mps2": 0.0468,
+      "as_fraction_of_threshold": 0.0562,
+      "family_uncovered": false
     },
     {
       "from_deg": 12.542,
+      "to_deg": 10.128,
+      "midpoint_deg": 11.335,
+      "max_abs_diff_mps2": 0.0781,
+      "mean_abs_diff_mps2": 0.0206,
+      "as_fraction_of_threshold": 0.0316,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": 10.128,
       "to_deg": 7.715,
-      "midpoint_deg": 10.128,
-      "max_abs_diff_mps2": 0.1581,
-      "mean_abs_diff_mps2": 0.0396,
-      "as_fraction_of_threshold": 0.0639
+      "midpoint_deg": 8.921,
+      "max_abs_diff_mps2": 0.3859,
+      "mean_abs_diff_mps2": 0.1178,
+      "as_fraction_of_threshold": 0.1559,
+      "family_uncovered": false
     },
     {
       "from_deg": 7.715,
       "to_deg": 5.298,
       "midpoint_deg": 6.506,
-      "max_abs_diff_mps2": 0.2075,
-      "mean_abs_diff_mps2": 0.0518,
-      "as_fraction_of_threshold": 0.0838
+      "max_abs_diff_mps2": 0.1872,
+      "mean_abs_diff_mps2": 0.0467,
+      "as_fraction_of_threshold": 0.0756,
+      "family_uncovered": false
     },
     {
       "from_deg": 5.298,
       "to_deg": 4.198,
       "midpoint_deg": 4.748,
-      "max_abs_diff_mps2": 0.0808,
-      "mean_abs_diff_mps2": 0.0174,
-      "as_fraction_of_threshold": 0.0326
+      "max_abs_diff_mps2": 0.062,
+      "mean_abs_diff_mps2": 0.0163,
+      "as_fraction_of_threshold": 0.025,
+      "family_uncovered": false
     },
     {
       "from_deg": 4.198,
       "to_deg": 3.525,
       "midpoint_deg": 3.862,
-      "max_abs_diff_mps2": 0.0404,
-      "mean_abs_diff_mps2": 0.0084,
-      "as_fraction_of_threshold": 0.0163
+      "max_abs_diff_mps2": 0.0601,
+      "mean_abs_diff_mps2": 0.0168,
+      "as_fraction_of_threshold": 0.0243,
+      "family_uncovered": false
     },
     {
       "from_deg": 3.525,
       "to_deg": 1.891,
       "midpoint_deg": 2.708,
-      "max_abs_diff_mps2": 0.1288,
-      "mean_abs_diff_mps2": 0.0291,
-      "as_fraction_of_threshold": 0.052
+      "max_abs_diff_mps2": 0.0866,
+      "mean_abs_diff_mps2": 0.0153,
+      "as_fraction_of_threshold": 0.035,
+      "family_uncovered": false
     },
     {
       "from_deg": 1.891,
       "to_deg": 1.391,
       "midpoint_deg": 1.641,
-      "max_abs_diff_mps2": 0.1578,
-      "mean_abs_diff_mps2": 0.0368,
-      "as_fraction_of_threshold": 0.0637
+      "max_abs_diff_mps2": 0.1576,
+      "mean_abs_diff_mps2": 0.0474,
+      "as_fraction_of_threshold": 0.0636,
+      "family_uncovered": false
     },
     {
       "from_deg": 1.391,
       "to_deg": 0.779,
       "midpoint_deg": 1.085,
-      "max_abs_diff_mps2": 0.1949,
-      "mean_abs_diff_mps2": 0.0363,
-      "as_fraction_of_threshold": 0.0787
+      "max_abs_diff_mps2": 0.199,
+      "mean_abs_diff_mps2": 0.0757,
+      "as_fraction_of_threshold": 0.0804,
+      "family_uncovered": false
     },
     {
       "from_deg": 0.779,
       "to_deg": 0.026,
       "midpoint_deg": 0.403,
-      "max_abs_diff_mps2": 0.1381,
-      "mean_abs_diff_mps2": 0.0374,
-      "as_fraction_of_threshold": 0.0558
+      "max_abs_diff_mps2": 0.3683,
+      "mean_abs_diff_mps2": 0.1914,
+      "as_fraction_of_threshold": 0.1487,
+      "family_uncovered": false
     },
     {
       "from_deg": 0.026,
       "to_deg": 0.0,
       "midpoint_deg": 0.013,
-      "max_abs_diff_mps2": 2.5132,
-      "mean_abs_diff_mps2": 1.1674,
-      "as_fraction_of_threshold": 1.015
+      "max_abs_diff_mps2": 3.0513,
+      "mean_abs_diff_mps2": 1.7498,
+      "as_fraction_of_threshold": 1.2323,
+      "family_uncovered": true
     },
     {
       "from_deg": 0.0,
       "to_deg": -0.961,
       "midpoint_deg": -0.48,
-      "max_abs_diff_mps2": 0.1628,
-      "mean_abs_diff_mps2": 0.0415,
-      "as_fraction_of_threshold": 0.0657
+      "max_abs_diff_mps2": 0.1132,
+      "mean_abs_diff_mps2": 0.0314,
+      "as_fraction_of_threshold": 0.0457,
+      "family_uncovered": false
     },
     {
       "from_deg": -0.961,
       "to_deg": -29.554,
       "midpoint_deg": -15.257,
-      "max_abs_diff_mps2": 0.1594,
-      "mean_abs_diff_mps2": 0.0565,
-      "as_fraction_of_threshold": 0.0644
+      "max_abs_diff_mps2": 0.1348,
+      "mean_abs_diff_mps2": 0.0303,
+      "as_fraction_of_threshold": 0.0544,
+      "family_uncovered": false
     },
     {
       "from_deg": -29.554,
       "to_deg": -30.0,
       "midpoint_deg": -29.777,
-      "max_abs_diff_mps2": 0.0804,
-      "mean_abs_diff_mps2": 0.0226,
-      "as_fraction_of_threshold": 0.0325
+      "max_abs_diff_mps2": 0.0651,
+      "mean_abs_diff_mps2": 0.019,
+      "as_fraction_of_threshold": 0.0263,
+      "family_uncovered": false
     }
   ],
   "note": "A blend differs from a render by this much in POLICY OUTPUT. Expressed against the decision threshold because a difference only matters if it can move the brake decision. At or above 1.0 the family's interior can flip an outcome the certificate quantifies over, and the interval is not usable as declared."

@@ -34,11 +34,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.50647,
-        "sigma": 0.20315,
+        "mean": 0.50648,
+        "sigma": 0.20313,
         "p01": 0.0,
         "p99": 0.77647,
-        "frac_dark": 0.01792
+        "frac_dark": 0.01791
       }
     },
     "P_pts|darkness_lowbeam": {
@@ -112,11 +112,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51363,
-        "sigma": 0.20831,
+        "mean": 0.51364,
+        "sigma": 0.20829,
         "p01": 0.0,
         "p99": 0.80392,
-        "frac_dark": 0.01787
+        "frac_dark": 0.01786
       }
     },
     "P_cont|darkness_lowbeam": {
@@ -125,28 +125,28 @@
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21,
-        14.21
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85,
+        15.85
       ],
       "brake_range_ft": [
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42,
-        51.42
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26,
+        53.26
       ],
       "sun_altitude_deg": -30.0,
       "headlamps": "LowBeam",
@@ -161,7 +161,7 @@
   },
   "illumination": {
     "knots": 2,
-    "axis_span_mean": 0.45516,
+    "axis_span_mean": 0.45517,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [],
@@ -178,7 +178,7 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 60.0,
-        "mean": 0.51363,
+        "mean": 0.51364,
         "lamps": false
       },
       {
