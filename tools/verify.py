@@ -257,6 +257,12 @@ def main() -> int:
         flush=True,
     )
 
+    # Claimed BEFORE any bound is computed. A crash now leaves no artifact rather than
+    # the previous run's (D-9); see carla_jobs.claim_output.
+    _suffix = "" if args.property == "S" else "_A"
+    out_path = J.claim_output(
+        OUT / f"verify_{args.policy}_{args.scenario}{_suffix}.json")
+
     stored = {
         round(float(np.load(p)["sun_altitude_deg"]), 3): p
         for p in CAPTURES.glob(f"{args.scenario}_sun*.npz")
@@ -386,8 +392,7 @@ def main() -> int:
             "BEFORE ANY DRIVING; that ordering is what makes these predictions."
         ),
     }
-    suffix = "" if args.property == "S" else "_A"
-    path = OUT / f"verify_{args.policy}_{args.scenario}{suffix}.json"
+    path = out_path
     path.write_text(json.dumps(payload, indent=2) + "\n")
     n_bad = len(payload["falsified"])
     n_und = len(payload["undecided"])

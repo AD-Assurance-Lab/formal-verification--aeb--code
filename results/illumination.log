@@ -103,4 +103,16 @@ cross-campaign agreement (lead, none, none_ped, ped)
      +28.397 deg  spread 0.0041  lead=0.5182, none=0.5182, none_ped=0.5223, ped=0.5215
   wrote results/captures/cross_campaign.json
 
-  4 of 4 campaigns consistent
+manifest_lead_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0498 vs lower 0.0406  OK, brighter
+
+manifest_none_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0498 vs lower 0.0406  OK, brighter
+
+manifest_none_ped_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0503 vs lower 0.0401  OK, brighter
+
+manifest_ped_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0503 vs lower 0.0401  OK, brighter
+
+  8 of 8 campaigns consistent

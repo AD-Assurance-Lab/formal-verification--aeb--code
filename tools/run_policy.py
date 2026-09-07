@@ -249,7 +249,12 @@ def main() -> int:
         raise SystemExit(f"scenario {args.scenario!r} is not drivable")
     import capture_campaign as CC
     assert A9_HEAD_START_M == CC.PED_LEAD_MARGIN_M, "A9 head start drifted"
-    policies = ["P_pts", "P_cont"] if args.all else [args.policy]
+    # From the training module's own arm list, not a literal. This read
+    # ["P_pts", "P_cont"] and silently skipped P_pts3 when it was added, so the third
+    # regulatory-matrix arm had certificates and gates and no M4 result at all -- and
+    # "--all" reported success while covering two thirds of the policies.
+    from train_policies import POLICY_ARMS
+    policies = list(POLICY_ARMS) if args.all else [args.policy]
     conditions = list(CONDITIONS) if args.all else [args.condition]
     if None in policies or None in conditions:
         raise SystemExit("give --policy and --condition, or --all")
@@ -259,6 +264,9 @@ def main() -> int:
     # carry (sm_120 vs an sm_90 build). Both end in a silent CPU run that still prints
     # numbers. See tools/gpu.py.
     dev = require_cuda()
+    _sfx = "" if args.scenario == "lead" else f"_{args.scenario}"
+    out_path = J.claim_output(                              # D-9
+        J.REPO / "results" / "carla" / f"policy_endpoints{_sfx}.json")
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81
     client, world = J.connect(rendering=True)
@@ -359,8 +367,7 @@ def main() -> int:
         "setup: the claim is that a policy which SATISFIES the standard is unsafe "
         "between its test points."
     )
-    suffix = "" if args.scenario == "lead" else f"_{args.scenario}"
-    path = J.REPO / "results" / "carla" / f"policy_endpoints{suffix}.json"
+    path = out_path
     path.write_text(json.dumps(out, indent=2) + "\n")
     print(f"\n  wrote {path.relative_to(J.REPO)}")
     return 0

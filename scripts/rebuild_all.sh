@@ -38,12 +38,28 @@ INPUT_W=128
 INPUT_H=96
 SEED=${SEED:-0}
 POLICIES="P_pts P_cont P_pts3"
+# How many bound computations share the card. Measured: each peaks near 4.5 GiB, so four
+# fit comfortably in 31.35 GiB with the server stopped and six do not fit with it running.
+VERIFY_CONC=${VERIFY_CONC:-4}
 
 say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
 fresh_server() {
   say "restarting CARLA on $CARLA_PORT"
   bash tools/carla_launch.sh >>"$LOG" 2>&1 || { say "FATAL: server would not start"; exit 1; }
+}
+
+stop_server() {
+  # Verification needs no simulator, and CARLA holds about 10.4 GiB of the card's 31.35.
+  # Leaving it up through a GPU-only stage cost this study two of six concurrent
+  # property-S jobs to CUDA out-of-memory on 2026-09-07: six jobs at ~4.5 GiB each plus
+  # CARLA does not fit, and the two that died had nothing to do with the simulator.
+  say "stopping CARLA: the next stage is GPU-only and the server is holding VRAM"
+  pkill -f "[C]arlaUE4" || true
+  for _ in $(seq 1 30); do
+    ss -ltn 2>/dev/null | grep -q ":$CARLA_PORT[[:space:]]" || break; sleep 2
+  done
+  sleep 3
 }
 
 run() {   # run <name> <cmd...>
@@ -71,24 +87,32 @@ if [ "$FROM" = "verifyA" ]; then
   # no ordering -- and alpha-CROWN on a 310k-parameter network at batch 1 leaves most of
   # a 32 GB card idle, so running them in series turns 1 hour of GPU into 4. Each still
   # writes its own log and its own artifact; the wait collects the exit codes.
-  pids=""; names=""
-  for pol in $POLICIES; do
-    say "START verify_${pol}_none_A (background)"
-    "$PY" -u tools/verify.py --policy "$pol" --scenario none \
-        --policy-scenario lead --property A > "$REPO/results/verify_${pol}_none_A.log" 2>&1 &
-    pids="$pids $!"; names="$names verify_${pol}_none_A"
-    say "START verify_${pol}_none_ped_A (background)"
-    "$PY" -u tools/verify.py --policy "$pol" --scenario none_ped \
-        --policy-scenario ped --property A > "$REPO/results/verify_${pol}_none_ped_A.log" 2>&1 &
-    pids="$pids $!"; names="$names verify_${pol}_none_ped_A"
-  done
+  stop_server
   fail=0
-  set -- $names
-  for pid in $pids; do
-    wait "$pid"; rc=$?
-    say "DONE  $1 rc=$rc"
-    [ $rc -ne 0 ] && { fail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
-    shift
+  queue=""
+  for pol in $POLICIES; do
+    queue="$queue ${pol}|none|lead ${pol}|none_ped|ped"
+  done
+  set -- $queue
+  while [ $# -gt 0 ]; do
+    pids=""; names=""
+    for _ in $(seq 1 "$VERIFY_CONC"); do
+      [ $# -eq 0 ] && break
+      item=$1; shift
+      pol=${item%%|*}; rest=${item#*|}; sc=${rest%%|*}; ps=${rest##*|}
+      say "START verify_${pol}_${sc}_A (background)"
+      "$PY" -u tools/verify.py --policy "$pol" --scenario "$sc" \
+          --policy-scenario "$ps" --property A \
+          > "$REPO/results/verify_${pol}_${sc}_A.log" 2>&1 &
+      pids="$pids $!"; names="$names verify_${pol}_${sc}_A"
+    done
+    set -- $names $@
+    for pid in $pids; do
+      wait "$pid"; rc=$?
+      say "DONE  $1 rc=$rc"
+      [ $rc -ne 0 ] && { fail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
+      shift
+    done
   done
   say "property A complete (rc=$fail)."
   exit $fail
@@ -195,27 +219,36 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # put four hours of work in front of the commit that lets the drives start, for no
       # reason. `bash scripts/rebuild_all.sh verifyA` runs it, and it can run at the same
       # time as `witness`: one wants the GPU, the other wants the simulator.
-      # CONCURRENTLY, for the same reason property A is: four independent jobs, no
-      # simulator, no shared output, and alpha-CROWN at batch 1 on a 310k-parameter
-      # network is latency-bound rather than throughput-bound, so a 32 GB card runs all
-      # four for about the cost of one.
-      pids=""; names=""
+      # Concurrent, but in BATCHES of $VERIFY_CONC and with the simulator stopped first.
+      # alpha-CROWN at batch 1 on a 310k-parameter network is latency-bound rather than
+      # throughput-bound, so several jobs share the card well -- until they do not fit.
+      # Six at once alongside CARLA is what OOM'd on 2026-09-07.
+      stop_server
+      vfail=0
+      queue=""
       for pol in $POLICIES; do
-        for sc in lead ped; do
+        for sc in lead ped; do queue="$queue ${pol}|${sc}"; done
+      done
+      set -- $queue
+      while [ $# -gt 0 ]; do
+        pids=""; names=""
+        for _ in $(seq 1 "$VERIFY_CONC"); do
+          [ $# -eq 0 ] && break
+          item=$1; shift
+          pol=${item%%|*}; sc=${item##*|}
           say "START verify_${pol}_${sc}_S (background)"
           "$PY" -u tools/verify.py --policy "$pol" --scenario "$sc" \
               --policy-scenario "$sc" --property S \
               > "$REPO/results/verify_${pol}_${sc}_S.log" 2>&1 &
           pids="$pids $!"; names="$names verify_${pol}_${sc}_S"
         done
-      done
-      vfail=0
-      set -- $names
-      for pid in $pids; do
-        wait "$pid"; rc=$?
-        say "DONE  $1 rc=$rc"
-        [ $rc -ne 0 ] && { vfail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
-        shift
+        set -- $names $@
+        for pid in $pids; do
+          wait "$pid"; rc=$?
+          say "DONE  $1 rc=$rc"
+          [ $rc -ne 0 ] && { vfail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
+          shift
+        done
       done
       [ $vfail -ne 0 ] && { say "stopping: a property S job failed"; exit 1; }
       say ""

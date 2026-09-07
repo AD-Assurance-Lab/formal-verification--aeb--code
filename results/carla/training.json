@@ -13,8 +13,9 @@
         -30.0,
         60.0
       ],
+      "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.0251,
+      "train_mae_mps2": 0.0163,
       "file": "P_pts_lead.pt"
     },
     "P_cont": {
@@ -40,9 +41,22 @@
         42.76599884033203,
         60.0
       ],
+      "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.0669,
+      "train_mae_mps2": 0.0261,
       "file": "P_cont_lead.pt"
+    },
+    "P_pts3": {
+      "samples": 3744,
+      "braking_samples": 450,
+      "knots": [
+        -30.0,
+        60.0
+      ],
+      "highbeam_condition": true,
+      "student_params": 310145,
+      "train_mae_mps2": 0.0211,
+      "file": "P_pts3_lead.pt"
     }
   },
   "scenario": "lead",

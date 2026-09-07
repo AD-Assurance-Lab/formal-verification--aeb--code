@@ -1,0 +1,15 @@
+[
+  {
+    "knot": -30.0,
+    "file": "ped_hb_sun-30.000.npz",
+    "frames": 104,
+    "size_mb": 10.0,
+    "signature": {
+      "mean": 0.05033,
+      "sigma": 0.09041,
+      "p01": 0.0,
+      "p99": 0.31765,
+      "frac_dark": 0.67464
+    }
+  }
+]

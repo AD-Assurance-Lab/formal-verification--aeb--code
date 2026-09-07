@@ -101,6 +101,12 @@ def main() -> int:
         J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2
     ) * J.FT
 
+    # D-9: claimed before the first run, so a crashed drive leaves no witness artifact
+    # rather than an earlier one that every consumer would treat as current.
+    _sfx = "_atwitness" if args.at_witness else ""
+    out_path = J.claim_output(
+        OUT / f"witness_{args.policy}_{args.scenario}{_sfx}.json")
+
     carla = J.carla_module()
     client, world = J.connect(rendering=True)
     site = J.flattest_site()
@@ -262,8 +268,7 @@ def main() -> int:
         "test that only visits flagged cells cannot tell a working certificate from one "
         "that flags everything."
         if args.at_witness else payload["note"])
-    suffix = "_atwitness" if args.at_witness else ""
-    path = OUT / f"witness_{args.policy}_{args.scenario}{suffix}.json"
+    path = out_path
     path.write_text(json.dumps(payload, indent=2) + "\n")
     print(f"\n  certificate agrees with driving in {agree}/{len(rows)} sub-intervals")
     print(f"  wrote {path.relative_to(J.REPO)}")

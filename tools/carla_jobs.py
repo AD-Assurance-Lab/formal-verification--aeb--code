@@ -424,6 +424,31 @@ def progress(msg: str) -> None:
     print(f"    {msg}", flush=True)
 
 
+def claim_output(path):
+    """Delete an artifact before regenerating it, so a crash cannot leave the old one.
+
+    D-9: "results files are usually overwritten in place, so a crashed repetition leaves
+    the previous one on disk and the probe compares a file with itself and reports
+    IDENTICAL. Copy each repetition's output to its own path before the next one runs.
+    [This defect produced a false 'runs are reproducible' result that contradicted the
+    true measurement and cost a day.]"
+
+    It cost this study something too, on 2026-09-07. Two of six concurrent property-S
+    jobs died on CUDA out-of-memory. One of them, verify_P_cont_lead, had produced a
+    perfectly good artifact eleven hours earlier on a DIFFERENT set of policies, and that
+    file stayed on disk: 17 cells, correct schema, branch-and-bound block present,
+    indistinguishable from a fresh one to every consumer. `study/ledger.py --check-order`
+    would have validated it and `make_figure.py` would have plotted it.
+
+    Unlinking first turns that silent substitution into an obvious absence.
+    """
+    from pathlib import Path as _P
+    path = _P(path)
+    if path.exists():
+        path.unlink()
+    return path
+
+
 def write(job: str, payload: dict) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"{job}.json").write_text(json.dumps(payload, indent=2) + "\n")

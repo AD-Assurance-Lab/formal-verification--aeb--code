@@ -1,41 +1,41 @@
   loading Town01 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
     sub-interval +60.000 to +42.766, midpoint +51.383
-      max policy difference 0.099 m/s^2 = 0.04 of the decision threshold
+      max policy difference 0.085 m/s^2 = 0.03 of the decision threshold
     sub-interval +42.766 to +28.397, midpoint +35.581
-      max policy difference 0.111 m/s^2 = 0.04 of the decision threshold
+      max policy difference 0.063 m/s^2 = 0.03 of the decision threshold
     sub-interval +28.397 to +18.743, midpoint +23.570
-      max policy difference 0.132 m/s^2 = 0.05 of the decision threshold
+      max policy difference 0.067 m/s^2 = 0.03 of the decision threshold
     sub-interval +18.743 to +12.542, midpoint +15.642
-      max policy difference 0.057 m/s^2 = 0.02 of the decision threshold
+      max policy difference 0.077 m/s^2 = 0.03 of the decision threshold
     sub-interval +12.542 to +10.128, midpoint +11.335
-      max policy difference 0.044 m/s^2 = 0.02 of the decision threshold
+      max policy difference 0.055 m/s^2 = 0.02 of the decision threshold
     sub-interval +10.128 to +7.715, midpoint +8.921
-      max policy difference 0.061 m/s^2 = 0.02 of the decision threshold
+      max policy difference 0.274 m/s^2 = 0.11 of the decision threshold
     sub-interval +7.715 to +5.298, midpoint +6.506
-      max policy difference 0.182 m/s^2 = 0.07 of the decision threshold
+      max policy difference 0.375 m/s^2 = 0.15 of the decision threshold
     sub-interval +5.298 to +4.198, midpoint +4.748
-      max policy difference 0.061 m/s^2 = 0.02 of the decision threshold
+      max policy difference 0.088 m/s^2 = 0.04 of the decision threshold
     sub-interval +4.198 to +3.525, midpoint +3.862
-      max policy difference 0.071 m/s^2 = 0.03 of the decision threshold
+      max policy difference 0.056 m/s^2 = 0.02 of the decision threshold
     sub-interval +3.525 to +1.891, midpoint +2.708
-      max policy difference 0.101 m/s^2 = 0.04 of the decision threshold
+      max policy difference 0.187 m/s^2 = 0.08 of the decision threshold
     sub-interval +1.891 to +1.391, midpoint +1.641
-      max policy difference 0.090 m/s^2 = 0.04 of the decision threshold
+      max policy difference 0.179 m/s^2 = 0.07 of the decision threshold
     sub-interval +1.391 to +0.779, midpoint +1.085
-      max policy difference 0.157 m/s^2 = 0.06 of the decision threshold
+      max policy difference 0.191 m/s^2 = 0.08 of the decision threshold
     sub-interval +0.779 to +0.026, midpoint +0.403
-      max policy difference 0.513 m/s^2 = 0.21 of the decision threshold
+      max policy difference 0.496 m/s^2 = 0.20 of the decision threshold
     sub-interval +0.026 to +0.000, midpoint +0.013
-      max policy difference 1.115 m/s^2 = 0.45 of the decision threshold
+      max policy difference 1.151 m/s^2 = 0.46 of the decision threshold
     sub-interval +0.000 to -0.961, midpoint -0.480
-      max policy difference 0.172 m/s^2 = 0.07 of the decision threshold
+      max policy difference 0.125 m/s^2 = 0.05 of the decision threshold
     sub-interval -0.961 to -29.554, midpoint -15.257
-      max policy difference 0.549 m/s^2 = 0.22 of the decision threshold
+      max policy difference 0.605 m/s^2 = 0.24 of the decision threshold
     sub-interval -29.554 to -30.000, midpoint -29.777
-      max policy difference 0.066 m/s^2 = 0.03 of the decision threshold
+      max policy difference 0.467 m/s^2 = 0.19 of the decision threshold
 
   illumination axis OK: 17 midpoints, span 0.4495 of full range
 
-  worst 0.451 of the decision threshold -> PASS
+  worst 0.465 of the decision threshold -> PASS
   wrote results/carla/gate_inbetween_P_cont.json
