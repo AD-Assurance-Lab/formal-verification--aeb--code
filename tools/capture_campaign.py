@@ -72,6 +72,22 @@ def load_knots() -> list[float]:
     return payload["knots_sun_altitude_deg"]
 
 
+def load_uncovered() -> list[dict]:
+    """The sub-intervals the family cannot represent, as the knot measurement found them.
+
+    A knot file written before this field existed has no way to say, so it is refused
+    rather than read as "everything is covered" -- a missing coverage record must never
+    default to full coverage.
+    """
+    path = J.REPO / "results" / "carla" / "family_knots.json"
+    payload = json.loads(path.read_text())
+    if "sub_interval_detail" not in payload:
+        raise SystemExit(
+            f"{path.name} predates per-sub-interval coverage and cannot state its own "
+            "scope. Re-run tools/build_family_knots.py.")
+    return payload.get("uncovered", [])
+
+
 def expert_decel(range_m: float, v: float, a_max: float) -> float:
     """Ground-truth braking law. The label, and the same law the oracle uses."""
     reach = max(0.05, range_m - S.FT * 0 - 1.0)  # 1.0 m standoff, PROTOCOL section 3

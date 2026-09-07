@@ -1,5 +1,22 @@
 # Formal verification of AEB across illuminations FMVSS 127 does not test
 
+> **SUPERSEDED, 2026-09-06. Every measured number below is from the pre-A12 harness and
+> is being re-measured; do not quote this file until this banner is gone.**
+>
+> Amendment A12 discarded every measured artifact in this study because the simulator
+> harness was wrong (`vehicle.apply_control()` racing `world.tick()`, and texture
+> streaming left on). The rebuild found something larger than the harness defects it was
+> launched for: `a_max` here, **0.868 g**, was an artifact of CARLA's default physics
+> substepping and is **0.505 g** when the step is integrated finely enough to resolve a
+> brake transient — so `r_req` at 25 mph is **52.0 ft**, not the 34.7 ft this report
+> derives everything from. See `FINDINGS.md` F5 for the convergence study and the
+> disposition. `python -m study.status` is the live state.
+>
+> What still stands: sections 1 through 4 and 6.1 (the claim, the selection criterion,
+> the regulatory grounding, and the finding that the illumination axis must be cut at the
+> horizon), the map survey, and every entry in section 17. What does not: sections 5 and
+> 7 through 15 in their entirety.
+
 **Complete methodology and results.** WMU AD Assurance Lab. Simulated in CARLA 0.9.16,
 Town01, on an RTX 4070.
 
@@ -387,18 +404,19 @@ property that a single-sided study would have skipped.
 ## 18. Reproducing this
 
 ```bash
-python tools/survey_maps.py                    # choose the map, offline
-python tools/carla_jobs.py --all               # primitives, gates, oracle
-python tools/build_family_knots.py             # the illumination knots
-python tools/capture_campaign.py --scenario lead   # then none, then ped
-python tools/check_pairing.py                  # exact pose pairing
-python tools/choose_input_size.py --scenario lead
-python tools/train_policies.py --input-w 128 --input-h 96
-python tools/run_policy.py --all               # M4
-python tools/verify.py --policy P_pts --property S   # M6, before driving
-python tools/verify.py --policy P_pts --scenario none --property A
-python tools/drive_witness.py --policy P_pts   # M7
-python -m study.status                         # the ledger
+bash scripts/bootstrap_env.sh            # builds .venv and PROVES a CUDA kernel runs
+python tools/survey_maps.py              # choose the map, offline, no simulator
+bash scripts/rebuild_all.sh              # M2 to M6, in dependency order
+                                         # ... commit results/carla/verify_*.json here
+bash scripts/rebuild_all.sh witness      # M7; refuses if the verdicts are uncommitted
+python -m study.ledger --check-order     # the blind protocol, checked against git
+python tools/make_figure.py              # PROTOCOL section 11's figure
+python -m study.status                   # the ledger
 ```
+
+The single script exists because a number that goes in a paper has to come from a
+committed invocation. It restarts the simulator before every measurement stage, and it
+stops before M7 on purpose: a script that committed the verdicts on your behalf would
+turn the blind protocol into a formality.
 
 Figure: `docs/figures/dusk_gap.html`. Raw results: `results/carla/*.json`.

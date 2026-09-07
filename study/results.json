@@ -1,5 +1,5 @@
 {
-  "_comment": "Measured outcomes against PROTOCOL.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here.",
+  "_comment": "Measured outcomes against PROTOCOL.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here. RESET 2026-09-06 for the A12 rebuild: every number below M1 was discarded with the artifacts that produced them (A12, FINDINGS F5) and is being re-measured on the corrected harness. The superseded values remain in git history at febefa9.",
   "milestones": {
     "M0": {
       "state": "done",
@@ -11,106 +11,100 @@
     },
     "M2": {
       "state": "done",
-      "note": "a_max 0.868 g, t_lat 0.150 s over 10 reps/speed; contact detector -1.23 ft on a deliberate crash; oracle 10/10 perfect and 0/10 late"
+      "note": "REBUILT on the corrected harness. a_max 0.505 g (was 0.868 g -- an integration artifact, FINDINGS F5), t_lat 0.150 s over 10 reps/speed, r_req 52.0 ft at 25 mph; contact detector validated on a deliberate crash; lead oracle 10/10 perfect and 0/10 late; pedestrian oracle 10/10 and 0/10"
     },
     "M3": {
       "state": "done",
-      "note": "expert 10/10 at both regulatory endpoints, outcomes identical across lighting; scenario objects built and both oracle checks pass"
+      "note": "REBUILT. Expert 10/10 at both regulatory endpoints, 14.0 ft standoff at each; capture check places a frame to 0.000 m and 0.010 of image range; scenario objects rebuilt and both oracle checks pass"
     },
     "M4": {
-      "state": "done",
-      "note": "both policies 10/10 at both regulatory endpoints, braking at 33.6 ft against r_req 34.7, standoff 5.4-5.5 ft"
+      "state": "todo",
+      "note": "A12 rebuild: policies not yet retrained on the rebuilt captures"
     },
     "M5": {
-      "state": "done",
-      "note": "both gates pass behaviourally for BOTH policies: capture 0.191 (P_cont) / 0.260 (P_pts); in-between worst 0.454 (P_cont) / 0.578 (P_pts) over covered sub-intervals, failing only inside the A6-excluded sliver (FINDINGS F2)"
+      "state": "todo",
+      "note": "A12 rebuild: behavioural gates await the rebuilt policies"
     },
     "M6": {
-      "state": "done",
-      "note": "lead: both properties, both policies, committed before driving (S 6/11, 8/11). ped: S committed before driving -- P_pts 5/15, P_cont 14/15 covered; A: P_cont 3/15, P_pts queued on GPU availability"
+      "state": "todo",
+      "note": "A12 rebuild: verdicts await the rebuilt policies"
     },
     "M7": {
-      "state": "done",
-      "note": "P_pts 10/11 agreement, P_cont 9/11, every disagreement conservative. P_pts drove 0/10 at three dusk illuminations where P_cont drove 10/10, 10/10, 5/10"
+      "state": "todo",
+      "note": "A12 rebuild: witness drives await the rebuilt verdicts"
     },
     "M8": {
-      "state": "in_progress",
-      "note": "figure and full report done (docs/STUDY_REPORT.md, docs/figures/dusk_gap.html); paper not drafted"
+      "state": "todo",
+      "note": "A12 rebuild: figure and report to be regenerated from the rebuilt results"
     }
   },
   "cells": {
     "1": {
-      "endpoints": "PASS both",
-      "fv": "FALSIFIED",
+      "endpoints": null,
+      "fv": null,
       "witness": null,
-      "width": 25.539,
-      "width_note": "contiguous falsified band +25.899 to +0.360 deg over the covered sub-intervals; the uncoverable [0.36, 0.00] sliver is excluded from the width as it is from the coverage claim (F2/F3)",
-      "artifact": "results/carla/verify_P_pts_ped.json",
-      "note": "FALSIFIED across 25.5 deg of dusk between the endpoints; certified only at the extremes. Witness drives pending CARLA handback."
+      "width": null,
+      "note": "A12 rebuild pending"
     },
     "2": {
-      "endpoints": "PASS both",
-      "fv": "FALSIFIED",
-      "witness": "FAIL",
-      "width": 10.802,
-      "note": "FALSIFIED, drove 0/10 at three dusk illuminations",
-      "artifact": "results/carla/verify_P_pts_lead.json",
-      "witness_artifact": "results/carla/witness_P_pts_lead.json",
-      "width_note": "total width of the falsified sub-intervals, degrees of sun altitude (axis 60 to -30)"
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": "A12 rebuild pending"
     },
     "3": {
-      "endpoints": "PASS both",
-      "fv": "CERTIFIED",
+      "endpoints": null,
+      "fv": null,
       "witness": null,
       "width": null,
-      "artifact": "results/carla/verify_P_cont_ped.json",
-      "note": "certified in ALL 14 covered sub-intervals; the only falsification is the declared-uncovered horizon sliver. Witness drives pending CARLA handback."
+      "note": "A12 rebuild pending"
     },
     "4": {
-      "endpoints": "PASS both",
-      "fv": "CERTIFIED in the shoulder",
-      "witness": "PASS",
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
       "width": null,
-      "note": "CERTIFIED in the shoulder, drove 10/10 where P_pts drove 0/10",
-      "artifact": "results/carla/verify_P_cont_lead.json",
-      "witness_artifact": "results/carla/witness_P_cont_lead.json"
+      "note": "A12 rebuild pending"
     },
     "5": {
-      "endpoints": "PASS both",
+      "endpoints": null,
       "fv": null,
       "witness": null,
       "width": null,
-      "note": ""
+      "note": "A12 rebuild pending"
     },
     "6": {
-      "endpoints": "PASS both",
+      "endpoints": null,
       "fv": null,
       "witness": null,
       "width": null,
-      "note": ""
+      "note": "A12 rebuild pending"
     }
   },
   "gates": {
     "capture_check": {
-      "state": "done",
-      "value": 0.191,
+      "state": "todo",
+      "value": null,
       "threshold": 1.0,
-      "note": "BEHAVIOURAL: policy output placed vs driven, 20 poses around r_req, worst 0.812 m/s2 = 0.191 of the brake decision threshold"
+      "note": "A12 rebuild: re-measured after the policies are retrained"
     },
     "in_between_check": {
-      "state": "done",
-      "value": 0.454,
+      "state": "todo",
+      "value": null,
       "threshold": 1.0,
-      "note": "BEHAVIOURAL: policy output on a blend vs a render at the same illumination, worst 0.454 of the decision threshold, in the two sub-intervals adjacent to the horizon. Everywhere else 0.02-0.17, as A5 predicted from image space."
+      "note": "A12 rebuild: re-measured after the policies are retrained"
     }
   },
   "primitives": {
-    "a_max_g": 0.8678,
+    "a_max_g": 0.5048,
+    "a_max_g_from_distance": 0.4863,
     "t_lat_s": 0.15,
     "d_margin_ft": 3.28,
-    "r_req_ft_at_25mph": 34.7,
-    "r_req_ft_at_50mph": 114.2,
+    "r_req_ft_at_25mph": 52.0,
+    "r_req_ft_at_50mph": 183.4,
     "input_w": 128,
-    "input_h": 96
+    "input_h": 96,
+    "_note": "a_max is read from the stop TIME, as PROTOCOL section 3 defines it; a_max_g_from_distance reads the same stops from the distance covered and is the consistency check that condemned the pre-A12 value (FINDINGS F5)."
   }
 }

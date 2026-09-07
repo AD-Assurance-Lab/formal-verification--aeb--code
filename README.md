@@ -7,10 +7,11 @@
 
 Formal verification of automatic emergency braking under degraded visibility.
 
-**Owner:** Zach. **Status:** Iteration 1 complete on the stopped-lead-vehicle scenario
-(see The result, below); pedestrian and trench-plate cells are captured or specified
-but not yet driven. **First milestone:** demo at the automotive technology expo, Novi,
-October 2026.
+**Owner:** Zach. **Status:** **rebuilding.** Amendment A12 discarded every measured
+artifact because the simulator harness was wrong, and the rebuild is under way on the
+corrected one; `python -m study.status` is the live state and `FINDINGS.md` F5 is what
+the rebuild found. The trench-plate cells (5 and 6) are specified and have no harness
+yet. **First milestone:** demo at the automotive technology expo, Novi, October 2026.
 
 ## What this is for
 
@@ -78,10 +79,12 @@ be readable by someone outside the lab.
 **Without a simulator**, which is most of what exists today:
 
 ```bash
-python tools/survey_maps.py           # choose the test map from map geometry alone
 python -m study.protocol_lock         # confirm the frozen design has not moved
 python -m study.status                # where the study stands, in the protocol's terms
-python tools/record_primitives.py     # braking runs -> the safety budget
+python -m study.ledger --check-order  # the blind protocol, checked against git history
+python tools/survey_maps.py           # choose the test map from map geometry alone
+python tools/condition_signature.py   # were the captures rendered at the illumination asked for
+python tools/make_figure.py           # rebuild PROTOCOL section 11's figure from the results
 python tools/tidy.py                  # repo hygiene report
 ```
 
@@ -91,17 +94,29 @@ server. Point it anywhere with `--carla`.
 **With a simulator:**
 
 ```bash
+bash scripts/bootstrap_env.sh         # builds .venv and PROVES a CUDA kernel runs
+bash tools/carla_launch.sh            # THE launcher; the determinism flags are launch-time
+bash scripts/rebuild_all.sh           # the whole study, M2 to M6, in dependency order
+bash scripts/rebuild_all.sh witness   # M7, after the verdicts are committed
 python tools/carla_jobs.py --list     # what is queued, in dependency order
-python tools/carla_jobs.py --all      # runs them, stops at the first failure
 python tools/probe_memory.py --help   # why a map is or is not usable on this hardware
 ```
 
+`scripts/rebuild_all.sh` stops before M7 deliberately. The verification verdicts have to
+be committed to git before the corresponding drive, because that ordering is what makes a
+verdict a prediction rather than a description, and a script that committed them for you
+would turn it into a formality.
+
 ## The result
 
-`docs/STUDY_REPORT.md` is the complete methodology and results in one file. The one-line
-version: a policy that passes both endpoint lighting conditions 10/10 fails 0/10 at three
-dusk illuminations between them; the certificate named those illuminations without
-simulating, and the verdicts were committed to version control before any vehicle moved
+`docs/STUDY_REPORT.md` is the complete methodology and results in one file. **Its
+measured sections are currently superseded** — see the banner at the top of that file and
+`FINDINGS.md` F5 — because A12's rebuild found that the braking primitive the whole safety
+budget derives from was an artifact of the simulator's default physics substepping.
+
+The claim under test is unchanged: a policy that passes both endpoint lighting conditions
+fails between them; the certificate names those illuminations without simulating, and the
+verdicts are committed to version control before any vehicle moves
 (`python -m study.ledger --check-order` verifies that ordering against git).
 
 <p align="center">

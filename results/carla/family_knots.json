@@ -1,0 +1,150 @@
+{
+  "verdict": "MEASURED",
+  "blend_metric": "rgb_three_channel",
+  "tolerance": 0.01,
+  "knots_sun_altitude_deg": [
+    60.0,
+    42.766,
+    28.397,
+    18.743,
+    12.542,
+    7.715,
+    5.298,
+    4.198,
+    3.525,
+    1.891,
+    1.391,
+    0.779,
+    0.026,
+    0.0,
+    -0.961,
+    -29.554,
+    -30.0
+  ],
+  "sub_intervals": 16,
+  "sub_interval_detail": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 42.766,
+      "step_deg": 17.234,
+      "blend_error": 0.01,
+      "covered": true
+    },
+    {
+      "from_deg": 42.766,
+      "to_deg": 28.397,
+      "step_deg": 14.368,
+      "blend_error": 0.0095,
+      "covered": true
+    },
+    {
+      "from_deg": 28.397,
+      "to_deg": 18.743,
+      "step_deg": 9.654,
+      "blend_error": 0.0099,
+      "covered": true
+    },
+    {
+      "from_deg": 18.743,
+      "to_deg": 12.542,
+      "step_deg": 6.201,
+      "blend_error": 0.0099,
+      "covered": true
+    },
+    {
+      "from_deg": 12.542,
+      "to_deg": 7.715,
+      "step_deg": 4.828,
+      "blend_error": 0.0097,
+      "covered": true
+    },
+    {
+      "from_deg": 7.715,
+      "to_deg": 5.298,
+      "step_deg": 2.416,
+      "blend_error": 0.0088,
+      "covered": true
+    },
+    {
+      "from_deg": 5.298,
+      "to_deg": 4.198,
+      "step_deg": 1.1,
+      "blend_error": 0.009,
+      "covered": true
+    },
+    {
+      "from_deg": 4.198,
+      "to_deg": 3.525,
+      "step_deg": 0.673,
+      "blend_error": 0.0088,
+      "covered": true
+    },
+    {
+      "from_deg": 3.525,
+      "to_deg": 1.891,
+      "step_deg": 1.634,
+      "blend_error": 0.0091,
+      "covered": true
+    },
+    {
+      "from_deg": 1.891,
+      "to_deg": 1.391,
+      "step_deg": 0.5,
+      "blend_error": 0.0084,
+      "covered": true
+    },
+    {
+      "from_deg": 1.391,
+      "to_deg": 0.779,
+      "step_deg": 0.611,
+      "blend_error": 0.0087,
+      "covered": true
+    },
+    {
+      "from_deg": 0.779,
+      "to_deg": 0.026,
+      "step_deg": 0.753,
+      "blend_error": 0.0098,
+      "covered": true
+    },
+    {
+      "from_deg": 0.026,
+      "to_deg": 0.0,
+      "step_deg": 0.026,
+      "blend_error": 0.0163,
+      "covered": false
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -0.961,
+      "step_deg": 0.961,
+      "blend_error": 0.0099,
+      "covered": true
+    },
+    {
+      "from_deg": -0.961,
+      "to_deg": -29.554,
+      "step_deg": 28.593,
+      "blend_error": 0.0083,
+      "covered": true
+    },
+    {
+      "from_deg": -29.554,
+      "to_deg": -30.0,
+      "step_deg": 0.446,
+      "blend_error": 0.0041,
+      "covered": true
+    }
+  ],
+  "uncovered": [
+    {
+      "from_deg": 0.026,
+      "to_deg": 0.0,
+      "step_deg": 0.026,
+      "blend_error": 0.0163,
+      "covered": false
+    }
+  ],
+  "renders_used": 175,
+  "note": "Endpoints to render for training and verification. A knot is forced at the horizon because straddling intervals floor near 0.03 error at any width, which is a kink and not curvature. Image space; the behavioural check in PROTOCOL section 4 still decides."
+}

@@ -85,6 +85,7 @@ def main() -> int:
             return sum(diffs) / len(diffs) / 255.0
 
         knots = [DAY_ALT]
+        detail = []
         cur = DAY_ALT
         while cur > NIGHT_ALT:
             floor_at = HORIZON if cur > HORIZON else NIGHT_ALT
@@ -109,6 +110,22 @@ def main() -> int:
                 f"knot {cur:7.2f} -> {nxt:7.2f}  step {cur - nxt:6.2f} deg  "
                 f"error {err:.4f}"
             )
+            # EACH SUB-INTERVAL DECLARES ITS OWN COVERAGE. A6 found one step at the
+            # horizon that cannot meet tolerance at any width, and downstream tools were
+            # deciding which step that was from a hard-coded altitude band (verify.py:
+            # `hi_alt <= 0.37 and lo_alt >= -0.001`) copied from the measurement current
+            # at the time. The band moved when the knots were re-measured -- 0.143 in the
+            # first campaign, 0.36 under the corrected three-channel metric, 0.026 on the
+            # rebuilt harness -- and a constant that no longer matches the knot file does
+            # not fail, it silently reclassifies a sub-interval. Coverage is a property of
+            # the measurement, so the measurement records it.
+            detail.append({
+                "from_deg": round(cur, 3),
+                "to_deg": round(nxt, 3),
+                "step_deg": round(cur - nxt, 3),
+                "blend_error": round(err, 4),
+                "covered": bool(err <= args.tol),
+            })
             knots.append(round(nxt, 3))
             cur = nxt
 
@@ -123,6 +140,8 @@ def main() -> int:
             "tolerance": args.tol,
             "knots_sun_altitude_deg": knots,
             "sub_intervals": len(knots) - 1,
+            "sub_interval_detail": detail,
+            "uncovered": [d for d in detail if not d["covered"]],
             "renders_used": renders,
             "note": (
                 "Endpoints to render for training and verification. A knot is forced at "
@@ -134,8 +153,13 @@ def main() -> int:
         (J.REPO / "results" / "carla" / "family_knots.json").write_text(
             json.dumps(payload, indent=2) + "\n"
         )
+        bad = [d for d in detail if not d["covered"]]
         print(f"\n  {len(knots) - 1} sub-intervals, {renders} renders")
         print(f"  knots: {knots}")
+        for d in bad:
+            print(f"  UNCOVERED: {d['from_deg']:+.3f} to {d['to_deg']:+.3f} "
+                  f"({d['step_deg']:.3f} deg) errs at {d['blend_error']:.4f} against a "
+                  f"{args.tol} tolerance -- declared uncovered, never quietly spanned")
         print("  wrote results/carla/family_knots.json")
     finally:
         if cam is not None:

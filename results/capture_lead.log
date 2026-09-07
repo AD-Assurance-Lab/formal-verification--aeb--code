@@ -1,0 +1,17 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  reusing the saved nominal run, 104 states
+
+lead: 104 states x 17 knots = 1768 frames, about 1.63 GB raw
+    signature: mean 0.5064 sigma 0.1827 p99 0.7686 dark 0.006
+  sun  +60.000: 104 frames,   36.9 MB,  26.4 s
+    signature: mean 0.5282 sigma 0.2257 p99 0.9647 dark 0.006
+  sun  +42.766: 104 frames,   38.5 MB,  26.4 s
+    signature: mean 0.5182 sigma 0.2572 p99 0.9922 dark 0.007
+  sun  +28.397: 104 frames,   38.5 MB,  26.8 s
+    signature: mean 0.4579 sigma 0.2565 p99 0.9882 dark 0.012
+  sun  +18.743: 104 frames,   37.2 MB,  27.6 s
+    signature: mean 0.4033 sigma 0.2465 p99 0.9882 dark 0.019
+  sun  +12.542: 104 frames,   35.3 MB,  28.8 s
+    signature: mean 0.3366 sigma 0.2242 p99 0.9686 dark 0.031
+  sun   +7.715: 104 frames,   31.5 MB,  30.6 s

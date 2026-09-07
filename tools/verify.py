@@ -133,8 +133,9 @@ def main() -> int:
     # scenarios against two different cuts of the same axis for no reason, and the
     # ped branch reads a file build_family_knots.py no longer writes. The metric is
     # checked from the artifact's own stamp instead of from its filename.
-    from capture_campaign import load_knots  # noqa: E402
+    from capture_campaign import load_knots, load_uncovered  # noqa: E402
     knots = load_knots()
+    uncovered = load_uncovered()
 
     # The no-target control replays the LEAD poses, so it has no states file of its own.
     states_name = {"none": "lead", "none_ped": "ped"}.get(args.scenario, args.scenario)
@@ -161,12 +162,19 @@ def main() -> int:
 
     cells = []
     for hi_alt, lo_alt in zip(knots[:-1], knots[1:]):
-        # A6 declares [0.143, 0.000] deg UNCOVERED: no step size meets the blend
-        # tolerance across the horizon discontinuity, so a bound over that blend
-        # quantifies over images that do not represent rendered reality. The cell
-        # is still computed (the ledger keeps its row) but carries the flag, and
-        # a CERTIFIED verdict there must never be counted as coverage (audit F8).
-        family_uncovered = hi_alt <= 0.37 and lo_alt >= -0.001
+        # A6 declares the horizon sliver UNCOVERED: no step size meets the blend
+        # tolerance across the discontinuity, so a bound over that blend quantifies over
+        # images that do not represent rendered reality. The cell is still computed (the
+        # ledger keeps its row) but carries the flag, and a CERTIFIED verdict there must
+        # never be counted as coverage (audit F8).
+        #
+        # WHICH sub-interval that is comes from the knot measurement, not from a constant
+        # here. It has been [0.143, 0.000], then [0.36, 0.00], then [0.026, 0.000] across
+        # three measurements of the same axis, and the band this line used to hard-code
+        # would have kept answering after the knots moved under it.
+        family_uncovered = any(
+            abs(u["from_deg"] - hi_alt) < 1e-6 and abs(u["to_deg"] - lo_alt) < 1e-6
+            for u in uncovered)
         t0 = time.time()
         a_imgs = np.load(stored[round(hi_alt, 3)])["images"]
         b_imgs = np.load(stored[round(lo_alt, 3)])["images"]

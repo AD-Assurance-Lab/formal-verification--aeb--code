@@ -1,7 +1,29 @@
 ==> CARLA_TAKEOVER: stopping whatever holds 3000
     SIGTERM did not clear it after 60 s; SIGKILL
-  server pid 1406596 on port 3000, 15 s old
+  server pid 1407089 on port 3000, 15 s old
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
   loading Town01 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
+    knot   60.00 ->   42.77  step  17.23 deg  error 0.0100
+    knot   42.77 ->   28.40  step  14.37 deg  error 0.0095
+    knot   28.40 ->   18.74  step   9.65 deg  error 0.0099
+    knot   18.74 ->   12.54  step   6.20 deg  error 0.0099
+    knot   12.54 ->    7.71  step   4.83 deg  error 0.0097
+    knot    7.71 ->    5.30  step   2.42 deg  error 0.0088
+    knot    5.30 ->    4.20  step   1.10 deg  error 0.0090
+    knot    4.20 ->    3.53  step   0.67 deg  error 0.0088
+    knot    3.53 ->    1.89  step   1.63 deg  error 0.0091
+    knot    1.89 ->    1.39  step   0.50 deg  error 0.0084
+    knot    1.39 ->    0.78  step   0.61 deg  error 0.0087
+    knot    0.78 ->    0.03  step   0.75 deg  error 0.0098
+    knot    0.03 ->    0.00  step   0.03 deg  error 0.0163
+    knot    0.00 ->   -0.96  step   0.96 deg  error 0.0099
+    knot   -0.96 ->  -29.55  step  28.59 deg  error 0.0083
+    knot  -29.55 ->  -30.00  step   0.45 deg  error 0.0041
+
+  16 sub-intervals, 175 renders
+  knots: [60.0, 42.766, 28.397, 18.743, 12.542, 7.715, 5.298, 4.198, 3.525, 1.891, 1.391, 0.779, 0.026, 0.0, -0.961, -29.554, -30.0]
+  UNCOVERED: +0.026 to +0.000 (0.026 deg) errs at 0.0163 against a 0.01 tolerance -- declared uncovered, never quietly spanned
+  wrote results/carla/family_knots.json
+Terminated

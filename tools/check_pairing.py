@@ -79,7 +79,11 @@ def check(scenario: str) -> bool:
 
 def main() -> int:
     all_ok = True
-    for scenario in ("lead", "ped", "none"):
+    # none_ped was missing here. It is the A10 no-target control for the PEDESTRIAN
+    # scenario and it carries property A for the ped cells, so its pairing matters
+    # exactly as much as the other three -- a check that silently skips one of the four
+    # capture sets is a check that reports PASS for work it never looked at.
+    for scenario in ("lead", "ped", "none", "none_ped"):
         all_ok &= check(scenario)
         print()
     print("pairing check:", "PASS" if all_ok else "FAIL")

@@ -37,6 +37,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
+import condition_signature as CS  # noqa: E402
 from run_policy import load_policy, preprocess, BRAKE_THRESHOLD_FRACTION  # noqa: E402
 
 CAPTURES = J.REPO / "results" / "captures"
@@ -302,10 +303,20 @@ def main() -> int:
         for p in CAPTURES.glob(f"{args.scenario}_sun*.npz")
     }
     rows = []
+    sig_records = []
     for lo, hi in zip(knots[1:], knots[:-1]):  # knots run high to low
         mid = (lo + hi) / 2.0
         J.progress(f"sub-interval {hi:+.3f} to {lo:+.3f}, midpoint {mid:+.3f}")
         rendered = render_at(mid, order)
+        # This gate's whole question is whether a BLEND resembles a RENDER at the same
+        # illumination, so a render that came out at the wrong illumination does not
+        # produce a wrong gate value, it produces a meaningless one -- and a meaningless
+        # one that still lands in [0, 1] and reads as a pass. Signature of the first
+        # rendered pose; the axis is asserted once every midpoint is in.
+        sig_records.append({
+            "sun_altitude_deg": round(mid, 3),
+            "signature": CS.signature(rendered[int(order[0])]),
+        })
         a_img = np.load(stored[round(hi, 3)])["images"]
         b_img = np.load(stored[round(lo, 3)])["images"]
         diffs = []
@@ -329,10 +340,15 @@ def main() -> int:
             f"= {max(diffs) / threshold:.2f} of the decision threshold"
         )
 
+    illumination = CS.assert_axis(sig_records)
+    print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
+          f"{illumination['axis_span_mean']:.4f} of full range")
+
     worst = max(r["as_fraction_of_threshold"] for r in rows)
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
+        "illumination": illumination,
         "decision_threshold_mps2": round(threshold, 3),
         "poses_used": len(order),
         "verdict": "PASS" if worst < 1.0 else "FAIL",
