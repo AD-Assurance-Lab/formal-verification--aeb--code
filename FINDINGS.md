@@ -6,6 +6,119 @@ here, never inside the protocol.
 
 ---
 
+## F8 — 2026-09-07, the verifier was not doing branch and bound, and it cost the negative control
+
+`PROTOCOL.md` section 6 has said "Bounds by **alpha-CROWN with input-space branch and
+bound** over `s`" since M0. `tools/verify.py` made a single `compute_bounds` call per pose
+over the whole sub-interval and never split anything. On a wide sub-interval that is not a
+certificate about the policy; it is a report on how loose one interval bound is.
+
+Measured on `P_cont`/lead over `[-0.961, -29.554]`, the 28.6-degree darkness sub-interval,
+worst lower bound against the number of input sub-domains:
+
+| sub-domains | worst lower bound | × threshold | verdict |
+|---|---|---|---|
+| **1** (what the file did) | 2.2321 | **0.90** | FALSIFIED |
+| 2 | 3.4548 | 1.40 | CERTIFIED |
+| 4 | 4.1036 | 1.66 | CERTIFIED |
+| 8 | 4.2932 | 1.73 | CERTIFIED |
+
+**One bisection flips it**, and the bound converges to about 1.73x. The policy was never
+the problem.
+
+### What it would have cost the study
+
+Without branch and bound the four property-S cells read `P_pts` 5/16 and 3/16, `P_cont`
+14/16 and 13/16. **The negative control was falsified in two sub-intervals of each
+scenario**, and both were the widest ones — `[-0.961, -29.554]` at 0.90x and 0.25x, and
+`[+0.779, +0.026]`. PROTOCOL section 8 says exactly what to do about that: *"Keep the
+negative control alive. If `P_cont` also fails, or `P_pts` also certifies, stop and debug
+rather than narrating it."* The finding underneath that instruction is that a study which
+narrates it would have published "continuum training also fails at dusk" on the strength
+of its own verifier being loose over a 28-degree interval.
+
+With branch and bound: **`P_cont` is 16/16 on both scenarios**, and the contrast with
+`P_pts` is attributable to axis sampling alone, which is the entire design of the ledger.
+
+### Three outcomes, not two
+
+FALSIFIED now requires a **concrete `s` whose actual network output violates the
+property** — an exhibited counterexample. A domain that neither certifies nor produces one
+within the branch-and-bound budget is **UNDECIDED** and is reported as itself.
+
+The old code called that FALSIFIED, which merges "we exhibited an illumination where this
+policy does not brake in time" with "our bound did not clear". For a tool whose product is
+the sentence *here is the certified envelope*, that distinction is the entire credibility
+of the result, and it is the difference between the two readings of the anticipated
+reviewer challenge *"the verifier just flags everything"*. This run has **zero** undecided
+sub-intervals across all four cells.
+
+Worth recording for the write-up: **every exhibited witness in this run sits at s = ±1**,
+which is a rendered knot rather than an interpolated interior point. No falsification in
+this study depends on the blend being faithful. (Partly a property of the search: the
+concrete check samples a domain at its ends and middle, so an endpoint violation is found
+first. It remains a real counterexample at a real rendered illumination.)
+
+### An implementation note that will otherwise be rediscovered
+
+A fresh `BoundedModule` is built **per sub-domain**. Reusing one across sub-domains is the
+obvious optimisation, and alpha-CROWN dies partway through a run with
+`KeyError: '/input-23'` when its per-node alpha cache is carried across perturbation
+regions. Measured, rebuilding costs 0.58 s per bound against 0.64 s with reuse, so there
+was nothing to buy.
+
+---
+
+## F7 — 2026-09-07, the in-between gate failed at a covered sub-interval, and section 4's repair worked
+
+The behavioural in-between check is the one PROTOCOL section 4 says decides whether the
+disturbance family is usable: does the policy answer a **blended** frame the way it answers
+a **rendered** frame at the same illumination? The certificate quantifies over the blends,
+so a sub-interval that fails this is one where a bound is not a statement about the vehicle.
+
+On the rebuilt axis it failed at a **covered** sub-interval, which is new — F2's failures
+were all inside the horizon sliver that is excluded from the coverage claim by design:
+
+| sub-interval | P_pts/ped | P_cont/ped | P_pts/lead | P_cont/lead |
+|---|---|---|---|---|
+| **[+12.542, +7.715]** | **1.016** | **0.848** | 0.123 | 0.114 |
+| every other covered sub-interval | ≤ 0.37 | ≤ 0.24 | ≤ 0.24 | ≤ 0.22 |
+
+Not noise: both policies see it, at three to five times their next-worst sub-interval. It
+is also the widest sub-interval in the region where brightness falls fastest, just above
+the 5-degree headlamp switch.
+
+**Section 4's declared repair is "shorter intervals with rendered interior endpoints ...
+the claim survives; only the interval length changes."** Unlike the horizon sliver, which
+A6 established is a genuine kink no width fixes, this is a width problem. Splitting
+`[+12.542, +7.715]` at `+10.128`:
+
+| | before | after |
+|---|---|---|
+| P_pts / ped | 1.016 | **0.268** and **0.368** |
+| P_pts / lead | 0.123 | 0.032 and 0.156 |
+| image blend error | 0.0097 | 0.0082 and 0.0095 |
+
+All four gates then pass over the covered axis, worst 0.156 / 0.222 / 0.506 / 0.678.
+
+`tools/build_family_knots.py --refine` is that repair as a committed tool: it reads the
+behavioural gate artifacts, splits every covered sub-interval that failed, re-measures both
+halves against the image tolerance, and records in the knot file which gate failure caused
+each split. **The split is applied to the shared axis, not per policy** — a sub-interval
+that fails for one policy is split for both, or the two are certified over different axes
+and stop being comparable, and that comparison is the whole study.
+
+### Two defects that let a failing exit criterion look like a passing one
+
+- `gate_behavioural.py` **returned 0 whatever the verdict**, so `scripts/rebuild_all.sh`
+  walked from a failed M5 straight into verification. It now returns non-zero on FAIL.
+- It judged the verdict on the worst sub-interval **including the uncovered sliver**, so
+  two policies whose covered axis was fine at 0.123 and 0.222 were both labelled FAIL. A
+  gate about the coverage claim cannot be failed by a sub-interval excluded from that
+  claim. Both the covered worst and the failing covered rows are now in the artifact.
+
+---
+
 ## F6 — 2026-09-07, CARLA's scene brightness is not monotone in sun altitude, and the horizon shows up twice
 
 Found by the illumination guard ported from the steering study (NOTES section 2b), on the

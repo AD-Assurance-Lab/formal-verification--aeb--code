@@ -344,3 +344,24 @@ Terminated
 [2026-09-07 05:44:25]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
 [2026-09-07 05:44:25] A verdict is a prediction only if it was written down first;
 [2026-09-07 05:44:25] tools/drive_witness.py refuses to run against an uncommitted one.
+[2026-09-07 05:45:53] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+[2026-09-07 05:45:58] START verify_P_pts_none_A (background)
+[2026-09-07 05:45:58] START verify_P_pts_none_ped_A (background)
+[2026-09-07 05:45:58] START verify_P_cont_none_A (background)
+[2026-09-07 05:45:58] START verify_P_cont_none_ped_A (background)
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1471797 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 05:47:10] START witness_P_pts_lead
+[2026-09-07 06:07:56] DONE  witness_P_pts_lead rc=0
+[2026-09-07 06:07:56] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1508750 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 06:09:14] START witness_P_pts_ped

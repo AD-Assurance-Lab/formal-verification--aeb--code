@@ -59,6 +59,12 @@ def main() -> int:
     ap.add_argument("--policy", required=True)
     ap.add_argument("--scenario", default="lead")
     ap.add_argument("--reps", type=int, default=J.REPS)
+    ap.add_argument(
+        "--at-witness", action="store_true",
+        help="drive the EXHIBITED witness illumination of each falsified sub-interval "
+             "instead of its midpoint. The default midpoint pass answers 'does the "
+             "certificate flag everything'; this one answers 'is the illumination it "
+             "named actually unsafe', which is the question section 10 asks")
     args = ap.parse_args()
 
     if args.scenario not in ("lead", "ped"):
@@ -98,11 +104,27 @@ def main() -> int:
     client, world = J.connect(rendering=True)
     site = J.flattest_site()
 
+    cells_to_drive = verdicts["cells"]
+    if args.at_witness:
+        # Only the falsified ones have an exhibited witness to drive.
+        cells_to_drive = [c for c in verdicts["cells"]
+                          if c["verdict"] == "FALSIFIED" and c.get("witness_s") is not None]
+        if not cells_to_drive:
+            print("  no falsified sub-interval carries an exhibited witness_s; "
+                  "nothing to drive")
+            return 0
+
     rows = []
     sig_records = []
     agree = 0
-    for cell in verdicts["cells"]:
-        mid = (cell["from_deg"] + cell["to_deg"]) / 2.0
+    for cell in cells_to_drive:
+        if args.at_witness:
+            # s runs from the sub-interval's BRIGHT knot at -1 to its DARK knot at +1:
+            # tools/verify.py builds the family with the hi_alt frame as the s = -1 end.
+            s = cell["witness_s"]
+            mid = cell["from_deg"] + (s + 1.0) / 2.0 * (cell["to_deg"] - cell["from_deg"])
+        else:
+            mid = (cell["from_deg"] + cell["to_deg"]) / 2.0
         weather = world.get_weather()
         weather.sun_altitude_angle = mid
         weather.cloudiness = 10.0
@@ -135,6 +157,9 @@ def main() -> int:
                 "from_deg": cell["from_deg"],
                 "to_deg": cell["to_deg"],
                 "midpoint_deg": round(mid, 3),
+                "driven_at_deg": round(mid, 3),
+                "driven_at": "witness" if args.at_witness else "midpoint",
+                "witness_s": cell.get("witness_s"),
                 "verdict": cell["verdict"],
                 "passes": passes,
                 "of": args.reps,
@@ -162,7 +187,13 @@ def main() -> int:
     # real power: a sun that did not move, or moved the wrong way, cannot produce a
     # monotone brightness curve across them.
     from capture_campaign import load_uncovered  # noqa: E402
-    illumination = CS.assert_axis(sig_records, uncovered=load_uncovered())
+    # The at-witness pass can land several sub-intervals on the SAME rendered knot, so
+    # its altitude set is not the spread the axis check is written for. Checked when the
+    # pass sweeps the axis, recorded either way.
+    if args.at_witness and len({r["sun_altitude_deg"] for r in sig_records}) < 3:
+        illumination = CS.check_axis(sig_records, uncovered=load_uncovered())
+    else:
+        illumination = CS.assert_axis(sig_records, uncovered=load_uncovered())
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
 
@@ -184,7 +215,17 @@ def main() -> int:
             "everything."
         ),
     }
-    path = OUT / f"witness_{args.policy}_{args.scenario}.json"
+    payload["driven_at"] = "witness" if args.at_witness else "midpoint"
+    payload["note"] = (
+        "Driven at each falsified sub-interval's EXHIBITED witness illumination -- the "
+        "concrete s whose actual network output violates the property. That illumination "
+        "is a rendered knot here, not a blend. The companion midpoint pass "
+        "(witness_*.json) drives every sub-interval, certified ones included, because a "
+        "test that only visits flagged cells cannot tell a working certificate from one "
+        "that flags everything."
+        if args.at_witness else payload["note"])
+    suffix = "_atwitness" if args.at_witness else ""
+    path = OUT / f"witness_{args.policy}_{args.scenario}{suffix}.json"
     path.write_text(json.dumps(payload, indent=2) + "\n")
     print(f"\n  certificate agrees with driving in {agree}/{len(rows)} sub-intervals")
     print(f"  wrote {path.relative_to(J.REPO)}")
