@@ -41,9 +41,26 @@ _b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
 A_MAX_MPS2 = _b["a_max_g_worst"] * 9.81
 R_REQ_M = J.r_req_m(J.HAZARD_MPH * J.MPH, _b["a_max_g_worst"], _b["t_lat_s_worst"] or 0.2)
 
-# The two regulatory endpoints present in the captures. Darkness with upper beam is a
-# third regulatory point and is not captured yet; see the note in the results file.
+# The two regulatory lighting conditions that are ENDPOINTS of the certified interval.
 REGULATORY_KNOTS = [60.0, -30.0]
+
+# The three policies, and the ONE thing that differs between them.
+#
+#   P_pts   the two regulatory conditions that bound the certified interval. This is the
+#           frozen section 5 comparison against P_cont and it does not move.
+#   P_cont  the illumination continuum, every knot.
+#   P_pts3  the regulatory MATRIX: both endpoints plus darkness with UPPER beam, which
+#           FMVSS 127 tests and which P_pts has never seen. Added 2026-09-07 because
+#           "what a manufacturer optimising against the test matrix builds" was being
+#           represented by a policy trained on two thirds of that matrix. It is a third
+#           arm rather than a redefinition of P_pts, so the existing comparison is
+#           undisturbed and this one answers its own question: does the dusk gap survive
+#           when the policy has seen every lighting condition the standard tests?
+POLICY_ARMS = {
+    "P_pts": {"knots": REGULATORY_KNOTS, "highbeam": False},
+    "P_cont": {"knots": None, "highbeam": False},
+    "P_pts3": {"knots": REGULATORY_KNOTS, "highbeam": True},
+}
 
 
 class Teacher(nn.Module):
@@ -91,7 +108,8 @@ class Student(nn.Module):
         return self.head(self.features(x))
 
 
-def load(scenario: str, knots: list[float] | None, w: int, h: int):
+def load(scenario: str, knots: list[float] | None, w: int, h: int,
+         highbeam: bool = False):
     """Load captures, crop to the road region, downsample, normalise.
 
     Loads the scenario AND the no-target control, the latter labelled zero at every
@@ -107,6 +125,11 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
     # informative: none replays the lead poses, none_ped the ped poses.
     ctrl = "none_ped" if scenario == "ped" else "none"
     sources += sorted(CAPTURES.glob(f"{ctrl}_sun*.npz"))
+    if highbeam:
+        # The upper-beam darkness capture, and its own no-target control. "{x}_sun*" does
+        # not match "{x}_hb_sun*", so these only ever arrive when asked for.
+        sources += sorted(CAPTURES.glob(f"{scenario}_hb_sun*.npz"))
+        sources += sorted(CAPTURES.glob(f"{ctrl}_hb_sun*.npz"))
     for path in sources:
         d = np.load(path)
         knot = float(d["sun_altitude_deg"])
@@ -126,7 +149,8 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int):
         # one place (tools/expert_law.py) so training and verification cannot drift
         # apart, and the captures stay valid when the law is corrected.
         rng = d["range_m"]
-        if path.name.startswith(("none_sun", "none_ped_sun")):
+        if path.name.startswith(("none_sun", "none_ped_sun",
+                                 "none_hb_sun", "none_ped_hb_sun")):
             # Nothing ahead, so nothing to brake for, at any range.
             lab = torch.zeros(len(rng), 1)
         else:
@@ -208,6 +232,10 @@ def main() -> int:
     ap.add_argument("--input-h", type=int, required=True)
     ap.add_argument("--epochs", type=int, default=60)
     ap.add_argument("--lr", type=float, default=1e-3)
+    ap.add_argument("--seed", type=int, default=0,
+                    help="seeds EVERY arm identically, so the arms are matched draws")
+    ap.add_argument("--policies", nargs="+", default=list(POLICY_ARMS),
+                    choices=list(POLICY_ARMS))
     args = ap.parse_args()
 
     # require_cuda, not is_available(): the flag is False while CARLA initialises on
@@ -218,23 +246,31 @@ def main() -> int:
     # Seed every RNG in use: weight init and torch.randperm were nondeterministic,
     # so "retrain, re-verify, re-drive" (A10) could not be reproduced (audit F12).
     import random as _random
-    torch.manual_seed(0)
-    _random.seed(0)
-    np.random.seed(0)
     MODELS.mkdir(parents=True, exist_ok=True)
-    report = {"input": [args.input_w, args.input_h], "device": dev, "seed": 0,
+    report = {"input": [args.input_w, args.input_h], "device": dev, "seed": args.seed,
               "policies": {}}
 
+    names = args.policies
     raw = [
-        load(args.scenario, knots, args.input_w, args.input_h)
-        for _, knots in (("P_pts", REGULATORY_KNOTS), ("P_cont", None))
+        load(args.scenario, POLICY_ARMS[n]["knots"], args.input_w, args.input_h,
+             highbeam=POLICY_ARMS[n]["highbeam"])
+        for n in names
     ]
-    print(f"  before equalising: {[len(x) for x, _, _ in raw]} frames")
+    print(f"  before equalising: {dict(zip(names, [len(x) for x, _, _ in raw]))} frames")
     balanced = equalise(raw)
 
-    for (name, _), (x, y, ks) in zip(
-        (("P_pts", None), ("P_cont", None)), balanced
-    ):
+    for name, (x, y, ks) in zip(names, balanced):
+        # SEEDED PER ARM, with the same seed for every arm. Previously the RNG was seeded
+        # once and the policies were trained in sequence, so P_cont's weight
+        # initialisation and shuffling depended on how much randomness P_pts had already
+        # consumed -- the arms were neither independent draws nor matched ones. PROTOCOL
+        # section 5 asks for two policies identical in everything except which knots the
+        # frames came from; matched seeds are what makes that true of the initialisation
+        # as well as the recipe, and they are the precondition for the seed sweep that
+        # has to establish this gap is not one draw's luck.
+        torch.manual_seed(args.seed)
+        _random.seed(args.seed)
+        np.random.seed(args.seed)
         w = class_weights(y, A_MAX_MPS2)
         print(
             f"\n{name}: {len(x)} samples from {len(set(ks))} knots, "
@@ -248,10 +284,13 @@ def main() -> int:
             Student(args.input_w, args.input_h), x, y, args.epochs, args.lr, dev,
             f"{name} student", teacher=teacher, w=w,
         )
-        path = MODELS / f"{name}_{args.scenario}.pt"
+        tag = "" if args.seed == 0 else f"_s{args.seed}"
+        path = MODELS / f"{name}_{args.scenario}{tag}.pt"
         torch.save(
             {"state_dict": student.state_dict(),
              "input": [args.input_w, args.input_h],
+             "seed": args.seed,
+             "highbeam": POLICY_ARMS[name]["highbeam"],
              "knots": sorted(set(ks))},
             path,
         )
@@ -265,6 +304,7 @@ def main() -> int:
             "samples": len(x),
             "braking_samples": int((y > A_MAX_MPS2 * 0.5).sum()),
             "knots": sorted(set(ks)),
+            "highbeam_condition": POLICY_ARMS[name]["highbeam"],
             "student_params": params,
             "train_mae_mps2": round(err, 4),
             "file": path.name,
@@ -282,6 +322,7 @@ def main() -> int:
     # file's own name implied it covered the training. Same shape as
     # policy_endpoints{suffix}.json and gate_*{suffix}.json elsewhere here.
     suffix = "" if args.scenario == "lead" else f"_{args.scenario}"
+    suffix += "" if args.seed == 0 else f"_s{args.seed}"
     path = J.REPO / "results" / "carla" / f"training{suffix}.json"
     path.write_text(json.dumps(report, indent=2) + "\n")
     print(f"\n  wrote {path.relative_to(J.REPO)}")

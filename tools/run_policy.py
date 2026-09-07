@@ -36,7 +36,16 @@ import condition_signature as CS  # noqa: E402
 from train_policies import Student  # noqa: E402
 
 MODELS = J.REPO / "results" / "models"
-CONDITIONS = {"daylight": (60.0, "NONE"), "darkness_lowbeam": (-30.0, "LowBeam")}
+# The three lighting conditions FMVSS 127 tests, as PROTOCOL section 2 records them.
+# The first two bound the certified interval; the third is the SAME darkness with a
+# different headlamp state, so it is an endpoint TEST and not a point on the family's
+# axis. M4 tested only the first two until 2026-09-07, which made "passes the regulatory
+# test points" a claim about two thirds of the matrix.
+CONDITIONS = {
+    "daylight": (60.0, "NONE"),
+    "darkness_lowbeam": (-30.0, "LowBeam"),
+    "darkness_highbeam": (-30.0, "HighBeam"),
+}
 # Latch at HALF of full braking authority, derived rather than picked. The label is a
 # step between 0 and a_max, so anything below that is the policy saying "not yet".
 # A 0.5 m/s^2 threshold latched on noise at 375 ft.
@@ -305,7 +314,8 @@ def main() -> int:
                 "signature": runs[0]["signature"],
             }
             sig_records.append(
-                {"sun_altitude_deg": alt, "signature": runs[0]["signature"]})
+                {"sun_altitude_deg": alt, "headlamps": lights,
+                 "signature": runs[0]["signature"]})
 
     # The two endpoints are the extremes of the axis, so they are the easiest place to
     # notice that the sun never moved: daylight and darkness-under-lower-beam cannot
@@ -313,11 +323,32 @@ def main() -> int:
     # the study as a whole -- the steering study's version of this rule was enforced on
     # the diagnostic path and not the authoritative one, for a whole study.
     from capture_campaign import load_uncovered  # noqa: E402
-    seen = {r["sun_altitude_deg"]: r for r in sig_records}
-    out["illumination"] = CS.check_axis(list(seen.values()),
+    # The axis check runs over the conditions that lie ON the family's axis. Upper beam
+    # sits at the SAME sun altitude as lower beam, so including it would key two records
+    # to one altitude and hand the monotonicity test a zero-degree step between two
+    # different scenes. Its signature is recorded separately -- it is the only evidence
+    # the high beam actually came on, and a lamp state that failed to apply looks exactly
+    # like a correct run.
+    on_axis = {r["sun_altitude_deg"]: r for r in sig_records
+               if r["headlamps"] != "HighBeam"}
+    out["illumination"] = CS.check_axis(list(on_axis.values()),
                                         uncovered=load_uncovered())
-    if not out["illumination"]["ok"] and len(seen) > 1:
-        CS.assert_axis(list(seen.values()), uncovered=load_uncovered())
+    out["illumination_highbeam"] = [
+        {"sun_altitude_deg": r["sun_altitude_deg"], "signature": r["signature"]}
+        for r in sig_records if r["headlamps"] == "HighBeam"]
+    # Upper beam must render BRIGHTER than lower beam at the same altitude. It is the
+    # same scene with more light in it, so anything else means the lamp state did not
+    # take -- the failure amendment A4 found when auto-exposure made the headlamps make
+    # the image darker.
+    for hb in out["illumination_highbeam"]:
+        lb = on_axis.get(hb["sun_altitude_deg"])
+        if lb and hb["signature"]["mean"] <= lb["signature"]["mean"]:
+            raise SystemExit(
+                f"UPPER BEAM DID NOT TAKE at {hb['sun_altitude_deg']:+.3f} deg: it "
+                f"renders {hb['signature']['mean']:.4f} against lower beam's "
+                f"{lb['signature']['mean']:.4f}. More light cannot make a darker frame.")
+    if not out["illumination"]["ok"] and len(on_axis) > 1:
+        CS.assert_axis(list(on_axis.values()), uncovered=load_uncovered())
 
     out["all_endpoints_pass"] = all(c["passes"] == J.REPS for c in out["cells"].values())
     out["note"] = (

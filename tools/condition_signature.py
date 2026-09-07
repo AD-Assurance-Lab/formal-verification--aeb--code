@@ -296,6 +296,14 @@ def main() -> int:
     unc = _uncovered()
     bad = 0
     campaigns = {}
+    # The upper-beam captures are ONE knot at a different headlamp state. They are not an
+    # axis -- the span check would fail on a single point -- and they are not comparable
+    # to the low-beam campaigns at the same altitude, because more light is supposed to
+    # make a different frame. Held out of both checks and given their own, which is the
+    # one that matters for them: upper beam must render BRIGHTER than lower beam at the
+    # same altitude, or the lamp state never took.
+    hb = [m for m in manifests if m.stem.endswith("_hb")]
+    manifests = [m for m in manifests if not m.stem.endswith("_hb")]
     for mpath in manifests:
         name = mpath.stem.replace("manifest_", "")
         records = _campaign_records(mpath)
@@ -346,7 +354,33 @@ def main() -> int:
         (CAPTURES / "cross_campaign.json").write_text(json.dumps(cc, indent=1) + "\n")
         print(f"  wrote results/captures/cross_campaign.json")
 
-    print(f"\n  {len(manifests) - bad} of {len(manifests)} campaigns consistent")
+    for mpath in hb:
+        scen = mpath.stem.replace("manifest_", "").removesuffix("_hb")
+        recs = _campaign_records(mpath)
+        base = campaigns.get(scen, [])
+        print(f"\n{mpath.name}  (upper beam, {len(recs)} knot)")
+        for r in recs:
+            alt = r["sun_altitude_deg"]
+            low = next((b for b in base
+                        if abs(b["sun_altitude_deg"] - alt) < 1e-6), None)
+            hi_m = r["signature"]["mean"]
+            if low is None:
+                print(f"  {alt:+8.3f} upper {hi_m:.4f}  (no lower-beam capture to "
+                      f"compare against)")
+                continue
+            lo_m = low["signature"]["mean"]
+            ok = hi_m > lo_m
+            print(f"  {alt:+8.3f} upper {hi_m:.4f} vs lower {lo_m:.4f}  "
+                  f"{'OK, brighter' if ok else 'VIOLATION, not brighter'}")
+            if not ok:
+                print("  VIOLATION: the upper beam is supposed to put MORE light into "
+                      "the same scene. A frame that is not brighter means the lamp "
+                      "state never applied -- amendment A4's auto-exposure failure made "
+                      "headlamps darken the image and read as perfectly normal.")
+                bad += 1
+
+    total = len(manifests) + len(hb)
+    print(f"\n  {total - bad} of {total} campaigns consistent")
     return 0 if bad == 0 else 1
 
 

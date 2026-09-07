@@ -45,6 +45,27 @@ DISK_HEADROOM_GB = 20.0
 PED_LEAD_MARGIN_M = 8.0
 
 
+# FMVSS 127 as PROTOCOL section 2 records it tests THREE lighting conditions: daylight,
+# darkness with lower beam, and darkness with upper beam. The first two are the endpoints
+# of the certified interval -- an interval has two ends -- and the third is the same
+# darkness with a different headlamp state, which is how tools/carla_jobs.py:job_sites has
+# always treated it. So upper beam is not a knot on the sun-altitude axis; it is a
+# separate capture at the darkness knot, used as a TRAINING condition and as a third
+# regulatory endpoint test.
+#
+# Filed under a prefix the family's own globs cannot see: every consumer matches
+# "{scenario}_sun*", and "{scenario}_hb_sun*" does not match it. A high-beam frame must
+# never enter the disturbance family by accident -- the family interpolates absolute pixel
+# values along sun altitude, and a different headlamp state at the same altitude is a
+# different scene, not a point on that line.
+HIGHBEAM_KNOT = -30.0
+
+
+def capture_stem(scenario: str, knot: float, highbeam: bool) -> str:
+    return (f"{scenario}_hb_sun{knot:+07.3f}" if highbeam
+            else f"{scenario}_sun{knot:+07.3f}")
+
+
 def load_knots() -> list[float]:
     """The illumination knots, and proof they were measured the right way.
 
@@ -240,7 +261,8 @@ def _load_states(path: Path):
     ]
 
 
-def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
+def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
+            highbeam: bool = False):
     carla = J.carla_module()
     client, world = J.connect(rendering=not dry_run)
     site = J.flattest_site()
@@ -287,7 +309,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = []
     for knot in knots:
-        out_path = OUT / f"{scenario}_sun{knot:+07.3f}.npz"
+        out_path = OUT / f"{capture_stem(scenario, knot, highbeam)}.npz"
         if out_path.exists():
             # A skipped knot still contributes its signature, read back out of the npz.
             # The axis check has to see the WHOLE axis or it sees nothing useful: a
@@ -343,9 +365,9 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
             cam.listen(images.put)
             ego.set_light_state(
                 carla.VehicleLightState(
-                    carla.VehicleLightState.LowBeam
-                    if knot < 5.0
-                    else carla.VehicleLightState.NONE
+                    carla.VehicleLightState.HighBeam if highbeam
+                    else (carla.VehicleLightState.LowBeam if knot < 5.0
+                          else carla.VehicleLightState.NONE)
                 )
             )
             for _ in range(J.WEATHER_SETTLE_TICKS):
@@ -406,6 +428,14 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     # it was asked to. Raising here, before the manifest is written, means a campaign
     # that rendered the wrong illumination cannot leave a manifest that looks finished.
     signed = [m for m in manifest if m.get("signature")]
+    if highbeam:
+        # One knot, so there is no axis. The signature is still recorded -- it is the only
+        # evidence that the high beam actually came on, and a lamp state that silently
+        # failed to apply would otherwise look exactly like a correct capture.
+        for m in signed:
+            print(f"  high beam at sun {m['knot']:+.3f}: mean {m['signature']['mean']:.4f} "
+                  f"p99 {m['signature']['p99']:.4f} dark {m['signature']['frac_dark']:.3f}")
+        return manifest
     if len(signed) < len(manifest):
         raise SystemExit(
             f"{len(manifest) - len(signed)} of {len(manifest)} knots carry no "
@@ -442,14 +472,26 @@ def main() -> int:
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     ap.add_argument("--plan", action="store_true", help="size it, capture nothing")
     ap.add_argument("--limit-knots", type=int, default=0, help="0 means all")
+    ap.add_argument(
+        "--highbeam", action="store_true",
+        help="capture the darkness knot with UPPER beam. FMVSS 127's third lighting "
+             "condition: same illumination, different headlamp state, so it is a "
+             "training condition and an endpoint test rather than a point on the axis")
     args = ap.parse_args()
 
     knots = load_knots()
-    if args.limit_knots:
+    if args.highbeam:
+        knots = [k for k in knots if abs(k - HIGHBEAM_KNOT) < 1e-6]
+        if not knots:
+            raise SystemExit(
+                f"the knot set has no point at {HIGHBEAM_KNOT} deg, so there is no "
+                "darkness endpoint to capture with the upper beam")
+    elif args.limit_knots:
         knots = knots[: args.limit_knots]
-    manifest = capture(args.scenario, knots, args.speed_mph, args.plan)
+    manifest = capture(args.scenario, knots, args.speed_mph, args.plan, args.highbeam)
     if manifest is not None:
-        path = OUT / f"manifest_{args.scenario}.json"
+        suffix = "_hb" if args.highbeam else ""
+        path = OUT / f"manifest_{args.scenario}{suffix}.json"
         path.write_text(json.dumps(manifest, indent=2) + "\n")
         print(f"\n  wrote {path.relative_to(J.REPO)}")
     return 0

@@ -36,6 +36,8 @@ LOG=$REPO/results/rebuild.log
 
 INPUT_W=128
 INPUT_H=96
+SEED=${SEED:-0}
+POLICIES="P_pts P_cont P_pts3"
 
 say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
@@ -70,7 +72,7 @@ if [ "$FROM" = "verifyA" ]; then
   # a 32 GB card idle, so running them in series turns 1 hour of GPU into 4. Each still
   # writes its own log and its own artifact; the wait collects the exit codes.
   pids=""; names=""
-  for pol in P_pts P_cont; do
+  for pol in $POLICIES; do
     say "START verify_${pol}_none_A (background)"
     "$PY" -u tools/verify.py --policy "$pol" --scenario none \
         --policy-scenario lead --property A > "$REPO/results/verify_${pol}_none_A.log" 2>&1 &
@@ -129,6 +131,14 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
         fresh_server
         run "capture_${sc}" "$PY" -u tools/capture_campaign.py --scenario "$sc"
       done
+      # FMVSS 127's third lighting condition: the darkness knot with UPPER beam. Same
+      # illumination, different headlamp state, so it is a training condition and an
+      # endpoint test rather than a point on the axis, and it is filed where the family's
+      # globs cannot reach it.
+      for sc in lead none ped none_ped; do
+        fresh_server
+        run "capture_${sc}_hb" "$PY" -u tools/capture_campaign.py --scenario "$sc" --highbeam
+      done
       ;;
     pairing)
       # Verification interpolates pixel by pixel between knots, so a pose that differs
@@ -144,9 +154,11 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
     train)
       # No simulator. Both policies for both hazard scenarios; the ONLY difference
       # between P_pts and P_cont is which knots their frames came from.
+      # All three arms in ONE invocation per scenario, so the equalisation target is
+      # shared and every arm is seeded identically.
       for sc in lead ped; do
         run "train_${sc}" "$PY" -u tools/train_policies.py --scenario "$sc" \
-            --input-w $INPUT_W --input-h $INPUT_H
+            --input-w $INPUT_W --input-h $INPUT_H --seed $SEED
       done
       ;;
     endpoints)
@@ -164,7 +176,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # BOTH gates. gate_behavioural.py defaults to --gate inbetween, so running it
       # without the flag measures one of the two M5 exit criteria and leaves the other
       # unmeasured while the stage reports success.
-      for pol in P_pts P_cont; do
+      for pol in $POLICIES; do
         for sc in lead ped; do
           for g in capture inbetween; do
             fresh_server
@@ -188,7 +200,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # network is latency-bound rather than throughput-bound, so a 32 GB card runs all
       # four for about the cost of one.
       pids=""; names=""
-      for pol in P_pts P_cont; do
+      for pol in $POLICIES; do
         for sc in lead ped; do
           say "START verify_${pol}_${sc}_S (background)"
           "$PY" -u tools/verify.py --policy "$pol" --scenario "$sc" \
