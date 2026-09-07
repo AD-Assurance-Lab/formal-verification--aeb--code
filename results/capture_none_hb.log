@@ -1,0 +1,10 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  reusing the saved nominal run, 104 states
+
+none: 104 states x 1 knots = 104 frames, about 0.10 GB raw
+    signature: mean 0.0498 sigma 0.0917 p99 0.3372 dark 0.676
+  sun  -30.000: 104 frames,   10.0 MB,  41.1 s
+  high beam at sun -30.000: mean 0.0498 p99 0.3372 dark 0.676
+
+  wrote results/captures/manifest_none_hb.json

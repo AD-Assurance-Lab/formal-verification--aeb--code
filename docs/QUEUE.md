@@ -5,7 +5,26 @@ underneath it, and so that the things which could still **damage** the claim run
 Agreed 2026-09-07 with no deadline pressure; `docs/STATE_OF_PLAY.md` is current belief,
 this is what happens next.
 
-State: `[ ]` queued, `[~]` in progress, `[x]` done, `[!]` blocked.
+Two states per item, because a tool that exists is not a measurement that ran:
+**built** (the instrument is committed and validated) and **measured** (it has produced a
+result on the current harness).
+
+| # | item | built | measured |
+|---|---|---|---|
+| 1 | third regulatory lighting condition | yes | pipeline running |
+| 2 | per-run recording, Wilson intervals, write-up | yes | waits on 1 |
+| 3 | open-loop determinism probe (D-8) | yes | needs the simulator |
+| 4 | seed sweep, n ≈ 20 | yes | GPU, can run beside CARLA |
+| 5 | falsification baseline | yes | needs the simulator |
+| 6 | in-between gate calibration | yes | waits on 2's fresh artifacts |
+| 7 | trench plate, cells 5 and 6 | no — edits files the pipeline is running | |
+| 8 | harness hardening | no — same | |
+| 9 | horizon glare ablation | yes | needs the simulator |
+| 10 | conformal coverage | yes | needs the simulator |
+
+Items 7 and 8 change `capture_campaign.py`, `run_policy.py` and `carla_jobs.py`, which the
+running pipeline invokes on every stage. They wait for it to finish rather than being
+edited underneath it.
 
 ---
 

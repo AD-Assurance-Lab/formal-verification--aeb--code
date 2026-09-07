@@ -284,8 +284,12 @@ def main() -> int:
             Student(args.input_w, args.input_h), x, y, args.epochs, args.lr, dev,
             f"{name} student", teacher=teacher, w=w,
         )
+        # Seed 0 keeps the plain name, so the study's own models are untouched. A
+        # non-zero seed puts the tag on the POLICY half of the name -- P_pts_s3_lead.pt --
+        # so every downstream tool can address it by passing --policy P_pts_s3 and none of
+        # them need to learn what a seed is.
         tag = "" if args.seed == 0 else f"_s{args.seed}"
-        path = MODELS / f"{name}_{args.scenario}{tag}.pt"
+        path = MODELS / f"{name}{tag}_{args.scenario}.pt"
         torch.save(
             {"state_dict": student.state_dict(),
              "input": [args.input_w, args.input_h],
