@@ -1,0 +1,44 @@
+{
+  "r_req_m": 15.85,
+  "r_req_ft": 52.0,
+  "cases": {
+    "perfect": {
+      "trigger_m": 15.85,
+      "passes": 10,
+      "of": 10,
+      "all_released": true,
+      "min_gap_ft": [
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12,
+        13.12
+      ]
+    },
+    "late": {
+      "trigger_m": 7.92,
+      "passes": 0,
+      "of": 10,
+      "all_released": true,
+      "min_gap_ft": [
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23,
+        -2.23
+      ]
+    }
+  },
+  "verdict": "PASS",
+  "note": "PASS needs the perfect oracle 10/10, the late oracle 0/10, and the pedestrian released on every run. A run where the pedestrian never crossed is not a pedestrian test, however good its standoff looks."
+}

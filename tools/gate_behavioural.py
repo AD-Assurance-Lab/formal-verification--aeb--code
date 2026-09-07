@@ -137,7 +137,7 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
                 if not _released and (to_conflict - _lead_m) / max(
                         J.speed_of(ego), 0.1) <= _walk_s:
                     _pctrl.speed = 1.5
-                    carla_jobs.apply_control(other, _pctrl)
+                    J.apply_control(other, _pctrl)
                     _released = True
             for i, r in list(want.items()):
                 if abs(gap - r) < 0.30 and i not in driven:
@@ -147,7 +147,7 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
             err = target_v - J.speed_of(ego)
             integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
             cmd = 0.5 * err + 0.5 * integral
-            carla_jobs.apply_control(ego, carla.VehicleControl(throttle=max(0.0, min(1.0, cmd))))
+            J.apply_control(ego, carla.VehicleControl(throttle=max(0.0, min(1.0, cmd))))
             if gap < 3.0:
                 break
     finally:
@@ -215,8 +215,10 @@ def main() -> int:
     a_max = b["a_max_g_worst"] * 9.81
     threshold = a_max * BRAKE_THRESHOLD_FRACTION
     rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
-    _kf = "family_knots.json" if args.scenario == "lead" else "family_knots_rgb.json"
-    knots = json.loads((OUT / _kf).read_text())["knots_sun_altitude_deg"]
+    # ONE knot set for every scenario; the split by filename is gone (see the same
+    # note in tools/verify.py). The metric is checked from the artifact's own stamp.
+    from capture_campaign import load_knots  # noqa: E402
+    knots = load_knots()
 
     states = json.loads((CAPTURES / f"states_{args.scenario}.json").read_text())
     ranges = np.array([s["range_m"] for s in states])

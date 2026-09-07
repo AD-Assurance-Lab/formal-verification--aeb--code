@@ -1,0 +1,36 @@
+{
+  "verdict": "MEASURED",
+  "interval": {
+    "day_sun_alt": 60.0,
+    "night_sun_alt": -30.0
+  },
+  "blend_vs_rendered": [
+    {
+      "s": 0.2,
+      "mean_abs_error_0_255": 29.09,
+      "mean_abs_error_normalised": 0.1141
+    },
+    {
+      "s": 0.4,
+      "mean_abs_error_0_255": 44.78,
+      "mean_abs_error_normalised": 0.1756
+    },
+    {
+      "s": 0.5,
+      "mean_abs_error_0_255": 43.2,
+      "mean_abs_error_normalised": 0.1694
+    },
+    {
+      "s": 0.6,
+      "mean_abs_error_0_255": 31.44,
+      "mean_abs_error_normalised": 0.1233
+    },
+    {
+      "s": 0.8,
+      "mean_abs_error_0_255": 24.57,
+      "mean_abs_error_normalised": 0.0963
+    }
+  ],
+  "worst_normalised_error": 0.1756,
+  "note": "IMAGE space only. The check that decides the study is behavioural and waits for a policy (PROTOCOL section 4). A low number here is not evidence the family is valid; a high number is evidence it is not."
+}

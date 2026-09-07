@@ -1,0 +1,95 @@
+{
+  "a_max_g": 0.5048,
+  "t_lat_s": 0.15,
+  "d_margin_m": 1.0,
+  "cases": {
+    "perfect_25mph": {
+      "trigger_m": 15.85,
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99
+      ],
+      "v_at_brake_mph": [
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0
+      ],
+      "distance_closed_after_trigger_m": [
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582,
+        11.582
+      ],
+      "braking_job_stop_m": 13.628
+    },
+    "late_25mph": {
+      "trigger_m": 9.51,
+      "passes": 0,
+      "of": 10,
+      "min_gap_ft": [
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07,
+        0.07
+      ],
+      "v_at_brake_mph": [
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0,
+        25.0
+      ],
+      "distance_closed_after_trigger_m": [
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486,
+        9.486
+      ],
+      "braking_job_stop_m": 13.628
+    }
+  },
+  "r_req_m_at_25mph": 15.85,
+  "r_req_ft_at_25mph": 52.0,
+  "verdict": "PASS",
+  "note": "PASS requires the perfect oracle 10/10 and the late oracle 0/10. Anything in between means the harness is measuring noise, and no policy result from it would mean anything."
+}

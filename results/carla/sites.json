@@ -1,4 +1,257 @@
 {
-  "verdict": "ERROR",
-  "error": "time-out of 600000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:3000"
+  "verdict": "PASS",
+  "street_lighting_by_site": {
+    "0": 3.35,
+    "1": 0.23,
+    "3": 9.85,
+    "4": 3.38,
+    "5": 9.72
+  },
+  "note": "night_nolights is the measurement that matters: with headlamps on, an unlit road and a lit one look similar ahead of the vehicle. Higher mean brightness with the lamps off means street lighting is present.",
+  "captures": [
+    {
+      "site": 0,
+      "run_ft": 1006.8,
+      "xy": [
+        -0.03,
+        -9.96
+      ],
+      "lanes": 2,
+      "condition": "day",
+      "mean_brightness": 129.21,
+      "image": "site00_day.png"
+    },
+    {
+      "site": 0,
+      "run_ft": 1006.8,
+      "xy": [
+        -0.03,
+        -9.96
+      ],
+      "lanes": 2,
+      "condition": "night_nolights",
+      "mean_brightness": 3.35,
+      "image": "site00_night_nolights.png"
+    },
+    {
+      "site": 0,
+      "run_ft": 1006.8,
+      "xy": [
+        -0.03,
+        -9.96
+      ],
+      "lanes": 2,
+      "condition": "night_lowbeam",
+      "mean_brightness": 8.7,
+      "image": "site00_night_lowbeam.png"
+    },
+    {
+      "site": 0,
+      "run_ft": 1006.8,
+      "xy": [
+        -0.03,
+        -9.96
+      ],
+      "lanes": 2,
+      "condition": "night_highbeam",
+      "mean_brightness": 12.22,
+      "image": "site00_night_highbeam.png"
+    },
+    {
+      "site": 1,
+      "run_ft": 758.2,
+      "xy": [
+        394.35,
+        -318.54
+      ],
+      "lanes": 2,
+      "condition": "day",
+      "mean_brightness": 109.15,
+      "image": "site01_day.png"
+    },
+    {
+      "site": 1,
+      "run_ft": 758.2,
+      "xy": [
+        394.35,
+        -318.54
+      ],
+      "lanes": 2,
+      "condition": "night_nolights",
+      "mean_brightness": 0.23,
+      "image": "site01_night_nolights.png"
+    },
+    {
+      "site": 1,
+      "run_ft": 758.2,
+      "xy": [
+        394.35,
+        -318.54
+      ],
+      "lanes": 2,
+      "condition": "night_lowbeam",
+      "mean_brightness": 4.08,
+      "image": "site01_night_lowbeam.png"
+    },
+    {
+      "site": 1,
+      "run_ft": 758.2,
+      "xy": [
+        394.35,
+        -318.54
+      ],
+      "lanes": 2,
+      "condition": "night_highbeam",
+      "mean_brightness": 7.34,
+      "image": "site01_night_highbeam.png"
+    },
+    {
+      "site": 2,
+      "error": "no lane at site (101, -197) runs along the straight"
+    },
+    {
+      "site": 3,
+      "run_ft": 735.6,
+      "xy": [
+        101.42,
+        -131.41
+      ],
+      "lanes": 2,
+      "condition": "day",
+      "mean_brightness": 133.24,
+      "image": "site03_day.png"
+    },
+    {
+      "site": 3,
+      "run_ft": 735.6,
+      "xy": [
+        101.42,
+        -131.41
+      ],
+      "lanes": 2,
+      "condition": "night_nolights",
+      "mean_brightness": 9.85,
+      "image": "site03_night_nolights.png"
+    },
+    {
+      "site": 3,
+      "run_ft": 735.6,
+      "xy": [
+        101.42,
+        -131.41
+      ],
+      "lanes": 2,
+      "condition": "night_lowbeam",
+      "mean_brightness": 15.28,
+      "image": "site03_night_lowbeam.png"
+    },
+    {
+      "site": 3,
+      "run_ft": 735.6,
+      "xy": [
+        101.42,
+        -131.41
+      ],
+      "lanes": 2,
+      "condition": "night_highbeam",
+      "mean_brightness": 17.08,
+      "image": "site03_night_highbeam.png"
+    },
+    {
+      "site": 4,
+      "run_ft": 734.4,
+      "xy": [
+        101.62,
+        -328.59
+      ],
+      "lanes": 2,
+      "condition": "day",
+      "mean_brightness": 111.81,
+      "image": "site04_day.png"
+    },
+    {
+      "site": 4,
+      "run_ft": 734.4,
+      "xy": [
+        101.62,
+        -328.59
+      ],
+      "lanes": 2,
+      "condition": "night_nolights",
+      "mean_brightness": 3.38,
+      "image": "site04_night_nolights.png"
+    },
+    {
+      "site": 4,
+      "run_ft": 734.4,
+      "xy": [
+        101.62,
+        -328.59
+      ],
+      "lanes": 2,
+      "condition": "night_lowbeam",
+      "mean_brightness": 6.77,
+      "image": "site04_night_lowbeam.png"
+    },
+    {
+      "site": 4,
+      "run_ft": 734.4,
+      "xy": [
+        101.62,
+        -328.59
+      ],
+      "lanes": 2,
+      "condition": "night_highbeam",
+      "mean_brightness": 9.79,
+      "image": "site04_night_highbeam.png"
+    },
+    {
+      "site": 5,
+      "run_ft": 518.3,
+      "xy": [
+        167.17,
+        -57.49
+      ],
+      "lanes": 2,
+      "condition": "day",
+      "mean_brightness": 91.34,
+      "image": "site05_day.png"
+    },
+    {
+      "site": 5,
+      "run_ft": 518.3,
+      "xy": [
+        167.17,
+        -57.49
+      ],
+      "lanes": 2,
+      "condition": "night_nolights",
+      "mean_brightness": 9.72,
+      "image": "site05_night_nolights.png"
+    },
+    {
+      "site": 5,
+      "run_ft": 518.3,
+      "xy": [
+        167.17,
+        -57.49
+      ],
+      "lanes": 2,
+      "condition": "night_lowbeam",
+      "mean_brightness": 14.94,
+      "image": "site05_night_lowbeam.png"
+    },
+    {
+      "site": 5,
+      "run_ft": 518.3,
+      "xy": [
+        167.17,
+        -57.49
+      ],
+      "lanes": 2,
+      "condition": "night_highbeam",
+      "mean_brightness": 17.06,
+      "image": "site05_night_highbeam.png"
+    }
+  ]
 }

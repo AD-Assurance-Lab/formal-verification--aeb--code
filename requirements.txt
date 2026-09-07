@@ -38,6 +38,20 @@ numpy==1.26.4
 torch==2.13.0        # from https://download.pytorch.org/whl/cu130, not plain PyPI
 graphviz
 
-# CARLA determinism rules and preflight, pinned to an exact tag so a rule change cannot
-# arrive silently mid-study. See its RULES.md for D-1..D-11.
-carla-determinism @ git+https://github.com/AD-Assurance-Lab/carla-determinism--simulation--package@v1.0.0
+# CARLA determinism rules and preflight, pinned to an exact COMMIT so a rule change
+# cannot arrive silently mid-study. See its RULES.md for D-1..D-11.
+#
+# This pin was v1.0.0 and that was wrong on a fresh machine. tools/carla_jobs.py has
+# called cd.install_cleanup_handlers() and cd.require_fresh_server() since 2026-08-30
+# (commit 4beb638), and both are 1.1.0 API. That commit noted "the package is an
+# editable install, so this repo already sees 1.1 without a reinstall" -- true on the
+# old desktop, false after the 2026-09-04 migration, where bootstrap_env.sh installed
+# the pinned v1.0.0 from GitHub and every job died at connect() with
+# "module 'carla_determinism' has no attribute 'install_cleanup_handlers'".
+#
+# 1.1.0 is pushed to origin/main but NOT tagged, so the pin is the commit SHA. Checked
+# before pinning: 1.1.0 adds only RULES.md section 5, which that file declares is
+# deliberately OUTSIDE the frozen section and outside the lock. The frozen digest is
+# byte-identical across the two (bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a)
+# and check_lock() returns clean, so D-1..D-11 have not moved under this study.
+carla-determinism @ git+https://github.com/AD-Assurance-Lab/carla-determinism--simulation--package@3f49938fd5c873d62a700ff55e6eee48775415c9

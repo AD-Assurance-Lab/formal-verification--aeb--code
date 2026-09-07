@@ -6,6 +6,104 @@ here, never inside the protocol.
 
 ---
 
+## F5 — 2026-09-06, the A12 rebuild: `a_max` was an integration artifact, and the safety budget was 33% too short
+
+**This is the disposition PROTOCOL section 8 requires.** Rebuilding the primitives on the
+corrected harness moved braking authority from **0.868 g to 0.505 g** at 25 mph, and
+`r_req` at 25 mph with it, from **34.7 ft to 52.0 ft**. A 42% move in the one measured
+number the entire safety budget is derived from is a bug until proven otherwise. It is
+now measured, and the old number is the wrong one.
+
+### What was ruled out, and what it was
+
+A12 changed two things in `connect()` at once, and the new desktop changed a third:
+
+| candidate | verdict |
+|---|---|
+| D-2, acknowledged `apply_control` | **not the cause** |
+| the RTX 4070 -> RTX 5090 migration | **not the cause** |
+| D-1, explicit substepping | **the cause, entirely** |
+
+Measured by sweeping substeps with D-2 held ON and everything else fixed
+(`tools/substep_convergence.py`, `results/carla/substep_convergence.json`). Before A12
+this study inherited CARLA's default substepping, which at `fixed_delta_seconds = 0.05`
+integrates the whole 50 ms step in **five** substeps. Setting exactly that today, on the
+new GPU and through the acknowledged-control path, reproduces the published number to
+four decimal places:
+
+| substeps | step | stop | a from TIME | a from DISTANCE | disagreement |
+|---|---|---|---|---|---|
+| 2 | 25.00 ms | 10.6-14.9 ft | 1.77-2.07 g | 1.43-1.97 g | non-repeatable, impossible |
+| 4 | 12.50 ms | 33.3 ft | 0.9867 g | 0.678 g | **+45.5%** |
+| **5** | **10.00 ms** | **35.4 ft** | **0.8678 g** | **0.6233 g** | **+39.2%** |
+| 8 | 6.25 ms | 37.7 ft | 0.5766 g | 0.5679 g | +1.5% |
+| **16** | **3.125 ms** | **44.7 ft** | **0.5054 g** | **0.4865 g** | **+3.9%** |
+
+`0.8678` is the value in the pre-A12 `braking.json`, to the digit. So the GPU migration
+is not in it and D-2 is not in it: **the whole 42% is the integrator.**
+
+### The old measurement was impossible on its own terms, and nothing looked
+
+A stop has one average deceleration. Read from the time it took, the pre-A12 stop gives
+0.868 g; read from the distance it covered, the same stop gives 0.623 g. Those cannot both
+be true, and the 39% gap is the coarse integrator failing to resolve the brake transient.
+Every guard the job had was satisfied: the deceleration was under the 1.3 g plausibility
+bound that catches a vehicle driving into a junction, the twenty runs agreed with each
+other to four decimals, the grade was 0.0%, and the verdict was PASS.
+
+`job_braking` now reads every stop both ways and **fails** if they disagree by more than
+10%. That check costs nothing and would have caught this on the first day of the study.
+
+### Convergence, and why 16 substeps is the answer rather than a preference
+
+CARLA clamps `max_substeps` to 16 and says so only in a warning line, so an arm at 32 or
+64 is the 16-substep arm relabelled. The knob saturates before it can demonstrate
+convergence, so the integration step was shrunk the other way instead, by reducing
+`fixed_delta_seconds` at 16 substeps. **These arms are a physics check and not a study
+configuration**; PROTOCOL section 1 fixes the control rate at 20 Hz and every measured
+cell runs there.
+
+| integration step | a from distance | change |
+|---|---|---|
+| 3.125 ms (the study's, dt = 0.05) | 0.4864 g | |
+| 1.563 ms (dt = 0.025) | 0.4801 g | -1.29% |
+| 0.781 ms (dt = 0.0125) | 0.4768 g | -0.69% |
+
+Converged: a four-fold finer integration moves the primitive by 2.0% in total, and the
+last halving by 0.69%. **0.505 g is the vehicle. 0.868 g was the solver.**
+
+*Recorded because the first version of that verdict was wrong in my own analysis code, not
+in the data.* It compared raw stopping distances between arms, and the arms do not start
+from identical speeds — the PI hold exits on a tolerance, so v0 lands at 25.5, 25.1 and
+24.9 mph — and distance goes as v². On that variable the sweep reads 1.85% and 1.25% and
+returns NOT_CONVERGED, which is the settle controller being reported as if it were the
+integrator. `a = v0²/2d` divides it out. Steering-notes section 4, in this repository, on
+the first try.
+
+### What it costs the study, and what it does not
+
+- **`r_req` at 25 mph: 34.7 ft -> 52.0 ft. At 50 mph: 114.2 ft -> 183.4 ft.** Property S
+  quantifies over poses inside `r_req`, so the certified window is larger, and every
+  bound, gate and witness is recomputed against it.
+- **The pre-A12 study was internally consistent and still not about this vehicle.** Its
+  physics braked at 0.868 g and its budget assumed 0.868 g, so its policies really did
+  stop inside a 34.7 ft budget, its oracle really did pass 10/10, and its published
+  "braking at 33.6 ft against r_req 34.7" really did hold. In a world whose vehicle
+  dynamics CARLA's own model does not produce. That is rule D-11 stated concretely: the
+  numbers are not wrong relative to each other, they are not reusable.
+- **A derived budget cannot detect an error in the primitive it is derived from.** `r_req`,
+  the expert label, the oracle's trigger and the closed-loop pass criterion all move
+  together with `a_max`, so every consumer stayed self-consistent while the primitive was
+  40% off. The oracle passed 10/10 before and passes 10/10 now, at two different physics.
+  Only a check from OUTSIDE the derivation chain could see it, and the one that worked was
+  the cheapest available: read one stop two ways and require the readings to agree.
+- **Nothing in PROTOCOL.md above the amendment line changes.** The design, the cells, the
+  properties and the expectations are untouched; `a_max` is defined there as a
+  measurement, and this is that measurement taken correctly. The lock is unmoved at
+  `a80d8c8dd458`.
+
+---
+
 ## F4 — 2026-08-25, Iteration 2 verdicts: the dusk gap reappears for the pedestrian, 25.5 degrees wide
 
 Committed at `ea1700c` BEFORE any witness drive (CARLA is lent out; the drives are

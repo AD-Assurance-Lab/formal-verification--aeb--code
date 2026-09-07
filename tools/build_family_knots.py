@@ -114,6 +114,12 @@ def main() -> int:
 
         payload = {
             "verdict": "MEASURED",
+            # The artifact states which metric produced it, because the study has
+            # already been burned by a knot set that did not. Audit F1 found every
+            # blend error sampled from the BLUE channel alone (stride 40 over a BGRA
+            # buffer), and the file it wrote was indistinguishable from a correct one.
+            # Consumers require this field rather than trusting the filename.
+            "blend_metric": "rgb_three_channel",
             "tolerance": args.tol,
             "knots_sun_altitude_deg": knots,
             "sub_intervals": len(knots) - 1,

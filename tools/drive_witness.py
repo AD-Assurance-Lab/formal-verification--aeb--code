@@ -28,6 +28,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
+import condition_signature as CS  # noqa: E402
 from run_policy import load_policy, one_run, PREMATURE_MULTIPLE  # noqa: E402
 
 OUT = J.REPO / "results" / "carla"
@@ -98,6 +99,7 @@ def main() -> int:
     site = J.flattest_site()
 
     rows = []
+    sig_records = []
     agree = 0
     for cell in verdicts["cells"]:
         mid = (cell["from_deg"] + cell["to_deg"]) / 2.0
@@ -139,14 +141,29 @@ def main() -> int:
                 "never_braked": sum(1 for r in runs if not r["braked"]),
                 "premature": sum(1 for r in runs if r["premature"]),
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],
+                "headlamps": lights,
+                "signature": runs[0]["signature"],
                 "agrees": matched,
             }
         )
+        sig_records.append(
+            {"sun_altitude_deg": round(mid, 3), "signature": runs[0]["signature"]})
         J.progress(
             f"{cell['from_deg']:+8.3f} to {cell['to_deg']:+8.3f}  "
             f"mid {mid:+7.3f}  predicted {cell['verdict']:<9}  "
             f"drove {passes}/{args.reps}  {'agree' if matched else 'DISAGREE'}"
         )
+
+    # THE ILLUMINATION AXIS THIS DRIVE ACTUALLY RENDERED, checked before the agreement
+    # table is written. This is the driver that produces the study's headline -- "P_pts
+    # passes both regulatory endpoints and fails 0/10 at three dusk illuminations" -- and
+    # until now nothing anywhere in the repository checked that the dusk it drove was the
+    # dusk the certificate named. Eleven midpoints spanning +45 to -30 deg give the check
+    # real power: a sun that did not move, or moved the wrong way, cannot produce a
+    # monotone brightness curve across them.
+    illumination = CS.assert_axis(sig_records)
+    print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
+          f"{illumination['axis_span_mean']:.4f} of full range")
 
     _prov = _provenance(str(J.REPO / "results" / "models" /
                             f"{args.policy}_{args.scenario}.pt"))
@@ -155,6 +172,7 @@ def main() -> int:
         "scenario": args.scenario,
         "model_sha256": _prov.get("model_sha256"),
         "provenance": _prov,
+        "illumination": illumination,
         "agreement": f"{agree}/{len(rows)}",
         "cells": rows,
         "note": (

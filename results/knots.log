@@ -1,6 +1,7 @@
 ==> CARLA_TAKEOVER: stopping whatever holds 3000
     SIGTERM did not clear it after 60 s; SIGKILL
-  server pid 1390548 on port 3000, 15 s old
+  server pid 1406596 on port 3000, 15 s old
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
-Terminated
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)

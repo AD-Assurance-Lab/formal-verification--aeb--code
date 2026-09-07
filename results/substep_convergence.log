@@ -1,0 +1,32 @@
+  server age 10 min (R-SIM-1 ok)
+     2 substeps (25.00 ms) rep 1: v0 25.0 mph, stop 10.6 ft in 0.55 s, a(time) 2.0748 g, a(dist) 1.9692 g
+     2 substeps (25.00 ms) rep 2: v0 25.3 mph, stop 14.9 ft in 0.65 s, a(time) 1.771 g, a(dist) 1.4336 g
+     2 substeps (25.00 ms) rep 3: v0 25.0 mph, stop 11.6 ft in 0.60 s, a(time) 1.9019 g, a(dist) 1.7997 g
+     4 substeps (12.50 ms) rep 1: v0 26.0 mph, stop 33.3 ft in 1.20 s, a(time) 0.9867 g, a(dist) 0.678 g
+     4 substeps (12.50 ms) rep 2: v0 26.0 mph, stop 33.3 ft in 1.20 s, a(time) 0.9867 g, a(dist) 0.678 g
+     4 substeps (12.50 ms) rep 3: v0 26.0 mph, stop 33.3 ft in 1.20 s, a(time) 0.9867 g, a(dist) 0.678 g
+     5 substeps (10.00 ms) rep 1: v0 25.7 mph, stop 35.4 ft in 1.35 s, a(time) 0.8678 g, a(dist) 0.6233 g
+     5 substeps (10.00 ms) rep 2: v0 25.7 mph, stop 35.4 ft in 1.35 s, a(time) 0.8678 g, a(dist) 0.6233 g
+     5 substeps (10.00 ms) rep 3: v0 25.7 mph, stop 35.4 ft in 1.35 s, a(time) 0.8678 g, a(dist) 0.6233 g
+     8 substeps (6.25 ms) rep 1: v0 25.3 mph, stop 37.7 ft in 1.95 s, a(time) 0.5914 g, a(dist) 0.568 g
+     8 substeps (6.25 ms) rep 2: v0 25.3 mph, stop 37.7 ft in 2.00 s, a(time) 0.5766 g, a(dist) 0.5679 g
+     8 substeps (6.25 ms) rep 3: v0 25.3 mph, stop 37.7 ft in 2.00 s, a(time) 0.5766 g, a(dist) 0.5677 g
+    16 substeps (3.12 ms) rep 1: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(time) 0.5054 g, a(dist) 0.4865 g
+    16 substeps (3.12 ms) rep 2: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(time) 0.5054 g, a(dist) 0.4865 g
+    16 substeps (3.12 ms) rep 3: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(time) 0.5054 g, a(dist) 0.4864 g
+
+    dt  50.0 ms x16 (3.12 ms) rep 1: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(dist) 0.4864 g
+    dt  50.0 ms x16 (3.12 ms) rep 2: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(dist) 0.4864 g
+    dt  50.0 ms x16 (3.12 ms) rep 3: v0 25.5 mph, stop 44.7 ft in 2.30 s, a(dist) 0.4864 g
+    dt  25.0 ms x16 (1.56 ms) rep 1: v0 25.1 mph, stop 43.9 ft in 2.33 s, a(dist) 0.4801 g
+    dt  25.0 ms x16 (1.56 ms) rep 2: v0 25.1 mph, stop 43.9 ft in 2.33 s, a(dist) 0.4801 g
+    dt  25.0 ms x16 (1.56 ms) rep 3: v0 25.1 mph, stop 43.9 ft in 2.33 s, a(dist) 0.4801 g
+    dt  12.5 ms x16 (0.78 ms) rep 1: v0 24.9 mph, stop 43.3 ft in 2.35 s, a(dist) 0.4768 g
+    dt  12.5 ms x16 (0.78 ms) rep 2: v0 24.9 mph, stop 43.3 ft in 2.35 s, a(dist) 0.4766 g
+    dt  12.5 ms x16 (0.78 ms) rep 3: v0 24.9 mph, stop 43.3 ft in 2.35 s, a(dist) 0.4768 g
+
+  stop distance vs substeps: {'2->4': 185.83, '4->5': 6.48, '5->8': 6.35, '8->16': 18.61}
+  stop distance vs dt (16 substeps): {'0.05->0.025': -1.85, '0.025->0.0125': -1.25}
+  a(time) over a(dist), percent, by substeps: {'2': 5.7, '4': 45.5, '5': 39.2, '8': 1.5, '16': 3.9}
+  verdict: NOT_CONVERGED
+  wrote results/carla/substep_convergence.json

@@ -71,12 +71,32 @@ def carla_module():
 
 
 def apply_control(actor, control):
-    """Vehicle/walker command through the acknowledged path (carla-determinism D-2).
+    """Vehicle OR walker command through the acknowledged path (carla-determinism D-2).
 
     `actor.apply_control()` is fire-and-forget and races `world.tick()`. The race is
     invisible while a command is unchanged, so it only bites on a step where the command
     CHANGES -- which for a braking policy is every step that matters.
+
+    **Walkers do not go through `cd.apply_control`, and must not go through the raw call
+    either.** The package builds `carla.command.ApplyVehicleControl`, so handing it a
+    `WalkerControl` raises "Python argument types ... did not match C++ signature" --
+    which is what every crossing-pedestrian job did on the first run after A12 routed all
+    commands through the choke point. The fix is not to exempt walkers: the walker's
+    arrival time IS the crossing scenario (an eight percent speed error moves the
+    conflict point by metres, tools/scenarios.py), so a raced walker command is a raced
+    hazard. Same acknowledged batch, walker command class.
     """
+    carla = carla_module()
+    if isinstance(control, carla.WalkerControl):
+        client = cd.get_client()
+        if client is None:
+            raise RuntimeError(
+                "no client bound; call connect() so cd.bind_client() has run. Falling "
+                "back to walker.apply_control() here would race the tick on the actor "
+                "whose timing defines the scenario.")
+        client.apply_batch_sync(
+            [carla.command.ApplyWalkerControl(actor.id, control)], False)
+        return
     cd.apply_control(actor, control)
 
 
@@ -628,6 +648,13 @@ def _brake_from(world, ego, spawn, target_mps: float) -> dict:
         # Average over the WHOLE stop, latency included. That makes it the conservative
         # number the safety budget wants, not the peak the tyres can manage.
         "a_avg_g": round(v0 / stop_time / 9.81, 4) if stop_time else None,
+        # THE SAME STOP, READ FROM THE DISTANCE INSTEAD OF THE TIME. It is not a second
+        # measurement, it is a consistency check: one stop cannot have two average
+        # decelerations. Where they disagree, the integrator is not resolving the brake
+        # transient and neither number is a property of the vehicle. See F5 and
+        # tools/substep_convergence.py -- on CARLA's default substepping these read
+        # 0.868 g and 0.623 g for one stop, and the 0.868 was published.
+        "a_from_dist_g": round(v0 * v0 / (2.0 * dist) / 9.81, 4) if dist > 0.1 else None,
         "grade_pct": round(100.0 * (end.z - start.z) / dist, 2) if dist > 1 else None,
     }
 
@@ -674,18 +701,40 @@ def job_braking() -> dict:
     speed_short = [
         r for r in runs if r["v0_mph"] < 0.9 * r["speed_mph"]
     ]
-    ok = len(accels) >= 2 * REPS and not implausible and not speed_short
+    # SELF-CONSISTENCY. The 1.3 g plausibility bound above does not catch an integrator
+    # that is too coarse to resolve the brake transient: pre-A12 this study ran on
+    # CARLA's default substepping and measured 0.868 g from the stop TIME while the
+    # distance travelled in that same stop implies 0.623 g. Both sat comfortably under
+    # 1.3 g, the verdict was PASS, and r_req was derived from the optimistic one for the
+    # whole study. One stop has one average deceleration; if the two readings disagree
+    # the measurement is of the integrator, not of the vehicle.
+    inconsistent = [
+        r for r in runs
+        if r["a_avg_g"] and r["a_from_dist_g"]
+        and abs(r["a_avg_g"] - r["a_from_dist_g"]) / r["a_from_dist_g"] > 0.10
+    ]
+    ok = (len(accels) >= 2 * REPS and not implausible and not speed_short
+          and not inconsistent)
     return {
         "verdict": "PASS" if ok else "FAIL",
         "implausible_runs": len(implausible),
         "runs_below_commanded_speed": len(speed_short),
+        "internally_inconsistent_runs": len(inconsistent),
+        "a_from_dist_g_worst": (
+            round(min(r["a_from_dist_g"] for r in runs if r["a_from_dist_g"]), 4)
+            if any(r["a_from_dist_g"] for r in runs) else None),
         "site_run_ft": site["run_ft"],
         "site_grade_pct": site.get("grade_pct"),
         "site_xy": [site["x0"], site["y0"]],
         "a_max_g_worst": round(min(accels), 4) if accels else None,
         "a_max_g_median": round(statistics.median(accels), 4) if accels else None,
         "t_lat_s_worst": round(max(lats), 3) if lats else None,
-        "note": "a_max is the WORST average over the stop, not the median. Use the worst.",
+        "note": (
+            "a_max is the WORST average over the stop, not the median. Use the worst. "
+            "a_avg_g is read from the stop TIME (PROTOCOL section 3's definition, "
+            "unchanged); a_from_dist_g reads the same stop from the distance and exists "
+            "only to prove the two agree. A run where they do not is a FAIL."),
+        "substepping": "16 x %.5f s, set explicitly in connect() (D-1)" % (FIXED_DT / 16),
         "runs": runs,
     }
 
@@ -775,16 +824,22 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
         for _ in range(1200):
             gap_ft = separation_ft(ego, lead)
             min_gap_ft = min(min_gap_ft, gap_ft)
-            # Trigger on range to the CONFLICT POINT (A7), not the straight-line
-            # walker distance, which includes the lateral offset (audit F4). Range is
-            # from the FRONT BUMPER, as the captures and labels measure it: without
-            # the extent subtraction the trigger fires ~2.4 m late and the "perfect"
-            # oracle contacts at -1.9 ft on every rep (measured 2026-08-25).
-            loc_now = ego.get_transform().location
-            conflict_range_m = math.hypot(
-                tf_conflict.location.x - loc_now.x, tf_conflict.location.y - loc_now.y
-            ) - ego.bounding_box.extent.x
-            if not braking and conflict_range_m <= trigger_m:
+            # Range for the LEAD scenario is the box-to-box gap, and that is not the
+            # same edit the crossing-pedestrian approach needed. A7 says range is to the
+            # conflict point and adds that "the lead-vehicle case is unaffected: a
+            # stationary lead sits on the ego's line, so the two are the same quantity".
+            # The audit (947c3fb) nonetheless copied the pedestrian form in here, and it
+            # referred to `tf_conflict`, which this function has never defined -- a
+            # NameError on the first oracle rep, invisible until 2026-09-06 because every
+            # artifact was discarded by A12 before the job was next run.
+            #
+            # Restored to the box-to-box gap because that is what the lead capture labels
+            # measure (capture_campaign.nominal_states: separation_ft for scenario
+            # "lead"), and an oracle that triggers on a different range definition from
+            # the one r_req and the labels are written in is testing a different property.
+            # The pedestrian form would also have measured to the lead's CENTRE, half a
+            # car length short.
+            if not braking and gap_ft / FT <= trigger_m:
                 braking = True
                 v_at_brake = speed_of(ego)
             if braking:
@@ -847,11 +902,28 @@ def job_oracle() -> dict:
                     f"min gap {runs[-1]['min_gap_ft']:.1f} ft"
                 )
             passes = sum(1 for r in runs if not r["contact"] and r["standoff_ok"])
+            # v_at_brake and the distance actually closed are RECORDED, not just used.
+            # The oracle's exit criterion is 10/10 against 0/10, and that passes without
+            # anyone being able to check the stop against the braking measurement it is
+            # supposed to agree with. On the 2026-09-06 rebuild the perfect oracle
+            # triggered 6.34 m earlier than the late one and gained only 4.24 m of
+            # standoff, where a fixed braking profile predicts 6.34 -- visible only
+            # because these were derived by hand afterwards from two numbers that
+            # happened to be in the file.
+            closed = [
+                round(trigger - r["min_gap_ft"] / FT, 3) for r in runs
+            ]
             out["cases"][f"{label}_{speed:g}mph"] = {
                 "trigger_m": round(trigger, 2),
                 "passes": passes,
                 "of": REPS,
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],
+                "v_at_brake_mph": [r["v_at_brake_mph"] for r in runs],
+                "distance_closed_after_trigger_m": closed,
+                "braking_job_stop_m": round(
+                    statistics.median(
+                        r["stop_ft"] for r in b["runs"] if r["speed_mph"] == speed
+                    ) / FT, 3),
             }
 
     perfect = out["cases"].get(f"perfect_{HAZARD_MPH:g}mph", {})

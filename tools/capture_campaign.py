@@ -32,6 +32,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
+import condition_signature as CS  # noqa: E402
 import scenarios as S  # noqa: E402
 
 OUT = J.REPO / "results" / "captures"
@@ -45,14 +46,30 @@ PED_LEAD_MARGIN_M = 8.0
 
 
 def load_knots() -> list[float]:
-    # FINDINGS F2: any capture campaign from 2026-08-25 onward uses the knots
-    # measured under the corrected three-channel blend metric. The original
-    # family_knots.json (blue-only metric) remains as the committed lead
-    # campaign's record and must not seed new captures.
-    path = J.REPO / "results" / "carla" / "family_knots_rgb.json"
+    """The illumination knots, and proof they were measured the right way.
+
+    FINDINGS F2: a capture campaign must use knots measured under the three-channel
+    blend metric, never the blue-only one audit F1 found. That was enforced by reading
+    a differently NAMED file, `family_knots_rgb.json`, which stopped working the moment
+    `build_family_knots.py` was fixed -- the fixed tool writes the correct knots to
+    `family_knots.json`, so the rule guarded a filename while the real artifact sat
+    beside it. A12 discarded both files, so there is no longer a stale one to guard
+    against; what has to be checked is the metric the file was MADE with, which the
+    file now states.
+    """
+    path = J.REPO / "results" / "carla" / "family_knots.json"
     if not path.exists():
-        raise SystemExit("run tools/build_family_knots.py first (writes the RGB knots)")
-    return json.loads(path.read_text())["knots_sun_altitude_deg"]
+        raise SystemExit("run tools/build_family_knots.py first (writes the knots)")
+    payload = json.loads(path.read_text())
+    metric = payload.get("blend_metric")
+    if metric != "rgb_three_channel":
+        raise SystemExit(
+            f"refusing: {path.name} declares blend_metric={metric!r}, and this campaign "
+            "requires 'rgb_three_channel'. A knot set bisected on the blue channel "
+            "alone (audit F1) cuts the axis in the wrong places, and dusk sky is "
+            "chromatic exactly where the cuts matter. Re-run "
+            "tools/build_family_knots.py.")
+    return payload["knots_sun_altitude_deg"]
 
 
 def expert_decel(range_m: float, v: float, a_max: float) -> float:
@@ -132,7 +149,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
                 )
                 if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
                     ctrl.speed = 1.5
-                    carla_jobs.apply_control(ped, ctrl)
+                    J.apply_control(ped, ctrl)
                     released = True
 
             if MIN_RANGE_M <= gap_m <= MAX_RANGE_M:
@@ -157,7 +174,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
             err = v_target - J.speed_of(ego)
             integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
             cmd = 0.5 * err + 0.5 * integral
-            carla_jobs.apply_control(ego, 
+            J.apply_control(ego, 
                 carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
             )
             world.tick()
@@ -324,8 +341,18 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
                 cam.stop()
             J.despawn(world, cam, ego, other)
 
+        # WHAT WAS ACTUALLY RENDERED, not what was asked for. Taken at pose 0, which is
+        # the same pose at every knot by construction (that pairing is the whole reason
+        # this replays rather than drives), so the signatures across knots differ only
+        # by illumination. Stored in the npz as well as the manifest, so a frame set can
+        # be audited from itself with nothing else on disk.
+        sig = CS.signature(frames[0])
+        print(f"    signature: mean {sig['mean']:.4f} sigma {sig['sigma']:.4f} "
+              f"p99 {sig['p99']:.4f} dark {sig['frac_dark']:.3f}", flush=True)
+
         np.savez_compressed(
             out_path,
+            signature=np.array(json.dumps(sig)),
             images=np.stack(frames),
             range_m=np.array([s["range_m"] for s in states], dtype=np.float32),
             speed_mps=np.array([s["speed_mps"] for s in states], dtype=np.float32),
@@ -342,9 +369,29 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
         )
         manifest.append(
             {"knot": knot, "file": out_path.name, "frames": len(frames),
-             "size_mb": round(size_mb, 1)}
+             "size_mb": round(size_mb, 1), "signature": sig}
         )
+
+    # THE AXIS IS CHECKED AS A WHOLE, once every knot is in. A per-knot assertion cannot
+    # see the failure that matters -- a single frame is consistent with any illumination
+    # you care to name, and only the axis's own shape says whether the sun moved the way
+    # it was asked to. Raising here, before the manifest is written, means a campaign
+    # that rendered the wrong illumination cannot leave a manifest that looks finished.
+    fresh = [m for m in manifest if m.get("signature")]
+    if len(fresh) >= 2:
+        rep = CS.assert_axis(fresh_records(fresh))
+        print(f"\n  illumination axis OK: {rep['knots']} knots, span "
+              f"{rep['axis_span_mean']:.4f} of full range, monotone within each "
+              f"headlamp regime")
+    else:
+        print("\n  illumination axis NOT checked: fewer than two knots captured in "
+              "this run (the rest were skipped as already present)")
     return manifest
+
+
+def fresh_records(manifest_entries):
+    return [{"sun_altitude_deg": m["knot"], "signature": m["signature"]}
+            for m in manifest_entries]
 
 
 def main() -> int:

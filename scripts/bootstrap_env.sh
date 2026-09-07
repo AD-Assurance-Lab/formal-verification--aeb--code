@@ -78,7 +78,10 @@ if [ -n "$CARLA_WHEEL" ]; then
 else
     echo "    WARNING: no CARLA wheel for $CPTAG in $CARLA_WHEEL_DIR -- closed-loop work will not run"
 fi
-$PIP install -q "git+https://github.com/AD-Assurance-Lab/carla-determinism--simulation--package@v1.0.0"
+# Pinned to a COMMIT, not v1.0.0: this repo's harness has needed 1.1.0's
+# install_cleanup_handlers/require_fresh_server since 2026-08-30, and 1.1.0 is pushed
+# but untagged. See requirements.txt for the check that the frozen rules did not move.
+$PIP install -q "git+https://github.com/AD-Assurance-Lab/carla-determinism--simulation--package@3f49938fd5c873d62a700ff55e6eee48775415c9"
 
 # --- prove it, do not assume it ------------------------------------------------
 echo "==> verifying"
@@ -127,9 +130,21 @@ try:
 except Exception as exc:
     print(f"    carla client: MISSING ({exc}) -- closed-loop work will not run")
 
+# An IMPORT is not the check. The 2026-09-04 migration installed a carla_determinism
+# that imported perfectly and was missing two functions tools/carla_jobs.py calls on
+# every connect(), so every measurement job died at the first one. Prove the API this
+# repo actually uses is present, not merely that the package is.
 try:
     import carla_determinism                                       # noqa: F401
-    print(f"    carla_determinism {carla_determinism.__version__}: OK")
+    need = ["bind_client", "require_deterministic", "apply_control", "check_lock",
+            "digest", "install_cleanup_handlers", "require_fresh_server"]
+    missing = [n for n in need if not hasattr(carla_determinism, n)]
+    if missing:
+        fail.append("carla_determinism is installed but missing "
+                    f"{missing} -- the pin in requirements.txt is too old")
+    else:
+        print(f"    carla_determinism {carla_determinism.__version__} "
+              f"(frozen digest {carla_determinism.digest()[:12]}): OK, full API present")
 except Exception as exc:
     fail.append(f"carla_determinism import failed: {exc}")
 

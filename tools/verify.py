@@ -126,10 +126,15 @@ def main() -> int:
     a_max = b["a_max_g_worst"] * 9.81
     threshold = a_max * BRAKE_THRESHOLD_FRACTION
     rr = J.r_req_m(J.HAZARD_MPH * J.MPH, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
-    # The committed lead campaign used family_knots.json (blue-only metric, its
-    # record); every later campaign uses the RGB knots (FINDINGS F2).
-    _kf = "family_knots.json" if args.scenario in ("lead", "none") else "family_knots_rgb.json"
-    knots = json.loads((OUT / _kf).read_text())["knots_sun_altitude_deg"]
+    # ONE knot set for every scenario. This used to branch -- lead and none read
+    # family_knots.json while ped read family_knots_rgb.json -- because the committed
+    # lead campaign predated the three-channel fix and had to keep its own record
+    # (FINDINGS F2). A12 discarded both files, so that split now certifies two
+    # scenarios against two different cuts of the same axis for no reason, and the
+    # ped branch reads a file build_family_knots.py no longer writes. The metric is
+    # checked from the artifact's own stamp instead of from its filename.
+    from capture_campaign import load_knots  # noqa: E402
+    knots = load_knots()
 
     # The no-target control replays the LEAD poses, so it has no states file of its own.
     states_name = {"none": "lead", "none_ped": "ped"}.get(args.scenario, args.scenario)

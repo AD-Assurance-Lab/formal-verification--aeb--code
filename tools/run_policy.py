@@ -32,6 +32,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
+import condition_signature as CS  # noqa: E402
 from train_policies import Student  # noqa: E402
 
 MODELS = J.REPO / "results" / "models"
@@ -116,6 +117,18 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
         for _ in range(J.SETTLE_TICKS):
             J.grab_frame(world, images)
 
+        # WHAT THIS RUN ACTUALLY SAW. Every artifact in this study has recorded the sun
+        # altitude it ASKED for and nothing has ever recorded what was rendered, which
+        # is the failure that cost the sibling steering study a set of verification
+        # captures (T06-F35): the axis was swept while the camera belonged to another
+        # condition, every run completed, and every number was plausible. Illumination
+        # is this study's independent variable, so a drive that silently ran at the
+        # wrong one does not produce a wrong number, it produces the headline.
+        _sig_img = J.grab_frame(world, images)
+        _arr = np.frombuffer(_sig_img.raw_data, dtype=np.uint8).reshape(
+            (_sig_img.height, _sig_img.width, 4))[:, :, :3]
+        run_signature = CS.signature(_arr)
+
         yaw = math.radians(tf_ego.rotation.yaw)
         ego.set_target_velocity(
             carla.Vector3D(x=v_target * math.cos(yaw), y=v_target * math.sin(yaw), z=0.0)
@@ -146,7 +159,7 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
             if scenario == "ped" and not released:
                 if (to_conflict - lead_m) / max(J.speed_of(ego), 0.1) <= walk_s:
                     ped_ctrl.speed = 1.5
-                    carla_jobs.apply_control(lead, ped_ctrl)
+                    J.apply_control(lead, ped_ctrl)
                     released = True
 
             sep_now = J.separation_ft(ego, lead)
@@ -169,12 +182,12 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                 # a_max inside r_req, so applying a fraction of the demand contradicts
                 # both. Applying demand/a_max meant a demand of 0.5 produced 6 percent
                 # braking and the vehicle coasted into the lead having "braked".
-                carla_jobs.apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
+                J.apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
             else:
                 err = v_target - J.speed_of(ego)
                 integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
                 cmd = 0.5 * err + 0.5 * integral
-                carla_jobs.apply_control(ego, 
+                J.apply_control(ego, 
                     carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
                 )
             if braking and J.speed_of(ego) < 0.1:
@@ -195,6 +208,7 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                     and to_conflict > min_conflict_m + 20.0):
                 break
         out = {
+            "signature": run_signature,
             "min_gap_ft": round(min_gap_ft, 2),
             "rest_gap_ft": None if rest_gap_ft is None else round(rest_gap_ft, 2),
             "contact": min_gap_ft <= 0.0,
@@ -241,6 +255,7 @@ def main() -> int:
     site = J.flattest_site()
 
     out = {"scenario": args.scenario, "speed_mph": args.speed_mph, "cells": {}}
+    sig_records = []
     for pol in policies:
         model, w, h = load_policy(pol, args.scenario, dev)
         for cond in conditions:
@@ -285,7 +300,22 @@ def main() -> int:
                 "premature_brakes": early,
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],
                 "brake_range_ft": [r["brake_range_ft"] for r in runs],
+                "sun_altitude_deg": alt,
+                "headlamps": lights,
+                "signature": runs[0]["signature"],
             }
+            sig_records.append(
+                {"sun_altitude_deg": alt, "signature": runs[0]["signature"]})
+
+    # The two endpoints are the extremes of the axis, so they are the easiest place to
+    # notice that the sun never moved: daylight and darkness-under-lower-beam cannot
+    # render to nearly the same frame. Checked on the driver that produces M4, not on
+    # the study as a whole -- the steering study's version of this rule was enforced on
+    # the diagnostic path and not the authoritative one, for a whole study.
+    seen = {r["sun_altitude_deg"]: r for r in sig_records}
+    out["illumination"] = CS.check_axis(list(seen.values()))
+    if not out["illumination"]["ok"] and len(seen) > 1:
+        CS.assert_axis(list(seen.values()))
 
     out["all_endpoints_pass"] = all(c["passes"] == J.REPS for c in out["cells"].values())
     out["note"] = (
