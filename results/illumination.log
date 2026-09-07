@@ -1,0 +1,102 @@
+
+manifest_lead.json  (17 knots, span 0.4905, worst inversion 4.5% of span)
+    sun deg     mean    sigma      p99  lamps
+     60.000   0.5064   0.1827   0.7686    off
+     42.766   0.5282   0.2257   0.9647    off
+     28.397   0.5182   0.2572   0.9922    off
+     18.743   0.4579   0.2565   0.9882    off
+     12.542   0.4033   0.2465   0.9882    off
+      7.715   0.3366   0.2242   0.9686    off
+      5.298   0.2617   0.2015   0.9216    off
+      4.198   0.2295   0.1722   0.8471     on
+      3.525   0.2102   0.1649   0.7843     on
+      1.891   0.1355   0.1302   0.6000     on
+      1.391   0.1082   0.1158   0.5294     on
+      0.779   0.0758   0.0972   0.4392     on
+      0.026   0.0377   0.0674   0.3098     on
+      0.000   0.0665   0.0827   0.3451     on
+     -0.961   0.0496   0.0719   0.2941     on
+    -29.554   0.0406   0.0715   0.2941     on
+    -30.000   0.0406   0.0715   0.2941     on
+  recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5064 -> 0.5282 (4.5% of the axis span)
+  recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0377 -> 0.0665 (5.9% of the axis span)  [declared uncovered]
+  OK
+
+manifest_none.json  (17 knots, span 0.4906, worst inversion 4.5% of span)
+    sun deg     mean    sigma      p99  lamps
+     60.000   0.5064   0.1827   0.7686    off
+     42.766   0.5283   0.2257   0.9647    off
+     28.397   0.5182   0.2572   0.9922    off
+     18.743   0.4579   0.2566   0.9882    off
+     12.542   0.4033   0.2466   0.9882    off
+      7.715   0.3362   0.2243   0.9686    off
+      5.298   0.2617   0.2015   0.9216    off
+      4.198   0.2295   0.1722   0.8471     on
+      3.525   0.2102   0.1649   0.7843     on
+      1.891   0.1356   0.1302   0.6000     on
+      1.391   0.1082   0.1158   0.5294     on
+      0.779   0.0758   0.0972   0.4392     on
+      0.026   0.0377   0.0674   0.3098     on
+      0.000   0.0665   0.0827   0.3451     on
+     -0.961   0.0496   0.0719   0.2941     on
+    -29.554   0.0406   0.0715   0.2941     on
+    -30.000   0.0406   0.0715   0.2941     on
+  recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5064 -> 0.5283 (4.4% of the axis span)
+  recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0377 -> 0.0665 (5.9% of the axis span)  [declared uncovered]
+  OK
+
+manifest_none_ped.json  (17 knots, span 0.4957, worst inversion 4.1% of span)
+    sun deg     mean    sigma      p99  lamps
+     60.000   0.5109   0.1870   0.7686    off
+     42.766   0.5313   0.2295   0.9647    off
+     28.397   0.5223   0.2578   0.9922    off
+     18.743   0.4605   0.2559   0.9882    off
+     12.542   0.4039   0.2460   0.9882    off
+      7.715   0.3361   0.2237   0.9686    off
+      5.298   0.2612   0.2014   0.9216    off
+      4.198   0.2281   0.1718   0.8471     on
+      3.525   0.2085   0.1645   0.7843     on
+      1.891   0.1337   0.1292   0.6000     on
+      1.391   0.1065   0.1144   0.5294     on
+      0.779   0.0738   0.0954   0.4392     on
+      0.026   0.0356   0.0646   0.3020     on
+      0.000   0.0653   0.0813   0.3451     on
+     -0.961   0.0488   0.0701   0.2863     on
+    -29.554   0.0401   0.0697   0.2863     on
+    -30.000   0.0401   0.0697   0.2863     on
+  recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5109 -> 0.5313 (4.1% of the axis span)
+  recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0356 -> 0.0653 (6.0% of the axis span)  [declared uncovered]
+  OK
+
+manifest_ped.json  (17 knots, span 0.4951, worst inversion 3.8% of span)
+    sun deg     mean    sigma      p99  lamps
+     60.000   0.5117   0.1892   0.7961    off
+     42.766   0.5305   0.2289   0.9647    off
+     28.397   0.5215   0.2574   0.9922    off
+     18.743   0.4633   0.2579   0.9882    off
+     12.542   0.4042   0.2467   0.9882    off
+      7.715   0.3354   0.2235   0.9686    off
+      5.298   0.2617   0.2018   0.9216    off
+      4.198   0.2298   0.1740   0.8432     on
+      3.525   0.2099   0.1662   0.7843     on
+      1.891   0.1332   0.1287   0.5961     on
+      1.391   0.1086   0.1172   0.5333     on
+      0.779   0.0726   0.0940   0.4392     on
+      0.026   0.0354   0.0643   0.3020     on
+      0.000   0.0652   0.0812   0.3451     on
+     -0.961   0.0487   0.0701   0.2863     on
+    -29.554   0.0401   0.0697   0.2863     on
+    -30.000   0.0401   0.0697   0.2863     on
+  recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5117 -> 0.5305 (3.8% of the axis span)
+  recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0354 -> 0.0652 (6.0% of the axis span)  [declared uncovered]
+  recorded: sun fell -29.554 -> -30.000 deg and the frame got BRIGHTER, 0.0401 -> 0.0401 (0.0% of the axis span)
+  OK
+
+cross-campaign agreement (lead, none, none_ped, ped)
+  worst per-knot disagreement: 1.1% of the axis span
+     +18.743 deg  spread 0.0054  lead=0.4579, none=0.4579, none_ped=0.4605, ped=0.4633
+     +60.000 deg  spread 0.0053  lead=0.5064, none=0.5064, none_ped=0.5109, ped=0.5117
+     +28.397 deg  spread 0.0041  lead=0.5182, none=0.5182, none_ped=0.5223, ped=0.5215
+  wrote results/captures/cross_campaign.json
+
+  4 of 4 campaigns consistent

@@ -3,3 +3,28 @@
 [2026-09-07 03:06:14] DONE  capture_lead rc=0
 [2026-09-07 03:06:14] restarting CARLA on 3000
 [2026-09-07 03:07:31] START capture_none
+[2026-09-07 03:17:31] DONE  capture_none rc=0
+[2026-09-07 03:17:31] restarting CARLA on 3000
+[2026-09-07 03:18:48] START capture_ped
+[2026-09-07 03:29:05] DONE  capture_ped rc=0
+[2026-09-07 03:29:05] restarting CARLA on 3000
+[2026-09-07 03:30:23] START capture_none_ped
+[2026-09-07 03:40:23] DONE  capture_none_ped rc=0
+[2026-09-07 03:40:23] START pairing
+[2026-09-07 03:40:24] DONE  pairing rc=0
+[2026-09-07 03:40:24] START illumination
+[2026-09-07 03:40:24] DONE  illumination rc=0
+[2026-09-07 03:40:24] START train_lead
+[2026-09-07 03:40:57] DONE  train_lead rc=0
+[2026-09-07 03:40:57] START train_ped
+[2026-09-07 03:41:29] DONE  train_ped rc=0
+[2026-09-07 03:41:29] restarting CARLA on 3000
+[2026-09-07 03:42:46] START endpoints_lead
+[2026-09-07 03:44:30] DONE  endpoints_lead rc=0
+[2026-09-07 03:44:30] restarting CARLA on 3000
+[2026-09-07 03:45:48] START endpoints_ped
+[2026-09-07 03:47:47] DONE  endpoints_ped rc=0
+[2026-09-07 03:47:47] restarting CARLA on 3000
+[2026-09-07 03:49:04] START gate_capture_P_pts_lead
+[2026-09-07 03:49:10] DONE  gate_capture_P_pts_lead rc=0
+[2026-09-07 03:49:10] restarting CARLA on 3000

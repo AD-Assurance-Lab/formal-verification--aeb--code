@@ -1,0 +1,223 @@
+[
+  {
+    "knot": 60.0,
+    "file": "none_sun+60.000.npz",
+    "frames": 104,
+    "size_mb": 36.9,
+    "signature": {
+      "mean": 0.50644,
+      "sigma": 0.18266,
+      "p01": 0.05098,
+      "p99": 0.76863,
+      "frac_dark": 0.0056
+    }
+  },
+  {
+    "knot": 42.766,
+    "file": "none_sun+42.766.npz",
+    "frames": 104,
+    "size_mb": 38.4,
+    "signature": {
+      "mean": 0.52826,
+      "sigma": 0.22566,
+      "p01": 0.05098,
+      "p99": 0.96471,
+      "frac_dark": 0.00554
+    }
+  },
+  {
+    "knot": 28.397,
+    "file": "none_sun+28.397.npz",
+    "frames": 104,
+    "size_mb": 38.6,
+    "signature": {
+      "mean": 0.51824,
+      "sigma": 0.2572,
+      "p01": 0.05098,
+      "p99": 0.99216,
+      "frac_dark": 0.00695
+    }
+  },
+  {
+    "knot": 18.743,
+    "file": "none_sun+18.743.npz",
+    "frames": 104,
+    "size_mb": 37.3,
+    "signature": {
+      "mean": 0.45794,
+      "sigma": 0.25656,
+      "p01": 0.0,
+      "p99": 0.98824,
+      "frac_dark": 0.01165
+    }
+  },
+  {
+    "knot": 12.542,
+    "file": "none_sun+12.542.npz",
+    "frames": 104,
+    "size_mb": 35.5,
+    "signature": {
+      "mean": 0.40335,
+      "sigma": 0.24658,
+      "p01": 0.0,
+      "p99": 0.98824,
+      "frac_dark": 0.01943
+    }
+  },
+  {
+    "knot": 7.715,
+    "file": "none_sun+07.715.npz",
+    "frames": 104,
+    "size_mb": 31.5,
+    "signature": {
+      "mean": 0.33623,
+      "sigma": 0.2243,
+      "p01": 0.0,
+      "p99": 0.96863,
+      "frac_dark": 0.03167
+    }
+  },
+  {
+    "knot": 5.298,
+    "file": "none_sun+05.298.npz",
+    "frames": 104,
+    "size_mb": 25.3,
+    "signature": {
+      "mean": 0.26174,
+      "sigma": 0.20149,
+      "p01": 0.0,
+      "p99": 0.92157,
+      "frac_dark": 0.06248
+    }
+  },
+  {
+    "knot": 4.198,
+    "file": "none_sun+04.198.npz",
+    "frames": 104,
+    "size_mb": 24.1,
+    "signature": {
+      "mean": 0.22954,
+      "sigma": 0.17218,
+      "p01": 0.0,
+      "p99": 0.84706,
+      "frac_dark": 0.09101
+    }
+  },
+  {
+    "knot": 3.525,
+    "file": "none_sun+03.525.npz",
+    "frames": 104,
+    "size_mb": 22.8,
+    "signature": {
+      "mean": 0.21022,
+      "sigma": 0.16491,
+      "p01": 0.0,
+      "p99": 0.78431,
+      "frac_dark": 0.11125
+    }
+  },
+  {
+    "knot": 1.891,
+    "file": "none_sun+01.891.npz",
+    "frames": 104,
+    "size_mb": 18.1,
+    "signature": {
+      "mean": 0.13555,
+      "sigma": 0.13021,
+      "p01": 0.0,
+      "p99": 0.6,
+      "frac_dark": 0.21016
+    }
+  },
+  {
+    "knot": 1.391,
+    "file": "none_sun+01.391.npz",
+    "frames": 104,
+    "size_mb": 16.0,
+    "signature": {
+      "mean": 0.10823,
+      "sigma": 0.11583,
+      "p01": 0.0,
+      "p99": 0.52945,
+      "frac_dark": 0.27563
+    }
+  },
+  {
+    "knot": 0.779,
+    "file": "none_sun+00.779.npz",
+    "frames": 104,
+    "size_mb": 13.1,
+    "signature": {
+      "mean": 0.07578,
+      "sigma": 0.09718,
+      "p01": 0.0,
+      "p99": 0.43922,
+      "frac_dark": 0.40518
+    }
+  },
+  {
+    "knot": 0.026,
+    "file": "none_sun+00.026.npz",
+    "frames": 104,
+    "size_mb": 8.9,
+    "signature": {
+      "mean": 0.03769,
+      "sigma": 0.06739,
+      "p01": 0.0,
+      "p99": 0.3098,
+      "frac_dark": 0.63565
+    }
+  },
+  {
+    "knot": 0.0,
+    "file": "none_sun+00.000.npz",
+    "frames": 104,
+    "size_mb": 14.4,
+    "signature": {
+      "mean": 0.06655,
+      "sigma": 0.08269,
+      "p01": 0.0,
+      "p99": 0.3451,
+      "frac_dark": 0.42557
+    }
+  },
+  {
+    "knot": -0.961,
+    "file": "none_sun-00.961.npz",
+    "frames": 104,
+    "size_mb": 12.9,
+    "signature": {
+      "mean": 0.04959,
+      "sigma": 0.07187,
+      "p01": 0.0,
+      "p99": 0.29412,
+      "frac_dark": 0.53552
+    }
+  },
+  {
+    "knot": -29.554,
+    "file": "none_sun-29.554.npz",
+    "frames": 104,
+    "size_mb": 8.8,
+    "signature": {
+      "mean": 0.04065,
+      "sigma": 0.0715,
+      "p01": 0.0,
+      "p99": 0.29412,
+      "frac_dark": 0.66161
+    }
+  },
+  {
+    "knot": -30.0,
+    "file": "none_sun-30.000.npz",
+    "frames": 104,
+    "size_mb": 8.8,
+    "signature": {
+      "mean": 0.04065,
+      "sigma": 0.07149,
+      "p01": 0.0,
+      "p99": 0.29412,
+      "frac_dark": 0.66156
+    }
+  }
+]

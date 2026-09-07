@@ -270,16 +270,21 @@ def main() -> int:
             "file": path.name,
         }
 
+    report["scenario"] = args.scenario
     report["note"] = (
         "Identical architecture, recipe, epochs and frame count. The ONLY difference is "
         "which illumination knots the frames came from. Train MAE is not a result; the "
         "result is whether each policy passes the regulatory endpoints closed loop, "
         "which is milestone M4."
     )
-    (J.REPO / "results" / "carla" / "training.json").write_text(
-        json.dumps(report, indent=2) + "\n"
-    )
-    print("\n  wrote results/carla/training.json")
+    # ONE FILE PER SCENARIO. This wrote a single training.json, so training lead and then
+    # ped left one record describing ped and nothing at all describing lead -- while the
+    # file's own name implied it covered the training. Same shape as
+    # policy_endpoints{suffix}.json and gate_*{suffix}.json elsewhere here.
+    suffix = "" if args.scenario == "lead" else f"_{args.scenario}"
+    path = J.REPO / "results" / "carla" / f"training{suffix}.json"
+    path.write_text(json.dumps(report, indent=2) + "\n")
+    print(f"\n  wrote {path.relative_to(J.REPO)}")
     return 0
 
 

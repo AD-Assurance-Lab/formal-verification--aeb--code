@@ -1,0 +1,45 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+
+ped: 104 states x 17 knots = 1768 frames, about 1.63 GB raw
+    signature: mean 0.5117 sigma 0.1892 p99 0.7961 dark 0.006
+  sun  +60.000: 104 frames,   36.8 MB,  27.1 s
+    signature: mean 0.5305 sigma 0.2289 p99 0.9647 dark 0.006
+  sun  +42.766: 104 frames,   38.3 MB,  26.9 s
+    signature: mean 0.5215 sigma 0.2574 p99 0.9922 dark 0.008
+  sun  +28.397: 104 frames,   38.5 MB,  27.4 s
+    signature: mean 0.4633 sigma 0.2579 p99 0.9882 dark 0.012
+  sun  +18.743: 104 frames,   37.1 MB,  28.3 s
+    signature: mean 0.4042 sigma 0.2467 p99 0.9882 dark 0.019
+  sun  +12.542: 104 frames,   35.3 MB,  29.4 s
+    signature: mean 0.3354 sigma 0.2235 p99 0.9686 dark 0.031
+  sun   +7.715: 104 frames,   31.3 MB,  31.1 s
+    signature: mean 0.2617 sigma 0.2018 p99 0.9216 dark 0.062
+  sun   +5.298: 104 frames,   25.3 MB,  33.2 s
+    signature: mean 0.2298 sigma 0.1740 p99 0.8432 dark 0.092
+  sun   +4.198: 104 frames,   24.2 MB,  35.4 s
+    signature: mean 0.2099 sigma 0.1662 p99 0.7843 dark 0.113
+  sun   +3.525: 104 frames,   22.8 MB,  36.2 s
+    signature: mean 0.1332 sigma 0.1287 p99 0.5961 dark 0.212
+  sun   +1.891: 104 frames,   18.1 MB,  36.8 s
+    signature: mean 0.1086 sigma 0.1172 p99 0.5333 dark 0.275
+  sun   +1.391: 104 frames,   16.1 MB,  36.9 s
+    signature: mean 0.0726 sigma 0.0940 p99 0.4392 dark 0.402
+  sun   +0.779: 104 frames,   13.2 MB,  36.4 s
+    signature: mean 0.0354 sigma 0.0643 p99 0.3020 dark 0.642
+  sun   +0.026: 104 frames,    9.0 MB,  36.2 s
+    signature: mean 0.0652 sigma 0.0812 p99 0.3451 dark 0.426
+  sun   +0.000: 104 frames,   14.4 MB,  54.8 s
+    signature: mean 0.0487 sigma 0.0701 p99 0.2863 dark 0.533
+  sun   -0.961: 104 frames,   12.9 MB,  54.5 s
+    signature: mean 0.0401 sigma 0.0697 p99 0.2863 dark 0.657
+  sun  -29.554: 104 frames,    8.8 MB,  41.7 s
+    signature: mean 0.0401 sigma 0.0697 p99 0.2863 dark 0.657
+  sun  -30.000: 104 frames,    8.8 MB,  41.9 s
+
+  illumination axis OK: 17 knots, span 0.4951 of full range, worst inversion 3.8% of span (limit 12%), total 3.8% (limit 25%)
+    recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5117 -> 0.5305 (3.8% of the axis span)
+    recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0354 -> 0.0652 (6.0% of the axis span)  [declared uncovered]
+    recorded: sun fell -29.554 -> -30.000 deg and the frame got BRIGHTER, 0.0401 -> 0.0401 (0.0% of the axis span)
+
+  wrote results/captures/manifest_ped.json

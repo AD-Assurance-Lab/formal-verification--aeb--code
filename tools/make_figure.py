@@ -453,6 +453,146 @@ drawMargins(); drawDriven(); table();
 """
 
 
+
+def render_svg(rows, meta, summary, scenario: str) -> str:
+    """A STATIC svg of the same two panels, with no JavaScript.
+
+    The HTML page builds its charts in the browser, which is right for reading it and
+    useless for a README, a slide or a paper: GitHub renders an <img> and runs nothing.
+    So the same numbers are drawn again here, server-side. Both come from the same `rows`,
+    so they cannot disagree.
+    """
+    W, TOP_H, GAP, BOT_H, PAD_B = 980, 300, 26, 210, 54
+    H = TOP_H + GAP + BOT_H + PAD_B
+    L, R = 66, W - 24
+    n = len(rows)
+    cw = (R - L) / n
+    bw = min(16.0, cw * 0.30)
+
+    margins = [r[p]["margin"] for r in rows for p in POLICIES]
+    y_max = max(2.0, (int(max(margins) * 2) + 1) / 2)
+    y_min = min(-0.5, (int(min(margins) * 2) - 1) / 2)
+
+    def ym(v):
+        return 20 + (y_max - v) / (y_max - y_min) * (TOP_H - 60)
+
+    reps = max((r[p].get("of") or 10) for r in rows for p in POLICIES)
+    dy0, dy1 = TOP_H + GAP + 18, TOP_H + GAP + BOT_H - 34
+
+    def yd(v):
+        return dy1 - (v / reps) * (dy1 - dy0)
+
+    C1, C2 = "#2a78d6", "#eb6834"
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" '
+        f'role="img" aria-label="Certified margin and driven outcome by sub-interval">',
+        # No media queries and no theme switching. This file is meant to be embedded
+        # with <img> in a README and dropped into a slide, and both strip or ignore
+        # stylesheet features unpredictably. One light rendering that looks the same
+        # everywhere beats two that sometimes do.
+        '<style>'
+        'text{font:12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#52514e}'
+        '.t{font-size:14px;font-weight:600;fill:#0b0b0b}'
+        '.s{font-size:11px;fill:#7b7a75}'
+        '.v{font-size:11px;font-weight:600;fill:#0b0b0b}'
+        '</style>',
+        '<defs><pattern id="unc" width="6" height="6" patternUnits="userSpaceOnUse" '
+        'patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" '
+        'stroke="#b9b8b2" stroke-width="2"/></pattern></defs>',
+        f'<rect class="bg" width="{W}" height="{H}" fill="#fcfcfb"/>',
+    ]
+
+    for i, r in enumerate(rows):
+        if r["family_uncovered"]:
+            out.append(f'<rect x="{L + i * cw:.1f}" y="14" width="{cw:.1f}" '
+                       f'height="{TOP_H - 46:.1f}" fill="url(#unc)" opacity="0.5"/>')
+            out.append(f'<rect x="{L + i * cw:.1f}" y="{dy0 - 4:.1f}" width="{cw:.1f}" '
+                       f'height="{dy1 - dy0 + 8:.1f}" fill="url(#unc)" opacity="0.5"/>')
+
+    out.append(f'<text class="t" x="{L}" y="14">Certified margin, '
+               f'× brake decision threshold</text>')
+    g = y_min
+    while g <= y_max + 1e-9:
+        out.append(f'<line class="gr" x1="{L}" x2="{R}" y1="{ym(g):.1f}" '
+                   f'y2="{ym(g):.1f}" stroke="#dedcd6" stroke-width="1"/>')
+        out.append(f'<text class="s" x="{L - 8}" y="{ym(g) + 4:.1f}" '
+                   f'text-anchor="end">{g:.1f}</text>')
+        g += 0.5
+    out.append(f'<line x1="{L}" x2="{R}" y1="{ym(1):.1f}" y2="{ym(1):.1f}" '
+               f'stroke="#52514e" stroke-width="2" stroke-dasharray="6 4"/>')
+    out.append(f'<text class="s" x="{R}" y="{ym(1) - 6:.1f}" text-anchor="end">'
+               f'certified at or above 1.0</text>')
+
+    for i, r in enumerate(rows):
+        cx = L + (i + 0.5) * cw
+        for pol, colour, side in ((POLICIES[0], C1, -1), (POLICIES[1], C2, 1)):
+            v = r[pol]["margin"]
+            top, bot = min(ym(v), ym(0)), max(ym(v), ym(0))
+            x = cx + (-bw - 1 if side < 0 else 1)
+            out.append(f'<rect x="{x:.1f}" y="{top:.1f}" width="{bw:.1f}" '
+                       f'height="{max(bot - top, 1.5):.1f}" rx="3" fill="{colour}" '
+                       f'opacity="{0.35 if r["family_uncovered"] else 1}"/>')
+        lab = f'{r["mid_deg"]:+.2f}'.rstrip("0").rstrip(".")
+        out.append(f'<text class="s" x="{cx:.1f}" y="{TOP_H - 30:.1f}" '
+                   f'text-anchor="end" transform="rotate(-55 {cx:.1f} '
+                   f'{TOP_H - 30:.1f})">{lab}</text>')
+    out.append(f'<line class="gr" x1="{L}" x2="{R}" y1="{ym(0):.1f}" y2="{ym(0):.1f}" '
+               f'stroke="#b9b8b2" stroke-width="1"/>')
+
+    driven_any = any("drove" in r[p] for r in rows for p in POLICIES)
+    if driven_any:
+        out.append(f'<text class="t" x="{L}" y="{TOP_H + GAP + 4:.1f}">Driven outcome, '
+                   f'{reps} runs at each sub-interval midpoint</text>')
+        for v in (0, reps // 2, reps):
+            out.append(f'<line class="gr" x1="{L}" x2="{R}" y1="{yd(v):.1f}" '
+                       f'y2="{yd(v):.1f}" stroke="#dedcd6" stroke-width="1"/>')
+            out.append(f'<text class="s" x="{L - 8}" y="{yd(v) + 4:.1f}" '
+                       f'text-anchor="end">{v}</text>')
+        for i, r in enumerate(rows):
+            cx = L + (i + 0.5) * cw
+            for pol, colour, side in ((POLICIES[0], C1, -1), (POLICIES[1], C2, 1)):
+                d = r[pol].get("drove")
+                if d is None:
+                    continue
+                px = cx + side * 6
+                out.append(f'<line x1="{px:.1f}" x2="{px:.1f}" y1="{yd(0):.1f}" '
+                           f'y2="{yd(d):.1f}" stroke="{colour}" stroke-width="2" '
+                           f'opacity="0.45"/>')
+                out.append(f'<circle cx="{px:.1f}" cy="{yd(d):.1f}" r="5" '
+                           f'fill="{colour}"/>')
+                # Label only the INTERMITTENT results. A clean pass sits on the top
+                # gridline and a total failure sits on the zero line, so both are already
+                # unambiguous, and labelling them collided across adjacent sub-intervals
+                # -- 16 columns at 56 px each cannot carry a 28 px label on either side
+                # of every dot. What a reader cannot infer from position is 3/10 versus
+                # 7/10, and that is what gets a number.
+                if 0 < d < reps:
+                    # Staggered by policy, above for one and below for the other. Two
+                    # policies landing on the SAME intermittent rate at the same
+                    # sub-interval is the case a reader most wants to read exactly, and
+                    # it is the one where two centred labels sit on top of each other.
+                    dy = -9 if side < 0 else 17
+                    out.append(
+                        f'<text class="v" x="{px:.1f}" y="{yd(d) + dy:.1f}" '
+                        f'fill="{colour}" text-anchor="middle">{d}/{reps}</text>')
+            lab = f'{r["mid_deg"]:+.2f}'.rstrip("0").rstrip(".")
+            out.append(f'<text class="s" x="{cx:.1f}" y="{dy1 + 12:.1f}" '
+                       f'text-anchor="end" transform="rotate(-55 {cx:.1f} '
+                       f'{dy1 + 12:.1f})">{lab}</text>')
+
+    ly = H - 12
+    out.append(f'<rect x="{L}" y="{ly - 9}" width="11" height="11" rx="2" fill="{C1}"/>')
+    out.append(f'<text x="{L + 17}" y="{ly}">P_pts · regulatory test points only'
+               f'</text>')
+    out.append(f'<rect x="{L + 250}" y="{ly - 9}" width="11" height="11" rx="2" '
+               f'fill="{C2}"/>')
+    out.append(f'<text x="{L + 267}" y="{ly}">P_cont · illumination continuum</text>')
+    out.append(f'<text class="s" x="{R}" y="{ly}" text-anchor="end">sun altitude at the '
+               f'sub-interval midpoint (degrees)</text>')
+    out.append('</svg>')
+    return "\n".join(out)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--scenario", default="lead", choices=["lead", "ped"])
@@ -467,6 +607,8 @@ def main() -> int:
         json.dumps({"meta": meta, "summary": summary, "rows": rows}, indent=1) + "\n")
     (FIGS / f"dusk_gap{suffix}.html").write_text(
         render_html(rows, meta, summary, args.scenario))
+    (FIGS / f"dusk_gap{suffix}.svg").write_text(
+        render_svg(rows, meta, summary, args.scenario))
 
     print(f"\n  {args.scenario}: {meta['sub_intervals']} sub-intervals, "
           f"{meta['sub_intervals_covered']} covered")
@@ -476,7 +618,7 @@ def main() -> int:
               f"falsified width {s['falsified_width_deg']:.2f} deg, "
               f"driven clean {s['clean_drives']}/{s['driven_cells']}, "
               f"certified-then-failed {s['certified_then_failed']}")
-    print(f"  wrote docs/figures/dusk_gap{suffix}.html and "
+    print(f"  wrote docs/figures/dusk_gap{suffix}.{{html,svg,}} and "
           f"dusk_gap_data{suffix}.json")
     return 0
 

@@ -1,0 +1,194 @@
+{
+  "scenario": "ped",
+  "speed_mph": 25.0,
+  "cells": {
+    "P_pts|daylight": {
+      "passes": 10,
+      "of": 10,
+      "never_braked": 0,
+      "premature_brakes": 0,
+      "min_gap_ft": [
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21
+      ],
+      "brake_range_ft": [
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42
+      ],
+      "sun_altitude_deg": 60.0,
+      "headlamps": "NONE",
+      "signature": {
+        "mean": 0.50647,
+        "sigma": 0.20315,
+        "p01": 0.0,
+        "p99": 0.77647,
+        "frac_dark": 0.01792
+      }
+    },
+    "P_pts|darkness_lowbeam": {
+      "passes": 10,
+      "of": 10,
+      "never_braked": 0,
+      "premature_brakes": 0,
+      "min_gap_ft": [
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21
+      ],
+      "brake_range_ft": [
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42
+      ],
+      "sun_altitude_deg": -30.0,
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.05847,
+        "sigma": 0.09623,
+        "p01": 0.0,
+        "p99": 0.3451,
+        "frac_dark": 0.65113
+      }
+    },
+    "P_cont|daylight": {
+      "passes": 10,
+      "of": 10,
+      "never_braked": 0,
+      "premature_brakes": 0,
+      "min_gap_ft": [
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21
+      ],
+      "brake_range_ft": [
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42
+      ],
+      "sun_altitude_deg": 60.0,
+      "headlamps": "NONE",
+      "signature": {
+        "mean": 0.51363,
+        "sigma": 0.20831,
+        "p01": 0.0,
+        "p99": 0.80392,
+        "frac_dark": 0.01787
+      }
+    },
+    "P_cont|darkness_lowbeam": {
+      "passes": 10,
+      "of": 10,
+      "never_braked": 0,
+      "premature_brakes": 0,
+      "min_gap_ft": [
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21,
+        14.21
+      ],
+      "brake_range_ft": [
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42,
+        51.42
+      ],
+      "sun_altitude_deg": -30.0,
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.05847,
+        "sigma": 0.09623,
+        "p01": 0.0,
+        "p99": 0.3451,
+        "frac_dark": 0.65113
+      }
+    }
+  },
+  "illumination": {
+    "knots": 2,
+    "axis_span_mean": 0.45516,
+    "min_axis_span": 0.05,
+    "span_ok": true,
+    "inversions": [],
+    "worst_inversion_frac": 0.0,
+    "max_inversion_frac": 0.12,
+    "total_rise_frac": 0.0,
+    "max_total_rise_frac": 0.25,
+    "monotone_violations": [],
+    "monotone_ok": true,
+    "brightest_at_deg": 60.0,
+    "darkest_at_deg": -30.0,
+    "extremes_ok": true,
+    "lamp_threshold_deg": 5.0,
+    "means_by_altitude": [
+      {
+        "sun_altitude_deg": 60.0,
+        "mean": 0.51363,
+        "lamps": false
+      },
+      {
+        "sun_altitude_deg": -30.0,
+        "mean": 0.05847,
+        "lamps": true
+      }
+    ],
+    "ok": true
+  },
+  "all_endpoints_pass": true,
+  "note": "M4 needs every cell 10/10. A policy that cannot pass the regulatory endpoints is not the policy a manufacturer would ship, and without it the study has no setup: the claim is that a policy which SATISFIES the standard is unsafe between its test points."
+}
