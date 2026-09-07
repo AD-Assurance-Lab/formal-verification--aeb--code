@@ -8,8 +8,7 @@ ped: 104 states x 18 knots = 1872 frames, about 1.73 GB raw
   ped_sun+28.397.npz exists, skipping
   ped_sun+18.743.npz exists, skipping
   ped_sun+12.542.npz exists, skipping
-    signature: mean 0.3711 sigma 0.2339 p99 0.9843 dark 0.023
-  sun  +10.128: 104 frames,   34.1 MB,  30.4 s
+  ped_sun+10.128.npz exists, skipping
   ped_sun+07.715.npz exists, skipping
   ped_sun+05.298.npz exists, skipping
   ped_sun+04.198.npz exists, skipping

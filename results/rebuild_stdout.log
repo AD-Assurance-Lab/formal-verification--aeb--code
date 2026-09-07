@@ -5,3 +5,9 @@
 [2026-09-07 15:17:06] START capture_none
 [2026-09-07 15:17:08] DONE  capture_none rc=0
 [2026-09-07 15:17:08] restarting CARLA on 3000
+[2026-09-07 15:18:25] START capture_ped
+[2026-09-07 15:18:27] DONE  capture_ped rc=0
+[2026-09-07 15:18:27] restarting CARLA on 3000
+[2026-09-07 15:19:45] START capture_none_ped
+[2026-09-07 15:19:47] DONE  capture_none_ped rc=0
+[2026-09-07 15:19:47] restarting CARLA on 3000

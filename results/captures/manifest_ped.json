@@ -62,8 +62,7 @@
   {
     "knot": 10.128,
     "file": "ped_sun+10.128.npz",
-    "frames": 104,
-    "size_mb": 34.1,
+    "skipped": true,
     "signature": {
       "mean": 0.37114,
       "sigma": 0.2339,
