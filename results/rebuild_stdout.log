@@ -1,2 +1,7 @@
 [2026-09-07 15:05:47] restarting CARLA on 3000
 [2026-09-07 15:07:05] START capture_lead
+[2026-09-07 15:15:48] DONE  capture_lead rc=0
+[2026-09-07 15:15:48] restarting CARLA on 3000
+[2026-09-07 15:17:06] START capture_none
+[2026-09-07 15:17:08] DONE  capture_none rc=0
+[2026-09-07 15:17:08] restarting CARLA on 3000

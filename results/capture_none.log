@@ -8,8 +8,7 @@ none: 104 states x 18 knots = 1872 frames, about 1.73 GB raw
   none_sun+28.397.npz exists, skipping
   none_sun+18.743.npz exists, skipping
   none_sun+12.542.npz exists, skipping
-    signature: mean 0.3693 sigma 0.2343 p99 0.9843 dark 0.024
-  sun  +10.128: 104 frames,   34.1 MB,  29.1 s
+  none_sun+10.128.npz exists, skipping
   none_sun+07.715.npz exists, skipping
   none_sun+05.298.npz exists, skipping
   none_sun+04.198.npz exists, skipping
