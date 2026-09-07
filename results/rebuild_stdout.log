@@ -11,3 +11,6 @@
 [2026-09-07 15:19:45] START capture_none_ped
 [2026-09-07 15:19:47] DONE  capture_none_ped rc=0
 [2026-09-07 15:19:47] restarting CARLA on 3000
+[2026-09-07 15:21:05] START capture_lead_hb
+[2026-09-07 15:21:07] DONE  capture_lead_hb rc=0
+[2026-09-07 15:21:07] restarting CARLA on 3000
