@@ -913,8 +913,10 @@ def job_oracle() -> dict:
             closed = [
                 round(trigger - r["min_gap_ft"] / FT, 3) for r in runs
             ]
+            import stats as _ST
             out["cases"][f"{label}_{speed:g}mph"] = {
                 "trigger_m": round(trigger, 2),
+                **_ST.rate(passes, REPS),
                 "passes": passes,
                 "of": REPS,
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],

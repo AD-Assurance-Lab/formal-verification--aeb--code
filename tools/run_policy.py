@@ -33,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
+import stats as ST  # noqa: E402
 from train_policies import Student  # noqa: E402
 
 MODELS = J.REPO / "results" / "models"
@@ -298,11 +299,12 @@ def main() -> int:
             never = sum(1 for r in runs if not r["braked"])
             early = sum(1 for r in runs if r["premature"])
             J.progress(
-                f"{pol} / {cond}: {passes}/{J.REPS} pass"
+                f"{pol} / {cond}: {ST.fmt(passes, J.REPS)} pass"
                 f"{f', {never} never braked' if never else ''}"
                 f"{f', {early} braked prematurely' if early else ''}"
             )
             out["cells"][f"{pol}|{cond}"] = {
+                **ST.rate(passes, J.REPS),
                 "passes": passes,
                 "of": J.REPS,
                 "never_braked": never,

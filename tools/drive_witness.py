@@ -29,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
+import stats as ST  # noqa: E402
 from run_policy import load_policy, one_run, PREMATURE_MULTIPLE  # noqa: E402
 
 OUT = J.REPO / "results" / "carla"
@@ -181,6 +182,7 @@ def main() -> int:
                 "driven_at": "witness" if args.at_witness else "midpoint",
                 "witness_s": cell.get("witness_s"),
                 "verdict": cell["verdict"],
+                **ST.rate(passes_protocol, args.reps),
                 "passes": passes_protocol,
                 "passes_protocol": passes_protocol,
                 "passes_no_nuisance": passes,
@@ -211,7 +213,7 @@ def main() -> int:
         J.progress(
             f"{cell['from_deg']:+8.3f} to {cell['to_deg']:+8.3f}  "
             f"mid {mid:+7.3f}  predicted {cell['verdict']:<9}  "
-            f"drove {passes_protocol}/{args.reps}{_nuis}  "
+            f"drove {ST.fmt(passes_protocol, args.reps)}{_nuis}  "
             f"{'agree' if matched else 'DISAGREE'}"
         )
 
