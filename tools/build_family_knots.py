@@ -32,9 +32,53 @@ MIN_STEP = 0.5
 MAX_STEP = 60.0
 
 
+def failing_sub_intervals() -> list[dict]:
+    """Covered sub-intervals where the BEHAVIOURAL in-between gate failed.
+
+    PROTOCOL section 4: the check that decides is behavioural, not the image metric this
+    file bisects on. A sub-interval can sit comfortably inside the image tolerance and
+    still move a policy's brake decision, and when it does, section 4's repair is
+    "shorter intervals with rendered interior endpoints ... the claim survives; only the
+    interval length changes". That is what --refine does.
+
+    Read from every gate artifact, because the knot set is shared: a sub-interval that
+    fails for ONE policy is split for all of them, or the two policies are certified over
+    different axes and cease to be comparable.
+    """
+    from capture_campaign import load_uncovered
+    unc = load_uncovered()
+
+    def covered(r):
+        return not any(abs(u["from_deg"] - r["from_deg"]) < 1e-6
+                       and abs(u["to_deg"] - r["to_deg"]) < 1e-6 for u in unc)
+
+    out: dict[tuple, dict] = {}
+    for path in sorted((J.REPO / "results" / "carla").glob("gate_inbetween_*.json")):
+        d = json.loads(path.read_text())
+        # Derived from the per-sub-interval rows rather than read from a summary field.
+        # The field is newer than some artifacts, and a gate run that predates it would
+        # otherwise look like a gate that passed -- which is the failure mode this study
+        # keeps writing down.
+        failing = [r for r in d["sub_intervals"]
+                   if r["as_fraction_of_threshold"] >= 1.0 and covered(r)]
+        for r in failing:
+            key = (round(r["from_deg"], 6), round(r["to_deg"], 6))
+            prev = out.get(key)
+            if prev is None or r["as_fraction_of_threshold"] > prev["worst"]:
+                out[key] = {"from_deg": r["from_deg"], "to_deg": r["to_deg"],
+                            "worst": r["as_fraction_of_threshold"],
+                            "policy": d["policy"], "scenario": d.get("scenario", "lead")}
+    return sorted(out.values(), key=lambda r: -r["from_deg"])
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--tol", type=float, default=0.01, help="normalised blend error")
+    ap.add_argument(
+        "--refine", action="store_true",
+        help="do not re-bisect. Split the sub-intervals the BEHAVIOURAL in-between gate "
+             "failed, at their midpoints, and re-measure the halves. PROTOCOL section 4's "
+             "repair, applied to the sub-intervals that actually need it")
     args = ap.parse_args()
 
     carla = J.carla_module()
@@ -83,6 +127,74 @@ def main() -> int:
                 for c in (0, 1, 2)
             ]
             return sum(diffs) / len(diffs) / 255.0
+
+        if args.refine:
+            failing = failing_sub_intervals()
+            if not failing:
+                print("\n  no covered sub-interval failed the behavioural gate; "
+                      "nothing to refine")
+                return 0
+            prev = json.loads(
+                (J.REPO / "results" / "carla" / "family_knots.json").read_text())
+            knots = list(prev["knots_sun_altitude_deg"])
+            detail = list(prev["sub_interval_detail"])
+            splits = []
+            for f in failing:
+                mid = round((f["from_deg"] + f["to_deg"]) / 2.0, 3)
+                if any(abs(k - mid) < 1e-6 for k in knots):
+                    continue
+                J.progress(
+                    f"splitting {f['from_deg']:+.3f} -> {f['to_deg']:+.3f} at {mid:+.3f} "
+                    f"({f['policy']}/{f['scenario']} gate failed at "
+                    f"{f['worst']:.3f} of the decision threshold)")
+                e_hi = blend_error(f["from_deg"], mid)
+                e_lo = blend_error(mid, f["to_deg"])
+                J.progress(f"    halves blend at {e_hi:.4f} and {e_lo:.4f} "
+                           f"(tolerance {args.tol})")
+                knots.append(mid)
+                knots = sorted(set(knots), reverse=True)
+                detail = [d for d in detail
+                          if not (abs(d["from_deg"] - f["from_deg"]) < 1e-6
+                                  and abs(d["to_deg"] - f["to_deg"]) < 1e-6)]
+                for a, b, e in ((f["from_deg"], mid, e_hi), (mid, f["to_deg"], e_lo)):
+                    detail.append({
+                        "from_deg": round(a, 3), "to_deg": round(b, 3),
+                        "step_deg": round(a - b, 3), "blend_error": round(e, 4),
+                        "covered": bool(e <= args.tol),
+                        "split_from": [f["from_deg"], f["to_deg"]],
+                        "split_because": (
+                            f"{f['policy']}/{f['scenario']} in-between gate failed at "
+                            f"{f['worst']:.3f} of the decision threshold"),
+                    })
+                splits.append({**f, "midpoint_deg": mid,
+                               "blend_error_upper": round(e_hi, 4),
+                               "blend_error_lower": round(e_lo, 4)})
+            detail.sort(key=lambda d: -d["from_deg"])
+            payload = {
+                "verdict": "MEASURED",
+                "blend_metric": "rgb_three_channel",
+                "tolerance": args.tol,
+                "knots_sun_altitude_deg": knots,
+                "sub_intervals": len(knots) - 1,
+                "sub_interval_detail": detail,
+                "uncovered": [d for d in detail if not d["covered"]],
+                "refined_from": prev.get("knots_sun_altitude_deg"),
+                "refinements": splits,
+                "renders_used": renders,
+                "note": (
+                    "Refined from a previous knot set by PROTOCOL section 4's repair: a "
+                    "sub-interval whose BEHAVIOURAL in-between gate failed is split at "
+                    "its midpoint, which becomes a rendered endpoint. The image blend "
+                    "metric had already accepted it; the behavioural check is the one "
+                    "that decides. Capture the new knot before re-gating."),
+            }
+            (J.REPO / "results" / "carla" / "family_knots.json").write_text(
+                json.dumps(payload, indent=2) + "\n")
+            print(f"\n  {len(splits)} sub-interval(s) split, now "
+                  f"{len(knots) - 1} sub-intervals, {renders} renders")
+            print(f"  knots: {knots}")
+            print("  wrote results/carla/family_knots.json")
+            return 0
 
         knots = [DAY_ALT]
         detail = []

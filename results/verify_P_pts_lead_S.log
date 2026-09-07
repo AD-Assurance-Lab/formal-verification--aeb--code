@@ -1,0 +1,14 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts / lead: 25 poses inside r_req (15.85 m), 16 sub-intervals, threshold 2.476 m/s^2
+Early stop at 16th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    3.143    1.27x threshold  CERTIFIED  [17s]
+Early stop at 13th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    3.123    1.26x threshold  CERTIFIED  [17s]
+   +28.397 to  +18.743  bound    3.259    1.32x threshold  CERTIFIED  [18s]
+   +18.743 to  +12.542  bound    1.986    0.80x threshold  FALSIFIED  witness pose 103 at 2.4 m  [19s]
+   +12.542 to   +7.715  bound    0.590    0.24x threshold  FALSIFIED  witness pose 103 at 2.4 m  [19s]
+    +7.715 to   +5.298  bound    0.611    0.25x threshold  FALSIFIED  witness pose 101 at 3.5 m  [18s]
+Early stop at 14th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    0.549    0.22x threshold  FALSIFIED  witness pose 96 at 6.3 m  [18s]

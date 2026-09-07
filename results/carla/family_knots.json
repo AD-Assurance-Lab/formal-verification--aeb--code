@@ -8,6 +8,7 @@
     28.397,
     18.743,
     12.542,
+    10.128,
     7.715,
     5.298,
     4.198,
@@ -21,7 +22,7 @@
     -29.554,
     -30.0
   ],
-  "sub_intervals": 16,
+  "sub_intervals": 17,
   "sub_interval_detail": [
     {
       "from_deg": 60.0,
@@ -53,10 +54,27 @@
     },
     {
       "from_deg": 12.542,
+      "to_deg": 10.128,
+      "step_deg": 2.414,
+      "blend_error": 0.0082,
+      "covered": true,
+      "split_from": [
+        12.542,
+        7.715
+      ],
+      "split_because": "P_pts/ped in-between gate failed at 1.016 of the decision threshold"
+    },
+    {
+      "from_deg": 10.128,
       "to_deg": 7.715,
-      "step_deg": 4.828,
-      "blend_error": 0.0097,
-      "covered": true
+      "step_deg": 2.413,
+      "blend_error": 0.0095,
+      "covered": true,
+      "split_from": [
+        12.542,
+        7.715
+      ],
+      "split_because": "P_pts/ped in-between gate failed at 1.016 of the decision threshold"
     },
     {
       "from_deg": 7.715,
@@ -145,6 +163,37 @@
       "covered": false
     }
   ],
-  "renders_used": 175,
-  "note": "Endpoints to render for training and verification. A knot is forced at the horizon because straddling intervals floor near 0.03 error at any width, which is a kink and not curvature. Image space; the behavioural check in PROTOCOL section 4 still decides."
+  "refined_from": [
+    60.0,
+    42.766,
+    28.397,
+    18.743,
+    12.542,
+    7.715,
+    5.298,
+    4.198,
+    3.525,
+    1.891,
+    1.391,
+    0.779,
+    0.026,
+    0.0,
+    -0.961,
+    -29.554,
+    -30.0
+  ],
+  "refinements": [
+    {
+      "from_deg": 12.542,
+      "to_deg": 7.715,
+      "worst": 1.016,
+      "policy": "P_pts",
+      "scenario": "ped",
+      "midpoint_deg": 10.128,
+      "blend_error_upper": 0.0082,
+      "blend_error_lower": 0.0095
+    }
+  ],
+  "renders_used": 5,
+  "note": "Refined from a previous knot set by PROTOCOL section 4's repair: a sub-interval whose BEHAVIOURAL in-between gate failed is split at its midpoint, which becomes a rendered endpoint. The image blend metric had already accepted it; the behavioural check is the one that decides. Capture the new knot before re-gating."
 }

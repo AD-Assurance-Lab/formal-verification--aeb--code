@@ -60,6 +60,38 @@ run() {   # run <name> <cmd...>
 STAGES=(jobs knots capture pairing train endpoints gates verify)
 FROM=${1:-jobs}
 
+if [ "$FROM" = "verifyA" ]; then
+  # Property A: must NOT brake, certified upper bound at most 0.25 g, on the no-target
+  # control at every pose rather than only inside r_req. No simulator and no ordering
+  # constraint -- there is no witness drive for a property about not doing something --
+  # so this is the stage to run alongside the drives.
+  # The four jobs run CONCURRENTLY. They share nothing -- no simulator, no output file,
+  # no ordering -- and alpha-CROWN on a 310k-parameter network at batch 1 leaves most of
+  # a 32 GB card idle, so running them in series turns 1 hour of GPU into 4. Each still
+  # writes its own log and its own artifact; the wait collects the exit codes.
+  pids=""; names=""
+  for pol in P_pts P_cont; do
+    say "START verify_${pol}_none_A (background)"
+    "$PY" -u tools/verify.py --policy "$pol" --scenario none \
+        --policy-scenario lead --property A > "$REPO/results/verify_${pol}_none_A.log" 2>&1 &
+    pids="$pids $!"; names="$names verify_${pol}_none_A"
+    say "START verify_${pol}_none_ped_A (background)"
+    "$PY" -u tools/verify.py --policy "$pol" --scenario none_ped \
+        --policy-scenario ped --property A > "$REPO/results/verify_${pol}_none_ped_A.log" 2>&1 &
+    pids="$pids $!"; names="$names verify_${pol}_none_ped_A"
+  done
+  fail=0
+  set -- $names
+  for pid in $pids; do
+    wait "$pid"; rc=$?
+    say "DONE  $1 rc=$rc"
+    [ $rc -ne 0 ] && { fail=1; tail -20 "$REPO/results/$1.log" | tee -a "$LOG"; }
+    shift
+  done
+  say "property A complete (rc=$fail)."
+  exit $fail
+fi
+
 if [ "$FROM" = "witness" ]; then
   # M7. Refuses to run until the verdicts are committed; that refusal is the protocol.
   for pol in P_pts P_cont; do
@@ -143,24 +175,26 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       done
       ;;
     verify)
-      # M6. No simulator: bounds over the captured endpoint frames. Property S is the
-      # one with a witness drive; property A has none, so it can run whenever.
+      # M6, PROPERTY S ONLY. No simulator: bounds over the captured endpoint frames.
+      #
+      # Property A is deliberately NOT here. It is the expensive half -- 104 poses per
+      # sub-interval against property S's 25, measured at ~3.7 h against ~50 min -- and
+      # it has no witness drive, so nothing waits on it. Running it in this stage would
+      # put four hours of work in front of the commit that lets the drives start, for no
+      # reason. `bash scripts/rebuild_all.sh verifyA` runs it, and it can run at the same
+      # time as `witness`: one wants the GPU, the other wants the simulator.
       for pol in P_pts P_cont; do
         for sc in lead ped; do
           run "verify_${pol}_${sc}_S" "$PY" -u tools/verify.py --policy "$pol" \
               --scenario "$sc" --policy-scenario "$sc" --property S
         done
       done
-      for pol in P_pts P_cont; do
-        run "verify_${pol}_none_A" "$PY" -u tools/verify.py --policy "$pol" \
-            --scenario none --policy-scenario lead --property A
-        run "verify_${pol}_none_ped_A" "$PY" -u tools/verify.py --policy "$pol" \
-            --scenario none_ped --policy-scenario ped --property A
-      done
       say ""
-      say "M6 done. COMMIT THE VERDICTS BEFORE DRIVING:"
-      say "    git add results/carla/verify_*.json && git commit"
-      say "    bash scripts/rebuild_all.sh witness"
+      say "M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:"
+      say "    python tools/record_cells.py --write"
+      say "    git add results/carla/verify_*.json study/results.json && git commit"
+      say "    bash scripts/rebuild_all.sh witness      # simulator"
+      say "    bash scripts/rebuild_all.sh verifyA      # GPU, concurrently"
       say "A verdict is a prediction only if it was written down first;"
       say "tools/drive_witness.py refuses to run against an uncommitted one."
       ;;

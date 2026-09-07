@@ -345,14 +345,29 @@ def main() -> int:
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
 
+    from capture_campaign import load_uncovered as _lu  # noqa: E402
+    _unc = _lu()
+
+    def _is_uncovered(r):
+        return any(abs(u["from_deg"] - r["from_deg"]) < 1e-6
+                   and abs(u["to_deg"] - r["to_deg"]) < 1e-6 for u in _unc)
+
+    for r in rows:
+        r["family_uncovered"] = _is_uncovered(r)
+    covered_rows = [r for r in rows if not r["family_uncovered"]]
     worst = max(r["as_fraction_of_threshold"] for r in rows)
+    worst_covered = max((r["as_fraction_of_threshold"] for r in covered_rows),
+                        default=0.0)
+    failing_covered = [r for r in covered_rows if r["as_fraction_of_threshold"] >= 1.0]
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
         "illumination": illumination,
+        "worst_over_covered_sub_intervals": round(worst_covered, 4),
+        "failing_covered_sub_intervals": failing_covered,
         "decision_threshold_mps2": round(threshold, 3),
         "poses_used": len(order),
-        "verdict": "PASS" if worst < 1.0 else "FAIL",
+        "verdict": "PASS" if worst_covered < 1.0 else "FAIL",
         "worst_as_fraction_of_threshold": worst,
         "sub_intervals": rows,
         "note": (
@@ -369,7 +384,13 @@ def main() -> int:
     )
     print(f"\n  worst {worst:.3f} of the decision threshold -> {payload['verdict']}")
     print(f"  wrote results/carla/gate_inbetween_{args.policy}{_sfx}.json")
-    return 0
+    # A FAILING GATE MUST FAIL THE STAGE. This returned 0 whatever the verdict, so on
+    # 2026-09-07 two of the four in-between gates came back FAIL and scripts/rebuild_all.sh
+    # carried straight on into verification -- an M5 exit criterion failing while the
+    # pipeline reported success. The worst is reported over COVERED sub-intervals: a
+    # sub-interval the knot measurement declares uncovered is excluded from the coverage
+    # claim, so it cannot fail a gate about that claim either (A6, audit F8).
+    return 0 if worst_covered < 1.0 else 1
 
 
 if __name__ == "__main__":
