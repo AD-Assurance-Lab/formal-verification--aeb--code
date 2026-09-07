@@ -144,11 +144,31 @@ def main() -> int:
                 r["brake_range_ft"] is not None
                 and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE
             )
+        # TWO COUNTS, because they answer two different properties and conflating them
+        # made a certified cell look unsound.
+        #
+        #   passes_protocol  PROTOCOL section 7's frozen closed-loop pass: "no contact
+        #                    and standoff at least d_margin". This is what property S
+        #                    composes into, so it is what a property-S verdict is scored
+        #                    against.
+        #   passes_no_nuisance  additionally requires the policy not to have braked
+        #                    absurdly early. run_policy.py added that (PREMATURE_MULTIPLE)
+        #                    and it is a sound thing to want -- a policy that stops at
+        #                    300 ft has not performed AEB -- but it is a MUST-NOT-BRAKE
+        #                    condition, which is property A, and property S says nothing
+        #                    about it.
+        #
+        # Measured 2026-09-07: scoring property S against the second count reported
+        # P_cont/lead's CERTIFIED [+0.779, +0.026] as a soundness violation. The run that
+        # "failed" stopped 306 ft from the lead vehicle. It braked too early; it did not
+        # fail to brake.
+        passes_protocol = sum(
+            1 for r in runs if not r["contact"] and r["standoff_ok"])
         passes = sum(
             1 for r in runs
             if not r["contact"] and r["standoff_ok"] and not r["premature"]
         )
-        drove_ok = passes == args.reps
+        drove_ok = passes_protocol == args.reps
         predicted_ok = cell["verdict"] == "CERTIFIED"
         matched = drove_ok == predicted_ok
         agree += matched
@@ -161,10 +181,24 @@ def main() -> int:
                 "driven_at": "witness" if args.at_witness else "midpoint",
                 "witness_s": cell.get("witness_s"),
                 "verdict": cell["verdict"],
-                "passes": passes,
+                "passes": passes_protocol,
+                "passes_protocol": passes_protocol,
+                "passes_no_nuisance": passes,
                 "of": args.reps,
                 "never_braked": sum(1 for r in runs if not r["braked"]),
+                "contacts": sum(1 for r in runs if r["contact"]),
+                "standoff_short": sum(1 for r in runs if not r["standoff_ok"]),
                 "premature": sum(1 for r in runs if r["premature"]),
+                # Per RUN, so the artifact can be re-scored under either criterion
+                # without re-driving. Summary counts alone cannot distinguish a policy
+                # that hit the target from one that stopped 300 ft early.
+                "runs": [
+                    {"contact": r["contact"], "standoff_ok": r["standoff_ok"],
+                     "premature": r["premature"], "braked": r["braked"],
+                     "min_gap_ft": r["min_gap_ft"], "rest_gap_ft": r.get("rest_gap_ft"),
+                     "brake_range_ft": r["brake_range_ft"]}
+                    for r in runs
+                ],
                 "min_gap_ft": [r["min_gap_ft"] for r in runs],
                 "headlamps": lights,
                 "signature": runs[0]["signature"],
@@ -173,10 +207,12 @@ def main() -> int:
         )
         sig_records.append(
             {"sun_altitude_deg": round(mid, 3), "signature": runs[0]["signature"]})
+        _nuis = "" if passes == passes_protocol else f" ({passes} w/o nuisance)"
         J.progress(
             f"{cell['from_deg']:+8.3f} to {cell['to_deg']:+8.3f}  "
             f"mid {mid:+7.3f}  predicted {cell['verdict']:<9}  "
-            f"drove {passes}/{args.reps}  {'agree' if matched else 'DISAGREE'}"
+            f"drove {passes_protocol}/{args.reps}{_nuis}  "
+            f"{'agree' if matched else 'DISAGREE'}"
         )
 
     # THE ILLUMINATION AXIS THIS DRIVE ACTUALLY RENDERED, checked before the agreement

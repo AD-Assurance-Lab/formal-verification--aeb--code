@@ -3,3 +3,9 @@
 [2026-09-07 06:07:56] DONE  witness_P_pts_lead rc=0
 [2026-09-07 06:07:56] restarting CARLA on 3000
 [2026-09-07 06:09:14] START witness_P_pts_ped
+[2026-09-07 06:40:51] DONE  witness_P_pts_ped rc=0
+[2026-09-07 06:40:51] restarting CARLA on 3000
+[2026-09-07 06:42:09] START witness_P_cont_lead
+[2026-09-07 07:07:40] DONE  witness_P_cont_lead rc=0
+[2026-09-07 07:07:40] restarting CARLA on 3000
+[2026-09-07 07:08:58] START witness_P_cont_ped

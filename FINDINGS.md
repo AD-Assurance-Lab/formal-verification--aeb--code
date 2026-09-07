@@ -6,6 +6,66 @@ here, never inside the protocol.
 
 ---
 
+## F9 — 2026-09-07, the agreement table was scoring property S against a property A condition
+
+M7's first pass reported a **CERTIFIED sub-interval that failed when driven** — `P_cont`
+on the lead scenario, `[+0.779, +0.026]`, certified at 1.08x, drove 9/10. That is the
+unsafe direction and the one outcome this study must never wave through, so
+`tools/record_cells.py` refuses to summarise it and PROTOCOL section 8 requires a
+disposition. Here it is, and the certificate is not at fault.
+
+**The run that "failed" stopped 306 ft from the lead vehicle.** It did not fail to brake;
+it braked absurdly early. Classifying every failing drive in the first pass:
+
+| driven at | verdict | passed | contacts | premature | min gap |
+|---|---|---|---|---|---|
+| P_pts/lead **+8.921°** | FALSIFIED | 0/10 | **10** | 0 | **−1.93 ft** |
+| P_pts/lead +0.403° | FALSIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+| P_pts/lead +0.013° | FALSIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+| P_pts/ped +1.085° | FALSIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+| P_pts/ped +0.403° | FALSIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+| P_pts/ped +0.013° | FALSIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+| P_cont/lead +0.403° | CERTIFIED | 9/10 | 0 | 1 | 306 ft on that run |
+| P_cont/lead +0.013° | CERTIFIED | 0/10 | 0 | 10 | ≥ 306 ft |
+
+**Exactly one is a must-brake failure**: `P_pts`/lead at +8.921°, where the vehicle ended
+**1.93 ft inside** the lead vehicle, on all ten runs, in the sub-interval the certificate
+falsified at 0.03x. Every other failing drive is nuisance braking near the horizon.
+
+### The criterion, and where the drift came from
+
+PROTOCOL section 7 states the closed-loop pass in full: *"no contact and standoff at least
+`d_margin`, over at least 10 repetitions."* `tools/run_policy.py` adds a third condition,
+`PREMATURE_MULTIPLE`, on the reasoning that *"a policy that stops the moment it starts
+satisfies 'no contact with standoff', but it has not performed AEB, it has performed a
+nuisance stop"*. That reasoning is right and the condition is worth having. **It is also a
+must-NOT-brake condition, which is property A, and property S says nothing about it.**
+
+Scoring a property-S verdict against a pass criterion that silently includes a property-A
+condition is comparing two different quantities, and here it manufactured a soundness
+violation out of a policy braking too early. This is the trap the steering study wrote
+down as its section 7: *check what your criterion quantifies over, and make the comparison
+cover the same set*.
+
+**The fix is to report both, not to drop either.** `drive_witness.py` now records
+`passes_protocol` (section 7's frozen criterion, which is what a property-S verdict is
+scored against), `passes_no_nuisance` (with the prematurity condition), and the per-run
+contact / standoff / premature / brake-range detail, so the artifact can be re-scored
+under either criterion without re-driving. Summary counts alone cannot tell a policy that
+hit the target from one that stopped 300 ft early, and for two nights running that was the
+difference between a clean result and a soundness violation.
+
+### What it says about the study, beyond the bookkeeping
+
+The near-horizon behaviour of BOTH policies is nuisance braking, not failure to brake.
+That is a property A phenomenon and it is the sleeper PROTOCOL section 9 names: *"6 is the
+sleeper: `P_cont` sees more braking data and may be the more trigger-happy, which is a
+trade no single-sided test can see."* The property S certificates say the policies brake
+in time; the drives say that near the horizon they brake at 300 ft. Both are true, and
+only running both properties makes the pair visible.
+
+---
+
 ## F8 — 2026-09-07, the verifier was not doing branch and bound, and it cost the negative control
 
 `PROTOCOL.md` section 6 has said "Bounds by **alpha-CROWN with input-space branch and
@@ -53,11 +113,18 @@ of the result, and it is the difference between the two readings of the anticipa
 reviewer challenge *"the verifier just flags everything"*. This run has **zero** undecided
 sub-intervals across all four cells.
 
-Worth recording for the write-up: **every exhibited witness in this run sits at s = ±1**,
-which is a rendered knot rather than an interpolated interior point. No falsification in
-this study depends on the blend being faithful. (Partly a property of the search: the
-concrete check samples a domain at its ends and middle, so an endpoint violation is found
-first. It remains a real counterexample at a real rendered illumination.)
+Worth recording for the write-up: **24 of the 26 exhibited witnesses sit at s = ±1**,
+which is a rendered knot rather than an interpolated interior point, so almost every
+falsification in this study is a claim about an illumination the simulator actually
+rendered and does not depend on the blend being faithful. The two exceptions are both in
+`P_pts`/lead — `[+18.743, +12.542]` and `[+0.779, +0.026]`, each at s = 0 — where the
+sub-interval's endpoints satisfy the property and an interior blend does not. Those two
+DO rest on the family, and the in-between gate is what licenses them: 0.156 and 0.123 of
+the decision threshold at those sub-intervals.
+
+That the rest land on knots is partly a property of the search — the concrete check samples
+a domain at its ends and middle, so an endpoint violation is found first — and they remain
+real counterexamples at real rendered illuminations.
 
 ### An implementation note that will otherwise be rediscovered
 

@@ -29,3 +29,20 @@ Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
+   +10.128 to   +7.715  bound    1.686    0.69x threshold  CERTIFIED  [104 domains, 488s]
+    +7.715 to   +5.298  bound    2.381    0.97x threshold  CERTIFIED  [104 domains, 552s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    2.154    0.88x threshold  CERTIFIED  [104 domains, 321s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    2.013    0.82x threshold  CERTIFIED  [104 domains, 381s]
+Early stop at 14th iter due to 10 iterations no improvement!
+    +3.525 to   +1.891  bound    2.447    1.00x threshold  CERTIFIED  [204 domains, 983s]
+Early stop at 19th iter due to 10 iterations no improvement!
+    +1.891 to   +1.391  bound    4.182    1.71x threshold  FALSIFIED  witness pose 65 at 23.5 m, s=+1.0000  [136 domains, 529s]
+Early stop at 19th iter due to 10 iterations no improvement!

@@ -114,20 +114,33 @@ def cell_row(policy: str, scenario: str) -> dict:
     by_key = {(c["from_deg"], c["to_deg"]): c for c in w["cells"]}
     driven = [(c, by_key.get((c["from_deg"], c["to_deg"]))) for c in covered]
     driven = [(c, d) for c, d in driven if d is not None]
-    cert_then_failed = [(c, d) for c, d in driven
-                        if c["verdict"] == "CERTIFIED" and d["passes"] < d["of"]]
-    fals_then_failed = [(c, d) for c, d in driven
-                        if c["verdict"] == "FALSIFIED" and d["passes"] < d["of"]]
-    all_clean = all(d["passes"] == d["of"] for _, d in driven)
+
+    # Scored against PROTOCOL section 7's frozen closed-loop pass -- no contact and
+    # standoff at least d_margin -- because that is what property S composes into.
+    # Premature braking is a must-NOT-brake condition and belongs to property A; scoring
+    # property S against it reported a certified cell as unsound when the run in question
+    # stopped 306 ft short of the lead vehicle.
+    def ok(d):
+        return d.get("passes_protocol", d["passes"]) == d["of"]
+
+    cert_then_failed = [(c, d) for c, d in driven if c["verdict"] == "CERTIFIED"
+                        and not ok(d)]
+    fals_then_failed = [(c, d) for c, d in driven if c["verdict"] == "FALSIFIED"
+                        and not ok(d)]
+    all_clean = all(ok(d) for _, d in driven)
+    nuisance = [(c, d) for c, d in driven if d.get("premature", 0)]
+    row["nuisance_braking_sub_intervals"] = len(nuisance)
 
     if cert_then_failed:
         # The unsafe direction. Never collapsed into PASS or FAIL.
-        worst = min(cert_then_failed, key=lambda p: p[1]["passes"])
+        worst = min(cert_then_failed,
+                    key=lambda p: p[1].get("passes_protocol", p[1]["passes"]))
         row["witness"] = "UNSOUND"
         row["note"] = (
             f"A CERTIFIED sub-interval FAILED when driven: "
             f"{worst[0]['from_deg']:+.3f} to {worst[0]['to_deg']:+.3f} deg drove "
-            f"{worst[1]['passes']}/{worst[1]['of']} at margin "
+            f"{worst[1].get('passes_protocol', worst[1]['passes'])}/{worst[1]['of']} "
+            f"at margin "
             f"{worst[0]['margin_x_threshold']:.2f}x threshold. "
             f"{len(cert_then_failed)} sub-interval(s) in total. This is a soundness "
             f"failure and PROTOCOL section 8 makes it a bug until a written disposition "

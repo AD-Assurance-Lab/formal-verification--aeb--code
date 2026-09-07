@@ -10,3 +10,10 @@ Early stop at 18th iter due to 10 iterations no improvement!
    +12.542 to  +10.128  bound    0.608    0.25x threshold  CERTIFIED  [104 domains, 384s]
 [W907 06:21:31.740084177 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 736100352 bytes (free: 687669248, total: 33661911040).
    +10.128 to   +7.715  bound    2.152    0.88x threshold  CERTIFIED  [106 domains, 444s]
+    +7.715 to   +5.298  bound    2.104    0.86x threshold  CERTIFIED  [106 domains, 520s]
+    +5.298 to   +4.198  bound    1.038    0.42x threshold  CERTIFIED  [104 domains, 436s]
+Early stop at 17th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.986    0.40x threshold  CERTIFIED  [104 domains, 272s]
+    +3.525 to   +1.891  bound    2.213    0.90x threshold  CERTIFIED  [104 domains, 436s]
+    +1.891 to   +1.391  bound    1.589    0.65x threshold  CERTIFIED  [104 domains, 449s]
+    +1.391 to   +0.779  bound    2.199    0.90x threshold  CERTIFIED  [156 domains, 591s]

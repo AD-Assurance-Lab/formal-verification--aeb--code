@@ -79,9 +79,13 @@ def load(scenario: str) -> tuple[list[dict], dict]:
                     (r for r in w["cells"]
                      if abs(r["from_deg"] - cell["from_deg"]) < 1e-6), None)
                 if wc is not None:
-                    row[pol]["drove"] = wc["passes"]
+                    # PROTOCOL section 7's frozen criterion. See the note in
+                    # tools/record_cells.py: prematurity is property A, not property S.
+                    row[pol]["drove"] = wc.get("passes_protocol", wc["passes"])
                     row[pol]["of"] = wc["of"]
                     row[pol]["agrees"] = wc["agrees"]
+                    row[pol]["premature"] = wc.get("premature", 0)
+                    row[pol]["contacts"] = wc.get("contacts")
         rows.append(row)
 
     covered = [r for r in rows if not r["family_uncovered"]]
@@ -469,7 +473,13 @@ def render_svg(rows, meta, summary, scenario: str) -> str:
     cw = (R - L) / n
     bw = min(16.0, cw * 0.30)
 
-    margins = [r[p]["margin"] for r in rows for p in POLICIES]
+    # Scale to the COVERED sub-intervals. An uncovered one is excluded from every claim
+    # on the page, so letting its bound set the axis would compress the range a reader is
+    # meant to read in order to show a number that does not count. Its bar is still drawn,
+    # clamped to the plot area, inside its hatched column.
+    margins = [r[p]["margin"] for r in rows for p in POLICIES
+               if not r["family_uncovered"]] or \
+              [r[p]["margin"] for r in rows for p in POLICIES]
     y_max = max(2.0, (int(max(margins) * 2) + 1) / 2)
     y_min = min(-0.5, (int(min(margins) * 2) - 1) / 2)
 
@@ -510,7 +520,7 @@ def render_svg(rows, meta, summary, scenario: str) -> str:
                        f'height="{dy1 - dy0 + 8:.1f}" fill="url(#unc)" opacity="0.5"/>')
 
     out.append(f'<text class="t" x="{L}" y="14">Certified margin, '
-               f'× brake decision threshold</text>')
+               f'× brake decision threshold — certified at or above 1.0</text>')
     g = y_min
     while g <= y_max + 1e-9:
         out.append(f'<line class="gr" x1="{L}" x2="{R}" y1="{ym(g):.1f}" '
@@ -520,14 +530,13 @@ def render_svg(rows, meta, summary, scenario: str) -> str:
         g += 0.5
     out.append(f'<line x1="{L}" x2="{R}" y1="{ym(1):.1f}" y2="{ym(1):.1f}" '
                f'stroke="#52514e" stroke-width="2" stroke-dasharray="6 4"/>')
-    out.append(f'<text class="s" x="{R}" y="{ym(1) - 6:.1f}" text-anchor="end">'
-               f'certified at or above 1.0</text>')
 
     for i, r in enumerate(rows):
         cx = L + (i + 0.5) * cw
         for pol, colour, side in ((POLICIES[0], C1, -1), (POLICIES[1], C2, 1)):
             v = r[pol]["margin"]
             top, bot = min(ym(v), ym(0)), max(ym(v), ym(0))
+            top, bot = max(top, 18.0), min(bot, float(TOP_H - 46))  # clamp to the panel
             x = cx + (-bw - 1 if side < 0 else 1)
             out.append(f'<rect x="{x:.1f}" y="{top:.1f}" width="{bw:.1f}" '
                        f'height="{max(bot - top, 1.5):.1f}" rx="3" fill="{colour}" '

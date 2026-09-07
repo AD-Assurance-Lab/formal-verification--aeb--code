@@ -61,3 +61,27 @@ Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 13th iter due to 10 iterations no improvement!
    +10.128 to   +7.715  bound    0.081    0.03x threshold  CERTIFIED  [104 domains, 445s]
+    +7.715 to   +5.298  bound    0.474    0.19x threshold  CERTIFIED  [104 domains, 510s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    0.220    0.09x threshold  CERTIFIED  [104 domains, 461s]
+[W907 06:40:04.942752299 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 977272832 bytes (free: 1429209088, total: 33661911040).
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.188    0.08x threshold  CERTIFIED  [104 domains, 301s]
+    +3.525 to   +1.891  bound    1.397    0.57x threshold  CERTIFIED  [104 domains, 471s]
+    +1.891 to   +1.391  bound    1.007    0.41x threshold  CERTIFIED  [104 domains, 499s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+    +1.391 to   +0.779  bound    3.728    1.52x threshold  FALSIFIED  witness pose 80 at 15.3 m, s=+1.0000  [148 domains, 559s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
