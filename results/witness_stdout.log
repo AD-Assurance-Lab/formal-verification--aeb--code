@@ -9,3 +9,5 @@
 [2026-09-07 07:07:40] DONE  witness_P_cont_lead rc=0
 [2026-09-07 07:07:40] restarting CARLA on 3000
 [2026-09-07 07:08:58] START witness_P_cont_ped
+[2026-09-07 08:34:09] DONE  witness_P_cont_ped rc=0
+[2026-09-07 08:34:09] M7 complete. python -m study.ledger --check-order

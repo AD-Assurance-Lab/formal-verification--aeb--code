@@ -383,3 +383,10 @@ Terminated
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
 [2026-09-07 07:08:58] START witness_P_cont_ped
+[2026-09-07 08:34:09] DONE  witness_P_cont_ped rc=0
+[2026-09-07 08:34:09] M7 complete. python -m study.ledger --check-order
+[2026-09-07 08:40:03] DONE  verify_P_pts_none_A rc=0
+[2026-09-07 08:40:03] DONE  verify_P_pts_none_ped_A rc=0
+[2026-09-07 08:40:03] DONE  verify_P_cont_none_A rc=0
+[2026-09-07 08:40:03] DONE  verify_P_cont_none_ped_A rc=0
+[2026-09-07 08:40:03] property A complete (rc=0).
