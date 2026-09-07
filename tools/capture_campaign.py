@@ -289,8 +289,19 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
     for knot in knots:
         out_path = OUT / f"{scenario}_sun{knot:+07.3f}.npz"
         if out_path.exists():
+            # A skipped knot still contributes its signature, read back out of the npz.
+            # The axis check has to see the WHOLE axis or it sees nothing useful: a
+            # campaign resumed after an interruption would otherwise check the three
+            # knots it happened to redo and report success for seventeen.
             print(f"  {out_path.name} exists, skipping")
-            manifest.append({"knot": knot, "file": out_path.name, "skipped": True})
+            entry = {"knot": knot, "file": out_path.name, "skipped": True}
+            try:
+                z = np.load(out_path, allow_pickle=True)
+                if "signature" in z:
+                    entry["signature"] = json.loads(str(z["signature"]))
+            except Exception as exc:
+                print(f"    could not read its signature: {exc}")
+            manifest.append(entry)
             continue
         t0 = time.time()
         w = world.get_weather()
@@ -388,20 +399,28 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool):
              "size_mb": round(size_mb, 1), "signature": sig}
         )
 
+
     # THE AXIS IS CHECKED AS A WHOLE, once every knot is in. A per-knot assertion cannot
     # see the failure that matters -- a single frame is consistent with any illumination
     # you care to name, and only the axis's own shape says whether the sun moved the way
     # it was asked to. Raising here, before the manifest is written, means a campaign
     # that rendered the wrong illumination cannot leave a manifest that looks finished.
-    fresh = [m for m in manifest if m.get("signature")]
-    if len(fresh) >= 2:
-        rep = CS.assert_axis(fresh_records(fresh))
-        print(f"\n  illumination axis OK: {rep['knots']} knots, span "
-              f"{rep['axis_span_mean']:.4f} of full range, monotone within each "
-              f"headlamp regime")
-    else:
-        print("\n  illumination axis NOT checked: fewer than two knots captured in "
-              "this run (the rest were skipped as already present)")
+    signed = [m for m in manifest if m.get("signature")]
+    if len(signed) < len(manifest):
+        raise SystemExit(
+            f"{len(manifest) - len(signed)} of {len(manifest)} knots carry no "
+            "photometric signature, so the axis cannot be checked. Those npz files "
+            "predate the guard; delete them and recapture.")
+    rep = CS.assert_axis(fresh_records(signed), uncovered=load_uncovered())
+    print(f"\n  illumination axis OK: {rep['knots']} knots, span "
+          f"{rep['axis_span_mean']:.4f} of full range, worst inversion "
+          f"{100 * rep['worst_inversion_frac']:.1f}% of span "
+          f"(limit {100 * CS.MAX_INVERSION_FRAC:.0f}%), total "
+          f"{100 * rep['total_rise_frac']:.1f}% (limit "
+          f"{100 * CS.MAX_TOTAL_RISE_FRAC:.0f}%)")
+    for inv in rep["inversions"]:
+        print(f"    recorded: {inv['detail']}"
+              + ("  [declared uncovered]" if inv["declared_uncovered"] else ""))
     return manifest
 
 

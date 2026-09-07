@@ -161,7 +161,8 @@ def main() -> int:
     # dusk the certificate named. Eleven midpoints spanning +45 to -30 deg give the check
     # real power: a sun that did not move, or moved the wrong way, cannot produce a
     # monotone brightness curve across them.
-    illumination = CS.assert_axis(sig_records)
+    from capture_campaign import load_uncovered  # noqa: E402
+    illumination = CS.assert_axis(sig_records, uncovered=load_uncovered())
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
 

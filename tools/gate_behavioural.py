@@ -340,7 +340,8 @@ def main() -> int:
             f"= {max(diffs) / threshold:.2f} of the decision threshold"
         )
 
-    illumination = CS.assert_axis(sig_records)
+    from capture_campaign import load_uncovered  # noqa: E402
+    illumination = CS.assert_axis(sig_records, uncovered=load_uncovered())
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
 

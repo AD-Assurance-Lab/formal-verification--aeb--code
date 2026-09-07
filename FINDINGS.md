@@ -6,6 +6,83 @@ here, never inside the protocol.
 
 ---
 
+## F6 — 2026-09-07, CARLA's scene brightness is not monotone in sun altitude, and the horizon shows up twice
+
+Found by the illumination guard ported from the steering study (NOTES section 2b), on the
+first capture campaign it ever ran against. **It failed the campaign, and it was the guard
+that was wrong** — but the measurement it produced is worth having, and one half of it
+independently corroborates amendment A6.
+
+### The measured curve
+
+Mean frame brightness at capture pose 0, Town01 site 0, fixed exposure f/4.0 (A7),
+headlamps below +5° per the campaign, one frame per knot:
+
+| sun ° | +60.000 | +42.766 | +28.397 | +18.743 | +12.542 | +7.715 | +5.298 |
+|---|---|---|---|---|---|---|---|
+| mean | 0.5064 | **0.5282** | 0.5182 | 0.4579 | 0.4033 | 0.3366 | 0.2617 |
+
+| sun ° | +4.198 | +3.525 | +1.891 | +1.391 | +0.779 | +0.026 | **+0.000** | −0.961 | −29.554 | −30.000 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| mean | 0.2295 | 0.2102 | 0.1355 | 0.1082 | 0.0758 | 0.0377 | **0.0665** | 0.0496 | 0.0406 | 0.0406 |
+
+Two things in there are not what a monotone model predicts.
+
+**1. Brightness peaks near +43°, not at +60°.** The scene is *dimmer* with the sun near
+zenith than at mid-elevation. The camera sees a large sky panel, and at 60° the sky in the
+direction of travel is darker than at 43°, which more than offsets the extra road
+illumination. 4.5% of the axis span.
+
+**2. There is a spike at exactly 0.000°.** Brightness falls 0.0758 → 0.0377 approaching
+the horizon, jumps to 0.0665 at zero, then resumes at 0.0496. 5.9% of the span, across a
+0.026° step.
+
+**The second one is A6 measured a second way.** A6 concluded from blend error that the
+horizon is *a genuine discontinuity in the renderer's sky model, not merely a region of
+high curvature*. The knot bisection independently picks out `[0.026°, 0.000°]` as the one
+sub-interval that cannot meet tolerance at any width (0.0163 against a 0.01 tolerance).
+The photometric signature — a different statistic, on different frames, computed by a
+different tool — singles out the same sub-interval. Two measurements that share no code
+agreeing on where the renderer breaks is the strongest evidence in the study that the
+uncovered sliver is real and not an artifact of the bisection.
+
+### The guard was wrong, and the repair is a magnitude test
+
+The first version asserted that within one headlamp regime a lower sun renders a strictly
+darker frame — read off A5's brightness table, which only ever covered +6° to −6°, and
+extrapolated to the whole 90° axis. It is false at both ends.
+
+Strict ordering was never the property worth asserting. Every failure this guard exists to
+catch moves brightness by a LOT: a condition swap, an unsettled weather write (A4 measured
+75% too bright twelve ticks in), a knot rendered at its neighbour's illumination. So the
+check now bounds magnitude — no single step may run backwards by more than 12% of the axis
+span, and the whole axis may not accumulate more than 25% — plus a span floor and an
+extremes check. The measured axis scores 4.5% and 4.5%; rendering the +0.779° knot in
+daylight would score 90%.
+
+Inversions across a sub-interval the knot measurement itself declares uncovered are
+recorded and not charged, because that declaration is the study having already measured
+that the renderer is discontinuous there.
+
+**Added at the same time, and it is the better check:** the four capture campaigns
+(`lead`, `none`, `ped`, `none_ped`) render the same site at the same knots and differ only
+by what stands in front of the camera. Their brightness curves must agree, and that
+comparison rests on no model of the renderer at all. A knot rendered at the wrong
+illumination in one campaign shows up as that campaign disagreeing with the other three at
+that knot and nowhere else. `python tools/condition_signature.py` reports it and the
+rebuild runs it.
+
+### Why this is recorded rather than quietly fixed
+
+Two of the errors in the steering follow-on programme were in the *analysis* code rather
+than the experiment, and both would have inverted a conclusion. This is the same class:
+a guard whose premise was an extrapolation, which would have rejected every correct
+capture campaign this study will ever run. It was caught because it fired on data whose
+provenance was known good, and because the numbers it printed were looked at instead of
+its verdict being taken at face value.
+
+---
+
 ## F5 — 2026-09-06, the A12 rebuild: `a_max` was an integration artifact, and the safety budget was 33% too short
 
 **This is the disposition PROTOCOL section 8 requires.** Rebuilding the primitives on the

@@ -102,6 +102,12 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # Verification interpolates pixel by pixel between knots, so a pose that differs
       # by one tick between two knots is not a pair. No simulator.
       run pairing "$PY" -u tools/check_pairing.py
+      # And the photometric cross-check: the four campaigns render the same site at the
+      # same knots and differ only by what stands in front of the camera, so a knot
+      # rendered at the wrong illumination in one of them shows up as that campaign
+      # disagreeing with the other three at that knot and nowhere else. It is the only
+      # illumination check here that rests on no assumption about the renderer.
+      run illumination "$PY" -u tools/condition_signature.py
       ;;
     train)
       # No simulator. Both policies for both hazard scenarios; the ONLY difference

@@ -312,10 +312,12 @@ def main() -> int:
     # render to nearly the same frame. Checked on the driver that produces M4, not on
     # the study as a whole -- the steering study's version of this rule was enforced on
     # the diagnostic path and not the authoritative one, for a whole study.
+    from capture_campaign import load_uncovered  # noqa: E402
     seen = {r["sun_altitude_deg"]: r for r in sig_records}
-    out["illumination"] = CS.check_axis(list(seen.values()))
+    out["illumination"] = CS.check_axis(list(seen.values()),
+                                        uncovered=load_uncovered())
     if not out["illumination"]["ok"] and len(seen) > 1:
-        CS.assert_axis(list(seen.values()))
+        CS.assert_axis(list(seen.values()), uncovered=load_uncovered())
 
     out["all_endpoints_pass"] = all(c["passes"] == J.REPS for c in out["cells"].values())
     out["note"] = (

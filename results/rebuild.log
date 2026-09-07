@@ -16,3 +16,42 @@ Terminated
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
 [2026-09-06 22:45:30] START capture_lead
+[2026-09-06 22:55:36] DONE  capture_lead rc=1
+[2026-09-06 22:55:36] stopping: capture_lead failed. Tail of results/capture_lead.log:
+  sun   +0.026: 104 frames,    8.9 MB,  35.4 s
+    signature: mean 0.0665 sigma 0.0827 p99 0.3451 dark 0.426
+  sun   +0.000: 104 frames,   14.4 MB,  53.9 s
+    signature: mean 0.0496 sigma 0.0719 p99 0.2941 dark 0.536
+  sun   -0.961: 104 frames,   12.9 MB,  53.6 s
+    signature: mean 0.0406 sigma 0.0715 p99 0.2941 dark 0.662
+  sun  -29.554: 104 frames,    8.8 MB,  41.1 s
+    signature: mean 0.0406 sigma 0.0715 p99 0.2941 dark 0.662
+  sun  -30.000: 104 frames,    8.8 MB,  41.3 s
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 440, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 431, in main
+    manifest = capture(args.scenario, knots, args.speed_mph, args.plan)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 398, in capture
+    rep = CS.assert_axis(fresh_records(fresh))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/condition_signature.py", line 149, in assert_axis
+    raise RuntimeError("\n".join(lines))
+RuntimeError: ILLUMINATION AXIS DOES NOT MATCH WHAT WAS REQUESTED.
+  sun fell 60.000 -> 42.766 deg but the frame got BRIGHTER, 0.5064 -> 0.5282
+  sun fell 0.026 -> 0.000 deg but the frame got BRIGHTER, 0.0377 -> 0.0665
+  Every frame captured under this axis is mislabelled. This is the failure that cost the steering study its Town04 captures (T06-F35).
+[2026-09-07 03:04:54] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1413357 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 03:06:12] START capture_lead
+[2026-09-07 03:06:14] DONE  capture_lead rc=0
+[2026-09-07 03:06:14] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated

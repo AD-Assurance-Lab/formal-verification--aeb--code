@@ -18,24 +18,49 @@ and they diverged.
 mean, sigma, 1st and 99th percentile, and the fraction of near-black pixels. That is
 enough, because this study's axis moves brightness monotonically over a wide range.
 
-**What is checked, and why it is not a threshold table.** The steering version classifies
-into four NAMED conditions and can therefore hard-code discriminators. Here the condition
+**What is checked, and why it is not strict monotonicity.** The steering version
+classifies into four NAMED conditions and can hard-code discriminators. Here the condition
 is a continuous sun altitude, and the absolute numbers depend on the pose, the scene
-content and the headlamp state -- so a fixed table would be wrong the moment the capture
-pose moved. What IS invariant is the physics:
+content and the headlamp state, so a fixed table would be wrong the moment the capture
+pose moved.
 
-  1. Within one headlamp regime, a lower sun renders a darker scene. Strictly. This is
-     amendment A5's measured curve (mean 179.7 at +6 deg falling to 57.7 at -6), and it
-     is the property a mislabelled or unsettled knot breaks first.
-  2. The axis has to actually SPAN daylight to darkness. If the brightest and darkest
-     knots are close together, the weather writes did not take effect and the family is
-     being built out of one illumination rendered eleven times.
-  3. Headlamps ON must lift the dark end. Their step at the 5 deg threshold is a
-     discontinuity in the curve, so monotonicity is checked within each regime, never
-     across the switch -- checking across it would fail on a correct capture.
+The first version of this file asserted that a lower sun always renders a darker frame.
+**It fired on the first real capture campaign, and it was wrong** -- measured over
+Town01's site 0 at the study's fixed exposure, CARLA's scene brightness is NOT monotone in
+sun altitude (FINDINGS F6):
 
-None of these needs a reference file, which matters: a reference measured by the same
-tool in the same session is a repeat, not an independent check.
+  * it PEAKS near +43 deg, not at +60. Mean 0.5064 at +60, 0.5282 at +42.8, 0.5182 at
+    +28.4. With the sun near zenith the sky panel in view is dimmer than at mid-elevation,
+    so the top of the axis turns over.
+  * it SPIKES at exactly 0.000 deg. Mean falls 0.0758, 0.0377 approaching the horizon and
+    jumps back to 0.0665 at zero before resuming at 0.0496. That is A6's horizon
+    discontinuity, seen photometrically instead of through blend error.
+
+Both are small -- 4.5% and 5.9% of the axis span -- and both are the renderer, not the
+harness. So what is asserted is MAGNITUDE, which is what every failure this guard exists
+to catch actually moves:
+
+  1. **Span.** Brightest and darkest must differ substantially. If they do not, the
+     weather writes never took effect and the family is one illumination rendered
+     seventeen times.
+  2. **Bounded inversion.** No single step may run backwards by more than
+     MAX_INVERSION_FRAC of the span, and the total backwards movement over the whole
+     axis may not exceed MAX_TOTAL_RISE_FRAC. A knot rendered at the wrong illumination
+     displaces its frame by a large fraction of the span; the renderer's own wobble is
+     under a sixteenth of it.
+  3. **Extremes.** The brightest frame must come from the upper half of the altitude
+     range and the darkest from the lower half. A reversed or scrambled axis fails here
+     even if every individual step is small.
+  4. **Declared discontinuities are exempt, not assumed.** An inversion that lands exactly
+     on a sub-interval the knot measurement itself declares UNCOVERED is expected -- that
+     declaration is A6 saying the renderer is discontinuous there. The deviation is still
+     recorded; it is just not a failure.
+
+None of this needs a reference file, which matters: a reference measured by the same tool
+in the same session is a repeat, not an independent check. What IS independent is
+comparing the four capture campaigns against each other, which `main()` does -- they
+render the same site at the same knots, so a knot mislabelled in one campaign diverges
+from the other three.
 """
 
 from __future__ import annotations
@@ -55,10 +80,21 @@ CAPTURES = REPO / "results" / "captures"
 LAMP_THRESHOLD_DEG = 5.0
 
 # The axis must span at least this much of full range between its brightest and darkest
-# knot. Measured under the study's fixed exposure (A7, f/4.0): daylight sits near 0.5 of
-# range and darkness near 0.03, so the true span is ~0.45. A tenth of that is already
+# knot. Measured under the study's fixed exposure (A7, f/4.0): daylight sits near 0.53 of
+# range and darkness near 0.04, so the true span is ~0.49. A tenth of that is already
 # unambiguous evidence that the sun was not moving.
 MIN_AXIS_SPAN = 0.05
+
+# How far a single step may run BACKWARDS, as a fraction of the axis span. The renderer's
+# own two inversions measure 4.5% and 5.9% (F6); a knot rendered one illumination away
+# from its label displaces by a large fraction of the span -- rendering the +0.779 deg
+# knot in daylight would show as 90%. 12% sits between them with headroom on both sides.
+MAX_INVERSION_FRAC = 0.12
+
+# ... and how much backwards movement the whole axis may accumulate. The measured axis
+# totals 10.3%; a scrambled one approaches 100%, because every downward step it gets
+# wrong it must climb back.
+MAX_TOTAL_RISE_FRAC = 0.25
 
 
 def signature(frame) -> dict:
@@ -77,61 +113,99 @@ def signature(frame) -> dict:
     }
 
 
-def check_axis(records: list[dict], lamp_threshold: float = LAMP_THRESHOLD_DEG) -> dict:
+def check_axis(records: list[dict], lamp_threshold: float = LAMP_THRESHOLD_DEG,
+               uncovered: list[dict] | None = None) -> dict:
     """Check a whole illumination axis for the failures a per-knot label cannot show.
 
     `records` is [{"sun_altitude_deg": float, "signature": {...}}, ...] in any order.
+    `uncovered` is the knot measurement's own list of sub-intervals the disturbance family
+    cannot represent; an inversion across one of those is recorded but not a failure.
     Returns a report; `assert_axis` raises on it.
     """
     rows = sorted(records, key=lambda r: -float(r["sun_altitude_deg"]))
     means = [r["signature"]["mean"] for r in rows]
     alts = [float(r["sun_altitude_deg"]) for r in rows]
+    unc = uncovered or []
 
     span = (max(means) - min(means)) if means else 0.0
 
-    # Monotonicity WITHIN each headlamp regime. Crossing the switch is a legitimate
-    # discontinuity, so pairs that straddle it are not compared.
-    violations = []
-    for (a0, m0), (a1, m1) in zip(zip(alts, means), zip(alts[1:], means[1:])):
-        lamps0 = a0 < lamp_threshold
-        lamps1 = a1 < lamp_threshold
-        if lamps0 != lamps1:
-            continue  # the headlamp step; see the module docstring
-        if m1 > m0 + 1e-9:
-            violations.append({
-                "from_deg": a0, "to_deg": a1,
-                "from_mean": m0, "to_mean": m1,
-                "detail": f"sun fell {a0:.3f} -> {a1:.3f} deg but the frame got "
-                          f"BRIGHTER, {m0:.4f} -> {m1:.4f}",
-            })
+    def _declared(a0, a1):
+        """Does this step cross a sub-interval the family declares uncovered?
 
-    # The brightest frame must be the highest sun in its regime, and the darkest the
-    # lowest. Stated separately from the pairwise check because a single swapped pair
-    # deep in the axis is a different defect from the whole axis being scrambled.
+        OVERLAP, not equality. For a capture campaign the step IS the sub-interval, but
+        the closed-loop drivers step between sub-interval MIDPOINTS, so the step that
+        crosses the horizon discontinuity is a wider one that contains it.
+        """
+        lo, hi = min(a0, a1), max(a0, a1)
+        return any(min(u["from_deg"], u["to_deg"]) <= hi
+                   and max(u["from_deg"], u["to_deg"]) >= lo
+                   for u in unc)
+
+    inversions, violations, total_rise = [], [], 0.0
+    for (a0, m0), (a1, m1) in zip(zip(alts, means), zip(alts[1:], means[1:])):
+        # Crossing the headlamp switch is a legitimate step change in the curve, so the
+        # pair that straddles it is not compared. Checking across it would fail on a
+        # correct capture.
+        if (a0 < lamp_threshold) != (a1 < lamp_threshold):
+            continue
+        rise = m1 - m0
+        if rise <= 1e-9:
+            continue
+        frac = rise / span if span > 0 else 1.0
+        total_rise += rise
+        entry = {
+            "from_deg": a0, "to_deg": a1, "from_mean": m0, "to_mean": m1,
+            "rise": round(rise, 5), "frac_of_span": round(frac, 4),
+            "declared_uncovered": _declared(a0, a1),
+            "detail": (f"sun fell {a0:.3f} -> {a1:.3f} deg and the frame got BRIGHTER, "
+                       f"{m0:.4f} -> {m1:.4f} ({100 * frac:.1f}% of the axis span)"),
+        }
+        inversions.append(entry)
+        if frac > MAX_INVERSION_FRAC and not entry["declared_uncovered"]:
+            violations.append(entry)
+
+    total_frac = (total_rise / span) if span > 0 else 1.0
+    # Backwards movement across a sub-interval the family already declares uncovered is
+    # the renderer's measured discontinuity, not evidence about the capture.
+    charged_rise = sum(i["rise"] for i in inversions if not i["declared_uncovered"])
+    charged_frac = (charged_rise / span) if span > 0 else 1.0
+
     brightest_at = alts[means.index(max(means))]
     darkest_at = alts[means.index(min(means))]
+    mid_alt = (max(alts) + min(alts)) / 2.0
+    extremes_ok = brightest_at >= mid_alt and darkest_at <= mid_alt
 
     return {
         "knots": len(rows),
         "axis_span_mean": round(span, 5),
         "min_axis_span": MIN_AXIS_SPAN,
         "span_ok": span >= MIN_AXIS_SPAN,
+        "inversions": inversions,
+        "worst_inversion_frac": round(
+            max((i["frac_of_span"] for i in inversions
+                 if not i["declared_uncovered"]), default=0.0), 4),
+        "max_inversion_frac": MAX_INVERSION_FRAC,
+        "total_rise_frac": round(charged_frac, 4),
+        "max_total_rise_frac": MAX_TOTAL_RISE_FRAC,
         "monotone_violations": violations,
-        "monotone_ok": not violations,
+        "monotone_ok": not violations and charged_frac <= MAX_TOTAL_RISE_FRAC,
         "brightest_at_deg": brightest_at,
         "darkest_at_deg": darkest_at,
+        "extremes_ok": extremes_ok,
         "lamp_threshold_deg": lamp_threshold,
         "means_by_altitude": [
             {"sun_altitude_deg": a, "mean": m, "lamps": a < lamp_threshold}
             for a, m in zip(alts, means)
         ],
-        "ok": bool(violations == [] and span >= MIN_AXIS_SPAN),
+        "ok": bool(span >= MIN_AXIS_SPAN and not violations
+                   and charged_frac <= MAX_TOTAL_RISE_FRAC and extremes_ok),
     }
 
 
-def assert_axis(records: list[dict], lamp_threshold: float = LAMP_THRESHOLD_DEG) -> dict:
+def assert_axis(records: list[dict], lamp_threshold: float = LAMP_THRESHOLD_DEG,
+                uncovered: list[dict] | None = None) -> dict:
     """Raise unless the rendered axis is physically consistent with the axis requested."""
-    rep = check_axis(records, lamp_threshold)
+    rep = check_axis(records, lamp_threshold, uncovered)
     if rep["ok"]:
         return rep
     lines = ["ILLUMINATION AXIS DOES NOT MATCH WHAT WAS REQUESTED."]
@@ -142,41 +216,110 @@ def assert_axis(records: list[dict], lamp_threshold: float = LAMP_THRESHOLD_DEG)
             f"The sun was not moving -- the family would be one illumination "
             f"rendered {rep['knots']} times.")
     for v in rep["monotone_violations"]:
-        lines.append("  " + v["detail"])
+        lines.append("  " + v["detail"] +
+                     f"  [limit {100 * MAX_INVERSION_FRAC:.0f}%]")
+    if rep["total_rise_frac"] > MAX_TOTAL_RISE_FRAC:
+        lines.append(
+            f"  the axis runs backwards by {100 * rep['total_rise_frac']:.1f}% of its "
+            f"own span in total, limit {100 * MAX_TOTAL_RISE_FRAC:.0f}%. That is a "
+            f"scrambled axis, not a renderer wobble.")
+    if not rep["extremes_ok"]:
+        lines.append(
+            f"  the brightest frame is at {rep['brightest_at_deg']:+.3f} deg and the "
+            f"darkest at {rep['darkest_at_deg']:+.3f} deg, which is the wrong way round.")
     lines.append(
         "  Every frame captured under this axis is mislabelled. This is the failure "
         "that cost the steering study its Town04 captures (T06-F35).")
     raise RuntimeError("\n".join(lines))
 
 
+def _campaign_records(manifest_path: Path) -> list[dict]:
+    entries = json.loads(manifest_path.read_text())
+    return [{"sun_altitude_deg": e["knot"], "signature": e["signature"]}
+            for e in entries if e.get("signature")]
+
+
+def _uncovered() -> list[dict]:
+    path = REPO / "results" / "carla" / "family_knots.json"
+    if not path.exists():
+        return []
+    return json.loads(path.read_text()).get("uncovered", [])
+
+
+def cross_campaign(campaigns: dict[str, list[dict]]) -> dict:
+    """Compare the campaigns against each other, knot by knot.
+
+    This is the only check here that does not rest on an assumption about the renderer.
+    All four campaigns drive the same site and render the same knots; only the target in
+    front of the camera differs, and a target occupies a small part of the frame. So the
+    brightness curves must agree closely, and a knot rendered at the wrong illumination in
+    ONE campaign shows up as that campaign disagreeing with the other three at that knot
+    and nowhere else.
+
+    A no-target control is expected to sit slightly brighter or darker than its scenario
+    at the same knot -- there is a car or a pedestrian missing from the frame -- so the
+    tolerance is on the scale of the axis, not on the scale of the difference.
+    """
+    names = sorted(campaigns)
+    by_knot: dict[float, dict[str, float]] = {}
+    for name in names:
+        for r in campaigns[name]:
+            by_knot.setdefault(round(float(r["sun_altitude_deg"]), 3), {})[name] = \
+                r["signature"]["mean"]
+    spans = [max(m.values()) - min(m.values())
+             for m in ([{k: v for k, v in
+                         ((r["sun_altitude_deg"], r["signature"]["mean"])
+                          for r in campaigns[n])} for n in names])]
+    span = max(spans) if spans else 1.0
+
+    rows, worst = [], 0.0
+    for alt in sorted(by_knot, reverse=True):
+        vals = by_knot[alt]
+        if len(vals) < 2:
+            continue
+        spread = max(vals.values()) - min(vals.values())
+        frac = spread / span if span > 0 else 1.0
+        worst = max(worst, frac)
+        rows.append({"sun_altitude_deg": alt, "spread": round(spread, 5),
+                     "frac_of_span": round(frac, 4),
+                     "means": {k: round(v, 5) for k, v in vals.items()}})
+    return {"campaigns": names, "axis_span": round(span, 5),
+            "worst_disagreement_frac": round(worst, 4), "knots": rows}
+
+
 def main() -> int:
-    """Validate the rule against whatever capture campaigns are on disk."""
+    """Validate the axis of every capture campaign on disk, and cross-check them."""
     manifests = sorted(CAPTURES.glob("manifest_*.json"))
     if not manifests:
         print(f"no capture manifests in {CAPTURES.relative_to(REPO)} to validate against")
         return 1
+    unc = _uncovered()
     bad = 0
+    campaigns = {}
     for mpath in manifests:
-        entries = json.loads(mpath.read_text())
-        records = [
-            {"sun_altitude_deg": e["knot"], "signature": e["signature"]}
-            for e in entries if e.get("signature")
-        ]
+        name = mpath.stem.replace("manifest_", "")
+        records = _campaign_records(mpath)
         if not records:
             print(f"{mpath.name:28s} no signatures recorded -- captured before this "
                   f"guard existed")
             bad += 1
             continue
-        rep = check_axis(records)
-        print(f"\n{mpath.name}  ({rep['knots']} knots, span {rep['axis_span_mean']:.4f})")
+        campaigns[name] = records
+        rep = check_axis(records, uncovered=unc)
+        print(f"\n{mpath.name}  ({rep['knots']} knots, span "
+              f"{rep['axis_span_mean']:.4f}, worst inversion "
+              f"{100 * rep['worst_inversion_frac']:.1f}% of span)")
         print(f"  {'sun deg':>9s} {'mean':>8s} {'sigma':>8s} {'p99':>8s} {'lamps':>6s}")
-        by_alt = {float(e["knot"]): e["signature"] for e in entries if e.get("signature")}
-        for alt in sorted(by_alt, reverse=True):
-            s = by_alt[alt]
-            print(f"  {alt:9.3f} {s['mean']:8.4f} {s['sigma']:8.4f} {s['p99']:8.4f} "
-                  f"{'on' if alt < LAMP_THRESHOLD_DEG else 'off':>6s}")
+        for r in sorted(records, key=lambda r: -r["sun_altitude_deg"]):
+            s = r["signature"]
+            print(f"  {r['sun_altitude_deg']:9.3f} {s['mean']:8.4f} {s['sigma']:8.4f} "
+                  f"{s['p99']:8.4f} "
+                  f"{'on' if r['sun_altitude_deg'] < LAMP_THRESHOLD_DEG else 'off':>6s}")
+        for inv in rep["inversions"]:
+            print(f"  recorded: {inv['detail']}"
+                  + ("  [declared uncovered]" if inv["declared_uncovered"] else ""))
         if rep["ok"]:
-            print("  OK: monotone within each headlamp regime, and the axis spans.")
+            print("  OK")
         else:
             bad += 1
             for v in rep["monotone_violations"]:
@@ -184,6 +327,25 @@ def main() -> int:
             if not rep["span_ok"]:
                 print(f"  VIOLATION: axis span {rep['axis_span_mean']:.4f} < "
                       f"{MIN_AXIS_SPAN}")
+            if not rep["extremes_ok"]:
+                print("  VIOLATION: brightest and darkest are the wrong way round")
+
+    if len(campaigns) > 1:
+        cc = cross_campaign(campaigns)
+        print(f"\ncross-campaign agreement ({', '.join(cc['campaigns'])})")
+        print(f"  worst per-knot disagreement: "
+              f"{100 * cc['worst_disagreement_frac']:.1f}% of the axis span")
+        for r in sorted(cc["knots"], key=lambda r: -r["frac_of_span"])[:3]:
+            print(f"    {r['sun_altitude_deg']:+8.3f} deg  spread {r['spread']:.4f}  "
+                  f"{', '.join(f'{k}={v:.4f}' for k, v in sorted(r['means'].items()))}")
+        if cc["worst_disagreement_frac"] > 0.15:
+            print("  VIOLATION: campaigns rendering the same knot disagree by more than "
+                  "15% of the axis span. They differ only by the target in front of the "
+                  "camera, which cannot do that.")
+            bad += 1
+        (CAPTURES / "cross_campaign.json").write_text(json.dumps(cc, indent=1) + "\n")
+        print(f"  wrote results/captures/cross_campaign.json")
+
     print(f"\n  {len(manifests) - bad} of {len(manifests)} campaigns consistent")
     return 0 if bad == 0 else 1
 
