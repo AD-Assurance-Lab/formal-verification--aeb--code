@@ -1121,3 +1121,4 @@ Terminated
 [2026-09-08 00:27:07] START witness_P_pts3_ped_atwitness
 [2026-09-08 00:33:03] DONE  witness_P_pts3_ped_atwitness rc=0
 [2026-09-08 00:33:03] M7 complete. python -m study.ledger --check-order
+Terminated

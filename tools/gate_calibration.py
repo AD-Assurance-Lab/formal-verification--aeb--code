@@ -62,8 +62,20 @@ def collect() -> list[dict]:
         stem = vpath.stem
         if stem.endswith("_A") or "_none" in stem:
             continue                                    # property A has no witness drive
-        parts = stem.split("_")                         # verify_<policy>_<scenario>
-        policy, scenario = parts[1], "_".join(parts[2:])
+        # Parsed against the KNOWN arm names, not by splitting on "_". Policy names
+        # contain underscores -- "verify_P_pts_lead".split("_") gives policy "P" and
+        # scenario "pts_lead" -- and the resulting gate path simply does not exist, so
+        # every pair was skipped by a `continue` and the tool reported a correlation
+        # over whatever happened to survive. Silent under-coverage again.
+        from train_policies import POLICY_ARMS
+        rest = stem[len("verify_"):]
+        policy = next((a for a in sorted(POLICY_ARMS, key=len, reverse=True)
+                       if rest.startswith(a + "_")), None)
+        if policy is None:
+            continue
+        scenario = rest[len(policy) + 1:]
+        if scenario not in ("lead", "ped"):
+            continue
         gsuffix = "" if scenario == "lead" else f"_{scenario}"
         gpath = OUT / f"gate_inbetween_{policy}{gsuffix}.json"
         wpath = OUT / f"witness_{policy}_{scenario}.json"

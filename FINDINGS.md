@@ -6,6 +6,52 @@ here, never inside the protocol.
 
 ---
 
+## F10 — 2026-09-08, the in-between gate carries no information about the risk it exists to bound
+
+PROTOCOL section 4 requires the in-between check and says the behavioural version is the
+one that decides whether the disturbance family may be used at all. The certificate
+quantifies over BLENDS; the witness drives happen at RENDERS; the gate is what stands
+between them, and the study has been using it as a pass/fail at 1.0.
+
+**It does not predict anything.** Over 96 covered sub-intervals — three arms, two hazard
+scenarios, each joining a certificate, a gate value and a witness drive on the same
+network:
+
+| | n | min | median | max | mean |
+|---|---|---|---|---|---|
+| gate where certificate and drive AGREE | 54 | 0.021 | 0.110 | 0.341 | 0.125 |
+| gate where they DISAGREE | 42 | 0.021 | 0.079 | 0.456 | 0.124 |
+
+Point-biserial correlation between the gate value and disagreement: **r = −0.005**. The
+two distributions are indistinguishable. A sub-interval where the blend moves the policy
+four times as far as another is no more likely to be one where a blend-based certificate
+fails to transfer to a rendered drive.
+
+**What this does and does not license.** It does not say the family is unsound: no
+sub-interval anywhere in those 96 was certified and then failed. It says the gate is not
+evidence *for* the family, and the paper must stop implying that it is. Passing the
+in-between check at 0.16 rather than 0.68 is not a statement about how far a certificate
+transfers, because transfer is uncorrelated with the number.
+
+The check still has one job it demonstrably does: it caught `[+12.542, +7.715]` at 1.016
+and PROTOCOL section 4's repair fixed it (F7). Detecting a sub-interval where the blend
+can flip a decision *in isolation* is worth having. Predicting where the certificate and
+the vehicle will disagree is a different claim and the gate does not support it.
+
+**Two instrument defects found while getting this number**, both silent under-coverage of
+exactly the kind this study keeps finding:
+
+- The tool parsed `verify_<policy>_<scenario>.json` by splitting on `_`, and every policy
+  name contains one. `verify_P_pts_lead` parsed as policy `P`, scenario `pts_lead`; the
+  gate path built from that does not exist, the pair was skipped by a `continue`, and the
+  tool reported a correlation over whatever happened to survive — 3 pairs of 6. Now parsed
+  against the known arm names.
+- Run against pre-F9 witness artifacts it happily produced r = 0.14 and four
+  "certified then failed" rows, both artifacts of scoring property S against a count that
+  folds in nuisance braking. It now refuses artifacts that predate the split.
+
+---
+
 ## F9 — 2026-09-07, the agreement table was scoring property S against a property A condition
 
 M7's first pass reported a **CERTIFIED sub-interval that failed when driven** — `P_cont`
