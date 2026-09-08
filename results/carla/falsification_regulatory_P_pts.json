@@ -1,0 +1,48 @@
+{
+  "policy": "P_pts",
+  "scenario": "lead",
+  "summary": {
+    "method": "regulatory",
+    "budget_runs": 100,
+    "reps_per_sample": 10,
+    "searches": 1,
+    "searches_that_found_a_failure": 0,
+    "runs_to_first_failure": null,
+    "runs_to_first_failure_all": [],
+    "altitudes_failed": [],
+    "altitudes_failed_count": 0,
+    "wall_clock_s": 51.0,
+    "note": "Search finds a POINT. The certificate states a WIDTH and covers the sub-intervals where nothing fails, which sampling cannot do at any budget. Cost-to-first-failure is where search competes and it may win."
+  },
+  "searches": [
+    {
+      "seed": 0,
+      "runs_used": 20,
+      "runs_to_first_failure": null,
+      "samples": [
+        {
+          "sun_altitude_deg": 60.0,
+          "passes": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ],
+          "failed": false
+        },
+        {
+          "sun_altitude_deg": -30.0,
+          "passes": 10,
+          "of": 10,
+          "rate": 1.0,
+          "wilson_95": [
+            0.7225,
+            1.0
+          ],
+          "failed": false
+        }
+      ]
+    }
+  ]
+}

@@ -54,3 +54,4 @@
   For an illumination drawn uniformly at random from [+0.000, +0.026] degrees of sun altitude, the policy's minimum commanded deceleration over the poses inside r_req is at least 0.0517 m/s^2 with probability at least 95%. THIS IS NOT A FOR-ALL STATEMENT. The certificate quantifies over every illumination in a sub-interval; this quantifies over a random one and attaches a probability. They are different claims and must never be reported as the same one.
 
   wrote results/carla/conformal_P_pts_p0.026_p0.000.json
+Terminated

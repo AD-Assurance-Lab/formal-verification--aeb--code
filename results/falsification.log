@@ -1,1 +1,74 @@
 === regulatory ===
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      seed 0 sun  +60.000  10/10 [0.72, 1.00]  
+      seed 0 sun  -30.000  10/10 [0.72, 1.00]  
+
+  regulatory: 0/1 searches found a failure; median None runs
+  wrote results/carla/falsification_regulatory_P_pts.json
+=== surrogate ===
+  surrogate ranked 18 captured illuminations offline; lowest predicted demand at +0.026 deg
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      seed 0 sun   +0.026  10/10 [0.72, 1.00]  
+      seed 0 sun   +7.715  0/10 [0.00, 0.28]  FAILURE FOUND
+
+  surrogate: 1/1 searches found a failure; median 20 runs
+  wrote results/carla/falsification_surrogate_P_pts.json
+=== random ===
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      seed 0 sun  +39.962  10/10 [0.72, 1.00]  
+      seed 0 sun  +30.284  10/10 [0.72, 1.00]  
+      seed 0 sun  -21.077  10/10 [0.72, 1.00]  
+      seed 0 sun   +1.767  10/10 [0.72, 1.00]  
+      seed 0 sun  +12.112  10/10 [0.72, 1.00]  
+      seed 0 sun  +18.122  10/10 [0.72, 1.00]  
+      seed 0 sun  +58.048  10/10 [0.72, 1.00]  
+      seed 0 sun  -18.272  10/10 [0.72, 1.00]  
+      seed 0 sun  +30.412  10/10 [0.72, 1.00]  
+      seed 0 sun   +2.781  10/10 [0.72, 1.00]  
+      seed 1 sun  +41.699  10/10 [0.72, 1.00]  
+      seed 1 sun  -24.724  10/10 [0.72, 1.00]  
+      seed 1 sun  +38.422  10/10 [0.72, 1.00]  
+      seed 1 sun  +47.643  10/10 [0.72, 1.00]  
+      seed 1 sun  -21.785  10/10 [0.72, 1.00]  
+      seed 1 sun  +51.224  10/10 [0.72, 1.00]  
+      seed 1 sun  +40.731  10/10 [0.72, 1.00]  
+      seed 1 sun   +6.601  10/10 [0.72, 1.00]  
+      seed 1 sun   +3.703  10/10 [0.72, 1.00]  
+      seed 1 sun  +28.412  10/10 [0.72, 1.00]  
+      seed 2 sun  +16.885  10/10 [0.72, 1.00]  
+      seed 2 sun   +7.913  0/10 [0.00, 0.28]  FAILURE FOUND
+      seed 3 sun  +14.761  10/10 [0.72, 1.00]  
+      seed 3 sun   +2.399  10/10 [0.72, 1.00]  
+      seed 3 sun  +34.986  10/10 [0.72, 1.00]  
+      seed 3 sun  +10.205  10/10 [0.72, 1.00]  
+      seed 3 sun  +10.802  10/10 [0.72, 1.00]  
+      seed 3 sun  -27.667  10/10 [0.72, 1.00]  
+      seed 3 sun   +0.141  10/10 [0.72, 1.00]  
+      seed 3 sun  +12.799  10/10 [0.72, 1.00]  
+      seed 3 sun  +10.619  10/10 [0.72, 1.00]  
+      seed 3 sun  -22.090  10/10 [0.72, 1.00]  
+      seed 4 sun   +7.901  0/10 [0.00, 0.28]  FAILURE FOUND
+      seed 5 sun  +13.480  10/10 [0.72, 1.00]  
+      seed 5 sun  +51.196  10/10 [0.72, 1.00]  
+      seed 5 sun  +18.371  10/10 [0.72, 1.00]  
+      seed 5 sun  +48.852  10/10 [0.72, 1.00]  
+      seed 5 sun  +21.584  10/10 [0.72, 1.00]  
+      seed 5 sun  +59.507  10/10 [0.72, 1.00]  
+      seed 5 sun   +2.170  10/10 [0.72, 1.00]  
+      seed 5 sun  +29.556  10/10 [0.72, 1.00]  
+      seed 5 sun  +13.946  10/10 [0.72, 1.00]  
+      seed 5 sun  +21.538  10/10 [0.72, 1.00]  
+
+  random: 2/6 searches found a failure; median 15 runs
+  wrote results/carla/falsification_random_P_pts.json
+
+  P_pts / lead
+    certificate   0 simulator runs, 4/16 sub-intervals certified, 50.32 deg of violating band mapped
+    regulatory    None runs to first failure   0 failing altitude(s) found
+    random        15 runs to first failure   2 failing altitude(s) found
+    surrogate     20 runs to first failure   1 failing altitude(s) found
+
+  wrote falsification_compare_P_pts.json

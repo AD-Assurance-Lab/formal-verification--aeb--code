@@ -6,6 +6,49 @@ here, never inside the protocol.
 
 ---
 
+## F15 — 2026-09-08, the falsification baseline: search is cheaper, unreliable, and cannot say the thing the study sells
+
+The first thing a Tier 1 or a reviewer says to this study is *"twenty random samples would
+have found that too"*, and until now the paper had no answer because it had never run the
+search. `tools/falsification_baseline.py` runs three, on `P_pts`/lead, scored on PROTOCOL
+section 7's frozen criterion so a nuisance stop cannot count as a find.
+
+| method | simulator runs to first failure | searches that found anything | failing altitudes found | wall clock |
+|---|---|---|---|---|
+| certificate | **0** | — | maps a **50.32°** band | 6 min |
+| regulatory test points | never | **0 of 1** | none | 51 s |
+| uniform random over the axis | 15 (median of those that found one) | **2 of 6** | +7.90, +7.91 | 20 min |
+| surrogate-guided | **20** | 1 of 1 | +7.715 | 2 min |
+
+**Search wins on cost to first failure, and the paper should say so.** The surrogate ranks
+all 18 captured illuminations offline by the policy's own predicted deceleration — free, no
+simulator — drives the worst one first, and has a contact in 20 runs. That is the honest
+competitor and it beats the certificate on that metric.
+
+**Three things it does not do.**
+
+1. **It is unreliable.** Uniform random sampling found a failure in **2 of 6 independent
+   searches** inside a 100-run budget. Four practitioners out of six would have sampled the
+   axis, seen nothing, and concluded the policy was fine. The certificate is not a coin
+   flip.
+2. **It finds a point, not a width.** All three methods between them named three
+   illuminations. The certificate maps 50.32° of violating band — 56% of the axis — and
+   names 12 sub-intervals.
+3. **It cannot certify absence.** Nothing a sampler does produces the statement about the
+   4 sub-intervals where nothing fails, and that statement is the product.
+
+**And the regulatory points find nothing, measured rather than asserted.** The study's
+entire premise is that a compliant policy hides its failure between the test conditions;
+driving exactly those conditions, 0 of 1 searches found anything, which is the same 10/10
+that M4 reports and is what makes the rest of the study necessary.
+
+The comparison to make in the paper is therefore not "certificate versus search" on
+cost-to-first-failure, which search wins. It is: **a surrogate search buys one illumination
+for 20 runs and a two-in-six chance of buying nothing at all; the certificate buys the
+whole interval for none.**
+
+---
+
 ## F14 — 2026-09-08, the uncovered sliver gets a guarantee after all, and it separates the policies
 
 Amendment A6 declares `[0.026°, 0.000°]` uncovered: the disturbance family cannot represent
