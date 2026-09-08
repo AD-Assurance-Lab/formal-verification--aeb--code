@@ -449,7 +449,12 @@ def main() -> int:
         print(f"\n  wrote {path.relative_to(J.REPO)}")
         return 0
 
-    out = {"scenario": args.scenario, "speed_mph": args.speed_mph, "cells": {}}
+    out = {"scenario": args.scenario, "speed_mph": args.speed_mph,
+           # The harness this cell ran under. D-11 makes data from a violating harness
+           # unusable, which is checkable after the fact only if the cell says which
+           # harness it was (CARLA_DETERMINISM_PENDING.md item 5).
+           "determinism": J.determinism_provenance(world),
+           "cells": {}}
     sig_records = []
     for pol in policies:
         model, w, h = load_policy(pol, args.scenario, dev)

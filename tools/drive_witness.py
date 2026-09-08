@@ -313,6 +313,10 @@ def main() -> int:
         "scenario": args.scenario,
         "model_sha256": _prov.get("model_sha256"),
         "provenance": _prov,
+        # D-11 is enforceable after the fact only if the artifact says which harness
+        # produced it. Read from the running server and the installed package, not from
+        # a constant. CARLA_DETERMINISM_PENDING.md adoption item 5.
+        "determinism": J.determinism_provenance(world),
         "illumination": illumination,
         "agreement": f"{agree}/{len(rows)}",
         "cells": rows,

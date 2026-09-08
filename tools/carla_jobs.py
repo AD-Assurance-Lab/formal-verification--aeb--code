@@ -164,10 +164,19 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     #                             with a parked car on it.
     #   require_fresh_server      a server that has been up for hours keeps answering and
     #                             stops advancing physics correctly. R-SIM-1 as a check.
+    #   require_clean_world       a world that already holds actors means a previous run
+    #                             died without cleanup, and the package REFUSES rather
+    #                             than tidying up: clearing the actors does not restore
+    #                             whatever else that run left behind, and the instruction
+    #                             is to restart the server. This repo called
+    #                             clear_actors() instead and carried on -- a mitigation
+    #                             where the rule asks for a refusal. It has never fired in
+    #                             any log here, so the strict form costs nothing.
     cd.install_cleanup_handlers()
     _age = cd.require_fresh_server(int(os.environ.get("CARLA_PORT", "2000")))
     if _age is not None:
         print(f"  server age {_age / 60:.0f} min (R-SIM-1 ok)", flush=True)
+    cd.require_clean_world(world)
 
     # D-1..D-6 asserted on EVERY connect, not only in the job runner. It was called from
     # one place, so any job that connected directly measured without asserting anything.
@@ -176,6 +185,8 @@ def connect(load_map: str | None = MAP, rendering: bool = True):
     left = clear_actors(world)
     if left:
         print(f"  cleared {left} actors left by an earlier run", flush=True)
+    global _LAST_WORLD
+    _LAST_WORLD = world
     return client, world
 
 
@@ -256,6 +267,62 @@ def rgb_camera_bp(world, width: int = 640, height: int = 480, fov: float = 90.0)
     bp.set_attribute("fstop", "4.0")
     bp.set_attribute("exposure_compensation", "0.0")
     return bp
+
+
+_LAST_WORLD = None
+
+
+def determinism_provenance(world=None) -> dict:
+    """The harness a measurement ran under, recorded INTO the artifact.
+
+    `CARLA_DETERMINISM_PENDING.md` adoption item 5: D-11 says data captured under a
+    violating harness is not reusable, and that is enforceable after the fact only if the
+    artifact says which harness produced it. Nothing in this repo recorded it, so every
+    closed-loop number here was, strictly, unauditable -- the stage logs prove the
+    preflight passed, and the stage log is not the artifact.
+
+    Read from the running process and the installed package, never from a constant in
+    this file: `-notexturestreaming` and `-quality-level` are launch flags and are
+    invisible over RPC, which is the whole reason the package reads /proc.
+
+    **Unknown is recorded as null, never as false.** A missing server command line means
+    "we could not tell", and writing `false` there would turn an absent measurement into
+    a claim that the flag was off.
+    """
+    port = int(os.environ.get("CARLA_PORT", "2000"))
+    argv = cd.server_cmdline(port)
+    settings = None
+    if world is not None:
+        try:
+            s = world.get_settings()
+            settings = {
+                "synchronous_mode": bool(s.synchronous_mode),
+                "fixed_delta_seconds": s.fixed_delta_seconds,
+                "substepping": bool(s.substepping),
+                "max_substeps": s.max_substeps,
+                "max_substep_delta_time": s.max_substep_delta_time,
+                "no_rendering_mode": bool(s.no_rendering_mode),
+            }
+        except Exception:
+            settings = None
+    return {
+        "package": "carla-determinism",
+        "package_version": cd.__version__,
+        "rules_digest": cd.digest(),
+        "rules_lock_violations": cd.check_lock(),
+        "deterministic_control": cd.get_client() is not None,
+        "server_port": port,
+        "server_cmdline": argv,
+        "server_age_s": cd.server_age_s(port),
+        # Parsed for readability; the raw argv above is the evidence and these are a
+        # convenience. None means the command line could not be read at all.
+        "notexturestreaming": (any("-notexturestreaming" in a for a in argv)
+                               if argv else None),
+        "quality_level": (next((a.split("=", 1)[1] for a in argv
+                                if a.startswith("-quality-level=")), None)
+                          if argv else None),
+        "world_settings": settings,
+    }
 
 
 def clear_actors(world) -> int:
@@ -458,7 +525,15 @@ def claim_output(path):
 
 
 def write(job: str, payload: dict) -> None:
+    """Every job artifact, stamped with the harness that produced it.
+
+    One choke point, so no job can forget. That is the same reasoning that put
+    require_deterministic() inside connect(): a rule re-typed into each driver is a rule
+    one driver will not have.
+    """
     OUT.mkdir(parents=True, exist_ok=True)
+    if isinstance(payload, dict) and "determinism" not in payload:
+        payload = {**payload, "determinism": determinism_provenance(_LAST_WORLD)}
     (OUT / f"{job}.json").write_text(json.dumps(payload, indent=2) + "\n")
     print(f"  wrote results/carla/{job}.json")
 

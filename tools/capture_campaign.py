@@ -244,6 +244,9 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
     return states
 
 
+LAST_DETERMINISM = None
+
+
 def _save_states(path: Path, states) -> None:
     path.write_text(
         json.dumps(
@@ -289,6 +292,11 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
             highbeam: bool = False):
     carla = J.carla_module()
     client, world = J.connect(rendering=not dry_run)
+    # Stashed here because `capture()` owns the world and main() writes the artifact.
+    # Recorded from the live server, so the world settings are the ones the frames were
+    # actually rendered under rather than the ones this file asks for.
+    global LAST_DETERMINISM
+    LAST_DETERMINISM = J.determinism_provenance(world)
     site = J.flattest_site()
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
 
@@ -527,7 +535,20 @@ def main() -> int:
     if manifest is not None:
         suffix = "_hb" if args.highbeam else ""
         path = OUT / f"manifest_{args.scenario}{suffix}.json"
+        # A LIST with a sidecar, not a dict: condition_signature.py reads this file as a
+        # list of entries and wrapping it would break the photometric cross-check, which
+        # is the one illumination check resting on no assumption about the renderer.
+        # D-11 is about captured data above all -- training images taken with texture
+        # streaming on carry mip variation an evaluation will never show -- so the frames
+        # need their harness recorded even though the manifest cannot hold it.
         path.write_text(json.dumps(manifest, indent=2) + "\n")
+        dpath = OUT / f"determinism_{args.scenario}{suffix}.json"
+        dpath.write_text(json.dumps({
+            "manifest": path.name,
+            "knots": len(manifest),
+            "determinism": LAST_DETERMINISM,
+        }, indent=2) + "\n")
+        print(f"  wrote {dpath.relative_to(J.REPO)}")
         print(f"\n  wrote {path.relative_to(J.REPO)}")
     return 0
 
