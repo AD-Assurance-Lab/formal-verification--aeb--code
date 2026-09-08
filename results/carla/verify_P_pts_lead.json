@@ -3,14 +3,24 @@
   "scenario": "lead",
   "model_sha256": "c41f47ada54f8bf473f109430fbfbefcbe6a29c26c653dd20c4d91b0540ca439",
   "provenance": {
-    "timestamp": "2026-09-07T21:55:30-04:00",
-    "git_sha": "e826f6642af8ba42fd2e7ce86186a9dae995eec2",
+    "timestamp": "2026-09-08T12:22:01-04:00",
+    "git_sha": "193cfb0596dc6de3b6779f86e64870b9258b1cc2",
     "model_sha256": "c41f47ada54f8bf473f109430fbfbefcbe6a29c26c653dd20c4d91b0540ca439"
   },
   "property": "S",
   "method": "alpha-CROWN",
   "threshold_mps2": 2.476,
   "r_req_m": 15.846,
+  "scope": {
+    "poses_verified": 25,
+    "poses_available": 104,
+    "pose_range_m": [
+      2.398,
+      15.817
+    ],
+    "selection": "range <= r_req",
+    "r_req_m": 15.846
+  },
   "poses_inside_r_req": 25,
   "branch_and_bound": {
     "max_domains_per_pose": 32,
@@ -34,7 +44,7 @@
       "witness_pose": 102,
       "witness_s": 1.0,
       "witness_range_m": 2.958,
-      "seconds": 35.7
+      "seconds": 35.6
     },
     {
       "from_deg": 42.766,
@@ -52,7 +62,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 39.7
+      "seconds": 39.5
     },
     {
       "from_deg": 28.397,
@@ -70,7 +80,7 @@
       "witness_pose": 79,
       "witness_s": null,
       "witness_range_m": 15.817,
-      "seconds": 33.9
+      "seconds": 33.7
     },
     {
       "from_deg": 18.743,
@@ -88,7 +98,7 @@
       "witness_pose": 79,
       "witness_s": 0.0,
       "witness_range_m": 15.817,
-      "seconds": 40.3
+      "seconds": 40.6
     },
     {
       "from_deg": 12.542,
@@ -106,7 +116,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 35.6
+      "seconds": 34.8
     },
     {
       "from_deg": 10.128,
@@ -124,7 +134,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 36.8
+      "seconds": 37.2
     },
     {
       "from_deg": 7.715,
@@ -142,7 +152,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 40.0
+      "seconds": 39.7
     },
     {
       "from_deg": 5.298,
@@ -178,12 +188,12 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 34.4
+      "seconds": 34.9
     },
     {
       "from_deg": 3.525,
       "to_deg": 1.891,
-      "worst_bound_mps2": 0.5762,
+      "worst_bound_mps2": 0.5761,
       "threshold_mps2": 2.476,
       "margin_x_threshold": 0.2327,
       "verdict": "FALSIFIED",
@@ -196,7 +206,7 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.817,
-      "seconds": 53.9
+      "seconds": 53.5
     },
     {
       "from_deg": 1.891,
@@ -214,14 +224,14 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.817,
-      "seconds": 47.8
+      "seconds": 48.1
     },
     {
       "from_deg": 1.391,
       "to_deg": 0.779,
-      "worst_bound_mps2": 0.7617,
+      "worst_bound_mps2": 0.7607,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.3076,
+      "margin_x_threshold": 0.3072,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 9,
@@ -232,7 +242,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.228,
-      "seconds": 58.9
+      "seconds": 58.7
     },
     {
       "from_deg": 0.779,
@@ -250,7 +260,7 @@
       "witness_pose": 79,
       "witness_s": 1.0,
       "witness_range_m": 15.817,
-      "seconds": 50.4
+      "seconds": 50.8
     },
     {
       "family_uncovered": true,
@@ -269,7 +279,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.551,
-      "seconds": 82.9
+      "seconds": 82.6
     },
     {
       "from_deg": 0.0,
@@ -287,7 +297,7 @@
       "witness_pose": 89,
       "witness_s": null,
       "witness_range_m": 10.228,
-      "seconds": 40.4
+      "seconds": 41.5
     },
     {
       "from_deg": -0.961,
@@ -305,7 +315,7 @@
       "witness_pose": 85,
       "witness_s": null,
       "witness_range_m": 12.464,
-      "seconds": 47.1
+      "seconds": 46.6
     },
     {
       "from_deg": -29.554,
@@ -323,7 +333,7 @@
       "witness_pose": 89,
       "witness_s": null,
       "witness_range_m": 10.228,
-      "seconds": 21.6
+      "seconds": 22.0
     }
   ],
   "falsified": [
@@ -343,7 +353,7 @@
       "witness_pose": 102,
       "witness_s": 1.0,
       "witness_range_m": 2.958,
-      "seconds": 35.7
+      "seconds": 35.6
     },
     {
       "from_deg": 42.766,
@@ -361,7 +371,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 39.7
+      "seconds": 39.5
     },
     {
       "from_deg": 18.743,
@@ -379,7 +389,7 @@
       "witness_pose": 79,
       "witness_s": 0.0,
       "witness_range_m": 15.817,
-      "seconds": 40.3
+      "seconds": 40.6
     },
     {
       "from_deg": 12.542,
@@ -397,7 +407,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 35.6
+      "seconds": 34.8
     },
     {
       "from_deg": 10.128,
@@ -415,7 +425,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 36.8
+      "seconds": 37.2
     },
     {
       "from_deg": 7.715,
@@ -433,7 +443,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 40.0
+      "seconds": 39.7
     },
     {
       "from_deg": 5.298,
@@ -469,12 +479,12 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 34.4
+      "seconds": 34.9
     },
     {
       "from_deg": 3.525,
       "to_deg": 1.891,
-      "worst_bound_mps2": 0.5762,
+      "worst_bound_mps2": 0.5761,
       "threshold_mps2": 2.476,
       "margin_x_threshold": 0.2327,
       "verdict": "FALSIFIED",
@@ -487,7 +497,7 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.817,
-      "seconds": 53.9
+      "seconds": 53.5
     },
     {
       "from_deg": 1.891,
@@ -505,14 +515,14 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.817,
-      "seconds": 47.8
+      "seconds": 48.1
     },
     {
       "from_deg": 1.391,
       "to_deg": 0.779,
-      "worst_bound_mps2": 0.7617,
+      "worst_bound_mps2": 0.7607,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.3076,
+      "margin_x_threshold": 0.3072,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 9,
@@ -523,7 +533,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.228,
-      "seconds": 58.9
+      "seconds": 58.7
     },
     {
       "from_deg": 0.779,
@@ -541,7 +551,7 @@
       "witness_pose": 79,
       "witness_s": 1.0,
       "witness_range_m": 15.817,
-      "seconds": 50.4
+      "seconds": 50.8
     },
     {
       "family_uncovered": true,
@@ -560,7 +570,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.551,
-      "seconds": 82.9
+      "seconds": 82.6
     }
   ],
   "undecided": [],

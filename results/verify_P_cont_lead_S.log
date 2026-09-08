@@ -1,75 +1,73 @@
 /home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
   warnings.warn(
 
-P_cont / lead: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+P_cont / lead: property S over 25 of 104 poses, 2.40 to 15.82 m (range <= r_req), 17 sub-intervals, threshold 2.476 m/s^2
 Early stop at 17th iter due to 10 iterations no improvement!
    +60.000 to  +42.766  bound    4.062    1.64x threshold  CERTIFIED  [25 domains, 33s]
    +42.766 to  +28.397  bound    4.050    1.64x threshold  CERTIFIED  [25 domains, 36s]
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
-   +28.397 to  +18.743  bound    4.538    1.83x threshold  CERTIFIED  [25 domains, 32s]
-   +18.743 to  +12.542  bound    4.423    1.79x threshold  CERTIFIED  [25 domains, 36s]
+   +28.397 to  +18.743  bound    4.538    1.83x threshold  CERTIFIED  [25 domains, 33s]
+   +18.743 to  +12.542  bound    4.423    1.79x threshold  CERTIFIED  [25 domains, 37s]
    +12.542 to  +10.128  bound    4.763    1.92x threshold  CERTIFIED  [25 domains, 33s]
 Early stop at 17th iter due to 10 iterations no improvement!
    +10.128 to   +7.715  bound    4.335    1.75x threshold  CERTIFIED  [25 domains, 35s]
-    +7.715 to   +5.298  bound    4.246    1.71x threshold  CERTIFIED  [25 domains, 34s]
-    +5.298 to   +4.198  bound    4.413    1.78x threshold  CERTIFIED  [25 domains, 37s]
+    +7.715 to   +5.298  bound    4.246    1.71x threshold  CERTIFIED  [25 domains, 33s]
+    +5.298 to   +4.198  bound    4.413    1.78x threshold  CERTIFIED  [25 domains, 38s]
     +4.198 to   +3.525  bound    4.704    1.90x threshold  CERTIFIED  [25 domains, 35s]
-    +3.525 to   +1.891  bound    3.930    1.59x threshold  CERTIFIED  [25 domains, 38s]
+    +3.525 to   +1.891  bound    3.921    1.58x threshold  CERTIFIED  [25 domains, 38s]
     +1.891 to   +1.391  bound    4.464    1.80x threshold  CERTIFIED  [25 domains, 36s]
     +1.391 to   +0.779  bound    2.496    1.01x threshold  CERTIFIED  [25 domains, 37s]
-    +0.779 to   +0.026  bound    3.505    1.42x threshold  CERTIFIED  [75 domains, 111s]
-    +0.026 to   +0.000  bound    2.672    1.08x threshold  CERTIFIED  [163 domains, 250s]
+    +0.779 to   +0.026  bound    3.505    1.42x threshold  CERTIFIED  [75 domains, 110s]
+    +0.026 to   +0.000  bound    2.672    1.08x threshold  CERTIFIED  [163 domains, 252s]
     +0.000 to   -0.961  bound    4.513    1.82x threshold  CERTIFIED  [25 domains, 27s]
 Early stop at 19th iter due to 10 iterations no improvement!
-    -0.961 to  -29.554  bound    3.330    1.35x threshold  CERTIFIED  [125 domains, 101s]
-Early stop at 14th iter due to 10 iterations no improvement!
+    -0.961 to  -29.554  bound    3.330    1.35x threshold  CERTIFIED  [125 domains, 96s]
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
 Early stop at 12th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
 Early stop at 13th iter due to 10 iterations no improvement!
 Early stop at 13th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
    -29.554 to  -30.000  bound    4.687    1.89x threshold  CERTIFIED  [25 domains, 11s]
 /home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_cont_lead.pt'>
   p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()

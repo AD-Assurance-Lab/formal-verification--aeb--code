@@ -6,6 +6,58 @@ here, never inside the protocol.
 
 ---
 
+## F20 — 2026-09-08, the verifier has its own reproducibility floor, and it is 50x smaller than the band where the margin stops meaning anything
+
+Re-running the property S certificates on **identical networks and identical captured
+frames** — same model hashes, same knots, same branch-and-bound budget — does not
+reproduce the margins bit-for-bit. alpha-CROWN's alpha optimisation runs on the GPU and
+its early-stopping path is not deterministic across processes.
+
+| | |
+|---|---|
+| sub-intervals recomputed | 102 |
+| **verdict changes** | **0** |
+| margins that moved at all | 16 of 102 |
+| median relative move, among those | **0.092%** |
+| largest relative move | 1.84%, on a margin of 0.109 |
+| largest **absolute** move | 0.0038 × threshold |
+
+**Nothing flipped.** Every CERTIFIED stayed certified and every FALSIFIED stayed
+falsified, including the four sub-intervals whose margins sit inside F17's uninformative
+band — `P_cont`/lead [+1.391°, +0.779°] at 1.0080 → 1.0079, `P_pts3`/lead
+[+18.743°, +12.542°] and [+5.298°, +4.198°] unchanged to four decimals, and `P_cont`/ped
+[−0.961°, −29.554°] at 1.0142 unchanged.
+
+### Why this matters for F17
+
+F17 measured that between about **1.00× and 1.05×** of threshold the certificate's margin
+carries no information about whether the drive holds: a sub-interval certified at 1.0318×
+crashed 10/10 while four thinner ones drove clean. The obvious objection is that the
+margin is simply noisy at that scale, in which case F17 would be a statement about the
+verifier rather than about the world.
+
+It is not. The verifier's own floor is **0.0038 absolute**, and the band F17 identifies is
+**0.05 wide** — a factor of about thirteen, and fifty times the median jitter. The margin
+is stable to far finer resolution than the band in which it stops predicting. So F17's
+finding is about the transfer from captured frames to a live-rendered drive, which is
+where it was always located, and not about bound reproducibility.
+
+This is the verification analogue of D-7. D-7 measured that rendering never reaches
+bit-identity and therefore closed-loop numbers stay rates over repetitions; this measures
+that bound computation does not either, and quantifies how much of the margin that costs.
+The answer is: not enough to move a verdict, on any of 102 sub-intervals.
+
+### How it was found
+
+Not by looking for it. `bash scripts/rebuild_all.sh endpoints` starts at the endpoints
+stage and runs **every stage after it**, so it recomputed the gates and the certificates
+as well. The witness stage then refused to drive — *"verify_P_pts_lead.json is modified
+since commit: an uncommitted verdict is not a prediction"* — which is the blind-protocol
+guard doing exactly its job on a change nobody intended to make. The accident produced a
+controlled re-run of the whole verifier, so it is recorded rather than discarded.
+
+---
+
 ## F19 — 2026-09-08, driving the plate: one arm violates the nuisance limit for reasons that are not the plate, and one arm violates it because of the plate
 
 **Disposes:** ledger cell 5 (witness)
