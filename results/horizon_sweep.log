@@ -1,0 +1,8 @@
+  server pid 2340954 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      sun  +30.00 az default  max demand   0.023  mean frame 0.5181
+      sun  +20.00 az default  max demand   0.159  mean frame 0.4702
+      sun  +12.00 az default  max demand   0.470  mean frame 0.3989

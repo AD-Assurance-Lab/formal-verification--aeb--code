@@ -27,7 +27,7 @@
     },
     "M6": {
       "state": "done",
-      "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving"
+      "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving. Property A over the covered axis: P_cont 16/16 and 15/16, P_pts 14/16 and 12/16, P_pts3 16/16 and 1/16 -- the pedestrian arm of P_pts3 is falsified over 89.22 of the 90 degree axis, and the drives exhibit exactly that"
     },
     "M7": {
       "state": "done",

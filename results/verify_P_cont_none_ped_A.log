@@ -2,126 +2,119 @@
   warnings.warn(
 
 P_cont / none_ped: 104 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.453 m/s^2
-   +60.000 to  +42.766  bound    0.507    0.21x threshold  CERTIFIED  [104 domains, 299s]
-   +42.766 to  +28.397  bound    0.830    0.34x threshold  CERTIFIED  [104 domains, 394s]
-   +28.397 to  +18.743  bound    0.996    0.41x threshold  CERTIFIED  [104 domains, 437s]
-   +18.743 to  +12.542  bound    1.100    0.45x threshold  CERTIFIED  [104 domains, 297s]
-Early stop at 18th iter due to 10 iterations no improvement!
-   +12.542 to  +10.128  bound    0.608    0.25x threshold  CERTIFIED  [104 domains, 384s]
-[W907 06:21:31.740084177 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 736100352 bytes (free: 687669248, total: 33661911040).
-   +10.128 to   +7.715  bound    2.152    0.88x threshold  CERTIFIED  [106 domains, 444s]
-    +7.715 to   +5.298  bound    2.104    0.86x threshold  CERTIFIED  [106 domains, 520s]
-    +5.298 to   +4.198  bound    1.038    0.42x threshold  CERTIFIED  [104 domains, 436s]
+   +60.000 to  +42.766  bound    0.523    0.21x threshold  CERTIFIED  [104 domains, 153s]
+   +42.766 to  +28.397  bound    0.846    0.34x threshold  CERTIFIED  [104 domains, 153s]
 Early stop at 17th iter due to 10 iterations no improvement!
-    +4.198 to   +3.525  bound    0.986    0.40x threshold  CERTIFIED  [104 domains, 272s]
-    +3.525 to   +1.891  bound    2.213    0.90x threshold  CERTIFIED  [104 domains, 436s]
-    +1.891 to   +1.391  bound    1.589    0.65x threshold  CERTIFIED  [104 domains, 449s]
-    +1.391 to   +0.779  bound    2.199    0.90x threshold  CERTIFIED  [156 domains, 591s]
-    +0.779 to   +0.026  bound    8.212    3.35x threshold  FALSIFIED  witness pose 84 at 12.9 m, s=+0.0000  [292 domains, 1554s]
+   +28.397 to  +18.743  bound    0.366    0.15x threshold  CERTIFIED  [104 domains, 156s]
+   +18.743 to  +12.542  bound    0.941    0.38x threshold  CERTIFIED  [104 domains, 157s]
 Early stop at 15th iter due to 10 iterations no improvement!
-    +0.026 to   +0.000  bound   17.998    7.34x threshold  FALSIFIED  witness pose 87 at 11.2 m, s=-1.0000  [566 domains, 3119s]
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-    +0.000 to   -0.961  bound    1.252    0.51x threshold  CERTIFIED  [104 domains, 460s]
-    -0.961 to  -29.554  bound    2.436    0.99x threshold  CERTIFIED  [152 domains, 207s]
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    1.058    0.43x threshold  CERTIFIED  [104 domains, 159s]
+   +10.128 to   +7.715  bound    1.474    0.60x threshold  CERTIFIED  [104 domains, 155s]
+    +7.715 to   +5.298  bound    1.157    0.47x threshold  CERTIFIED  [104 domains, 169s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    0.392    0.16x threshold  CERTIFIED  [104 domains, 152s]
 Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.308    0.13x threshold  CERTIFIED  [104 domains, 148s]
+    +3.525 to   +1.891  bound    1.412    0.58x threshold  CERTIFIED  [104 domains, 144s]
+    +1.891 to   +1.391  bound    0.609    0.25x threshold  CERTIFIED  [104 domains, 152s]
+    +1.391 to   +0.779  bound    2.268    0.92x threshold  CERTIFIED  [106 domains, 158s]
+    +0.779 to   +0.026  bound    7.152    2.92x threshold  FALSIFIED  witness pose 84 at 12.9 m, s=+0.0000  [156 domains, 241s]
+    +0.026 to   +0.000  bound   15.169    6.19x threshold  FALSIFIED  witness pose 84 at 12.9 m, s=-1.0000  [486 domains, 813s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+    +0.000 to   -0.961  bound    0.844    0.34x threshold  CERTIFIED  [104 domains, 165s]
+    -0.961 to  -29.554  bound    2.437    0.99x threshold  CERTIFIED  [118 domains, 211s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
 Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 10th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
 Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 18th iter due to 10 iterations no improvement!
 Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 15th iter due to 10 iterations no improvement!
 Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
-   -29.554 to  -30.000  bound    0.633    0.26x threshold  CERTIFIED  [104 domains, 87s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    0.543    0.22x threshold  CERTIFIED  [104 domains, 133s]
 /home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_cont_ped.pt'>
   p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
 ResourceWarning: Enable tracemalloc to get the object allocation traceback

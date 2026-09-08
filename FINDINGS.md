@@ -6,6 +6,65 @@ here, never inside the protocol.
 
 ---
 
+## F12 — 2026-09-08, training on the whole regulatory matrix made the policy worse in BOTH directions
+
+`P_pts3` was added to answer the cheapest question that could have sunk this study: does
+the dusk gap close when the policy has seen every lighting condition FMVSS 127 tests? It
+does not. It is worse than that.
+
+`P_pts3` is trained on all three regulatory lighting conditions — daylight, darkness with
+lower beam, darkness with upper beam — against `P_pts`'s two. Identical architecture,
+recipe, sample count after equalising, and the same seed. It passes **all three** regulatory
+endpoint tests, on both hazard scenarios, 10/10, on PROTOCOL section 7's frozen criterion.
+
+Then:
+
+| | `P_pts` (2 conditions) | `P_pts3` (all 3) | `P_cont` (continuum) |
+|---|---|---|---|
+| property S certified, lead | 4/16 | **6/16** | 16/16 |
+| property S certified, ped | 4/16 | **3/16** | 15/16 |
+| property S falsified width, lead | 50.32° | **43.02°** | 0° |
+| property A certified, empty road | 14/16 | **16/16** | 16/16 |
+| property A certified, ped poses | 12/16 | **1/16** | 15/16 |
+| property A falsified width, ped poses | 2.83° | **89.22°** | 0.75° |
+| contacts when driven, lead | 10 | **40** | **0** |
+| contacts + nuisance stops, ped | 0 + 40 | 18 + 32 | **0 + 0** |
+
+**It certifies more of the axis on property S and crashes four times as often.** 6/16
+against 4/16 on the lead scenario, and 40 contacts against 10 when the certificate's own
+witnesses are driven.
+
+**And on the pedestrian scenario it is falsified for property A across 89.22° of a 90°
+axis.** One sub-interval of sixteen survives. That is the certificate saying this policy
+will brake on an empty road at essentially every illumination, and the drives exhibit
+exactly that: it brakes at 287.6 ft in daylight and stops 250 ft short of the pedestrian,
+ten runs of ten.
+
+### Why this matters more than the original result
+
+The study's claim was that training against a discrete test matrix creates gaps at the
+matrix's own gaps. The obvious objection is *"then sample the matrix properly"*. `P_pts3`
+samples it properly — every lighting condition the standard names — and comes out failing
+in **both** directions at once: it does not brake when it should across 43° of the axis,
+and it brakes when it should not across 89°.
+
+Adding a third training condition did not interpolate between the conditions. It bought
+margin at the endpoints the standard checks and lost the road between and around them.
+
+**This is only visible because both properties were verified.** A study that checked only
+must-brake would have reported `P_pts3` as the better regulatory arm — it certifies more
+sub-intervals than `P_pts` — and shipped a policy that stops dead 250 ft from a pedestrian
+in broad daylight. PROTOCOL section 9 calls property A's cells "the sleeper"; this is the
+sleeper, and it is louder than the cell it was written about.
+
+### The direction of every disagreement is still safe
+
+Across all six cells, both drive passes, and every one of 96 covered sub-intervals:
+**nothing was certified and then failed.** Every certificate/drive disagreement in this
+study is the verifier calling unsafe something that drove cleanly.
+
+---
+
 ## F11 — 2026-09-08, D-8 measured here at last: physics bit-exact, rendering never, and this policy does not amplify
 
 Rule D-8 says determinism must be measured OPEN LOOP, and this study had never done it —
