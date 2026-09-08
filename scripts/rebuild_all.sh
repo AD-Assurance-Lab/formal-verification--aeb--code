@@ -298,7 +298,11 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # M4. If P_pts cannot pass the regulatory endpoints there is no study, because
       # the claim is that a policy which SATISFIES the standard is unsafe between its
       # test points. The script stops here in that case, deliberately.
-      for sc in lead ped; do
+      # plate too. Cells 5 and 6 are ledger rows and their endpoint drives were run by
+      # hand on 2026-09-08 while this loop covered two of the three scenarios -- a stage
+      # that reports success having measured less than the study contains. Standing rule
+      # 8: the exact invocation that produced a committed number is a script in the repo.
+      for sc in lead ped plate; do
         fresh_server
         run "endpoints_${sc}" "$PY" -u tools/run_policy.py --all --scenario "$sc"
       done
