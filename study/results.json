@@ -99,18 +99,20 @@
       "nuisance_braking_sub_intervals": 0
     },
     "5": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
-      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
+      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario.",
+      "criterion": "crossed the plate without braking and never exceeded the standard's 0.25 g nuisance limit"
     },
     "6": {
-      "endpoints": null,
+      "endpoints": "PASS both",
       "fv": null,
       "witness": null,
       "width": null,
-      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
+      "note": "NO HARNESS. The FMVSS 127 false-activation scenario is specified in PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles the trench plate to the standard's dimensions and nothing drives it. See docs/STATE_OF_PLAY.md for what it needs. Property A is currently verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario.",
+      "criterion": "crossed the plate without braking and never exceeded the standard's 0.25 g nuisance limit"
     }
   },
   "gates": {

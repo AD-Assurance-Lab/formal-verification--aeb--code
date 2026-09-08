@@ -1,0 +1,18 @@
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2486604 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+    P_pts / daylight / plate: 10/10 [0.72, 1.00] pass (peak demand 0.034 vs limit 2.453)
+    P_pts / darkness_lowbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.056 vs limit 2.453)
+    P_pts / darkness_highbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.037 vs limit 2.453)
+    P_cont / daylight / plate: 10/10 [0.72, 1.00] pass (peak demand 0.093 vs limit 2.453)
+    P_cont / darkness_lowbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.375 vs limit 2.453)
+    P_cont / darkness_highbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.082 vs limit 2.453)
+    P_pts3 / daylight / plate: 10/10 [0.72, 1.00] pass (peak demand 0.030 vs limit 2.453)
+    P_pts3 / darkness_lowbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.066 vs limit 2.453)
+    P_pts3 / darkness_highbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.050 vs limit 2.453)
+
+  wrote results/carla/policy_endpoints_plate.json
