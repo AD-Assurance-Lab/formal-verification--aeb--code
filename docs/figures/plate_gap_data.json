@@ -1,0 +1,618 @@
+{
+  "nuisance_limit_mps2": 2.4525,
+  "endpoints_peak_mps2": {
+    "P_pts": {
+      "daylight": 0.0336,
+      "darkness_lowbeam": 0.0556,
+      "darkness_highbeam": 0.037
+    },
+    "P_cont": {
+      "daylight": 0.0929,
+      "darkness_lowbeam": 0.3752,
+      "darkness_highbeam": 0.0817
+    },
+    "P_pts3": {
+      "daylight": 0.0298,
+      "darkness_lowbeam": 0.0655,
+      "darkness_highbeam": 0.0495
+    }
+  },
+  "sub_intervals": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 42.766,
+      "driven_at_deg": 51.383,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.3448,
+          "peak_no_plate": 0.351,
+          "x_limit_plate": 0.1406,
+          "x_limit_no_plate": 0.1431,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.2193,
+          "peak_no_plate": 0.0263,
+          "x_limit_plate": 0.0894,
+          "x_limit_no_plate": 0.0107,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.0877,
+          "peak_no_plate": 0.0873,
+          "x_limit_plate": 0.0358,
+          "x_limit_no_plate": 0.0356,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 42.766,
+      "to_deg": 28.397,
+      "driven_at_deg": 35.581,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.7366,
+          "peak_no_plate": 1.075,
+          "x_limit_plate": 0.3003,
+          "x_limit_no_plate": 0.4383,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.5702,
+          "peak_no_plate": 0.506,
+          "x_limit_plate": 0.2325,
+          "x_limit_no_plate": 0.2063,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.0205,
+          "peak_no_plate": 1.0234,
+          "x_limit_plate": 0.4161,
+          "x_limit_no_plate": 0.4173,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 28.397,
+      "to_deg": 18.743,
+      "driven_at_deg": 23.57,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 1.0176,
+          "peak_no_plate": 1.021,
+          "x_limit_plate": 0.4149,
+          "x_limit_no_plate": 0.4163,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.1841,
+          "peak_no_plate": 0.1828,
+          "x_limit_plate": 0.0751,
+          "x_limit_no_plate": 0.0745,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.0778,
+          "peak_no_plate": 1.0762,
+          "x_limit_plate": 0.4395,
+          "x_limit_no_plate": 0.4388,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 18.743,
+      "to_deg": 12.542,
+      "driven_at_deg": 15.642,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.8058,
+          "peak_no_plate": 0.7985,
+          "x_limit_plate": 0.3286,
+          "x_limit_no_plate": 0.3256,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.1114,
+          "peak_no_plate": 0.1073,
+          "x_limit_plate": 0.0454,
+          "x_limit_no_plate": 0.0438,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.4129,
+          "peak_no_plate": 1.4178,
+          "x_limit_plate": 0.5761,
+          "x_limit_no_plate": 0.5781,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 12.542,
+      "to_deg": 10.128,
+      "driven_at_deg": 11.335,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.0374,
+          "peak_no_plate": 0.0381,
+          "x_limit_plate": 0.0152,
+          "x_limit_no_plate": 0.0155,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.0133,
+          "peak_no_plate": 0.0056,
+          "x_limit_plate": 0.0054,
+          "x_limit_no_plate": 0.0023,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.7592,
+          "peak_no_plate": 1.757,
+          "x_limit_plate": 0.7173,
+          "x_limit_no_plate": 0.7164,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 10.128,
+      "to_deg": 7.715,
+      "driven_at_deg": 8.921,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.0446,
+          "peak_no_plate": 0.0434,
+          "x_limit_plate": 0.0182,
+          "x_limit_no_plate": 0.0177,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.0682,
+          "peak_no_plate": 0.0583,
+          "x_limit_plate": 0.0278,
+          "x_limit_no_plate": 0.0238,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.7382,
+          "peak_no_plate": 0.7408,
+          "x_limit_plate": 0.301,
+          "x_limit_no_plate": 0.3021,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 7.715,
+      "to_deg": 5.298,
+      "driven_at_deg": 6.506,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.2769,
+          "peak_no_plate": 0.3768,
+          "x_limit_plate": 0.1129,
+          "x_limit_no_plate": 0.1536,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 1.6328,
+          "peak_no_plate": 1.7276,
+          "x_limit_plate": 0.6658,
+          "x_limit_no_plate": 0.7044,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.5125,
+          "peak_no_plate": 1.5134,
+          "x_limit_plate": 0.6167,
+          "x_limit_no_plate": 0.6171,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 5.298,
+      "to_deg": 4.198,
+      "driven_at_deg": 4.748,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.3286,
+          "peak_no_plate": 0.3401,
+          "x_limit_plate": 0.134,
+          "x_limit_no_plate": 0.1387,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 1.361,
+          "peak_no_plate": 1.5812,
+          "x_limit_plate": 0.5549,
+          "x_limit_no_plate": 0.6447,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.1387,
+          "peak_no_plate": 1.1416,
+          "x_limit_plate": 0.4643,
+          "x_limit_no_plate": 0.4655,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 4.198,
+      "to_deg": 3.525,
+      "driven_at_deg": 3.862,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.3255,
+          "peak_no_plate": 0.3326,
+          "x_limit_plate": 0.1327,
+          "x_limit_no_plate": 0.1356,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 1.1269,
+          "peak_no_plate": 1.1527,
+          "x_limit_plate": 0.4595,
+          "x_limit_no_plate": 0.47,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.6858,
+          "peak_no_plate": 0.5934,
+          "x_limit_plate": 0.2796,
+          "x_limit_no_plate": 0.242,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 3.525,
+      "to_deg": 1.891,
+      "driven_at_deg": 2.708,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.5878,
+          "peak_no_plate": 0.5894,
+          "x_limit_plate": 0.2397,
+          "x_limit_no_plate": 0.2403,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.7758,
+          "peak_no_plate": 0.877,
+          "x_limit_plate": 0.3163,
+          "x_limit_no_plate": 0.3576,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.2621,
+          "peak_no_plate": 1.3091,
+          "x_limit_plate": 0.5146,
+          "x_limit_no_plate": 0.5338,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 1.891,
+      "to_deg": 1.391,
+      "driven_at_deg": 1.641,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.4095,
+          "peak_no_plate": 0.4139,
+          "x_limit_plate": 0.167,
+          "x_limit_no_plate": 0.1688,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.1216,
+          "peak_no_plate": 0.1149,
+          "x_limit_plate": 0.0496,
+          "x_limit_no_plate": 0.0469,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.7094,
+          "peak_no_plate": 1.7084,
+          "x_limit_plate": 0.697,
+          "x_limit_no_plate": 0.6966,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 1.391,
+      "to_deg": 0.779,
+      "driven_at_deg": 1.085,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.6122,
+          "peak_no_plate": 0.5984,
+          "x_limit_plate": 0.2496,
+          "x_limit_no_plate": 0.244,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.2345,
+          "peak_no_plate": 0.0947,
+          "x_limit_plate": 0.0956,
+          "x_limit_no_plate": 0.0386,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.7216,
+          "peak_no_plate": 1.757,
+          "x_limit_plate": 0.702,
+          "x_limit_no_plate": 0.7164,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 0.779,
+      "to_deg": 0.026,
+      "driven_at_deg": 0.403,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 3.3805,
+          "peak_no_plate": 3.3825,
+          "x_limit_plate": 1.3784,
+          "x_limit_no_plate": 1.3792,
+          "passes_plate": "0/10",
+          "passes_no_plate": "0/10",
+          "verdict": "FALSIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 2.589,
+          "peak_no_plate": 2.5677,
+          "x_limit_plate": 1.0557,
+          "x_limit_no_plate": 1.047,
+          "passes_plate": "0/10",
+          "passes_no_plate": "0/10",
+          "verdict": "FALSIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 1.8467,
+          "peak_no_plate": 1.7473,
+          "x_limit_plate": 0.753,
+          "x_limit_no_plate": 0.7125,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 0.026,
+      "to_deg": 0.0,
+      "driven_at_deg": 0.013,
+      "family_uncovered": true,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 3.0527,
+          "peak_no_plate": 3.0555,
+          "x_limit_plate": 1.2447,
+          "x_limit_no_plate": 1.2459,
+          "passes_plate": "0/10",
+          "passes_no_plate": "0/10",
+          "verdict": "FALSIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 2.182,
+          "peak_no_plate": 2.1733,
+          "x_limit_plate": 0.8897,
+          "x_limit_no_plate": 0.8862,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 2.7107,
+          "peak_no_plate": 2.2212,
+          "x_limit_plate": 1.1053,
+          "x_limit_no_plate": 0.9057,
+          "passes_plate": "7/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -0.961,
+      "driven_at_deg": -0.48,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.0388,
+          "peak_no_plate": 0.0387,
+          "x_limit_plate": 0.0158,
+          "x_limit_no_plate": 0.0158,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.0714,
+          "peak_no_plate": 0.0715,
+          "x_limit_plate": 0.0291,
+          "x_limit_no_plate": 0.0292,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.0689,
+          "peak_no_plate": 0.0671,
+          "x_limit_plate": 0.0281,
+          "x_limit_no_plate": 0.0274,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": -0.961,
+      "to_deg": -29.554,
+      "driven_at_deg": -15.257,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.0555,
+          "peak_no_plate": 0.0556,
+          "x_limit_plate": 0.0226,
+          "x_limit_no_plate": 0.0227,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.0655,
+          "peak_no_plate": 0.0654,
+          "x_limit_plate": 0.0267,
+          "x_limit_no_plate": 0.0267,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.37,
+          "peak_no_plate": 0.3715,
+          "x_limit_plate": 0.1509,
+          "x_limit_no_plate": 0.1515,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    },
+    {
+      "from_deg": -29.554,
+      "to_deg": -30.0,
+      "driven_at_deg": -29.777,
+      "family_uncovered": false,
+      "arms": {
+        "P_pts": {
+          "peak_plate": 0.0555,
+          "peak_no_plate": 0.0556,
+          "x_limit_plate": 0.0226,
+          "x_limit_no_plate": 0.0227,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_pts3": {
+          "peak_plate": 0.0655,
+          "peak_no_plate": 0.0654,
+          "x_limit_plate": 0.0267,
+          "x_limit_no_plate": 0.0267,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        },
+        "P_cont": {
+          "peak_plate": 0.3714,
+          "peak_no_plate": 0.3692,
+          "x_limit_plate": 0.1514,
+          "x_limit_no_plate": 0.1505,
+          "passes_plate": "10/10",
+          "passes_no_plate": "10/10",
+          "verdict": "CERTIFIED"
+        }
+      }
+    }
+  ],
+  "note": "Measured peak commanded deceleration over 10 repetitions per point, with and without the plate. Bounds are in verify_*_plate_A.json; this is what the vehicle did."
+}

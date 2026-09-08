@@ -55,8 +55,8 @@ One sub-interval in 102 behaves differently with the steel there:
 | plate present | **2.711** | **110.5%** | **7/10** |
 | plate removed | 2.221 | 90.6% | 10/10 |
 
-The plate adds **18.1%** to the peak demand and carries the policy across the standard's
-threshold. That is false activation in the strict sense — the vehicle brakes *because of
+The plate adds **22%** to the peak demand — 2.221 to 2.711, measured against the control —
+and carries the policy across the standard's threshold. That is false activation in the strict sense — the vehicle brakes *because of
 the steel* — and `P_cont` is the only arm that does it. PROTOCOL §9 named this cell the
 sleeper on the grounds that the continuum-trained policy sees more braking data and might
 be the more trigger-happy, *"a trade no single-sided test can see"*. It is right, and it
@@ -80,6 +80,10 @@ already on record predicted it, from different directions:
 
 Both were written down before this drive. Neither was written down *because* of it.
 
+`docs/figures/plate_gap.svg` draws all of it: 51 bars against the limit line, with the
+plate-removed control as a tick on each. `tools/make_plate_figure.py` builds it, and the
+bar geometry is checked against `plate_gap_data.json` rather than trusted.
+
 ### What cells 5 and 6 establish, stated carefully
 
 - **No arm false-activates on the trench plate at any illumination FMVSS 127 tests.** All
@@ -88,7 +92,10 @@ Both were written down before this drive. Neither was written down *because* of 
   and for `P_pts` and `P_pts3` the plate is irrelevant to it** — the same violation occurs
   on empty road within 0.9%.
 - **`P_cont` alone brakes for the steel**, in one sub-interval, and only there does the
-  plate change a verdict.
+  plate change a verdict. Below the limit, bar-to-control differences are run-to-run
+  variation on demands two orders of magnitude under it — 0.089 against 0.011 is a 736%
+  relative change and decides nothing. The only difference that means anything is one
+  that crosses the line, and there is exactly one.
 - The sub-interval where that happens is the one the disturbance family cannot represent,
   so the certificate cannot speak to it. The conformal guarantee (F14) is what covers that
   sliver, and this drive is what it is covering.

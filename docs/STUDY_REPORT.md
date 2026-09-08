@@ -359,7 +359,9 @@ the steel, and FMVSS 127's own false-activation procedure cannot see it.
 
 `P_cont` is the one arm where the plate itself matters, in one sub-interval: at +0.013° it
 peaks at **2.711 (110.5% of the limit, 7/10) with the plate** and **2.221 (90.6%, 10/10)
-without** — the steel adds 18.1% and carries it over. That is §9's named sleeper, and it
+without** — the steel adds 22% over the control and carries it over. It is the only
+place on the whole axis, in any arm, where the plate changes a verdict; below the limit
+the plate-to-control differences are run-to-run variation on demands far under it. That is §9's named sleeper, and it
 took a two-sided test at an illumination outside the standard to see it.
 
 That sub-interval is also **the only certified-then-failed cell in the study** — certified

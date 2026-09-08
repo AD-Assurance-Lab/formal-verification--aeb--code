@@ -10,3 +10,11 @@
 [2026-09-08 10:52:28] DONE  witness_P_pts3_none_plate rc=0
 [2026-09-08 10:52:28] restarting CARLA on 3000
 [2026-09-08 10:53:46] START witness_P_pts_none_plate_atwitness
+[2026-09-08 10:54:16] DONE  witness_P_pts_none_plate_atwitness rc=0
+[2026-09-08 10:54:16] restarting CARLA on 3000
+[2026-09-08 10:55:33] START witness_P_cont_none_plate_atwitness
+[2026-09-08 10:55:37] DONE  witness_P_cont_none_plate_atwitness rc=0
+[2026-09-08 10:55:37] restarting CARLA on 3000
+[2026-09-08 10:56:54] START witness_P_pts3_none_plate_atwitness
+[2026-09-08 10:57:19] DONE  witness_P_pts3_none_plate_atwitness rc=0
+[2026-09-08 10:57:19] M7 complete. python -m study.ledger --check-order

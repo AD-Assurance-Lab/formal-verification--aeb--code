@@ -99,8 +99,9 @@ yet contain:
   and 138% of it between them**, 60x its worst test point — and the plate is irrelevant,
   the same illumination on empty road gives 3.382 against 3.381. The standard's own
   false-activation procedure cannot see this.
-- `P_cont` is the only arm that brakes **for the steel**: at +0.013° the plate adds 18.1%
-  to peak demand and carries it from 90.6% to 110.5% of the limit. That is section 9's
+- `P_cont` is the only arm that brakes **for the steel**: at +0.013° the plate adds 22%
+  to peak demand and carries it from 90.6% to 110.5% of the limit — the only place in any
+  arm where the plate changes a verdict. That is section 9's
   named sleeper, and it is in the A6-uncovered sliver — which is also the study's only
   certified-then-failed sub-interval, and the first empirical proof that the sliver cannot
   be certified.
