@@ -6,6 +6,48 @@ here, never inside the protocol.
 
 ---
 
+## F14 — 2026-09-08, the uncovered sliver gets a guarantee after all, and it separates the policies
+
+Amendment A6 declares `[0.026°, 0.000°]` uncovered: the disturbance family cannot represent
+the horizon at any width, so a certificate there would quantify over images the simulator
+would never render. The study correctly refuses to count it — and until now that left it
+saying **nothing at all** about a gap in the middle of the axis which is sunset, exactly
+the region the claim is about.
+
+Split conformal calibration over 40 illuminations drawn i.i.d. from the sliver and
+**rendered rather than blended**, at α = 0.05, using the k = 2 order statistic:
+
+| arm | conformal lower bound | × threshold | verdict | samples below threshold |
+|---|---|---|---|---|
+| `P_cont` | **4.6023 m/s²** | 1.86 | CLEARS | **0 / 40** |
+| `P_pts` | **0.0517 m/s²** | 0.02 | does not clear | **40 / 40** |
+
+**The method separates the two policies cleanly at the one place where no certificate is
+available.** For an illumination drawn at random from that sliver, `P_cont` commands at
+least 1.86× the brake decision threshold with 95% confidence, and `P_pts` does not command
+anything at all.
+
+**It is not the certificate's statement and must never be reported as one.** The
+certificate says *for all* `s` in a sub-interval, with no probability attached. This says
+*for a random* `s` from it, with probability 1 − α, and it assumes only exchangeability —
+which holds by construction here, because the calibration illuminations are drawn
+independently and rendered. The artifact carries that quantifier in words and the tool
+prints it on every run.
+
+The pairing is what makes it worth having:
+
+| where | instrument | quantifier |
+|---|---|---|
+| the 16 covered sub-intervals | alpha-CROWN with branch and bound | for all `s`, sound |
+| the uncovered sliver | split conformal | for a random `s`, 95% |
+
+The tool refuses to produce a bound at all when n is too small for the order statistic to
+exist — at α = 0.05 that is 19 calibration points — rather than returning a weaker number
+that still looks like a result. Its coverage was validated by simulation before use:
+0.9514 at n = 40 and 0.9489 at n = 19 against a 0.95 target.
+
+---
+
 ## F13 — 2026-09-08, the horizon braking is illumination, not glare; and for one arm it is not the horizon at all
 
 Queue item 9 asked whether the near-horizon nuisance braking follows the sun's ALTITUDE

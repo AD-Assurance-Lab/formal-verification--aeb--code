@@ -1,0 +1,461 @@
+{
+  "policy": "P_cont",
+  "scenario": "lead",
+  "sub_interval_deg": [
+    0.026,
+    0.0
+  ],
+  "is_declared_uncovered": true,
+  "n_calibration": 40,
+  "alpha": 0.05,
+  "order_statistic_k": 2,
+  "conformal_lower_bound_mps2": 4.60234,
+  "brake_decision_threshold_mps2": 2.476,
+  "bound_clears_threshold": true,
+  "margin_x_threshold": 1.8587,
+  "empirical_illuminations_below_threshold": 0,
+  "poses_inside_r_req": 25,
+  "quantifier": "For an illumination drawn uniformly at random from [+0.000, +0.026] degrees of sun altitude, the policy's minimum commanded deceleration over the poses inside r_req is at least 4.6023 m/s^2 with probability at least 95%. THIS IS NOT A FOR-ALL STATEMENT. The certificate quantifies over every illumination in a sub-interval; this quantifies over a random one and attaches a probability. They are different claims and must never be reported as the same one.",
+  "calibration": [
+    {
+      "sun_altitude_deg": 0.02593,
+      "min_demand_mps2": 4.78406,
+      "signature": {
+        "mean": 0.03831,
+        "sigma": 0.06795,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62661
+      }
+    },
+    {
+      "sun_altitude_deg": 0.0255,
+      "min_demand_mps2": 4.68093,
+      "signature": {
+        "mean": 0.03957,
+        "sigma": 0.06954,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62771
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02431,
+      "min_demand_mps2": 4.70284,
+      "signature": {
+        "mean": 0.03915,
+        "sigma": 0.06882,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62937
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02429,
+      "min_demand_mps2": 4.68278,
+      "signature": {
+        "mean": 0.03942,
+        "sigma": 0.06925,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62897
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02373,
+      "min_demand_mps2": 4.73714,
+      "signature": {
+        "mean": 0.03943,
+        "sigma": 0.06843,
+        "p01": 0.0,
+        "p99": 0.30196,
+        "frac_dark": 0.62528
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02313,
+      "min_demand_mps2": 4.76774,
+      "signature": {
+        "mean": 0.03972,
+        "sigma": 0.06963,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62887
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02244,
+      "min_demand_mps2": 4.72945,
+      "signature": {
+        "mean": 0.03937,
+        "sigma": 0.06947,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63116
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02229,
+      "min_demand_mps2": 4.65268,
+      "signature": {
+        "mean": 0.03842,
+        "sigma": 0.06723,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62631
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02121,
+      "min_demand_mps2": 4.75498,
+      "signature": {
+        "mean": 0.03919,
+        "sigma": 0.06911,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62948
+      }
+    },
+    {
+      "sun_altitude_deg": 0.02115,
+      "min_demand_mps2": 4.80349,
+      "signature": {
+        "mean": 0.0383,
+        "sigma": 0.06767,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62685
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01897,
+      "min_demand_mps2": 4.63841,
+      "signature": {
+        "mean": 0.03935,
+        "sigma": 0.06946,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63143
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01897,
+      "min_demand_mps2": 4.66163,
+      "signature": {
+        "mean": 0.03887,
+        "sigma": 0.06838,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62807
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01876,
+      "min_demand_mps2": 4.72173,
+      "signature": {
+        "mean": 0.03908,
+        "sigma": 0.06788,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62712
+      }
+    },
+    {
+      "sun_altitude_deg": 0.0179,
+      "min_demand_mps2": 4.79715,
+      "signature": {
+        "mean": 0.03918,
+        "sigma": 0.06877,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62874
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01782,
+      "min_demand_mps2": 4.63125,
+      "signature": {
+        "mean": 0.03934,
+        "sigma": 0.06955,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63207
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01744,
+      "min_demand_mps2": 4.605,
+      "signature": {
+        "mean": 0.03854,
+        "sigma": 0.06817,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63096
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01691,
+      "min_demand_mps2": 4.70277,
+      "signature": {
+        "mean": 0.03909,
+        "sigma": 0.069,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63232
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01683,
+      "min_demand_mps2": 4.78204,
+      "signature": {
+        "mean": 0.03872,
+        "sigma": 0.06817,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62907
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01656,
+      "min_demand_mps2": 4.66737,
+      "signature": {
+        "mean": 0.03921,
+        "sigma": 0.0692,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63133
+      }
+    },
+    {
+      "sun_altitude_deg": 0.016,
+      "min_demand_mps2": 4.75432,
+      "signature": {
+        "mean": 0.03902,
+        "sigma": 0.06884,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63194
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01577,
+      "min_demand_mps2": 4.69623,
+      "signature": {
+        "mean": 0.03893,
+        "sigma": 0.06781,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.6284
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01413,
+      "min_demand_mps2": 4.70957,
+      "signature": {
+        "mean": 0.03916,
+        "sigma": 0.06917,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63234
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01408,
+      "min_demand_mps2": 4.72294,
+      "signature": {
+        "mean": 0.03834,
+        "sigma": 0.06805,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63069
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01366,
+      "min_demand_mps2": 4.63408,
+      "signature": {
+        "mean": 0.03897,
+        "sigma": 0.06906,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.6344
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01263,
+      "min_demand_mps2": 4.66405,
+      "signature": {
+        "mean": 0.03789,
+        "sigma": 0.06754,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63163
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01099,
+      "min_demand_mps2": 4.70481,
+      "signature": {
+        "mean": 0.0381,
+        "sigma": 0.06708,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63138
+      }
+    },
+    {
+      "sun_altitude_deg": 0.01011,
+      "min_demand_mps2": 4.65588,
+      "signature": {
+        "mean": 0.03701,
+        "sigma": 0.06643,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.62885
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00998,
+      "min_demand_mps2": 4.64414,
+      "signature": {
+        "mean": 0.0391,
+        "sigma": 0.06892,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63353
+      }
+    },
+    {
+      "sun_altitude_deg": 0.0093,
+      "min_demand_mps2": 4.61703,
+      "signature": {
+        "mean": 0.03874,
+        "sigma": 0.06853,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63507
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00807,
+      "min_demand_mps2": 4.67441,
+      "signature": {
+        "mean": 0.03879,
+        "sigma": 0.06878,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63584
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00779,
+      "min_demand_mps2": 4.66302,
+      "signature": {
+        "mean": 0.0386,
+        "sigma": 0.06813,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63192
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00701,
+      "min_demand_mps2": 4.70572,
+      "signature": {
+        "mean": 0.03876,
+        "sigma": 0.06881,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63464
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00457,
+      "min_demand_mps2": 4.69524,
+      "signature": {
+        "mean": 0.03822,
+        "sigma": 0.06798,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63483
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00351,
+      "min_demand_mps2": 4.73672,
+      "signature": {
+        "mean": 0.03792,
+        "sigma": 0.06693,
+        "p01": 0.0,
+        "p99": 0.30196,
+        "frac_dark": 0.63285
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00323,
+      "min_demand_mps2": 4.73878,
+      "signature": {
+        "mean": 0.03781,
+        "sigma": 0.06723,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63125
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00107,
+      "min_demand_mps2": 4.69957,
+      "signature": {
+        "mean": 0.03827,
+        "sigma": 0.06752,
+        "p01": 0.0,
+        "p99": 0.30196,
+        "frac_dark": 0.63436
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00087,
+      "min_demand_mps2": 4.60234,
+      "signature": {
+        "mean": 0.03856,
+        "sigma": 0.06868,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63809
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00074,
+      "min_demand_mps2": 4.60772,
+      "signature": {
+        "mean": 0.0375,
+        "sigma": 0.06747,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.6371
+      }
+    },
+    {
+      "sun_altitude_deg": 0.00043,
+      "min_demand_mps2": 4.5959,
+      "signature": {
+        "mean": 0.03755,
+        "sigma": 0.06675,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63488
+      }
+    },
+    {
+      "sun_altitude_deg": 7e-05,
+      "min_demand_mps2": 4.75066,
+      "signature": {
+        "mean": 0.03749,
+        "sigma": 0.06718,
+        "p01": 0.0,
+        "p99": 0.3098,
+        "frac_dark": 0.63429
+      }
+    }
+  ]
+}

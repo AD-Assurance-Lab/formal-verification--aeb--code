@@ -1,0 +1,56 @@
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2342587 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+  defaulting to the declared-uncovered sub-interval [+0.026, +0.000] deg
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      sun  +0.02593  min demand over 25 poses   0.057  BELOW
+      sun  +0.02550  min demand over 25 poses   0.060  BELOW
+      sun  +0.02431  min demand over 25 poses   0.055  BELOW
+      sun  +0.02429  min demand over 25 poses   0.056  BELOW
+      sun  +0.02373  min demand over 25 poses   0.056  BELOW
+      sun  +0.02313  min demand over 25 poses   0.057  BELOW
+      sun  +0.02244  min demand over 25 poses   0.058  BELOW
+      sun  +0.02229  min demand over 25 poses   0.055  BELOW
+      sun  +0.02121  min demand over 25 poses   0.056  BELOW
+      sun  +0.02115  min demand over 25 poses   0.056  BELOW
+      sun  +0.01897  min demand over 25 poses   0.056  BELOW
+      sun  +0.01897  min demand over 25 poses   0.053  BELOW
+      sun  +0.01876  min demand over 25 poses   0.054  BELOW
+      sun  +0.01790  min demand over 25 poses   0.056  BELOW
+      sun  +0.01782  min demand over 25 poses   0.063  BELOW
+      sun  +0.01744  min demand over 25 poses   0.054  BELOW
+      sun  +0.01691  min demand over 25 poses   0.055  BELOW
+      sun  +0.01683  min demand over 25 poses   0.057  BELOW
+      sun  +0.01656  min demand over 25 poses   0.057  BELOW
+      sun  +0.01600  min demand over 25 poses   0.053  BELOW
+      sun  +0.01577  min demand over 25 poses   0.054  BELOW
+      sun  +0.01413  min demand over 25 poses   0.058  BELOW
+      sun  +0.01408  min demand over 25 poses   0.058  BELOW
+      sun  +0.01366  min demand over 25 poses   0.054  BELOW
+      sun  +0.01263  min demand over 25 poses   0.052  BELOW
+      sun  +0.01099  min demand over 25 poses   0.053  BELOW
+      sun  +0.01011  min demand over 25 poses   0.055  BELOW
+      sun  +0.00998  min demand over 25 poses   0.056  BELOW
+      sun  +0.00930  min demand over 25 poses   0.053  BELOW
+      sun  +0.00807  min demand over 25 poses   0.056  BELOW
+      sun  +0.00779  min demand over 25 poses   0.057  BELOW
+      sun  +0.00701  min demand over 25 poses   0.057  BELOW
+      sun  +0.00457  min demand over 25 poses   0.052  BELOW
+      sun  +0.00351  min demand over 25 poses   0.052  BELOW
+      sun  +0.00323  min demand over 25 poses   0.055  BELOW
+      sun  +0.00107  min demand over 25 poses   0.054  BELOW
+      sun  +0.00087  min demand over 25 poses   0.053  BELOW
+      sun  +0.00074  min demand over 25 poses   0.053  BELOW
+      sun  +0.00043  min demand over 25 poses   0.052  BELOW
+      sun  +0.00007  min demand over 25 poses   0.057  BELOW
+
+  n = 40, alpha = 0.05, using the k = 2 smallest score
+  conformal lower bound 0.0517 m/s^2 = 0.02x the decision threshold -> DOES NOT CLEAR
+  empirically 40/40 sampled illuminations fell below it
+
+  For an illumination drawn uniformly at random from [+0.000, +0.026] degrees of sun altitude, the policy's minimum commanded deceleration over the poses inside r_req is at least 0.0517 m/s^2 with probability at least 95%. THIS IS NOT A FOR-ALL STATEMENT. The certificate quantifies over every illumination in a sub-interval; this quantifies over a random one and attaches a probability. They are different claims and must never be reported as the same one.
+
+  wrote results/carla/conformal_P_pts_p0.026_p0.000.json
