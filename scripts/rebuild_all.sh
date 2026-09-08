@@ -165,6 +165,34 @@ if [ "$FROM" = "verifyA" ]; then
   exit $fail
 fi
 
+if [ "$FROM" = "analysis" ]; then
+  # Everything that turns committed results into a number or a picture someone quotes.
+  # No simulator: these read results/carla/*.json and the captured frames. They live in a
+  # stage rather than in anyone's shell history because standing rule 8 is that a number
+  # in a paper comes from a committed invocation, and tools/tidy.py reported three of
+  # these as dead code because genuinely nothing referenced them.
+  stop_server
+  fail=0
+  run gate_calibration   "$PY" -u tools/gate_calibration.py   || fail=1
+  for pol in P_pts P_cont; do
+    run "conformal_${pol}" "$PY" -u tools/conformal_coverage.py --policy "$pol" || fail=1
+  done
+  for pol in $POLICIES; do
+    for sc in lead ped; do
+      run "latch_window_${pol}_${sc}" "$PY" -u tools/latch_window.py \
+          --policy "$pol" --scenario "$sc" || fail=1
+    done
+  done
+  run latch_window_report "$PY" -u tools/latch_window_report.py || fail=1
+  run scope_restatement   "$PY" -u tools/restate_scope.py --write || fail=1
+  run figure_lead  "$PY" -u tools/make_figure.py --scenario lead || fail=1
+  run figure_ped   "$PY" -u tools/make_figure.py --scenario ped  || fail=1
+  run figure_plate "$PY" -u tools/make_plate_figure.py || fail=1
+  run record_cells "$PY" -u tools/record_cells.py --write || fail=1
+  say "analysis complete (rc=$fail). python -m study.status"
+  exit $fail
+fi
+
 if [ "$FROM" = "witness" ]; then
   # M7. Refuses to run until the verdicts are committed; that refusal is the protocol.
   #
@@ -217,6 +245,10 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # and the expert at both regulatory endpoints. Stops at the first failing job.
       fresh_server
       run jobs "$PY" -u tools/carla_jobs.py --all
+      # The safety budget, derived from braking.json. This was invoked by nothing for the
+      # whole study, so the r_req every certificate composes with had been hand-edited
+      # past what the tool produced -- standing rule 8 on the most important numbers here.
+      run primitives "$PY" -u tools/record_primitives.py
       ;;
     knots)
       # A6: where the illumination axis has to be cut. Must precede capture -- these

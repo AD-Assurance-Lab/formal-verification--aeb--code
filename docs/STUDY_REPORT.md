@@ -470,13 +470,24 @@ control that makes a plate verdict attributable to the plate.
 bash scripts/bootstrap_env.sh            # builds .venv and PROVES a CUDA kernel runs
 bash scripts/rebuild_all.sh              # M2 to M6, in dependency order
                                          # ... commit results/carla/verify_*.json here
+bash scripts/rebuild_all.sh verifyA      # property A, hazard + plate + control. GPU only
 bash scripts/rebuild_all.sh witness      # M7; refuses if the verdicts are uncommitted
-bash scripts/rebuild_all.sh verifyA      # property A, GPU only
 bash scripts/determinism_probe.sh        # D-8
+bash scripts/seed_sweep.sh               # the attribution at n = 10, GPU only
+bash scripts/rebuild_all.sh analysis     # every number and figure a reader quotes
 python -m study.ledger --check-order     # the blind protocol, checked against git
-python tools/record_cells.py --write     # the ledger, from the artifacts
-python tools/make_figure.py              # PROTOCOL section 11's figure
 python -m study.status
 ```
 
-Figure: `docs/figures/dusk_gap.svg` and `.html`. Raw results: `results/carla/*.json`.
+Both `verifyA` and `witness` take an explicit scope argument — `all` (the default),
+`hazard`, `plate`, `none_plate`. The default is the whole thing on purpose: a flag that
+narrows scope is passed explicitly or it is not passed, because a default that quietly
+measures less still produces a result that looks finished.
+
+`analysis` is the stage that exists because `tools/tidy.py` found three tools nothing
+referenced — including `record_primitives.py`, which derives the safety budget every
+certificate composes with. A number in this report comes from a committed invocation or
+it does not go in.
+
+Figures: `docs/figures/dusk_gap.svg`, `dusk_gap_ped.svg` and `plate_gap.svg`, each with
+its `_data.json`. Raw results: `results/carla/*.json`.

@@ -108,7 +108,12 @@ def main() -> int:
         if not rel.endswith(".py") or rel.endswith("__init__.py"):
             continue
         stem = Path(rel).stem
-        hits = git("grep", "-l", stem, "--", "*.py", "*.md")
+        # *.sh TOO. The committed drivers are shell scripts -- standing rule 8 is that a
+        # number in a paper comes from a script in the repo -- so searching only .py and
+        # .md made every tool wired into the pipeline and nowhere else read as dead.
+        # check_pairing.py is invoked by scripts/rebuild_all.sh on every run and this
+        # reported it as unreferenced.
+        hits = git("grep", "-l", stem, "--", "*.py", "*.md", "*.sh")
         if len([h for h in hits if h != rel]) == 0:
             orphans.append(f"{rel}  (nothing else mentions it)")
     section(

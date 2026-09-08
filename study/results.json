@@ -27,15 +27,15 @@
     },
     "M6": {
       "state": "done",
-      "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving. Property A over the covered axis: P_cont 16/16 and 15/16, P_pts 14/16 and 12/16, P_pts3 16/16 and 1/16 -- the pedestrian arm of P_pts3 is falsified over 89.22 of the 90 degree axis, and the drives exhibit exactly that"
+      "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving. Property A over the covered axis: P_cont 16/16 and 15/16, P_pts 14/16 and 12/16, P_pts3 16/16 and 1/16 -- the pedestrian arm of P_pts3 is falsified over 89.22 of the 90 degree axis, and the drives exhibit exactly that. Property A over the FMVSS 127 false-activation scenario, all three arms, 52 poses from 2.179 to 59.178 m: P_cont 16/16 covered, P_pts and P_pts3 15/16. Every verdict is identical with the plate REMOVED and every bound within 0.5%, so no falsification is attributable to the plate (F18)"
     },
     "M7": {
       "state": "done",
-      "note": "REBUILT, twelve drives: six at sub-interval midpoints and six at the certificate's EXHIBITED witness illumination. Agreement on PROTOCOL section 7's frozen criterion: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. ZERO certified-then-failed anywhere -- no soundness violation in any cell. Cells 1 and 3 contradict their pre-registration and need dispositions per section 8"
+      "note": "REBUILT, then extended to the plate. Twenty-four drives: midpoint and at-witness passes for three arms on lead, ped, plate and the plate-removed control. Hazard agreement: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. Plate agreement: cell 5 (P_pts) 17/17, cell 6 (P_cont) 16/17, P_pts3 17/17. ZERO certified-then-failed on the covered axis in any cell; the study's only one is in the A6-UNCOVERED sliver, which is excluded from every verdict by construction and is the first empirical confirmation that the sliver cannot be certified (F19). All four ledger contradictions carry written dispositions: cells 1 and 3 in F17, cell 5's certificate in F18 and its drive in F19"
     },
     "M8": {
-      "state": "todo",
-      "note": "A12 rebuild: figure and report to be regenerated from the rebuilt results"
+      "state": "in_progress",
+      "note": "Report rewritten and both figures regenerated from the rebuilt results (dusk_gap, dusk_gap_ped, plate_gap). Remaining: the Novi demo, and formal-verification--aeb--arxiv, whose every measured number predates the A12 rebuild -- its figures/make_data.py is the only sanctioned path in"
     }
   },
   "cells": {
