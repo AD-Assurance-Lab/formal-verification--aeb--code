@@ -175,16 +175,29 @@ def main() -> int:
     verdict = None
     if args.azimuth_ablation:
         d = summary["default"]["peak_demand_in_band"]
+        base = summary["default"]["baseline_demand_above_12deg"]
         rotated = max(summary[k]["peak_demand_in_band"] for k in ("rot90", "rot180"))
-        # If rotating the sun out of the direction of travel removes most of the effect,
-        # the effect followed the sun rather than the altitude.
-        verdict = ("GLARE: the horizon braking follows the sun's azimuth, so it is a "
-                   "geometric artifact of this site's heading and does not generalise"
-                   if rotated < 0.5 * d else
-                   "ILLUMINATION: the horizon braking survives rotating the sun away "
-                   "from the direction of travel, so it follows altitude and is a "
-                   "property of low-sun illumination rather than of glare geometry")
-        print(f"\n  default peak {d:.3f}, rotated peak {rotated:.3f} m/s^2")
+        # FIRST ask whether there is a horizon effect at all. The first version of this
+        # went straight to the azimuth comparison, and on a policy that brakes on an empty
+        # road at EVERY illumination it dutifully reported "illumination, not glare" --
+        # true, and beside the point, because the demand above +12 deg was 4.13 against an
+        # in-band peak of 4.87. Nothing was localised to the horizon to explain.
+        if base >= 0.75 * d:
+            verdict = (
+                f"NOT A HORIZON EFFECT: the demand above +12 deg is {base:.3f} against an "
+                f"in-band peak of {d:.3f}, so this policy behaves this way at every "
+                f"illumination and the horizon band is not special. If it exceeds the "
+                f"decision threshold it is a global must-not-brake failure, not a dusk "
+                f"one, and the azimuth question does not arise.")
+        elif rotated < 0.5 * d:
+            verdict = ("GLARE: the horizon braking follows the sun's azimuth, so it is a "
+                       "geometric artifact of this site's heading and does not generalise")
+        else:
+            verdict = ("ILLUMINATION: the horizon braking survives rotating the sun away "
+                       "from the direction of travel, so it follows altitude and is a "
+                       "property of low-sun illumination rather than of glare geometry")
+        print(f"\n  in-band peak {d:.3f}, above +12 deg {base:.3f}, rotated peak "
+              f"{rotated:.3f} m/s^2")
         print(f"  {verdict}")
 
     payload = {

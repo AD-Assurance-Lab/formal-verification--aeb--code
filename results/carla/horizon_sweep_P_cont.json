@@ -1,0 +1,1286 @@
+{
+  "policy": "P_cont",
+  "scenario": "lead",
+  "brake_decision_threshold_mps2": 2.476,
+  "poses_sampled": 12,
+  "default_sun_azimuth_deg": 275.0,
+  "summary": {
+    "default": {
+      "peak_demand_in_band": 0.3349,
+      "peak_at_deg": 5.5,
+      "baseline_demand_above_12deg": 0.1592,
+      "exceeds_threshold": false
+    },
+    "rot90": {
+      "peak_demand_in_band": 0.6899,
+      "peak_at_deg": 1.0,
+      "baseline_demand_above_12deg": 0.0452,
+      "exceeds_threshold": false
+    },
+    "rot180": {
+      "peak_demand_in_band": 0.5862,
+      "peak_at_deg": 1.0,
+      "baseline_demand_above_12deg": 0.031,
+      "exceeds_threshold": false
+    }
+  },
+  "verdict": "ILLUMINATION: the horizon braking survives rotating the sun away from the direction of travel, so it follows altitude and is a property of low-sun illumination rather than of glare geometry",
+  "wall_clock_s": 534.6,
+  "arms": {
+    "default": [
+      {
+        "sun_altitude_deg": 30.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0228,
+        "mean_demand_mps2": 0.0065,
+        "signature": {
+          "mean": 0.51806,
+          "sigma": 0.25298,
+          "p01": 0.05098,
+          "p99": 0.99608,
+          "frac_dark": 0.00657
+        }
+      },
+      {
+        "sun_altitude_deg": 20.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.1592,
+        "mean_demand_mps2": 0.015,
+        "signature": {
+          "mean": 0.47015,
+          "sigma": 0.25935,
+          "p01": 0.0,
+          "p99": 0.98824,
+          "frac_dark": 0.0106
+        }
+      },
+      {
+        "sun_altitude_deg": 12.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.4695,
+        "mean_demand_mps2": 0.0761,
+        "signature": {
+          "mean": 0.39892,
+          "sigma": 0.24643,
+          "p01": 0.0,
+          "p99": 0.98824,
+          "frac_dark": 0.02034
+        }
+      },
+      {
+        "sun_altitude_deg": 8.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.2111,
+        "mean_demand_mps2": 0.0353,
+        "signature": {
+          "mean": 0.34104,
+          "sigma": 0.22602,
+          "p01": 0.0,
+          "p99": 0.97255,
+          "frac_dark": 0.0305
+        }
+      },
+      {
+        "sun_altitude_deg": 6.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.1544,
+        "mean_demand_mps2": 0.0229,
+        "signature": {
+          "mean": 0.29061,
+          "sigma": 0.20846,
+          "p01": 0.0,
+          "p99": 0.9451,
+          "frac_dark": 0.04507
+        }
+      },
+      {
+        "sun_altitude_deg": 5.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.3349,
+        "mean_demand_mps2": 0.0277,
+        "signature": {
+          "mean": 0.26528,
+          "sigma": 0.19971,
+          "p01": 0.0,
+          "p99": 0.92549,
+          "frac_dark": 0.05616
+        }
+      },
+      {
+        "sun_altitude_deg": 5.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0161,
+        "mean_demand_mps2": -0.0036,
+        "signature": {
+          "mean": 0.24823,
+          "sigma": 0.19515,
+          "p01": 0.0,
+          "p99": 0.90588,
+          "frac_dark": 0.07203
+        }
+      },
+      {
+        "sun_altitude_deg": 4.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0071,
+        "mean_demand_mps2": -0.0046,
+        "signature": {
+          "mean": 0.24457,
+          "sigma": 0.1803,
+          "p01": 0.0,
+          "p99": 0.87059,
+          "frac_dark": 0.08298
+        }
+      },
+      {
+        "sun_altitude_deg": 4.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0102,
+        "mean_demand_mps2": -0.0038,
+        "signature": {
+          "mean": 0.22687,
+          "sigma": 0.17213,
+          "p01": 0.0,
+          "p99": 0.83137,
+          "frac_dark": 0.0964
+        }
+      },
+      {
+        "sun_altitude_deg": 3.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0145,
+        "mean_demand_mps2": -0.0024,
+        "signature": {
+          "mean": 0.21156,
+          "sigma": 0.16703,
+          "p01": 0.0,
+          "p99": 0.78039,
+          "frac_dark": 0.11211
+        }
+      },
+      {
+        "sun_altitude_deg": 3.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0188,
+        "mean_demand_mps2": -0.0027,
+        "signature": {
+          "mean": 0.19217,
+          "sigma": 0.15873,
+          "p01": 0.0,
+          "p99": 0.73333,
+          "frac_dark": 0.13287
+        }
+      },
+      {
+        "sun_altitude_deg": 2.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0148,
+        "mean_demand_mps2": -0.0047,
+        "signature": {
+          "mean": 0.16907,
+          "sigma": 0.14808,
+          "p01": 0.0,
+          "p99": 0.67843,
+          "frac_dark": 0.16
+        }
+      },
+      {
+        "sun_altitude_deg": 2.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0158,
+        "mean_demand_mps2": -0.0027,
+        "signature": {
+          "mean": 0.14372,
+          "sigma": 0.13592,
+          "p01": 0.0,
+          "p99": 0.61569,
+          "frac_dark": 0.1989
+        }
+      },
+      {
+        "sun_altitude_deg": 1.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.03,
+        "mean_demand_mps2": -0.001,
+        "signature": {
+          "mean": 0.11518,
+          "sigma": 0.11996,
+          "p01": 0.0,
+          "p99": 0.54902,
+          "frac_dark": 0.25872
+        }
+      },
+      {
+        "sun_altitude_deg": 1.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0029,
+        "mean_demand_mps2": -0.0176,
+        "signature": {
+          "mean": 0.08766,
+          "sigma": 0.10447,
+          "p01": 0.0,
+          "p99": 0.47059,
+          "frac_dark": 0.35534
+        }
+      },
+      {
+        "sun_altitude_deg": 0.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.1077,
+        "mean_demand_mps2": 0.0273,
+        "signature": {
+          "mean": 0.05997,
+          "sigma": 0.08579,
+          "p01": 0.0,
+          "p99": 0.38824,
+          "frac_dark": 0.47623
+        }
+      },
+      {
+        "sun_altitude_deg": 0.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0095,
+        "mean_demand_mps2": -0.0144,
+        "signature": {
+          "mean": 0.06478,
+          "sigma": 0.0808,
+          "p01": 0.0,
+          "p99": 0.3451,
+          "frac_dark": 0.41985
+        }
+      },
+      {
+        "sun_altitude_deg": -0.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0092,
+        "mean_demand_mps2": -0.013,
+        "signature": {
+          "mean": 0.05651,
+          "sigma": 0.07501,
+          "p01": 0.0,
+          "p99": 0.3098,
+          "frac_dark": 0.47782
+        }
+      },
+      {
+        "sun_altitude_deg": -1.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0132,
+        "mean_demand_mps2": -0.0138,
+        "signature": {
+          "mean": 0.04896,
+          "sigma": 0.07193,
+          "p01": 0.0,
+          "p99": 0.30196,
+          "frac_dark": 0.54338
+        }
+      },
+      {
+        "sun_altitude_deg": -1.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0715,
+        "mean_demand_mps2": -0.01,
+        "signature": {
+          "mean": 0.04523,
+          "sigma": 0.07106,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.58674
+        }
+      },
+      {
+        "sun_altitude_deg": -2.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.114,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04331,
+          "sigma": 0.07112,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.61503
+        }
+      },
+      {
+        "sun_altitude_deg": -2.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.2082,
+        "mean_demand_mps2": 0.0044,
+        "signature": {
+          "mean": 0.04205,
+          "sigma": 0.07132,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.63686
+        }
+      },
+      {
+        "sun_altitude_deg": -3.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.1386,
+        "mean_demand_mps2": 0.0016,
+        "signature": {
+          "mean": 0.04136,
+          "sigma": 0.07142,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.64915
+        }
+      },
+      {
+        "sun_altitude_deg": -3.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.016,
+        "mean_demand_mps2": -0.0083,
+        "signature": {
+          "mean": 0.04098,
+          "sigma": 0.07147,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.65618
+        }
+      },
+      {
+        "sun_altitude_deg": -4.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0269,
+        "mean_demand_mps2": -0.0051,
+        "signature": {
+          "mean": 0.04069,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66115
+        }
+      },
+      {
+        "sun_altitude_deg": -4.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0254,
+        "mean_demand_mps2": -0.0052,
+        "signature": {
+          "mean": 0.04068,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.6613
+        }
+      },
+      {
+        "sun_altitude_deg": -5.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0338,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04067,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66138
+        }
+      },
+      {
+        "sun_altitude_deg": -5.5,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0341,
+        "mean_demand_mps2": -0.0045,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66142
+        }
+      },
+      {
+        "sun_altitude_deg": -6.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0318,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66151
+        }
+      },
+      {
+        "sun_altitude_deg": -10.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0334,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66157
+        }
+      },
+      {
+        "sun_altitude_deg": -20.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0358,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66158
+        }
+      },
+      {
+        "sun_altitude_deg": -30.0,
+        "sun_azimuth_deg": null,
+        "max_demand_mps2": 0.0326,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04064,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66162
+        }
+      }
+    ],
+    "rot90": [
+      {
+        "sun_altitude_deg": 30.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0321,
+        "mean_demand_mps2": 0.0056,
+        "signature": {
+          "mean": 0.29441,
+          "sigma": 0.15686,
+          "p01": 0.0,
+          "p99": 0.53725,
+          "frac_dark": 0.02967
+        }
+      },
+      {
+        "sun_altitude_deg": 20.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0452,
+        "mean_demand_mps2": 0.0021,
+        "signature": {
+          "mean": 0.26993,
+          "sigma": 0.15049,
+          "p01": 0.0,
+          "p99": 0.49412,
+          "frac_dark": 0.04341
+        }
+      },
+      {
+        "sun_altitude_deg": 12.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.024,
+        "mean_demand_mps2": -0.0022,
+        "signature": {
+          "mean": 0.24489,
+          "sigma": 0.13742,
+          "p01": 0.0,
+          "p99": 0.45098,
+          "frac_dark": 0.05158
+        }
+      },
+      {
+        "sun_altitude_deg": 8.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0212,
+        "mean_demand_mps2": -0.0025,
+        "signature": {
+          "mean": 0.22083,
+          "sigma": 0.12343,
+          "p01": 0.0,
+          "p99": 0.41569,
+          "frac_dark": 0.06008
+        }
+      },
+      {
+        "sun_altitude_deg": 6.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0185,
+        "mean_demand_mps2": -0.0031,
+        "signature": {
+          "mean": 0.19699,
+          "sigma": 0.11283,
+          "p01": 0.0,
+          "p99": 0.38824,
+          "frac_dark": 0.07313
+        }
+      },
+      {
+        "sun_altitude_deg": 5.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0196,
+        "mean_demand_mps2": -0.0024,
+        "signature": {
+          "mean": 0.19191,
+          "sigma": 0.11291,
+          "p01": 0.0,
+          "p99": 0.38431,
+          "frac_dark": 0.07842
+        }
+      },
+      {
+        "sun_altitude_deg": 5.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0206,
+        "mean_demand_mps2": -0.0016,
+        "signature": {
+          "mean": 0.1823,
+          "sigma": 0.10906,
+          "p01": 0.0,
+          "p99": 0.37255,
+          "frac_dark": 0.08589
+        }
+      },
+      {
+        "sun_altitude_deg": 4.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0203,
+        "mean_demand_mps2": -0.003,
+        "signature": {
+          "mean": 0.18753,
+          "sigma": 0.10299,
+          "p01": 0.0,
+          "p99": 0.35686,
+          "frac_dark": 0.09148
+        }
+      },
+      {
+        "sun_altitude_deg": 4.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0199,
+        "mean_demand_mps2": -0.0018,
+        "signature": {
+          "mean": 0.17448,
+          "sigma": 0.09824,
+          "p01": 0.0,
+          "p99": 0.3451,
+          "frac_dark": 0.10355
+        }
+      },
+      {
+        "sun_altitude_deg": 3.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0214,
+        "mean_demand_mps2": 0.0017,
+        "signature": {
+          "mean": 0.16226,
+          "sigma": 0.09556,
+          "p01": 0.0,
+          "p99": 0.32549,
+          "frac_dark": 0.11981
+        }
+      },
+      {
+        "sun_altitude_deg": 3.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0266,
+        "mean_demand_mps2": 0.0049,
+        "signature": {
+          "mean": 0.14521,
+          "sigma": 0.08962,
+          "p01": 0.0,
+          "p99": 0.3098,
+          "frac_dark": 0.14126
+        }
+      },
+      {
+        "sun_altitude_deg": 2.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0304,
+        "mean_demand_mps2": 0.0034,
+        "signature": {
+          "mean": 0.12573,
+          "sigma": 0.0825,
+          "p01": 0.0,
+          "p99": 0.28627,
+          "frac_dark": 0.16822
+        }
+      },
+      {
+        "sun_altitude_deg": 2.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.1365,
+        "mean_demand_mps2": 0.024,
+        "signature": {
+          "mean": 0.10117,
+          "sigma": 0.07176,
+          "p01": 0.0,
+          "p99": 0.25882,
+          "frac_dark": 0.20682
+        }
+      },
+      {
+        "sun_altitude_deg": 1.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.367,
+        "mean_demand_mps2": 0.0735,
+        "signature": {
+          "mean": 0.08218,
+          "sigma": 0.06665,
+          "p01": 0.0,
+          "p99": 0.23922,
+          "frac_dark": 0.26676
+        }
+      },
+      {
+        "sun_altitude_deg": 1.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.6899,
+        "mean_demand_mps2": 0.1369,
+        "signature": {
+          "mean": 0.05801,
+          "sigma": 0.05669,
+          "p01": 0.0,
+          "p99": 0.21961,
+          "frac_dark": 0.36751
+        }
+      },
+      {
+        "sun_altitude_deg": 0.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.4431,
+        "mean_demand_mps2": 0.0361,
+        "signature": {
+          "mean": 0.03567,
+          "sigma": 0.04836,
+          "p01": 0.0,
+          "p99": 0.20784,
+          "frac_dark": 0.543
+        }
+      },
+      {
+        "sun_altitude_deg": 0.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.3798,
+        "mean_demand_mps2": 0.0195,
+        "signature": {
+          "mean": 0.04926,
+          "sigma": 0.07015,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.52133
+        }
+      },
+      {
+        "sun_altitude_deg": -0.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.3678,
+        "mean_demand_mps2": 0.0184,
+        "signature": {
+          "mean": 0.04604,
+          "sigma": 0.0705,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.56434
+        }
+      },
+      {
+        "sun_altitude_deg": -1.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.378,
+        "mean_demand_mps2": 0.0212,
+        "signature": {
+          "mean": 0.04372,
+          "sigma": 0.07097,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.60534
+        }
+      },
+      {
+        "sun_altitude_deg": -1.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.4152,
+        "mean_demand_mps2": 0.0253,
+        "signature": {
+          "mean": 0.04253,
+          "sigma": 0.07121,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.62753
+        }
+      },
+      {
+        "sun_altitude_deg": -2.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.3577,
+        "mean_demand_mps2": 0.0211,
+        "signature": {
+          "mean": 0.04144,
+          "sigma": 0.07142,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.64805
+        }
+      },
+      {
+        "sun_altitude_deg": -2.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.4299,
+        "mean_demand_mps2": 0.0269,
+        "signature": {
+          "mean": 0.04083,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.65921
+        }
+      },
+      {
+        "sun_altitude_deg": -3.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0843,
+        "mean_demand_mps2": 0.0001,
+        "signature": {
+          "mean": 0.04072,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.6609
+        }
+      },
+      {
+        "sun_altitude_deg": -3.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0321,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04069,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66118
+        }
+      },
+      {
+        "sun_altitude_deg": -4.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0286,
+        "mean_demand_mps2": -0.0047,
+        "signature": {
+          "mean": 0.04067,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66141
+        }
+      },
+      {
+        "sun_altitude_deg": -4.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0346,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66152
+        }
+      },
+      {
+        "sun_altitude_deg": -5.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.034,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66149
+        }
+      },
+      {
+        "sun_altitude_deg": -5.5,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0283,
+        "mean_demand_mps2": -0.0047,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66155
+        }
+      },
+      {
+        "sun_altitude_deg": -6.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0318,
+        "mean_demand_mps2": -0.0044,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66157
+        }
+      },
+      {
+        "sun_altitude_deg": -10.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0347,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66157
+        }
+      },
+      {
+        "sun_altitude_deg": -20.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0332,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66158
+        }
+      },
+      {
+        "sun_altitude_deg": -30.0,
+        "sun_azimuth_deg": 5.0,
+        "max_demand_mps2": 0.0346,
+        "mean_demand_mps2": -0.0043,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.07149,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66159
+        }
+      }
+    ],
+    "rot180": [
+      {
+        "sun_altitude_deg": 30.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0307,
+        "mean_demand_mps2": 0.006,
+        "signature": {
+          "mean": 0.36739,
+          "sigma": 0.13673,
+          "p01": 0.0,
+          "p99": 0.58039,
+          "frac_dark": 0.0193
+        }
+      },
+      {
+        "sun_altitude_deg": 20.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.031,
+        "mean_demand_mps2": 0.0017,
+        "signature": {
+          "mean": 0.31422,
+          "sigma": 0.14139,
+          "p01": 0.0,
+          "p99": 0.55294,
+          "frac_dark": 0.02833
+        }
+      },
+      {
+        "sun_altitude_deg": 12.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0308,
+        "mean_demand_mps2": 0.0023,
+        "signature": {
+          "mean": 0.2657,
+          "sigma": 0.13762,
+          "p01": 0.0,
+          "p99": 0.50196,
+          "frac_dark": 0.04055
+        }
+      },
+      {
+        "sun_altitude_deg": 8.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0319,
+        "mean_demand_mps2": 0.005,
+        "signature": {
+          "mean": 0.23333,
+          "sigma": 0.12913,
+          "p01": 0.0,
+          "p99": 0.46275,
+          "frac_dark": 0.05554
+        }
+      },
+      {
+        "sun_altitude_deg": 6.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0333,
+        "mean_demand_mps2": -0.0006,
+        "signature": {
+          "mean": 0.20421,
+          "sigma": 0.12148,
+          "p01": 0.0,
+          "p99": 0.42745,
+          "frac_dark": 0.07326
+        }
+      },
+      {
+        "sun_altitude_deg": 5.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0307,
+        "mean_demand_mps2": 0.0013,
+        "signature": {
+          "mean": 0.19558,
+          "sigma": 0.11771,
+          "p01": 0.0,
+          "p99": 0.41569,
+          "frac_dark": 0.07881
+        }
+      },
+      {
+        "sun_altitude_deg": 5.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0317,
+        "mean_demand_mps2": 0.005,
+        "signature": {
+          "mean": 0.18596,
+          "sigma": 0.11449,
+          "p01": 0.0,
+          "p99": 0.40784,
+          "frac_dark": 0.08612
+        }
+      },
+      {
+        "sun_altitude_deg": 4.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0283,
+        "mean_demand_mps2": 0.0024,
+        "signature": {
+          "mean": 0.19192,
+          "sigma": 0.10839,
+          "p01": 0.0,
+          "p99": 0.39608,
+          "frac_dark": 0.09153
+        }
+      },
+      {
+        "sun_altitude_deg": 4.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0265,
+        "mean_demand_mps2": 0.0006,
+        "signature": {
+          "mean": 0.18126,
+          "sigma": 0.1057,
+          "p01": 0.0,
+          "p99": 0.37647,
+          "frac_dark": 0.10388
+        }
+      },
+      {
+        "sun_altitude_deg": 3.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0267,
+        "mean_demand_mps2": 0.003,
+        "signature": {
+          "mean": 0.16749,
+          "sigma": 0.10161,
+          "p01": 0.0,
+          "p99": 0.35686,
+          "frac_dark": 0.12005
+        }
+      },
+      {
+        "sun_altitude_deg": 3.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0317,
+        "mean_demand_mps2": 0.0064,
+        "signature": {
+          "mean": 0.14985,
+          "sigma": 0.09498,
+          "p01": 0.0,
+          "p99": 0.33725,
+          "frac_dark": 0.14142
+        }
+      },
+      {
+        "sun_altitude_deg": 2.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0354,
+        "mean_demand_mps2": 0.0052,
+        "signature": {
+          "mean": 0.12986,
+          "sigma": 0.0873,
+          "p01": 0.0,
+          "p99": 0.31765,
+          "frac_dark": 0.16785
+        }
+      },
+      {
+        "sun_altitude_deg": 2.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.1378,
+        "mean_demand_mps2": 0.0254,
+        "signature": {
+          "mean": 0.10925,
+          "sigma": 0.08018,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.20658
+        }
+      },
+      {
+        "sun_altitude_deg": 1.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.381,
+        "mean_demand_mps2": 0.0755,
+        "signature": {
+          "mean": 0.08694,
+          "sigma": 0.07177,
+          "p01": 0.0,
+          "p99": 0.27059,
+          "frac_dark": 0.26584
+        }
+      },
+      {
+        "sun_altitude_deg": 1.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.5862,
+        "mean_demand_mps2": 0.1351,
+        "signature": {
+          "mean": 0.06366,
+          "sigma": 0.06254,
+          "p01": 0.0,
+          "p99": 0.23922,
+          "frac_dark": 0.36506
+        }
+      },
+      {
+        "sun_altitude_deg": 0.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.3839,
+        "mean_demand_mps2": 0.0374,
+        "signature": {
+          "mean": 0.04151,
+          "sigma": 0.05259,
+          "p01": 0.0,
+          "p99": 0.20784,
+          "frac_dark": 0.50821
+        }
+      },
+      {
+        "sun_altitude_deg": 0.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0838,
+        "mean_demand_mps2": -0.0054,
+        "signature": {
+          "mean": 0.05292,
+          "sigma": 0.07048,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.48451
+        }
+      },
+      {
+        "sun_altitude_deg": -0.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.1176,
+        "mean_demand_mps2": -0.0034,
+        "signature": {
+          "mean": 0.0482,
+          "sigma": 0.07048,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.53948
+        }
+      },
+      {
+        "sun_altitude_deg": -1.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.183,
+        "mean_demand_mps2": 0.0029,
+        "signature": {
+          "mean": 0.04509,
+          "sigma": 0.07074,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.58203
+        }
+      },
+      {
+        "sun_altitude_deg": -1.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.2447,
+        "mean_demand_mps2": 0.0109,
+        "signature": {
+          "mean": 0.04324,
+          "sigma": 0.07106,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.61421
+        }
+      },
+      {
+        "sun_altitude_deg": -2.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.1856,
+        "mean_demand_mps2": 0.0098,
+        "signature": {
+          "mean": 0.04188,
+          "sigma": 0.07134,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.63974
+        }
+      },
+      {
+        "sun_altitude_deg": -2.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0196,
+        "mean_demand_mps2": -0.0026,
+        "signature": {
+          "mean": 0.04092,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.65755
+        }
+      },
+      {
+        "sun_altitude_deg": -3.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0239,
+        "mean_demand_mps2": -0.005,
+        "signature": {
+          "mean": 0.04073,
+          "sigma": 0.07152,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66076
+        }
+      },
+      {
+        "sun_altitude_deg": -3.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0278,
+        "mean_demand_mps2": -0.0046,
+        "signature": {
+          "mean": 0.04069,
+          "sigma": 0.07151,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66126
+        }
+      },
+      {
+        "sun_altitude_deg": -4.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.035,
+        "mean_demand_mps2": -0.0039,
+        "signature": {
+          "mean": 0.04067,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66142
+        }
+      },
+      {
+        "sun_altitude_deg": -4.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0367,
+        "mean_demand_mps2": -0.004,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66147
+        }
+      },
+      {
+        "sun_altitude_deg": -5.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0322,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66153
+        }
+      },
+      {
+        "sun_altitude_deg": -5.5,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0352,
+        "mean_demand_mps2": -0.004,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66152
+        }
+      },
+      {
+        "sun_altitude_deg": -6.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0295,
+        "mean_demand_mps2": -0.0045,
+        "signature": {
+          "mean": 0.04066,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66146
+        }
+      },
+      {
+        "sun_altitude_deg": -10.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0328,
+        "mean_demand_mps2": -0.0041,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66156
+        }
+      },
+      {
+        "sun_altitude_deg": -20.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0354,
+        "mean_demand_mps2": -0.004,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.6616
+        }
+      },
+      {
+        "sun_altitude_deg": -30.0,
+        "sun_azimuth_deg": 95.0,
+        "max_demand_mps2": 0.0338,
+        "mean_demand_mps2": -0.0042,
+        "signature": {
+          "mean": 0.04065,
+          "sigma": 0.0715,
+          "p01": 0.0,
+          "p99": 0.29412,
+          "frac_dark": 0.66156
+        }
+      }
+    ]
+  },
+  "note": "Placed poses on an EMPTY road, policy output read rather than driven. Property A is falsified near the horizon for both policies and both brake at 200-300 ft there; this asks whether that follows the sun's altitude (illumination, generalises) or its azimuth (glare, does not)."
+}

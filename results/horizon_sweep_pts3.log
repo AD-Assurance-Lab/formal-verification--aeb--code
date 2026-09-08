@@ -1,0 +1,113 @@
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2341499 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      sun  +30.00 az default  max demand   4.130  mean frame 0.5233
+      sun  +20.00 az default  max demand   3.665  mean frame 0.4730
+      sun  +12.00 az default  max demand   3.145  mean frame 0.3998
+      sun   +8.00 az default  max demand   2.646  mean frame 0.3409
+      sun   +6.00 az default  max demand   3.161  mean frame 0.2894
+      sun   +5.50 az default  max demand   3.315  mean frame 0.2646
+      sun   +5.00 az default  max demand   3.351  mean frame 0.2473
+      sun   +4.50 az default  max demand   3.309  mean frame 0.2426
+      sun   +4.00 az default  max demand   3.282  mean frame 0.2252
+      sun   +3.50 az default  max demand   3.123  mean frame 0.2097
+      sun   +3.00 az default  max demand   3.089  mean frame 0.1903
+      sun   +2.50 az default  max demand   2.982  mean frame 0.1672
+      sun   +2.00 az default  max demand   2.655  mean frame 0.1418
+      sun   +1.50 az default  max demand   2.672  mean frame 0.1134
+      sun   +1.00 az default  max demand   2.425  mean frame 0.0858
+      sun   +0.50 az default  max demand   1.687  mean frame 0.0580
+      sun   +0.00 az default  max demand   3.334  mean frame 0.0636
+      sun   -0.50 az default  max demand   3.661  mean frame 0.0555
+      sun   -1.00 az default  max demand   3.981  mean frame 0.0481
+      sun   -1.50 az default  max demand   4.314  mean frame 0.0445
+      sun   -2.00 az default  max demand   4.440  mean frame 0.0426
+      sun   -2.50 az default  max demand   4.652  mean frame 0.0414
+      sun   -3.00 az default  max demand   4.730  mean frame 0.0408
+      sun   -3.50 az default  max demand   4.813  mean frame 0.0404
+      sun   -4.00 az default  max demand   4.860  mean frame 0.0401
+      sun   -4.50 az default  max demand   4.865  mean frame 0.0401
+      sun   -5.00 az default  max demand   4.865  mean frame 0.0401
+      sun   -5.50 az default  max demand   4.866  mean frame 0.0401
+      sun   -6.00 az default  max demand   4.866  mean frame 0.0401
+      sun  -10.00 az default  max demand   4.871  mean frame 0.0401
+      sun  -20.00 az default  max demand   4.869  mean frame 0.0401
+      sun  -30.00 az default  max demand   4.868  mean frame 0.0401
+
+  azimuth ablation: rot90
+      sun  +30.00 az     5.0  max demand   2.372  mean frame 0.3006
+      sun  +20.00 az     5.0  max demand   2.303  mean frame 0.2708
+      sun  +12.00 az     5.0  max demand   2.531  mean frame 0.2452
+      sun   +8.00 az     5.0  max demand   2.569  mean frame 0.2215
+      sun   +6.00 az     5.0  max demand   2.514  mean frame 0.1979
+      sun   +5.50 az     5.0  max demand   2.450  mean frame 0.1927
+      sun   +5.00 az     5.0  max demand   2.408  mean frame 0.1831
+      sun   +4.50 az     5.0  max demand   2.241  mean frame 0.1873
+      sun   +4.00 az     5.0  max demand   2.198  mean frame 0.1743
+      sun   +3.50 az     5.0  max demand   2.189  mean frame 0.1618
+      sun   +3.00 az     5.0  max demand   2.106  mean frame 0.1446
+      sun   +2.50 az     5.0  max demand   1.992  mean frame 0.1251
+      sun   +2.00 az     5.0  max demand   1.902  mean frame 0.1004
+      sun   +1.50 az     5.0  max demand   1.807  mean frame 0.0812
+      sun   +1.00 az     5.0  max demand   1.654  mean frame 0.0568
+      sun   +0.50 az     5.0  max demand   1.571  mean frame 0.0341
+      sun   +0.00 az     5.0  max demand   4.406  mean frame 0.0483
+      sun   -0.50 az     5.0  max demand   4.510  mean frame 0.0452
+      sun   -1.00 az     5.0  max demand   4.634  mean frame 0.0430
+      sun   -1.50 az     5.0  max demand   4.691  mean frame 0.0418
+      sun   -2.00 az     5.0  max demand   4.814  mean frame 0.0408
+      sun   -2.50 az     5.0  max demand   4.859  mean frame 0.0402
+      sun   -3.00 az     5.0  max demand   4.858  mean frame 0.0401
+      sun   -3.50 az     5.0  max demand   4.868  mean frame 0.0401
+      sun   -4.00 az     5.0  max demand   4.866  mean frame 0.0401
+      sun   -4.50 az     5.0  max demand   4.866  mean frame 0.0401
+      sun   -5.00 az     5.0  max demand   4.865  mean frame 0.0401
+      sun   -5.50 az     5.0  max demand   4.871  mean frame 0.0401
+      sun   -6.00 az     5.0  max demand   4.863  mean frame 0.0401
+      sun  -10.00 az     5.0  max demand   4.866  mean frame 0.0401
+      sun  -20.00 az     5.0  max demand   4.870  mean frame 0.0401
+      sun  -30.00 az     5.0  max demand   4.867  mean frame 0.0401
+
+  azimuth ablation: rot180
+      sun  +30.00 az    95.0  max demand   2.306  mean frame 0.3692
+      sun  +20.00 az    95.0  max demand   1.897  mean frame 0.3162
+      sun  +12.00 az    95.0  max demand   1.673  mean frame 0.2676
+      sun   +8.00 az    95.0  max demand   2.291  mean frame 0.2349
+      sun   +6.00 az    95.0  max demand   2.339  mean frame 0.2049
+      sun   +5.50 az    95.0  max demand   2.413  mean frame 0.1963
+      sun   +5.00 az    95.0  max demand   2.313  mean frame 0.1868
+      sun   +4.50 az    95.0  max demand   2.073  mean frame 0.1916
+      sun   +4.00 az    95.0  max demand   2.082  mean frame 0.1808
+      sun   +3.50 az    95.0  max demand   2.142  mean frame 0.1669
+      sun   +3.00 az    95.0  max demand   2.099  mean frame 0.1492
+      sun   +2.50 az    95.0  max demand   2.104  mean frame 0.1291
+      sun   +2.00 az    95.0  max demand   2.058  mean frame 0.1083
+      sun   +1.50 az    95.0  max demand   1.903  mean frame 0.0858
+      sun   +1.00 az    95.0  max demand   1.647  mean frame 0.0624
+      sun   +0.50 az    95.0  max demand   1.488  mean frame 0.0399
+      sun   +0.00 az    95.0  max demand   3.999  mean frame 0.0519
+      sun   -0.50 az    95.0  max demand   4.252  mean frame 0.0474
+      sun   -1.00 az    95.0  max demand   4.450  mean frame 0.0444
+      sun   -1.50 az    95.0  max demand   4.632  mean frame 0.0425
+      sun   -2.00 az    95.0  max demand   4.829  mean frame 0.0412
+      sun   -2.50 az    95.0  max demand   4.859  mean frame 0.0403
+      sun   -3.00 az    95.0  max demand   4.863  mean frame 0.0401
+      sun   -3.50 az    95.0  max demand   4.865  mean frame 0.0401
+      sun   -4.00 az    95.0  max demand   4.869  mean frame 0.0401
+      sun   -4.50 az    95.0  max demand   4.870  mean frame 0.0401
+      sun   -5.00 az    95.0  max demand   4.871  mean frame 0.0401
+      sun   -5.50 az    95.0  max demand   4.868  mean frame 0.0401
+      sun   -6.00 az    95.0  max demand   4.868  mean frame 0.0401
+      sun  -10.00 az    95.0  max demand   4.869  mean frame 0.0401
+      sun  -20.00 az    95.0  max demand   4.865  mean frame 0.0401
+      sun  -30.00 az    95.0  max demand   4.867  mean frame 0.0401
+
+  default peak 4.866, rotated peak 4.871 m/s^2
+  ILLUMINATION: the horizon braking survives rotating the sun away from the direction of travel, so it follows altitude and is a property of low-sun illumination rather than of glare geometry
+
+  wrote results/carla/horizon_sweep_P_pts3_ped.json
+Terminated

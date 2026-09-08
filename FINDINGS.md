@@ -6,6 +6,59 @@ here, never inside the protocol.
 
 ---
 
+## F13 — 2026-09-08, the horizon braking is illumination, not glare; and for one arm it is not the horizon at all
+
+Queue item 9 asked whether the near-horizon nuisance braking follows the sun's ALTITUDE
+(illumination, generalises, the study's point) or its AZIMUTH (glare, an artifact of this
+site's heading, does not generalise). F6's brightness spike at exactly 0.000° made glare
+the prime suspect. `tools/horizon_sweep.py` sweeps the band on an EMPTY road reading the
+policy's commanded deceleration, then repeats it with the sun rotated 90° and 180° at
+identical altitude.
+
+**It is illumination.** Rotating the sun out of the direction of travel does not remove the
+effect — it makes it slightly worse. For `P_cont`/lead:
+
+| arm | peak in the ±6° band | above +12° | at |
+|---|---|---|---|
+| default azimuth | 0.335 | 0.159 | +5.5° |
+| rotated 90° | 0.690 | 0.045 | +1.0° |
+| rotated 180° | 0.586 | 0.031 | +1.0° |
+
+The band is 2 to 15× the out-of-band baseline and the ordering is unchanged by azimuth, so
+the effect is a property of low-sun illumination and generalises. `P_cont` never comes
+close to the 2.476 m/s² decision threshold, which is why it has zero nuisance stops in the
+drives and 16/16 on property A.
+
+### For `P_pts3` on the pedestrian scenario it is not a horizon effect at all
+
+The same sweep on the arm that IS falsified for property A over 89.22°:
+
+| sun altitude | +30° | +12° | +5° | +1° | 0° | −3° | −30° |
+|---|---|---|---|---|---|---|---|
+| max demand, empty road | **4.130** | **3.145** | **3.351** | 2.425 | **3.334** | **4.730** | **4.869** |
+
+**31 of 33 sampled illuminations exceed the decision threshold, including full daylight.**
+The demand above +12° is 4.130 against an in-band peak of 4.866. There is nothing localised
+to the horizon to explain: this policy brakes on an empty road essentially everywhere, and
+the two altitudes that do *not* trigger it (+1.0° and +0.5°) are the exception.
+
+This is amendment A10's position confound returning in a policy that HAS the no-target
+control in its training set. A10 fixed it by adding `none`-scenario frames labelled zero at
+every range; `P_pts3` has them, sees three lighting conditions rather than two, and brakes
+at an empty road anyway. Whatever the third condition bought at the endpoints, it did not
+buy the ability to tell a pedestrian from a road.
+
+### The tool told me the wrong thing first, and the fix is recorded
+
+The verdict logic went straight to the azimuth comparison and reported "ILLUMINATION, not
+glare" for `P_pts3` — literally true, and beside the point, because there was no horizon
+localisation to attribute to anything. A question of the form *"is this effect A or B"*
+cannot be asked before establishing that the effect exists. The tool now checks whether the
+in-band peak is meaningfully above the out-of-band baseline first, and says
+**NOT A HORIZON EFFECT** when it is not.
+
+---
+
 ## F12 — 2026-09-08, training on the whole regulatory matrix made the policy worse in BOTH directions
 
 `P_pts3` was added to answer the cheapest question that could have sunk this study: does
