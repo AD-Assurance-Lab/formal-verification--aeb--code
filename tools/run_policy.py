@@ -88,8 +88,13 @@ A9_HEAD_START_M = 8.0
 NUISANCE_LIMIT_MPS2 = 0.25 * 9.81
 
 
-def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0):
+def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0,
+              place=True):
     """One false-activation run: approach a trench plate and DO NOT BRAKE.
+
+    `place=False` runs the identical approach with NO PLATE, which is the control that
+    makes a plate result attributable to the plate. Without it, a policy that brakes near
+    the horizon on any road reads as false activation on steel.
 
     Every other scenario in this study passes by stopping. This one passes by not
     stopping, which is why it cannot be a flag on `one_run`: there is no contact to avoid,
@@ -112,9 +117,15 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0):
     try:
         tf_ego, _ = J.site_transform(world, site, along=10.0, need_m=gap_m + 120.0)
         tf_plate, wp_plate = J.site_transform(world, site, along=10.0 + gap_m)
-        plate, plate_info = S.place_trench_plate(world, wp_plate)
-        if not plate:
-            raise RuntimeError("trench plate placement blocked")
+        if place:
+            plate, plate_info = S.place_trench_plate(world, wp_plate)
+            if not plate:
+                raise RuntimeError("trench plate placement blocked")
+        else:
+            # Same geometry, same distances, no steel. `to_plate` below is measured from
+            # the placement waypoint either way, so the approach and the range at which
+            # a brake would be recorded are identical.
+            plate, plate_info = [], {"tiles": 0, "covered_w_ft": 0.0, "covered_l_ft": 0.0}
         ego = J.spawn_hero(world, tf_ego)
 
         images: "queue.Queue" = queue.Queue()
@@ -188,6 +199,7 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0):
             # PASS is not stopping AND not exceeding the standard's own limit.
             "passes": bool(crossed and not braking
                            and peak_demand <= NUISANCE_LIMIT_MPS2),
+            "plate_present": place,
             "plate_tiles": plate_info["tiles"],
             "plate_covered_ft": [plate_info["covered_w_ft"], plate_info["covered_l_ft"]],
         }

@@ -1,0 +1,8 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  [  +0.779,   +0.026] at   +0.214  FALSIFIED  drove 10/10  peak 2.402 (0.979x limit)  DISAGREES
+
+  illumination axis OK: 1 midpoints, span 0.0000 of full range
+
+  certificate agrees with driving in 0/1 sub-intervals
+  wrote results/carla/witness_P_pts3_plate_atwitness.json

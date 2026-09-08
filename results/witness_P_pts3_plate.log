@@ -1,0 +1,24 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  [ +60.000,  +42.766] at  +51.383  CERTIFIED  drove 10/10  peak 0.219 (0.089x limit)  agrees
+  [ +42.766,  +28.397] at  +35.581  CERTIFIED  drove 10/10  peak 0.570 (0.232x limit)  agrees
+  [ +28.397,  +18.743] at  +23.570  CERTIFIED  drove 10/10  peak 0.184 (0.075x limit)  agrees
+  [ +18.743,  +12.542] at  +15.642  CERTIFIED  drove 10/10  peak 0.111 (0.045x limit)  agrees
+  [ +12.542,  +10.128] at  +11.335  CERTIFIED  drove 10/10  peak 0.013 (0.005x limit)  agrees
+  [ +10.128,   +7.715] at   +8.921  CERTIFIED  drove 10/10  peak 0.068 (0.028x limit)  agrees
+  [  +7.715,   +5.298] at   +6.506  CERTIFIED  drove 10/10  peak 1.633 (0.666x limit)  agrees
+  [  +5.298,   +4.198] at   +4.748  CERTIFIED  drove 10/10  peak 1.361 (0.555x limit)  agrees
+  [  +4.198,   +3.525] at   +3.862  CERTIFIED  drove 10/10  peak 1.127 (0.459x limit)  agrees
+  [  +3.525,   +1.891] at   +2.708  CERTIFIED  drove 10/10  peak 0.776 (0.316x limit)  agrees
+  [  +1.891,   +1.391] at   +1.641  CERTIFIED  drove 10/10  peak 0.122 (0.050x limit)  agrees
+  [  +1.391,   +0.779] at   +1.085  CERTIFIED  drove 10/10  peak 0.234 (0.096x limit)  agrees
+  [  +0.779,   +0.026] at   +0.403  FALSIFIED  drove 0/10  peak 2.589 (1.056x limit)  agrees
+  [  +0.026,   +0.000] at   +0.013  CERTIFIED  drove 10/10  peak 2.182 (0.890x limit)  agrees
+  [  +0.000,   -0.961] at   -0.480  CERTIFIED  drove 10/10  peak 0.071 (0.029x limit)  agrees
+  [  -0.961,  -29.554] at  -15.257  CERTIFIED  drove 10/10  peak 0.066 (0.027x limit)  agrees
+  [ -29.554,  -30.000] at  -29.777  CERTIFIED  drove 10/10  peak 0.066 (0.027x limit)  agrees
+
+  illumination axis OK: 17 midpoints, span 0.4704 of full range
+
+  certificate agrees with driving in 17/17 sub-intervals
+  wrote results/carla/witness_P_pts3_plate.json

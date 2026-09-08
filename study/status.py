@@ -105,9 +105,17 @@ def dispositions() -> dict[tuple[str, str], str]:
     return out
 
 
-def contradicts(cell_id: str, measured: dict) -> str | None:
-    """A measured cell that disagrees with its pre-registered expectation."""
+def contradicts(cell_id: str, measured: dict) -> list[str]:
+    """EVERY field of a measured cell that disagrees with its pre-registration.
+
+    This returned at the FIRST mismatch, which is fine until a cell contradicts on two
+    fields and the first one gets a disposition: cell 5 disagreed on both the certificate
+    and the drive, F18 disposed the certificate, and the drive's disagreement then had
+    nothing to report it. A contradiction that hides behind a disposed one is the worst
+    place for it to hide, because the row now reads as handled.
+    """
     _, _, exp_end, exp_fv, exp_wit, _ = EXPECTED[cell_id]
+    out = []
     for label, got, expected in (
         ("endpoints", measured.get("endpoints"), exp_end),
         ("FV", measured.get("fv"), exp_fv),
@@ -116,8 +124,8 @@ def contradicts(cell_id: str, measured: dict) -> str | None:
         if got is None:
             continue
         if not str(got).upper().startswith(expected.split(",")[0].upper()):
-            return f"{label}: expected {expected}, measured {got}"
-    return None
+            out.append(f"{label}: expected {expected}, measured {got}")
+    return out
 
 
 def main() -> int:
@@ -167,8 +175,7 @@ def main() -> int:
             f"{exp_wit + ' -> ' + fmt(m.get('witness')):<16}{conf}"
         )
         print(row)
-        bad = contradicts(cid, m)
-        if bad:
+        for bad in contradicts(cid, m):
             conflicts.append((cid, bad))
 
     measured = sum(1 for c in results["cells"].values() if c.get("fv") is not None)

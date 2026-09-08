@@ -69,15 +69,16 @@ def main() -> int:
              "named actually unsafe', which is the question section 10 asks")
     args = ap.parse_args()
 
-    if args.scenario not in ("lead", "ped", "plate"):
+    if args.scenario not in ("lead", "ped", "plate", "none_plate"):
         raise SystemExit(f"scenario {args.scenario!r} is not drivable")
 
     # The plate cells pass by NOT stopping, so their verdict column is property A and
     # their artifact carries the `_A` suffix. Everything downstream of the verdict --
     # the commit check, the midpoint/at-witness split, the agreement count -- is the same
     # question asked of a different criterion, so it is a branch and not a second script.
-    plate = args.scenario == "plate"
-    verdicts_path = OUT / (f"verify_{args.policy}_plate_A.json" if plate
+    plate = args.scenario in ("plate", "none_plate")
+    place_plate = args.scenario == "plate"
+    verdicts_path = OUT / (f"verify_{args.policy}_{args.scenario}_A.json" if plate
                            else f"verify_{args.policy}_{args.scenario}.json")
     if not verdicts_path.exists():
         raise SystemExit(f"no verdicts at {verdicts_path}; run tools/verify.py first")
@@ -153,7 +154,8 @@ def main() -> int:
         lights = "LowBeam" if mid < 5.0 else "NONE"
 
         if plate:
-            runs = [plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights)
+            runs = [plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights,
+                              place=place_plate)
                     for _ in range(reps)]
             # ONE criterion here, and it is the standard's own: crossed the plate still
             # moving, never braked, never commanded more than 0.25 g. There is no second
@@ -187,7 +189,8 @@ def main() -> int:
                 "signature": runs[0]["signature"],
                 "agrees": matched,
                 "runs": [{k: r[k] for k in
-                          ("passes", "braked", "crossed_plate", "peak_demand_mps2",
+                          ("passes", "braked", "crossed_plate", "plate_present",
+                           "peak_demand_mps2",
                            "exceeded_nuisance_limit", "brake_range_ft",
                            "min_speed_mps_while_moving")} for r in runs],
             })
@@ -327,6 +330,7 @@ def main() -> int:
             "and never commanded more than the standard's 0.25 g nuisance limit. This is "
             "the only scenario in the study that passes by NOT stopping.")
         payload["model_scenario"] = "lead"
+        payload["plate_present"] = place_plate
     payload["driven_at"] = "witness" if args.at_witness else "midpoint"
     payload["note"] = (
         "Driven at each falsified sub-interval's EXHIBITED witness illumination -- the "
