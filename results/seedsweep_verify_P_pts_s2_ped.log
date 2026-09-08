@@ -32,3 +32,5 @@ Early stop at 13th iter due to 10 iterations no improvement!
     +1.391 to   +0.779  bound   -0.256   -0.10x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [69 domains, 165s]
     +0.779 to   +0.026  bound   -0.828   -0.33x threshold  FALSIFIED  witness pose 80 at 15.1 m, s=+0.0000  [25 domains, 76s]
     +0.026 to   +0.000  bound   -2.818   -1.14x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 63s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!

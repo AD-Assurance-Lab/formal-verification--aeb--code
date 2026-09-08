@@ -74,13 +74,24 @@ def cell_row(policy: str, scenario: str) -> dict:
         # overstates it -- the same two words for "waiting on a verifier" and "nobody has
         # built this scenario" is exactly the ambiguity a ledger exists to remove.
         if scenario == "plate":
-            row["note"] = (
-                "NO HARNESS. The FMVSS 127 false-activation scenario is specified in "
-                "PROTOCOL sections 2 and 9 and has never been built: scenarios.py tiles "
-                "the trench plate to the standard's dimensions and nothing drives it. "
-                "See docs/STATE_OF_PLAY.md for what it needs. Property A is currently "
-                "verified on the no-target control, which is a legitimate must-not-brake "
-                "property and is NOT the standard's false-activation scenario.")
+            # The harness landed on 2026-09-08. Distinguish "nobody has built this" from
+            # "built, driven, verification pending" -- the same two words for both is the
+            # ambiguity a ledger exists to remove, and the first version of this note went
+            # stale within the hour.
+            captured = (J.REPO / "results" / "captures" / "states_plate.json").exists()
+            if ep and captured:
+                row["note"] = (
+                    "endpoints measured on the standard's own false-activation scenario: "
+                    "an ASTM A36 plate tiled to 8.0 x 12.0 ft, approached at 50 mph, "
+                    "crossed without braking. The CERTIFIED property A over the plate "
+                    "interval is pending.")
+            else:
+                row["note"] = (
+                    "NO HARNESS YET. The FMVSS 127 false-activation scenario is specified "
+                    "in PROTOCOL sections 2 and 9. Until it is captured and driven, "
+                    "property A is verified on the no-target control, which is a "
+                    "legitimate must-not-brake property and is NOT the standard's "
+                    "false-activation scenario.")
         elif ep:
             row["note"] = "endpoints measured; verification pending"
         else:

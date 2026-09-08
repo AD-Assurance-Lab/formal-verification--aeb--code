@@ -21,3 +21,4 @@ Early stop at 17th iter due to 10 iterations no improvement!
     +0.779 to   +0.026  bound    2.515    1.02x threshold  CERTIFIED  [33 domains, 63s]
 Early stop at 18th iter due to 10 iterations no improvement!
     +0.026 to   +0.000  bound    2.693    1.09x threshold  CERTIFIED  [119 domains, 298s]
+    +0.000 to   -0.961  bound    4.614    1.86x threshold  CERTIFIED  [25 domains, 36s]
