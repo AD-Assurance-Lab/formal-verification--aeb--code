@@ -57,12 +57,16 @@ harness hardening.
 ## What to read, in order
 
 1. `PROTOCOL.md` — the frozen design. Run `python -m study.protocol_lock` first.
-2. `FINDINGS.md` — newest first. F5 (the primitive) and F6 (the renderer's brightness
-   curve) are the two from the rebuild.
+2. `FINDINGS.md` — newest first. F5 through F15 are all from this rebuild; F5 (the
+   primitive was a solver artifact), F8 (the verifier had no branch and bound) and F12
+   (training on the whole regulatory matrix made the policy worse in both directions) are
+   the three that change what the study claims.
 3. `NOTES_FROM_STEERING_2026-09-06.md` — what transfers from the sibling study, including
    the guard this repo was missing.
 4. `CARLA_DETERMINISM_PENDING.md` — still open on the LAP protocol; see below.
-5. `docs/STUDY_REPORT.md` — carries a banner saying which of its sections still stand.
+5. `docs/STUDY_REPORT.md` — the complete methodology and results, rewritten from the
+   rebuilt measurements on 2026-09-08. The SUPERSEDED banner is gone.
+6. `docs/QUEUE.md` — what happens next, and which of it has been measured.
 
 ## How to run it
 
