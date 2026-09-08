@@ -2,3 +2,33 @@
   warnings.warn(
 
 P_cont / none: 104 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.453 m/s^2
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    0.031    0.01x threshold  CERTIFIED  [104 domains, 142s]
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    0.076    0.03x threshold  CERTIFIED  [104 domains, 150s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+   +28.397 to  +18.743  bound    0.266    0.11x threshold  CERTIFIED  [104 domains, 148s]
+   +18.743 to  +12.542  bound    0.432    0.18x threshold  CERTIFIED  [104 domains, 156s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    0.621    0.25x threshold  CERTIFIED  [104 domains, 151s]
+Early stop at 19th iter due to 10 iterations no improvement!
