@@ -1,0 +1,86 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts_s7 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+   +60.000 to  +42.766  bound    4.208    1.70x threshold  CERTIFIED  [25 domains, 32s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    3.573    1.44x threshold  CERTIFIED  [25 domains, 33s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+   +28.397 to  +18.743  bound    2.362    0.95x threshold  FALSIFIED  witness pose 82 at 14.0 m, s=+1.0000  [27 domains, 36s]
+Early stop at 17th iter due to 10 iterations no improvement!
+   +18.743 to  +12.542  bound    1.560    0.63x threshold  FALSIFIED  witness pose 82 at 14.0 m, s=-1.0000  [27 domains, 36s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    0.280    0.11x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 30s]
+   +10.128 to   +7.715  bound    0.031    0.01x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 45s]
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+    +7.715 to   +5.298  bound    0.141    0.06x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [33 domains, 59s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    0.186    0.07x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [25 domains, 38s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.100    0.04x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 31s]
+    +3.525 to   +1.891  bound   -0.675   -0.27x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 39s]
+    +1.891 to   +1.391  bound   -0.591   -0.24x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 33s]
+    +1.391 to   +0.779  bound   -0.678   -0.27x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 35s]
+    +0.779 to   +0.026  bound   -1.002   -0.40x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 38s]
+    +0.026 to   +0.000  bound   -3.716   -1.50x threshold  FALSIFIED  witness pose 89 at 10.1 m, s=-1.0000  [25 domains, 43s]
+    +0.000 to   -0.961  bound   -0.447   -0.18x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 46s]
+    -0.961 to  -29.554  bound   -0.149   -0.06x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 45s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    4.555    1.84x threshold  CERTIFIED  [25 domains, 20s]
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts_s7_ped.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  3/17 sub-intervals certified, 14 falsified with an exhibited witness, 0 undecided
+  wrote results/carla/verify_P_pts_s7_ped.json

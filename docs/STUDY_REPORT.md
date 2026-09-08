@@ -62,7 +62,7 @@ FMVSS No. 127, compliance 1 September 2029. What the standard supplies:
 | Element | Value used |
 |---|---|
 | Stopped lead vehicle, crossing pedestrian | The two hazard scenarios |
-| False activation | Steel trench plate, 8 × 12 ft × 1 in, 50 mph — **not built, see §16** |
+| False activation | Steel trench plate, 8 × 12 ft × 1 in, 50 mph — built and driven, §11 |
 | Nuisance braking limit | **0.25 g**, the threshold in property A |
 | Lighting conditions | Daylight; darkness lower beam; darkness upper beam |
 
@@ -206,6 +206,11 @@ All three arms, both hazard scenarios, all three lighting conditions: **10/10**,
 95% [0.72, 1.00], on PROTOCOL §7's frozen pass criterion. Brake onset 51.9 ft against
 `r_req` 52.0, standoff 14.3 ft.
 
+**False activation, cells 5 and 6.** All three arms, all three lighting conditions, ten
+runs each on an ASTM A36 plate tiled to exactly 8.0 × 12.0 ft and approached at 50 mph:
+**9 of 9 cells 10/10**, peak commanded deceleration 0.030–0.375 m/s² against the standard's
+0.25 g limit of 2.453. Nobody brakes for the plate.
+
 One defect is recorded beside the verdict rather than inside it: `P_pts3` on the pedestrian
 scenario in daylight brakes at **287.6 ft** and stops 250 ft short, ten runs of ten. That
 is nuisance braking — a must-NOT-brake condition, which is property A — and §7's criterion
@@ -217,12 +222,18 @@ Covered sub-intervals (16 of 17; the horizon sliver is excluded):
 
 | arm | lead certified | falsified width | ped certified | falsified width |
 |---|---|---|---|---|
-| `P_pts` | 4/16 | **50.32°** | 4/16 | **48.27°** |
-| `P_pts3` | 6/16 | **43.02°** | 3/16 | **43.70°** |
+| `P_pts` | 4/16 | 50.32° | 4/16 | 48.27° |
+| `P_pts3` | 6/16 | 43.02° | 3/16 | 43.70° |
 | `P_cont` | **16/16** | 0.00° | **15/16** | 0.75° |
 
-**Adding the third regulatory lighting condition narrows the falsified band by about seven
-degrees and does not close it.** A policy trained on every lighting condition FMVSS 127
+Those are seed 0. Over **ten matched seeds** (F16), `P_cont` beats both regulatory arms on
+10 of 10 pairs, p = 0.002, ranges disjoint — while `P_pts3` and `P_pts` are
+indistinguishable from each other (p = 0.45 and 0.75, ranges overlapping). The separation
+is robust. The individual widths are single draws from a distribution spanning 4.5° to
+57.9°, and should never be quoted alone.
+
+**Adding the third regulatory lighting condition does not close the gap**, and over ten
+seeds it does not reliably narrow it either. A policy trained on every lighting condition FMVSS 127
 tests is still falsified across roughly 43° of the axis, while the continuum-trained
 control certifies essentially all of it. The gap is not an artifact of having sampled two
 of three points.
@@ -298,14 +309,19 @@ illumination in a declared interval, where a driven run samples one.
 ## 16. What this does not establish
 
 - **Simulation only**, one map, one site, one speed, one vehicle, camera only.
-- **Cells 5 and 6 are not built.** The FMVSS false-activation scenario — a trench plate at
-  50 mph — is specified in PROTOCOL §§2 and 9 and has no harness. Property A is verified on
-  the no-target control, which is a legitimate must-not-brake property and is **not** the
-  standard's scenario. This must never be described as covering false activation.
-- **One seed per arm.** The arms are matched draws, which is better than they were, but the
-  attribution "the gap is the axis sampling" is not separated from seed luck at n = 1.
-  `P_cont`/ped moved from 16/16 to 15/16 between two runs whose only difference was
-  seeding. A 9-seed sweep is trained and queued (`docs/QUEUE.md` item 4).
+- **Cells 5 and 6 have endpoints but no certificate.** The trench-plate harness was built
+  on 2026-09-08 and all nine cells drive 10/10 without braking, peak demand 0.030–0.375
+  against the standard's 2.453 limit. The CERTIFIED property A over the plate interval is
+  not yet computed, so the cells are not closed.
+- **The attribution is swept; the driving numbers are not.** Ten matched seeds establish
+  that `P_cont` certifies more of the axis than either regulatory arm on 10 of 10 pairs,
+  p = 0.002, with disjoint ranges (F16). Every *driving* number here — contacts, nuisance
+  stops, agreement rates — and all of property A are seed-0 measurements, and the sweep
+  says nothing about their stability. Driving ten seeds is about 20 hours of simulator
+  time.
+- **The falsified WIDTH is a single draw.** It ranges 4.5° to 57.9° across seeds on the
+  pedestrian scenario. The separation between the arms is robust; the width is not, and it
+  must not be quoted without its spread.
 - **The 0.026° sliver at the horizon is uncovered** and no certificate exists there.
 - **Interior `s` is an approximation** of intermediate illumination. The endpoints are
   ground truth, and 24 of 26 exhibited witnesses sit at rendered knots rather than blends,

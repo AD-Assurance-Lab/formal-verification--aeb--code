@@ -14,10 +14,10 @@ result on the current harness).
 | 1 | third regulatory lighting condition | yes | **yes** | gap survives: 43.0° vs 50.3° falsified, F12 |
 | 2 | per-run recording, Wilson, write-up | yes | **yes** | report rewritten, banner gone |
 | 3 | open-loop determinism probe (D-8) | yes | **yes** | physics bit-exact, policy contractive, F11 |
-| 4 | seed sweep, n = 9 + the study's own | yes | *running* | 54 verifications, ~06:20 |
+| 4 | seed sweep, 10 matched pairs | yes | **yes** | attribution holds p = 0.002, F16 |
 | 5 | falsification baseline | yes | **yes** | search wins on cost, 2/6 reliable, F15 |
 | 6 | in-between gate calibration | yes | **yes** | gate predicts nothing, r = −0.005, F10 |
-| 7 | trench plate, cells 5 and 6 | **no** | no | needs a new harness; see below |
+| 7 | trench plate, cells 5 and 6 | **yes** | endpoints | 9/9 cells 10/10, no false activation; property A pending |
 | 8 | harness hardening | partly | partly | see below |
 | 9 | horizon glare ablation | yes | **yes** | illumination not glare, F13 |
 | 10 | conformal coverage | yes | **yes** | separates the arms on the sliver, F14 |

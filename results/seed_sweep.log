@@ -15,3 +15,79 @@
 [2026-09-08 04:46:26] START verify P_cont_s2 / ped
 [2026-09-08 04:46:26] START verify P_pts3_s2 / lead
 [2026-09-08 04:46:26] START verify P_pts3_s2 / ped
+[2026-09-08 05:01:30] progress 12 / 54
+[2026-09-08 05:01:30] START verify P_pts_s3 / lead
+[2026-09-08 05:01:30] START verify P_pts_s3 / ped
+[2026-09-08 05:01:30] START verify P_cont_s3 / lead
+[2026-09-08 05:13:44] progress 15 / 54
+[2026-09-08 05:13:44] START verify P_cont_s3 / ped
+[2026-09-08 05:13:44] START verify P_pts3_s3 / lead
+[2026-09-08 05:13:44] START verify P_pts3_s3 / ped
+[2026-09-08 05:27:08] progress 18 / 54
+[2026-09-08 05:27:08] START verify P_pts_s4 / lead
+[2026-09-08 05:27:08] START verify P_pts_s4 / ped
+[2026-09-08 05:27:08] START verify P_cont_s4 / lead
+[2026-09-08 05:40:18] progress 21 / 54
+[2026-09-08 05:40:18] START verify P_cont_s4 / ped
+[2026-09-08 05:40:18] START verify P_pts3_s4 / lead
+[2026-09-08 05:40:18] START verify P_pts3_s4 / ped
+[2026-09-08 05:53:56] progress 24 / 54
+[2026-09-08 05:53:56] START verify P_pts_s5 / lead
+[2026-09-08 05:53:56] START verify P_pts_s5 / ped
+[2026-09-08 05:53:56] START verify P_cont_s5 / lead
+[2026-09-08 06:07:48] progress 27 / 54
+[2026-09-08 06:07:48] START verify P_cont_s5 / ped
+[2026-09-08 06:07:48] START verify P_pts3_s5 / lead
+[2026-09-08 06:07:48] START verify P_pts3_s5 / ped
+[2026-09-08 06:21:45] progress 30 / 54
+[2026-09-08 06:21:45] START verify P_pts_s6 / lead
+[2026-09-08 06:21:45] START verify P_pts_s6 / ped
+[2026-09-08 06:21:45] START verify P_cont_s6 / lead
+[2026-09-08 06:36:32] progress 33 / 54
+[2026-09-08 06:36:32] START verify P_cont_s6 / ped
+[2026-09-08 06:36:32] START verify P_pts3_s6 / lead
+[2026-09-08 06:36:32] START verify P_pts3_s6 / ped
+[2026-09-08 06:50:30] progress 36 / 54
+[2026-09-08 06:50:30] START verify P_pts_s7 / lead
+[2026-09-08 06:50:30] START verify P_pts_s7 / ped
+[2026-09-08 06:50:30] START verify P_cont_s7 / lead
+[2026-09-08 07:03:42] progress 39 / 54
+[2026-09-08 07:03:42] START verify P_cont_s7 / ped
+[2026-09-08 07:03:42] START verify P_pts3_s7 / lead
+[2026-09-08 07:03:42] START verify P_pts3_s7 / ped
+[2026-09-08 07:17:51] progress 42 / 54
+[2026-09-08 07:17:51] START verify P_pts_s8 / lead
+[2026-09-08 07:17:51] START verify P_pts_s8 / ped
+[2026-09-08 07:17:51] START verify P_cont_s8 / lead
+[2026-09-08 07:32:03] progress 45 / 54
+[2026-09-08 07:32:03] START verify P_cont_s8 / ped
+[2026-09-08 07:32:03] START verify P_pts3_s8 / lead
+[2026-09-08 07:32:03] START verify P_pts3_s8 / ped
+[2026-09-08 07:47:09] progress 48 / 54
+[2026-09-08 07:47:09] START verify P_pts_s9 / lead
+[2026-09-08 07:47:09] START verify P_pts_s9 / ped
+[2026-09-08 07:47:09] START verify P_cont_s9 / lead
+[2026-09-08 07:58:46] progress 51 / 54
+[2026-09-08 07:58:46] START verify P_cont_s9 / ped
+[2026-09-08 07:58:46] START verify P_pts3_s9 / lead
+[2026-09-08 07:58:46] START verify P_pts3_s9 / ped
+[2026-09-08 08:11:23] progress 54 / 54
+
+=== lead ===
+  P_pts   n=10  certified 3-7 (median 4.0)   falsified width 12.5-60.0 deg (median 46.5)
+  P_cont  n=10  certified 16-16 (median 16.0)   falsified width 0.0-0.0 deg (median 0.0)
+  P_pts3  n=10  certified 3-7 (median 5.0)   falsified width 12.5-60.0 deg (median 35.7)
+
+  P_cont_minus_P_pts: certified difference median +12.0, range +9 to +13
+    sign test on 10 matched pairs: 10 positive, 0 negative, p = 0.001953
+    ranges disjoint: True   ([16, 16] vs [3, 7])
+
+  P_pts3_minus_P_pts: certified difference median +0.5, range -2 to +2
+    sign test on 7 matched pairs: 5 positive, 2 negative, p = 0.453125
+    ranges disjoint: False   ([3, 7] vs [3, 7])
+
+  P_cont_minus_P_pts3: certified difference median +11.0, range +9 to +13
+    sign test on 10 matched pairs: 10 positive, 0 negative, p = 0.001953
+    ranges disjoint: True   ([16, 16] vs [3, 7])
+
+  wrote results/carla/seed_sweep.json

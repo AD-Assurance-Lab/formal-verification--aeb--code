@@ -1,0 +1,160 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts3_s9 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+Early stop at 16th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    3.786    1.53x threshold  CERTIFIED  [25 domains, 32s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    1.149    0.46x threshold  FALSIFIED  witness pose 89 at 10.1 m, s=+1.0000  [25 domains, 36s]
+Early stop at 14th iter due to 10 iterations no improvement!
+   +28.397 to  +18.743  bound    0.003    0.00x threshold  FALSIFIED  witness pose 91 at 9.0 m, s=-1.0000  [25 domains, 40s]
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+   +18.743 to  +12.542  bound   -0.003   -0.00x threshold  FALSIFIED  witness pose 87 at 11.2 m, s=-1.0000  [25 domains, 38s]
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound   -0.013   -0.01x threshold  FALSIFIED  witness pose 86 at 11.8 m, s=-1.0000  [25 domains, 26s]
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+   +10.128 to   +7.715  bound   -0.040   -0.02x threshold  FALSIFIED  witness pose 86 at 11.8 m, s=-1.0000  [25 domains, 44s]
+Early stop at 13th iter due to 10 iterations no improvement!
+    +7.715 to   +5.298  bound   -0.033   -0.01x threshold  FALSIFIED  witness pose 89 at 10.1 m, s=-1.0000  [31 domains, 49s]
+Early stop at 17th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    1.377    0.56x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 34s]
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    0.969    0.39x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 37s]
+Early stop at 16th iter due to 10 iterations no improvement!
+    +3.525 to   +1.891  bound   -0.016   -0.01x threshold  FALSIFIED  witness pose 91 at 9.0 m, s=-1.0000  [57 domains, 93s]
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +1.891 to   +1.391  bound    0.003    0.00x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [37 domains, 56s]
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +1.391 to   +0.779  bound    0.003    0.00x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [39 domains, 57s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +0.779 to   +0.026  bound    0.003    0.00x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [31 domains, 48s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+    +0.026 to   +0.000  bound   -0.041   -0.02x threshold  FALSIFIED  witness pose 90 at 9.5 m, s=-1.0000  [61 domains, 88s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +0.000 to   -0.961  bound    0.402    0.16x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 25s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+    -0.961 to  -29.554  bound    1.560    0.63x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [29 domains, 30s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    4.262    1.72x threshold  CERTIFIED  [25 domains, 12s]
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts3_s9_ped.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  2/17 sub-intervals certified, 15 falsified with an exhibited witness, 0 undecided
+  wrote results/carla/verify_P_pts3_s9_ped.json

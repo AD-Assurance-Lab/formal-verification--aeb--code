@@ -1,0 +1,405 @@
+{
+  "seeds_requested": 9,
+  "scenarios": {
+    "lead": {
+      "seeds_found": {
+        "P_pts": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_cont": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_pts3": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "per_arm": {
+        "P_pts": {
+          "certified": {
+            "n": 10,
+            "min": 3,
+            "max": 7,
+            "median": 4.0,
+            "mean": 4.7
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 12.516,
+            "max": 59.974,
+            "median": 46.53,
+            "mean": 38.231
+          }
+        },
+        "P_cont": {
+          "certified": {
+            "n": 10,
+            "min": 16,
+            "max": 16,
+            "median": 16.0,
+            "mean": 16.0
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 0,
+            "max": 0,
+            "median": 0.0,
+            "mean": 0.0
+          }
+        },
+        "P_pts3": {
+          "certified": {
+            "n": 10,
+            "min": 3,
+            "max": 7,
+            "median": 5.0,
+            "mean": 5.1
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 12.516,
+            "max": 59.974,
+            "median": 35.695,
+            "mean": 35.955
+          }
+        }
+      },
+      "paired": {
+        "P_cont_minus_P_pts": {
+          "certified_difference": {
+            "n": 10,
+            "min": 9,
+            "max": 13,
+            "median": 12.0,
+            "mean": 11.3
+          },
+          "certified_sign_test": {
+            "n": 10,
+            "positive": 10,
+            "negative": 0,
+            "ties": 0,
+            "p_two_sided": 0.001953
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": 12.516,
+            "max": 59.974,
+            "median": 46.53,
+            "mean": 38.231
+          },
+          "certified_range_x": [
+            16,
+            16
+          ],
+          "certified_range_y": [
+            3,
+            7
+          ],
+          "ranges_disjoint": true
+        },
+        "P_pts3_minus_P_pts": {
+          "certified_difference": {
+            "n": 10,
+            "min": -2,
+            "max": 2,
+            "median": 0.5,
+            "mean": 0.4
+          },
+          "certified_sign_test": {
+            "n": 7,
+            "positive": 5,
+            "negative": 2,
+            "ties": 3,
+            "p_two_sided": 0.453125
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": -31.603,
+            "max": 31.603,
+            "median": 0.55,
+            "mean": 2.277
+          },
+          "certified_range_x": [
+            3,
+            7
+          ],
+          "certified_range_y": [
+            3,
+            7
+          ],
+          "ranges_disjoint": false
+        },
+        "P_cont_minus_P_pts3": {
+          "certified_difference": {
+            "n": 10,
+            "min": 9,
+            "max": 13,
+            "median": 11.0,
+            "mean": 10.9
+          },
+          "certified_sign_test": {
+            "n": 10,
+            "positive": 10,
+            "negative": 0,
+            "ties": 0,
+            "p_two_sided": 0.001953
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": 12.516,
+            "max": 59.974,
+            "median": 35.695,
+            "mean": 35.955
+          },
+          "certified_range_x": [
+            16,
+            16
+          ],
+          "certified_range_y": [
+            3,
+            7
+          ],
+          "ranges_disjoint": true
+        }
+      }
+    },
+    "ped": {
+      "seeds_found": {
+        "P_pts": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_cont": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "P_pts3": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "per_arm": {
+        "P_pts": {
+          "certified": {
+            "n": 10,
+            "min": 3,
+            "max": 11,
+            "median": 4.0,
+            "mean": 4.8
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 4.46,
+            "max": 57.925,
+            "median": 48.271,
+            "mean": 43.781
+          }
+        },
+        "P_cont": {
+          "certified": {
+            "n": 10,
+            "min": 15,
+            "max": 16,
+            "median": 16.0,
+            "mean": 15.8
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 0,
+            "max": 0.753,
+            "median": 0.0,
+            "mean": 0.151
+          }
+        },
+        "P_pts3": {
+          "certified": {
+            "n": 10,
+            "min": 2,
+            "max": 11,
+            "median": 5.5,
+            "mean": 5.7
+          },
+          "falsified_width_deg": {
+            "n": 10,
+            "min": 16.944,
+            "max": 72.294,
+            "median": 24.849,
+            "mean": 31.101
+          }
+        }
+      },
+      "paired": {
+        "P_cont_minus_P_pts": {
+          "certified_difference": {
+            "n": 10,
+            "min": 5,
+            "max": 13,
+            "median": 11.5,
+            "mean": 11.0
+          },
+          "certified_sign_test": {
+            "n": 10,
+            "positive": 10,
+            "negative": 0,
+            "ties": 0,
+            "p_two_sided": 0.001953
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": 4.46,
+            "max": 57.925,
+            "median": 47.895,
+            "mean": 43.631
+          },
+          "certified_range_x": [
+            15,
+            16
+          ],
+          "certified_range_y": [
+            3,
+            11
+          ],
+          "ranges_disjoint": true
+        },
+        "P_pts3_minus_P_pts": {
+          "certified_difference": {
+            "n": 10,
+            "min": -3,
+            "max": 7,
+            "median": 1.0,
+            "mean": 0.9
+          },
+          "certified_sign_test": {
+            "n": 10,
+            "positive": 6,
+            "negative": 4,
+            "ties": 0,
+            "p_two_sided": 0.753906
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": -15.469,
+            "max": 38.92,
+            "median": 20.753,
+            "mean": 12.681
+          },
+          "certified_range_x": [
+            2,
+            11
+          ],
+          "certified_range_y": [
+            3,
+            11
+          ],
+          "ranges_disjoint": false
+        },
+        "P_cont_minus_P_pts3": {
+          "certified_difference": {
+            "n": 10,
+            "min": 5,
+            "max": 14,
+            "median": 10.0,
+            "mean": 10.1
+          },
+          "certified_sign_test": {
+            "n": 10,
+            "positive": 10,
+            "negative": 0,
+            "ties": 0,
+            "p_two_sided": 0.001953
+          },
+          "falsified_width_reduction_deg": {
+            "n": 10,
+            "min": 16.944,
+            "max": 72.294,
+            "median": 24.849,
+            "mean": 30.95
+          },
+          "certified_range_x": [
+            15,
+            16
+          ],
+          "certified_range_y": [
+            2,
+            11
+          ],
+          "ranges_disjoint": true
+        }
+      }
+    }
+  }
+}

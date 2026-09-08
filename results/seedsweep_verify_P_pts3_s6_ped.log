@@ -1,0 +1,84 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts3_s6 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+   +60.000 to  +42.766  bound    4.557    1.84x threshold  CERTIFIED  [25 domains, 43s]
+   +42.766 to  +28.397  bound    4.015    1.62x threshold  CERTIFIED  [25 domains, 49s]
+   +28.397 to  +18.743  bound    3.275    1.32x threshold  CERTIFIED  [25 domains, 39s]
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+   +18.743 to  +12.542  bound    2.190    0.88x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=+1.0000  [25 domains, 45s]
+Early stop at 17th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    0.109    0.04x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [25 domains, 44s]
+   +10.128 to   +7.715  bound    0.042    0.02x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [27 domains, 42s]
+Early stop at 18th iter due to 10 iterations no improvement!
+    +7.715 to   +5.298  bound    1.869    0.75x threshold  FALSIFIED  witness pose 103 at 2.3 m, s=-1.0000  [31 domains, 54s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    2.757    1.11x threshold  CERTIFIED  [25 domains, 36s]
+    +4.198 to   +3.525  bound    3.127    1.26x threshold  CERTIFIED  [25 domains, 30s]
+    +3.525 to   +1.891  bound    0.109    0.04x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=+1.0000  [67 domains, 91s]
+    +1.891 to   +1.391  bound    0.311    0.13x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [35 domains, 50s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+    +1.391 to   +0.779  bound    0.214    0.09x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [32 domains, 44s]
+Early stop at 14th iter due to 10 iterations no improvement!
+    +0.779 to   +0.026  bound    0.213    0.09x threshold  FALSIFIED  witness pose 81 at 14.6 m, s=-1.0000  [27 domains, 35s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+    +0.026 to   +0.000  bound    0.074    0.03x threshold  FALSIFIED  witness pose 89 at 10.1 m, s=-1.0000  [43 domains, 53s]
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+    +0.000 to   -0.961  bound    2.307    0.93x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 24s]
+    -0.961 to  -29.554  bound    3.512    1.42x threshold  CERTIFIED  [25 domains, 26s]
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    4.917    1.99x threshold  CERTIFIED  [25 domains, 14s]
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts3_s6_ped.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  7/17 sub-intervals certified, 10 falsified with an exhibited witness, 0 undecided
+  wrote results/carla/verify_P_pts3_s6_ped.json

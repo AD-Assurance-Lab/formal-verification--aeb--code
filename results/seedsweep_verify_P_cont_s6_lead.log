@@ -1,0 +1,70 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_cont_s6 / lead: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+   +60.000 to  +42.766  bound    4.288    1.73x threshold  CERTIFIED  [25 domains, 35s]
+   +42.766 to  +28.397  bound    4.233    1.71x threshold  CERTIFIED  [25 domains, 38s]
+   +28.397 to  +18.743  bound    4.643    1.88x threshold  CERTIFIED  [25 domains, 37s]
+   +18.743 to  +12.542  bound    4.688    1.89x threshold  CERTIFIED  [25 domains, 35s]
+   +12.542 to  +10.128  bound    4.755    1.92x threshold  CERTIFIED  [25 domains, 33s]
+   +10.128 to   +7.715  bound    4.565    1.84x threshold  CERTIFIED  [25 domains, 33s]
+    +7.715 to   +5.298  bound    4.349    1.76x threshold  CERTIFIED  [25 domains, 33s]
+    +5.298 to   +4.198  bound    4.823    1.95x threshold  CERTIFIED  [25 domains, 29s]
+    +4.198 to   +3.525  bound    4.829    1.95x threshold  CERTIFIED  [25 domains, 35s]
+    +3.525 to   +1.891  bound    4.176    1.69x threshold  CERTIFIED  [25 domains, 36s]
+    +1.891 to   +1.391  bound    4.596    1.86x threshold  CERTIFIED  [25 domains, 36s]
+    +1.391 to   +0.779  bound    2.634    1.06x threshold  CERTIFIED  [29 domains, 46s]
+    +0.779 to   +0.026  bound    2.724    1.10x threshold  CERTIFIED  [73 domains, 110s]
+    +0.026 to   +0.000  bound    2.538    1.03x threshold  CERTIFIED  [155 domains, 227s]
+    +0.000 to   -0.961  bound    4.716    1.90x threshold  CERTIFIED  [25 domains, 24s]
+Early stop at 15th iter due to 10 iterations no improvement!
+    -0.961 to  -29.554  bound    2.710    1.09x threshold  CERTIFIED  [125 domains, 88s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 12th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+   -29.554 to  -30.000  bound    4.855    1.96x threshold  CERTIFIED  [25 domains, 10s]
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_cont_s6_lead.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  17/17 sub-intervals certified, 0 falsified with an exhibited witness, 0 undecided
+  wrote results/carla/verify_P_cont_s6_lead.json

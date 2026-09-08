@@ -1,0 +1,22 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_cont / lead: r_req 51.99 ft, 25 poses inside it, threshold 2.476 m/s^2
+  latch window from primitives: range >= 47.99 ft -> poses [79, 80, 81]  (worst stop 44.71 ft + d_margin 3.28 ft)
+  probing poses [79, 80, 81, 82, 83, 84, 85] (51.9ft, 50.1ft, 48.2ft, 46.4ft, 44.6ft, 42.7ft, 40.9ft)
+
+  [ +60.000,  +42.766]  LATCHES IN TIME     1.980x  poses CCC|CCCC  8s
+  [ +42.766,  +28.397]  LATCHES IN TIME     1.972x  poses CCC|CCCC  7s
+Early stop at 17th iter due to 10 iterations no improvement!
+  [ +28.397,  +18.743]  LATCHES IN TIME     1.973x  poses CCC|CCCC  8s
+  [ +18.743,  +12.542]  LATCHES IN TIME     1.973x  poses CCC|CCCC  8s
+  [ +12.542,  +10.128]  LATCHES IN TIME     2.038x  poses CCC|CCCC  7s
+Early stop at 17th iter due to 10 iterations no improvement!
+  [ +10.128,   +7.715]  LATCHES IN TIME     1.993x  poses CCC|CCCC  7s
+  [  +7.715,   +5.298]  LATCHES IN TIME     1.804x  poses CCC|CCCC  8s
+  [  +5.298,   +4.198]  LATCHES IN TIME     2.010x  poses CCC|CCCC  8s
+  [  +4.198,   +3.525]  LATCHES IN TIME     2.034x  poses CCC|CCCC  8s
+  [  +3.525,   +1.891]  LATCHES IN TIME     1.704x  poses CCC|CCCC  8s
+  [  +1.891,   +1.391]  LATCHES IN TIME     1.943x  poses CCC|CCCC  8s
+  [  +1.391,   +0.779]  LATCHES IN TIME     1.075x  poses CCC|CCCC  8s
+  [  +0.779,   +0.026]  LATCHES IN TIME     1.449x  poses CCC|CCCC  25s

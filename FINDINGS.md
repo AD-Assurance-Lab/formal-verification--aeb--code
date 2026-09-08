@@ -6,6 +6,61 @@ here, never inside the protocol.
 
 ---
 
+## F16 — 2026-09-08, the seed sweep: the attribution holds at p = 0.002, and one of F12's claims does not survive it
+
+The study's central claim is an **attribution** — that the gap between the arms is
+attributable to how the illumination axis was sampled — and it rested on one seed per arm.
+The sibling steering study measured that this lab's training dispersion is intrinsic and
+recommended n = 20 to 60 before believing a 20% effect, so an attribution at n = 1 was not
+measured at all.
+
+Nine additional seeds, every arm seeded identically at each seed so the arms are **matched
+draws** differing only in which frames they saw, property S verified for all of them:
+**54 verifications, 10 matched pairs including the study's own seed 0.**
+
+### The attribution holds, and it is not close
+
+| comparison | scenario | median Δ certified | sign test | ranges |
+|---|---|---|---|---|
+| `P_cont` − `P_pts` | lead | **+12.0** | 10/10, **p = 0.00195** | **disjoint** [16,16] vs [3,7] |
+| `P_cont` − `P_pts` | ped | **+11.5** | 10/10, **p = 0.00195** | **disjoint** [15,16] vs [3,11] |
+| `P_cont` − `P_pts3` | lead | +11.0 | 10/10, p = 0.00195 | disjoint |
+| `P_cont` − `P_pts3` | ped | +10.0 | 10/10, p = 0.00195 | disjoint |
+
+Every one of ten matched pairs goes the same way on both scenarios, at the smallest p an
+exact sign test can produce at n = 10, with **no overlap between the arms' ranges at all**.
+`P_cont` certifies 16 of 16 covered sub-intervals on *every* lead seed. The claim is as
+strong as this design can make it and it needs no distributional assumption.
+
+### And a claim from F12 does not survive
+
+| comparison | scenario | median Δ | sign test | ranges |
+|---|---|---|---|---|
+| `P_pts3` − `P_pts` | lead | +0.5 | 5/7, p = 0.45 | **overlap** [3,7] vs [3,7] |
+| `P_pts3` − `P_pts` | ped | +1.0 | 6/10, p = 0.75 | **overlap** [2,11] vs [3,11] |
+
+F12 reported that `P_pts3` **certifies more** of the axis than `P_pts` — 6/16 against 4/16.
+Over ten seeds that difference does not exist. It was one draw, and F12 is corrected.
+
+### What the sweep says about quoting a width
+
+`P_pts`'s falsified width ranges **4.5° to 57.9°** across seeds on the pedestrian scenario
+and 12.5° to 60.0° on the lead one. The study reports 48.3° and 50.3° from seed 0, and
+those are single draws from a very wide distribution.
+
+**The separation is robust; the width is not.** A paper may say *the regulatory-points arm
+is falsified over a large band and the continuum arm is not, on ten of ten matched seeds*.
+It may not say *the band is 50.3° wide* without saying which seed and what the spread is.
+
+### What has NOT been swept
+
+Property S certified counts only. The contact counts, the property A results and every
+driving number in this study are seed-0 measurements, and the sweep says nothing about
+their stability. Driving ten seeds is roughly 20 hours of simulator time and is the
+obvious next question.
+
+---
+
 ## F15 — 2026-09-08, the falsification baseline: search is cheaper, unreliable, and cannot say the thing the study sells
 
 The first thing a Tier 1 or a reviewer says to this study is *"twenty random samples would
@@ -168,12 +223,19 @@ Then:
 | contacts when driven, lead | 10 | **40** | **0** |
 | contacts + nuisance stops, ped | 0 + 40 | 18 + 32 | **0 + 0** |
 
-**It certifies more of the axis on property S and crashes four times as often.** 6/16
-against 4/16 on the lead scenario, and 40 contacts against 10 when the certificate's own
+**It crashes four times as often** — 40 contacts against 10 when the certificate's own
 witnesses are driven.
 
+> **Corrected 2026-09-08 by the seed sweep (F16).** This finding originally also said
+> `P_pts3` *certifies more of the axis* than `P_pts`, on 6/16 against 4/16 at one seed.
+> Over ten matched seeds that difference is **not there**: median +0.5 and +1.0
+> sub-intervals, sign test p = 0.45 and 0.75, and the two arms' ranges overlap completely.
+> The certified-count comparison between the two regulatory arms was one draw. The
+> contact count and the property A result below are single-seed measurements too and are
+> labelled as such; only the `P_cont` comparison has been swept.
+
 **And on the pedestrian scenario it is falsified for property A across 89.22° of a 90°
-axis.** One sub-interval of sixteen survives. That is the certificate saying this policy
+axis** (one seed; property A has not been swept). One sub-interval of sixteen survives. That is the certificate saying this policy
 will brake on an empty road at essentially every illumination, and the drives exhibit
 exactly that: it brakes at 287.6 ft in daylight and stops 250 ft short of the pedestrian,
 ten runs of ten.
