@@ -108,6 +108,24 @@ def cell_row(policy: str, scenario: str) -> dict:
                        "working, not a gap")
         return row
     w = json.loads(wpath.read_text())
+
+    # MODEL BINDING. A verdict is a prediction about ONE network, and a witness drive is
+    # a test of one network; joining two that describe different networks produces a
+    # confident, wrong agreement table. On 2026-09-07 this joined fresh certificates
+    # against witness drives from fourteen hours earlier, on policies retrained since,
+    # and reported a SOUNDNESS VIOLATION in the negative control -- the single most
+    # alarming thing this study can print -- purely from the mismatch.
+    #
+    # study/ledger.py has checked this since the F1 audit. record_cells did not, so it
+    # could manufacture the finding that ledger.py would later refuse to validate.
+    vm, wm = v.get("model_sha256"), w.get("model_sha256")
+    if vm and wm and vm != wm:
+        row["note"] = (
+            f"verdict committed, witness drive STALE and ignored: the certificate "
+            f"describes model {vm[:12]} and the drive on disk tested {wm[:12]}. "
+            f"Re-drive before this cell can record a witness.")
+        return row
+
     row["witness_artifact"] = str(wpath.relative_to(J.REPO))
     row["agreement"] = w["agreement"]
 
