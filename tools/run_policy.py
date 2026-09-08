@@ -300,6 +300,19 @@ def main() -> int:
                     r["brake_range_ft"] is not None
                     and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE
                 )
+            # TWO COUNTS, as in drive_witness.py and for the same reason (FINDINGS F9).
+            # PROTOCOL section 7 defines the closed-loop pass as "no contact and standoff
+            # at least d_margin", and section 10's M4 criterion is that phrase. The
+            # prematurity condition is this file's own addition, for a good reason -- a
+            # policy that stops immediately has not performed AEB -- but it is a
+            # must-NOT-brake condition and belongs to property A.
+            #
+            # This is conformance to the frozen text, not a relaxation to make a run
+            # pass, and it is not allowed to bury anything: P_pts3 brakes at 287 ft in
+            # daylight on the pedestrian scenario and stops 250 ft short, which is a
+            # serious defect that M4 must report even though M4 does not fail on it.
+            passes_protocol = sum(
+                1 for r in runs if not r["contact"] and r["standoff_ok"])
             passes = sum(
                 1 for r in runs
                 if not r["contact"] and r["standoff_ok"] and not r["premature"]
@@ -307,13 +320,15 @@ def main() -> int:
             never = sum(1 for r in runs if not r["braked"])
             early = sum(1 for r in runs if r["premature"])
             J.progress(
-                f"{pol} / {cond}: {ST.fmt(passes, J.REPS)} pass"
+                f"{pol} / {cond}: {ST.fmt(passes_protocol, J.REPS)} pass"
                 f"{f', {never} never braked' if never else ''}"
                 f"{f', {early} braked prematurely' if early else ''}"
             )
             out["cells"][f"{pol}|{cond}"] = {
-                **ST.rate(passes, J.REPS),
-                "passes": passes,
+                **ST.rate(passes_protocol, J.REPS),
+                "passes": passes_protocol,
+                "passes_protocol": passes_protocol,
+                "passes_no_nuisance": passes,
                 "of": J.REPS,
                 "never_braked": never,
                 "premature_brakes": early,
@@ -360,7 +375,16 @@ def main() -> int:
     if not out["illumination"]["ok"] and len(on_axis) > 1:
         CS.assert_axis(list(on_axis.values()), uncovered=load_uncovered())
 
-    out["all_endpoints_pass"] = all(c["passes"] == J.REPS for c in out["cells"].values())
+    out["all_endpoints_pass"] = all(
+        c["passes_protocol"] == J.REPS for c in out["cells"].values())
+    out["all_endpoints_pass_no_nuisance"] = all(
+        c["passes_no_nuisance"] == J.REPS for c in out["cells"].values())
+    # Named loudly, because an M4 that passes on the frozen criterion while a policy
+    # brakes at 287 ft is a result with two halves and only one of them is the verdict.
+    out["nuisance_braking_cells"] = {
+        k: {"premature_of": f"{v['premature_brakes']}/{v['of']}",
+            "brake_range_ft": v["brake_range_ft"][0]}
+        for k, v in out["cells"].items() if v["premature_brakes"]}
     out["note"] = (
         "M4 needs every cell 10/10. A policy that cannot pass the regulatory endpoints "
         "is not the policy a manufacturer would ship, and without it the study has no "

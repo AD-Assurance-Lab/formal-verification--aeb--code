@@ -3,8 +3,8 @@
   "scenario": "ped",
   "model_sha256": "8fe58fe548824648d7836b83f4f3ca48b159031850e3c0e73bff6a7c1b13d0a8",
   "provenance": {
-    "timestamp": "2026-09-07T16:22:58-04:00",
-    "git_sha": "8691ed5cc08169408a25b953694ee568f2f9dc05",
+    "timestamp": "2026-09-07T17:50:17-04:00",
+    "git_sha": "3ea9a81fe66c50bda4b9c1e6884e6098ff19d91c",
     "model_sha256": "8fe58fe548824648d7836b83f4f3ca48b159031850e3c0e73bff6a7c1b13d0a8"
   },
   "property": "S",
@@ -34,7 +34,7 @@
       "witness_pose": 99,
       "witness_s": null,
       "witness_range_m": 4.502,
-      "seconds": 70.1
+      "seconds": 29.7
     },
     {
       "from_deg": 42.766,
@@ -52,7 +52,7 @@
       "witness_pose": 96,
       "witness_s": 1.0,
       "witness_range_m": 6.178,
-      "seconds": 70.1
+      "seconds": 28.9
     },
     {
       "from_deg": 28.397,
@@ -70,7 +70,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 57.6
+      "seconds": 28.9
     },
     {
       "from_deg": 18.743,
@@ -88,7 +88,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 71.8
+      "seconds": 34.4
     },
     {
       "from_deg": 12.542,
@@ -106,7 +106,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 62.0
+      "seconds": 29.4
     },
     {
       "from_deg": 10.128,
@@ -124,7 +124,7 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 55.5
+      "seconds": 32.1
     },
     {
       "from_deg": 7.715,
@@ -142,7 +142,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.089,
-      "seconds": 73.1
+      "seconds": 42.8
     },
     {
       "from_deg": 5.298,
@@ -160,7 +160,7 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 53.0
+      "seconds": 28.8
     },
     {
       "from_deg": 4.198,
@@ -178,14 +178,14 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 40.1
+      "seconds": 24.6
     },
     {
       "from_deg": 3.525,
       "to_deg": 1.891,
-      "worst_bound_mps2": 0.2685,
+      "worst_bound_mps2": 0.2732,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.1084,
+      "margin_x_threshold": 0.1104,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 7,
@@ -196,14 +196,14 @@
       "witness_pose": 97,
       "witness_s": -1.0,
       "witness_range_m": 5.619,
-      "seconds": 82.2
+      "seconds": 46.8
     },
     {
       "from_deg": 1.891,
       "to_deg": 1.391,
-      "worst_bound_mps2": 0.7822,
+      "worst_bound_mps2": 0.7819,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.3159,
+      "margin_x_threshold": 0.3158,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 2,
@@ -214,14 +214,14 @@
       "witness_pose": 97,
       "witness_s": -1.0,
       "witness_range_m": 5.619,
-      "seconds": 52.2
+      "seconds": 31.3
     },
     {
       "from_deg": 1.391,
       "to_deg": 0.779,
-      "worst_bound_mps2": 0.2283,
+      "worst_bound_mps2": 0.2275,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.0922,
+      "margin_x_threshold": 0.0919,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 0,
@@ -232,7 +232,7 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.677,
-      "seconds": 49.4
+      "seconds": 32.2
     },
     {
       "from_deg": 0.779,
@@ -250,13 +250,13 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.677,
-      "seconds": 52.1
+      "seconds": 37.0
     },
     {
       "family_uncovered": true,
       "from_deg": 0.026,
       "to_deg": 0.0,
-      "worst_bound_mps2": -5.0116,
+      "worst_bound_mps2": -5.0114,
       "threshold_mps2": 2.476,
       "margin_x_threshold": -2.024,
       "verdict": "FALSIFIED",
@@ -269,7 +269,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.089,
-      "seconds": 61.7
+      "seconds": 35.9
     },
     {
       "from_deg": 0.0,
@@ -287,7 +287,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.413,
-      "seconds": 54.1
+      "seconds": 33.3
     },
     {
       "from_deg": -0.961,
@@ -305,7 +305,7 @@
       "witness_pose": 94,
       "witness_s": null,
       "witness_range_m": 7.295,
-      "seconds": 66.4
+      "seconds": 24.4
     },
     {
       "from_deg": -29.554,
@@ -323,7 +323,7 @@
       "witness_pose": 92,
       "witness_s": null,
       "witness_range_m": 8.413,
-      "seconds": 29.8
+      "seconds": 9.4
     }
   ],
   "falsified": [
@@ -343,7 +343,7 @@
       "witness_pose": 96,
       "witness_s": 1.0,
       "witness_range_m": 6.178,
-      "seconds": 70.1
+      "seconds": 28.9
     },
     {
       "from_deg": 28.397,
@@ -361,7 +361,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 57.6
+      "seconds": 28.9
     },
     {
       "from_deg": 18.743,
@@ -379,7 +379,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 71.8
+      "seconds": 34.4
     },
     {
       "from_deg": 12.542,
@@ -397,7 +397,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.178,
-      "seconds": 62.0
+      "seconds": 29.4
     },
     {
       "from_deg": 10.128,
@@ -415,7 +415,7 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 55.5
+      "seconds": 32.1
     },
     {
       "from_deg": 7.715,
@@ -433,7 +433,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.089,
-      "seconds": 73.1
+      "seconds": 42.8
     },
     {
       "from_deg": 5.298,
@@ -451,7 +451,7 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 53.0
+      "seconds": 28.8
     },
     {
       "from_deg": 4.198,
@@ -469,14 +469,14 @@
       "witness_pose": 100,
       "witness_s": -1.0,
       "witness_range_m": 3.943,
-      "seconds": 40.1
+      "seconds": 24.6
     },
     {
       "from_deg": 3.525,
       "to_deg": 1.891,
-      "worst_bound_mps2": 0.2685,
+      "worst_bound_mps2": 0.2732,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.1084,
+      "margin_x_threshold": 0.1104,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 7,
@@ -487,14 +487,14 @@
       "witness_pose": 97,
       "witness_s": -1.0,
       "witness_range_m": 5.619,
-      "seconds": 82.2
+      "seconds": 46.8
     },
     {
       "from_deg": 1.891,
       "to_deg": 1.391,
-      "worst_bound_mps2": 0.7822,
+      "worst_bound_mps2": 0.7819,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.3159,
+      "margin_x_threshold": 0.3158,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 2,
@@ -505,14 +505,14 @@
       "witness_pose": 97,
       "witness_s": -1.0,
       "witness_range_m": 5.619,
-      "seconds": 52.2
+      "seconds": 31.3
     },
     {
       "from_deg": 1.391,
       "to_deg": 0.779,
-      "worst_bound_mps2": 0.2283,
+      "worst_bound_mps2": 0.2275,
       "threshold_mps2": 2.476,
-      "margin_x_threshold": 0.0922,
+      "margin_x_threshold": 0.0919,
       "verdict": "FALSIFIED",
       "poses": {
         "CERTIFIED": 0,
@@ -523,7 +523,7 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.677,
-      "seconds": 49.4
+      "seconds": 32.2
     },
     {
       "from_deg": 0.779,
@@ -541,13 +541,13 @@
       "witness_pose": 79,
       "witness_s": -1.0,
       "witness_range_m": 15.677,
-      "seconds": 52.1
+      "seconds": 37.0
     },
     {
       "family_uncovered": true,
       "from_deg": 0.026,
       "to_deg": 0.0,
-      "worst_bound_mps2": -5.0116,
+      "worst_bound_mps2": -5.0114,
       "threshold_mps2": 2.476,
       "margin_x_threshold": -2.024,
       "verdict": "FALSIFIED",
@@ -560,7 +560,7 @@
       "witness_pose": 89,
       "witness_s": -1.0,
       "witness_range_m": 10.089,
-      "seconds": 61.7
+      "seconds": 35.9
     },
     {
       "from_deg": 0.0,
@@ -578,7 +578,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.413,
-      "seconds": 54.1
+      "seconds": 33.3
     }
   ],
   "undecided": [],

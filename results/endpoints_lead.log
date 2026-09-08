@@ -6,5 +6,8 @@
     P_cont / daylight: 10/10 [0.72, 1.00] pass
     P_cont / darkness_lowbeam: 10/10 [0.72, 1.00] pass
     P_cont / darkness_highbeam: 10/10 [0.72, 1.00] pass
+    P_pts3 / daylight: 10/10 [0.72, 1.00] pass
+    P_pts3 / darkness_lowbeam: 10/10 [0.72, 1.00] pass
+    P_pts3 / darkness_highbeam: 10/10 [0.72, 1.00] pass
 
   wrote results/carla/policy_endpoints.json
