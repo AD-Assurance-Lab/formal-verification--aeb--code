@@ -1,0 +1,60 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts / lead: r_req 51.99 ft, 25 poses inside it, threshold 2.476 m/s^2
+  latch window from primitives: range >= 47.99 ft -> poses [79, 80, 81]  (worst stop 44.71 ft + d_margin 3.28 ft)
+  probing poses [79, 80, 81, 82, 83, 84, 85] (51.9ft, 50.1ft, 48.2ft, 46.4ft, 44.6ft, 42.7ft, 40.9ft)
+
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+  [ +60.000,  +42.766]  LATCHES IN TIME     1.926x  poses CCC|CCCC  8s
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 17th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+  [ +42.766,  +28.397]  LATCHES IN TIME     1.838x  poses CCC|CCCC  8s
+  [ +28.397,  +18.743]  LATCHES IN TIME     1.543x  poses CCC|CCCC  6s
+Early stop at 16th iter due to 10 iterations no improvement!
+  [ +18.743,  +12.542]  LATCHES IN TIME     1.168x  poses FFC|CCCC  6s
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+  [ +12.542,  +10.128]  latch NOT in time   0.940x  poses FFF|FCCC  6s
+Early stop at 14th iter due to 10 iterations no improvement!
+  [ +10.128,   +7.715]  latch NOT in time   0.928x  poses FFF|FCFF  7s
+  [  +7.715,   +5.298]  LATCHES IN TIME     1.032x  poses FFC|FCFF  8s
+  [  +5.298,   +4.198]  LATCHES IN TIME     1.267x  poses FCC|CCCC  7s
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+  [  +4.198,   +3.525]  LATCHES IN TIME     1.233x  poses FCC|CCCC  6s
+Early stop at 15th iter due to 10 iterations no improvement!
+  [  +3.525,   +1.891]  LATCHES IN TIME     1.003x  poses FFC|FCFF  32s
+  [  +1.891,   +1.391]  LATCHES IN TIME     1.023x  poses FFC|FCFF  23s
+  [  +1.391,   +0.779]  LATCHES IN TIME     1.106x  poses FCC|FCFF  19s
+  [  +0.779,   +0.026]  latch NOT in time   0.007x  poses FFF|FFFF  9s
+  [  +0.026,   +0.000]  latch NOT in time  -0.056x  poses FFF|FFFF  10s
+  [  +0.000,   -0.961]  LATCHES IN TIME     1.855x  poses CCC|CCCC  7s
+  [  -0.961,  -29.554]  LATCHES IN TIME     1.695x  poses CCC|CCCC  8s
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 18th iter due to 10 iterations no improvement!
+  [ -29.554,  -30.000]  LATCHES IN TIME     1.946x  poses CCC|CCCC  5s
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts_lead.pt'>
+  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+  latches in time (FORALL s. max over window >= th) in 13/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 13/17, which is the weaker sufficient condition
+  wrote results/carla/latch_window_P_pts_lead.json

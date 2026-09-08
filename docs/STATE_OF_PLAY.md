@@ -30,7 +30,11 @@ Live state in the protocol's own terms: `python -m study.status`.
   **89.2° of 90** on the pedestrian scenario, braking on an empty road at 31 of 33
   illuminations including full daylight.
 - **Nothing was certified and then failed**, in any cell, at midpoints or at the
-  certificate's own exhibited witnesses, across 96 covered sub-intervals.
+  certificate's own exhibited witnesses, across 96 covered sub-intervals. Property S
+  falsified **9 of the 9** sub-intervals that produced a contact.
+- Both ledger contradictions are **disposed** (F17), and the repair they suggested was
+  built and **fails**: stating property S as the disjunction the controller actually needs
+  catches only 8 of those 9, missing a cell it certifies at 1.03× that crashes 10/10.
 - All three arms pass all three regulatory endpoint tests 10/10.
 
 ### What the rebuild found about the instruments
@@ -50,9 +54,9 @@ would have changed a published number:
 
 ### The queue
 
-Seven of ten items in `docs/QUEUE.md` are measured. The seed sweep is running. Two remain:
-the trench-plate cells, which need a harness that does not exist, and the rest of the
-harness hardening.
+Nine of eleven items in `docs/QUEUE.md` are measured. Remaining: the rest of the harness
+hardening (item 8), and cells 5 and 6, whose drives are done and whose property A
+certificates are computing now.
 
 ## What to read, in order
 
@@ -80,36 +84,27 @@ turn the blind protocol into a formality.
 
 ## Open, in priority order
 
-### 1. Cells 5 and 6 have no harness at all
+### 1. Cells 5 and 6 are one certificate short
 
-The frozen ledger has six cells. Cells 5 and 6 — `P_pts` and `P_cont` on the FMVSS 127
-false-activation scenario, a steel trench plate approached in lane at 50 mph — **are
-specified and have never been built.** `tools/scenarios.py:place_trench_plate` tiles the
-plate to the standard's dimensions and is validated, and nothing drives it.
+The harness was built on 2026-09-08 and the drives are done: all nine cells — three arms
+across all three lighting conditions — pass **10/10** on the trench plate at 50 mph, peak
+commanded deceleration 0.030–0.375 m/s² against the standard's 2.453 limit. Nobody false
+activates. What is missing is the property A certificate over the illumination interval,
+which is computing now.
 
-Property A is currently verified on the `none` scenario, an empty road at the lead poses.
-That is a legitimate must-not-brake property and it is the one that caught the position
-confound (A10), but **it is not the standard's false-activation scenario** and the study
-must not describe it as one.
+**The scenario substitution happened twice and both times in the safe-looking direction.**
+Property A was originally verified only on `none`, an empty road at the lead poses — a
+legitimate must-not-brake property, the one that caught the position confound (A10), and
+**not** the standard's false-activation scenario. The harness written to fix that then
+queued `none_plate`, which is the plate poses with the plate **removed** — the same
+substitution one level down. `scripts/rebuild_all.sh` now queues `plate` (the standard's
+scenario) and keeps `none_plate` beside it as the control that makes a plate verdict
+attributable to the plate, and the stage takes an explicit scope argument rather than
+silently covering less.
 
-What cells 5 and 6 need, in order:
-
-1. **`plate` and `none_plate` capture scenarios.** `capture_campaign.nominal_states` needs
-   a plate branch: place the plate with `S.place_trench_plate`, drive the approach at
-   `PLATE_MPH`, and record range to the plate. `none_plate` replays those poses with the
-   plate removed, the same way `none` replays `lead`. Roughly 15 minutes of simulator time
-   for both at 17 knots.
-2. **A must-not-brake closed-loop criterion.** `run_policy.one_run` is built around braking
-   and standoff and has no notion of passing by *not* stopping. A plate run passes when
-   commanded deceleration never exceeds 0.25 g and the vehicle crosses the plate at speed.
-   This is new code, not a flag.
-3. **`verify.py --scenario plate --property A`** for both policies, which then works
-   unchanged.
-4. **Witness drives** at each sub-interval midpoint, as for the hazard cells.
-
-Estimated at three to four hours including measurement. Section 9 calls cell 6 the
-sleeper: `P_cont` sees more braking data and may be the more trigger-happy, which is a
-trade no single-sided test can see. That is worth doing properly rather than quickly.
+Section 9 calls cell 6 the sleeper: `P_cont` sees more braking data and may be the more
+trigger-happy. The drives say it is not — `P_cont` is at 0.030–0.061 m/s², the quietest of
+the three arms — but the certificate is what closes the cell.
 
 ### 2. The LAP protocol is still unresolved, and it is lab-wide
 
@@ -151,6 +146,10 @@ Written where they will be read, because each has cost real time here.
 - **The knot file states its own coverage and its own metric.** Read those fields; do not
   re-derive which sub-interval is uncovered from an altitude band, which has already moved
   three times.
+- **A certificate at 1.0x is not a prediction this harness can cash.** Between about
+  1.00x and 1.05x of threshold the margin carries no information about whether the drive
+  holds: a sub-interval certified at 1.0318x crashed 10/10 while four thinner ones drove
+  clean (F17). Report the margin, and do not read a bare pass near the threshold as one.
 - **`carla-determinism` is pinned to a commit, not a tag.** The 1.1.0 API this harness
   needs is pushed but untagged. `scripts/bootstrap_env.sh` now proves the API is present
   rather than only that the package imports.

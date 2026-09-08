@@ -101,8 +101,16 @@ run() {   # run <name> <cmd...>
 
 STAGES=(jobs knots capture pairing train endpoints gates verify)
 FROM=${1:-jobs}
+# Scope for the verifyA stage. DEFAULT IS EVERYTHING, deliberately: standing rule 7 says a
+# default that quietly measures less is the worst kind, because the result still looks
+# finished. Narrowing is opt-in, is echoed, and is written into the stage log.
+SCOPE=${2:-all}
 
 if [ "$FROM" = "verifyA" ]; then
+  case "$SCOPE" in
+    all|plate|hazard) ;;
+    *) echo "verifyA scope must be one of: all (default), plate, hazard" >&2; exit 2 ;;
+  esac
   # Property A: must NOT brake, certified upper bound at most 0.25 g, on the no-target
   # control at every pose rather than only inside r_req. No simulator and no ordering
   # constraint -- there is no witness drive for a property about not doing something --
@@ -112,15 +120,25 @@ if [ "$FROM" = "verifyA" ]; then
   # a 32 GB card idle, so running them in series turns 1 hour of GPU into 4. Each still
   # writes its own log and its own artifact; the wait collects the exit codes.
   stop_server
+  say "verifyA scope: $SCOPE"
   fail=0
   queue=""
   for pol in $POLICIES; do
-    queue="$queue ${pol}|none|lead ${pol}|none_ped|ped"
-    # Cells 5 and 6: the FMVSS false-activation scenario, if it has been captured. The
-    # hazard-trained policy is evaluated on plate frames, exactly as property A already
-    # evaluates it on no-target frames.
-    [ -f "$REPO/results/captures/states_plate.json" ] && \
-      queue="$queue ${pol}|none_plate|lead"
+    [ "$SCOPE" = "plate" ] || queue="$queue ${pol}|none|lead ${pol}|none_ped|ped"
+    # Cells 5 and 6: the FMVSS false-activation scenario, if it has been captured.
+    # `plate` is the STANDARD'S scenario -- the steel trench plate present, approached in
+    # lane at 50 mph -- and it is the one the ledger's cells 5 and 6 name. `none_plate`
+    # replays the same poses with the plate REMOVED and is the control: it says whether
+    # the road, the site and the illumination alone can trigger a stop, which is what
+    # makes a plate verdict attributable to the plate.
+    #
+    # This queued only `none_plate` when the harness landed, which certifies an empty
+    # road and reads as a false-activation certificate. docs/STATE_OF_PLAY.md section 1
+    # already records that exact substitution one level up -- property A on `none` is not
+    # the standard's scenario -- and it was made again on the way down.
+    if [ "$SCOPE" != "hazard" ] && [ -f "$REPO/results/captures/states_plate.json" ]; then
+      queue="$queue ${pol}|plate|lead ${pol}|none_plate|lead"
+    fi
   done
   set -- $queue
   while [ $# -gt 0 ]; do

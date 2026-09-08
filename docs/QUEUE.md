@@ -17,16 +17,24 @@ result on the current harness).
 | 4 | seed sweep, 10 matched pairs | yes | **yes** | attribution holds p = 0.002, F16 |
 | 5 | falsification baseline | yes | **yes** | search wins on cost, 2/6 reliable, F15 |
 | 6 | in-between gate calibration | yes | **yes** | gate predicts nothing, r = −0.005, F10 |
-| 7 | trench plate, cells 5 and 6 | **yes** | endpoints | 9/9 cells 10/10, no false activation; property A pending |
+| 7 | trench plate, cells 5 and 6 | **yes** | endpoints | 9/9 cells 10/10, no false activation; property A queued on the WRONG scenario, fixed |
 | 8 | harness hardening | partly | partly | see below |
+| 11 | latch-window property, PROTOCOL section 8 dispositions | yes | **yes** | both contradictions disposed, F17 |
 | 9 | horizon glare ablation | yes | **yes** | illumination not glare, F13 |
 | 10 | conformal coverage | yes | **yes** | separates the arms on the sliver, F14 |
+
+**Item 11 in one line.** Property S is a conjunction over 25 poses and the controller only
+needs a disjunction over the two or three in the latch window; both ledger contradictions
+live in that gap. Stating the property the controller's way was then built and measured
+and **it is worse** — 8 of 9 crash cells caught instead of 9 of 9 — so PROTOCOL section 7
+stays as written and the disjunction is reported beside it. F17.
 
 **Item 8, what is done and what is not.** Done: `claim_output` so a crashed stage leaves no
 artifact; `stop_server` waiting on the process and the VRAM rather than the socket;
 `VERIFY_CONC` set from the worst-case per-job memory rather than the average;
-`expandable_segments`. Not done: `enable_postprocess_effects` is still relied on as a
-CARLA default (D-4); the server still restarts per stage rather than per repetition (D-6);
+`expandable_segments`; `enable_postprocess_effects` set explicitly (D-4); the verifyA
+stage takes an explicit scope argument instead of a silent default. Not done: the server
+still restarts per stage rather than per repetition (D-6);
 the branch-and-bound witness search still samples three concrete points per domain; and
 `a_max` is still read from stop TIME while `r_req = v²/2a` composes with distance, a 3.9%
 difference.

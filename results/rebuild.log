@@ -1138,3 +1138,9 @@ Terminated
 [2026-09-08 02:48:09] DONE  verify_P_pts3_none_A rc=0
 [2026-09-08 02:48:09] DONE  verify_P_pts3_none_ped_A rc=0
 [2026-09-08 02:48:09] property A complete (rc=0).
+[2026-09-08 08:51:56] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+[2026-09-08 08:51:56]   CARLA stopped; GPU now at 390 MiB
+[2026-09-08 08:51:56] verifyA scope: plate
+[2026-09-08 08:51:56] START verify_P_pts_plate_A (background)
+[2026-09-08 08:51:56] START verify_P_pts_none_plate_A (background)
+[2026-09-08 08:51:56] START verify_P_cont_plate_A (background)

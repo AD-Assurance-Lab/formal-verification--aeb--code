@@ -1,0 +1,4 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts / none_plate: 52 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.453 m/s^2

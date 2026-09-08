@@ -1,1 +1,25 @@
 ===== P_cont / lead  08:33:05 =====
+  exit 0 ; 08:36:54
+  latches in time (FORALL s. max over window >= th) in 17/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 17/17, which is the weaker sufficient condition
+===== P_cont / ped  08:36:54 =====
+  exit 0 ; 08:39:42
+  latches in time (FORALL s. max over window >= th) in 17/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 17/17, which is the weaker sufficient condition
+===== P_pts / lead  08:39:42 =====
+  exit 0 ; 08:42:38
+  latches in time (FORALL s. max over window >= th) in 13/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 13/17, which is the weaker sufficient condition
+===== P_pts / ped  08:42:38 =====
+  exit 0 ; 08:44:33
+  latches in time (FORALL s. max over window >= th) in 9/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 9/17, which is the weaker sufficient condition
+===== P_pts3 / lead  08:44:33 =====
+  exit 0 ; 08:46:48
+  latches in time (FORALL s. max over window >= th) in 9/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 9/17, which is the weaker sufficient condition
+===== P_pts3 / ped  08:46:48 =====
+  exit 0 ; 08:48:51
+  latches in time (FORALL s. max over window >= th) in 10/17 sub-intervals
+  per-pose EXISTS-pose-FORALL-s holds in 10/17, which is the weaker sufficient condition
+ALL DONE 08:48:51

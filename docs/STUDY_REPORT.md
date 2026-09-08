@@ -270,6 +270,54 @@ criterion and 78 contacts occur at them.
 often** when driven: 40 contacts against 10. Training against the full regulatory matrix
 narrowed the certified gap and made the driving worse.
 
+### 13a. What a FALSIFIED verdict was ever entitled to predict (F17)
+
+Two ledger cells contradicted their pre-registration, and PROTOCOL §8 required a written
+disposition before either could be written up. Both have the same cause and it is in how
+the property is *stated*.
+
+Property S is a conjunction — the bound must clear at **every** one of the 25 poses inside
+`r_req`, for every illumination in the sub-interval. The controller latches once and holds
+full braking, so what the closed loop needs is a disjunction: at every illumination,
+**some** pose in the latch window clears. The first implies the second and not the
+converse, so a FALSIFIED property S is not on its own a prediction that the drive fails.
+Cell 1's `witness: expected FAIL` was reading it as one.
+
+The **latch window** is derived from the primitives and never from the drives: the worst
+measured stop at 25 mph is 44.71 ft, which already carries `t_lat`, plus `d_margin`
+3.28 ft, so a latch at 47.99 ft or more stops in time — poses 79–80 on the pedestrian
+approach and 79–81 on the lead one. The drives agree without having been used: latch to
+rest is **37.56 ft in all 610** non-premature braking runs, against 39.10 ft of predicted
+braking travel.
+
+That disposes of cell 3 outright. `P_cont`/ped is falsified at pose 87, **36.77 ft** —
+past the last range at which a latch could still meet `d_margin` — while the vehicle
+latches at pose 79, 51.4 ft, in all seventeen sub-intervals including both falsified ones.
+Certifying the disjunction, `P_cont` latches in time **17/17 on both scenarios**, at
+1.06–2.10×.
+
+**The obvious repair then fails, and that is the useful part.** Stating property S as the
+disjunction is formally better aligned with the controller, so it should certify the same
+crashes. It does not:
+
+| | property S (conjunction) | disjunction over the latch window |
+|---|---|---|
+| sub-intervals driven | 102 | 102 |
+| producing a contact | 9 | 9 |
+| flagged by the certificate | **9 of 9** | **8 of 9** |
+
+The miss is `P_pts`/lead over [+7.715°, +5.298°], certified to latch in time at **1.0318×**,
+whose endpoint drove **10 contacts in 10 runs, 9 never braking, ending 1.93 ft inside the
+lead vehicle**. On the captured frames the certificate is right — poses 79–81 give 1.568,
+2.345 and 2.563 against a 2.476 threshold — and the whole approach there sits within ±5%
+of the threshold, so the live-rendered drive lands on the other side of it. **The margin
+does not separate them either**: four sub-intervals certified more thinly (1.0000×,
+1.0033×, 1.0231×, 1.0250×) drove clean.
+
+Requiring all twenty-five poses forces the certificate away from that knife edge, and that
+is what buys the 9-of-9. §7 stays as written; the disjunction is reported beside it as the
+quantity the agreement table is entitled to score against, not in place of it.
+
 ## 14. What the harness itself measures
 
 **Determinism, open loop** (F11), three repetitions with a fresh server each, feedback cut
@@ -345,10 +393,20 @@ looked entirely reasonable.
 | A `str.replace` that matched nothing | "M7 complete" after 4 of 12 drives | counting the drives |
 | Gate calibration splitting names on `_` | a correlation over 3 pairs of 6 | the pair count |
 | Illumination guard assuming monotonicity | a correct capture campaign rejected | looking at the brightness curve |
+| Property A for cells 5 and 6 queued on `none_plate` | a false-activation certificate computed on an empty road | reading the scenario the ledger row names against the one the script passed |
 
-Nine defects. **Five were found only because a number was compared against another number
+Ten defects. **Five were found only because a number was compared against another number
 that should have matched it**, and none would have been caught by a test that checked
 whether the pipeline ran.
+
+The tenth is worth its own sentence, because it is a repeat. `docs/STATE_OF_PLAY.md`
+section 1 already recorded that property A on the no-target control is *not* FMVSS 127's
+false-activation scenario and must never be described as one. The harness built to fix
+that then queued `none_plate` — the plate poses with the plate **removed** — which is the
+same substitution one level down, in a script written the same week by someone who had
+just written the warning. A rule stated in prose does not survive contact with a shell
+loop; the fix is that the loop now queues `plate` and keeps `none_plate` beside it as the
+control that makes a plate verdict attributable to the plate.
 
 ## 18. Reproducing this
 

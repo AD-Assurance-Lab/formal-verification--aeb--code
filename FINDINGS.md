@@ -6,6 +6,146 @@ here, never inside the protocol.
 
 ---
 
+## F17 — 2026-09-08, both ledger contradictions are one quantifier — and fixing the quantifier makes the certificate worse
+
+**This is the disposition PROTOCOL section 8 requires**, for both open contradictions. They
+share a cause, it is in how the property is *stated* rather than in the certificate or the
+vehicle, and it is measured rather than argued (`tools/latch_window.py`,
+`tools/latch_window_report.py`). The repair it suggests was then built and **it fails**,
+which is the more useful half of the finding.
+
+**Disposes:** ledger cell 1 (witness), ledger cell 3 (FV)
+
+| cell | pre-registered | measured |
+|---|---|---|
+| 1, `P_pts` / ped cross | witness **FAIL** | **PASS** 10/10 in all thirteen falsified sub-intervals, at midpoints and at the certificate's own exhibited witnesses |
+| 3, `P_cont` / ped cross | FV **CERTIFIED** | **FALSIFIED** over 0.753°, the single sub-interval [+0.779°, +0.026°] |
+
+### What was ruled out
+
+| candidate | verdict | how |
+|---|---|---|
+| the drives used a different network than the verification | **not the cause** | `model_sha256` identical across certificate, both witness passes and the latch-window artifact; `record_cells.py` and `latch_window_report.py` both refuse to join across a mismatch, a check that exists because the join once manufactured a soundness violation out of one |
+| the falsification is a loose bound rather than a real counterexample | **not the cause** | `certify_pose` returns FALSIFIED only when a forward pass at a concrete `s` falls below the threshold; a failed bound with no exhibited counterexample returns UNDECIDED. Both cells report `UNDECIDED: 0` in all seventeen sub-intervals |
+| the drives never visited the falsifying illumination | **not the cause** | the `atwitness` pass exists for this and drove all thirteen falsified sub-intervals at their own exhibited witness `s`. All thirteen passed 10/10 |
+| the criterion folds a property A condition into a property S verdict | **not the cause** | that was F9 and it is fixed: `passes_protocol` is section 7's frozen criterion, `passes_no_nuisance` is reported beside it and never inside it |
+| cell 3 is one seed's draw | **explains the frequency, not the reason** | over ten matched seeds `P_cont`/ped certifies 15 or 16 of 16 — eight of ten certify all sixteen and **two of ten land on exactly this 0.753°** (F16). CERTIFIED was the right modal pre-registration and seed 0 drew the minority, which says nothing about why the sub-interval falsifies |
+| **property S and the closed-loop criterion do not quantify over the same thing** | **the cause** | below, measured |
+
+### The quantifier
+
+Write `out(i, s)` for the network's commanded deceleration at pose `i` under illumination
+`s`, and `th` for the latch threshold. `verify.py` and `run_policy.py` already share that
+threshold to the digit — `a_max_g_worst × 9.81 × BRAKE_THRESHOLD_FRACTION` = 2.476 m/s² —
+so this is not a mismatch of values.
+
+    property S, as section 7 states it and verify.py computes it:
+        FORALL i inside r_req.  FORALL s in I.  out(i, s) >= th
+
+    what section 7's CLOSED-LOOP criterion needs:
+        FORALL s in I.  EXISTS i in the latch window.  out(i, s) >= th
+
+`run_policy.one_run` latches once and then holds full braking, so one pose clearing the
+threshold early enough is the whole requirement: every pose after the latch is already
+irrelevant, and every pose too late to stop within `d_margin` was irrelevant before it.
+**The first formula implies the second; the second does not imply the first.** A FALSIFIED
+property S is therefore not, on its own, a prediction that the drive fails, and cell 1's
+`witness: expected FAIL` was reading it as one.
+
+That is F9's defect on a different axis. F9 was the *criterion* silently folding in a
+property A condition; this is the *property* silently quantifying over twenty-five poses
+where the vehicle needs a handful. Both make the certificate look wrong when it is
+answering a strictly stronger question.
+
+### The latch window, from primitives and never from the drives
+
+Sizing the window on the observed stops and then explaining the observed stops with it
+would be circular, so it comes from `braking.json` alone: the **worst** measured stop at
+25 mph is 44.71 ft, which already carries `t_lat`, plus `d_margin` 3.28 ft. A latch at
+47.99 ft or more therefore stops in time. That is poses 79–80 on the pedestrian approach
+and 79–81 on the lead approach, out of the twenty-five poses inside `r_req`.
+
+The drives agree with that arithmetic without having been used to produce it: over 610
+non-premature braking runs on the lead scenario the distance from latch to rest is
+**37.56 ft in every single one**, against the primitive's 39.10 ft of braking travel once
+its 5.61 ft of latency travel is removed — 3.9% apart, in the safe direction. The window
+derived from primitives is a strict subset of the one the vehicle actually has.
+
+### Cell 3, disposed
+
+`P_cont`/ped is falsified at **witness pose 87, 36.77 ft** — four poses beyond the last
+range at which a latch could still meet `d_margin`, and a range the vehicle occupies only
+after it has already been braking for 14.6 ft. The drives say exactly that: `P_cont`/ped
+latches at **pose 79, 51.4 ft, in all seventeen sub-intervals including both falsified
+ones**, and comes to rest 14.25 ft from the walker against a 3.28 ft requirement.
+
+Certifying the disjunction instead, `P_cont` **latches in time in 17 of 17 sub-intervals
+on both scenarios**, at margins of 1.06× to 2.10× — including the falsified
+[+0.779°, +0.026°] at 1.0634×, and including the A6-uncovered horizon sliver. The
+pre-registration and the measurement were disagreeing about a pose the vehicle had
+already passed under braking.
+
+### Cell 1, disposed — and only partly explained
+
+Of the thirteen falsified `P_pts`/ped sub-intervals, the disjunction certifies **five**,
+and those five drove clean, which is what it predicts. It does not explain the other
+eight, and four of those are near-horizon nuisance braking where the vehicle latches at
+**384 ft** — outside `r_req` entirely, where no property quantified inside `r_req` can
+speak to it at all.
+
+What settles the cell is the direction of the disagreement rather than a complete causal
+account. Across cell 1's 390 drives there is **not one contact and not one failure to
+brake**; every disagreement is the certificate being more pessimistic than the vehicle.
+The unsafe direction — certified and then failed — does not occur, in this cell or in any
+other, and that is the property PROTOCOL section 8 is protecting.
+
+### The repair fails, and this is the part worth keeping
+
+The obvious conclusion is that section 7 should state property S as the disjunction, since
+that is the property the vehicle actually has. **It should not.** Certifying the
+disjunction across all six arms and joining it against every drive
+(`tools/latch_window_report.py`):
+
+| | property S (conjunction) | disjunction over the latch window |
+|---|---|---|
+| sub-intervals driven | 102 | 102 |
+| sub-intervals producing a **contact** | 9 | 9 |
+| of those, flagged by the certificate | **9 of 9** | **8 of 9** |
+
+The miss is `P_pts`/lead over [+7.715°, +5.298°], **certified to latch in time at
+1.0318×**, whose endpoint illumination was then driven and produced **10 contacts in 10
+runs, 9 of them never braking at all, ending 1.93 ft inside the lead vehicle.**
+
+On the captured frames the certificate is arithmetically right: at +7.715° the policy's
+demand at poses 79, 80, 81 is 1.568, 2.345 and **2.563** against a 2.476 threshold, so the
+window's maximum clears by 3.5% and the disjunction certifies. The whole approach at that
+illumination sits within ±5% of the threshold — the demand never exceeds 2.598 at any of
+the thirty-four poses examined — and the vehicle, rendering live rather than replaying
+captures, lands on the other side of it.
+
+**The margin does not rescue this.** Four sub-intervals certified more thinly than the
+crashing one — at 1.0000×, 1.0033×, 1.0231× and 1.0250× — drove perfectly clean. Between
+about 1.00× and 1.05× the certificate's margin carries no information about whether the
+drive holds, whichever quantifier produced it.
+
+So the conjunction is not merely conservative. Requiring all twenty-five poses forces the
+certificate away from the knife edge, and **that is what buys the 9-of-9**: property S
+falsified every sub-interval that produced a contact, and the property that is formally
+better aligned with the controller did not. PROTOCOL section 7 stays as written, and the
+recommendation to Zach is that the disjunction be reported **beside** property S as the
+quantity the agreement table is entitled to score against — not in place of it.
+
+### The connection to queue item 10
+
+Item 10 wanted to restate the peak-versus-sustained bet as the difference between STL's
+`eventually` and `always`. The same distinction arrived here on a different axis without
+being looked for: property S as written is `always` over the poses inside `r_req`, the
+vehicle needs `eventually` over the latch window, and both contradictions live in the gap.
+The measurement adds the part the framing does not predict, which is that the weaker
+operator is also the less useful one on this harness.
+
+---
+
 ## F16 — 2026-09-08, the seed sweep: the attribution holds at p = 0.002, and one of F12's claims does not survive it
 
 The study's central claim is an **attribution** — that the gap between the arms is

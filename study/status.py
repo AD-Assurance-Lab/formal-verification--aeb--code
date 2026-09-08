@@ -69,6 +69,42 @@ def fmt(value) -> str:
     return "-" if value is None else str(value)
 
 
+DISPOSES = re.compile(
+    r"^\*\*Disposes:\*\*(.+)$", re.MULTILINE)
+DISPOSED_CELL = re.compile(r"cell\s+(\d+)\s*\((endpoints|FV|witness)\)")
+
+
+def dispositions() -> dict[tuple[str, str], str]:
+    """(cell, field) -> the FINDINGS heading that disposes of it.
+
+    PROTOCOL section 8 lets a contradiction be written up once a written disposition
+    lists the candidate causes ruled out. Nothing recorded that fact, so this report
+    would have kept printing "do not write these up" at someone holding the finished
+    disposition -- which is the failure mode this repo keeps meeting: a rule that names
+    an artifact nobody made looks exactly like a rule being obeyed.
+
+    A finding claims one by carrying a line
+
+        **Disposes:** ledger cell 1 (witness), ledger cell 3 (FV)
+
+    which is deliberately explicit about WHICH field, because a cell can contradict on
+    the certificate and agree on the drive.
+    """
+    out: dict[tuple[str, str], str] = {}
+    path = REPO / "FINDINGS.md"
+    if not path.exists():
+        return out
+    heading = None
+    for line in path.read_text().splitlines():
+        if line.startswith("## "):
+            heading = line[3:].split(" ", 1)[0].strip()
+        m = DISPOSES.match(line)
+        if m and heading:
+            for cid, field in DISPOSED_CELL.findall(m.group(1)):
+                out[(cid, field)] = heading
+    return out
+
+
 def contradicts(cell_id: str, measured: dict) -> str | None:
     """A measured cell that disagrees with its pre-registered expectation."""
     _, _, exp_end, exp_fv, exp_wit, _ = EXPECTED[cell_id]
@@ -139,14 +175,27 @@ def main() -> int:
     print(f"\n  {measured}/6 cells measured")
 
     if conflicts:
+        disposed = dispositions()
+        open_ones = []
         print("\nCONTRADICTIONS. Each is a bug until proven otherwise.")
         for cid, why in conflicts:
-            print(f"  cell {cid}: {why}")
+            where = disposed.get((cid, why.split(":", 1)[0]))
+            if where:
+                print(f"  cell {cid}: {why}   -- disposed, FINDINGS {where}")
+            else:
+                print(f"  cell {cid}: {why}")
+                open_ones.append(cid)
+        if open_ones:
+            print(
+                "\nDo not write these up as findings. A written disposition must list the\n"
+                "candidate causes ruled out first. See PROTOCOL.md section 8."
+            )
+            return 1
         print(
-            "\nDo not write these up as findings. A written disposition must list the\n"
-            "candidate causes ruled out first. See PROTOCOL.md section 8."
+            "\nEvery contradiction carries a written disposition. The ledger rows stand\n"
+            "as measured -- a disposition explains a contradiction, it does not erase it."
         )
-        return 1
+        return 0
 
     print()
     return 0
