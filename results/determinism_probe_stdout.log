@@ -1,1 +1,18 @@
 [2026-09-08 00:35:22] restarting CARLA for rep 1
+[2026-09-08 00:36:39] START rep 1
+[2026-09-08 00:36:47] DONE  rep 1 rc=0
+[2026-09-08 00:36:47] restarting CARLA for rep 2
+[2026-09-08 00:38:05] START rep 2
+[2026-09-08 00:38:13] DONE  rep 2 rc=0
+[2026-09-08 00:38:13] restarting CARLA for rep 3
+[2026-09-08 00:39:31] START rep 3
+[2026-09-08 00:39:39] DONE  rep 3 rc=0
+
+  3 reps, 168 common steps, sun -30.0 deg
+
+  physics   max pose divergence   0.000000000 m   BIT-IDENTICAL
+            final pose divergence 0.000000000 m
+  rendering frames differing      168/168  (100.0%)
+  policy    max demand spread      0.002358 m/s^2 = 0.000952 of the brake decision threshold
+
+  wrote results/carla/determinism_probe.json

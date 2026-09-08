@@ -1,9 +1,6 @@
-[2026-09-07 05:45:58] START verify_P_pts_none_A (background)
-[2026-09-07 05:45:58] START verify_P_pts_none_ped_A (background)
-[2026-09-07 05:45:58] START verify_P_cont_none_A (background)
-[2026-09-07 05:45:58] START verify_P_cont_none_ped_A (background)
-[2026-09-07 08:40:03] DONE  verify_P_pts_none_A rc=0
-[2026-09-07 08:40:03] DONE  verify_P_pts_none_ped_A rc=0
-[2026-09-07 08:40:03] DONE  verify_P_cont_none_A rc=0
-[2026-09-07 08:40:03] DONE  verify_P_cont_none_ped_A rc=0
-[2026-09-07 08:40:03] property A complete (rc=0).
+[2026-09-08 00:40:49] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+[2026-09-08 00:41:29]   SIGTERM did not stop it after 40 s; SIGKILL
+[2026-09-08 00:41:31]   CARLA stopped; GPU now at 393 MiB
+[2026-09-08 00:41:31] START verify_P_pts_none_A (background)
+[2026-09-08 00:41:31] START verify_P_pts_none_ped_A (background)
+[2026-09-08 00:41:31] START verify_P_cont_none_A (background)

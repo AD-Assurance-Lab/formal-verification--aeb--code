@@ -1,3 +1,45 @@
 [2026-09-08 00:35:22] restarting CARLA for rep 1
 ==> CARLA_TAKEOVER: stopping whatever holds 3000
     SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2336219 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:36:39] START rep 1
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  rep 1: 168 steps -> determinism_rep1.json
+[2026-09-08 00:36:47] DONE  rep 1 rc=0
+[2026-09-08 00:36:47] restarting CARLA for rep 2
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2337414 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:38:05] START rep 2
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  rep 2: 168 steps -> determinism_rep2.json
+[2026-09-08 00:38:13] DONE  rep 2 rc=0
+[2026-09-08 00:38:13] restarting CARLA for rep 3
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2338139 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:39:31] START rep 3
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  rep 3: 168 steps -> determinism_rep3.json
+[2026-09-08 00:39:39] DONE  rep 3 rc=0
+
+  3 reps, 168 common steps, sun -30.0 deg
+
+  physics   max pose divergence   0.000000000 m   BIT-IDENTICAL
+            final pose divergence 0.000000000 m
+  rendering frames differing      168/168  (100.0%)
+  policy    max demand spread      0.002358 m/s^2 = 0.000952 of the brake decision threshold
+
+  wrote results/carla/determinism_probe.json
+Terminated

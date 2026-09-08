@@ -6,6 +6,60 @@ here, never inside the protocol.
 
 ---
 
+## F11 — 2026-09-08, D-8 measured here at last: physics bit-exact, rendering never, and this policy does not amplify
+
+Rule D-8 says determinism must be measured OPEN LOOP, and this study had never done it —
+it adopted the `carla-determinism` fixes and inherited every claim about run-to-run noise
+from the steering study's Town06 branch, a different map, a different camera and a
+lane-keeping policy. `tools/determinism_probe.py` cuts the feedback: the vehicle is driven
+by a command sequence that is a pure function of the step index, deliberately changing on
+every step through the acceleration phase, while the policy sees every frame and its
+output is computed and recorded but never applied.
+
+Three repetitions, a fresh server before each, 168 steps, `P_cont`/lead at −30° with lower
+beam:
+
+| stream | result | rule |
+|---|---|---|
+| pose across reps | **identical, 168 of 168 steps, 0.000000000 m** | D-1, D-2 |
+| raw frame SHA-256 | **different, 0 of 168 identical** | D-3, D-7 |
+| commanded deceleration, computed not applied | max spread **0.00236 m/s²**, median 0.00013 | D-10 |
+
+**The physics is bit-exact.** Acknowledged control and explicit substepping deliver exactly
+what they promise on this map and this vehicle. That is now measured here rather than
+assumed from Town06.
+
+**The rendering is never bit-identical**, in exactly the way D-7 says it cannot be, and
+that rule's repetition floor is not in dispute.
+
+**This policy does not amplify the render floor, and that is the number the study needed.**
+D-10 says amplification is a property of the policy: in the steering study a 2.6e-6
+steering perturbation grew to 7.6 ft of cross-track error over 349 steps, so run-to-run
+spread there was a stability-margin measurement. Here, with the physics bit-exact and only
+the render floor left, the commanded deceleration moves by **0.095% of the brake decision
+threshold** at its worst. The AEB policy is strongly contractive with respect to the noise
+the simulator cannot remove.
+
+That explains something the study had been reporting without understanding: every
+repetition of every M4 cell agreeing to 0.1 ft. It is not the harness being suspiciously
+quiet, it is a contractive policy on bit-exact physics.
+
+**What it does NOT license.** This is an open-loop measurement, and the closed loop
+latches: once the demand crosses the threshold, braking is commanded at full authority and
+never withdrawn. A demand perturbation of 0.0024 m/s² can only matter if it moves which
+STEP the crossing happens on, and at 20 Hz and 11 m/s a step is 0.56 m. So the bound on
+the closed-loop consequence is one control step, not zero — small, but not nothing, and it
+is why the repetition count stays where PROTOCOL section 1 puts it.
+
+**Recorded for the D-7 versus A-4 question, and not acted on.** `CARLA_DETERMINISM_PENDING`
+flags an unresolved conflict between D-7's floor of ten repetitions and the steering
+study's amendment A-4, which cut it to three on a fully enforced harness. This is the
+AEB-specific datum that argument has been missing: the policy whose marginality motivated
+the floor is not this policy. Resolving it still needs the package's section 4 amendment
+procedure and it is Zach's call, not a study's.
+
+---
+
 ## F10 — 2026-09-08, the in-between gate carries no information about the risk it exists to bound
 
 PROTOCOL section 4 requires the in-between check and says the behavioural version is the
