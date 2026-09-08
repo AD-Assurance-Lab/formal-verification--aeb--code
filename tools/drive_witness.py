@@ -30,7 +30,8 @@ from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 import stats as ST  # noqa: E402
-from run_policy import load_policy, one_run, PREMATURE_MULTIPLE  # noqa: E402
+from run_policy import (load_policy, one_run, plate_run,  # noqa: E402
+                        PREMATURE_MULTIPLE)
 
 OUT = J.REPO / "results" / "carla"
 
@@ -68,10 +69,16 @@ def main() -> int:
              "named actually unsafe', which is the question section 10 asks")
     args = ap.parse_args()
 
-    if args.scenario not in ("lead", "ped"):
+    if args.scenario not in ("lead", "ped", "plate"):
         raise SystemExit(f"scenario {args.scenario!r} is not drivable")
 
-    verdicts_path = OUT / f"verify_{args.policy}_{args.scenario}.json"
+    # The plate cells pass by NOT stopping, so their verdict column is property A and
+    # their artifact carries the `_A` suffix. Everything downstream of the verdict --
+    # the commit check, the midpoint/at-witness split, the agreement count -- is the same
+    # question asked of a different criterion, so it is a branch and not a second script.
+    plate = args.scenario == "plate"
+    verdicts_path = OUT / (f"verify_{args.policy}_plate_A.json" if plate
+                           else f"verify_{args.policy}_{args.scenario}.json")
     if not verdicts_path.exists():
         raise SystemExit(f"no verdicts at {verdicts_path}; run tools/verify.py first")
     # A verdict is a prediction only if it is COMMITTED before this drive
@@ -94,7 +101,10 @@ def main() -> int:
     # carry (sm_120 vs an sm_90 build). Both end in a silent CPU run that still prints
     # numbers. See tools/gpu.py.
     dev = require_cuda()
-    model, w, h = load_policy(args.policy, args.scenario, dev)
+    # There is no plate-trained policy and there must not be: cells 5 and 6 ask whether
+    # the HAZARD policy false-activates, so they load exactly the network the hazard
+    # cells verify and drive. verify.py used --policy-scenario lead for the same reason.
+    model, w, h = load_policy(args.policy, "lead" if plate else args.scenario, dev)
     b = json.loads((OUT / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81
     r_req_ft = J.r_req_m(
@@ -106,6 +116,7 @@ def main() -> int:
     _sfx = "_atwitness" if args.at_witness else ""
     out_path = J.claim_output(
         OUT / f"witness_{args.policy}_{args.scenario}{_sfx}.json")
+    reps = args.reps
 
     carla = J.carla_module()
     client, world = J.connect(rendering=True)
@@ -140,6 +151,54 @@ def main() -> int:
         for _ in range(J.WEATHER_SETTLE_TICKS):
             world.tick()
         lights = "LowBeam" if mid < 5.0 else "NONE"
+
+        if plate:
+            runs = [plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights)
+                    for _ in range(reps)]
+            # ONE criterion here, and it is the standard's own: crossed the plate still
+            # moving, never braked, never commanded more than 0.25 g. There is no second
+            # count to keep apart, because there is no contact to avoid and no standoff
+            # to hold -- the hazard cells' two counts exist because a must-brake verdict
+            # must not be scored against a must-not-brake condition (F9), and here the
+            # verdict IS the must-not-brake one.
+            passes_protocol = sum(1 for r in runs if r["passes"])
+            peaks = [r["peak_demand_mps2"] for r in runs]
+            drove_ok = passes_protocol == reps
+            predicted_ok = cell["verdict"] == "CERTIFIED"
+            matched = drove_ok == predicted_ok
+            agree += matched
+            rows.append({
+                "from_deg": cell["from_deg"], "to_deg": cell["to_deg"],
+                "midpoint_deg": round(mid, 3), "driven_at_deg": round(mid, 3),
+                "driven_at": "witness" if args.at_witness else "midpoint",
+                "witness_s": cell.get("witness_s"),
+                "verdict": cell["verdict"],
+                **ST.rate(passes_protocol, reps),
+                "passes": passes_protocol, "passes_protocol": passes_protocol,
+                "of": reps,
+                "braked": sum(1 for r in runs if r["braked"]),
+                "exceeded_limit": sum(1 for r in runs if r["exceeded_nuisance_limit"]),
+                "did_not_cross": sum(1 for r in runs if not r["crossed_plate"]),
+                "peak_demand_mps2": [round(x, 4) for x in peaks],
+                "worst_peak_mps2": round(max(peaks), 4),
+                "worst_peak_x_limit": round(max(peaks) / runs[0]["nuisance_limit_mps2"], 4),
+                "nuisance_limit_mps2": runs[0]["nuisance_limit_mps2"],
+                "headlamps": lights,
+                "signature": runs[0]["signature"],
+                "agrees": matched,
+                "runs": [{k: r[k] for k in
+                          ("passes", "braked", "crossed_plate", "peak_demand_mps2",
+                           "exceeded_nuisance_limit", "brake_range_ft",
+                           "min_speed_mps_while_moving")} for r in runs],
+            })
+            sig_records.append({"sun_altitude_deg": round(mid, 3),
+                                "signature": runs[0]["signature"]})
+            print(f"  [{cell['from_deg']:+8.3f}, {cell['to_deg']:+8.3f}] "
+                  f"at {mid:+8.3f}  {cell['verdict']:<10} "
+                  f"drove {passes_protocol}/{reps}  peak {max(peaks):.3f} "
+                  f"({max(peaks) / runs[0]['nuisance_limit_mps2']:.3f}x limit)  "
+                  f"{'agrees' if matched else 'DISAGREES'}", flush=True)
+            continue
 
         runs = [
             one_run(world, site, model, w, h, dev, a_max, J.HAZARD_MPH, lights,
@@ -241,8 +300,11 @@ def main() -> int:
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
 
+    # The model that was LOADED, not the scenario name. For the plate cells those differ
+    # -- there is no P_pts_plate.pt -- and hashing a path that does not exist yields a
+    # null model_sha256, which silently disables study.ledger's model-binding check.
     _prov = _provenance(str(J.REPO / "results" / "models" /
-                            f"{args.policy}_{args.scenario}.pt"))
+                            f"{args.policy}_{'lead' if plate else args.scenario}.pt"))
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
@@ -259,6 +321,12 @@ def main() -> int:
             "everything."
         ),
     }
+    if plate:
+        payload["criterion"] = (
+            "FMVSS 127 false activation: crossed the plate still moving, never braked, "
+            "and never commanded more than the standard's 0.25 g nuisance limit. This is "
+            "the only scenario in the study that passes by NOT stopping.")
+        payload["model_scenario"] = "lead"
     payload["driven_at"] = "witness" if args.at_witness else "midpoint"
     payload["note"] = (
         "Driven at each falsified sub-interval's EXHIBITED witness illumination -- the "
