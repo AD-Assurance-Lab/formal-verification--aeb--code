@@ -254,8 +254,11 @@ sub-interval, because §10 says *drive the witness* and the midpoint is not the 
 | `P_pts3` / ped | 5/17 | 18 | 32 |
 | `P_pts` / ped | 4/17 | 0 | 40 |
 
-**Nothing was certified and then failed**, in any cell, at either the midpoints or the
-exhibited witnesses. For a safety tool that is the direction that matters.
+**Nothing was certified and then failed** on the covered axis, in any cell, at either the
+midpoints or the exhibited witnesses. For a safety tool that is the direction that matters.
+The single exception in the whole study is in the A6-**uncovered** sliver, which the
+protocol excludes from every verdict precisely because a bound there is not evidence
+(§13b, F19).
 
 **The continuum-trained control drives the entire axis with zero contacts and zero nuisance
 stops on both scenarios.** Neither regulatory-matrix arm does.
@@ -344,8 +347,26 @@ essentially no margin**, which is the result rather than a comfortable pass: the
 continuum-trained policy buys its clean must-brake record with a must-not-brake budget it
 very nearly spends.
 
-Witness drives for these two cells are still open; the verdicts above are committed before
-them.
+**Driving them (F19).** Six drives, 17 sub-intervals, 10 repetitions — 1,020 runs — plus
+the control with no steel on the road. Agreement `P_pts` 17/17, `P_pts3` 17/17, `P_cont`
+16/17.
+
+`P_pts` commands about **2% of the nuisance limit at all three lighting conditions the
+standard tests** (0.034, 0.056, 0.037 m/s²) and **138% of it at +0.403°** (3.381), an
+illumination between them. That is **60× its worst test point**, and with the plate
+removed the same illumination gives 3.382 — 0.06% away. The violation is the light, not
+the steel, and FMVSS 127's own false-activation procedure cannot see it.
+
+`P_cont` is the one arm where the plate itself matters, in one sub-interval: at +0.013° it
+peaks at **2.711 (110.5% of the limit, 7/10) with the plate** and **2.221 (90.6%, 10/10)
+without** — the steel adds 18.1% and carries it over. That is §9's named sleeper, and it
+took a two-sided test at an illumination outside the standard to see it.
+
+That sub-interval is also **the only certified-then-failed cell in the study** — certified
+at 0.9963×, driven at 1.105×. It is the A6-**uncovered** sub-interval, excluded from cell
+6's verdict by construction, and its margin sits inside the band §13a measured as carrying
+no information. Both were on record before the drive. It is the first direct empirical
+confirmation that the uncovered sliver genuinely cannot be certified.
 
 ## 14. What the harness itself measures
 

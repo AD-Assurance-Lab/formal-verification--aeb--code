@@ -6,6 +6,95 @@ here, never inside the protocol.
 
 ---
 
+## F19 — 2026-09-08, driving the plate: one arm violates the nuisance limit for reasons that are not the plate, and one arm violates it because of the plate
+
+**Disposes:** ledger cell 5 (witness)
+
+The witness column for cells 5 and 6, plus the control the cells need to mean anything:
+the identical 50 mph approach with **no steel on the road** (`plate_run(place=False)`).
+Six drives, 17 sub-intervals each, 10 repetitions each — 1,020 runs.
+
+| arm | plate agreement | verdict mismatches vs the control | median peak difference |
+|---|---|---|---|
+| `P_pts` | **17/17** | **0** of 17 | 1.06% |
+| `P_pts3` | **17/17** | **0** of 17 | 5.49% |
+| `P_cont` | 16/17 | **1** of 17 | 0.40% |
+
+### `P_pts`: a real FMVSS 127 nuisance violation, 60x the worst test point, and the plate has nothing to do with it
+
+| driven at | peak commanded deceleration | of the 2.453 limit | passed |
+|---|---|---|---|
+| daylight (regulatory) | 0.034 | 1.4% | 10/10 |
+| darkness, lower beam (regulatory) | 0.056 | 2.3% | 10/10 |
+| darkness, upper beam (regulatory) | 0.037 | 1.5% | 10/10 |
+| **+0.403°** | **3.381** | **138%** | **0/10** |
+| **+0.013°** | **3.053** | **124%** | **0/10** |
+
+At all three lighting conditions the standard actually tests, this policy commands about
+2% of the nuisance limit — it does essentially nothing. At an illumination **between**
+them it commands **60 times more** and exceeds the limit by 38%. The certificate named
+both sub-intervals and was committed before the drive.
+
+**And it is not the plate.** With the steel removed the same two illuminations give
+**3.382** and **3.055** — 0.06% and 0.09% away — and every one of the 17 pass/fail
+outcomes is identical. `P_pts` brakes at 1.38x the nuisance limit on an empty road at
+50 mph because of the light, and FMVSS 127's own false-activation test, run at its own
+three lighting conditions, cannot see it.
+
+That disposes cell 5's witness contradiction. The pre-registration expected PASS because
+it expected CERTIFIED; the drive confirms the falsification, and the ruled-out candidate
+that mattered — *the policy is responding to the steel* — is ruled out by the control at
+drive level, not only in the certificate (F18).
+
+### `P_cont`: the section 9 sleeper, awake, and it IS the plate
+
+One sub-interval in 102 behaves differently with the steel there:
+
+| `P_cont` at +0.013° | peak | of the limit | passed |
+|---|---|---|---|
+| plate present | **2.711** | **110.5%** | **7/10** |
+| plate removed | 2.221 | 90.6% | 10/10 |
+
+The plate adds **18.1%** to the peak demand and carries the policy across the standard's
+threshold. That is false activation in the strict sense — the vehicle brakes *because of
+the steel* — and `P_cont` is the only arm that does it. PROTOCOL §9 named this cell the
+sleeper on the grounds that the continuum-trained policy sees more braking data and might
+be the more trigger-happy, *"a trade no single-sided test can see"*. It is right, and it
+took a two-sided test at an illumination the standard does not visit to see it.
+
+### The one certified-then-failed sub-interval in the study, and where it is
+
+That same cell is the only place in the entire study where a CERTIFIED sub-interval failed
+when driven: certified at **0.9963x** of the limit, driven at **1.105x**. Two things
+already on record predicted it, from different directions:
+
+- **A6.** [+0.026°, +0.000°] is the **uncovered** sub-interval — no step size meets the
+  blend tolerance across the horizon discontinuity, so a bound there quantifies over
+  images the renderer does not produce, and PROTOCOL says a CERTIFIED verdict there must
+  never be counted as coverage. `record_cells` excludes it, so cell 6 still reads
+  *"CERTIFIED in all 16 covered sub-intervals, drove clean in all 16 driven"*. **This is
+  the first direct empirical confirmation that the uncovered sliver genuinely cannot be
+  certified** — until now it was an argument from the blend metric.
+- **F17.** 0.9963x sits inside the band F17 measured as carrying no information: between
+  about 1.00x and 1.05x of threshold the margin does not predict the drive. It did not.
+
+Both were written down before this drive. Neither was written down *because* of it.
+
+### What cells 5 and 6 establish, stated carefully
+
+- **No arm false-activates on the trench plate at any illumination FMVSS 127 tests.** All
+  nine endpoint cells, 10/10, peak 0.030–0.375 against a 2.453 limit.
+- **Two of three arms violate the nuisance limit at illuminations between those tests,
+  and for `P_pts` and `P_pts3` the plate is irrelevant to it** — the same violation occurs
+  on empty road within 0.9%.
+- **`P_cont` alone brakes for the steel**, in one sub-interval, and only there does the
+  plate change a verdict.
+- The sub-interval where that happens is the one the disturbance family cannot represent,
+  so the certificate cannot speak to it. The conformal guarantee (F14) is what covers that
+  sliver, and this drive is what it is covering.
+
+---
+
 ## F18 — 2026-09-08, cells 5 and 6 close: nobody false-activates on the trench plate, and the one arm that looks like it does not
 
 The ledger has been 4 of 6 since M0. It is now **6 of 6**, and the two false-activation

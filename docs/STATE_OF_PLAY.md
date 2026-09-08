@@ -36,7 +36,7 @@ Live state in the protocol's own terms: `python -m study.status`.
   built and **fails**: stating property S as the disjunction the controller actually needs
   catches only 8 of those 9, missing a cell it certifies at 1.03× that crashes 10/10.
 - All three arms pass all three regulatory endpoint tests 10/10.
-- **The ledger is 6 of 6 for the first time.** Cells 5 and 6 say **no arm false-activates
+- **The ledger is 6 of 6 and every cell has all three columns.** Cells 5 and 6 say **no arm false-activates
   on the trench plate**: every property A verdict is identical with the plate present and
   removed, every bound within 0.5%, so the falsifications belong to the illumination and
   not the plate (F18). `P_cont` closes cell 6 CERTIFIED with **no margin** — 0.9825x — and
@@ -89,14 +89,21 @@ turn the blind protocol into a formality.
 
 ## Open, in priority order
 
-### 1. Cells 5 and 6 need their witness drives
+### 1. Cells 5 and 6 are complete; what they found needs writing into the paper
 
-The harness was built on 2026-09-08, the drives are done — all nine endpoint cells pass
-**10/10**, peak demand 0.030–0.375 m/s² against the standard's 2.453 limit — and the
-property A certificates over the illumination axis are in (F18). What remains is the
-**witness drives** at the sub-interval midpoints and at the exhibited witnesses, as for
-the hazard cells. The verdicts are committed to git ahead of them, which is what makes
-them predictions.
+**Closed.** Endpoints 9/9 at 10/10, certificates in (F18), witness drives in (F19):
+1,020 runs across three arms with and without the plate. Two results the paper does not
+yet contain:
+
+- `P_pts` commands **2% of the nuisance limit at every lighting condition FMVSS 127 tests
+  and 138% of it between them**, 60x its worst test point — and the plate is irrelevant,
+  the same illumination on empty road gives 3.382 against 3.381. The standard's own
+  false-activation procedure cannot see this.
+- `P_cont` is the only arm that brakes **for the steel**: at +0.013° the plate adds 18.1%
+  to peak demand and carries it from 90.6% to 110.5% of the limit. That is section 9's
+  named sleeper, and it is in the A6-uncovered sliver — which is also the study's only
+  certified-then-failed sub-interval, and the first empirical proof that the sliver cannot
+  be certified.
 
 **The scenario substitution happened twice and both times in the safe-looking direction.**
 Property A was originally verified only on `none`, an empty road at the lead poses — a

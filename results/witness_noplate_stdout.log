@@ -1,0 +1,12 @@
+[2026-09-08 10:30:16] witness scope: none_plate (none_plate)
+[2026-09-08 10:30:16] restarting CARLA on 3000
+[2026-09-08 10:31:34] START witness_P_pts_none_plate
+[2026-09-08 10:37:47] DONE  witness_P_pts_none_plate rc=0
+[2026-09-08 10:37:47] restarting CARLA on 3000
+[2026-09-08 10:39:05] START witness_P_cont_none_plate
+[2026-09-08 10:45:15] DONE  witness_P_cont_none_plate rc=0
+[2026-09-08 10:45:15] restarting CARLA on 3000
+[2026-09-08 10:46:33] START witness_P_pts3_none_plate
+[2026-09-08 10:52:28] DONE  witness_P_pts3_none_plate rc=0
+[2026-09-08 10:52:28] restarting CARLA on 3000
+[2026-09-08 10:53:46] START witness_P_pts_none_plate_atwitness
