@@ -6,6 +6,102 @@ here, never inside the protocol.
 
 ---
 
+## F18 — 2026-09-08, cells 5 and 6 close: nobody false-activates on the trench plate, and the one arm that looks like it does not
+
+The ledger has been 4 of 6 since M0. It is now **6 of 6**, and the two false-activation
+cells say something the endpoint drives alone could not.
+
+**Disposes:** ledger cell 5 (FV)
+
+### What was measured
+
+FMVSS 127's false-activation scenario: an ASTM A36 steel plate tiled to exactly
+8.0 × 12.0 ft, approached in lane at 50 mph. Property A over the whole illumination axis
+— **52 poses from 2.179 m to 59.178 m**, every captured pose at any range, against the
+standard's own 0.25 g limit of 2.4525 m/s².
+
+And the control that makes any of it attributable: `none_plate`, the identical poses with
+the plate **removed**.
+
+| arm | plate: covered certified | worst covered | uncovered sliver | **plate removed** |
+|---|---|---|---|---|
+| `P_cont` | **16/16** | 0.9825× | CERTIFIED 0.9963× | 16/16, worst 0.9850× |
+| `P_pts3` | 15/16 | **1.3634×** | CERTIFIED 0.9974× | 15/16, worst 1.3652× |
+| `P_pts` | 15/16 | **2.0872×** | FALSIFIED 3.8309× | 15/16, worst 2.0775× |
+
+**Every verdict is identical with the plate present and with it removed, and every bound
+agrees to within 0.5%.** Not one sub-interval falsifies because of the plate.
+
+The drives agree: all nine cells — three arms across all three FMVSS lighting conditions,
+ten runs each — cross the plate at 50 mph **10/10** without braking, peak commanded
+deceleration 0.030 to 0.375 m/s² against the 2.453 limit.
+
+### Cell 5's contradiction, disposed
+
+Cell 5 pre-registered CERTIFIED and measured FALSIFIED over 0.753°, the sub-interval
+[+0.779°, +0.026°], at 2.0872× the nuisance limit.
+
+| candidate | verdict | how |
+|---|---|---|
+| **`P_pts` false-activates on the steel plate** | **ruled out** | the control. With the plate removed the same sub-interval falsifies at 2.0775× and the same uncovered sliver at 3.8457×, differences of 0.5% and 0.4%. The plate contributes nothing |
+| an instrument defect | **ruled out** | concrete exhibited witnesses, `UNDECIDED` 0 in all seventeen, and the same tool on the same frames certifies `P_cont` 16/16 |
+| the certificate covers less than the cell scopes | **ruled out** | 52 poses over 2.179–59.178 m, recomputed from `states_plate.json` and checked against the artifact's own per-cell pose counts (`tools/restate_scope.py`, 0 refused) |
+| the near-horizon nuisance braking of F13 | **the cause** | it is a property of the illumination, it appears on an empty road, and it is why the axis contains illuminations at which this policy brakes at nothing at all |
+
+So the cell is falsified and **it is not false activation**. `P_pts` brakes near sun
+altitude 0 whether or not there is a steel plate in front of it, and reporting that as a
+response to the plate would be exactly the attribution error the control exists to prevent.
+The pre-registration expected CERTIFIED because it was reasoning about the plate; the
+property is quantified over an axis that includes illuminations where this arm's behaviour
+has nothing to do with the target.
+
+### Cell 6 was the sleeper, and it is awake
+
+PROTOCOL §9 calls cell 6 the sleeper: `P_cont` sees more braking data than the other arms
+and might be the more trigger-happy, a trade no single-sided test can see. It is right,
+in the direction it named and not the magnitude.
+
+`P_cont` is the **loudest** arm on the plate at the regulatory endpoints — 0.082 to
+0.375 m/s² against `P_pts3`'s 0.030–0.066 and `P_pts`'s 0.034–0.056, four to eleven times
+higher — while still passing 10/10 far under the limit. And its certificate carries the
+**thinnest margins of any arm**: 0.9825× on [+0.779°, +0.026°] and 0.9963× on the
+uncovered sliver.
+
+By F17 that is a band where a bare pass says nothing: between about 1.00× and 1.05× of
+threshold the margin carries no information about what the vehicle does. **Cell 6 closes
+as CERTIFIED with essentially no margin**, and that is the result, not a comfortable pass.
+The continuum-trained policy buys its clean must-brake record with a must-not-brake budget
+it very nearly spends.
+
+### Two instrument defects found closing these cells
+
+Both would have produced a finished-looking ledger row that said the wrong thing.
+
+- **`record_cells` took the minimum margin for both properties.** For property S the
+  dangerous end is the lowest bound; for property A it is the highest. Cell 5's worst
+  covered sub-interval is at 2.0872× — a bound at twice the nuisance limit — and the
+  ledger's margin column read **−0.0021**, which is not merely wrong but reassuring. Now
+  property-aware, with the direction written into the row.
+- **Every property A artifact misstated its own scope.** `verify.py` recorded
+  `poses_inside_r_req` for both properties, and property A quantifies over every captured
+  pose out to 60 m: `verify_P_cont_none_A.json` claimed "104 poses inside r_req
+  (15.846 m)" for poses spanning 2.398 to 59.962 m, a scope **3.8× narrower** than the one
+  verified. Every verdict was right the whole time; only the artifact's claim about itself
+  was wrong, which is the version that survives longest because nothing downstream ever
+  disagrees with it. `tools/restate_scope.py` rebuilds the scope from the primary data and
+  checks it against each artifact's own per-cell pose counts before touching anything —
+  72 artifacts restated, **0 refused**, so it is confirmed a labelling defect and not a
+  measurement one.
+
+### What is still open on these cells
+
+The witness drives. The verdicts above are committed to git before any of them, which is
+what makes them predictions. `P_pts` and `P_pts3` each have one falsified covered
+sub-interval to drive, and the certified ones need driving too — a test that only visits
+flagged cells cannot tell a working certificate from one that flags everything.
+
+---
+
 ## F17 — 2026-09-08, both ledger contradictions are one quantifier — and fixing the quantifier makes the certificate worse
 
 **This is the disposition PROTOCOL section 8 requires**, for both open contradictions. They

@@ -36,6 +36,11 @@ Live state in the protocol's own terms: `python -m study.status`.
   built and **fails**: stating property S as the disjunction the controller actually needs
   catches only 8 of those 9, missing a cell it certifies at 1.03× that crashes 10/10.
 - All three arms pass all three regulatory endpoint tests 10/10.
+- **The ledger is 6 of 6 for the first time.** Cells 5 and 6 say **no arm false-activates
+  on the trench plate**: every property A verdict is identical with the plate present and
+  removed, every bound within 0.5%, so the falsifications belong to the illumination and
+  not the plate (F18). `P_cont` closes cell 6 CERTIFIED with **no margin** — 0.9825x — and
+  is the loudest arm on the plate, which is the section 9 sleeper arriving.
 
 ### What the rebuild found about the instruments
 
@@ -84,13 +89,14 @@ turn the blind protocol into a formality.
 
 ## Open, in priority order
 
-### 1. Cells 5 and 6 are one certificate short
+### 1. Cells 5 and 6 need their witness drives
 
-The harness was built on 2026-09-08 and the drives are done: all nine cells — three arms
-across all three lighting conditions — pass **10/10** on the trench plate at 50 mph, peak
-commanded deceleration 0.030–0.375 m/s² against the standard's 2.453 limit. Nobody false
-activates. What is missing is the property A certificate over the illumination interval,
-which is computing now.
+The harness was built on 2026-09-08, the drives are done — all nine endpoint cells pass
+**10/10**, peak demand 0.030–0.375 m/s² against the standard's 2.453 limit — and the
+property A certificates over the illumination axis are in (F18). What remains is the
+**witness drives** at the sub-interval midpoints and at the exhibited witnesses, as for
+the hazard cells. The verdicts are committed to git ahead of them, which is what makes
+them predictions.
 
 **The scenario substitution happened twice and both times in the safe-looking direction.**
 Property A was originally verified only on `none`, an empty road at the lead poses — a
@@ -103,8 +109,12 @@ attributable to the plate, and the stage takes an explicit scope argument rather
 silently covering less.
 
 Section 9 calls cell 6 the sleeper: `P_cont` sees more braking data and may be the more
-trigger-happy. The drives say it is not — `P_cont` is at 0.030–0.061 m/s², the quietest of
-the three arms — but the certificate is what closes the cell.
+trigger-happy. **The endpoint drives support that**, in the only place a single-sided test
+could not see it — `P_cont` peaks at 0.082–0.375 m/s² on the plate against `P_pts3`'s
+0.030–0.066 and `P_pts`'s 0.034–0.056, four to eleven times higher, though every arm is far
+under the 2.453 limit and all nine cells pass 10/10. The certificate then puts `P_cont` at
+0.98–1.00x of the limit on the two near-horizon sub-intervals, the thinnest margins of any
+arm, which by F17 is a band where a bare pass says nothing.
 
 ### 2. The LAP protocol is still unresolved, and it is lab-wide
 

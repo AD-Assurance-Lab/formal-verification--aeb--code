@@ -1144,3 +1144,13 @@ Terminated
 [2026-09-08 08:51:56] START verify_P_pts_plate_A (background)
 [2026-09-08 08:51:56] START verify_P_pts_none_plate_A (background)
 [2026-09-08 08:51:56] START verify_P_cont_plate_A (background)
+[2026-09-08 09:17:52] DONE  verify_P_pts_plate_A rc=0
+[2026-09-08 09:17:52] DONE  verify_P_pts_none_plate_A rc=0
+[2026-09-08 09:19:49] DONE  verify_P_cont_plate_A rc=0
+[2026-09-08 09:19:49] START verify_P_cont_none_plate_A (background)
+[2026-09-08 09:19:49] START verify_P_pts3_plate_A (background)
+[2026-09-08 09:19:49] START verify_P_pts3_none_plate_A (background)
+[2026-09-08 09:50:29] DONE  verify_P_cont_none_plate_A rc=0
+[2026-09-08 09:54:16] DONE  verify_P_pts3_plate_A rc=0
+[2026-09-08 09:54:16] DONE  verify_P_pts3_none_plate_A rc=0
+[2026-09-08 09:54:16] property A complete (rc=0).

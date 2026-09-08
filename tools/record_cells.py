@@ -67,7 +67,12 @@ def cell_row(policy: str, scenario: str) -> dict:
         row["criterion"] = ("crossed the plate without braking and never exceeded the "
                             "standard's 0.25 g nuisance limit")
 
-    vpath = OUT / f"verify_{policy}_{scenario}.json"
+    # The plate cells' FV column is property A, and property A artifacts carry the `_A`
+    # suffix. Without this the certificates sit on disk and the ledger keeps reporting
+    # "verification pending" -- a cell that is DONE reading as blocked, which is the same
+    # class of failure as a cell that is blocked reading as done.
+    vpath = OUT / (f"verify_{policy}_{scenario}_A.json" if scenario == "plate"
+                   else f"verify_{policy}_{scenario}.json")
     if not vpath.exists():
         # Say WHICH part is missing. "not measured" on a cell whose endpoints are
         # measured 10/10 understates the state, and on a cell with no harness at all it
@@ -103,6 +108,25 @@ def cell_row(policy: str, scenario: str) -> dict:
     # COVERED sub-intervals only. A sub-interval the disturbance family cannot represent
     # is excluded from the verdict and from the width, because a bound over a blend that
     # corresponds to no render is not evidence either way (A6, audit F8).
+    if scenario == "plate":
+        # The control that makes a plate verdict attributable to the PLATE: the same
+        # poses with the plate removed. If both falsify the same sub-intervals at the
+        # same bounds, the braking is the illumination and not the plate, and calling it
+        # false activation would be wrong.
+        cpath = OUT / f"verify_{policy}_none_plate_A.json"
+        if cpath.exists():
+            ctrl = json.loads(cpath.read_text())
+            cf = {(c["from_deg"], c["to_deg"]): c["margin_x_threshold"]
+                  for c in ctrl["cells"] if c["verdict"] == "FALSIFIED"}
+            pf = {(c["from_deg"], c["to_deg"]): c["margin_x_threshold"]
+                  for c in v["cells"] if c["verdict"] == "FALSIFIED"}
+            row["control_artifact"] = str(cpath.relative_to(J.REPO))
+            row["attributable_to_plate"] = sorted(
+                f"[{a:+.3f},{b:+.3f}]" for a, b in set(pf) - set(cf))
+            row["falsified_with_plate_removed_too"] = sorted(
+                f"[{a:+.3f},{b:+.3f}] {pf[k]:.3f}x vs {cf[k]:.3f}x without"
+                for k in sorted(set(pf) & set(cf)) for a, b in [k])
+
     covered = [c for c in v["cells"] if not c.get("family_uncovered")]
     uncovered = [c for c in v["cells"] if c.get("family_uncovered")]
     fals = [c for c in covered if c["verdict"] == "FALSIFIED"]
@@ -115,10 +139,22 @@ def cell_row(policy: str, scenario: str) -> dict:
             f"{v['cells'][-1]['to_deg']:g}); "
             f"{len(uncovered)} uncovered sub-interval(s) excluded")
     row["certified_of_covered"] = f"{len(covered) - len(fals)}/{len(covered)}"
-    row["margin_worst_x_threshold"] = min(
-        (c["margin_x_threshold"] for c in covered), default=None)
-    row["margin_best_x_threshold"] = max(
-        (c["margin_x_threshold"] for c in covered), default=None)
+    # WHICH END IS DANGEROUS DEPENDS ON THE PROPERTY, and this took the minimum for both.
+    #   S  margin = lower bound / threshold, and a pass needs >= 1. The worst is the MIN.
+    #   A  margin = upper bound / threshold, and a pass needs <= 1. The worst is the MAX.
+    # Taking the min for property A reports the SAFEST sub-interval as the cell's margin.
+    # Cell 5's worst is 2.087x -- a bound at twice the nuisance limit -- and the column
+    # read -0.0021, which is not merely wrong but reassuring. Standing rule: a pass at 1%
+    # of budget and a pass at 60% are different results, and a margin that reports the
+    # wrong end cannot tell them apart at all.
+    margins = [c["margin_x_threshold"] for c in covered]
+    worst, best = (min, max) if v["property"] == "S" else (max, min)
+    row["margin_worst_x_threshold"] = worst(margins, default=None)
+    row["margin_best_x_threshold"] = best(margins, default=None)
+    row["margin_direction"] = (
+        "property S: bound / threshold, pass needs >= 1, worst is the lowest"
+        if v["property"] == "S" else
+        "property A: bound / threshold, pass needs <= 1, worst is the highest")
 
     wpath = OUT / f"witness_{policy}_{scenario}.json"
     if not wpath.exists():

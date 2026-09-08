@@ -252,9 +252,27 @@ def main() -> int:
         # braking is warranted. The limit is the standard's own 0.25 g.
         poses = list(range(len(states)))
         threshold = 0.25 * 9.81
+    # Standing rule 7: evidence states its own scope, recomputed from the primary data
+    # and never asserted from a constant. This said "N poses inside r_req (15.85 m)" for
+    # BOTH properties, and property A quantifies over every captured pose out to 60 m --
+    # so every property A artifact in the repo claimed a scope 3.8x narrower than the one
+    # it actually verified. The verdicts were right the whole time; only the label lied,
+    # which is the version of this defect that survives longest because nothing downstream
+    # disagrees with it.
+    span = [round(float(ranges[poses].min()), 3), round(float(ranges[poses].max()), 3)]
+    scope = {
+        "poses_verified": len(poses),
+        "poses_available": len(states),
+        "pose_range_m": span,
+        "selection": ("range <= r_req" if args.property == "S"
+                      else "every captured pose, at any range"),
+        "r_req_m": round(float(rr), 3),
+    }
     print(
-        f"\n{args.policy} / {args.scenario}: {len(poses)} poses inside r_req "
-        f"({rr:.2f} m), {len(knots) - 1} sub-intervals, threshold {threshold:.3f} m/s^2",
+        f"\n{args.policy} / {args.scenario}: property {args.property} over "
+        f"{len(poses)} of {len(states)} poses, {span[0]:.2f} to {span[1]:.2f} m "
+        f"({scope['selection']}), {len(knots) - 1} sub-intervals, "
+        f"threshold {threshold:.3f} m/s^2",
         flush=True,
     )
 
@@ -372,7 +390,8 @@ def main() -> int:
         "method": args.method,
         "threshold_mps2": round(threshold, 4),
         "r_req_m": round(rr, 3),
-        "poses_inside_r_req": len(poses),
+        "scope": scope,
+        "poses_inside_r_req": (len(poses) if args.property == "S" else None),
         "branch_and_bound": {
             "max_domains_per_pose": args.max_domains,
             "min_domain_width": args.min_domain_width,

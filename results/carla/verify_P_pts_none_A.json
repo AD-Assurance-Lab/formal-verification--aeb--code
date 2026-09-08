@@ -11,7 +11,7 @@
   "method": "alpha-CROWN",
   "threshold_mps2": 2.4525,
   "r_req_m": 15.846,
-  "poses_inside_r_req": 104,
+  "poses_inside_r_req": null,
   "branch_and_bound": {
     "max_domains_per_pose": 32,
     "min_domain_width": 0.03125,
@@ -384,5 +384,17 @@
     }
   ],
   "undecided": [],
-  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. CERTIFIED means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval, under input-space branch and bound. FALSIFIED means a concrete s was exhibited whose actual output violates it. UNDECIDED means neither, at the stated budget, and is reported as itself rather than as a falsification. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
+  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. CERTIFIED means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval, under input-space branch and bound. FALSIFIED means a concrete s was exhibited whose actual output violates it. UNDECIDED means neither, at the stated budget, and is reported as itself rather than as a falsification. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions.",
+  "scope": {
+    "poses_verified": 104,
+    "poses_available": 104,
+    "pose_range_m": [
+      2.398,
+      59.962
+    ],
+    "selection": "every captured pose, at any range",
+    "r_req_m": 15.846,
+    "restated_by": "tools/restate_scope.py",
+    "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+  }
 }

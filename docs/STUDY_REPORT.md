@@ -318,6 +318,35 @@ Requiring all twenty-five poses forces the certificate away from that knife edge
 is what buys the 9-of-9. §7 stays as written; the disjunction is reported beside it as the
 quantity the agreement table is entitled to score against, not in place of it.
 
+### 13b. Cells 5 and 6: the trench plate (F18)
+
+FMVSS 127's false-activation scenario — an ASTM A36 plate tiled to 8.0 × 12.0 ft,
+approached in lane at 50 mph — with property A over **52 poses from 2.179 to 59.178 m**
+against the standard's 0.25 g limit, and the control that makes it attributable: the same
+poses with the plate **removed**.
+
+| arm | plate | worst covered | plate removed |
+|---|---|---|---|
+| `P_cont` | **16/16 certified** | 0.9825× | 16/16, worst 0.9850× |
+| `P_pts3` | 15/16 | 1.3634× | 15/16, worst 1.3652× |
+| `P_pts` | 15/16 | 2.0872× | 15/16, worst 2.0775× |
+
+**Every verdict is identical with the plate present and removed, every bound within 0.5%.**
+No arm's braking is attributable to the plate; the falsifications are the near-horizon
+illumination effect of F13, which appears equally on an empty road. All nine endpoint
+cells cross the plate 10/10 without braking, peak demand 0.030–0.375 m/s².
+
+**Cell 6 was §9's named sleeper and it is awake.** `P_cont` is the loudest arm on the
+plate at the endpoints — 0.082–0.375 m/s² against the others' 0.030–0.066 — and its
+certificate carries the thinnest margins of any arm, 0.9825× and 0.9963×. By §13a that is
+a band where a bare pass carries no information. **Cell 6 closes as certified with
+essentially no margin**, which is the result rather than a comfortable pass: the
+continuum-trained policy buys its clean must-brake record with a must-not-brake budget it
+very nearly spends.
+
+Witness drives for these two cells are still open; the verdicts above are committed before
+them.
+
 ## 14. What the harness itself measures
 
 **Determinism, open loop** (F11), three repetitions with a fresh server each, feedback cut
@@ -394,10 +423,14 @@ looked entirely reasonable.
 | Gate calibration splitting names on `_` | a correlation over 3 pairs of 6 | the pair count |
 | Illumination guard assuming monotonicity | a correct capture campaign rejected | looking at the brightness curve |
 | Property A for cells 5 and 6 queued on `none_plate` | a false-activation certificate computed on an empty road | reading the scenario the ledger row names against the one the script passed |
+| `record_cells` taking the MINIMUM margin for both properties | cell 5's worst sub-interval, a bound at twice the nuisance limit, as a margin of **−0.0021** | asking which end of the bound is the dangerous one for a must-NOT property |
+| Every property A artifact misstating its own scope | "104 poses inside r_req (15.846 m)" for poses spanning 2.398–59.962 m | recomputing the pose set from `states_*.json` and checking it against the artifact's own per-cell pose counts |
 
-Ten defects. **Five were found only because a number was compared against another number
+Twelve defects. **Six were found only because a number was compared against another number
 that should have matched it**, and none would have been caught by a test that checked
-whether the pipeline ran.
+whether the pipeline ran. Three of the last four are *labels* rather than measurements —
+a scope, a margin's sign, a scenario name — which is the harder class, because the numbers
+underneath are correct and nothing downstream ever disagrees with the label.
 
 The tenth is worth its own sentence, because it is a repeat. `docs/STATE_OF_PLAY.md`
 section 1 already recorded that property A on the no-target control is *not* FMVSS 127's
