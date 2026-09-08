@@ -1,63 +1,76 @@
-[2026-09-07 16:40:37] restarting CARLA on 3000
-[2026-09-07 16:41:54] START endpoints_lead
-[2026-09-07 16:45:58] DONE  endpoints_lead rc=0
-[2026-09-07 16:45:58] restarting CARLA on 3000
-[2026-09-07 16:47:16] START endpoints_ped
-[2026-09-07 16:51:43] DONE  endpoints_ped rc=0
-[2026-09-07 16:51:43] restarting CARLA on 3000
-[2026-09-07 16:53:00] START gate_capture_P_pts_lead
-[2026-09-07 16:53:06] DONE  gate_capture_P_pts_lead rc=0
-[2026-09-07 16:53:06] restarting CARLA on 3000
-[2026-09-07 16:54:24] START gate_inbetween_P_pts_lead
-[2026-09-07 16:56:33] DONE  gate_inbetween_P_pts_lead rc=0
-[2026-09-07 16:56:33] restarting CARLA on 3000
-[2026-09-07 16:57:51] START gate_capture_P_pts_ped
-[2026-09-07 16:57:56] DONE  gate_capture_P_pts_ped rc=0
-[2026-09-07 16:57:56] restarting CARLA on 3000
-[2026-09-07 16:59:14] START gate_inbetween_P_pts_ped
-[2026-09-07 17:01:26] DONE  gate_inbetween_P_pts_ped rc=0
-[2026-09-07 17:01:26] restarting CARLA on 3000
-[2026-09-07 17:02:44] START gate_capture_P_cont_lead
-[2026-09-07 17:02:49] DONE  gate_capture_P_cont_lead rc=0
-[2026-09-07 17:02:49] restarting CARLA on 3000
-[2026-09-07 17:04:07] START gate_inbetween_P_cont_lead
-[2026-09-07 17:06:17] DONE  gate_inbetween_P_cont_lead rc=0
-[2026-09-07 17:06:17] restarting CARLA on 3000
-[2026-09-07 17:07:34] START gate_capture_P_cont_ped
-[2026-09-07 17:07:40] DONE  gate_capture_P_cont_ped rc=0
-[2026-09-07 17:07:40] restarting CARLA on 3000
-[2026-09-07 17:08:58] START gate_inbetween_P_cont_ped
-[2026-09-07 17:11:08] DONE  gate_inbetween_P_cont_ped rc=0
-[2026-09-07 17:11:08] restarting CARLA on 3000
-[2026-09-07 17:12:26] START gate_capture_P_pts3_lead
-[2026-09-07 17:12:31] DONE  gate_capture_P_pts3_lead rc=0
-[2026-09-07 17:12:31] restarting CARLA on 3000
-[2026-09-07 17:13:49] START gate_inbetween_P_pts3_lead
-[2026-09-07 17:15:57] DONE  gate_inbetween_P_pts3_lead rc=0
-[2026-09-07 17:15:57] restarting CARLA on 3000
-[2026-09-07 17:17:15] START gate_capture_P_pts3_ped
-[2026-09-07 17:17:21] DONE  gate_capture_P_pts3_ped rc=0
-[2026-09-07 17:17:21] restarting CARLA on 3000
-[2026-09-07 17:18:38] START gate_inbetween_P_pts3_ped
-[2026-09-07 17:20:49] DONE  gate_inbetween_P_pts3_ped rc=0
-[2026-09-07 17:20:49] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
-[2026-09-07 17:21:53] START verify_P_pts_lead_S (background)
-[2026-09-07 17:21:53] START verify_P_pts_ped_S (background)
-[2026-09-07 17:21:53] START verify_P_cont_lead_S (background)
-[2026-09-07 17:21:53] START verify_P_cont_ped_S (background)
-[2026-09-07 17:37:35] DONE  verify_P_pts_lead_S rc=0
-[2026-09-07 17:39:46] DONE  verify_P_pts_ped_S rc=0
-[2026-09-07 17:41:26] DONE  verify_P_cont_lead_S rc=0
-[2026-09-07 17:41:26] DONE  verify_P_cont_ped_S rc=0
-[2026-09-07 17:41:26] START verify_P_pts3_lead_S (background)
-[2026-09-07 17:41:26] START verify_P_pts3_ped_S (background)
-[2026-09-07 17:49:53] DONE  verify_P_pts3_lead_S rc=0
-[2026-09-07 17:50:17] DONE  verify_P_pts3_ped_S rc=0
-[2026-09-07 17:50:17] 
-[2026-09-07 17:50:17] M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:
-[2026-09-07 17:50:17]     python tools/record_cells.py --write
-[2026-09-07 17:50:17]     git add results/carla/verify_*.json study/results.json && git commit
-[2026-09-07 17:50:17]     bash scripts/rebuild_all.sh witness      # simulator
-[2026-09-07 17:50:17]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
-[2026-09-07 17:50:17] A verdict is a prediction only if it was written down first;
-[2026-09-07 17:50:17] tools/drive_witness.py refuses to run against an uncommitted one.
+[2026-09-07 20:35:40] restarting CARLA on 3000
+[2026-09-07 20:35:58] START endpoints_lead
+[2026-09-07 20:39:59] DONE  endpoints_lead rc=0
+[2026-09-07 20:39:59] restarting CARLA on 3000
+[2026-09-07 20:41:17] START endpoints_ped
+[2026-09-07 20:45:41] DONE  endpoints_ped rc=0
+[2026-09-07 20:45:41] restarting CARLA on 3000
+[2026-09-07 20:46:58] START gate_capture_P_pts_lead
+[2026-09-07 20:47:04] DONE  gate_capture_P_pts_lead rc=0
+[2026-09-07 20:47:04] restarting CARLA on 3000
+[2026-09-07 20:48:22] START gate_inbetween_P_pts_lead
+[2026-09-07 20:50:30] DONE  gate_inbetween_P_pts_lead rc=0
+[2026-09-07 20:50:30] restarting CARLA on 3000
+[2026-09-07 20:51:48] START gate_capture_P_pts_ped
+[2026-09-07 20:51:54] DONE  gate_capture_P_pts_ped rc=0
+[2026-09-07 20:51:54] restarting CARLA on 3000
+[2026-09-07 20:53:12] START gate_inbetween_P_pts_ped
+[2026-09-07 20:55:22] DONE  gate_inbetween_P_pts_ped rc=0
+[2026-09-07 20:55:22] restarting CARLA on 3000
+[2026-09-07 20:56:39] START gate_capture_P_cont_lead
+[2026-09-07 20:56:45] DONE  gate_capture_P_cont_lead rc=0
+[2026-09-07 20:56:45] restarting CARLA on 3000
+[2026-09-07 20:58:03] START gate_inbetween_P_cont_lead
+[2026-09-07 21:00:12] DONE  gate_inbetween_P_cont_lead rc=0
+[2026-09-07 21:00:12] restarting CARLA on 3000
+[2026-09-07 21:01:30] START gate_capture_P_cont_ped
+[2026-09-07 21:01:36] DONE  gate_capture_P_cont_ped rc=0
+[2026-09-07 21:01:36] restarting CARLA on 3000
+[2026-09-07 21:02:53] START gate_inbetween_P_cont_ped
+[2026-09-07 21:05:04] DONE  gate_inbetween_P_cont_ped rc=0
+[2026-09-07 21:05:04] restarting CARLA on 3000
+[2026-09-07 21:06:22] START gate_capture_P_pts3_lead
+[2026-09-07 21:06:28] DONE  gate_capture_P_pts3_lead rc=0
+[2026-09-07 21:06:28] restarting CARLA on 3000
+[2026-09-07 21:07:45] START gate_inbetween_P_pts3_lead
+[2026-09-07 21:09:55] DONE  gate_inbetween_P_pts3_lead rc=0
+[2026-09-07 21:09:55] restarting CARLA on 3000
+[2026-09-07 21:11:13] START gate_capture_P_pts3_ped
+[2026-09-07 21:11:19] DONE  gate_capture_P_pts3_ped rc=0
+[2026-09-07 21:11:19] restarting CARLA on 3000
+[2026-09-07 21:12:36] START gate_inbetween_P_pts3_ped
+[2026-09-07 21:14:47] DONE  gate_inbetween_P_pts3_ped rc=0
+[2026-09-07 21:14:47] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+[2026-09-07 21:15:51] START verify_P_pts_lead_S (background)
+[2026-09-07 21:15:51] START verify_P_pts_ped_S (background)
+[2026-09-07 21:15:51] START verify_P_cont_lead_S (background)
+[2026-09-07 21:15:51] START verify_P_cont_ped_S (background)
+[2026-09-07 21:29:49] DONE  verify_P_pts_lead_S rc=0
+[2026-09-07 21:29:49] DONE  verify_P_pts_ped_S rc=1
+                                 ^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 154, in certify_pose
+    lb, ub = bounds_on(lo, hi)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 134, in bounds_on
+    lb, ub = bm.compute_bounds(x=(BoundedTensor(s_template, ptb),), method=method)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/auto_LiRPA/bound_general.py", line 1394, in compute_bounds
+    ret2 = self._get_optimized_bounds(bound_side='upper', **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/auto_LiRPA/optimized_bounds.py", line 870, in _get_optimized_bounds
+    loss.backward()
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/_tensor.py", line 623, in backward
+    torch.autograd.backward(
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/autograd/__init__.py", line 395, in backward
+    _engine_run_backward(
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/autograd/graph.py", line 979, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 954.00 MiB. GPU 0 has a total capacity of 31.35 GiB of which 1.33 GiB is free. Process 1806596 has 10.37 GiB memory in use. Process 1807042 has 3.32 GiB memory in use. Including non-PyTorch memory, this process has 3.06 GiB memory in use. Process 1807038 has 8.31 GiB memory in use. Process 1807030 has 4.50 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 833.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+[2026-09-07 21:33:07] DONE  verify_P_cont_lead_S rc=0
+[2026-09-07 21:33:07] DONE  verify_P_cont_ped_S rc=0
+[2026-09-07 21:33:07] START verify_P_pts3_lead_S (background)
+[2026-09-07 21:33:07] START verify_P_pts3_ped_S (background)
+[2026-09-07 21:41:35] DONE  verify_P_pts3_lead_S rc=0
+[2026-09-07 21:41:59] DONE  verify_P_pts3_ped_S rc=0
+[2026-09-07 21:41:59] stopping: a property S job failed

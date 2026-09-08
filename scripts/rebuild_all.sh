@@ -38,9 +38,14 @@ INPUT_W=128
 INPUT_H=96
 SEED=${SEED:-0}
 POLICIES="P_pts P_cont P_pts3"
-# How many bound computations share the card. Measured: each peaks near 4.5 GiB, so four
-# fit comfortably in 31.35 GiB with the server stopped and six do not fit with it running.
-VERIFY_CONC=${VERIFY_CONC:-4}
+# How many bound computations share the card. Peak use is NOT uniform -- measured between
+# 3.3 and 8.3 GiB depending on the policy and how much branching a sub-interval needs --
+# so the safe count is set by the worst case rather than the average: three at 8.3 GiB
+# fit in 31.35 with room, four do not reliably.
+VERIFY_CONC=${VERIFY_CONC:-3}
+# Fragmentation, not total size, is what actually kills these: the allocator reported
+# 833 MiB "reserved but unallocated" while failing a 954 MiB request.
+export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 
 say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
@@ -51,15 +56,34 @@ fresh_server() {
 
 stop_server() {
   # Verification needs no simulator, and CARLA holds about 10.4 GiB of the card's 31.35.
-  # Leaving it up through a GPU-only stage cost this study two of six concurrent
-  # property-S jobs to CUDA out-of-memory on 2026-09-07: six jobs at ~4.5 GiB each plus
-  # CARLA does not fit, and the two that died had nothing to do with the simulator.
+  #
+  # WAIT FOR THE PROCESS, NOT THE PORT. The first version of this function polled the
+  # listening socket, and CARLA closes its socket on SIGTERM without exiting: the port
+  # went quiet, the function returned, and the server sat there holding 10.6 GiB for the
+  # next 23 minutes. A property-S job then died on CUDA out-of-memory with the server
+  # named in the allocator's own error message, twice in one evening -- the second time
+  # while a function whose entire job was to prevent it reported success.
+  #
+  # And wait for the VRAM, not just the process table: a process can be reaped while its
+  # GPU allocation is still being released.
   say "stopping CARLA: the next stage is GPU-only and the server is holding VRAM"
-  pkill -f "[C]arlaUE4" || true
-  for _ in $(seq 1 30); do
-    ss -ltn 2>/dev/null | grep -q ":$CARLA_PORT[[:space:]]" || break; sleep 2
+  pkill -f "[C]arlaUE4" 2>/dev/null || true
+  for _ in $(seq 1 20); do pgrep -f "[C]arlaUE4" >/dev/null || break; sleep 2; done
+  if pgrep -f "[C]arlaUE4" >/dev/null; then
+    say "  SIGTERM did not stop it after 40 s; SIGKILL"
+    pkill -9 -f "[C]arlaUE4" 2>/dev/null || true
+    for _ in $(seq 1 15); do pgrep -f "[C]arlaUE4" >/dev/null || break; sleep 2; done
+  fi
+  if pgrep -f "[C]arlaUE4" >/dev/null; then
+    say "FATAL: CARLA will not die; refusing to start a GPU stage beside it"; exit 1
+  fi
+  for _ in $(seq 1 15); do
+    used=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null | head -1)
+    [ -z "$used" ] && break
+    [ "$used" -lt 4000 ] && break
+    sleep 2
   done
-  sleep 3
+  say "  CARLA stopped; GPU now at ${used:-unknown} MiB"
 }
 
 run() {   # run <name> <cmd...>

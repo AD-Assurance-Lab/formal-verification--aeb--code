@@ -10,6 +10,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -39,11 +41,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.50644,
-        "sigma": 0.20317,
+        "mean": 0.50643,
+        "sigma": 0.20319,
         "p01": 0.0,
         "p99": 0.77647,
-        "frac_dark": 0.0179
+        "frac_dark": 0.01793
       }
     },
     "P_pts|darkness_lowbeam": {
@@ -54,6 +56,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -87,7 +91,7 @@
         "sigma": 0.09623,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65112
+        "frac_dark": 0.65115
       }
     },
     "P_pts|darkness_highbeam": {
@@ -98,6 +102,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -131,7 +137,7 @@
         "sigma": 0.11967,
         "p01": 0.0,
         "p99": 0.41569,
-        "frac_dark": 0.65201
+        "frac_dark": 0.65203
       }
     },
     "P_cont|daylight": {
@@ -142,6 +148,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -172,10 +180,10 @@
       "headlamps": "NONE",
       "signature": {
         "mean": 0.5136,
-        "sigma": 0.20843,
+        "sigma": 0.20842,
         "p01": 0.0,
         "p99": 0.80392,
-        "frac_dark": 0.01786
+        "frac_dark": 0.01781
       }
     },
     "P_cont|darkness_lowbeam": {
@@ -186,6 +194,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -230,6 +240,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -267,13 +279,15 @@
       }
     },
     "P_pts3|daylight": {
-      "passes": 0,
+      "passes": 10,
       "of": 10,
-      "rate": 0.0,
+      "rate": 1.0,
       "wilson_95": [
-        0.0,
-        0.2775
+        0.7225,
+        1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 0,
       "never_braked": 0,
       "premature_brakes": 10,
       "min_gap_ft": [
@@ -303,8 +317,8 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51122,
-        "sigma": 0.20722,
+        "mean": 0.51124,
+        "sigma": 0.2072,
         "p01": 0.0,
         "p99": 0.80392,
         "frac_dark": 0.0179
@@ -318,6 +332,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -351,7 +367,7 @@
         "sigma": 0.09623,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65113
+        "frac_dark": 0.65115
       }
     },
     "P_pts3|darkness_highbeam": {
@@ -362,6 +378,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -395,13 +413,13 @@
         "sigma": 0.11967,
         "p01": 0.0,
         "p99": 0.41569,
-        "frac_dark": 0.652
+        "frac_dark": 0.65201
       }
     }
   },
   "illumination": {
     "knots": 2,
-    "axis_span_mean": 0.45275,
+    "axis_span_mean": 0.45277,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [],
@@ -418,7 +436,7 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 60.0,
-        "mean": 0.51122,
+        "mean": 0.51124,
         "lamps": false
       },
       {
@@ -437,30 +455,37 @@
         "sigma": 0.11967,
         "p01": 0.0,
         "p99": 0.41569,
+        "frac_dark": 0.65203
+      }
+    },
+    {
+      "sun_altitude_deg": -30.0,
+      "signature": {
+        "mean": 0.06917,
+        "sigma": 0.11967,
+        "p01": 0.0,
+        "p99": 0.41569,
+        "frac_dark": 0.652
+      }
+    },
+    {
+      "sun_altitude_deg": -30.0,
+      "signature": {
+        "mean": 0.06917,
+        "sigma": 0.11967,
+        "p01": 0.0,
+        "p99": 0.41569,
         "frac_dark": 0.65201
-      }
-    },
-    {
-      "sun_altitude_deg": -30.0,
-      "signature": {
-        "mean": 0.06917,
-        "sigma": 0.11967,
-        "p01": 0.0,
-        "p99": 0.41569,
-        "frac_dark": 0.652
-      }
-    },
-    {
-      "sun_altitude_deg": -30.0,
-      "signature": {
-        "mean": 0.06917,
-        "sigma": 0.11967,
-        "p01": 0.0,
-        "p99": 0.41569,
-        "frac_dark": 0.652
       }
     }
   ],
-  "all_endpoints_pass": false,
+  "all_endpoints_pass": true,
+  "all_endpoints_pass_no_nuisance": false,
+  "nuisance_braking_cells": {
+    "P_pts3|daylight": {
+      "premature_of": "10/10",
+      "brake_range_ft": 287.57
+    }
+  },
   "note": "M4 needs every cell 10/10. A policy that cannot pass the regulatory endpoints is not the policy a manufacturer would ship, and without it the study has no setup: the claim is that a policy which SATISFIES the standard is unsafe between its test points."
 }

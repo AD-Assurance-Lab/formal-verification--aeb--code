@@ -10,6 +10,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -25,7 +27,7 @@
         14.32
       ],
       "brake_range_ft": [
-        51.88,
+        51.89,
         51.88,
         51.88,
         51.88,
@@ -39,11 +41,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.50661,
+        "mean": 0.50662,
         "sigma": 0.2031,
         "p01": 0.0,
         "p99": 0.77255,
-        "frac_dark": 0.01785
+        "frac_dark": 0.01787
       }
     },
     "P_pts|darkness_lowbeam": {
@@ -54,6 +56,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -70,13 +74,13 @@
       ],
       "brake_range_ft": [
         51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
         51.89,
-        51.88,
-        51.88,
-        51.88,
-        51.88,
-        51.89,
-        51.88,
         51.88,
         51.88
       ],
@@ -98,6 +102,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -142,6 +148,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -160,10 +168,10 @@
         51.88,
         51.88,
         51.88,
-        51.88,
-        51.88,
-        51.88,
         51.89,
+        51.88,
+        51.88,
+        51.88,
         51.88,
         51.88,
         51.88
@@ -171,11 +179,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51065,
+        "mean": 0.51066,
         "sigma": 0.20724,
         "p01": 0.0,
         "p99": 0.80392,
-        "frac_dark": 0.01785
+        "frac_dark": 0.01787
       }
     },
     "P_cont|darkness_lowbeam": {
@@ -186,6 +194,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -202,8 +212,8 @@
       ],
       "brake_range_ft": [
         51.88,
-        51.89,
         51.88,
+        51.89,
         51.88,
         51.88,
         51.88,
@@ -230,6 +240,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -245,14 +257,14 @@
         14.32
       ],
       "brake_range_ft": [
-        51.88,
-        51.88,
-        51.88,
-        51.88,
-        51.88,
-        51.88,
-        51.88,
         51.89,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
         51.88,
         51.88
       ],
@@ -263,7 +275,7 @@
         "sigma": 0.11966,
         "p01": 0.0,
         "p99": 0.41569,
-        "frac_dark": 0.65203
+        "frac_dark": 0.65204
       }
     },
     "P_pts3|daylight": {
@@ -274,6 +286,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -295,7 +309,7 @@
         51.88,
         51.88,
         51.88,
-        51.88,
+        51.89,
         51.88,
         51.88,
         51.88
@@ -307,7 +321,7 @@
         "sigma": 0.20848,
         "p01": 0.0,
         "p99": 0.80392,
-        "frac_dark": 0.01779
+        "frac_dark": 0.01782
       }
     },
     "P_pts3|darkness_lowbeam": {
@@ -318,6 +332,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -362,6 +378,8 @@
         0.7225,
         1.0
       ],
+      "passes_protocol": 10,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
       "premature_brakes": 0,
       "min_gap_ft": [
@@ -379,12 +397,12 @@
       "brake_range_ft": [
         51.88,
         51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
+        51.88,
         51.89,
-        51.88,
-        51.88,
-        51.88,
-        51.89,
-        51.88,
         51.88,
         51.88
       ],
@@ -447,7 +465,7 @@
         "sigma": 0.11966,
         "p01": 0.0,
         "p99": 0.41569,
-        "frac_dark": 0.65203
+        "frac_dark": 0.65204
       }
     },
     {
@@ -462,5 +480,7 @@
     }
   ],
   "all_endpoints_pass": true,
+  "all_endpoints_pass_no_nuisance": true,
+  "nuisance_braking_cells": {},
   "note": "M4 needs every cell 10/10. A policy that cannot pass the regulatory endpoints is not the policy a manufacturer would ship, and without it the study has no setup: the claim is that a policy which SATISFIES the standard is unsafe between its test points."
 }

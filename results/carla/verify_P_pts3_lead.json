@@ -3,8 +3,8 @@
   "scenario": "lead",
   "model_sha256": "02260cb3ffe13df4544cf1305b5286392d2abc112e3807dbe6a5ae7ee1fac70f",
   "provenance": {
-    "timestamp": "2026-09-07T17:49:52-04:00",
-    "git_sha": "3ea9a81fe66c50bda4b9c1e6884e6098ff19d91c",
+    "timestamp": "2026-09-07T21:41:35-04:00",
+    "git_sha": "819cb5a480d35c96300b89db0e00042c4b06af25",
     "model_sha256": "02260cb3ffe13df4544cf1305b5286392d2abc112e3807dbe6a5ae7ee1fac70f"
   },
   "property": "S",
@@ -52,7 +52,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 26.9
+      "seconds": 27.2
     },
     {
       "from_deg": 28.397,
@@ -70,7 +70,7 @@
       "witness_pose": 79,
       "witness_s": null,
       "witness_range_m": 15.817,
-      "seconds": 25.3
+      "seconds": 26.4
     },
     {
       "from_deg": 18.743,
@@ -88,7 +88,7 @@
       "witness_pose": 103,
       "witness_s": null,
       "witness_range_m": 2.398,
-      "seconds": 27.8
+      "seconds": 27.9
     },
     {
       "from_deg": 12.542,
@@ -106,7 +106,7 @@
       "witness_pose": 103,
       "witness_s": 0.0,
       "witness_range_m": 2.398,
-      "seconds": 27.3
+      "seconds": 27.6
     },
     {
       "from_deg": 10.128,
@@ -124,7 +124,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 28.4
+      "seconds": 28.6
     },
     {
       "from_deg": 7.715,
@@ -142,7 +142,7 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 31.7
+      "seconds": 31.6
     },
     {
       "from_deg": 5.298,
@@ -160,7 +160,7 @@
       "witness_pose": 98,
       "witness_s": null,
       "witness_range_m": 5.196,
-      "seconds": 28.0
+      "seconds": 27.8
     },
     {
       "from_deg": 4.198,
@@ -178,7 +178,7 @@
       "witness_pose": 98,
       "witness_s": 0.0,
       "witness_range_m": 5.196,
-      "seconds": 22.5
+      "seconds": 22.6
     },
     {
       "from_deg": 3.525,
@@ -196,7 +196,7 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 45.6
+      "seconds": 45.5
     },
     {
       "from_deg": 1.891,
@@ -214,7 +214,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.314,
-      "seconds": 35.2
+      "seconds": 34.8
     },
     {
       "from_deg": 1.391,
@@ -232,7 +232,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.314,
-      "seconds": 29.5
+      "seconds": 29.7
     },
     {
       "from_deg": 0.779,
@@ -250,7 +250,7 @@
       "witness_pose": 85,
       "witness_s": -1.0,
       "witness_range_m": 12.464,
-      "seconds": 32.3
+      "seconds": 32.7
     },
     {
       "family_uncovered": true,
@@ -269,7 +269,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.551,
-      "seconds": 36.9
+      "seconds": 36.6
     },
     {
       "from_deg": 0.0,
@@ -287,7 +287,7 @@
       "witness_pose": 89,
       "witness_s": null,
       "witness_range_m": 10.228,
-      "seconds": 28.7
+      "seconds": 28.5
     },
     {
       "from_deg": -0.961,
@@ -305,7 +305,7 @@
       "witness_pose": 87,
       "witness_s": null,
       "witness_range_m": 11.346,
-      "seconds": 35.0
+      "seconds": 34.8
     },
     {
       "from_deg": -29.554,
@@ -361,7 +361,7 @@
       "witness_pose": 102,
       "witness_s": -1.0,
       "witness_range_m": 2.958,
-      "seconds": 26.9
+      "seconds": 27.2
     },
     {
       "from_deg": 12.542,
@@ -379,7 +379,7 @@
       "witness_pose": 103,
       "witness_s": 0.0,
       "witness_range_m": 2.398,
-      "seconds": 27.3
+      "seconds": 27.6
     },
     {
       "from_deg": 10.128,
@@ -397,7 +397,7 @@
       "witness_pose": 103,
       "witness_s": -1.0,
       "witness_range_m": 2.398,
-      "seconds": 28.4
+      "seconds": 28.6
     },
     {
       "from_deg": 7.715,
@@ -415,7 +415,7 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 31.7
+      "seconds": 31.6
     },
     {
       "from_deg": 4.198,
@@ -433,7 +433,7 @@
       "witness_pose": 98,
       "witness_s": 0.0,
       "witness_range_m": 5.196,
-      "seconds": 22.5
+      "seconds": 22.6
     },
     {
       "from_deg": 3.525,
@@ -451,7 +451,7 @@
       "witness_pose": 98,
       "witness_s": -1.0,
       "witness_range_m": 5.196,
-      "seconds": 45.6
+      "seconds": 45.5
     },
     {
       "from_deg": 1.891,
@@ -469,7 +469,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.314,
-      "seconds": 35.2
+      "seconds": 34.8
     },
     {
       "from_deg": 1.391,
@@ -487,7 +487,7 @@
       "witness_pose": 96,
       "witness_s": -1.0,
       "witness_range_m": 6.314,
-      "seconds": 29.5
+      "seconds": 29.7
     },
     {
       "from_deg": 0.779,
@@ -505,7 +505,7 @@
       "witness_pose": 85,
       "witness_s": -1.0,
       "witness_range_m": 12.464,
-      "seconds": 32.3
+      "seconds": 32.7
     },
     {
       "family_uncovered": true,
@@ -524,7 +524,7 @@
       "witness_pose": 92,
       "witness_s": -1.0,
       "witness_range_m": 8.551,
-      "seconds": 36.9
+      "seconds": 36.6
     }
   ],
   "undecided": [],

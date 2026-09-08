@@ -4,7 +4,6 @@
 P_pts / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
 Early stop at 14th iter due to 10 iterations no improvement!
 Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
    +60.000 to  +42.766  bound    4.767    1.93x threshold  CERTIFIED  [25 domains, 42s]
 Early stop at 17th iter due to 10 iterations no improvement!
 Early stop at 14th iter due to 10 iterations no improvement!
@@ -15,76 +14,39 @@ Early stop at 19th iter due to 10 iterations no improvement!
    +18.743 to  +12.542  bound    1.724    0.70x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=+0.0000  [25 domains, 54s]
 Early stop at 19th iter due to 10 iterations no improvement!
    +12.542 to  +10.128  bound    0.565    0.23x threshold  FALSIFIED  witness pose 85 at 12.3 m, s=-1.0000  [25 domains, 53s]
+[W907 21:19:57.857100248 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 2097152 bytes (free: 539820032, total: 33661911040).
 Early stop at 15th iter due to 10 iterations no improvement!
-[W907 17:26:47.480073863 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 2097152 bytes (free: 559808512, total: 33661911040).
    +10.128 to   +7.715  bound    0.411    0.17x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [27 domains, 53s]
 Early stop at 14th iter due to 10 iterations no improvement!
     +7.715 to   +5.298  bound    0.787    0.32x threshold  FALSIFIED  witness pose 102 at 2.8 m, s=-1.0000  [25 domains, 57s]
     +5.298 to   +4.198  bound    2.140    0.86x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=+0.0000  [25 domains, 51s]
-    +4.198 to   +3.525  bound    1.764    0.71x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 40s]
-[W907 17:29:19.954727844 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 939524096 bytes (free: 1333657600, total: 33661911040).
-[W907 17:29:59.495715988 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 740294656 bytes (free: 1289617408, total: 33661911040).
+    +4.198 to   +3.525  bound    1.764    0.71x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 41s]
 Early stop at 17th iter due to 10 iterations no improvement!
-[W907 17:30:08.481628375 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1000341504 bytes (free: 1482555392, total: 33661911040).
-Early stop at 16th iter due to 10 iterations no improvement!
-    +3.525 to   +1.891  bound   -0.397   -0.16x threshold  FALSIFIED  witness pose 80 at 15.1 m, s=+0.0000  [111 domains, 189s]
-    +1.891 to   +1.391  bound    0.015    0.01x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [31 domains, 60s]
-    +1.391 to   +0.779  bound    0.107    0.04x threshold  FALSIFIED  witness pose 82 at 14.0 m, s=-1.0000  [39 domains, 85s]
-    +0.779 to   +0.026  bound   -0.227   -0.09x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 56s]
-    +0.026 to   +0.000  bound   -2.534   -1.02x threshold  FALSIFIED  witness pose 83 at 13.4 m, s=-1.0000  [35 domains, 81s]
-    +0.000 to   -0.961  bound    0.809    0.33x threshold  FALSIFIED  witness pose 83 at 13.4 m, s=-1.0000  [25 domains, 43s]
-Early stop at 14th iter due to 10 iterations no improvement!
-    -0.961 to  -29.554  bound    0.879    0.35x threshold  FALSIFIED  witness pose 83 at 13.4 m, s=-1.0000  [49 domains, 89s]
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 19th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 17th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 10th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 18th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 10th iter due to 10 iterations no improvement!
-Early stop at 14th iter due to 10 iterations no improvement!
-Early stop at 16th iter due to 10 iterations no improvement!
-Early stop at 13th iter due to 10 iterations no improvement!
-Early stop at 10th iter due to 10 iterations no improvement!
-Early stop at 15th iter due to 10 iterations no improvement!
-   -29.554 to  -30.000  bound    4.867    1.97x threshold  CERTIFIED  [25 domains, 24s]
-/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py:189: ResourceWarning: unclosed file <_io.BufferedReader name='/home/za/ad-assurance--workspace/formal-verification--aeb--code/results/models/P_pts_ped.pt'>
-  p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-
-  4/17 sub-intervals certified, 13 falsified with an exhibited witness, 0 undecided
-  wrote results/carla/verify_P_pts_ped.json
+[W907 21:24:08.206347871 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1000341504 bytes (free: 636289024, total: 33661911040).
+[W907 21:24:08.211791856 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1000341504 bytes (free: 1422721024, total: 33661911040).
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 300, in main
+    verdict_i, val, w_s, n_dom = certify_pose(
+                                 ^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 154, in certify_pose
+    lb, ub = bounds_on(lo, hi)
+             ^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/verify.py", line 134, in bounds_on
+    lb, ub = bm.compute_bounds(x=(BoundedTensor(s_template, ptb),), method=method)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/auto_LiRPA/bound_general.py", line 1394, in compute_bounds
+    ret2 = self._get_optimized_bounds(bound_side='upper', **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/auto_LiRPA/optimized_bounds.py", line 870, in _get_optimized_bounds
+    loss.backward()
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/_tensor.py", line 623, in backward
+    torch.autograd.backward(
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/autograd/__init__.py", line 395, in backward
+    _engine_run_backward(
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/autograd/graph.py", line 979, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 954.00 MiB. GPU 0 has a total capacity of 31.35 GiB of which 1.33 GiB is free. Process 1806596 has 10.37 GiB memory in use. Process 1807042 has 3.32 GiB memory in use. Including non-PyTorch memory, this process has 3.06 GiB memory in use. Process 1807038 has 8.31 GiB memory in use. Process 1807030 has 4.50 GiB memory in use. Of the allocated memory 1.61 GiB is allocated by PyTorch, and 833.26 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
