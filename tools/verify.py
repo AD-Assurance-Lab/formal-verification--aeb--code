@@ -240,7 +240,8 @@ def main() -> int:
     uncovered = load_uncovered()
 
     # The no-target control replays the LEAD poses, so it has no states file of its own.
-    states_name = {"none": "lead", "none_ped": "ped"}.get(args.scenario, args.scenario)
+    states_name = {"none": "lead", "none_ped": "ped",
+                   "none_plate": "plate"}.get(args.scenario, args.scenario)
     states = json.loads((CAPTURES / f"states_{states_name}.json").read_text())
     ranges = np.array([s["range_m"] for s in states])
     if args.property == "S":

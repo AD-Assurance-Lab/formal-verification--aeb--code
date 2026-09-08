@@ -116,6 +116,11 @@ if [ "$FROM" = "verifyA" ]; then
   queue=""
   for pol in $POLICIES; do
     queue="$queue ${pol}|none|lead ${pol}|none_ped|ped"
+    # Cells 5 and 6: the FMVSS false-activation scenario, if it has been captured. The
+    # hazard-trained policy is evaluated on plate frames, exactly as property A already
+    # evaluates it on no-target frames.
+    [ -f "$REPO/results/captures/states_plate.json" ] && \
+      queue="$queue ${pol}|none_plate|lead"
   done
   set -- $queue
   while [ $# -gt 0 ]; do
@@ -191,7 +196,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # Order matters and is not cosmetic: the no-target controls REPLAY the poses of
       # the scenario they control (A10), so `none` needs `lead` on disk and `none_ped`
       # needs `ped`. capture_campaign refuses if you get it wrong.
-      for sc in lead none ped none_ped; do
+      for sc in lead none ped none_ped plate none_plate; do
         fresh_server
         run "capture_${sc}" "$PY" -u tools/capture_campaign.py --scenario "$sc"
       done

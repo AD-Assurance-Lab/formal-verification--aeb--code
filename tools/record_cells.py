@@ -59,6 +59,13 @@ def cell_row(policy: str, scenario: str) -> dict:
     row = {"endpoints": None, "fv": None, "witness": None, "width": None, "note": ""}
     ep, ep_detail = endpoints_verdict(policy, scenario)
     row["endpoints"] = ep
+    if scenario == "plate" and ep is not None:
+        # The false-activation cells pass by NOT stopping, so their endpoint verdict is
+        # about the nuisance limit rather than about standoff, and their FV column is
+        # property A rather than property S. Recorded distinctly so nobody reads a plate
+        # row as though it were a hazard row.
+        row["criterion"] = ("crossed the plate without braking and never exceeded the "
+                            "standard's 0.25 g nuisance limit")
 
     vpath = OUT / f"verify_{policy}_{scenario}.json"
     if not vpath.exists():

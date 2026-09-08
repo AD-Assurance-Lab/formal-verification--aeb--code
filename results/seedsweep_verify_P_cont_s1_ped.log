@@ -1,0 +1,35 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_cont_s1 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+Early stop at 14th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    4.399    1.78x threshold  CERTIFIED  [25 domains, 32s]
+   +42.766 to  +28.397  bound    4.347    1.76x threshold  CERTIFIED  [25 domains, 35s]
+   +28.397 to  +18.743  bound    4.355    1.76x threshold  CERTIFIED  [25 domains, 34s]
+   +18.743 to  +12.542  bound    4.490    1.81x threshold  CERTIFIED  [25 domains, 37s]
+Early stop at 16th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    4.442    1.79x threshold  CERTIFIED  [25 domains, 33s]
+   +10.128 to   +7.715  bound    3.676    1.48x threshold  CERTIFIED  [25 domains, 29s]
+    +7.715 to   +5.298  bound    3.940    1.59x threshold  CERTIFIED  [25 domains, 32s]
+Early stop at 16th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    4.454    1.80x threshold  CERTIFIED  [25 domains, 30s]
+Early stop at 18th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    4.634    1.87x threshold  CERTIFIED  [25 domains, 31s]
+    +3.525 to   +1.891  bound    3.708    1.50x threshold  CERTIFIED  [75 domains, 98s]
+    +1.891 to   +1.391  bound    3.970    1.60x threshold  CERTIFIED  [25 domains, 31s]
+    +1.391 to   +0.779  bound    2.501    1.01x threshold  CERTIFIED  [49 domains, 64s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+Early stop at 16th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!

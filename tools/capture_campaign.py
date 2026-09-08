@@ -38,6 +38,9 @@ import scenarios as S  # noqa: E402
 OUT = J.REPO / "results" / "captures"
 LEAD_GAP_M = 120.0
 PED_GAP_M = 120.0
+# The false-activation approach is run at 50 mph per FMVSS 127, so it needs more room:
+# settle distance plus r_req at that speed is about 183 ft of stopping alone.
+PLATE_GAP_M = 200.0
 MIN_RANGE_M = 2.0
 MAX_RANGE_M = 60.0
 DISK_HEADROOM_GB = 20.0
@@ -120,7 +123,8 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
     carla = J.carla_module()
     v_target = speed_mph * J.MPH
     a_max = a_max_g * 9.81
-    gap = LEAD_GAP_M if scenario == "lead" else PED_GAP_M
+    gap = {"lead": LEAD_GAP_M, "none": LEAD_GAP_M,
+           "plate": PLATE_GAP_M, "none_plate": PLATE_GAP_M}.get(scenario, PED_GAP_M)
 
     tf_ego, _ = J.site_transform(world, site, along=10.0, need_m=gap + 80.0)
     tf_target, wp_target = J.site_transform(world, site, along=10.0 + gap)
@@ -128,8 +132,23 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
     ego = target = ped = None
     states = []
     try:
-        if scenario == "none":
+        if scenario in ("none", "none_plate"):
             target = None
+        elif scenario == "plate":
+            # FMVSS 127's false-activation target: an ASTM A36 steel trench plate,
+            # 8 x 12 ft x 1 in, lying in lane. It is a STATIC PROP tiled to the
+            # standard's dimensions rather than a vehicle, and the correct behaviour is
+            # to drive over it without braking -- the opposite of every other scenario
+            # here, which is why it needs its own closed-loop criterion in run_policy.
+            plate_actors, plate_info = S.place_trench_plate(world, wp_target)
+            if not plate_actors:
+                raise RuntimeError("trench plate placement blocked")
+            print(f"  trench plate: {plate_info['tiles']} tiles covering "
+                  f"{plate_info['covered_w_ft']} x {plate_info['covered_l_ft']} ft "
+                  f"against a specified {plate_info['target_w_ft']} x "
+                  f"{plate_info['target_l_ft']}")
+            target = None            # nothing to measure a bounding box against
+            plate_ref = tf_target
         elif scenario == "lead":
             bp = world.get_blueprint_library().filter("vehicle.audi.tt")[0]
             target = world.try_spawn_actor(bp, tf_target)
@@ -168,7 +187,12 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
             to_conflict = math.hypot(
                 tf_target.location.x - loc.x, tf_target.location.y - loc.y
             ) - ego.bounding_box.extent.x
-            if scenario == "lead":
+            if scenario in ("plate", "none_plate"):
+                # The plate lies flat on the road with no bounding box worth measuring
+                # against, so range is to its centre from the front bumper -- the same
+                # quantity the conflict-point range is for the pedestrian.
+                gap_m = to_conflict
+            elif scenario == "lead":
                 # A stationary lead sits ON the ego's line, so the straight-line gap IS
                 # the longitudinal range.
                 gap_m = J.separation_ft(ego, other) / J.FT
@@ -278,12 +302,12 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     OUT.mkdir(parents=True, exist_ok=True)
     # The no-target control MUST replay the lead poses, or it is not a control: the
     # whole point is to isolate what the target contributes at an identical pose.
-    base = {"none": "lead", "none_ped": "ped"}.get(scenario, scenario)
+    base = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}.get(scenario, scenario)
     states_path = OUT / f"states_{base}.json"
     if states_path.exists():
         states = _load_states(states_path)
         print(f"  reusing the saved nominal run, {len(states)} states")
-    elif scenario in ("none", "none_ped"):
+    elif scenario in ("none", "none_ped", "none_plate"):
         raise SystemExit(
             f"capture --scenario {base} first: the no-target control replays its poses"
         )
@@ -339,7 +363,13 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
         cam = None
         frames = []
         try:
-            if scenario in ("none", "none_ped"):
+            if scenario in ("none", "none_ped", "none_plate"):
+                other = None
+            elif scenario == "plate":
+                # Static, placed once, never moved between poses: it is road furniture,
+                # not an actor that tracks the approach.
+                S.place_trench_plate(world, J.site_transform(
+                    world, site, along=10.0 + PLATE_GAP_M)[1])
                 other = None
             else:
                 lifted = carla.Transform(
@@ -463,13 +493,15 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
         "--scenario",
-        choices=["lead", "ped", "none", "none_ped"],
+        choices=["lead", "ped", "none", "none_ped", "plate", "none_plate"],
         default="lead",
         help="'none' repeats the lead poses with NO target; 'none_ped' repeats the "
              "ped poses the same way. The control isolates what the target contributes "
              "to a frame (A10) and is the false-activation baseline for property A",
     )
-    ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
+    ap.add_argument("--speed-mph", type=float, default=None,
+                    help="defaults to 25 mph for the hazard scenarios and 50 for the "
+                         "trench plate, which is the speed FMVSS 127 approaches it at")
     ap.add_argument("--plan", action="store_true", help="size it, capture nothing")
     ap.add_argument("--limit-knots", type=int, default=0, help="0 means all")
     ap.add_argument(
@@ -479,6 +511,9 @@ def main() -> int:
              "training condition and an endpoint test rather than a point on the axis")
     args = ap.parse_args()
 
+    if args.speed_mph is None:
+        args.speed_mph = (J.PLATE_MPH if args.scenario in ("plate", "none_plate")
+                          else J.HAZARD_MPH)
     knots = load_knots()
     if args.highbeam:
         knots = [k for k in knots if abs(k - HIGHBEAM_KNOT) < 1e-6]

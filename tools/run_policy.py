@@ -82,6 +82,127 @@ def preprocess(img, w: int, h: int, dev):
 A9_HEAD_START_M = 8.0
 
 
+# FMVSS 127's nuisance braking limit, taken from the standard and not chosen (PROTOCOL
+# section 2). Property A certifies the upper bound against it; this is the same number
+# applied to what the vehicle actually commanded.
+NUISANCE_LIMIT_MPS2 = 0.25 * 9.81
+
+
+def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0):
+    """One false-activation run: approach a trench plate and DO NOT BRAKE.
+
+    Every other scenario in this study passes by stopping. This one passes by not
+    stopping, which is why it cannot be a flag on `one_run`: there is no contact to avoid,
+    no standoff to hold, and the failure is the vehicle deciding to brake for a piece of
+    steel lying flat on the road.
+
+    Pass, from PROTOCOL sections 2 and 7:
+      - commanded deceleration never exceeds 0.25 g, the standard's own nuisance limit
+      - the vehicle crosses the plate still moving
+
+    The policy's output is applied here exactly as it is in the hazard runs -- latched at
+    the decision threshold, full authority once latched -- because the question is what
+    the closed loop does, not what the network prints.
+    """
+    import scenarios as S
+    carla = J.carla_module()
+    v_target = speed_mph * J.MPH
+    ego = cam = None
+    plate = []
+    try:
+        tf_ego, _ = J.site_transform(world, site, along=10.0, need_m=gap_m + 120.0)
+        tf_plate, wp_plate = J.site_transform(world, site, along=10.0 + gap_m)
+        plate, plate_info = S.place_trench_plate(world, wp_plate)
+        if not plate:
+            raise RuntimeError("trench plate placement blocked")
+        ego = J.spawn_hero(world, tf_ego)
+
+        images: "queue.Queue" = queue.Queue()
+        cam = world.spawn_actor(
+            J.rgb_camera_bp(world),
+            carla.Transform(carla.Location(x=1.5, z=1.6)), attach_to=ego)
+        cam.listen(images.put)
+        ego.set_light_state(
+            carla.VehicleLightState(getattr(carla.VehicleLightState, lights)))
+        for _ in range(J.SETTLE_TICKS):
+            J.grab_frame(world, images)
+        _sig = J.grab_frame(world, images)
+        _arr = np.frombuffer(_sig.raw_data, dtype=np.uint8).reshape(
+            (_sig.height, _sig.width, 4))[:, :, :3]
+        run_signature = CS.signature(_arr)
+
+        yaw = math.radians(tf_ego.rotation.yaw)
+        ego.set_target_velocity(carla.Vector3D(
+            x=v_target * math.cos(yaw), y=v_target * math.sin(yaw), z=0.0))
+
+        braking = False
+        integral = 0.0
+        peak_demand = 0.0
+        brake_range_ft = None
+        min_speed_mps = 1e9
+        crossed = False
+        start_dist = None
+        for _ in range(2000):
+            img = J.grab_frame(world, images)
+            with torch.no_grad():
+                demand = float(model(preprocess(img, w, h, dev)).item())
+            peak_demand = max(peak_demand, demand)
+
+            loc = ego.get_transform().location
+            to_plate = math.hypot(tf_plate.location.x - loc.x,
+                                  tf_plate.location.y - loc.y)
+            if start_dist is None:
+                start_dist = to_plate
+            if not braking and demand >= a_max_threshold(dev):
+                braking = True
+                brake_range_ft = round((to_plate - ego.bounding_box.extent.x) * J.FT, 2)
+            if braking:
+                J.apply_control(ego, carla.VehicleControl(throttle=0.0, brake=1.0))
+            else:
+                err = v_target - J.speed_of(ego)
+                integral = max(-20.0, min(20.0, integral + err * J.FIXED_DT))
+                cmd = 0.5 * err + 0.5 * integral
+                J.apply_control(ego, carla.VehicleControl(
+                    throttle=max(0.0, min(1.0, cmd))))
+            world.tick()
+            if J.speed_of(ego) > 1.0:
+                min_speed_mps = min(min_speed_mps, J.speed_of(ego))
+            # Crossed when the plate is behind us: the distance starts growing again.
+            if to_plate < 5.0:
+                crossed = True
+            if crossed and to_plate > 25.0:
+                break
+            if braking and J.speed_of(ego) < 0.1:
+                break
+
+        return {
+            "signature": run_signature,
+            "peak_demand_mps2": round(peak_demand, 4),
+            "nuisance_limit_mps2": round(NUISANCE_LIMIT_MPS2, 4),
+            "exceeded_nuisance_limit": peak_demand > NUISANCE_LIMIT_MPS2,
+            "braked": braking,
+            "brake_range_ft": brake_range_ft,
+            "crossed_plate": crossed,
+            "min_speed_mps_while_moving": (round(min_speed_mps, 3)
+                                           if min_speed_mps < 1e8 else None),
+            # PASS is not stopping AND not exceeding the standard's own limit.
+            "passes": bool(crossed and not braking
+                           and peak_demand <= NUISANCE_LIMIT_MPS2),
+            "plate_tiles": plate_info["tiles"],
+            "plate_covered_ft": [plate_info["covered_w_ft"], plate_info["covered_l_ft"]],
+        }
+    finally:
+        if cam is not None:
+            cam.stop()
+        J.despawn(world, cam, ego, *plate)
+
+
+def a_max_threshold(dev=None):
+    """The latch threshold the closed loop uses, read from the measured primitive."""
+    b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+    return b["a_max_g_worst"] * 9.81 * BRAKE_THRESHOLD_FRACTION
+
+
 def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0,
             scenario="lead", release_r_req_m=None):
     """One closed-loop run. `scenario` is 'lead' (stationary vehicle) or 'ped'
@@ -245,7 +366,7 @@ def main() -> int:
     ap.add_argument("--speed-mph", type=float, default=J.HAZARD_MPH)
     args = ap.parse_args()
 
-    if args.scenario not in ("lead", "ped"):
+    if args.scenario not in ("lead", "ped", "plate"):
         raise SystemExit(f"scenario {args.scenario!r} is not drivable")
     import capture_campaign as CC
     assert A9_HEAD_START_M == CC.PED_LEAD_MARGIN_M, "A9 head start drifted"
@@ -271,6 +392,50 @@ def main() -> int:
     a_max = b["a_max_g_worst"] * 9.81
     client, world = J.connect(rendering=True)
     site = J.flattest_site()
+
+    if args.scenario == "plate":
+        # Cells 5 and 6. The false-activation scenario passes by NOT stopping, so it does
+        # not share the endpoint loop below: there is no contact to avoid and no standoff
+        # to hold, and its speed is the standard's 50 mph rather than 25.
+        out = {"scenario": "plate", "speed_mph": J.PLATE_MPH, "cells": {}}
+        for pol in policies:
+            model, w, h = load_policy(pol, "lead", dev)   # the hazard-trained policy
+            for cond in conditions:
+                alt, lights = CONDITIONS[cond]
+                weather = world.get_weather()
+                weather.sun_altitude_angle = alt
+                weather.cloudiness = 10.0
+                weather.precipitation = 0.0
+                world.set_weather(weather)
+                for _ in range(J.WEATHER_SETTLE_TICKS):
+                    world.tick()
+                runs = [plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights)
+                        for _ in range(J.REPS)]
+                passes = sum(1 for r in runs if r["passes"])
+                J.progress(f"{pol} / {cond} / plate: {ST.fmt(passes, J.REPS)} pass "
+                           f"(peak demand {max(r['peak_demand_mps2'] for r in runs):.3f} "
+                           f"vs limit {NUISANCE_LIMIT_MPS2:.3f})")
+                out["cells"][f"{pol}|{cond}"] = {
+                    **ST.rate(passes, J.REPS),
+                    "of": J.REPS,
+                    "braked": sum(1 for r in runs if r["braked"]),
+                    "exceeded_limit": sum(1 for r in runs if r["exceeded_nuisance_limit"]),
+                    "peak_demand_mps2": max(r["peak_demand_mps2"] for r in runs),
+                    "nuisance_limit_mps2": round(NUISANCE_LIMIT_MPS2, 4),
+                    "sun_altitude_deg": alt, "headlamps": lights,
+                    "runs": runs,
+                }
+        out["all_endpoints_pass"] = all(
+            c["passes"] == J.REPS for c in out["cells"].values())
+        out["note"] = (
+            "FMVSS 127 false activation: an ASTM A36 trench plate, 8 x 12 ft x 1 in, "
+            "approached in lane at 50 mph. PASS is crossing it without braking and "
+            "without ever commanding more than the standard's 0.25 g nuisance limit. "
+            "This is the ONLY scenario in the study that passes by not stopping.")
+        path = J.claim_output(J.REPO / "results" / "carla" / "policy_endpoints_plate.json")
+        path.write_text(json.dumps(out, indent=2) + "\n")
+        print(f"\n  wrote {path.relative_to(J.REPO)}")
+        return 0
 
     out = {"scenario": args.scenario, "speed_mph": args.speed_mph, "cells": {}}
     sig_records = []
