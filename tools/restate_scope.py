@@ -25,7 +25,17 @@ If the rebuilt count and the recorded count disagree, the artifact verified a di
 set from the one the code selects and this script REFUSES to touch it, because that is a
 real defect and not a labelling one.
 
-No verdict, bound, margin, witness or provenance field is modified.
+**IT WRITES A SIDECAR AND NEVER TOUCHES A VERIFICATION ARTIFACT.** The first version
+rewrote the scope field in place, which was wrong in a way worth recording: `study.ledger`
+proves the blind protocol by finding the earliest commit whose blob equals the artifact's
+CURRENT content, so a metadata-only rewrite of 66 committed verdicts moved all of them
+after their own witness drives and `--check-order` reported *"verdict committed AFTER the
+witness drive -- postdiction is not prediction"* on every hazard cell. The ordering
+evidence was intact; rewriting the files to correct a label destroyed it.
+
+That is the failure `study.ledger`'s own docstring names about the A10 retrain, met from
+the other side. **Committed evidence is immutable and corrections go beside it.**
+`verify.py` emits the correct scope for every new run; this covers the historical ones.
 """
 
 from __future__ import annotations
@@ -41,6 +51,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
 OUT = J.REPO / "results" / "carla"
+WHY_A_SIDECAR = (
+    "Corrected scope for artifacts written before verify.py stated it properly. This is "
+    "a SIDECAR because study.ledger proves the blind protocol by matching an artifact's "
+    "current bytes to the earliest commit carrying them: rewriting a committed verdict "
+    "to fix a label moves it after its own witness drive and breaks the ordering proof. "
+    "The verdicts, bounds, margins and witnesses in those files are correct and untouched."
+)
 CAPTURES = J.REPO / "results" / "captures"
 STATES_FOR = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}
 
@@ -75,10 +92,11 @@ def rebuild_scope(art: dict) -> tuple[dict, int]:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--write", action="store_true",
-                    help="rewrite the scope fields. Without it this only reports.")
+                    help="write the sidecar. Never modifies a verification artifact.")
     args = ap.parse_args()
 
     changed, ok, refused = 0, 0, 0
+    sidecar: dict[str, dict] = {}
     for path in sorted(OUT.glob("verify_*.json")):
         art = json.loads(path.read_text())
         if "cells" not in art or "property" not in art:
@@ -104,17 +122,24 @@ def main() -> int:
               f"{span[0]}-{span[1]} m"
               + (f"   [claimed '{claimed} poses inside r_req ({art['r_req_m']} m)']"
                  if wrong else ""))
-        if args.write:
-            art["scope"] = scope
-            if art["property"] != "S":
-                art["poses_inside_r_req"] = None
-            path.write_text(json.dumps(art, indent=2) + "\n")
+        sidecar[path.name] = {
+            "property": art["property"],
+            "claimed_poses_inside_r_req": claimed,
+            "corrected": scope,
+            "label_was_wrong": bool(wrong),
+        }
         changed += 1
 
-    print(f"\n  {changed} artifact(s) {'restated' if args.write else 'would be restated'}, "
-          f"{ok} already correct, {refused} refused")
+    if args.write:
+        out = J.claim_output(OUT / "scope_restatement.json")
+        out.write_text(json.dumps({
+            "artifacts": sidecar,
+            "note": WHY_A_SIDECAR,
+        }, indent=2) + "\n")
+        print(f"\n  wrote {out.relative_to(J.REPO)}")
+    print(f"  {changed} artifact(s) restated, {ok} already correct, {refused} refused")
     if not args.write and changed:
-        print("  Re-run with --write to apply.")
+        print("  Re-run with --write to write the sidecar.")
     return 1 if refused else 0
 
 

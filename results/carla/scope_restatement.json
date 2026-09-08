@@ -1,0 +1,1127 @@
+{
+  "artifacts": {
+    "verify_P_cont_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_none_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          59.962
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_cont_none_ped_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          59.819
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_cont_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s1_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s1_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s2_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s2_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s3_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s3_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s4_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s4_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s5_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s5_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s6_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s6_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s7_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s7_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s8_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s8_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s9_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_cont_s9_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_none_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          59.962
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_pts3_none_ped_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          59.819
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_pts3_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s1_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s1_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s2_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s2_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s3_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s3_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s4_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s4_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s5_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s5_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s6_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s6_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s7_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s7_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s8_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s8_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s9_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts3_s9_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_none_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          59.962
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_pts_none_ped_A.json": {
+      "property": "A",
+      "claimed_poses_inside_r_req": 104,
+      "corrected": {
+        "poses_verified": 104,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          59.819
+        ],
+        "selection": "every captured pose, at any range",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": true
+    },
+    "verify_P_pts_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s1_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s1_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s2_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s2_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s3_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s3_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s4_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s4_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s5_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s5_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s6_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s6_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s7_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s7_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s8_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s8_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s9_lead.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.398,
+          15.817
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    },
+    "verify_P_pts_s9_ped.json": {
+      "property": "S",
+      "claimed_poses_inside_r_req": 25,
+      "corrected": {
+        "poses_verified": 25,
+        "poses_available": 104,
+        "pose_range_m": [
+          2.267,
+          15.677
+        ],
+        "selection": "range <= r_req",
+        "r_req_m": 15.846,
+        "restated_by": "tools/restate_scope.py",
+        "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
+      },
+      "label_was_wrong": false
+    }
+  },
+  "note": "Corrected scope for artifacts written before verify.py stated it properly. This is a SIDECAR because study.ledger proves the blind protocol by matching an artifact's current bytes to the earliest commit carrying them: rewriting a committed verdict to fix a label moves it after its own witness drive and breaks the ordering proof. The verdicts, bounds, margins and witnesses in those files are correct and untouched."
+}

@@ -546,17 +546,5 @@
     }
   ],
   "undecided": [],
-  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. CERTIFIED means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval, under input-space branch and bound. FALSIFIED means a concrete s was exhibited whose actual output violates it. UNDECIDED means neither, at the stated budget, and is reported as itself rather than as a falsification. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions.",
-  "scope": {
-    "poses_verified": 25,
-    "poses_available": 104,
-    "pose_range_m": [
-      2.267,
-      15.677
-    ],
-    "selection": "range <= r_req",
-    "r_req_m": 15.846,
-    "restated_by": "tools/restate_scope.py",
-    "note": "Recomputed from results/captures/states_*.json, then checked against this file's own per-cell pose counts. The verdicts are untouched; only the scope statement was wrong, and only for property A."
-  }
+  "note": "Property S from PROTOCOL section 7, on the same threshold the closed-loop controller latches at. CERTIFIED means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval, under input-space branch and bound. FALSIFIED means a concrete s was exhibited whose actual output violates it. UNDECIDED means neither, at the stated budget, and is reported as itself rather than as a falsification. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
 }
