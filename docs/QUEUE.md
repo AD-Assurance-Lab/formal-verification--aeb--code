@@ -9,18 +9,27 @@ Two states per item, because a tool that exists is not a measurement that ran:
 **built** (the instrument is committed and validated) and **measured** (it has produced a
 result on the current harness).
 
-| # | item | built | measured |
-|---|---|---|---|
-| 1 | third regulatory lighting condition | yes | pipeline running |
-| 2 | per-run recording, Wilson intervals, write-up | yes | waits on 1 |
-| 3 | open-loop determinism probe (D-8) | yes | needs the simulator |
-| 4 | seed sweep, n ≈ 20 | yes | GPU, can run beside CARLA |
-| 5 | falsification baseline | yes | needs the simulator |
-| 6 | in-between gate calibration | yes | waits on 2's fresh artifacts |
-| 7 | trench plate, cells 5 and 6 | no — edits files the pipeline is running | |
-| 8 | harness hardening | no — same | |
-| 9 | horizon glare ablation | yes | needs the simulator |
-| 10 | conformal coverage | yes | needs the simulator |
+| # | item | built | measured | result |
+|---|---|---|---|---|
+| 1 | third regulatory lighting condition | yes | **yes** | gap survives: 43.0° vs 50.3° falsified, F12 |
+| 2 | per-run recording, Wilson, write-up | yes | **yes** | report rewritten, banner gone |
+| 3 | open-loop determinism probe (D-8) | yes | **yes** | physics bit-exact, policy contractive, F11 |
+| 4 | seed sweep, n = 9 + the study's own | yes | *running* | 54 verifications, ~06:20 |
+| 5 | falsification baseline | yes | **yes** | search wins on cost, 2/6 reliable, F15 |
+| 6 | in-between gate calibration | yes | **yes** | gate predicts nothing, r = −0.005, F10 |
+| 7 | trench plate, cells 5 and 6 | **no** | no | needs a new harness; see below |
+| 8 | harness hardening | partly | partly | see below |
+| 9 | horizon glare ablation | yes | **yes** | illumination not glare, F13 |
+| 10 | conformal coverage | yes | **yes** | separates the arms on the sliver, F14 |
+
+**Item 8, what is done and what is not.** Done: `claim_output` so a crashed stage leaves no
+artifact; `stop_server` waiting on the process and the VRAM rather than the socket;
+`VERIFY_CONC` set from the worst-case per-job memory rather than the average;
+`expandable_segments`. Not done: `enable_postprocess_effects` is still relied on as a
+CARLA default (D-4); the server still restarts per stage rather than per repetition (D-6);
+the branch-and-bound witness search still samples three concrete points per domain; and
+`a_max` is still read from stop TIME while `r_req = v²/2a` composes with distance, a 3.9%
+difference.
 
 Items 7 and 8 change `capture_campaign.py`, `run_policy.py` and `carla_jobs.py`, which the
 running pipeline invokes on every stage. They wait for it to finish rather than being

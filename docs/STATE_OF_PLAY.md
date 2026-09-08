@@ -12,47 +12,47 @@ Live state in the protocol's own terms: `python -m study.status`.
 
 ---
 
-## Where the study is, 2026-09-07
+## Where the study is, 2026-09-08
 
-**Rebuilding under amendment A12, on the corrected simulator harness and the RTX 5090.**
+**The A12 rebuild is complete, M0 through M7, on three policy arms.** Every number in
+`docs/STUDY_REPORT.md` was measured on the corrected harness between 2026-09-07 and
+2026-09-08 and nothing is carried over. `python -m study.status` is authoritative.
 
-A12 (2026-08-30) discarded every measured artifact in the study because the harness was
-wrong in two ways the `carla-determinism` package now enforces against. **That rebuild had
-never actually run.** It was launched on 2026-08-30, died on its first job because another
-study's server held the port, and nothing was re-measured for a week.
+### The result, in five lines
 
-### What the rebuild has produced
+- `P_cont`, the continuum-trained control, certifies **16/16** and **15/16** of the covered
+  axis and drives the whole thing with **zero contacts and zero nuisance stops** on both
+  hazard scenarios.
+- `P_pts`, trained on the two regulatory conditions that bound the interval, is falsified
+  over **50.3°** and **48.3°** and produces contacts.
+- `P_pts3`, trained on **all three** conditions FMVSS 127 tests, certifies slightly more of
+  the axis and **crashes four times as often** — and is falsified for property A over
+  **89.2° of 90** on the pedestrian scenario, braking on an empty road at 31 of 33
+  illuminations including full daylight.
+- **Nothing was certified and then failed**, in any cell, at midpoints or at the
+  certificate's own exhibited witnesses, across 96 covered sub-intervals.
+- All three arms pass all three regulatory endpoint tests 10/10.
 
-| milestone | state |
-|---|---|
-| M0 specification | locked, `a80d8c8dd458`, 12 amendments |
-| M1 map survey | stands. Offline geometry, unaffected by any harness defect |
-| M2 harness and primitives | **rebuilt.** See the primitives below |
-| M3 expert and collection | **rebuilt.** Expert 10/10 at both regulatory endpoints |
-| M4-M8 | in progress; `python -m study.status` is authoritative |
+### What the rebuild found about the instruments
 
-### The primitives moved, and that is the headline of the rebuild
+Nine defects, listed with what caught each in `docs/STUDY_REPORT.md` §17. The three that
+would have changed a published number:
 
-| | pre-A12 | rebuilt | |
-|---|---|---|---|
-| `a_max` | 0.868 g | **0.505 g** | an integration artifact, FINDINGS F5 |
-| `r_req` at 25 mph | 34.7 ft | **52.0 ft** | |
-| `r_req` at 50 mph | 114.2 ft | **183.4 ft** | |
-| poses inside `r_req` | 15 | 25 | property S quantifies over more of the approach |
-| illumination sub-intervals | 11 | 16 | re-bisected on the corrected renderer |
+- **`a_max` was an integration artifact** (F5). 0.868 g was CARLA's default substepping
+  failing to resolve a brake transient; the correct value is 0.505 g and `r_req` is 52.0 ft,
+  not 34.7.
+- **The verifier had no branch and bound** (F8), which PROTOCOL §6 has specified since M0.
+  Without it the negative control read 14/16 and 13/16 with false falsifications in its
+  widest sub-intervals, and the study would have reported that continuum training also
+  fails at dusk.
+- **Property S was being scored with a property A condition** (F9), which manufactured a
+  soundness violation in the negative control out of a policy braking 306 ft early.
 
-`a_max` was not measured wrong by a little. CARLA's default physics substepping integrates
-the whole 50 ms step in five substeps, which cannot resolve a brake transient, and the
-resulting stop is impossible on its own terms: read from its duration it decelerates at
-0.868 g, read from the distance it covered, 0.623 g. Every guard the job had was
-satisfied. `job_braking` now reads every stop both ways and fails when they disagree.
+### The queue
 
-**Everything the pre-A12 study published is superseded, and it was self-consistent.** Its
-physics braked at 0.868 g and its budget assumed 0.868 g, so its policies really did stop
-inside a 34.7 ft budget and its oracle really did pass 10/10 — in a world whose vehicle
-dynamics CARLA's own model does not produce.
-
----
+Seven of ten items in `docs/QUEUE.md` are measured. The seed sweep is running. Two remain:
+the trench-plate cells, which need a harness that does not exist, and the rest of the
+harness hardening.
 
 ## What to read, in order
 
