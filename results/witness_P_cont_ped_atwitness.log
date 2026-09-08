@@ -1,0 +1,9 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      +0.779 to   +0.026  mid  +0.403  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +0.026 to   +0.000  mid  +0.026  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+
+  illumination axis OK: 2 midpoints, span 0.0170 of full range
+
+  certificate agrees with driving in 0/2 sub-intervals
+  wrote results/carla/witness_P_cont_ped_atwitness.json

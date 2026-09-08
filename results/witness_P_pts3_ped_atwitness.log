@@ -1,0 +1,21 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+     +42.766 to  +28.397  mid +28.397  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+     +28.397 to  +18.743  mid +28.397  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+     +18.743 to  +12.542  mid +18.743  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (3 w/o nuisance)  DISAGREE
+     +12.542 to  +10.128  mid +12.542  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+     +10.128 to   +7.715  mid +10.128  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +7.715 to   +5.298  mid  +7.715  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +5.298 to   +4.198  mid  +5.298  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +4.198 to   +3.525  mid  +4.198  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +3.525 to   +1.891  mid  +3.525  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +1.891 to   +1.391  mid  +1.891  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +1.391 to   +0.779  mid  +1.391  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +0.779 to   +0.026  mid  +0.779  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (2 w/o nuisance)  DISAGREE
+      +0.026 to   +0.000  mid  +0.026  predicted FALSIFIED  drove 0/10 [0.00, 0.28]  agree
+      +0.000 to   -0.961  mid  +0.000  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+
+  illumination axis OK: 14 midpoints, span 0.4592 of full range
+
+  certificate agrees with driving in 1/14 sub-intervals
+  wrote results/carla/witness_P_pts3_ped_atwitness.json

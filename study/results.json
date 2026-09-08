@@ -30,8 +30,8 @@
       "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving"
     },
     "M7": {
-      "state": "todo",
-      "note": "verdicts committed; the pre-item-1 witness drives are parked in stale/ because their model hashes describe policies that no longer exist"
+      "state": "done",
+      "note": "REBUILT, twelve drives: six at sub-interval midpoints and six at the certificate's EXHIBITED witness illumination. Agreement on PROTOCOL section 7's frozen criterion: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. ZERO certified-then-failed anywhere -- no soundness violation in any cell. Cells 1 and 3 contradict their pre-registration and need dispositions per section 8"
     },
     "M8": {
       "state": "todo",
@@ -42,49 +42,61 @@
     "1": {
       "endpoints": "PASS both",
       "fv": "FALSIFIED",
-      "witness": null,
+      "witness": "PASS",
       "width": 48.271,
-      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "note": "FALSIFIED over 48.271 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
       "artifact": "results/carla/verify_P_pts_ped.json",
       "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
       "certified_of_covered": "4/16",
       "margin_worst_x_threshold": -0.1601,
-      "margin_best_x_threshold": 1.9658
+      "margin_best_x_threshold": 1.9658,
+      "witness_artifact": "results/carla/witness_P_pts_ped.json",
+      "agreement": "4/17",
+      "nuisance_braking_sub_intervals": 3
     },
     "2": {
       "endpoints": "PASS both",
       "fv": "FALSIFIED",
-      "witness": null,
+      "witness": "FAIL",
       "width": 50.32,
-      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "note": "FALSIFIED over 50.320 deg; 1 of 12 falsified sub-intervals failed when driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
       "artifact": "results/carla/verify_P_pts_lead.json",
       "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
       "certified_of_covered": "4/16",
       "margin_worst_x_threshold": -0.0007,
-      "margin_best_x_threshold": 1.9369
+      "margin_best_x_threshold": 1.9369,
+      "witness_artifact": "results/carla/witness_P_pts_lead.json",
+      "agreement": "5/17",
+      "nuisance_braking_sub_intervals": 1
     },
     "3": {
       "endpoints": "PASS both",
       "fv": "FALSIFIED",
-      "witness": null,
+      "witness": "PASS",
       "width": 0.753,
-      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "note": "FALSIFIED over 0.753 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
       "artifact": "results/carla/verify_P_cont_ped.json",
       "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
       "certified_of_covered": "15/16",
       "margin_worst_x_threshold": -0.1443,
-      "margin_best_x_threshold": 1.9387
+      "margin_best_x_threshold": 1.9387,
+      "witness_artifact": "results/carla/witness_P_cont_ped.json",
+      "agreement": "15/17",
+      "nuisance_braking_sub_intervals": 0
     },
     "4": {
       "endpoints": "PASS both",
       "fv": "CERTIFIED",
-      "witness": null,
+      "witness": "PASS",
       "width": null,
-      "note": "verdict committed, witness drive pending -- the blind protocol working, not a gap",
+      "note": "CERTIFIED in all 16 covered sub-intervals; drove clean in all 16 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
       "artifact": "results/carla/verify_P_cont_lead.json",
       "certified_of_covered": "16/16",
       "margin_worst_x_threshold": 1.008,
-      "margin_best_x_threshold": 1.9235
+      "margin_best_x_threshold": 1.9235,
+      "witness_artifact": "results/carla/witness_P_cont_lead.json",
+      "agreement": "17/17",
+      "nuisance_braking_sub_intervals": 0
     },
     "5": {
       "endpoints": null,

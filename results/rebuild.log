@@ -1012,3 +1012,112 @@ Terminated
 [2026-09-07 22:44:29] START witness_P_cont_ped
 [2026-09-07 22:52:58] DONE  witness_P_cont_ped rc=0
 [2026-09-07 22:52:58] M7 complete. python -m study.ledger --check-order
+[2026-09-07 23:04:25] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 1967849 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:05:43] START witness_P_pts_lead
+[2026-09-07 23:14:10] DONE  witness_P_pts_lead rc=0
+[2026-09-07 23:14:10] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2015648 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:15:28] START witness_P_pts_ped
+[2026-09-07 23:22:46] DONE  witness_P_pts_ped rc=0
+[2026-09-07 23:22:46] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2047769 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:24:04] START witness_P_cont_lead
+[2026-09-07 23:31:26] DONE  witness_P_cont_lead rc=0
+[2026-09-07 23:31:26] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2086030 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:32:44] START witness_P_cont_ped
+[2026-09-07 23:41:14] DONE  witness_P_cont_ped rc=0
+[2026-09-07 23:41:14] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2125223 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:42:31] START witness_P_pts3_lead
+[2026-09-07 23:52:04] DONE  witness_P_pts3_lead rc=0
+[2026-09-07 23:52:04] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2180553 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-07 23:53:22] START witness_P_pts3_ped
+[2026-09-08 00:00:55] DONE  witness_P_pts3_ped rc=0
+[2026-09-08 00:00:55] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2213423 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:02:12] START witness_P_pts_lead_atwitness
+[2026-09-08 00:08:30] DONE  witness_P_pts_lead_atwitness rc=0
+[2026-09-08 00:08:30] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2251152 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:09:47] START witness_P_pts_ped_atwitness
+[2026-09-08 00:15:36] DONE  witness_P_pts_ped_atwitness rc=0
+[2026-09-08 00:15:36] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2275594 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:16:54] START witness_P_cont_lead_atwitness
+[2026-09-08 00:16:57] DONE  witness_P_cont_lead_atwitness rc=0
+[2026-09-08 00:16:57] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2276004 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:18:15] START witness_P_cont_ped_atwitness
+[2026-09-08 00:19:20] DONE  witness_P_cont_ped_atwitness rc=0
+[2026-09-08 00:19:20] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2280967 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:20:37] START witness_P_pts3_lead_atwitness
+[2026-09-08 00:25:49] DONE  witness_P_pts3_lead_atwitness rc=0
+[2026-09-08 00:25:49] restarting CARLA on 3000
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 2309999 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-08 00:27:07] START witness_P_pts3_ped_atwitness
+[2026-09-08 00:33:03] DONE  witness_P_pts3_ped_atwitness rc=0
+[2026-09-08 00:33:03] M7 complete. python -m study.ledger --check-order
