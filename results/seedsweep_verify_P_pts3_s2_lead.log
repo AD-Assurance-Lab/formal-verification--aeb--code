@@ -1,0 +1,28 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts3_s2 / lead: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+Early stop at 14th iter due to 10 iterations no improvement!
+   +60.000 to  +42.766  bound    3.536    1.43x threshold  CERTIFIED  [25 domains, 43s]
+Early stop at 14th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    3.418    1.38x threshold  CERTIFIED  [25 domains, 39s]
+Early stop at 13th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+   +28.397 to  +18.743  bound    2.900    1.17x threshold  CERTIFIED  [25 domains, 32s]
+   +18.743 to  +12.542  bound    2.590    1.05x threshold  CERTIFIED  [25 domains, 32s]
+Early stop at 15th iter due to 10 iterations no improvement!
+   +12.542 to  +10.128  bound    2.168    0.88x threshold  FALSIFIED  witness pose 95 at 6.9 m, s=+0.0000  [25 domains, 39s]
+Early stop at 18th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 19th iter due to 10 iterations no improvement!
+   +10.128 to   +7.715  bound    2.062    0.83x threshold  FALSIFIED  witness pose 95 at 6.9 m, s=-1.0000  [33 domains, 44s]
+Early stop at 16th iter due to 10 iterations no improvement!
+    +7.715 to   +5.298  bound    1.659    0.67x threshold  FALSIFIED  witness pose 95 at 6.9 m, s=-1.0000  [53 domains, 79s]
+Early stop at 15th iter due to 10 iterations no improvement!
+    +5.298 to   +4.198  bound    1.394    0.56x threshold  FALSIFIED  witness pose 94 at 7.4 m, s=-1.0000  [27 domains, 36s]
+Early stop at 14th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    1.041    0.42x threshold  FALSIFIED  witness pose 93 at 8.0 m, s=-1.0000  [25 domains, 31s]
+    +3.525 to   +1.891  bound    0.019    0.01x threshold  FALSIFIED  witness pose 79 at 15.8 m, s=-1.0000  [29 domains, 42s]
+    +1.891 to   +1.391  bound    0.036    0.01x threshold  FALSIFIED  witness pose 94 at 7.4 m, s=-1.0000  [25 domains, 36s]
+    +1.391 to   +0.779  bound    0.007    0.00x threshold  FALSIFIED  witness pose 94 at 7.4 m, s=-1.0000  [25 domains, 40s]

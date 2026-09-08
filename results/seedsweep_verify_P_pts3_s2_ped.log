@@ -1,0 +1,30 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_pts3_s2 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+   +60.000 to  +42.766  bound    3.606    1.46x threshold  CERTIFIED  [25 domains, 43s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 15th iter due to 10 iterations no improvement!
+   +42.766 to  +28.397  bound    2.813    1.14x threshold  CERTIFIED  [25 domains, 37s]
+   +28.397 to  +18.743  bound    1.949    0.79x threshold  FALSIFIED  witness pose 102 at 2.8 m, s=+0.0000  [25 domains, 31s]
+Early stop at 14th iter due to 10 iterations no improvement!
+   +18.743 to  +12.542  bound    1.161    0.47x threshold  FALSIFIED  witness pose 102 at 2.8 m, s=-1.0000  [25 domains, 30s]
+   +12.542 to  +10.128  bound    0.096    0.04x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [25 domains, 37s]
+   +10.128 to   +7.715  bound    0.052    0.02x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [25 domains, 34s]
+    +7.715 to   +5.298  bound    0.911    0.37x threshold  FALSIFIED  witness pose 99 at 4.5 m, s=-1.0000  [41 domains, 53s]
+    +5.298 to   +4.198  bound    1.803    0.73x threshold  FALSIFIED  witness pose 102 at 2.8 m, s=-1.0000  [25 domains, 32s]
+Early stop at 15th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    1.952    0.79x threshold  FALSIFIED  witness pose 100 at 3.9 m, s=-1.0000  [25 domains, 30s]
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +3.525 to   +1.891  bound   -0.234   -0.09x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 36s]
+Early stop at 10th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+Early stop at 14th iter due to 10 iterations no improvement!
+    +1.891 to   +1.391  bound    0.015    0.01x threshold  FALSIFIED  witness pose 79 at 15.7 m, s=-1.0000  [25 domains, 33s]
+Early stop at 18th iter due to 10 iterations no improvement!
+    +1.391 to   +0.779  bound   -0.482   -0.19x threshold  FALSIFIED  witness pose 87 at 11.2 m, s=-1.0000  [25 domains, 37s]
+    +0.779 to   +0.026  bound   -1.714   -0.69x threshold  FALSIFIED  witness pose 89 at 10.1 m, s=-1.0000  [43 domains, 65s]

@@ -1,0 +1,17 @@
+/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+
+P_cont_s2 / ped: 25 poses inside r_req (15.85 m), 17 sub-intervals, threshold 2.476 m/s^2
+   +60.000 to  +42.766  bound    4.381    1.77x threshold  CERTIFIED  [25 domains, 43s]
+   +42.766 to  +28.397  bound    4.320    1.74x threshold  CERTIFIED  [25 domains, 38s]
+   +28.397 to  +18.743  bound    4.057    1.64x threshold  CERTIFIED  [25 domains, 33s]
+   +18.743 to  +12.542  bound    3.988    1.61x threshold  CERTIFIED  [25 domains, 32s]
+   +12.542 to  +10.128  bound    4.242    1.71x threshold  CERTIFIED  [25 domains, 36s]
+   +10.128 to   +7.715  bound    3.415    1.38x threshold  CERTIFIED  [25 domains, 39s]
+    +7.715 to   +5.298  bound    3.400    1.37x threshold  CERTIFIED  [25 domains, 38s]
+    +5.298 to   +4.198  bound    4.132    1.67x threshold  CERTIFIED  [25 domains, 32s]
+Early stop at 14th iter due to 10 iterations no improvement!
+    +4.198 to   +3.525  bound    4.430    1.79x threshold  CERTIFIED  [25 domains, 31s]
+    +3.525 to   +1.891  bound    3.217    1.30x threshold  CERTIFIED  [25 domains, 36s]
+    +1.891 to   +1.391  bound    3.762    1.52x threshold  CERTIFIED  [25 domains, 33s]
+    +1.391 to   +0.779  bound    2.563    1.03x threshold  CERTIFIED  [75 domains, 109s]

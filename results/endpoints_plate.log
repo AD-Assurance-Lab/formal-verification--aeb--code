@@ -16,3 +16,4 @@
     P_pts3 / darkness_highbeam / plate: 10/10 [0.72, 1.00] pass (peak demand 0.050 vs limit 2.453)
 
   wrote results/carla/policy_endpoints_plate.json
+Terminated

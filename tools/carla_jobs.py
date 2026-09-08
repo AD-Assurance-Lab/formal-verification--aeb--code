@@ -242,6 +242,14 @@ def rgb_camera_bp(world, width: int = 640, height: int = 480, fov: float = 90.0)
     # Swept f/1.4 to f/16: f/4.0 gives mean 129, p5 22, p95 188, no clipping, and night
     # stays properly dark at mean 8 with the target lit by the headlamps, which is the
     # case the standard is about.
+    # D-4, STATED rather than inherited. The rule is "keep enable_postprocess_effects
+    # TRUE and pin exposure manually", because manual exposure lives INSIDE the
+    # postprocess chain and disabling postprocessing silently un-pins it -- measured at
+    # roughly 2000x worse injected noise. CARLA defaults it to true, so this study has
+    # been satisfying D-4 by luck, and the preflight cannot catch it because it is a
+    # camera attribute rather than a world setting. The whole lesson of D-1 was to state
+    # the property rather than rely on the default that currently provides it.
+    bp.set_attribute("enable_postprocess_effects", "true")
     bp.set_attribute("exposure_mode", "manual")
     bp.set_attribute("shutter_speed", "200.0")
     bp.set_attribute("iso", "100.0")
