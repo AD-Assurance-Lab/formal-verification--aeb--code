@@ -1,24 +1,24 @@
   loading Town01 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
-     +60.000 to  +42.766  mid +51.383  predicted CERTIFIED  drove 10/10  agree
-     +42.766 to  +28.397  mid +35.581  predicted CERTIFIED  drove 10/10  agree
-     +28.397 to  +18.743  mid +23.570  predicted FALSIFIED  drove 10/10  DISAGREE
-     +18.743 to  +12.542  mid +15.642  predicted FALSIFIED  drove 10/10  DISAGREE
-     +12.542 to  +10.128  mid +11.335  predicted FALSIFIED  drove 10/10  DISAGREE
-     +10.128 to   +7.715  mid  +8.921  predicted FALSIFIED  drove 10/10  DISAGREE
-      +7.715 to   +5.298  mid  +6.506  predicted FALSIFIED  drove 10/10  DISAGREE
-      +5.298 to   +4.198  mid  +4.748  predicted FALSIFIED  drove 10/10  DISAGREE
-      +4.198 to   +3.525  mid  +3.862  predicted FALSIFIED  drove 10/10  DISAGREE
-      +3.525 to   +1.891  mid  +2.708  predicted FALSIFIED  drove 10/10  DISAGREE
-      +1.891 to   +1.391  mid  +1.641  predicted FALSIFIED  drove 10/10  DISAGREE
-      +1.391 to   +0.779  mid  +1.085  predicted FALSIFIED  drove 0/10  agree
-      +0.779 to   +0.026  mid  +0.403  predicted FALSIFIED  drove 0/10  agree
-      +0.026 to   +0.000  mid  +0.013  predicted FALSIFIED  drove 0/10  agree
-      +0.000 to   -0.961  mid  -0.480  predicted FALSIFIED  drove 10/10  DISAGREE
-      -0.961 to  -29.554  mid -15.257  predicted FALSIFIED  drove 10/10  DISAGREE
-     -29.554 to  -30.000  mid -29.777  predicted CERTIFIED  drove 10/10  agree
+     +60.000 to  +42.766  mid +51.383  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
+     +42.766 to  +28.397  mid +35.581  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
+     +28.397 to  +18.743  mid +23.570  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
+     +18.743 to  +12.542  mid +15.642  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+     +12.542 to  +10.128  mid +11.335  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+     +10.128 to   +7.715  mid  +8.921  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +7.715 to   +5.298  mid  +6.506  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +5.298 to   +4.198  mid  +4.748  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +4.198 to   +3.525  mid  +3.862  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +3.525 to   +1.891  mid  +2.708  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +1.891 to   +1.391  mid  +1.641  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+      +1.391 to   +0.779  mid  +1.085  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+      +0.779 to   +0.026  mid  +0.403  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+      +0.026 to   +0.000  mid  +0.013  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+      +0.000 to   -0.961  mid  -0.480  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
+      -0.961 to  -29.554  mid -15.257  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
+     -29.554 to  -30.000  mid -29.777  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
 
-  illumination axis OK: 17 midpoints, span 0.4743 of full range
+  illumination axis OK: 17 midpoints, span 0.4739 of full range
 
-  certificate agrees with driving in 6/17 sub-intervals
+  certificate agrees with driving in 4/17 sub-intervals
   wrote results/carla/witness_P_pts_ped.json

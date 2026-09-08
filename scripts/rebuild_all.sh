@@ -144,10 +144,26 @@ fi
 
 if [ "$FROM" = "witness" ]; then
   # M7. Refuses to run until the verdicts are committed; that refusal is the protocol.
-  for pol in P_pts P_cont; do
+  #
+  # TWO PASSES, answering different questions.
+  #   midpoint    every sub-interval, certified ones included, at its midpoint. The
+  #               control: a test that only visits flagged cells cannot tell a working
+  #               certificate from one that flags everything.
+  #   at-witness  the illumination the certificate actually EXHIBITED for each falsified
+  #               sub-interval. Section 10 says "drive the witness", and the midpoint is
+  #               not the witness: falsifying [+28.397, +18.743] while exhibiting s = +1
+  #               is a claim about 18.743 deg, and driving 23.570 tests something else.
+  for pol in $POLICIES; do
     for sc in lead ped; do
       fresh_server
       run "witness_${pol}_${sc}" "$PY" -u tools/drive_witness.py --policy "$pol" --scenario "$sc"
+    done
+  done
+  for pol in $POLICIES; do
+    for sc in lead ped; do
+      fresh_server
+      run "witness_${pol}_${sc}_atwitness" "$PY" -u tools/drive_witness.py \
+          --policy "$pol" --scenario "$sc" --at-witness
     done
   done
   say "M7 complete. python -m study.ledger --check-order"

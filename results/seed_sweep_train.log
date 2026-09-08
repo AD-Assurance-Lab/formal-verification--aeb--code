@@ -1,0 +1,20 @@
+[2026-09-07 22:14:49] seed sweep: 9 seeds x {P_pts P_cont P_pts3} x {lead ped}, 3 concurrent verifications
+[2026-09-07 22:14:49] train seed 1 / lead
+[2026-09-07 22:16:05] train seed 1 / ped
+[2026-09-07 22:17:21] train seed 2 / lead
+[2026-09-07 22:18:36] train seed 2 / ped
+[2026-09-07 22:19:54] train seed 3 / lead
+[2026-09-07 22:21:13] train seed 3 / ped
+[2026-09-07 22:22:33] train seed 4 / lead
+[2026-09-07 22:23:49] train seed 4 / ped
+[2026-09-07 22:24:37] train seed 5 / lead
+[2026-09-07 22:25:42] train seed 5 / ped
+[2026-09-07 22:26:58] train seed 6 / lead
+[2026-09-07 22:28:15] train seed 6 / ped
+[2026-09-07 22:29:31] train seed 7 / lead
+[2026-09-07 22:30:50] train seed 7 / ped
+[2026-09-07 22:32:09] train seed 8 / lead
+[2026-09-07 22:33:27] train seed 8 / ped
+[2026-09-07 22:34:32] train seed 9 / lead
+[2026-09-07 22:35:20] train seed 9 / ped
+[2026-09-07 22:36:35] training phase complete; run with phase 'verify' when the GPU is free

@@ -30,6 +30,11 @@ unset PYTHONPATH
 
 N=${1:-20}
 CONC=${2:-4}
+# train | verify | all. Split because the two phases have very different appetites: the
+# training phase is a few hundred MiB and minutes, and can run happily beside a simulator
+# that is busy driving; the verification phase peaks near 8 GiB per job and cannot.
+PHASE=${3:-all}
+export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 ARMS="P_pts P_cont P_pts3"
 LOG=$REPO/results/seed_sweep.log
 : > "$LOG"
@@ -40,7 +45,7 @@ say "seed sweep: $N seeds x {$ARMS} x {lead ped}, $CONC concurrent verifications
 # --- train ------------------------------------------------------------------
 # Seed 0 is the study's own run and is NOT retrained here; it is already on disk and
 # retraining it would silently replace the models every committed verdict describes.
-for s in $(seq 1 "$N"); do
+[ "$PHASE" = "verify" ] || for s in $(seq 1 "$N"); do
   for sc in lead ped; do
     say "train seed $s / $sc"
     "$PY" -u tools/train_policies.py --scenario "$sc" --input-w 128 --input-h 96 \
@@ -52,6 +57,11 @@ done
 # --- verify property S, in batches -------------------------------------------
 # Property S only. It is the property the claim is about, it is 25 poses against property
 # A's 104, and property A has no witness drive to disagree with.
+if [ "$PHASE" = "train" ]; then
+  say "training phase complete; run with phase 'verify' when the GPU is free"
+  exit 0
+fi
+
 pending=()
 for s in $(seq 1 "$N"); do
   for a in $ARMS; do
