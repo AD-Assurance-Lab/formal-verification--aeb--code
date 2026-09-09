@@ -97,14 +97,14 @@ had open — plus two controls that were unanimous.
 | `P_pts` / lead [+0.779°, +0.026°] | 9/10 | **10/10** | F21 scoring defect |
 | `P_pts` / lead at-witness [+0.026°, +0.000°] | 8/10 | **10/10** | F21 scoring defect |
 | `P_pts3` / ped [+0.779°, +0.026°] | 2/10 | **10/10** | F23 cloud drift |
-| `P_cont` / plate [+0.026°, +0.000°] | 6/10 | **2/10, still split** | the policy |
+| `P_cont` / plate [+0.026°, +0.000°] | 6/10 | **2/10, still split** | OPEN, E1 |
 | CONTROL `P_cont` / lead [+60.000°, +42.766°] | 10/10 | 3/3 | — |
 | CONTROL `P_pts3` / lead [+10.128°, +7.715°] | 0/10 | 0/3 | — |
 
 **Not one of the four was sampling.** Two were an instrument defect, one was the simulator
-moving underneath the measurement, and one is the policy sitting on its own brake
-threshold. A Wilson interval over any of them would have described a failure rate that
-does not exist.
+moving underneath the measurement, and the fourth is open — see below, it was filed as a
+marginal policy and that is a conclusion the evidence does not yet support. A Wilson
+interval over any of them would have described a failure rate that does not exist.
 
 ### The three causes, separated by measurement rather than by argument
 
@@ -115,12 +115,20 @@ does not exist.
   1,000 ticks with nothing spawned reproduces both the drifted brightness (0.06425) and
   the failure, so the cause follows elapsed simulated time and not spawn churn. F23 names
   it.
-- **`P_cont`/plate.** Scene means are stable to 3e-5 across all ten fresh-server
-  repetitions and the cell still splits, 2/10, with peak demand bimodal at 1.90–1.91
-  against 2.61–2.62 m/s² and nothing in between. The harness is clean and the policy is
-  not: this is D-10 exactly, a marginal policy amplifying the render floor into a flipped
-  verdict. **The cell is VOID**, and it fails harder on the clean harness than the shared
-  server said (2/10 rather than 6/10).
+- **`P_cont`/plate. Open, and filed wrongly the first time.** Scene means are stable to
+  3e-5 across all ten fresh-server repetitions and the cell still splits, 2/10, with peak
+  demand bimodal at 1.90–1.91 against 2.61–2.62 m/s² and nothing in between. This was
+  first written up as D-10 amplification and therefore VOID, and that was the wrong place
+  to stop. **Under a fully enforced harness a repetition disagreement has been a BUG every
+  time in this lab**, and void is where the hunt starts. A clean gap with no intermediate
+  values is a discrete difference between runs, not an amplified continuum: candidates are
+  a partially placed trench plate (it is built from tiles and **the per-run record does not
+  carry the tile count**, so a partial placement is invisible in the artifact), the absence
+  of any `brake_step` or `speed_at_brake` diagnostic in `plate_run` — the two fields that
+  made F21 visible — and a one-frame offset at the start, which over a 200 m approach at
+  50 mph is 1.1 m of range. **The cell is not reported until the cause is written down**;
+  it also fails harder on the clean harness than the shared server said, 2/10 against
+  6/10. `docs/PAPER_PLAN_2026-09-09.md` E1.
 - **The two `P_pts` cells.** F21's `rest_gap_ft` defect, fixed, and both are now unanimous.
 
 ### The pre-registered prediction that failed, and its disposition

@@ -138,9 +138,12 @@ found three things the ten-repetition floor had been hiding (F22):
 
 - Of 281 committed ten-repetition cells, **277 are unanimous and 4 are split**, and not
   one of the four is a draw from a rate.
-- Two of the four were an instrument defect (F21). One is the policy on its own brake
-  threshold, and it stays split on the clean harness, so it is **void** — and it fails
-  harder there, 2/10 rather than the shared server's 6/10.
+- Two of the four were an instrument defect (F21). One stays split on the clean harness and
+  is **an open bug**, not a resting state: under a fully enforced harness a repetition
+  disagreement has been a bug every time in this lab, so void is where the hunt starts.
+  It also fails harder there, 2/10 rather than the shared server's 6/10, and it is the
+  study's only certified-then-failed sub-interval, so F19 rests on it
+  (`docs/PAPER_PLAN_2026-09-09.md` E1).
 - The fourth was the simulator moving underneath the measurement, which is F23 and is the
   finding with the longest reach.
 
