@@ -79,8 +79,15 @@ reproduces a bug that has already cost this lab real time.
 - **Train on the parameterized family, closed-loop test on points from that family's axis,
   and verify over that same interval.** If training and verification disagree about what the
   disturbance is, the comparison is meaningless.
-- **Every closed-loop number is a failure RATE over at least 10 repetitions**, never a single
-  run. Report Wilson intervals.
+- **Every closed-loop number is a verdict over at least 3 repetitions, each in its own
+  process against its own freshly restarted server**, reported with its margin. Never a
+  single run. **Repetitions that disagree make the cell VOID** — that is a bug until proven
+  otherwise and never a reason to run more. Amendment A13 replaced the ten-repetition
+  Wilson-interval rule after measuring what ten were buying: of 281 cells, 277 were
+  unanimous and all four splits had identifiable causes, none of them sampling (F22).
+  **Three is conditional on the restart harness**, `scripts/drive_witness_reps.sh`; a
+  `for _ in range(REPS)` loop inside one process is not that harness and keeps ten, which
+  is why `carla_jobs.py` carries two constants and not one lowered number.
 - **Keep a known-bad negative control in every experiment.** A model that must fail the
   conditions it never saw is what catches specification bugs.
 - **Disturbances apply at full sensor resolution, before crop and downsampling**, never to
@@ -100,6 +107,17 @@ reproduces a bug that has already cost this lab real time.
 > **A read or a placement issued next to a write does not see that write.**
 > `world.set_weather()`, spectator `set_transform()` and sensor delivery are all applied by
 > the simulator on the NEXT TICK. Nothing errors when you get this wrong.
+
+And the one found on 2026-09-09, which is worse because the write DOES apply:
+
+> **A fixed weather is not a static scene.** Every driver here sets `cloudiness = 10.0`,
+> and CARLA's cloud layer MOVES. Scene brightness at the horizon drifts **3.9% with
+> elapsed simulated time and never settles**; at `cloudiness = 0.0` the same scene settles
+> by tick 20 and holds to 0.08%. `WEATHER_SETTLE_TICKS = 120` returns long before any of
+> this is over. Illumination is this study's independent variable, so it is the
+> independent variable drifting — and a capture that settles once and then walks its poses
+> sweeps the curve along its own pose index. FINDINGS F23, open, and it needs an amendment
+> before anything is re-measured on the back of it.
 
 Never read back state you just wrote; construct it. Match sensor frames on the id
 `world.tick()` returns, and never swallow a missing frame.
