@@ -18,7 +18,7 @@
       -0.961 to  -29.554  mid -15.257  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
      -29.554 to  -30.000  mid -29.777  predicted CERTIFIED  drove 10/10 [0.72, 1.00]  agree
 
-  illumination axis OK: 17 midpoints, span 0.4714 of full range
+  illumination axis OK: 17 midpoints, span 0.4713 of full range
 
   certificate agrees with driving in 17/17 sub-intervals
   wrote results/carla/witness_P_cont_lead.json

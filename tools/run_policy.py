@@ -289,7 +289,16 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
             lead_m = release_r_req_m + A9_HEAD_START_M
         min_conflict_m = 1e9
         rest_gap_ft = None
-        for _ in range(1500):
+        # The two diagnostics that separate "stopped" from "never started" (F21). The
+        # loop's stop condition is `braking and speed < 0.1`, which a run that latches
+        # the brake on its FIRST iteration satisfies for the wrong reason: the ego has
+        # not moved yet. Recording the step index and the speed at latch makes that
+        # visible in the artifact instead of only in a null rest gap.
+        step = 0
+        brake_step = None
+        speed_at_brake = None
+        top_speed = 0.0
+        for step in range(1500):
             img = J.grab_frame(world, images)
             with torch.no_grad():
                 demand = float(model(preprocess(img, w, h, dev)).item())
@@ -316,9 +325,13 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
             # scenario's range is to the CONFLICT POINT (A7).
             range_now_ft = (J.separation_ft(ego, lead) if scenario == "lead"
                             else (to_conflict - ego.bounding_box.extent.x) * J.FT)
+            speed_now = J.speed_of(ego)
+            top_speed = max(top_speed, speed_now)
             if not braking and demand >= a_max * BRAKE_THRESHOLD_FRACTION:
                 braking = True
                 demand_at_brake = round(range_now_ft, 2)
+                brake_step = step
+                speed_at_brake = speed_now
             if braking:
                 # FULL braking once latched. The label is a step to a_max and the
                 # certificate's property is that the commanded deceleration is at least
@@ -334,6 +347,20 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                     carla.VehicleControl(throttle=max(0.0, min(1.0, cmd)))
                 )
             if braking and J.speed_of(ego) < 0.1:
+                # RECORD THE RESTING GAP HERE TOO, not only at the top of the loop.
+                # F21: the top-of-loop recorder reads `braking` from a PREVIOUS
+                # iteration, so a run that latches the brake and reaches the stop test
+                # in the SAME iteration left rest_gap_ft at None and was scored
+                # standoff_ok = False -- a vehicle stopped 379 ft short of a stationary
+                # lead, recorded as a standoff failure. Three runs in the study hit it,
+                # all of them P_pts near the horizon, where the policy brakes so early
+                # that it latches on the first iteration, before set_target_velocity has
+                # shown up in get_velocity. One of them flipped a cell verdict between
+                # two otherwise identical drives.
+                if rest_gap_ft is None:
+                    rest_gap_ft = sep_now
+                else:
+                    rest_gap_ft = min(rest_gap_ft, sep_now)
                 # For the crossing scenario, idle a moment at rest so the resting
                 # standoff sees the walker actually cross; the lead target is static
                 # and needs no dwell.
@@ -359,6 +386,15 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
                             and rest_gap_ft >= J.D_MARGIN_M * J.FT),
             "braked": braking,
             "brake_range_ft": demand_at_brake,
+            # F21 diagnostics. `brake_step` 0 with `speed_at_brake_mps` ~ 0 is the
+            # degenerate run: the policy commanded full braking before the ego had
+            # moved, so the "stop" is a vehicle that never started. It is a real and
+            # severe nuisance brake, not a standoff failure, and the two must not be
+            # scored as the same thing.
+            "brake_step": brake_step,
+            "speed_at_brake_mps": None if speed_at_brake is None else round(speed_at_brake, 3),
+            "top_speed_mps": round(top_speed, 3),
+            "steps": step + 1,
         }
         if scenario == "ped":
             out["released"] = bool(released)

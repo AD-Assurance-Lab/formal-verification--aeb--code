@@ -1,7 +1,7 @@
   loading Town01 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
-  [  +0.779,   +0.026] at   +0.403  FALSIFIED  drove 0/10  peak 3.465 (1.413x limit)  agrees
-  [  +0.026,   +0.000] at   +0.026  FALSIFIED  drove 0/10  peak 3.365 (1.372x limit)  agrees
+  [  +0.779,   +0.026] at   +0.403  FALSIFIED  drove 0/10  peak 3.440 (1.403x limit)  agrees
+  [  +0.026,   +0.000] at   +0.026  FALSIFIED  drove 0/10  peak 3.112 (1.269x limit)  agrees
 
   illumination axis OK: 2 midpoints, span 0.0167 of full range
 

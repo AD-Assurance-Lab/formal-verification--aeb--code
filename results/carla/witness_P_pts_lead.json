@@ -3,13 +3,41 @@
   "scenario": "lead",
   "model_sha256": "c41f47ada54f8bf473f109430fbfbefcbe6a29c26c653dd20c4d91b0540ca439",
   "provenance": {
-    "timestamp": "2026-09-07T23:14:10-04:00",
-    "git_sha": "590c34a2b751a6d51fe571fa504aecc3ecf5a75e",
+    "timestamp": "2026-09-08T12:49:31-04:00",
+    "git_sha": "08708b889d895a3e539d385015db41f30e07665a",
     "model_sha256": "c41f47ada54f8bf473f109430fbfbefcbe6a29c26c653dd20c4d91b0540ca439"
+  },
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 500.7600000000093,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
   },
   "illumination": {
     "knots": 17,
-    "axis_span_mean": 0.46986,
+    "axis_span_mean": 0.47019,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [
@@ -17,8 +45,8 @@
         "from_deg": 51.383,
         "to_deg": 35.581,
         "from_mean": 0.51445,
-        "to_mean": 0.51483,
-        "rise": 0.00038,
+        "to_mean": 0.51484,
+        "rise": 0.00039,
         "frac_of_span": 0.0008,
         "declared_uncovered": false,
         "detail": "sun fell 51.383 -> 35.581 deg and the frame got BRIGHTER, 0.5144 -> 0.5148 (0.1% of the axis span)"
@@ -26,12 +54,12 @@
       {
         "from_deg": 0.013,
         "to_deg": -0.48,
-        "from_mean": 0.04497,
-        "to_mean": 0.07405,
-        "rise": 0.02908,
-        "frac_of_span": 0.0619,
+        "from_mean": 0.04465,
+        "to_mean": 0.07444,
+        "rise": 0.02979,
+        "frac_of_span": 0.0634,
         "declared_uncovered": true,
-        "detail": "sun fell 0.013 -> -0.480 deg and the frame got BRIGHTER, 0.0450 -> 0.0741 (6.2% of the axis span)"
+        "detail": "sun fell 0.013 -> -0.480 deg and the frame got BRIGHTER, 0.0447 -> 0.0744 (6.3% of the axis span)"
       }
     ],
     "worst_inversion_frac": 0.0008,
@@ -52,22 +80,22 @@
       },
       {
         "sun_altitude_deg": 35.581,
-        "mean": 0.51483,
+        "mean": 0.51484,
         "lamps": false
       },
       {
         "sun_altitude_deg": 23.57,
-        "mean": 0.48407,
+        "mean": 0.48408,
         "lamps": false
       },
       {
         "sun_altitude_deg": 15.642,
-        "mean": 0.42548,
+        "mean": 0.42549,
         "lamps": false
       },
       {
         "sun_altitude_deg": 11.335,
-        "mean": 0.3811,
+        "mean": 0.38111,
         "lamps": false
       },
       {
@@ -77,47 +105,47 @@
       },
       {
         "sun_altitude_deg": 6.506,
-        "mean": 0.3061,
+        "mean": 0.3012,
         "lamps": false
       },
       {
         "sun_altitude_deg": 4.748,
-        "mean": 0.27412,
+        "mean": 0.27497,
         "lamps": true
       },
       {
         "sun_altitude_deg": 3.862,
-        "mean": 0.23497,
+        "mean": 0.23682,
         "lamps": true
       },
       {
         "sun_altitude_deg": 2.708,
-        "mean": 0.18387,
+        "mean": 0.18513,
         "lamps": true
       },
       {
         "sun_altitude_deg": 1.641,
-        "mean": 0.13386,
+        "mean": 0.1341,
         "lamps": true
       },
       {
         "sun_altitude_deg": 1.085,
-        "mean": 0.10283,
+        "mean": 0.10016,
         "lamps": true
       },
       {
         "sun_altitude_deg": 0.403,
-        "mean": 0.06368,
+        "mean": 0.06374,
         "lamps": true
       },
       {
         "sun_altitude_deg": 0.013,
-        "mean": 0.04497,
+        "mean": 0.04465,
         "lamps": true
       },
       {
         "sun_altitude_deg": -0.48,
-        "mean": 0.07405,
+        "mean": 0.07444,
         "lamps": true
       },
       {
@@ -133,7 +161,7 @@
     ],
     "ok": true
   },
-  "agreement": "5/17",
+  "agreement": "6/17",
   "cells": [
     {
       "from_deg": 60.0,
@@ -164,7 +192,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
+          "brake_range_ft": 51.89
         },
         {
           "contact": false,
@@ -317,61 +345,61 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
           "brake_range_ft": 51.89
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
         },
         {
           "contact": false,
@@ -397,11 +425,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51483,
+        "mean": 0.51484,
         "sigma": 0.24979,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.01865
+        "frac_dark": 0.01864
       },
       "agrees": false
     },
@@ -443,7 +471,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.89
+          "brake_range_ft": 51.88
         },
         {
           "contact": false,
@@ -532,11 +560,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.48407,
+        "mean": 0.48408,
         "sigma": 0.26651,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.02297
+        "frac_dark": 0.02296
       },
       "agrees": true
     },
@@ -648,9 +676,9 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
+          "min_gap_ft": 12.49,
+          "rest_gap_ft": 12.49,
+          "brake_range_ft": 50.06
         }
       ],
       "min_gap_ft": [
@@ -663,12 +691,12 @@
         12.48,
         12.48,
         12.48,
-        12.48
+        12.49
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.42548,
-        "sigma": 0.25948,
+        "mean": 0.42549,
+        "sigma": 0.25947,
         "p01": 0.0,
         "p99": 0.98824,
         "frac_dark": 0.03131
@@ -711,9 +739,9 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": 6.97,
-          "rest_gap_ft": 6.97,
-          "brake_range_ft": 44.55
+          "min_gap_ft": 6.98,
+          "rest_gap_ft": 6.98,
+          "brake_range_ft": 44.56
         },
         {
           "contact": false,
@@ -738,9 +766,9 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": 6.98,
-          "rest_gap_ft": 6.98,
-          "brake_range_ft": 44.56
+          "min_gap_ft": 6.97,
+          "rest_gap_ft": 6.97,
+          "brake_range_ft": 44.55
         },
         {
           "contact": false,
@@ -790,10 +818,10 @@
       ],
       "min_gap_ft": [
         6.97,
-        6.97,
+        6.98,
         8.81,
         6.97,
-        6.98,
+        6.97,
         6.97,
         6.97,
         6.97,
@@ -802,11 +830,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.3811,
+        "mean": 0.38111,
         "sigma": 0.24754,
         "p01": 0.0,
         "p99": 0.98824,
-        "frac_dark": 0.04014
+        "frac_dark": 0.04013
       },
       "agrees": false
     },
@@ -827,19 +855,19 @@
       ],
       "passes_protocol": 0,
       "passes_no_nuisance": 0,
-      "never_braked": 10,
+      "never_braked": 9,
       "contacts": 10,
-      "standoff_short": 10,
+      "standoff_short": 9,
       "premature": 0,
       "runs": [
         {
           "contact": true,
-          "standoff_ok": false,
+          "standoff_ok": true,
           "premature": false,
-          "braked": false,
-          "min_gap_ft": -1.93,
-          "rest_gap_ft": null,
-          "brake_range_ft": null
+          "braked": true,
+          "min_gap_ft": -1.66,
+          "rest_gap_ft": 62.65,
+          "brake_range_ft": 53.35
         },
         {
           "contact": true,
@@ -924,7 +952,7 @@
         }
       ],
       "min_gap_ft": [
-        -1.93,
+        -1.66,
         -1.93,
         -1.93,
         -1.93,
@@ -938,10 +966,10 @@
       "headlamps": "NONE",
       "signature": {
         "mean": 0.34925,
-        "sigma": 0.23609,
+        "sigma": 0.23608,
         "p01": 0.0,
         "p99": 0.97647,
-        "frac_dark": 0.04926
+        "frac_dark": 0.04923
       },
       "agrees": true
     },
@@ -1008,9 +1036,9 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": 12.49,
-          "rest_gap_ft": 12.49,
-          "brake_range_ft": 50.06
+          "min_gap_ft": 12.48,
+          "rest_gap_ft": 12.48,
+          "brake_range_ft": 50.05
         },
         {
           "contact": false,
@@ -1063,7 +1091,7 @@
         12.48,
         12.48,
         12.48,
-        12.49,
+        12.48,
         12.48,
         12.48,
         12.48,
@@ -1072,11 +1100,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.3061,
-        "sigma": 0.22012,
+        "mean": 0.3012,
+        "sigma": 0.21665,
         "p01": 0.0,
         "p99": 0.95686,
-        "frac_dark": 0.06538
+        "frac_dark": 0.06559
       },
       "agrees": false
     },
@@ -1207,11 +1235,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.27412,
-        "sigma": 0.1925,
+        "mean": 0.27497,
+        "sigma": 0.19311,
         "p01": 0.0,
         "p99": 0.90588,
-        "frac_dark": 0.09156
+        "frac_dark": 0.09167
       },
       "agrees": false
     },
@@ -1296,9 +1324,9 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
+          "min_gap_ft": 12.49,
+          "rest_gap_ft": 12.49,
+          "brake_range_ft": 50.06
         },
         {
           "contact": false,
@@ -1335,18 +1363,18 @@
         12.48,
         12.48,
         12.48,
-        12.48,
+        12.49,
         12.48,
         12.48,
         12.48
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.23497,
-        "sigma": 0.17622,
+        "mean": 0.23682,
+        "sigma": 0.17824,
         "p01": 0.0,
         "p99": 0.83529,
-        "frac_dark": 0.11957
+        "frac_dark": 0.1195
       },
       "agrees": false
     },
@@ -1440,27 +1468,27 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
+          "min_gap_ft": 10.64,
+          "rest_gap_ft": 10.64,
+          "brake_range_ft": 48.22
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 10.64,
+          "rest_gap_ft": 10.64,
+          "brake_range_ft": 48.22
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
           "min_gap_ft": 10.65,
           "rest_gap_ft": 10.65,
           "brake_range_ft": 48.23
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 10.64,
-          "rest_gap_ft": 10.64,
-          "brake_range_ft": 48.22
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 10.64,
-          "rest_gap_ft": 10.64,
-          "brake_range_ft": 48.22
         }
       ],
       "min_gap_ft": [
@@ -1471,16 +1499,16 @@
         10.64,
         10.64,
         10.64,
-        10.65,
         10.64,
-        10.64
+        10.64,
+        10.65
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.18387,
-        "sigma": 0.15062,
+        "mean": 0.18513,
+        "sigma": 0.15236,
         "p01": 0.0,
-        "p99": 0.69804,
+        "p99": 0.70588,
         "frac_dark": 0.16348
       },
       "agrees": false
@@ -1521,6 +1549,42 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
+          "min_gap_ft": 10.64,
+          "rest_gap_ft": 10.64,
+          "brake_range_ft": 48.22
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 10.64,
+          "rest_gap_ft": 10.64,
+          "brake_range_ft": 48.22
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 10.64,
+          "rest_gap_ft": 10.64,
+          "brake_range_ft": 48.22
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 12.48,
+          "rest_gap_ft": 12.48,
+          "brake_range_ft": 50.05
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
           "min_gap_ft": 12.48,
           "rest_gap_ft": 12.48,
           "brake_range_ft": 50.05
@@ -1560,63 +1624,27 @@
           "min_gap_ft": 10.64,
           "rest_gap_ft": 10.64,
           "brake_range_ft": 48.22
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 12.48,
-          "rest_gap_ft": 12.48,
-          "brake_range_ft": 50.05
         }
       ],
       "min_gap_ft": [
         10.64,
-        12.48,
-        10.64,
         10.64,
         10.64,
         10.64,
         12.48,
         12.48,
-        12.48,
-        12.48
+        10.64,
+        10.64,
+        10.64,
+        10.64
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.13386,
-        "sigma": 0.129,
+        "mean": 0.1341,
+        "sigma": 0.12938,
         "p01": 0.0,
-        "p99": 0.57647,
-        "frac_dark": 0.2383
+        "p99": 0.57255,
+        "frac_dark": 0.23836
       },
       "agrees": false
     },
@@ -1658,7 +1686,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
+          "brake_range_ft": 51.89
         },
         {
           "contact": false,
@@ -1747,11 +1775,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.10283,
-        "sigma": 0.11256,
+        "mean": 0.10016,
+        "sigma": 0.10916,
         "p01": 0.0,
-        "p99": 0.4902,
-        "frac_dark": 0.31432
+        "p99": 0.48627,
+        "frac_dark": 0.31452
       },
       "agrees": false
     },
@@ -1763,18 +1791,18 @@
       "driven_at": "midpoint",
       "witness_s": 1.0,
       "verdict": "FALSIFIED",
-      "passes": 10,
+      "passes": 9,
       "of": 10,
-      "rate": 1.0,
+      "rate": 0.9,
       "wilson_95": [
-        0.7225,
-        1.0
+        0.5958,
+        0.9821
       ],
-      "passes_protocol": 10,
+      "passes_protocol": 9,
       "passes_no_nuisance": 0,
       "never_braked": 0,
       "contacts": 0,
-      "standoff_short": 0,
+      "standoff_short": 1,
       "premature": 10,
       "runs": [
         {
@@ -1824,12 +1852,12 @@
         },
         {
           "contact": false,
-          "standoff_ok": true,
+          "standoff_ok": false,
           "premature": true,
           "braked": true,
-          "min_gap_ft": 325.97,
-          "rest_gap_ft": 325.97,
-          "brake_range_ft": 377.19
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": null,
+          "brake_range_ft": 378.98
         },
         {
           "contact": false,
@@ -1874,7 +1902,7 @@
         325.97,
         325.97,
         325.97,
-        325.97,
+        378.98,
         325.97,
         325.97,
         325.97,
@@ -1882,13 +1910,13 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.06368,
-        "sigma": 0.08696,
+        "mean": 0.06374,
+        "sigma": 0.08759,
         "p01": 0.0,
         "p99": 0.37647,
-        "frac_dark": 0.46282
+        "frac_dark": 0.46262
       },
-      "agrees": false
+      "agrees": true
     },
     {
       "from_deg": 0.026,
@@ -2017,11 +2045,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.04497,
-        "sigma": 0.07418,
+        "mean": 0.04465,
+        "sigma": 0.0734,
         "p01": 0.0,
         "p99": 0.31765,
-        "frac_dark": 0.59962
+        "frac_dark": 0.59702
       },
       "agrees": false
     },
@@ -2135,7 +2163,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
+          "brake_range_ft": 51.89
         }
       ],
       "min_gap_ft": [
@@ -2152,11 +2180,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.07405,
-        "sigma": 0.09612,
+        "mean": 0.07444,
+        "sigma": 0.09652,
         "p01": 0.0,
         "p99": 0.35294,
-        "frac_dark": 0.47191
+        "frac_dark": 0.47108
       },
       "agrees": true
     },
@@ -2216,52 +2244,52 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
           "brake_range_ft": 51.89
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.89
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 14.32,
-          "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
         },
         {
           "contact": false,
@@ -2291,7 +2319,7 @@
         "sigma": 0.09624,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65118
+        "frac_dark": 0.65116
       },
       "agrees": true
     },
@@ -2426,7 +2454,7 @@
         "sigma": 0.09624,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65119
+        "frac_dark": 0.65117
       },
       "agrees": true
     }

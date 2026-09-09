@@ -6,6 +6,76 @@ here, never inside the protocol.
 
 ---
 
+## F21 — 2026-09-09, the whole of M7 re-driven: 262 of 263 sub-interval drives reproduce, and the one that did not is an instrument defect
+
+Every witness drive in the study was run a second time, on the same committed networks
+against the same committed verdicts, twelve hours apart on independently restarted
+servers. `tools/rerun_compare.py` compares the two passes on the only thing D-7 permits
+comparing: **whether a cell's verdict moved**, not whether its numbers did.
+
+| | |
+|---|---|
+| artifacts re-driven | 21 |
+| sub-interval drives compared | 263 |
+| **cell verdicts that flipped** | **1** |
+| artifacts whose agreement count reproduced exactly | 20 of 21 |
+| the exception | `P_pts`/lead, 5/17 → 6/17 |
+
+This is the closed-loop analogue of F20. F20 measured that the verifier reproduces its
+102 verdicts with a margin floor of 0.0038 × threshold; this measures that the simulator
+reproduces 262 of 263 drive verdicts, and that the 263rd is not the simulator.
+
+### The one flip, and why it is a bug rather than a rate
+
+`P_pts`/lead [+0.779°, +0.026°], driven at +0.403°, went 10/10 → 9/10. Nine of the ten
+repetitions are identical to the pass they replace to the recorded precision — brake at
+377.19 ft, rest at 325.97 ft. The tenth braked at **378.98 ft**, exactly one frame
+earlier at 25 mph, and was scored a standoff failure with a null resting gap.
+
+The standing rule is that repetitions which disagree are a bug until proven otherwise.
+They were:
+
+`one_run` records the resting gap at the TOP of its loop, guarded by `braking`, which on
+that iteration still holds the value from the previous one. A run that latches the brake
+and reaches the stop test **in the same iteration** therefore falls out of the loop with
+`rest_gap_ft` still `None`, and `standoff_ok` is defined as `rest_gap_ft is not None and
+rest_gap_ft >= d_margin`. So a vehicle that stopped **379 ft short of a stationary lead**
+was recorded as having failed to hold a 3.28 ft standoff.
+
+It can only happen when the policy latches on the loop's first iteration, before
+`set_target_velocity` shows up in `get_velocity` and while the ego still reads as
+stationary — which needs a nuisance brake so extreme that it fires before the vehicle has
+moved. `P_pts` near the horizon brakes at 379 ft of a 52 ft required range, so it is the
+one arm in the study that can reach it. Three runs of 2,764 did:
+`witness_P_pts_lead` [+0.779°, +0.026°] once, and `witness_P_pts_lead_atwitness`
+[+0.026°, +0.000°] twice.
+
+**Fixed** in `tools/run_policy.py`: the resting gap is recorded on the exit path as well
+as at the top of the loop, and each run now also records `brake_step`,
+`speed_at_brake_mps` and `top_speed_mps`, so a run that braked before the vehicle moved is
+visible in the artifact rather than only inferable from a null field.
+
+### What it would have cost
+
+The defect adds one to `P_pts`/lead's hazard agreement, 5/17 → 6/17, which is a number
+the study reports and the paper's Table 4 carries. It survives every numeric check in the
+repository: the cell is FALSIFIED either way, the drive is a nuisance brake either way,
+and 9/10 with a Wilson interval of [0.596, 0.982] reads like an ordinary marginal cell.
+Nothing would have found it except driving the same thing twice and refusing to average.
+
+This is the fourth time in this repository that a defect was invisible in the statistics
+and obvious in one record, and it is the reason the re-drive was worth its wall clock.
+
+### What it does NOT excuse
+
+Twenty of twenty-one artifacts reproduced their agreement count exactly, on a simulator
+D-7 says can never render two identical frames. That is a statement about the policies as
+much as the harness: per D-10 a marginal policy amplifies the render floor into a flipped
+verdict, and 262 of 263 cells did not. The cells that remain sensitive are catalogued in
+F22, and none of them is sensitive for a reason a larger sample would fix.
+
+---
+
 ## F20 — 2026-09-08, the verifier has its own reproducibility floor, and it is 50x smaller than the band where the margin stops meaning anything
 
 Re-running the property S certificates on **identical networks and identical captured

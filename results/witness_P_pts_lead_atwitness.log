@@ -12,9 +12,9 @@
       +1.891 to   +1.391  mid  +1.891  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
       +1.391 to   +0.779  mid  +1.391  predicted FALSIFIED  drove 10/10 [0.72, 1.00]  DISAGREE
       +0.779 to   +0.026  mid  +0.026  predicted FALSIFIED  drove 10/10 [0.72, 1.00] (0 w/o nuisance)  DISAGREE
-      +0.026 to   +0.000  mid  +0.026  predicted FALSIFIED  drove 9/10 [0.60, 0.98] (0 w/o nuisance)  agree
+      +0.026 to   +0.000  mid  +0.026  predicted FALSIFIED  drove 8/10 [0.49, 0.94] (0 w/o nuisance)  agree
 
-  illumination axis OK: 13 midpoints, span 0.4747 of full range
+  illumination axis OK: 13 midpoints, span 0.4759 of full range
 
   certificate agrees with driving in 2/13 sub-intervals
   wrote results/carla/witness_P_pts_lead_atwitness.json

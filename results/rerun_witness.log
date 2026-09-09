@@ -1,0 +1,77 @@
+===== WITNESS all 12:41:08 =====
+[2026-09-08 12:41:08] witness scope: all (lead ped plate none_plate)
+[2026-09-08 12:41:08] restarting CARLA on 3000
+[2026-09-08 12:41:25] START witness_P_pts_lead
+[2026-09-08 12:49:31] DONE  witness_P_pts_lead rc=0
+[2026-09-08 12:49:31] restarting CARLA on 3000
+[2026-09-08 12:50:49] START witness_P_pts_ped
+[2026-09-08 12:57:51] DONE  witness_P_pts_ped rc=0
+[2026-09-08 12:57:51] restarting CARLA on 3000
+[2026-09-08 12:59:09] START witness_P_pts_plate
+[2026-09-08 13:04:50] DONE  witness_P_pts_plate rc=0
+[2026-09-08 13:04:50] restarting CARLA on 3000
+[2026-09-08 13:06:08] START witness_P_pts_none_plate
+[2026-09-08 13:11:47] DONE  witness_P_pts_none_plate rc=0
+[2026-09-08 13:11:47] restarting CARLA on 3000
+[2026-09-08 13:13:05] START witness_P_cont_lead
+[2026-09-08 13:20:17] DONE  witness_P_cont_lead rc=0
+[2026-09-08 13:20:17] restarting CARLA on 3000
+[2026-09-08 13:21:34] START witness_P_cont_ped
+[2026-09-08 13:29:52] DONE  witness_P_cont_ped rc=0
+[2026-09-08 13:29:52] restarting CARLA on 3000
+[2026-09-08 13:31:10] START witness_P_cont_plate
+[2026-09-08 13:37:04] DONE  witness_P_cont_plate rc=0
+[2026-09-08 13:37:04] restarting CARLA on 3000
+[2026-09-08 13:38:21] START witness_P_cont_none_plate
+[2026-09-08 13:44:13] DONE  witness_P_cont_none_plate rc=0
+[2026-09-08 13:44:13] restarting CARLA on 3000
+[2026-09-08 13:45:31] START witness_P_pts3_lead
+[2026-09-08 13:54:46] DONE  witness_P_pts3_lead rc=0
+[2026-09-08 13:54:46] restarting CARLA on 3000
+[2026-09-08 13:56:04] START witness_P_pts3_ped
+[2026-09-08 14:03:25] DONE  witness_P_pts3_ped rc=0
+[2026-09-08 14:03:25] restarting CARLA on 3000
+[2026-09-08 14:04:42] START witness_P_pts3_plate
+[2026-09-08 14:10:41] DONE  witness_P_pts3_plate rc=0
+[2026-09-08 14:10:41] restarting CARLA on 3000
+[2026-09-08 14:11:58] START witness_P_pts3_none_plate
+[2026-09-08 14:17:53] DONE  witness_P_pts3_none_plate rc=0
+[2026-09-08 14:17:53] restarting CARLA on 3000
+[2026-09-08 14:19:11] START witness_P_pts_lead_atwitness
+[2026-09-08 14:25:20] DONE  witness_P_pts_lead_atwitness rc=0
+[2026-09-08 14:25:20] restarting CARLA on 3000
+[2026-09-08 14:26:37] START witness_P_pts_ped_atwitness
+[2026-09-08 14:32:12] DONE  witness_P_pts_ped_atwitness rc=0
+[2026-09-08 14:32:12] restarting CARLA on 3000
+[2026-09-08 14:33:30] START witness_P_pts_plate_atwitness
+[2026-09-08 14:34:01] DONE  witness_P_pts_plate_atwitness rc=0
+[2026-09-08 14:34:01] restarting CARLA on 3000
+[2026-09-08 14:35:18] START witness_P_pts_none_plate_atwitness
+[2026-09-08 14:35:49] DONE  witness_P_pts_none_plate_atwitness rc=0
+[2026-09-08 14:35:49] restarting CARLA on 3000
+[2026-09-08 14:37:07] START witness_P_cont_lead_atwitness
+[2026-09-08 14:37:10] DONE  witness_P_cont_lead_atwitness rc=0
+[2026-09-08 14:37:10] restarting CARLA on 3000
+[2026-09-08 14:38:27] START witness_P_cont_ped_atwitness
+[2026-09-08 14:39:30] DONE  witness_P_cont_ped_atwitness rc=0
+[2026-09-08 14:39:30] restarting CARLA on 3000
+[2026-09-08 14:40:48] START witness_P_cont_plate_atwitness
+[2026-09-08 14:40:51] DONE  witness_P_cont_plate_atwitness rc=0
+[2026-09-08 14:40:51] restarting CARLA on 3000
+[2026-09-08 14:42:09] START witness_P_cont_none_plate_atwitness
+[2026-09-08 14:42:12] DONE  witness_P_cont_none_plate_atwitness rc=0
+[2026-09-08 14:42:12] restarting CARLA on 3000
+[2026-09-08 14:43:29] START witness_P_pts3_lead_atwitness
+[2026-09-08 14:48:29] DONE  witness_P_pts3_lead_atwitness rc=0
+[2026-09-08 14:48:29] restarting CARLA on 3000
+[2026-09-08 14:49:46] START witness_P_pts3_ped_atwitness
+[2026-09-08 14:55:31] DONE  witness_P_pts3_ped_atwitness rc=0
+[2026-09-08 14:55:31] restarting CARLA on 3000
+[2026-09-08 14:56:48] START witness_P_pts3_plate_atwitness
+[2026-09-08 14:57:13] DONE  witness_P_pts3_plate_atwitness rc=0
+[2026-09-08 14:57:13] restarting CARLA on 3000
+[2026-09-08 14:58:31] START witness_P_pts3_none_plate_atwitness
+[2026-09-08 14:58:55] DONE  witness_P_pts3_none_plate_atwitness rc=0
+[2026-09-08 14:58:55] M7 complete. python -m study.ledger --check-order
+  witness rc=0 14:58:55
+ALL DONE 14:58:55

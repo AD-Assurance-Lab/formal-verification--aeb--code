@@ -3,23 +3,51 @@
   "scenario": "ped",
   "model_sha256": "8fe58fe548824648d7836b83f4f3ca48b159031850e3c0e73bff6a7c1b13d0a8",
   "provenance": {
-    "timestamp": "2026-09-08T00:33:02-04:00",
-    "git_sha": "590c34a2b751a6d51fe571fa504aecc3ecf5a75e",
+    "timestamp": "2026-09-08T14:55:30-04:00",
+    "git_sha": "08708b889d895a3e539d385015db41f30e07665a",
     "model_sha256": "8fe58fe548824648d7836b83f4f3ca48b159031850e3c0e73bff6a7c1b13d0a8"
+  },
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 359.20000000001164,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
   },
   "illumination": {
     "knots": 14,
-    "axis_span_mean": 0.45921,
+    "axis_span_mean": 0.4592,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [
       {
         "from_deg": 28.397,
         "to_deg": 28.397,
-        "from_mean": 0.49975,
-        "to_mean": 0.50345,
-        "rise": 0.0037,
-        "frac_of_span": 0.0081,
+        "from_mean": 0.49976,
+        "to_mean": 0.50344,
+        "rise": 0.00368,
+        "frac_of_span": 0.008,
         "declared_uncovered": false,
         "detail": "sun fell 28.397 -> 28.397 deg and the frame got BRIGHTER, 0.4998 -> 0.5034 (0.8% of the axis span)"
       },
@@ -34,9 +62,9 @@
         "detail": "sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0442 -> 0.0841 (8.7% of the axis span)"
       }
     ],
-    "worst_inversion_frac": 0.0081,
+    "worst_inversion_frac": 0.008,
     "max_inversion_frac": 0.12,
-    "total_rise_frac": 0.0081,
+    "total_rise_frac": 0.008,
     "max_total_rise_frac": 0.25,
     "monotone_violations": [],
     "monotone_ok": true,
@@ -47,12 +75,12 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 28.397,
-        "mean": 0.49975,
+        "mean": 0.49976,
         "lamps": false
       },
       {
         "sun_altitude_deg": 28.397,
-        "mean": 0.50345,
+        "mean": 0.50344,
         "lamps": false
       },
       {
@@ -62,17 +90,17 @@
       },
       {
         "sun_altitude_deg": 12.542,
-        "mean": 0.39217,
+        "mean": 0.39216,
         "lamps": false
       },
       {
         "sun_altitude_deg": 10.128,
-        "mean": 0.36816,
+        "mean": 0.36817,
         "lamps": false
       },
       {
         "sun_altitude_deg": 7.715,
-        "mean": 0.32984,
+        "mean": 0.32983,
         "lamps": false
       },
       {
@@ -82,7 +110,7 @@
       },
       {
         "sun_altitude_deg": 4.198,
-        "mean": 0.24993,
+        "mean": 0.24994,
         "lamps": true
       },
       {
@@ -97,12 +125,12 @@
       },
       {
         "sun_altitude_deg": 1.391,
-        "mean": 0.12019,
+        "mean": 0.12017,
         "lamps": true
       },
       {
         "sun_altitude_deg": 0.779,
-        "mean": 0.0843,
+        "mean": 0.08429,
         "lamps": true
       },
       {
@@ -247,11 +275,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.49975,
+        "mean": 0.49976,
         "sigma": 0.26027,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.02048
+        "frac_dark": 0.02047
       },
       "agrees": false
     },
@@ -382,11 +410,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.50345,
-        "sigma": 0.26283,
+        "mean": 0.50344,
+        "sigma": 0.26284,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.02041
+        "frac_dark": 0.0204
       },
       "agrees": false
     },
@@ -433,38 +461,38 @@
         {
           "contact": false,
           "standoff_ok": true,
-          "premature": true,
-          "braked": true,
-          "min_gap_ft": 232.02,
-          "rest_gap_ft": 232.02,
-          "brake_range_ft": 269.39
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": true,
-          "braked": true,
-          "min_gap_ft": 232.02,
-          "rest_gap_ft": 232.02,
-          "brake_range_ft": 269.39
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": true,
-          "braked": true,
-          "min_gap_ft": 232.02,
-          "rest_gap_ft": 232.02,
-          "brake_range_ft": 269.39
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
           "premature": false,
           "braked": true,
           "min_gap_ft": 44.31,
           "rest_gap_ft": 44.31,
           "brake_range_ft": 82.59
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": true,
+          "braked": true,
+          "min_gap_ft": 232.02,
+          "rest_gap_ft": 232.02,
+          "brake_range_ft": 269.39
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": true,
+          "braked": true,
+          "min_gap_ft": 232.02,
+          "rest_gap_ft": 232.02,
+          "brake_range_ft": 269.39
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": true,
+          "braked": true,
+          "min_gap_ft": 232.02,
+          "rest_gap_ft": 232.02,
+          "brake_range_ft": 269.39
         },
         {
           "contact": false,
@@ -506,10 +534,10 @@
       "min_gap_ft": [
         232.02,
         232.02,
-        232.02,
-        232.02,
-        232.02,
         44.31,
+        232.02,
+        232.02,
+        232.02,
         232.02,
         44.31,
         232.02,
@@ -521,7 +549,7 @@
         "sigma": 0.26243,
         "p01": 0.0,
         "p99": 0.98824,
-        "frac_dark": 0.02718
+        "frac_dark": 0.02719
       },
       "agrees": false
     },
@@ -652,11 +680,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.39217,
+        "mean": 0.39216,
         "sigma": 0.24859,
         "p01": 0.0,
         "p99": 0.98824,
-        "frac_dark": 0.03684
+        "frac_dark": 0.03687
       },
       "agrees": false
     },
@@ -787,11 +815,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.36816,
+        "mean": 0.36817,
         "sigma": 0.24415,
         "p01": 0.0,
         "p99": 0.98039,
-        "frac_dark": 0.04411
+        "frac_dark": 0.0441
       },
       "agrees": false
     },
@@ -922,11 +950,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.32984,
+        "mean": 0.32983,
         "sigma": 0.22864,
         "p01": 0.0,
         "p99": 0.96863,
-        "frac_dark": 0.05574
+        "frac_dark": 0.05573
       },
       "agrees": false
     },
@@ -1061,7 +1089,7 @@
         "sigma": 0.20782,
         "p01": 0.0,
         "p99": 0.92941,
-        "frac_dark": 0.08313
+        "frac_dark": 0.08312
       },
       "agrees": false
     },
@@ -1192,11 +1220,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.24993,
-        "sigma": 0.18285,
+        "mean": 0.24994,
+        "sigma": 0.18286,
         "p01": 0.0,
         "p99": 0.86667,
-        "frac_dark": 0.10743
+        "frac_dark": 0.10745
       },
       "agrees": false
     },
@@ -1533,27 +1561,27 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
+          "min_gap_ft": 95.67,
+          "rest_gap_ft": 95.67,
+          "brake_range_ft": 133.92
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 95.67,
+          "rest_gap_ft": 95.67,
+          "brake_range_ft": 133.92
+        },
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
           "min_gap_ft": 97.51,
           "rest_gap_ft": 97.51,
           "brake_range_ft": 135.75
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 95.67,
-          "rest_gap_ft": 95.67,
-          "brake_range_ft": 133.92
-        },
-        {
-          "contact": false,
-          "standoff_ok": true,
-          "premature": false,
-          "braked": true,
-          "min_gap_ft": 95.67,
-          "rest_gap_ft": 95.67,
-          "brake_range_ft": 133.92
         },
         {
           "contact": false,
@@ -1588,20 +1616,20 @@
         95.67,
         95.67,
         95.67,
+        95.67,
+        95.67,
         97.51,
-        95.67,
-        95.67,
         95.67,
         97.51,
         97.51
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.12019,
-        "sigma": 0.12177,
+        "mean": 0.12017,
+        "sigma": 0.12176,
         "p01": 0.0,
         "p99": 0.53333,
-        "frac_dark": 0.26775
+        "frac_dark": 0.26783
       },
       "agrees": false
     },
@@ -1732,11 +1760,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.0843,
+        "mean": 0.08429,
         "sigma": 0.10111,
         "p01": 0.0,
         "p99": 0.43922,
-        "frac_dark": 0.37049
+        "frac_dark": 0.37053
       },
       "agrees": false
     },
@@ -2006,7 +2034,7 @@
         "sigma": 0.10082,
         "p01": 0.0,
         "p99": 0.36471,
-        "frac_dark": 0.41916
+        "frac_dark": 0.41915
       },
       "agrees": false
     }
