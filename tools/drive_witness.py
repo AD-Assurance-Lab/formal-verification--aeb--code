@@ -143,7 +143,7 @@ def main() -> int:
 
     carla = J.carla_module()
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
 
     cells_to_drive = verdicts["cells"]
     if args.at_witness:
@@ -210,11 +210,14 @@ def main() -> int:
                 "headlamps": lights,
                 "signature": runs[0]["signature"],
                 "agrees": matched,
-                "runs": [{k: r[k] for k in
-                          ("passes", "braked", "crossed_plate", "plate_present",
-                           "peak_demand_mps2",
-                           "exceeded_nuisance_limit", "brake_range_ft",
-                           "min_speed_mps_while_moving")} for r in runs],
+                # EVERY field plate_run returns, not a hand-picked subset. The subset
+                # this used to be dropped `plate_tiles` and `plate_covered_ft`, so the
+                # trench plate's actual geometry was measured on every run and thrown
+                # away at the artifact boundary -- and a partially placed plate was
+                # therefore invisible to anyone reading the result. F22 named the gap as
+                # "not recorded"; it was recorded and then discarded, which is worse,
+                # because the fix looked like it needed a re-drive and did not.
+                "runs": [dict(r) for r in runs],
             })
             sig_records.append({"sun_altitude_deg": round(mid, 3),
                                 "signature": runs[0]["signature"]})

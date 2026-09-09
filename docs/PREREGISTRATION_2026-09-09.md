@@ -74,3 +74,55 @@ measured, and a disposition explains a contradiction rather than erasing it.
 If prediction 3 fails — if the `P_cont`/plate split reproduces with the same contiguous
 shape under independent servers — then the shared server is exonerated, D-6 is not the
 mechanism here, and the repetition count should not be reduced on this evidence.
+
+---
+
+# Addendum, same day: the plate cell has a named mechanism now
+
+Written after `P_cont`/plate [+0.026°, +0.000°] was reopened as a bug rather than left
+void, and **before** the confirming drive. The candidates listed in F22 were guesses. This
+is not.
+
+## The mechanism
+
+`plate_run` ticks the world twice per control iteration. `J.grab_frame` at the top of the
+loop calls `world.tick()` and returns the frame that tick produced; a second bare
+`world.tick()` sat at the bottom. `one_run` has never had it. So:
+
+- the false-activation driver ran the closed loop at **10 Hz**, where PROTOCOL section 3
+  fixes the control rate at 20 Hz and states the quantization as 3.7 ft at 50 mph. The
+  real quantization was **7.3 ft**;
+- the policy was evaluated on **every other rendered frame**, the intervening one being
+  discarded by `grab_frame`'s stale-frame guard;
+- `peak_demand_mps2` is therefore a maximum over a subsample, and near the plate the
+  demand changes fast.
+
+A sampler that skips every other frame past a sharp peak either catches it or misses it.
+That is what 2.61–2.62 against 1.90–1.91 m/s² **with nothing in between** looks like, and
+no continuum mechanism produces a gap with no intermediate values.
+
+## Predicted, before the drive
+
+1. **The cell becomes unanimous at 20 Hz.** High confidence. If it is still split, the
+   double tick was not the mechanism and this addendum is wrong.
+2. **It goes unanimously to FAIL, not to pass**, with peak demand at or above the higher
+   mode. A 20 Hz sampler cannot miss a peak that a 10 Hz sampler sometimes catches, so the
+   measured peak should rise to ≈2.6 m/s² or beyond on every repetition — meaning
+   `P_cont` exceeds the nuisance limit on this sub-interval **always**, and the shared
+   server's 6/10 and the restarted harness's 2/10 were both flattered by a sampler that
+   kept missing the peak.
+3. **`brake_range_ft` tightens.** The two values recorded were 307.68 and 271.12 ft,
+   36.6 ft apart, which is five iterations at 7.3 ft. At 3.7 ft quantization the spread
+   across repetitions should be a small number of 3.7 ft steps or none.
+
+## Why it runs on Town01 and runs now
+
+A14 moves the study to Town12 and every Town01 artifact becomes unusable. **The Town01
+certificate and policies are the only place this defect can be settled**, so it is settled
+before the rebuild, not after. `CARLA_MAP=Town01` exists for exactly this and for nothing
+else.
+
+## What it does not change
+
+Nothing measured is rescored. The Town01 plate results stand as collected on the harness
+that collected them, and the finding is what carries forward to Town12.

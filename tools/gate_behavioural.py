@@ -228,7 +228,7 @@ def main() -> int:
     order = np.sort(order)
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
     spawn_tf, _ = J.site_transform(world, site, along=10.0, need_m=200.0)
 
     def render_at(alt: float, idxs) -> dict[int, np.ndarray]:

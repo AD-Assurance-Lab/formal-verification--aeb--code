@@ -175,7 +175,22 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0,
                 cmd = 0.5 * err + 0.5 * integral
                 J.apply_control(ego, carla.VehicleControl(
                     throttle=max(0.0, min(1.0, cmd))))
-            world.tick()
+            # NO SECOND TICK. `J.grab_frame` at the top of this loop already ticks the
+            # world and returns the frame that tick produced, so the `world.tick()` that
+            # used to sit here made every iteration advance TWO steps -- and grab_frame
+            # then silently discarded the intervening frame as stale.
+            #
+            # PROTOCOL section 3 fixes the control rate at 20 Hz and states the resulting
+            # quantization as 3.7 ft at 50 mph. This loop was running at 10 Hz, evaluating
+            # the policy on every other frame, with a quantization of 7.3 ft. `one_run`
+            # has never had the extra tick, so the two hazard scenarios and the
+            # false-activation scenario were not being driven at the same control rate.
+            #
+            # It is also the best available mechanism for the bimodality in FINDINGS F22:
+            # peak_demand is a maximum over the frames the policy actually sees, and a
+            # sampler that skips every other frame near a fast-changing demand either
+            # catches the peak or misses it, which is what 2.61 against 1.90 m/s^2 with
+            # nothing in between looks like. F24.
             if J.speed_of(ego) > 1.0:
                 min_speed_mps = min(min_speed_mps, J.speed_of(ego))
             # Crossed when the plate is behind us: the distance starts growing again.
@@ -439,7 +454,7 @@ def main() -> int:
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
 
     if args.scenario == "plate":
         # Cells 5 and 6. The false-activation scenario passes by NOT stopping, so it does

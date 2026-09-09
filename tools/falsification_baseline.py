@@ -191,7 +191,7 @@ def main() -> int:
               f"lowest predicted demand at {ranking[0]['sun_altitude_deg']:+.3f} deg")
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
 
     searches = []
     t0 = time.time()

@@ -1,0 +1,73 @@
+[2026-09-09 16:36:52] === Town01  rendering=off ===
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+map Town01  rendering=off  spawn + tick + destroy  140 ticks/cycle  base 5.06 GB
+  cycle  1:   3.18 GB  (-1.88 this cycle, -1.88 total)      0.2 s   683.5 ticks/s
+  cycle  2:   3.18 GB  (+0.00 this cycle, -1.88 total)      0.1 s   1432.4 ticks/s
+  cycle  3:   3.19 GB  (+0.00 this cycle, -1.88 total)      0.1 s   1445.2 ticks/s
+  cycle  4:   3.19 GB  (+0.00 this cycle, -1.88 total)      0.1 s   1461.5 ticks/s
+  cycle  5:   3.15 GB  (-0.03 this cycle, -1.91 total)      0.1 s   1399.4 ticks/s
+  cycle  6:   3.09 GB  (-0.06 this cycle, -1.97 total)      0.1 s   1350.5 ticks/s
+
+growth per cycle: -0.328 GB
+[2026-09-09 16:37:09] === Town12  rendering=off ===
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+map Town12  rendering=off  spawn + tick + destroy  140 ticks/cycle  base 7.37 GB
+  cycle  1:   6.33 GB  (-1.04 this cycle, -1.04 total)      5.4 s    25.7 ticks/s
+  cycle  2:   6.47 GB  (+0.14 this cycle, -0.90 total)      5.2 s    27.1 ticks/s
+  cycle  3:   6.51 GB  (+0.04 this cycle, -0.86 total)      5.1 s    27.4 ticks/s
+  cycle  4:   6.53 GB  (+0.02 this cycle, -0.83 total)      5.3 s    26.6 ticks/s
+  cycle  5:   6.71 GB  (+0.18 this cycle, -0.65 total)      5.4 s    25.9 ticks/s
+  cycle  6:   7.01 GB  (+0.30 this cycle, -0.36 total)      5.5 s    25.6 ticks/s
+
+growth per cycle: -0.059 GB
+[2026-09-09 16:38:19] === Town13  rendering=off ===
+  loading Town13 (large maps take a while)
+  server age 1 min (R-SIM-1 ok)
+map Town13  rendering=off  spawn + tick + destroy  140 ticks/cycle  base 12.15 GB
+  cycle  1:  11.48 GB  (-0.67 this cycle, -0.67 total)     17.0 s     8.2 ticks/s
+  cycle  2:  12.15 GB  (+0.67 this cycle, -0.00 total)     58.4 s     2.4 ticks/s
+  cycle  3:  12.18 GB  (+0.03 this cycle, +0.03 total)     67.6 s     2.1 ticks/s
+  cycle  4:  12.24 GB  (+0.07 this cycle, +0.09 total)     70.1 s     2.0 ticks/s
+  cycle  5:  12.26 GB  (+0.02 this cycle, +0.11 total)     72.6 s     1.9 ticks/s
+  cycle  6:  12.27 GB  (+0.02 this cycle, +0.12 total)     76.4 s     1.8 ticks/s
+
+growth per cycle: +0.021 GB
+[2026-09-09 16:45:18] === Town01  rendering=on ===
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+map Town01  rendering=on  spawn + tick + destroy  140 ticks/cycle  base 5.06 GB
+  cycle  1:   3.34 GB  (-1.72 this cycle, -1.72 total)      0.4 s   326.6 ticks/s
+  cycle  2:   3.34 GB  (+0.00 this cycle, -1.72 total)      0.3 s   455.6 ticks/s
+  cycle  3:   3.34 GB  (+0.00 this cycle, -1.72 total)      0.3 s   441.8 ticks/s
+  cycle  4:   3.34 GB  (+0.00 this cycle, -1.72 total)      0.3 s   438.1 ticks/s
+  cycle  5:   3.30 GB  (-0.04 this cycle, -1.76 total)      0.3 s   442.3 ticks/s
+  cycle  6:   3.24 GB  (-0.06 this cycle, -1.81 total)      0.3 s   440.7 ticks/s
+
+growth per cycle: -0.302 GB
+[2026-09-09 16:45:44] === Town12  rendering=on ===
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+map Town12  rendering=on  spawn + tick + destroy  140 ticks/cycle  base 7.40 GB
+  cycle  1:   6.54 GB  (-0.86 this cycle, -0.86 total)      6.0 s    23.1 ticks/s
+  cycle  2:   6.63 GB  (+0.09 this cycle, -0.77 total)      5.2 s    27.1 ticks/s
+  cycle  3:   6.70 GB  (+0.07 this cycle, -0.70 total)      5.2 s    26.9 ticks/s
+  cycle  4:   6.68 GB  (-0.02 this cycle, -0.72 total)      5.3 s    26.6 ticks/s
+  cycle  5:   6.93 GB  (+0.25 this cycle, -0.47 total)      5.4 s    26.1 ticks/s
+  cycle  6:   7.18 GB  (+0.25 this cycle, -0.22 total)      5.4 s    25.8 ticks/s
+
+growth per cycle: -0.036 GB
+[2026-09-09 16:46:54] === Town13  rendering=on ===
+  loading Town13 (large maps take a while)
+  server age 1 min (R-SIM-1 ok)
+map Town13  rendering=on  spawn + tick + destroy  140 ticks/cycle  base 12.07 GB
+  cycle  1:  11.31 GB  (-0.76 this cycle, -0.76 total)     12.6 s    11.1 ticks/s
+  cycle  2:  11.71 GB  (+0.40 this cycle, -0.35 total)     43.3 s     3.2 ticks/s
+  cycle  3:  11.95 GB  (+0.23 this cycle, -0.12 total)     41.1 s     3.4 ticks/s
+  cycle  4:  12.10 GB  (+0.15 this cycle, +0.04 total)     46.2 s     3.0 ticks/s
+  cycle  5:  12.12 GB  (+0.02 this cycle, +0.05 total)     47.7 s     2.9 ticks/s
+  cycle  6:  12.20 GB  (+0.08 this cycle, +0.13 total)     52.3 s     2.7 ticks/s
+
+growth per cycle: +0.022 GB
+[2026-09-09 16:52:00] ALL DONE

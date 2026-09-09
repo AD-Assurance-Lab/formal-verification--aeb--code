@@ -149,7 +149,7 @@ def main() -> int:
         "range_m": s["range_m"]} for s in raw]
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
     default_az = world.get_weather().sun_azimuth_angle
 
     t0 = time.time()

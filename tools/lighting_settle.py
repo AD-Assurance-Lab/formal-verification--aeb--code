@@ -83,13 +83,15 @@ def main() -> int:
     dev = require_cuda()
     model, w, h = load_policy(args.policy, args.scenario, dev)
 
-    tag = f"{args.altitude:+.3f}".replace("+", "p").replace("-", "m").replace(".", "_")
-    if args.cloudiness != 10.0:
-        tag += f"_cloud{args.cloudiness:g}"
+    # The map is in the name. The Town01 curves are committed and the Town12 ones are a
+    # different measurement of a different road, and a file that overwrote the other would
+    # leave the repository holding one curve labelled as both.
+    tag = f"{J.MAP}_{args.altitude:+.3f}".replace("+", "p").replace("-", "m").replace(".", "_")
+    tag += f"_cloud{args.cloudiness:g}"
     out_path = J.claim_output(OUT / f"lighting_settle_{tag}.json")
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
     weather = world.get_weather()
     weather.sun_altitude_angle = args.altitude
     weather.cloudiness = args.cloudiness

@@ -126,7 +126,7 @@ def drive_one(args) -> int:
                         f"_{key}_rep{args.rep:02d}.json")
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site()
+    site = J.flattest_site(scenario=args.scenario)
     weather = world.get_weather()
     weather.sun_altitude_angle = mid
     weather.cloudiness = 10.0

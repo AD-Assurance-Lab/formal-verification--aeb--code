@@ -1,0 +1,7 @@
+[2026-09-09 16:57:24] restarting CARLA, then sweeping altitude 0.403 at cloudiness 10.0
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.403: mean 0.01050 -> 0.01332 (23.72% of final), settled at tick 3000 against a 120-tick settle; demand spans 0.0632 m/s^2
+  wrote results/carla/lighting_settle_Town12_p0_403_cloud10.json
+[2026-09-09 16:58:54] restarting CARLA, then sweeping altitude 0.013 at cloudiness 10.0
+  loading Town12 (large maps take a while)

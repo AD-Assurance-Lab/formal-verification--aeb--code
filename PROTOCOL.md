@@ -242,7 +242,10 @@ qualifies on:
 
 - straight clear run long enough to settle at speed and stop from 50 mph. The ego is
   launched at cruise speed rather than accelerated, so this is the settle distance plus
-  `r_req`: about 310 ft at 50 mph, and 400 ft is used with margin
+  `r_req`. **The requirement is read from the drivers, not quoted here**, because it has
+  already gone stale twice: the 310 ft this line used to carry was computed from the
+  pre-A12 `a_max`, and the false-activation approach actually asks `site_transform` for
+  320 m of junction-free lane. See A14
 - pedestrian crossing geometry, with sidewalk and walker navmesh on both sides
 - both lit and unlit stretches, since headlamp beam is a test variable
 - nothing about the posted limit. CARLA's declared limits are inconsistent between maps
@@ -255,9 +258,11 @@ reported it is read from the map's OpenDRIVE file, never from `get_speed_limit()
 returns the nearest sign prop or a default and disagrees with the declared limit on most
 towns.
 
-**Large maps are not usable on this hardware at all.** The hero tag is still required, and
-still works, but it is not sufficient. See amendment A3 for the measurement that moved this
-study to Town01.
+**Large maps were not usable on the hardware A3 measured, and are usable on this one.** The
+hero tag is still required and still not sufficient. A3 moved the study to Town01 on an
+RTX 4070 with 12 GB; A14 moves it to Town12 on an RTX 5090 with 32 GB, on the same probe.
+Read both, in that order: the first is why a large map was abandoned and the second is what
+changed.
 
 ---
 
@@ -726,3 +731,58 @@ not amended. What is disputed is the inference from it to a repetition floor, on
 grounds that verdict stability rather than frame identity is what the floor protected, and
 that is now measured here. The package is hash-locked and lab-wide; changing D-7 needs its
 section 4 procedure and is Zach's call.
+
+### A14. The map moves from Town01 to Town12, on the same probe A3 used
+
+**Date:** 2026-09-09. **Requested by:** Zach: the machine handles the large maps now, and
+they carry more scenario options. **Measured before adopting**, with `tools/probe_memory.py`
+at A3's own settings — 6 cycles, 140 ticks each, spawn/tick/destroy — because A3 is the
+amendment being reversed and it deserves its own instrument.
+
+| map | ticks/s, render off | ticks/s, render on | server memory | growth/cycle | restart to usable |
+|---|---|---|---|---|---|
+| Town01 | 1,418 | 444 | 3.1–3.2 GB | none | 17 s |
+| **Town12** | **26.5** | **26.5** | **7.0–7.4 GB** | **none** | **29 s** |
+| Town13 | 2.0 | 3.0 | 12.1–12.3 GB | +0.022 GB | 46 s |
+
+**A3's crashes are gone.** Town13 ran six cycles flat at 12 GB with no OOM and no
+RenderThread timeout, against A3's OOM kill at 58 GB resident and a segfault at 15 GB. The
+hardware was the whole of that problem. What survives is throughput: Town13 is still 150x
+slower than Town01 and nine times slower than Town12, and it is the only map of the three
+still growing. **Town12 is the large map that is actually usable**, and Town11 has a longer
+straight but a fifth of Town12's flat sites.
+
+**And the site requirement is why this is not merely a convenience.** Re-filtering the
+committed survey against what the drivers actually demand — `plate_run` asks
+`site_transform` for 320 m (1,050 ft) of junction-free lane at 50 mph, `one_run` for 200 m
+(656 ft) at 25 mph, both on flat road:
+
+| map | flat sites | qualifying for the plate | qualifying for the pedestrian | longest flat straight |
+|---|---|---|---|---|
+| **Town01** | 9 | **0** | 5 | 1,007 ft |
+| Town12 | 311 | 30 | 113 | 5,226 ft |
+| Town13 | 292 | 36 | 62 | 5,077 ft |
+
+**Town01 has no site that meets the false-activation scenario's own stated requirement.**
+Its longest flat straight is 1,007 ft against the 1,050 ft the driver asks for, and the
+runs complete only because `usable_run_m` measures junction-free LANE, which is a weaker
+criterion than the surveyed STRAIGHT and can continue into curve. Nothing is asserted to be
+wrong on that account — the driven portion, 10 m to 210 m, is inside the straight — but
+cells 5 and 6 have been running with no margin on a criterion the study wrote for itself,
+which is the class of defect standing rule 7 exists for.
+
+**What this costs.** Every measured artifact. Primitives, expert, captures, all three
+policies, both gates, every certificate and every drive are Town01 measurements and none of
+them transfers: the disturbance family is built from frames captured at poses on a specific
+road. This is an A12-scale rebuild and it is entered deliberately, not discovered halfway
+through.
+
+**What it does not change.** The claim, the properties, the ledger cells, the criterion,
+the primitives' definitions, or the expectations. Where the study runs, not what it tests —
+the same sentence A3 ends on.
+
+**Ordering that follows from it, and is not optional.** F23 is undecided and the whole
+capture campaign is about to be re-run. Deciding `cloudiness` AFTER recapturing means
+capturing twice, so F23's decision comes first and is now nearly free. Likewise the
+false-activation instrumentation gap in FINDINGS F22 is fixed before the plate is driven
+again, or the rebuild reproduces an invisible failure mode on a new map.

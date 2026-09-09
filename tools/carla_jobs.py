@@ -40,7 +40,13 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "results" / "carla"
 
-MAP = "Town01"
+# Overridable by CARLA_MAP for one reason: the Town01 artifacts are the only place the
+# open plate defect (F22/F24) can be settled, and once the Town12 rebuild lands that
+# evidence is gone. Measurement code reads this constant; nothing hard-codes a map.
+# A14: Town12. A3 had moved this to Town01 because large maps did not run on an RTX 4070;
+# on the 5090 Town12 holds 26.5 ticks/s flat at 7 GB, and Town01 has ZERO sites meeting the
+# false-activation scenario's own 320 m requirement against Town12's thirty.
+MAP = os.environ.get("CARLA_MAP", "Town12")
 FIXED_DT = 0.05  # 20 Hz, PROTOCOL section 1
 MPH = 0.44704  # mph -> m/s
 FT = 3.280839895  # m -> ft
@@ -555,21 +561,66 @@ def write(job: str, payload: dict) -> None:
     print(f"  wrote results/carla/{job}.json")
 
 
-def flattest_site(max_grade_pct: float = 0.5) -> dict:
-    """Longest straight that is actually flat.
+# What each scenario's driver actually asks site_transform for, in metres, and whether it
+# needs pavement beside the road. READ FROM HERE by the drivers rather than retyped, and
+# checked by flattest_site rather than assumed: PROTOCOL section 12 used to quote 310 ft,
+# which was computed from the pre-A12 a_max and was wrong by a factor of three by the time
+# anyone noticed. A14.
+SCENARIO_SITE = {
+    # one_run: gap_m 120, need_m = gap_m + 80
+    "lead":       {"need_m": 200.0, "sidewalk_both": False},
+    # one_run, plus a walker that has to start and finish off the carriageway
+    "ped":        {"need_m": 200.0, "sidewalk_both": True},
+    # plate_run: gap_m 200, need_m = gap_m + 120, at 50 mph
+    "plate":      {"need_m": 320.0, "sidewalk_both": False},
+    "none_plate": {"need_m": 320.0, "sidewalk_both": False},
+    # the primitives and the probes drive the ego alone and need only room to stop
+    "any":        {"need_m": 200.0, "sidewalk_both": False},
+}
+
+
+def flattest_site(max_grade_pct: float = 0.5, scenario: str = "any") -> dict:
+    """Longest FLAT straight that meets `scenario`'s stated requirements.
 
     Measured: the longest straight in Town13 runs at 1.35 percent, which biases a
     braking measurement by a couple of percent. The flat-road number is the one the
     safety budget wants, so length alone is the wrong sort order here.
+
+    **The scenario argument is not a convenience.** On Town01 one site served everything
+    and the argument would have been dead code. On Town12 the longest flat straight is
+    5,226 ft with THREE driving lanes and NO SIDEWALK ON EITHER SIDE, so the crossing
+    pedestrian has nowhere to start or finish, and a call that ignored the scenario would
+    have picked it and run -- producing a pedestrian scenario on a road that cannot have
+    one, with every number looking finished. That is standing rule 7's failure mode
+    exactly, so this refuses rather than falling back to the longest straight.
     """
+    req = SCENARIO_SITE.get(scenario)
+    if req is None:
+        raise RuntimeError(
+            f"scenario {scenario!r} has no site requirement; add it to SCENARIO_SITE "
+            f"rather than letting it inherit one")
+    need_ft = req["need_m"] * FT
     flat = [
         s
-        for s in top_sites(200)
+        for s in top_sites(2000)
         if s.get("grade_pct") is not None and abs(s["grade_pct"]) <= max_grade_pct
     ]
     if not flat:
-        raise RuntimeError(f"no straight flatter than {max_grade_pct}%")
-    return flat[0]
+        raise RuntimeError(f"no straight on {MAP} flatter than {max_grade_pct}%")
+    ok = [s for s in flat if s["run_ft"] >= need_ft]
+    if req["sidewalk_both"]:
+        ok = [s for s in ok if s.get("sidewalk_both_sides")]
+    if not ok:
+        raise RuntimeError(
+            f"no site on {MAP} qualifies for scenario {scenario!r}: needs a flat straight "
+            f"of at least {need_ft:.0f} ft"
+            + (" with sidewalk on both sides" if req["sidewalk_both"] else "")
+            + f". Longest flat straight is {max(s['run_ft'] for s in flat):.0f} ft"
+            + (f", longest with sidewalk both sides is "
+               f"{max((s['run_ft'] for s in flat if s.get('sidewalk_both_sides')), default=0):.0f} ft"
+               if req["sidewalk_both"] else "")
+            + ". Pick another map or another scenario; do not relax this silently.")
+    return ok[0]
 
 
 def top_sites(n: int = 8) -> list[dict]:
