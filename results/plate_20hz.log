@@ -1,0 +1,11 @@
+  rep 01  [+0.026,+0.000] at +0.013  PASS  server age 20.5s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep01.json
+  rep 02  [+0.026,+0.000] at +0.013  PASS  server age 20.509999999951106s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep02.json
+  rep 03  [+0.026,+0.000] at +0.013  PASS  server age 20.489999999990687s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep03.json
+  rep 04  [+0.026,+0.000] at +0.013  PASS  server age 20.60999999998603s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep04.json
+  rep 05  [+0.026,+0.000] at +0.013  PASS  server age 20.470000000030268s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep05.json
+  rep 06  [+0.026,+0.000] at +0.013  PASS  server age 20.44000000000233s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep06.json
+  rep 07  [+0.026,+0.000] at +0.013  PASS  server age 20.45000000001164s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep07.json
+  rep 08  [+0.026,+0.000] at +0.013  PASS  server age 20.510000000009313s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep08.json
+  rep 09  [+0.026,+0.000] at +0.013  PASS  server age 20.45000000001164s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep09.json
+  rep 10  [+0.026,+0.000] at +0.013  PASS  server age 20.449999999953434s  -> witness_P_cont_plate_p0.026_p0.000_20hz_rep10.json
+PLATE 20HZ DONE

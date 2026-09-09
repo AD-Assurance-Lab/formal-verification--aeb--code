@@ -6,6 +6,79 @@ here, never inside the protocol.
 
 ---
 
+## F24 — 2026-09-09, the false-activation driver ran at half the specified control rate, and it invented the plate result on both sides
+
+**Reopens:** F19's `P_cont` half. **Disposes:** the `P_cont`/plate split left open in F22.
+**Falsifies:** prediction 2 of the pre-registration addendum, which is recorded below
+rather than quietly dropped.
+
+`plate_run` ticked the world **twice per control iteration**. `J.grab_frame` at the top of
+the loop calls `world.tick()` and returns the frame that tick produced; a second bare
+`world.tick()` sat at the bottom. `one_run` has never had it. So the false-activation
+driver — cells 5 and 6, and nothing else — ran the closed loop at **10 Hz** where
+`PROTOCOL.md` section 3 fixes 20, with **7.3 ft** of quantization where section 3 states
+3.7, holding each throttle command across two physics steps while the PI integral used a
+one-step `dt`.
+
+### What it did to the measurement
+
+`P_cont` on the trench plate at +0.013°, ten repetitions, one freshly restarted server and
+one process each, identical in every respect except the extra tick:
+
+| | peak commanded deceleration | braked | verdict |
+|---|---|---|---|
+| **10 Hz** (as collected) | bimodal: 1.904, 1.914 and 2.605–2.618, nothing between | 8 of 10 | **2/10 pass** |
+| **20 Hz** (as specified) | **1.996 – 2.176**, ten repetitions | **0 of 10** | **10/10 pass** |
+| the limit | 2.4525 | | |
+
+**The 10 Hz values bracket the truth on both sides.** Neither mode was real: the low mode
+sat 5% below the correct value and the high mode 20% above it, and only the high mode
+crossed the nuisance limit. This is not a sampler missing a peak, which was the
+pre-registered guess — it is the trajectory itself being different, because the control was
+held across two physics steps. The plate was fully placed on every run, nine tiles of nine,
+so the partial-placement candidate is eliminated by measurement rather than by argument.
+
+### What it costs, and it is a headline
+
+F19 read `P_cont` as **the only arm that brakes for the steel**: at +0.013° the plate was
+said to add 22% to peak demand and carry it from 90.6% to 110.5% of the limit, the only
+place in any arm where the plate changes a verdict, and therefore *"the first empirical
+confirmation that the sliver cannot be certified"*.
+
+**At the specified control rate `P_cont` does not brake on the plate at +0.013° at all.**
+It peaks at 89% of the limit and crosses the plate still moving, ten times out of ten. So:
+
+- **the study's only certified-then-failed sub-interval was a driver defect.** With it
+  gone the count is zero, across every cell and every arm — which is a *stronger* result
+  for the certificate than the one that was written down, not a weaker one;
+- F19's `P_cont` half is withdrawn pending a re-drive, and with it section 9's "sleeper is
+  awake" reading. Its `P_pts` half is untouched by this: `P_pts` commands 138% of the limit
+  at +0.403° with the plate and 3.382 against 3.381 without it, and neither number depends
+  on the brake latching;
+- **every plate measurement in the study was collected at 10 Hz** — cells 5 and 6, F18,
+  F19, and the plate figure. They stand as collected, on a driver that did not conform to
+  the protocol, and they are not carried into the Town12 rebuild.
+
+### The pre-registered prediction that failed
+
+The addendum predicted the cell would go **unanimously to FAIL** with peaks at or above
+2.6, reasoning that a 20 Hz sampler cannot miss a peak a 10 Hz sampler sometimes catches.
+It went unanimously to PASS at 2.0–2.2. The reasoning assumed the extra tick subsampled an
+otherwise identical trajectory; it changed the trajectory. Prediction 1 held — the cell is
+unanimous — and prediction 3 held in spirit: the residual spread is two tight speed modes,
+19.996 and 20.327 m/s, and the peak tracks them at 2.00 against 2.17. That bimodality is
+still there and no longer crosses anything.
+
+### Why it was found at all
+
+Only because a repetition disagreement was treated as a bug and chased. It survived the
+shared-server harness, the per-repetition restart, F22's write-up — where it was filed as
+an amplifying policy and left void — and it would have survived into the paper. **A cell
+whose repetitions disagree has been a bug every time in this lab**, and the three that
+turned up in this study are now F21, F23 and F24. Void is where the hunt starts.
+
+---
+
 ## F23 — 2026-09-09, CARLA's cloud layer moves under fixed weather, so "the same illumination" drifts 3.9% with elapsed simulation time
 
 **The scene this study calls a condition is not static.** Held on the brake, camera rigid,
@@ -97,7 +170,7 @@ had open — plus two controls that were unanimous.
 | `P_pts` / lead [+0.779°, +0.026°] | 9/10 | **10/10** | F21 scoring defect |
 | `P_pts` / lead at-witness [+0.026°, +0.000°] | 8/10 | **10/10** | F21 scoring defect |
 | `P_pts3` / ped [+0.779°, +0.026°] | 2/10 | **10/10** | F23 cloud drift |
-| `P_cont` / plate [+0.026°, +0.000°] | 6/10 | **2/10, still split** | OPEN, E1 |
+| `P_cont` / plate [+0.026°, +0.000°] | 6/10 | **2/10, still split** | the driver, F24 |
 | CONTROL `P_cont` / lead [+60.000°, +42.766°] | 10/10 | 3/3 | — |
 | CONTROL `P_pts3` / lead [+10.128°, +7.715°] | 0/10 | 0/3 | — |
 
@@ -115,7 +188,7 @@ interval over any of them would have described a failure rate that does not exis
   1,000 ticks with nothing spawned reproduces both the drifted brightness (0.06425) and
   the failure, so the cause follows elapsed simulated time and not spawn churn. F23 names
   it.
-- **`P_cont`/plate. Open, and filed wrongly the first time.** Scene means are stable to
+- **`P_cont`/plate. CLOSED by F24, and filed wrongly twice before that.** Scene means are stable to
   3e-5 across all ten fresh-server repetitions and the cell still splits, 2/10, with peak
   demand bimodal at 1.90–1.91 against 2.61–2.62 m/s² and nothing in between. This was
   first written up as D-10 amplification and therefore VOID, and that was the wrong place
@@ -328,6 +401,13 @@ that mattered — *the policy is responding to the steel* — is ruled out by th
 drive level, not only in the certificate (F18).
 
 ### `P_cont`: the section 9 sleeper, awake, and it IS the plate
+
+> **WITHDRAWN 2026-09-09, see F24.** Everything in this subsection was measured on a
+> driver running at 10 Hz where PROTOCOL section 3 specifies 20. At the specified rate
+> `P_cont` does not brake on the plate at +0.013°: it peaks at 2.00–2.18 m/s² against a
+> 2.4525 limit and crosses the plate still moving, ten repetitions out of ten. The text
+> below is left as collected, because a disposition explains a contradiction and does not
+> erase it, but **nothing in it may be quoted**.
 
 One sub-interval in 102 behaves differently with the steel there:
 

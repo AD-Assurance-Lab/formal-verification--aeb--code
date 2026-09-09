@@ -5,3 +5,27 @@
   wrote results/carla/lighting_settle_Town12_p0_403_cloud10.json
 [2026-09-09 16:58:54] restarting CARLA, then sweeping altitude 0.013 at cloudiness 10.0
   loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.013: mean 0.00682 -> 0.00934 (28.48% of final), settled at tick 2960 against a 120-tick settle; demand spans 0.0679 m/s^2
+  wrote results/carla/lighting_settle_Town12_p0_013_cloud10.json
+[2026-09-09 17:00:25] restarting CARLA, then sweeping altitude 51.383 at cloudiness 10.0
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +51.383: mean 0.16394 -> 0.17861 (10.96% of final), settled at tick 2600 against a 120-tick settle; demand spans 0.1746 m/s^2
+  wrote results/carla/lighting_settle_Town12_p51_383_cloud10.json
+[2026-09-09 17:01:52] restarting CARLA, then sweeping altitude 0.403 at cloudiness 0.0
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.403: mean 0.01071 -> 0.01331 (19.68% of final), settled at tick 2760 against a 120-tick settle; demand spans 0.0245 m/s^2
+  wrote results/carla/lighting_settle_Town12_p0_403_cloud0.json
+[2026-09-09 17:03:23] restarting CARLA, then sweeping altitude 0.013 at cloudiness 0.0
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.013: mean 0.00729 -> 0.00971 (25.13% of final), settled at tick 2920 against a 120-tick settle; demand spans 0.0228 m/s^2
+  wrote results/carla/lighting_settle_Town12_p0_013_cloud0.json
+[2026-09-09 17:04:53] restarting CARLA, then sweeping altitude 51.383 at cloudiness 0.0
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +51.383: mean 0.15337 -> 0.16614 (7.73% of final), settled at tick 100 against a 120-tick settle; demand spans 0.1018 m/s^2
+  wrote results/carla/lighting_settle_Town12_p51_383_cloud0.json
+[2026-09-09 17:06:21] ALL DONE

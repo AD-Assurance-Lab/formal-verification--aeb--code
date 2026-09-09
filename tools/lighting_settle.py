@@ -75,8 +75,16 @@ def main() -> int:
                          "a fixed weather is not a static scene; pass 0.0 to test "
                          "whether the drift is the clouds.")
     ap.add_argument("--band", type=float, default=0.002,
-                    help="relative band the signature must stay inside for the rest of "
-                         "the sweep before that tick counts as settled")
+                    help="RELATIVE band, kept for continuity. Misleading on a dark scene: "
+                         "0.2%% of a mean of 0.011 is 2.2e-5, finer than the renderer's "
+                         "own floor, so a scene that settles perfectly reads as never "
+                         "settling. Judge on --band-abs.")
+    ap.add_argument("--band-abs", type=float, default=0.0005,
+                    help="ABSOLUTE band on the 0-1 image scale, and the one to read. "
+                         "0.0005 is about an eighth of a grey level at 8 bits, which is "
+                         "below anything the policy resolves and above the render floor. "
+                         "A relative band cannot be used across a 15x range of scene "
+                         "brightness, which is what the horizon-to-daylight axis is.")
     args = ap.parse_args()
 
     carla = J.carla_module()
@@ -133,15 +141,24 @@ def main() -> int:
 
     means = [s["mean"] for s in samples]
     final = means[-1]
-    # First sample after which every later sample stays inside the band. Read from the
-    # END backwards, so a curve that wanders back out later cannot be called settled.
-    settled_at = samples[-1]["tick"]
-    for i in range(len(samples) - 1, -1, -1):
-        if abs(means[i] - final) / max(final, 1e-9) > args.band:
-            settled_at = samples[min(i + 1, len(samples) - 1)]["tick"]
-            break
-    else:
-        settled_at = samples[0]["tick"]
+
+    def settle_tick(tol: float, relative: bool) -> int:
+        """First tick after which every later sample stays inside `tol`.
+
+        Read from the END backwards, so a curve that wanders back out later cannot be
+        called settled."""
+        for i in range(len(samples) - 1, -1, -1):
+            d = abs(means[i] - final)
+            if (d / max(final, 1e-9) if relative else d) > tol:
+                return samples[min(i + 1, len(samples) - 1)]["tick"]
+        return samples[0]["tick"]
+
+    settled_at = settle_tick(args.band_abs, relative=False)
+    settled_at_rel = settle_tick(args.band, relative=True)
+    # What is left AFTER the settle, which is the number the cloudiness decision turns on.
+    # The transient before it is removed by settling longer; this is not.
+    post = [m for m, sm in zip(means, samples) if sm["tick"] >= settled_at]
+    post_drift = (max(post) - min(post)) if post else 0.0
 
     demands = [s["demand_mps2"] for s in samples]
     payload = {
@@ -155,7 +172,10 @@ def main() -> int:
         "mean_final": final,
         "mean_min": min(means), "mean_max": max(means),
         "drift_frac_of_final": round((max(means) - min(means)) / max(final, 1e-9), 5),
+        "band_abs": args.band_abs,
         "settled_at_tick": settled_at,
+        "settled_at_tick_relative_band": settled_at_rel,
+        "post_settle_drift": round(post_drift, 6),
         "settled_within_protocol_settle": settled_at <= J.WEATHER_SETTLE_TICKS,
         "demand_min": round(min(demands), 6), "demand_max": round(max(demands), 6),
         "demand_range": round(max(demands) - min(demands), 6),

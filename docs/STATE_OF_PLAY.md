@@ -138,12 +138,15 @@ found three things the ten-repetition floor had been hiding (F22):
 
 - Of 281 committed ten-repetition cells, **277 are unanimous and 4 are split**, and not
   one of the four is a draw from a rate.
-- Two of the four were an instrument defect (F21). One stays split on the clean harness and
-  is **an open bug**, not a resting state: under a fully enforced harness a repetition
-  disagreement has been a bug every time in this lab, so void is where the hunt starts.
-  It also fails harder there, 2/10 rather than the shared server's 6/10, and it is the
-  study's only certified-then-failed sub-interval, so F19 rests on it
-  (`docs/PAPER_PLAN_2026-09-09.md` E1).
+- **All four were bugs.** Two were F21's scoring defect. One was the simulator drifting
+  (F23). The fourth was chased rather than left void, and it was the worst of them:
+  `plate_run` ticked the world twice per control iteration, so the false-activation driver
+  ran at **10 Hz where PROTOCOL section 3 specifies 20**. At the specified rate the cell is
+  unanimous 10/10 and never reaches the nuisance limit — **the study's only
+  certified-then-failed sub-interval was a driver defect** (F24), the count is now zero
+  everywhere, and F19's `P_cont` half is withdrawn. Under a fully enforced harness a
+  repetition disagreement has been a bug every time in this lab; three repetitions exist to
+  find it, and void is where the hunt starts, not where it stops.
 - The fourth was the simulator moving underneath the measurement, which is F23 and is the
   finding with the longest reach.
 

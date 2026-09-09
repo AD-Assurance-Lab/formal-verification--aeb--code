@@ -298,3 +298,100 @@ Terminated
   server pid 3575785 on port 3000, 15 s old
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated
+  server pid 3579300 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated
+  server pid 3582660 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated
+  server pid 3586081 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated
+  server pid 3589539 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3589529 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3593078 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3593069 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3593381 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3593371 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3593678 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3593669 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3593980 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3593970 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3594324 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3594314 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3594622 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3594612 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3594925 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3594916 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3595225 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3595215 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3595561 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3595551 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3595862 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3595852 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3596197 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3596188 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3596699 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3596689 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3597249 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3597240 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3597758 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3597748 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3598262 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3598252 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3598765 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3598756 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3599271 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3599261 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3599818 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3599808 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3600324 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3600314 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null
+  server pid 3600825 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+tools/carla_launch.sh: line 54: 3600815 Killed                  setsid nohup ./CarlaUE4.sh -carla-rpc-port="$PORT" -RenderOffScreen -quality-level=Epic -notexturestreaming >> "$LOG" 2>&1 < /dev/null

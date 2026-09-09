@@ -122,11 +122,12 @@ def drive_one(args) -> int:
     # of the measurement it was supposed to be compared against. D-9's rule is that a
     # crashed repetition must leave no artifact; it is not a licence to delete one that
     # this invocation is never going to replace.
+    _tag = f"_{args.tag}" if args.tag else ""
     out_path = (PROBE / f"{artifact_name(args.policy, args.scenario, args.at_witness)}"
-                        f"_{key}_rep{args.rep:02d}.json")
+                        f"_{key}{_tag}_rep{args.rep:02d}.json")
 
     client, world = J.connect(rendering=True)
-    site = J.flattest_site(scenario=args.scenario)
+    site = J.flattest_site(scenario=args.site_scenario or args.scenario)
     weather = world.get_weather()
     weather.sun_altitude_angle = mid
     weather.cloudiness = 10.0
@@ -198,6 +199,9 @@ def drive_one(args) -> int:
         "provenance": {"git_sha": _git_sha(), "reference_artifact": ref_path.name},
     }
     record["shared_server"] = False
+    record["site_scenario"] = args.site_scenario or args.scenario
+    record["site_run_ft"] = site["run_ft"]
+    record["tag"] = args.tag
     record["idle_ticks"] = args.idle_ticks
     record["server_age_s"] = record["determinism"].get("server_age_s")
     out_path.write_text(json.dumps(record, indent=2) + "\n")
@@ -244,6 +248,8 @@ def report() -> int:
             continue      # a different harness; the A/B, never pooled with it
         if r.get("idle_ticks"):
             continue      # a deliberately perturbed control, not a repetition
+        if r.get("tag"):
+            continue      # a re-drive under a changed harness; compared, never pooled
         # Both exclusions exist because the first version of this report pooled the
         # 1,000-idle-tick control in with the repetitions and moved a cell from 10/10 to
         # 9/10. A diagnostic run silently counted as a measurement is this repository's
@@ -329,6 +335,20 @@ def main() -> int:
     ap.add_argument("--to-deg", type=float)
     ap.add_argument("--rep", type=int)
     ap.add_argument("--at-witness", action="store_true")
+    ap.add_argument(
+        "--site-scenario", default=None,
+        help="pick the site as if for THIS scenario instead of --scenario. Exists for one "
+             "job: reproducing a historical measurement whose site would no longer "
+             "qualify. Town01's longest flat straight is 1,007 ft and the plate scenario "
+             "asks for 1,050, so every committed Town01 plate result was collected on a "
+             "site the current guard refuses -- and a re-drive that silently moved to a "
+             "different site would not be a re-drive. Passed explicitly, recorded in the "
+             "artifact, and never a fallback.")
+    ap.add_argument("--tag", default="",
+                    help="suffix for the artifact names, so a re-drive under a CHANGED "
+                         "harness does not overwrite the run it is being compared "
+                         "against. The comparison is the measurement; losing one half of "
+                         "it to a filename collision loses the whole thing.")
     ap.add_argument(
         "--idle-ticks", type=int, default=0,
         help="tick the world this many times after the weather settle and before "
