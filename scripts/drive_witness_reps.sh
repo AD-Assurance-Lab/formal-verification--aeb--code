@@ -27,14 +27,21 @@ REPO=$PWD
 PY="$REPO/.venv/bin/python"
 POLICY=${1:?usage: drive_witness_reps.sh <policy> <scenario> [--at-witness]}
 SCENARIO=${2:?usage: drive_witness_reps.sh <policy> <scenario> [--at-witness]}
-ATW=${3:-}
+shift 2 || true
+EXTRA=("$@")          # --at-witness, or --interior K, passed to the driver AND the merge
+ATW=""
+case " ${EXTRA[*]} " in *" --at-witness "*) ATW="--at-witness" ;; esac
+INTERIOR=""
+for i in "${!EXTRA[@]}"; do
+  [ "${EXTRA[$i]}" = "--interior" ] && INTERIOR="_interior${EXTRA[$((i+1))]}"
+done
 export CARLA_PORT=${CARLA_PORT:-3000}
 export CARLA_TAKEOVER=1
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH
 export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
 REPS=${REPS:-$("$PY" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(J.REPS_RESTARTED)")}
-LOG=$REPO/results/witness_reps_${POLICY}_${SCENARIO}${ATW:+_atwitness}.log
+LOG=$REPO/results/witness_reps_${POLICY}_${SCENARIO}${ATW:+_atwitness}${INTERIOR}.log
 say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
 stop_server() {
@@ -53,15 +60,15 @@ stop_server() {
   done
 }
 
-say "M7 for $POLICY/$SCENARIO ${ATW:-midpoint}: $REPS repetitions, one server each"
+say "M7 for $POLICY/$SCENARIO ${EXTRA[*]:-midpoint}: $REPS repetitions, one server each"
 for rep in $(seq 1 "$REPS"); do
   say "restart before repetition $rep of $REPS"
   stop_server
   bash tools/carla_launch.sh >>"$REPO/results/carla_launch.log" 2>&1 \
     || { say "FATAL: server would not start"; exit 1; }
-  name="witness_${POLICY}_${SCENARIO}${ATW:+_atwitness}_rep${rep}"
+  name="witness_${POLICY}_${SCENARIO}${ATW:+_atwitness}${INTERIOR}_rep${rep}"
   "$PY" tools/drive_witness.py --policy "$POLICY" --scenario "$SCENARIO" \
-      --reps 1 --rep-index "$rep" $ATW >"$REPO/results/${name}.log" 2>&1
+      --reps 1 --rep-index "$rep" "${EXTRA[@]}" >"$REPO/results/${name}.log" 2>&1
   rc=$?
   if [ $rc -ne 0 ]; then
     say "repetition $rep FAILED rc=$rc. Tail of results/${name}.log:"
@@ -74,7 +81,8 @@ for rep in $(seq 1 "$REPS"); do
 done
 
 say "merging"
-"$PY" tools/merge_witness_reps.py --policy "$POLICY" --scenario "$SCENARIO" $ATW 2>&1 | tee -a "$LOG"
+"$PY" tools/merge_witness_reps.py --policy "$POLICY" --scenario "$SCENARIO" \
+    "${EXTRA[@]}" 2>&1 | tee -a "$LOG"
 rc=${PIPESTATUS[0]}
 say "merge rc=$rc$([ "$rc" -ne 0 ] && echo '  -- VOID cells present, see above')"
 exit "$rc"

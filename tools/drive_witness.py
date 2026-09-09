@@ -62,6 +62,15 @@ def main() -> int:
     ap.add_argument("--scenario", default="lead")
     ap.add_argument("--reps", type=int, default=J.REPS)
     ap.add_argument(
+        "--interior", type=int, default=0, metavar="K",
+        help="drive K illuminations spread across EACH sub-interval instead of one. This "
+             "is the dense interior sweep: the certificate quantifies over the whole "
+             "family and a drive can only ever apply one rendered illumination, so the "
+             "drivable slice is a one-dimensional curve through it, and K points per "
+             "sub-interval is how finely that curve gets measured. K must be odd, so the "
+             "midpoint is one of them and the sweep contains its own cross-check against "
+             "the ordinary midpoint pass.")
+    ap.add_argument(
         "--rep-index", type=int, default=None,
         help="drive ONE repetition of every sub-interval and write it to its own "
              "artifact under results/carla/witness_reps/. The shell restarts the "
@@ -121,7 +130,15 @@ def main() -> int:
 
     # D-9: claimed before the first run, so a crashed drive leaves no witness artifact
     # rather than an earlier one that every consumer would treat as current.
-    _sfx = "_atwitness" if args.at_witness else ""
+    if args.interior:
+        if args.at_witness:
+            raise SystemExit("--interior sweeps a sub-interval; --at-witness drives one "
+                             "exhibited point in it. Pick one.")
+        if args.interior % 2 == 0:
+            raise SystemExit(f"--interior must be odd so the midpoint is included and the "
+                             f"sweep cross-checks the midpoint pass; got {args.interior}")
+    _sfx = ("_atwitness" if args.at_witness
+            else f"_interior{args.interior}" if args.interior else "")
     if args.rep_index is None:
         out_path = J.claim_output(
             OUT / f"witness_{args.policy}_{args.scenario}{_sfx}.json")
@@ -155,17 +172,33 @@ def main() -> int:
                   "nothing to drive")
             return 0
 
-    rows = []
-    sig_records = []
-    agree = 0
-    for cell in cells_to_drive:
+    def altitudes_for(cell) -> list[float]:
+        """Which rendered illuminations this pass drives inside one sub-interval.
+
+        One value for the ordinary passes. For --interior K, K values at equal fractions
+        strictly inside the sub-interval, (2i+1)/2K for i in 0..K-1, so no point lands on
+        a knot -- a knot is a rendered endpoint that the family is built FROM, and driving
+        it tests the endpoint rather than the interior. K odd puts the midpoint at the
+        centre, which is the point the ordinary pass already drove."""
+        lo, hi = cell["from_deg"], cell["to_deg"]
         if args.at_witness:
             # s runs from the sub-interval's BRIGHT knot at -1 to its DARK knot at +1:
             # tools/verify.py builds the family with the hi_alt frame as the s = -1 end.
-            s = cell["witness_s"]
-            mid = cell["from_deg"] + (s + 1.0) / 2.0 * (cell["to_deg"] - cell["from_deg"])
-        else:
-            mid = (cell["from_deg"] + cell["to_deg"]) / 2.0
+            return [lo + (cell["witness_s"] + 1.0) / 2.0 * (hi - lo)]
+        if not args.interior:
+            return [(lo + hi) / 2.0]
+        K = args.interior
+        return [lo + (2 * i + 1) / (2.0 * K) * (hi - lo) for i in range(K)]
+
+    plan = [(cell, alt) for cell in cells_to_drive for alt in altitudes_for(cell)]
+    if args.interior:
+        print(f"  interior sweep: {len(cells_to_drive)} sub-intervals x {args.interior} "
+              f"illuminations = {len(plan)} points, {reps} repetition(s) each", flush=True)
+
+    rows = []
+    sig_records = []
+    agree = 0
+    for cell, mid in plan:
         weather = world.get_weather()
         weather.sun_altitude_angle = mid
         weather.cloudiness = J.CLOUDINESS
@@ -194,7 +227,9 @@ def main() -> int:
             rows.append({
                 "from_deg": cell["from_deg"], "to_deg": cell["to_deg"],
                 "midpoint_deg": round(mid, 3), "driven_at_deg": round(mid, 3),
-                "driven_at": "witness" if args.at_witness else "midpoint",
+                "driven_at": ("witness" if args.at_witness
+                              else "interior" if args.interior else "midpoint"),
+                "interior_of": args.interior or None,
                 "witness_s": cell.get("witness_s"),
                 "verdict": cell["verdict"],
                 **ST.rate(passes_protocol, reps),
@@ -272,7 +307,9 @@ def main() -> int:
                 "to_deg": cell["to_deg"],
                 "midpoint_deg": round(mid, 3),
                 "driven_at_deg": round(mid, 3),
-                "driven_at": "witness" if args.at_witness else "midpoint",
+                "driven_at": ("witness" if args.at_witness
+                              else "interior" if args.interior else "midpoint"),
+                "interior_of": args.interior or None,
                 "witness_s": cell.get("witness_s"),
                 "verdict": cell["verdict"],
                 **ST.rate(passes_protocol, args.reps),
@@ -321,12 +358,33 @@ def main() -> int:
     # The at-witness pass can land several sub-intervals on the SAME rendered knot, so
     # its altitude set is not the spread the axis check is written for. Checked when the
     # pass sweeps the axis, recorded either way.
+    illumination_dense = None
     if args.at_witness and len({r["sun_altitude_deg"] for r in sig_records}) < 3:
         illumination = CS.check_axis(sig_records, uncovered=load_uncovered())
+    elif args.interior:
+        # ASSERTED on the midpoints and RECORDED on the full sweep, not the other way
+        # round. The check's tolerances were calibrated against one altitude per
+        # sub-interval; five per sub-interval samples the horizon band far more finely
+        # than it was written for, and F6 already measured that CARLA's scene brightness
+        # is not monotone in sun altitude there. Loosening the guard to accommodate the
+        # denser set would weaken it on the set it was built for, which is the set that
+        # catches a sun that never moved. So the guard runs at full strength on the
+        # midpoints, and the dense curve is recorded beside it for reading.
+        mids = {}
+        for cell in cells_to_drive:
+            mid = round((cell["from_deg"] + cell["to_deg"]) / 2.0, 3)
+            near = min(sig_records, key=lambda r: abs(r["sun_altitude_deg"] - mid))
+            mids[near["sun_altitude_deg"]] = near
+        illumination = CS.assert_axis(list(mids.values()), uncovered=load_uncovered())
+        illumination_dense = CS.check_axis(sig_records, uncovered=load_uncovered())
     else:
         illumination = CS.assert_axis(sig_records, uncovered=load_uncovered())
     print(f"\n  illumination axis OK: {illumination['knots']} midpoints, span "
           f"{illumination['axis_span_mean']:.4f} of full range")
+    if illumination_dense is not None:
+        print(f"  dense sweep recorded: {illumination_dense['knots']} illuminations, "
+              f"monotone_ok={illumination_dense['monotone_ok']}, "
+              f"span {illumination_dense['axis_span_mean']:.4f}")
 
     # The model that was LOADED, not the scenario name. For the plate cells those differ
     # -- there is no P_pts_plate.pt -- and hashing a path that does not exist yields a
@@ -344,6 +402,7 @@ def main() -> int:
         # a constant. CARLA_DETERMINISM_PENDING.md adoption item 5.
         "determinism": J.determinism_provenance(world),
         "illumination": illumination,
+        "illumination_dense": illumination_dense,
         "agreement": f"{agree}/{len(rows)}",
         "cells": rows,
         "note": (

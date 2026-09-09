@@ -39,11 +39,16 @@ REPS_DIR = OUT / "witness_reps"
 
 
 def key_of(cell: dict) -> tuple:
-    return (round(cell["from_deg"], 6), round(cell["to_deg"], 6))
+    # The DRIVEN ILLUMINATION is part of the key, not just the sub-interval. An interior
+    # sweep puts several driven points inside one sub-interval, and keying on the
+    # sub-interval alone would silently merge five different conditions into one cell.
+    return (round(cell["from_deg"], 6), round(cell["to_deg"], 6),
+            round(cell["driven_at_deg"], 3))
 
 
-def merge(policy: str, scenario: str, at_witness: bool) -> int:
-    sfx = "_atwitness" if at_witness else ""
+def merge(policy: str, scenario: str, at_witness: bool, interior: int = 0) -> int:
+    sfx = ("_atwitness" if at_witness
+           else f"_interior{interior}" if interior else "")
     stem = f"witness_{policy}_{scenario}{sfx}"
     paths = sorted(REPS_DIR.glob(f"{stem}_rep*.json"))
     if not paths:
@@ -66,7 +71,7 @@ def merge(policy: str, scenario: str, at_witness: bool) -> int:
         alts = {round(d["cells"][i]["driven_at_deg"], 3) for d in docs}
         if len(alts) != 1:
             raise SystemExit(
-                f"{stem}: sub-interval {key} was driven at {sorted(alts)} deg across "
+                f"{stem}: point {key} was driven at {sorted(alts)} deg across "
                 f"repetitions. Scope is recomputed from the primary data and this is it.")
 
     plate = scenario in ("plate", "none_plate")
@@ -152,8 +157,9 @@ def main() -> int:
     ap.add_argument("--policy", required=True)
     ap.add_argument("--scenario", default="lead")
     ap.add_argument("--at-witness", action="store_true")
+    ap.add_argument("--interior", type=int, default=0)
     args = ap.parse_args()
-    return merge(args.policy, args.scenario, args.at_witness)
+    return merge(args.policy, args.scenario, args.at_witness, args.interior)
 
 
 if __name__ == "__main__":
