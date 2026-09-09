@@ -1,0 +1,16 @@
+
+20 braking runs on a 2094.2 ft straight
+
+    speed   n   a worst  a median   spread   t_lat   grade
+      25m  10    0.4990    0.4990   0.0002   0.150   -0.86
+      50m  10    0.6575    0.6575   0.0000   0.150   -0.88
+
+  a_max = 0.4990 g (worst of 20), t_lat = 0.150 s
+  d_margin = 1.0 m (3.3 ft), declared not fitted
+
+    speed      r_req      r_req
+      25m      16.0 m      52.5 ft
+      50m      56.5 m     185.4 ft
+
+  recorded in study/results.json (M2's state is carla_jobs' to set, not this tool's)
+

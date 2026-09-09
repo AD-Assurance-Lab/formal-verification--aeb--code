@@ -58,7 +58,7 @@ WHY_A_SIDECAR = (
     "to fix a label moves it after its own witness drive and breaks the ordering proof. "
     "The verdicts, bounds, margins and witnesses in those files are correct and untouched."
 )
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 STATES_FOR = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}
 
 

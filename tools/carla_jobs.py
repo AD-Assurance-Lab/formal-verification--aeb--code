@@ -75,6 +75,13 @@ WEATHER_SETTLE_TICKS = 120
 # on Town01 that wander was enough to flip a brake decision and produce eight pedestrian
 # contacts the same cell does not produce on a fresh server.
 CLOUDINESS = 0.0
+
+# WHERE THE FRAMES LIVE, in one place and scoped by map. Eleven modules had this path
+# re-typed as a literal, which is the shape of defect this repository keeps writing down --
+# and it bit exactly as predicted: F26. The captures directory was flat and keyed on
+# scenario and sun altitude, so a campaign on a new map silently reused every frame set
+# whose knot happened to coincide with an old one, including both regulatory endpoints.
+CAPTURES = REPO / "results" / "captures" / MAP
 # TWO FLOORS, and which one applies is a property of the HARNESS, not a preference.
 #
 # REPS is the floor for repetitions that share a process and a server, which is what a

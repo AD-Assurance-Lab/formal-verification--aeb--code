@@ -35,7 +35,13 @@ import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 import scenarios as S  # noqa: E402
 
-OUT = J.REPO / "results" / "captures"
+# MAP-SCOPED. Captures used to land in one flat directory keyed on scenario and sun
+# altitude, and the resume-skip below tested only whether that filename existed -- so a
+# campaign on a new map silently reused every frame set whose knot altitude happened to
+# coincide with an old one. Measured on the A14 rebuild: Town12's axis shares exactly three
+# knots with Town01's, and TWO OF THEM ARE THE REGULATORY ENDPOINTS, +60 and -30, which are
+# the two frames the entire disturbance family is built between. See FINDINGS F26.
+OUT = J.CAPTURES
 LEAD_GAP_M = 120.0
 PED_GAP_M = 120.0
 # The false-activation approach is run at 50 mph per FMVSS 127, so it needs more room:
@@ -62,6 +68,51 @@ PED_LEAD_MARGIN_M = 8.0
 # values along sun altitude, and a different headlamp state at the same altitude is a
 # different scene, not a point on that line.
 HIGHBEAM_KNOT = -30.0
+
+
+def capture_harness() -> dict:
+    """What a frame set has to match to be reusable. Kept deliberately small: every field
+    here is something that changes what is IN the frame, and nothing here is a timestamp
+    or a path, because those differ between two legitimately identical campaigns."""
+    det = J.determinism_provenance()
+    return {
+        "map": J.MAP,
+        "cloudiness": J.CLOUDINESS,
+        "weather_settle_ticks": J.WEATHER_SETTLE_TICKS,
+        "rules_digest": det.get("rules_digest"),
+        "notexturestreaming": det.get("notexturestreaming"),
+        "quality_level": det.get("quality_level"),
+    }
+
+
+def stamp_mismatch(path, knot: float) -> str | None:
+    """None if the frame set on disk was made by the harness running now.
+
+    Returns a short human description of the FIRST disagreement otherwise. An unstamped
+    file is a mismatch by definition: it predates F26 and there is no way to tell what
+    made it."""
+    try:
+        z = np.load(path, allow_pickle=True)
+    except Exception as exc:
+        return f"unreadable: {exc}"
+    if "harness" not in z:
+        return "no harness stamp; predates F26"
+    try:
+        was = json.loads(str(z["harness"]))
+    except Exception:
+        return "unreadable harness stamp"
+    now = capture_harness()
+    for k, v in now.items():
+        if v is None:
+            continue                      # nothing to compare against
+        if was.get(k) != v:
+            return f"{k} {was.get(k)!r} -> {v!r}"
+    # The altitude is in the filename, and a filename is a claim about a file. Check it
+    # against what the file itself recorded.
+    if "sun_altitude_deg" in z and abs(float(z["sun_altitude_deg"]) - knot) > 1e-3:
+        return (f"file says sun {float(z['sun_altitude_deg']):+.3f} deg, "
+                f"this knot is {knot:+.3f}")
+    return None
 
 
 def capture_stem(scenario: str, knot: float, highbeam: bool) -> str:
@@ -343,20 +394,31 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     for knot in knots:
         out_path = OUT / f"{capture_stem(scenario, knot, highbeam)}.npz"
         if out_path.exists():
-            # A skipped knot still contributes its signature, read back out of the npz.
-            # The axis check has to see the WHOLE axis or it sees nothing useful: a
-            # campaign resumed after an interruption would otherwise check the three
-            # knots it happened to redo and report success for seventeen.
-            print(f"  {out_path.name} exists, skipping")
-            entry = {"knot": knot, "file": out_path.name, "skipped": True}
-            try:
-                z = np.load(out_path, allow_pickle=True)
-                if "signature" in z:
-                    entry["signature"] = json.loads(str(z["signature"]))
-            except Exception as exc:
-                print(f"    could not read its signature: {exc}")
-            manifest.append(entry)
-            continue
+            # Resuming an interrupted campaign is the reason this skip exists and it is a
+            # real need -- a capture set is hours. But a file's EXISTENCE is not evidence
+            # that it belongs to this campaign, and until F26 that was the whole test.
+            # The stamp inside the file is compared against the harness now running, and a
+            # mismatch RECAPTURES rather than reusing or refusing: the operator asked for
+            # this campaign, and the stale frames are not it.
+            stale = stamp_mismatch(out_path, knot)
+            if stale:
+                print(f"  {out_path.name} exists but belongs to a different campaign "
+                      f"({stale}); recapturing")
+            else:
+                # A skipped knot still contributes its signature, read back out of the
+                # npz. The axis check has to see the WHOLE axis or it sees nothing useful:
+                # a campaign resumed after an interruption would otherwise check the three
+                # knots it happened to redo and report success for seventeen.
+                print(f"  {out_path.name} exists, skipping")
+                entry = {"knot": knot, "file": out_path.name, "skipped": True}
+                try:
+                    z = np.load(out_path, allow_pickle=True)
+                    if "signature" in z:
+                        entry["signature"] = json.loads(str(z["signature"]))
+                except Exception as exc:
+                    print(f"    could not read its signature: {exc}")
+                manifest.append(entry)
+                continue
         t0 = time.time()
         w = world.get_weather()
         w.sun_altitude_angle = knot
@@ -439,6 +501,11 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
 
         np.savez_compressed(
             out_path,
+            # The harness that produced these frames, inside the frames. D-11 is
+            # enforceable after the fact only if the artifact says what made it, and a
+            # manifest beside the file is a thing that can go missing or go stale while
+            # the file survives. F26.
+            harness=np.array(json.dumps(capture_harness())),
             signature=np.array(json.dumps(sig)),
             images=np.stack(frames),
             range_m=np.array([s["range_m"] for s in states], dtype=np.float32),

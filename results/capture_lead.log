@@ -1,29 +1,26 @@
-  loading Town01 (large maps take a while)
-  server age 9 min (R-SIM-1 ok)
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
   reusing the saved nominal run, 104 states
 
-lead: 104 states x 18 knots = 1872 frames, about 1.73 GB raw
+lead: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
   lead_sun+60.000.npz exists, skipping
-  lead_sun+42.766.npz exists, skipping
-  lead_sun+28.397.npz exists, skipping
-  lead_sun+18.743.npz exists, skipping
-  lead_sun+12.542.npz exists, skipping
-  lead_sun+10.128.npz exists, skipping
-  lead_sun+07.715.npz exists, skipping
-  lead_sun+05.298.npz exists, skipping
-  lead_sun+04.198.npz exists, skipping
-  lead_sun+03.525.npz exists, skipping
-  lead_sun+01.891.npz exists, skipping
-  lead_sun+01.391.npz exists, skipping
-  lead_sun+00.779.npz exists, skipping
-  lead_sun+00.026.npz exists, skipping
-  lead_sun+00.000.npz exists, skipping
-  lead_sun-00.961.npz exists, skipping
-  lead_sun-29.554.npz exists, skipping
-  lead_sun-30.000.npz exists, skipping
-
-  illumination axis OK: 18 knots, span 0.4905 of full range, worst inversion 4.5% of span (limit 12%), total 4.5% (limit 25%)
-    recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5064 -> 0.5282 (4.5% of the axis span)
-    recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0377 -> 0.0665 (5.9% of the axis span)  [declared uncovered]
-
-  wrote results/captures/manifest_lead.json
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 557, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 534, in main
+    manifest = capture(args.scenario, knots, args.speed_mph, args.plan, args.highbeam)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 421, in capture
+    J.grab_frame(world, images)
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/carla_jobs.py", line 257, in grab_frame
+    img = images.get(timeout=timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/usr/lib/python3.12/threading.py", line 359, in wait
+    gotit = waiter.acquire(True, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/carla_determinism/hygiene.py", line 102, in _raise
+    raise KeyboardInterrupt(f"signal {signum}")
+KeyboardInterrupt: signal 15

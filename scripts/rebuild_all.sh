@@ -29,6 +29,9 @@ cd "$(dirname "$0")/.."
 REPO=$PWD
 PY="$REPO/.venv/bin/python"
 export CARLA_PORT=${CARLA_PORT:-3000}
+# The map is carla_jobs.MAP unless CARLA_MAP overrides it, and the shell needs it
+# too now that captures are map-scoped (F26). Read from the module, never retyped.
+CARLA_MAP_NAME=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(J.MAP)")
 export CARLA_TAKEOVER=1        # this script owns the port for the duration
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH               # ROS leaks in through it; see scripts/bootstrap_env.sh
@@ -150,7 +153,7 @@ if [ "$FROM" = "verifyA" ]; then
     # road and reads as a false-activation certificate. docs/STATE_OF_PLAY.md section 1
     # already records that exact substitution one level up -- property A on `none` is not
     # the standard's scenario -- and it was made again on the way down.
-    if [ "$SCOPE" != "hazard" ] && [ -f "$REPO/results/captures/states_plate.json" ]; then
+    if [ "$SCOPE" != "hazard" ] && [ -f "$REPO/results/captures/$CARLA_MAP_NAME/states_plate.json" ]; then
       queue="$queue ${pol}|plate|lead ${pol}|none_plate|lead"
     fi
   done

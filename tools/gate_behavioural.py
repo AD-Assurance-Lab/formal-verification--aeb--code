@@ -40,7 +40,7 @@ import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 from run_policy import load_policy, preprocess, BRAKE_THRESHOLD_FRACTION  # noqa: E402
 
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 OUT = J.REPO / "results" / "carla"
 POSES_NEAR_RREQ = 20
 

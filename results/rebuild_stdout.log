@@ -1,22 +1,2 @@
-[2026-09-07 21:43:10] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
-[2026-09-07 21:43:10]   CARLA stopped; GPU now at 389 MiB
-[2026-09-07 21:43:10] START verify_P_pts_lead_S (background)
-[2026-09-07 21:43:10] START verify_P_pts_ped_S (background)
-[2026-09-07 21:43:10] START verify_P_cont_lead_S (background)
-[2026-09-07 21:55:31] DONE  verify_P_pts_lead_S rc=0
-[2026-09-07 21:57:08] DONE  verify_P_pts_ped_S rc=0
-[2026-09-07 21:58:33] DONE  verify_P_cont_lead_S rc=0
-[2026-09-07 21:58:33] START verify_P_cont_ped_S (background)
-[2026-09-07 21:58:33] START verify_P_pts3_lead_S (background)
-[2026-09-07 21:58:33] START verify_P_pts3_ped_S (background)
-[2026-09-07 22:12:04] DONE  verify_P_cont_ped_S rc=0
-[2026-09-07 22:12:04] DONE  verify_P_pts3_lead_S rc=0
-[2026-09-07 22:12:04] DONE  verify_P_pts3_ped_S rc=0
-[2026-09-07 22:12:04] 
-[2026-09-07 22:12:04] M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:
-[2026-09-07 22:12:04]     python tools/record_cells.py --write
-[2026-09-07 22:12:04]     git add results/carla/verify_*.json study/results.json && git commit
-[2026-09-07 22:12:04]     bash scripts/rebuild_all.sh witness      # simulator
-[2026-09-07 22:12:04]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
-[2026-09-07 22:12:04] A verdict is a prediction only if it was written down first;
-[2026-09-07 22:12:04] tools/drive_witness.py refuses to run against an uncommitted one.
+[2026-09-09 18:13:46] restarting CARLA on 3000
+[2026-09-09 18:14:08] START capture_lead

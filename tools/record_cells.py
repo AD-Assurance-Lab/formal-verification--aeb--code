@@ -83,7 +83,7 @@ def cell_row(policy: str, scenario: str) -> dict:
             # "built, driven, verification pending" -- the same two words for both is the
             # ambiguity a ledger exists to remove, and the first version of this note went
             # stale within the hour.
-            captured = (J.REPO / "results" / "captures" / "states_plate.json").exists()
+            captured = (J.CAPTURES / "states_plate.json").exists()
             if ep and captured:
                 row["note"] = (
                     "endpoints measured on the standard's own false-activation scenario: "

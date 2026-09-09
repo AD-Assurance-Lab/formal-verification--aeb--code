@@ -28,7 +28,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 CANDIDATES = [(64, 48), (100, 66), (128, 96), (200, 66), (200, 150), (320, 240)]
 
 

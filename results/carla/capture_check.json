@@ -1,38 +1,66 @@
 {
   "verdict": "MEASURED",
-  "worst_image_error_normalised": 0.0109,
+  "worst_image_error_normalised": 0.0194,
   "worst_placement_error_m": 0.0,
   "poses": [
     {
       "pose": 0,
-      "mae_0_255": 2.64,
-      "mae_normalised": 0.0104,
+      "mae_0_255": 4.89,
+      "mae_normalised": 0.0192,
       "position_error_m": 0.0
     },
     {
       "pose": 1,
-      "mae_0_255": 2.61,
-      "mae_normalised": 0.0102,
+      "mae_0_255": 4.73,
+      "mae_normalised": 0.0186,
       "position_error_m": 0.0
     },
     {
       "pose": 2,
-      "mae_0_255": 2.52,
-      "mae_normalised": 0.0099,
+      "mae_0_255": 4.94,
+      "mae_normalised": 0.0194,
       "position_error_m": 0.0
     },
     {
       "pose": 3,
-      "mae_0_255": 2.51,
-      "mae_normalised": 0.0098,
+      "mae_0_255": 4.75,
+      "mae_normalised": 0.0186,
       "position_error_m": 0.0
     },
     {
       "pose": 4,
-      "mae_0_255": 2.78,
-      "mae_normalised": 0.0109,
+      "mae_0_255": 3.77,
+      "mae_normalised": 0.0148,
       "position_error_m": 0.0
     }
   ],
-  "note": "Image space. The gate that decides compares POLICY OUTPUT at the same poses and waits for a policy (PROTOCOL section 8). A large error here is disqualifying now; a small one is not yet a pass."
+  "note": "Image space. The gate that decides compares POLICY OUTPUT at the same poses and waits for a policy (PROTOCOL section 8). A large error here is disqualifying now; a small one is not yet a pass.",
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 714.7999999999884,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  }
 }

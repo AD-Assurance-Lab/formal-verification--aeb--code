@@ -51,7 +51,7 @@ import carla_jobs as J  # noqa: E402
 import stats as ST  # noqa: E402
 
 OUT = J.REPO / "results" / "carla"
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 AXIS_HI, AXIS_LO = 60.0, -30.0
 REGULATORY = [60.0, -30.0]
 

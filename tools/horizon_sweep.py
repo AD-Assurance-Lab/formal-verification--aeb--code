@@ -49,7 +49,7 @@ import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 
 OUT = J.REPO / "results" / "carla"
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 
 # Fine through the band the certificates and the drives both single out, coarse outside it
 # so the sweep still shows what "normal" looks like.

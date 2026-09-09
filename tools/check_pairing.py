@@ -23,7 +23,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 POSE_TOL_M = 1e-4
 
 

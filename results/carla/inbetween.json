@@ -7,30 +7,58 @@
   "blend_vs_rendered": [
     {
       "s": 0.2,
-      "mean_abs_error_0_255": 29.09,
-      "mean_abs_error_normalised": 0.1141
+      "mean_abs_error_0_255": 10.55,
+      "mean_abs_error_normalised": 0.0414
     },
     {
       "s": 0.4,
-      "mean_abs_error_0_255": 44.78,
-      "mean_abs_error_normalised": 0.1756
+      "mean_abs_error_0_255": 15.35,
+      "mean_abs_error_normalised": 0.0602
     },
     {
       "s": 0.5,
-      "mean_abs_error_0_255": 43.2,
-      "mean_abs_error_normalised": 0.1694
+      "mean_abs_error_0_255": 15.28,
+      "mean_abs_error_normalised": 0.0599
     },
     {
       "s": 0.6,
-      "mean_abs_error_0_255": 31.44,
-      "mean_abs_error_normalised": 0.1233
+      "mean_abs_error_0_255": 10.28,
+      "mean_abs_error_normalised": 0.0403
     },
     {
       "s": 0.8,
-      "mean_abs_error_0_255": 24.57,
-      "mean_abs_error_normalised": 0.0963
+      "mean_abs_error_0_255": 11.55,
+      "mean_abs_error_normalised": 0.0453
     }
   ],
-  "worst_normalised_error": 0.1756,
-  "note": "IMAGE space only. The check that decides the study is behavioural and waits for a policy (PROTOCOL section 4). A low number here is not evidence the family is valid; a high number is evidence it is not."
+  "worst_normalised_error": 0.0602,
+  "note": "IMAGE space only. The check that decides the study is behavioural and waits for a policy (PROTOCOL section 4). A low number here is not evidence the family is valid; a high number is evidence it is not.",
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 747.9899999999907,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  }
 }

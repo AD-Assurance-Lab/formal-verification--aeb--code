@@ -4,196 +4,171 @@
   "tolerance": 0.01,
   "knots_sun_altitude_deg": [
     60.0,
-    42.766,
-    28.397,
-    18.743,
-    12.542,
-    10.128,
-    7.715,
-    5.298,
-    4.198,
-    3.525,
-    1.891,
-    1.391,
-    0.779,
-    0.026,
+    54.852,
+    47.558,
+    41.911,
+    36.234,
+    30.151,
+    22.238,
+    14.605,
+    12.342,
+    8.327,
+    6.848,
+    6.051,
+    4.857,
+    4.289,
+    3.315,
+    2.815,
+    2.026,
+    0.024,
     0.0,
-    -0.961,
-    -29.554,
+    -29.539,
     -30.0
   ],
-  "sub_intervals": 17,
+  "sub_intervals": 20,
   "sub_interval_detail": [
     {
       "from_deg": 60.0,
-      "to_deg": 42.766,
-      "step_deg": 17.234,
-      "blend_error": 0.01,
+      "to_deg": 54.852,
+      "step_deg": 5.148,
+      "blend_error": 0.0097,
       "covered": true
     },
     {
-      "from_deg": 42.766,
-      "to_deg": 28.397,
-      "step_deg": 14.368,
-      "blend_error": 0.0095,
+      "from_deg": 54.852,
+      "to_deg": 47.558,
+      "step_deg": 7.294,
+      "blend_error": 0.0079,
       "covered": true
     },
     {
-      "from_deg": 28.397,
-      "to_deg": 18.743,
-      "step_deg": 9.654,
-      "blend_error": 0.0099,
-      "covered": true
-    },
-    {
-      "from_deg": 18.743,
-      "to_deg": 12.542,
-      "step_deg": 6.201,
-      "blend_error": 0.0099,
-      "covered": true
-    },
-    {
-      "from_deg": 12.542,
-      "to_deg": 10.128,
-      "step_deg": 2.414,
-      "blend_error": 0.0082,
-      "covered": true,
-      "split_from": [
-        12.542,
-        7.715
-      ],
-      "split_because": "P_pts/ped in-between gate failed at 1.016 of the decision threshold"
-    },
-    {
-      "from_deg": 10.128,
-      "to_deg": 7.715,
-      "step_deg": 2.413,
-      "blend_error": 0.0095,
-      "covered": true,
-      "split_from": [
-        12.542,
-        7.715
-      ],
-      "split_because": "P_pts/ped in-between gate failed at 1.016 of the decision threshold"
-    },
-    {
-      "from_deg": 7.715,
-      "to_deg": 5.298,
-      "step_deg": 2.416,
-      "blend_error": 0.0088,
-      "covered": true
-    },
-    {
-      "from_deg": 5.298,
-      "to_deg": 4.198,
-      "step_deg": 1.1,
-      "blend_error": 0.009,
-      "covered": true
-    },
-    {
-      "from_deg": 4.198,
-      "to_deg": 3.525,
-      "step_deg": 0.673,
-      "blend_error": 0.0088,
-      "covered": true
-    },
-    {
-      "from_deg": 3.525,
-      "to_deg": 1.891,
-      "step_deg": 1.634,
-      "blend_error": 0.0091,
-      "covered": true
-    },
-    {
-      "from_deg": 1.891,
-      "to_deg": 1.391,
-      "step_deg": 0.5,
-      "blend_error": 0.0084,
-      "covered": true
-    },
-    {
-      "from_deg": 1.391,
-      "to_deg": 0.779,
-      "step_deg": 0.611,
-      "blend_error": 0.0087,
-      "covered": true
-    },
-    {
-      "from_deg": 0.779,
-      "to_deg": 0.026,
-      "step_deg": 0.753,
+      "from_deg": 47.558,
+      "to_deg": 41.911,
+      "step_deg": 5.647,
       "blend_error": 0.0098,
       "covered": true
     },
     {
-      "from_deg": 0.026,
+      "from_deg": 41.911,
+      "to_deg": 36.234,
+      "step_deg": 5.676,
+      "blend_error": 0.0077,
+      "covered": true
+    },
+    {
+      "from_deg": 36.234,
+      "to_deg": 30.151,
+      "step_deg": 6.083,
+      "blend_error": 0.0098,
+      "covered": true
+    },
+    {
+      "from_deg": 30.151,
+      "to_deg": 22.238,
+      "step_deg": 7.913,
+      "blend_error": 0.0078,
+      "covered": true
+    },
+    {
+      "from_deg": 22.238,
+      "to_deg": 14.605,
+      "step_deg": 7.633,
+      "blend_error": 0.0079,
+      "covered": true
+    },
+    {
+      "from_deg": 14.605,
+      "to_deg": 12.342,
+      "step_deg": 2.263,
+      "blend_error": 0.0096,
+      "covered": true
+    },
+    {
+      "from_deg": 12.342,
+      "to_deg": 8.327,
+      "step_deg": 4.016,
+      "blend_error": 0.0098,
+      "covered": true
+    },
+    {
+      "from_deg": 8.327,
+      "to_deg": 6.848,
+      "step_deg": 1.478,
+      "blend_error": 0.0076,
+      "covered": true
+    },
+    {
+      "from_deg": 6.848,
+      "to_deg": 6.051,
+      "step_deg": 0.798,
+      "blend_error": 0.0098,
+      "covered": true
+    },
+    {
+      "from_deg": 6.051,
+      "to_deg": 4.857,
+      "step_deg": 1.194,
+      "blend_error": 0.0072,
+      "covered": true
+    },
+    {
+      "from_deg": 4.857,
+      "to_deg": 4.289,
+      "step_deg": 0.568,
+      "blend_error": 0.01,
+      "covered": true
+    },
+    {
+      "from_deg": 4.289,
+      "to_deg": 3.315,
+      "step_deg": 0.974,
+      "blend_error": 0.0079,
+      "covered": true
+    },
+    {
+      "from_deg": 3.315,
+      "to_deg": 2.815,
+      "step_deg": 0.5,
+      "blend_error": 0.0074,
+      "covered": true
+    },
+    {
+      "from_deg": 2.815,
+      "to_deg": 2.026,
+      "step_deg": 0.789,
+      "blend_error": 0.0078,
+      "covered": true
+    },
+    {
+      "from_deg": 2.026,
+      "to_deg": 0.024,
+      "step_deg": 2.002,
+      "blend_error": 0.0094,
+      "covered": true
+    },
+    {
+      "from_deg": 0.024,
       "to_deg": 0.0,
-      "step_deg": 0.026,
-      "blend_error": 0.0163,
-      "covered": false
+      "step_deg": 0.024,
+      "blend_error": 0.0095,
+      "covered": true
     },
     {
       "from_deg": 0.0,
-      "to_deg": -0.961,
-      "step_deg": 0.961,
-      "blend_error": 0.0099,
+      "to_deg": -29.539,
+      "step_deg": 29.539,
+      "blend_error": 0.0082,
       "covered": true
     },
     {
-      "from_deg": -0.961,
-      "to_deg": -29.554,
-      "step_deg": 28.593,
-      "blend_error": 0.0083,
-      "covered": true
-    },
-    {
-      "from_deg": -29.554,
+      "from_deg": -29.539,
       "to_deg": -30.0,
-      "step_deg": 0.446,
-      "blend_error": 0.0041,
+      "step_deg": 0.461,
+      "blend_error": 0.0043,
       "covered": true
     }
   ],
-  "uncovered": [
-    {
-      "from_deg": 0.026,
-      "to_deg": 0.0,
-      "step_deg": 0.026,
-      "blend_error": 0.0163,
-      "covered": false
-    }
-  ],
-  "refined_from": [
-    60.0,
-    42.766,
-    28.397,
-    18.743,
-    12.542,
-    7.715,
-    5.298,
-    4.198,
-    3.525,
-    1.891,
-    1.391,
-    0.779,
-    0.026,
-    0.0,
-    -0.961,
-    -29.554,
-    -30.0
-  ],
-  "refinements": [
-    {
-      "from_deg": 12.542,
-      "to_deg": 7.715,
-      "worst": 1.016,
-      "policy": "P_pts",
-      "scenario": "ped",
-      "midpoint_deg": 10.128,
-      "blend_error_upper": 0.0082,
-      "blend_error_lower": 0.0095
-    }
-  ],
-  "renders_used": 5,
-  "note": "Refined from a previous knot set by PROTOCOL section 4's repair: a sub-interval whose BEHAVIOURAL in-between gate failed is split at its midpoint, which becomes a rendered endpoint. The image blend metric had already accepted it; the behavioural check is the one that decides. Capture the new knot before re-gating."
+  "uncovered": [],
+  "renders_used": 223,
+  "note": "Endpoints to render for training and verification. A knot is forced at the horizon because straddling intervals floor near 0.03 error at any width, which is a kink and not curvature. Image space; the behavioural check in PROTOCOL section 4 still decides."
 }

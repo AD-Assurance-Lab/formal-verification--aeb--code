@@ -6,6 +6,75 @@ here, never inside the protocol.
 
 ---
 
+## F26 — 2026-09-09, the capture campaign would have built a Town12 family out of Town01 endpoints
+
+**Caught in the log, not by a check.** The A14 rebuild reached the capture stage and
+printed:
+
+    lead: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
+      lead_sun+60.000.npz exists, skipping
+
+`capture_campaign.py` skipped any knot whose output file already existed. The file name is
+`<scenario>_sun<altitude>.npz` and the test was `out_path.exists()` — nothing in the name
+or the test carried the map, the weather, or the harness. Every capture on disk was a
+**Town01** frame set from 2026-09-06 and 09-07.
+
+### What it would have produced
+
+Town12's re-bisected axis (F25) shares exactly three knots with Town01's:
+
+| shared knot | what it is |
+|---|---|
+| **+60.000°** | **the daylight regulatory endpoint** |
+| 0.000° | the horizon knot |
+| **−30.000°** | **the darkness regulatory endpoint** |
+
+**Two of the three are the regulatory endpoints** — the two rendered frames the entire
+disturbance family is built between, and the two conditions FMVSS 127 tests. The rebuild
+would have captured eighteen fresh Town12 knots, silently reused Town01 frames at those
+three, and built a family that interpolates a Town01 daylight image to a Town01 darkness
+image over Town12 poses.
+
+Nothing errors. The manifest lists twenty-one knots, the frame counts are right, the
+photometric axis check passes because the endpoints are genuinely bright and genuinely
+dark, and every certificate, gate and drive downstream reads as complete. This is the same
+shape as the defect that cost the sibling steering study a set of verification captures,
+and the same shape as A12's: **an artifact that is wrong in a way no numeric check can
+see.**
+
+### Why the skip exists, and why it is kept
+
+Resuming an interrupted campaign is a real need — a capture set is hours, and the skip is
+what makes a crash recoverable. The defect was not the skip. It was that **a file's
+existence was treated as evidence that it belonged to this campaign.**
+
+Two guards now, and deliberately two, because the first is a directory layout and layouts
+get flattened by the next person tidying up:
+
+1. **The path carries the map.** `carla_jobs.CAPTURES` is defined once and scoped by
+   `MAP`. Eleven modules had that path re-typed as a literal, which is the condition this
+   repository keeps recording — a rule re-typed into each driver is a rule one driver will
+   not have — and here it was eleven drivers all agreeing on the wrong thing.
+2. **Every frame set carries a `harness` stamp inside the npz**: map, cloudiness, weather
+   settle ticks, rules digest, `-notexturestreaming`, quality level. The resume-skip
+   compares it against the harness running now and **recaptures** on a mismatch rather than
+   reusing or refusing — the operator asked for this campaign, and the stale frames are not
+   it. An unstamped file is a mismatch by definition, because it predates the stamp and
+   there is no way to tell what made it.
+
+The Town01 captures were moved to `results/captures/Town01/`, which is where they belong.
+They are not stale and not wrong; they are a Town01 measurement, behind the `town01-final`
+tag, and they are now somewhere a Town12 campaign cannot reach by accident.
+
+### What it says about A14
+
+A14 wrote that every measured artifact is rebuilt and that this is "an A12-scale rebuild,
+entered deliberately". It was entered deliberately and the pipeline still had a path that
+quietly declined to rebuild one. Declaring a rebuild does not perform one, and the only
+reason this was caught is that the capture stage prints what it skips.
+
+---
+
 ## F25 — 2026-09-09, on Town12 the disturbance family covers the whole axis: there is no uncovered sliver
 
 The A14 rebuild re-bisected the illumination axis on the new map, at the same tolerance

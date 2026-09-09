@@ -34,7 +34,7 @@ from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 from expert_law import label_decel  # noqa: E402
 
-CAPTURES = J.REPO / "results" / "captures"
+CAPTURES = J.CAPTURES
 MODELS = J.REPO / "results" / "models"
 
 _b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())

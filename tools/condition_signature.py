@@ -72,7 +72,12 @@ from pathlib import Path
 import numpy as np
 
 REPO = Path(__file__).resolve().parent.parent
-CAPTURES = REPO / "results" / "captures"
+# Map-scoped, and read from the environment rather than imported, because this module
+# deliberately has no CARLA dependency -- it must run on a machine with no simulator and
+# no carla package, which importing carla_jobs would break. The default matches
+# carla_jobs.MAP; both read CARLA_MAP. F26.
+import os as _os
+CAPTURES = REPO / "results" / "captures" / _os.environ.get("CARLA_MAP", "Town12")
 
 # Sun altitude at or above which the capture campaign leaves the headlamps off.
 # Kept here rather than imported so this module has no CARLA dependency and can be run
@@ -352,7 +357,7 @@ def main() -> int:
                   "camera, which cannot do that.")
             bad += 1
         (CAPTURES / "cross_campaign.json").write_text(json.dumps(cc, indent=1) + "\n")
-        print(f"  wrote results/captures/cross_campaign.json")
+        print(f"  wrote {(CAPTURES / 'cross_campaign.json').relative_to(REPO)}")
 
     for mpath in hb:
         scen = mpath.stem.replace("manifest_", "").removesuffix("_hb")
