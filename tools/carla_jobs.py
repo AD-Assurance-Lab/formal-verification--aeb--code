@@ -61,6 +61,20 @@ SETTLE_TOLERANCE_MPS = 0.15
 # darkness endpoint at 12 ticks makes it 75 percent too bright, and the disturbance
 # family interpolates between endpoints, so that error would land in the verified set.
 WEATHER_SETTLE_TICKS = 120
+# THE CLOUD COVER, in one place. It was retyped as a literal 10.0 at eighteen sites across
+# thirteen drivers, which is the shape of defect this repository keeps writing down: a rule
+# re-typed into each driver is a rule one driver will not have, and a capture and a drive
+# that disagreed about it would be comparing two different scenes with no error anywhere.
+#
+# A15 sets it to 0.0, on measurement. CARLA's cloud layer MOVES under fixed weather
+# parameters (F23), and after the lighting transient has settled it is the whole of the
+# residual scene-brightness wander: at horizon illuminations, on both maps, clouds DOUBLE
+# it -- Town12 0.00076 against 0.00035 at +0.403 deg and 0.00062 against 0.00031 at
+# +0.013, Town01 0.00038 against 0.00019 -- while making no difference at all in daylight,
+# 0.00048 either way. The horizon is where every interesting cell in this study lives, and
+# on Town01 that wander was enough to flip a brake decision and produce eight pedestrian
+# contacts the same cell does not produce on a fresh server.
+CLOUDINESS = 0.0
 # TWO FLOORS, and which one applies is a property of the HARNESS, not a preference.
 #
 # REPS is the floor for repetitions that share a process and a server, which is what a
@@ -721,7 +735,7 @@ def job_sites() -> dict:
             for label, altitude, lights in CONDITIONS:
                 w = world.get_weather()
                 w.sun_altitude_angle = altitude
-                w.cloudiness = 10.0
+                w.cloudiness = CLOUDINESS
                 w.precipitation = 0.0
                 world.set_weather(w)
                 ego.set_light_state(carla.VehicleLightState(lights))
@@ -1161,7 +1175,7 @@ def job_inbetween() -> dict:
             progress(f"rendering s={s:.2f}")
             w = world.get_weather()
             w.sun_altitude_angle = DAY_ALT + s * (NIGHT_ALT - DAY_ALT)
-            w.cloudiness = 10.0
+            w.cloudiness = CLOUDINESS
             w.precipitation = 0.0
             world.set_weather(w)
             for _ in range(WEATHER_SETTLE_TICKS):
@@ -1390,7 +1404,7 @@ def job_capture_check() -> dict:
         cam.listen(images.put)
         w = world.get_weather()
         w.sun_altitude_angle = 60.0
-        w.cloudiness = 10.0
+        w.cloudiness = CLOUDINESS
         world.set_weather(w)
         for _ in range(WEATHER_SETTLE_TICKS):
             grab_frame(world, images)
@@ -1515,7 +1529,7 @@ def job_expert() -> dict:
     for name, altitude, lights in ENDPOINTS:
         w = world.get_weather()
         w.sun_altitude_angle = altitude
-        w.cloudiness = 10.0
+        w.cloudiness = CLOUDINESS
         w.precipitation = 0.0
         world.set_weather(w)
         for _ in range(WEATHER_SETTLE_TICKS):

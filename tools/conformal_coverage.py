@@ -142,7 +142,7 @@ def main() -> int:
             cam.listen(images.put)
             wx = world.get_weather()
             wx.sun_altitude_angle = float(alt)
-            wx.cloudiness = 10.0
+            wx.cloudiness = J.CLOUDINESS
             wx.precipitation = 0.0
             world.set_weather(wx)
             ego.set_light_state(carla.VehicleLightState(

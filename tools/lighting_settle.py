@@ -70,10 +70,10 @@ def main() -> int:
     ap.add_argument("--every", type=int, default=20)
     ap.add_argument("--policy", default="P_pts3")
     ap.add_argument("--scenario", default="ped")
-    ap.add_argument("--cloudiness", type=float, default=10.0,
-                    help="the study sets 10.0 everywhere. CARLA's cloud layer MOVES, so "
-                         "a fixed weather is not a static scene; pass 0.0 to test "
-                         "whether the drift is the clouds.")
+    ap.add_argument("--cloudiness", type=float, default=None,
+                    help="defaults to the study's own J.CLOUDINESS, which A15 sets to 0.0 "
+                         "because CARLA's cloud layer MOVES under fixed weather (F23). "
+                         "Pass a value to sweep it; this tool is how that was measured.")
     ap.add_argument("--band", type=float, default=0.002,
                     help="RELATIVE band, kept for continuity. Misleading on a dark scene: "
                          "0.2%% of a mean of 0.011 is 2.2e-5, finer than the renderer's "
@@ -86,6 +86,8 @@ def main() -> int:
                          "A relative band cannot be used across a 15x range of scene "
                          "brightness, which is what the horizon-to-daylight axis is.")
     args = ap.parse_args()
+    if args.cloudiness is None:
+        args.cloudiness = J.CLOUDINESS
 
     carla = J.carla_module()
     dev = require_cuda()
@@ -95,7 +97,7 @@ def main() -> int:
     # different measurement of a different road, and a file that overwrote the other would
     # leave the repository holding one curve labelled as both.
     tag = f"{J.MAP}_{args.altitude:+.3f}".replace("+", "p").replace("-", "m").replace(".", "_")
-    tag += f"_cloud{args.cloudiness:g}"
+    tag += f"_cloud{args.cloudiness:g}"   # always in the name; the study's value changed
     out_path = J.claim_output(OUT / f"lighting_settle_{tag}.json")
 
     client, world = J.connect(rendering=True)

@@ -104,7 +104,7 @@ def drive_at(world, site, model, w, h, dev, a_max, r_req_m, scenario, alt, reps)
     carla = J.carla_module()
     wx = world.get_weather()
     wx.sun_altitude_angle = alt
-    wx.cloudiness = 10.0
+    wx.cloudiness = J.CLOUDINESS
     wx.precipitation = 0.0
     world.set_weather(wx)
     for _ in range(J.WEATHER_SETTLE_TICKS):

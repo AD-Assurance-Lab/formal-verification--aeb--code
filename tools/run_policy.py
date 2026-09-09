@@ -467,7 +467,7 @@ def main() -> int:
                 alt, lights = CONDITIONS[cond]
                 weather = world.get_weather()
                 weather.sun_altitude_angle = alt
-                weather.cloudiness = 10.0
+                weather.cloudiness = J.CLOUDINESS
                 weather.precipitation = 0.0
                 world.set_weather(weather)
                 for _ in range(J.WEATHER_SETTLE_TICKS):
@@ -513,7 +513,7 @@ def main() -> int:
             alt, lights = CONDITIONS[cond]
             weather = world.get_weather()
             weather.sun_altitude_angle = alt
-            weather.cloudiness = 10.0
+            weather.cloudiness = J.CLOUDINESS
             weather.precipitation = 0.0
             world.set_weather(weather)
             for _ in range(J.WEATHER_SETTLE_TICKS):

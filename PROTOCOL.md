@@ -786,3 +786,48 @@ capture campaign is about to be re-run. Deciding `cloudiness` AFTER recapturing 
 capturing twice, so F23's decision comes first and is now nearly free. Likewise the
 false-activation instrumentation gap in FINDINGS F22 is fixed before the plate is driven
 again, or the rebuild reproduces an invisible failure mode on a new map.
+
+### A15. Cloud cover goes to zero, because a fixed weather was not a static scene
+
+**Date:** 2026-09-09. **Requested by:** the measurement, and taken now because A14 is about
+to re-run every capture and deciding this afterwards means capturing twice.
+
+**What changed.** Every driver set `cloudiness = 10.0` beside the sun altitude. It is now a
+single constant, `carla_jobs.CLOUDINESS`, and its value is **0.0**. Nothing else about the
+conditions changes: the sun-altitude axis, the headlamp states, the three regulatory
+lighting conditions and the endpoints are all as section 2 defines them.
+
+**Why.** FINDINGS F23. CARLA's cloud layer moves even though the weather parameters are
+held fixed, so "the same illumination" is a function of elapsed simulated time. Measured
+with the vehicle held on the brake, camera rigid, exposure pinned manually and nothing else
+in the world, on both maps, at three altitudes, 3,000 ticks each. The lighting transient
+after `set_weather` is over by about tick 120, so the existing settle is adequate and is
+not changed. What is left after it is the cloud wander:
+
+| | residual after the settle, cloudiness 10.0 | cloudiness 0.0 |
+|---|---|---|
+| Town12, +0.403° | 0.00076 | **0.00035** |
+| Town12, +0.013° | 0.00062 | **0.00031** |
+| Town12, +51.383° (daylight) | 0.00048 | 0.00048 |
+| Town01, +0.403° | 0.00038 | **0.00019** |
+
+**The clouds double the residual at the horizon and change nothing in daylight**, and the
+horizon is where every interesting cell in this study lives. On Town01 that wander was
+enough to move a policy across its brake threshold: the same sub-interval produced eight
+pedestrian contacts on a warm server and none at all on ten fresh ones (F22).
+
+**What it costs.** Nothing that A14 was not already spending. Every capture is being redone
+for the map move, so this is free now and would have cost the whole campaign twice later.
+That is the entire reason it is decided today rather than after the rebuild.
+
+**What it narrows.** The ODD. `cloudiness = 0` is a clear sky, where 10.0 was a nearly
+clear one, and the study should say so rather than imply cloud cover was tested. FMVSS 127
+does not specify cloud cover, and the disturbance family is parameterised on sun altitude,
+so removing an uncontrolled second illumination variable makes the axis the thing the
+family claims it is. Cloud cover as a disturbance axis in its own right is journal work,
+and it would need the family rebuilt around it.
+
+**What it does not fix.** The residual at the horizon is halved, not removed: 0.00035 at
++0.403° on Town12 is still there and is still unmodelled. It is now small enough to sit
+below the transient, and it is recorded here so that a future cell sitting on a knife edge
+is read against a known floor rather than against an assumption of zero.

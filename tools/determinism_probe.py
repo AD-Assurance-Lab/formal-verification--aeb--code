@@ -96,7 +96,7 @@ def run_rep(rep: int, policy: str | None, scenario: str, sun_altitude: float) ->
 
     wx = world.get_weather()
     wx.sun_altitude_angle = sun_altitude
-    wx.cloudiness = 10.0
+    wx.cloudiness = J.CLOUDINESS
     wx.precipitation = 0.0
     world.set_weather(wx)
 

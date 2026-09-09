@@ -130,7 +130,7 @@ def drive_one(args) -> int:
     site = J.flattest_site(scenario=args.site_scenario or args.scenario)
     weather = world.get_weather()
     weather.sun_altitude_angle = mid
-    weather.cloudiness = 10.0
+    weather.cloudiness = J.CLOUDINESS
     weather.precipitation = 0.0
     world.set_weather(weather)
     for _ in range(J.WEATHER_SETTLE_TICKS):

@@ -106,7 +106,7 @@ def main() -> int:
             if alt not in cache:
                 w = world.get_weather()
                 w.sun_altitude_angle = alt
-                w.cloudiness = 10.0
+                w.cloudiness = J.CLOUDINESS
                 w.precipitation = 0.0
                 world.set_weather(w)
                 for _ in range(J.WEATHER_SETTLE_TICKS):

@@ -360,7 +360,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
         t0 = time.time()
         w = world.get_weather()
         w.sun_altitude_angle = knot
-        w.cloudiness = 10.0
+        w.cloudiness = J.CLOUDINESS
         w.precipitation = 0.0
         world.set_weather(w)
 

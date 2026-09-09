@@ -113,7 +113,7 @@ def capture_gate(world, site, spawn_tf, states, order, model, w, h, dev, thresho
         cam.listen(images.put)
         wx = world.get_weather()
         wx.sun_altitude_angle = 60.0
-        wx.cloudiness = 10.0
+        wx.cloudiness = J.CLOUDINESS
         world.set_weather(wx)
         ego.set_light_state(carla.VehicleLightState(carla.VehicleLightState.NONE))
         for _ in range(J.WEATHER_SETTLE_TICKS):
@@ -258,7 +258,7 @@ def main() -> int:
             cam.listen(images.put)
             wx = world.get_weather()
             wx.sun_altitude_angle = alt
-            wx.cloudiness = 10.0
+            wx.cloudiness = J.CLOUDINESS
             wx.precipitation = 0.0
             world.set_weather(wx)
             ego.set_light_state(

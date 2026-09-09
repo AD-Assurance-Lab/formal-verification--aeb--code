@@ -79,7 +79,7 @@ def sweep(world, site, model, w, h, dev, states, poses, azimuth: float | None,
             cam.listen(images.put)
             wx = world.get_weather()
             wx.sun_altitude_angle = alt
-            wx.cloudiness = 10.0
+            wx.cloudiness = J.CLOUDINESS
             wx.precipitation = 0.0
             if azimuth is not None:
                 wx.sun_azimuth_angle = azimuth
