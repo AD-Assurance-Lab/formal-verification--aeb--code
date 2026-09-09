@@ -6,6 +6,75 @@ here, never inside the protocol.
 
 ---
 
+## F27 — 2026-09-09, one sub-interval on each map is a verdict about nothing, and the axis weights sub-intervals 200:1
+
+The axis is bisected until the chord's midpoint error falls under an **absolute** tolerance
+of 0.01. That rule has no notion of how much illumination an interval spans, so nothing
+stops it producing a sub-interval across which almost nothing changes — and on both maps it
+did, in the same place.
+
+Measured on the captured frame sets, which is what `verify.py` actually bounds: the mean
+absolute per-pixel distance between a sub-interval's two endpoint frame sets, over the whole
+captured pose set, on the 0–1 scale.
+
+| | Town01 | Town12 |
+|---|---|---|
+| sub-intervals | 17 | 20 |
+| endpoint distance, smallest | **0.0000** | **0.000229** |
+| endpoint distance, largest | 0.0288 | 0.046794 |
+| ratio, largest to smallest | — | **204** |
+| median | — | 0.021705 |
+| the sub-interval that spans nothing | **[−29.554°, −30.000°]** | **[−29.539°, −30.000°]** |
+
+**The two endpoint frame sets of that sub-interval are the same image to within the render
+floor.** The family there interpolates between two copies of one frame, so its certificate
+is a statement about nothing — and it still contributes a verdict to every count the study
+reports. `P_cont` certifying "16/16" includes it.
+
+### Why it exists
+
+Both maps' darkness endpoint is −30.0° with lower beam, and by −29.5° the sun is already
+far below the horizon, so the scene is lit by headlamps alone and stops changing. The
+bisection reached that region, measured a chord error of 0.0041 (Town01) and 0.0043
+(Town12) — which is the **render floor**, not an interpolation error, since there is
+nothing to interpolate — and stopped, because the floor is under the tolerance. An absolute
+stopping rule cannot tell "the chord fits well" from "there is nothing to fit".
+
+### What follows, and what does not
+
+- **Verdict counts over sub-intervals are not a coverage statistic.** They weight a
+  sub-interval spanning 0.047 the same as one spanning 0.0002, a factor of two hundred.
+  Every "certified N of M" in this study is a count of that kind, and the span belongs
+  beside it.
+- **No verdict is asserted to be wrong.** The certificate is sound over the family it
+  declares. This is about how much of the rendered axis that family represents, which is a
+  different question and is the one a reader will ask.
+- **This is the photometric picture only.** PROTOCOL section 4's *behavioural* in-between
+  gate, in the policy's own output space, is what section 4 says decides, and it is M5. A
+  sub-interval spanning no image distance will trivially pass it too, for the same reason.
+
+### The measurement that is NOT made here
+
+The tempting next step is a ratio of the knot file's `blend_error` to this distance, and it
+would be wrong. `blend_error` is **one frame at a fixed empty-road pose** (`along=25.0`);
+this distance is over the whole captured pose set with the target present. Different
+populations, different variance, and a ratio of them would look rigorous and mean little. A
+first pass at this finding computed exactly that ratio and reported figures up to 190
+before the mismatch was noticed. The honest version needs both quantities rendered at the
+same poses, which needs the simulator, and it is queued rather than guessed.
+
+### What to do
+
+`tools/family_fidelity.py` reports the span per sub-interval and flags any that span less
+than half a grey level. Two candidate protocol changes, **neither made here** because both
+change what the axis IS and that needs an amendment:
+
+1. make the bisection tolerance relative to the endpoint distance rather than absolute;
+2. refuse to create a sub-interval whose endpoint distance is under a floor, merging it
+   into its neighbour instead.
+
+---
+
 ## F26 — 2026-09-09, the capture campaign would have built a Town12 family out of Town01 endpoints
 
 **Caught in the log, not by a check.** The A14 rebuild reached the capture stage and
