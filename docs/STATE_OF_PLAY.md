@@ -12,7 +12,38 @@ Live state in the protocol's own terms: `python -m study.status`.
 
 ---
 
-## Where the study is, 2026-09-08
+## Where the study is, 2026-09-09
+
+**The study moved to Town12 and is rebuilding.** Amendments A13, A14 and A15 landed in one
+day and each one came from a measurement rather than a preference:
+
+- **A13** — three repetitions, each in its own process against its own freshly restarted
+  server, margin reported, disagreement making a cell void. Of 281 committed
+  ten-repetition cells 277 were unanimous, and **all four splits were bugs**: F21's scoring
+  defect twice, F23's cloud drift once, and F24 once.
+- **A14** — the map moves to Town12. A3 had moved the study off large maps on an RTX 4070;
+  on the 5090 Town12 holds 26.5 ticks/s flat at 7.4 GB. And Town01 had **zero** sites
+  meeting the false-activation scenario's own 320 m requirement. The study site is Town12
+  road 1016, 2,094 ft, grade −0.08%, sidewalk both sides, with 628 m of junction-free lane
+  against the 320 m needed — 308 m of margin where Town01 had about thirteen.
+- **A15** — `cloudiness = 0`, decided before the rebuild recaptured anything, because
+  every capture was being redone anyway and deciding it later costs the campaign twice.
+
+**F24 is the one that changes a headline.** `plate_run` ticked the world twice per control
+iteration, so the false-activation driver ran at 10 Hz where PROTOCOL section 3 specifies
+20. At the specified rate `P_cont` does not brake on the plate at +0.013° at all — 10/10
+pass, peaks 2.00–2.18 against a 2.4525 limit — so **the study's only certified-then-failed
+sub-interval was a driver defect**, the count is now zero everywhere, and F19's `P_cont`
+half is withdrawn. That is a stronger result for the certificate than the one that was
+written down.
+
+Everything below this section describes the **Town01** study, which is tagged
+`town01-final` and superseded by A14. It is kept because the rebuild is not finished and
+because the comparison between the two is worth having.
+
+---
+
+## Where the study was, 2026-09-08 (Town01, superseded by A14)
 
 **The A12 rebuild is complete, M0 through M7, on three policy arms.** Every number in
 `docs/STUDY_REPORT.md` was measured on the corrected harness between 2026-09-07 and

@@ -154,7 +154,15 @@ One sentence, as `docs/PAPER_OUTLINE.md` already fixes it.
 
 ## Part 2 — experiments to run, ordered by what can still damage the claim
 
-**E1. Chase the `P_cont`/plate split as a bug.** [+0.026°, +0.000°], 2/10 under A13's
+> **Status, later the same day.** E1 and E2 are closed, and the map moved. E1 found
+> F24 — the false-activation driver was running at 10 Hz where PROTOCOL section 3
+> specifies 20 — which withdrew F19's `P_cont` half and took the study's only
+> certified-then-failed sub-interval with it. E2 became amendment A15, `cloudiness = 0`,
+> decided before the rebuild recaptured anything. A14 then moved the study to Town12,
+> which makes E3, E4 and E5 measurements on the new map rather than the old one. The
+> remaining items stand as written.
+
+**E1. Chase the `P_cont`/plate split as a bug.** **CLOSED, F24.** [+0.026°, +0.000°], 2/10 under A13's
 harness, scene signature stable to 3e-5, peak demand bimodal at 1.90–1.91 against
 2.61–2.62 m/s² with nothing between. A clean gap with no intermediate values is a
 discrete difference between runs, not amplification. Named candidates: the trench plate is
@@ -166,7 +174,7 @@ instrumentation, re-drive, and do not report the cell until the cause is written
 **Cheap, and it is load-bearing:** this is the study's only certified-then-failed
 sub-interval and F19 rests on it.
 
-**E2. Decide F23, and measure what deciding it costs before paying.** Do not rebuild on
+**E2. Decide F23, and measure what deciding it costs before paying.** **CLOSED, A15.** Do not rebuild on
 the strength of the finding. Re-verify **one** cell and re-drive **one** at
 `cloudiness = 0.0` and see whether any verdict moves. If none moves, the paper carries F23
 as a stated limitation with a measured bound on its effect. If one moves, the captures are
@@ -220,9 +228,14 @@ written up; E9 before E3's at-witness half; E3 and E4 are the paper's new sectio
 **Dropped by A13, and still generating output:**
 
 - **Wilson intervals.** `tools/stats.py:rate()` stamps `wilson_95` into every cell. The
-  steering paper prints none, and under A13 an interval over three reproducibility
-  repetitions is an interval on nothing. `merge_witness_reps.py` already writes null;
-  the rest should stop emitting it.
+  steering paper prints none, and under A13 an interval over repetitions is an interval on
+  nothing — in either direction, because the ten-in-process fallback samples a drifting
+  harness and an interval there describes the drift as though it were a failure rate.
+  `merge_witness_reps.py` already writes null; the rest should stop emitting it.
+  **Deliberately not done while the rebuild runs**: every stage is a fresh process that
+  imports `stats.py`, so editing it mid-campaign would produce one rebuild out of two
+  different scorers, which is the drift this repository has lost study logic to twice.
+  It is the first change after the rebuild lands.
 - **The ten-repetition drive pattern.** The twenty-four-drive M7 at ten repetitions per
   cell is superseded. It is not re-run to "confirm" F21 or F22 — more repetitions is the
   thing that was just measured to be the wrong instrument.
