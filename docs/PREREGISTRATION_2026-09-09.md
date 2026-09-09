@@ -126,3 +126,67 @@ else.
 
 Nothing measured is rescored. The Town01 plate results stand as collected on the harness
 that collected them, and the finding is what carries forward to Town12.
+
+---
+
+# Addendum: what the Town12 rebuild is expected to produce
+
+Written 2026-09-09 at 19:00, with the capture campaign running and **before** pairing,
+training, endpoints, gates or verification have produced anything. The A14 rebuild changes
+the map, the site, the cloud cover and the repetition harness at once, so almost every
+number will move. That is not the interesting part. What is written down here is the small
+set of outcomes that would mean something has gone **wrong**, as opposed to merely
+different.
+
+## Already measured, and not predictions
+
+The primitives came out at `a_max` 0.499 g against Town01's 0.5048, `r_req` 52.5 ft at
+25 mph against 52.0, `t_lat` unchanged at 0.150 s, with the oracle and contact checks
+passing. The axis re-bisected to 20 sub-intervals with **no uncovered band** (F25). Those
+are results, not expectations.
+
+## Predicted
+
+1. **Pairing passes.** Poses are replayed from `states_<scenario>.json`, so a knot that
+   differs by a tick is a capture defect and nothing about the map should produce one.
+   High confidence. A pairing failure means the capture loop is not deterministic on this
+   map, which would be a new defect and would stop everything.
+
+2. **All three arms pass all three regulatory endpoints, 10/10.** Medium-high confidence,
+   and this one is load-bearing: it is the setup for the whole paper. `P_pts` failing an
+   endpoint on Town12 does not mean the paper is wrong, it means the policy did not train
+   on this road, and the honest response is a training problem to fix rather than a result
+   to report. **A study whose baseline cannot pass the regulatory test has no story**, in
+   PROTOCOL section 10's own words.
+
+3. **The behavioural in-between gate fails somewhere.** Medium confidence, and it is the
+   first thing that can contradict F25. On Town01 the photometric check passed at every
+   sub-interval and the behavioural gate then failed for `P_pts`/ped at [+12.542°, +7.715°]
+   at 1.016, needing A5's repair. Town12's axis has finer daylight splitting and a 29.5°
+   step across darkness; the darkness step is the obvious suspect. If it fails, section 4's
+   repair applies and the knots refine — that is the protocol working, not a defect.
+
+4. **The falsified band survives, and moves.** Low confidence on the width, high on the
+   existence: the study's claim is that a policy trained on the regulatory points fails
+   between them, and the mechanism — a discrete training matrix — is a property of the
+   training, not the road. A `P_pts` that is certified everywhere on Town12 would be the
+   single most damaging outcome available and would need a written disposition before
+   anything else proceeded.
+
+5. **Zero certified-then-failed sub-intervals.** High confidence, now that F24 has removed
+   the one the study had. This is the certificate's soundness and it is the claim the paper
+   rests on.
+
+6. **No void cells at M7.** Medium confidence. Three repetitions on three fresh servers
+   were identical to the recorded precision on Town01 (F22), and Town12 has no reason to be
+   worse. A void cell is a bug to chase, and this study's three have all been real defects.
+
+## What would mean the rebuild itself is broken
+
+Distinguished from a result, because after F26 the failure mode of interest is an artifact
+that is wrong in a way no numeric check sees:
+
+- any capture reusing a frame set from another campaign — the stamp now makes this loud;
+- endpoint or gate numbers that reproduce Town01's **exactly**, which on a different road
+  at a different cloud cover would mean something is still reading old artifacts;
+- a certificate whose scope does not cover what the drives cover, in either direction.
