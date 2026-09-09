@@ -361,12 +361,12 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     OUT.mkdir(parents=True, exist_ok=True)
     # The no-target control MUST replay the lead poses, or it is not a control: the
     # whole point is to isolate what the target contributes at an identical pose.
-    base = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}.get(scenario, scenario)
+    base = J.CONTROL_OF.get(scenario, scenario)
     states_path = OUT / f"states_{base}.json"
     if states_path.exists():
         states = _load_states(states_path)
         print(f"  reusing the saved nominal run, {len(states)} states")
-    elif scenario in ("none", "none_ped", "none_plate"):
+    elif scenario in J.CONTROL_OF:
         raise SystemExit(
             f"capture --scenario {base} first: the no-target control replays its poses"
         )
@@ -433,7 +433,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
         cam = None
         frames = []
         try:
-            if scenario in ("none", "none_ped", "none_plate"):
+            if scenario in J.CONTROL_OF:
                 other = None
             elif scenario == "plate":
                 # Static, placed once, never moved between poses: it is road furniture,
@@ -568,7 +568,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument(
         "--scenario",
-        choices=["lead", "ped", "none", "none_ped", "plate", "none_plate"],
+        # DERIVED, not listed. A scenario this accepts but SCENARIO_SITE does not know
+        # stops the run at site selection -- which is what happened to 'none' and
+        # 'none_ped' -- and a scenario SCENARIO_SITE knows but this rejects is
+        # unreachable. Two lists of the same thing is one list too many.
+        choices=[k for k in J.SCENARIO_SITE if k != "any"],
         default="lead",
         help="'none' repeats the lead poses with NO target; 'none_ped' repeats the "
              "ped poses the same way. The control isolates what the target contributes "

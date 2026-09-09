@@ -1,26 +1,52 @@
   loading Town12 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
-  reusing the saved nominal run, 104 states
 
 lead: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
-  lead_sun+60.000.npz exists, skipping
-Traceback (most recent call last):
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 557, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 534, in main
-    manifest = capture(args.scenario, knots, args.speed_mph, args.plan, args.highbeam)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 421, in capture
-    J.grab_frame(world, images)
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/carla_jobs.py", line 257, in grab_frame
-    img = images.get(timeout=timeout)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/lib/python3.12/queue.py", line 180, in get
-    self.not_empty.wait(remaining)
-  File "/usr/lib/python3.12/threading.py", line 359, in wait
-    gotit = waiter.acquire(True, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/.venv/lib/python3.12/site-packages/carla_determinism/hygiene.py", line 102, in _raise
-    raise KeyboardInterrupt(f"signal {signum}")
-KeyboardInterrupt: signal 15
+    signature: mean 0.3718 sigma 0.1526 p99 0.7333 dark 0.026
+  sun  +60.000: 104 frames,   40.0 MB,  94.9 s
+    signature: mean 0.3616 sigma 0.1522 p99 0.7098 dark 0.027
+  sun  +54.852: 104 frames,   39.6 MB,  94.8 s
+    signature: mean 0.3337 sigma 0.1562 p99 0.6784 dark 0.028
+  sun  +47.558: 104 frames,   38.7 MB,  97.9 s
+    signature: mean 0.2991 sigma 0.1677 p99 0.6588 dark 0.030
+  sun  +41.911: 104 frames,   37.7 MB,  98.0 s
+    signature: mean 0.2655 sigma 0.1758 p99 0.6314 dark 0.046
+  sun  +36.234: 104 frames,   36.7 MB,  99.3 s
+    signature: mean 0.2407 sigma 0.1704 p99 0.6078 dark 0.069
+  sun  +30.151: 104 frames,   35.5 MB, 101.1 s
+    signature: mean 0.1979 sigma 0.1690 p99 0.5686 dark 0.100
+  sun  +22.238: 104 frames,   30.9 MB, 101.3 s
+    signature: mean 0.1755 sigma 0.1528 p99 0.5137 dark 0.124
+  sun  +14.605: 104 frames,   27.4 MB, 103.8 s
+    signature: mean 0.1667 sigma 0.1455 p99 0.4941 dark 0.134
+  sun  +12.342: 104 frames,   25.2 MB, 103.5 s
+    signature: mean 0.1444 sigma 0.1273 p99 0.4392 dark 0.166
+  sun   +8.327: 104 frames,   21.7 MB, 105.9 s
+    signature: mean 0.1320 sigma 0.1184 p99 0.4078 dark 0.195
+  sun   +6.848: 104 frames,   20.7 MB, 106.9 s
+    signature: mean 0.1239 sigma 0.1123 p99 0.3843 dark 0.215
+  sun   +6.051: 104 frames,   20.0 MB, 107.0 s
+    signature: mean 0.1165 sigma 0.0982 p99 0.3725 dark 0.168
+  sun   +4.857: 104 frames,   19.6 MB, 108.4 s
+    signature: mean 0.1061 sigma 0.0929 p99 0.3529 dark 0.199
+  sun   +4.289: 104 frames,   18.7 MB, 108.5 s
+    signature: mean 0.0859 sigma 0.0825 p99 0.3255 dark 0.284
+  sun   +3.315: 104 frames,   16.9 MB, 109.2 s
+    signature: mean 0.0743 sigma 0.0762 p99 0.3020 dark 0.343
+  sun   +2.815: 104 frames,   15.7 MB, 108.8 s
+    signature: mean 0.0556 sigma 0.0651 p99 0.2588 dark 0.447
+  sun   +2.026: 104 frames,   13.4 MB, 108.6 s
+    signature: mean 0.0142 sigma 0.0328 p99 0.1333 dark 0.788
+  sun   +0.024: 104 frames,    7.0 MB, 108.3 s
+    signature: mean 0.0451 sigma 0.0665 p99 0.3333 dark 0.480
+  sun   +0.000: 104 frames,   14.6 MB, 133.4 s
+    signature: mean 0.0341 sigma 0.0670 p99 0.3333 dark 0.653
+  sun  -29.539: 104 frames,    9.8 MB, 125.9 s
+    signature: mean 0.0341 sigma 0.0670 p99 0.3333 dark 0.653
+  sun  -30.000: 104 frames,    9.8 MB, 127.4 s
+
+  illumination axis OK: 21 knots, span 0.3576 of full range, worst inversion 8.6% of span (limit 12%), total 8.6% (limit 25%)
+    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.6% of the axis span)
+  wrote results/captures/Town12/determinism_lead.json
+
+  wrote results/captures/Town12/manifest_lead.json

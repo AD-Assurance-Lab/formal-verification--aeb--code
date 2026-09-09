@@ -594,10 +594,20 @@ SCENARIO_SITE = {
     "ped":        {"need_m": 200.0, "sidewalk_both": True},
     # plate_run: gap_m 200, need_m = gap_m + 120, at 50 mph
     "plate":      {"need_m": 320.0, "sidewalk_both": False},
-    "none_plate": {"need_m": 320.0, "sidewalk_both": False},
     # the primitives and the probes drive the ego alone and need only room to stop
     "any":        {"need_m": 200.0, "sidewalk_both": False},
 }
+
+# THE NO-TARGET CONTROLS replay their base scenario's poses at the same site -- that is
+# what makes them controls -- so they inherit its site requirement, and they inherit it by
+# DERIVATION rather than by being listed again. Listing them was the first attempt and it
+# went wrong immediately: `none_plate` was written down and `none` and `none_ped` were not,
+# and the capture stage stopped on scenario 'none' having no requirement. The guard did its
+# job; the list was the defect. This mapping is the same one capture_campaign uses to pick
+# which nominal run a control replays, and it now lives here so the two cannot disagree.
+CONTROL_OF = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}
+for _control, _base in CONTROL_OF.items():
+    SCENARIO_SITE[_control] = dict(SCENARIO_SITE[_base])
 
 # THE study site satisfies every scenario at once, and that is a design property rather
 # than an accident of Town01 having only one usable straight. The family knots, the
