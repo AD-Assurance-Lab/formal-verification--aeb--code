@@ -1,6 +1,6 @@
 {
   "verdict": "PASS",
-  "map": "Carla/Maps/Town01",
+  "map": "Carla/Maps/Town12/Town12",
   "frames_received": 100,
   "note": "server survived a sensor attach on a large map with the hero tag",
   "determinism": {
@@ -19,7 +19,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 70.35000000003492,
+    "server_age_s": 41.34999999997672,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {
