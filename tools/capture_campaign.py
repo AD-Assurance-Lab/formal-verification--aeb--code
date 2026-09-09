@@ -297,7 +297,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     # actually rendered under rather than the ones this file asks for.
     global LAST_DETERMINISM
     LAST_DETERMINISM = J.determinism_provenance(world)
-    site = J.flattest_site(scenario=args.scenario)
+    site = J.flattest_site(scenario=scenario)
     b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
 
     spawn_tf, _ = J.site_transform(world, site, along=10.0, need_m=LEAD_GAP_M + 80.0)

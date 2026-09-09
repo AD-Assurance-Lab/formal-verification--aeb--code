@@ -51,6 +51,20 @@ say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
 fresh_server() {
   say "restarting CARLA on $CARLA_PORT"
+  # Stop it here rather than leaving it to the launcher's takeover path. That path waits
+  # 60 s on a SIGTERM CARLA does not honour before reaching for SIGKILL, and it reaches
+  # for SIGKILL every time -- correct when it is stopping a server it does not own and
+  # which may be someone's mid-run, and a minute of nothing per stage here, where the
+  # server is one this script started and is throwing away.
+  pkill -f "[C]arlaUE4" 2>/dev/null || true
+  for _ in $(seq 1 6); do pgrep -f "[C]arlaUE4" >/dev/null || break; sleep 1; done
+  pgrep -f "[C]arlaUE4" >/dev/null && pkill -9 -f "[C]arlaUE4" 2>/dev/null
+  # Wait for the SOCKET, not the process table: CARLA closes its socket on SIGTERM
+  # without exiting, and a reaped process whose port is still bound makes the next
+  # launch fail its bind while every later job answers from a server nobody configured.
+  for _ in $(seq 1 30); do
+    ss -ltn 2>/dev/null | grep -q ":$CARLA_PORT[[:space:]]" || break; sleep 1
+  done
   bash tools/carla_launch.sh >>"$LOG" 2>&1 || { say "FATAL: server would not start"; exit 1; }
 }
 
