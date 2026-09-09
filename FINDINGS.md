@@ -6,6 +6,70 @@ here, never inside the protocol.
 
 ---
 
+## F25 — 2026-09-09, on Town12 the disturbance family covers the whole axis: there is no uncovered sliver
+
+The A14 rebuild re-bisected the illumination axis on the new map, at the same tolerance
+and with the same metric. It comes out differently, and one of the differences removes a
+caveat the study has carried since A6.
+
+| | Town01 | Town12 |
+|---|---|---|
+| sub-intervals | 17 | **20** |
+| **uncovered sub-intervals** | **1** | **0** |
+| the horizon sliver | [+0.026°, +0.000°], blend error **0.0163** | [+0.024°, +0.000°], blend error **0.0095** |
+| worst blend error, any sub-interval | — | 0.0100, at [+4.857°, +4.289°] |
+| tolerance | 0.01 | 0.01 |
+
+**Every sub-interval on Town12 is covered.** The sliver at the horizon that A6 declared
+uncovered, that PROTOCOL excludes from every verdict by construction, and that F19 read as
+the place where a certificate is unavailable in principle, sits at 0.0095 here — inside
+tolerance, on the same metric.
+
+### What changed, and what did not
+
+The two axes are the same shape at the dark end and different at the bright end. Both need
+one enormous step across darkness (Town01 28.593°, Town12 29.539°) and both end up with a
+sliver of a few hundredths of a degree at the horizon. Where they part is daylight: Town01
+opened with a 17.234° sub-interval, and Town12 needs 5.148°, 7.294°, 5.647°, 5.677° and
+6.083° to hold the same tolerance. Town12's daylight scene has more in it, so a straight
+line in image space between two rendered frames fits it worse and the bisection has to
+split further.
+
+That is also the likely reason the horizon sliver now passes. Town12's scene at +0.403° has
+a mean brightness of 0.011 against Town01's 0.062 — this road is much darker at the horizon
+— and a scene that changes less between adjacent altitudes is one a chord fits better.
+
+### What this does NOT establish
+
+- **Not that the horizon is coverable in general.** One road on one map, and the plausible
+  mechanism is that this particular scene is darker. A6's measurement on Town01 stands as
+  a measurement of Town01.
+- **Not that the behavioural gate will pass.** This is the *photometric* in-between check,
+  which is what the knots are bisected on. PROTOCOL section 4's *behavioural* in-between
+  gate is M5 and has not run. On Town01 the photometric check passed everywhere and the
+  behavioural gate then failed for `P_pts`/ped at [+12.542°, +7.715°] at 1.016, and needed
+  A5's repair. The same can happen here.
+- **Not a like-for-like render count.** Town12's 223 renders are a fresh full bisection;
+  Town01's committed knot file records 5 because it is the *refined* artifact, produced by
+  A5's repair from an earlier set. The two numbers are not comparable and neither is a
+  measure of how hard the map is.
+
+### What it costs the study, which is not nothing
+
+Two results are about the sliver and lose their subject if it does not exist on this map:
+
+- **F14 and QUEUE item 10, conformal coverage for the uncovered sliver.** The argument was
+  that a certificate is unavailable where the family provably cannot represent reality, so
+  a distribution-free coverage statement goes there instead. With no uncovered band there
+  is nowhere to put it. The instrument stands; the motivating gap may not.
+- **F19's reading of the sliver** as the first empirical confirmation that it cannot be
+  certified. That half of F19 was already withdrawn by F24 for an unrelated reason.
+
+Both are recorded here rather than deleted. If the behavioural gate reopens a band, they
+come back.
+
+---
+
 ## F24 — 2026-09-09, the false-activation driver ran at half the specified control rate, and it invented the plate result on both sides
 
 **Reopens:** F19's `P_cont` half. **Disposes:** the `P_cont`/plate split left open in F22.
