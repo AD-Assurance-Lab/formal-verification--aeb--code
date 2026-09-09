@@ -1,0 +1,114 @@
+[2026-09-09 02:11:29] probing 6 sub-intervals, 46 repetitions, one server restart each
+[2026-09-09 02:11:29] CELL P_cont/plate [0.026, 0.0] midpoint  (10 reps)
+[2026-09-09 02:11:29]   why: split 6/10 on the shared server; runs 0-3 braked over the limit and 4-9 did not, which is a step in run INDEX. F19 rests on this cell.
+[2026-09-09 02:11:29]   restart before rep 1  [1/46]
+  rep 01  [+0.026,+0.000] at +0.013  FAIL  server age 20.089999999967404s  -> witness_P_cont_plate_p0.026_p0.000_rep01.json
+[2026-09-09 02:11:51]   restart before rep 2  [2/46]
+  rep 02  [+0.026,+0.000] at +0.013  FAIL  server age 20.12999999994645s  -> witness_P_cont_plate_p0.026_p0.000_rep02.json
+[2026-09-09 02:12:18]   restart before rep 3  [3/46]
+  rep 03  [+0.026,+0.000] at +0.013  PASS  server age 20.40999999997439s  -> witness_P_cont_plate_p0.026_p0.000_rep03.json
+[2026-09-09 02:12:46]   restart before rep 4  [4/46]
+  rep 04  [+0.026,+0.000] at +0.013  FAIL  server age 20.130000000004657s  -> witness_P_cont_plate_p0.026_p0.000_rep04.json
+[2026-09-09 02:13:14]   restart before rep 5  [5/46]
+  rep 05  [+0.026,+0.000] at +0.013  FAIL  server age 20.10999999998603s  -> witness_P_cont_plate_p0.026_p0.000_rep05.json
+[2026-09-09 02:13:41]   restart before rep 6  [6/46]
+  rep 06  [+0.026,+0.000] at +0.013  FAIL  server age 20.070000000006985s  -> witness_P_cont_plate_p0.026_p0.000_rep06.json
+[2026-09-09 02:14:09]   restart before rep 7  [7/46]
+  rep 07  [+0.026,+0.000] at +0.013  FAIL  server age 20.080000000016298s  -> witness_P_cont_plate_p0.026_p0.000_rep07.json
+[2026-09-09 02:14:36]   restart before rep 8  [8/46]
+  rep 08  [+0.026,+0.000] at +0.013  FAIL  server age 20.14000000001397s  -> witness_P_cont_plate_p0.026_p0.000_rep08.json
+[2026-09-09 02:15:04]   restart before rep 9  [9/46]
+  rep 09  [+0.026,+0.000] at +0.013  PASS  server age 20.430000000051223s  -> witness_P_cont_plate_p0.026_p0.000_rep09.json
+[2026-09-09 02:15:31]   restart before rep 10  [10/46]
+  rep 10  [+0.026,+0.000] at +0.013  FAIL  server age 20.15999999997439s  -> witness_P_cont_plate_p0.026_p0.000_rep10.json
+[2026-09-09 02:15:59] CELL P_pts3/ped [0.779, 0.026] midpoint  (10 reps)
+[2026-09-09 02:15:59]   why: split 2/10; bimodal -- two runs brake at 377 ft and pass, eight never brake and hit the pedestrian.
+[2026-09-09 02:15:59]   restart before rep 1  [11/46]
+  rep 01  [+0.779,+0.026] at +0.403  PASS  server age 19.779999999969732s  -> witness_P_pts3_ped_p0.779_p0.026_rep01.json
+[2026-09-09 02:16:26]   restart before rep 2  [12/46]
+  rep 02  [+0.779,+0.026] at +0.403  PASS  server age 19.789999999979045s  -> witness_P_pts3_ped_p0.779_p0.026_rep02.json
+[2026-09-09 02:16:53]   restart before rep 3  [13/46]
+  rep 03  [+0.779,+0.026] at +0.403  PASS  server age 19.79999999998836s  -> witness_P_pts3_ped_p0.779_p0.026_rep03.json
+[2026-09-09 02:17:21]   restart before rep 4  [14/46]
+  rep 04  [+0.779,+0.026] at +0.403  PASS  server age 19.789999999979045s  -> witness_P_pts3_ped_p0.779_p0.026_rep04.json
+[2026-09-09 02:17:48]   restart before rep 5  [15/46]
+  rep 05  [+0.779,+0.026] at +0.403  PASS  server age 19.760000000009313s  -> witness_P_pts3_ped_p0.779_p0.026_rep05.json
+[2026-09-09 02:18:15]   restart before rep 6  [16/46]
+  rep 06  [+0.779,+0.026] at +0.403  PASS  server age 19.70000000001164s  -> witness_P_pts3_ped_p0.779_p0.026_rep06.json
+[2026-09-09 02:18:42]   restart before rep 7  [17/46]
+  rep 07  [+0.779,+0.026] at +0.403  PASS  server age 19.789999999979045s  -> witness_P_pts3_ped_p0.779_p0.026_rep07.json
+[2026-09-09 02:19:09]   restart before rep 8  [18/46]
+  rep 08  [+0.779,+0.026] at +0.403  PASS  server age 19.739999999990687s  -> witness_P_pts3_ped_p0.779_p0.026_rep08.json
+[2026-09-09 02:19:36]   restart before rep 9  [19/46]
+  rep 09  [+0.779,+0.026] at +0.403  PASS  server age 19.75s  -> witness_P_pts3_ped_p0.779_p0.026_rep09.json
+[2026-09-09 02:20:04]   restart before rep 10  [20/46]
+  rep 10  [+0.779,+0.026] at +0.403  PASS  server age 19.910000000032596s  -> witness_P_pts3_ped_p0.779_p0.026_rep10.json
+[2026-09-09 02:20:31] CELL P_pts/lead [0.779, 0.026] midpoint  (10 reps)
+[2026-09-09 02:20:31]   why: split 9/10; the one repetition that failed is F21's scoring defect, fixed in run_policy.py. Should now be unanimous.
+[2026-09-09 02:20:31]   restart before rep 1  [21/46]
+  rep 01  [+0.779,+0.026] at +0.403  PASS  server age 18.760000000009313s  -> witness_P_pts_lead_p0.779_p0.026_rep01.json
+[2026-09-09 02:20:57]   restart before rep 2  [22/46]
+  rep 02  [+0.779,+0.026] at +0.403  PASS  server age 18.820000000006985s  -> witness_P_pts_lead_p0.779_p0.026_rep02.json
+[2026-09-09 02:21:23]   restart before rep 3  [23/46]
+  rep 03  [+0.779,+0.026] at +0.403  PASS  server age 19.369999999995343s  -> witness_P_pts_lead_p0.779_p0.026_rep03.json
+[2026-09-09 02:21:50]   restart before rep 4  [24/46]
+  rep 04  [+0.779,+0.026] at +0.403  PASS  server age 19.330000000016298s  -> witness_P_pts_lead_p0.779_p0.026_rep04.json
+[2026-09-09 02:22:17]   restart before rep 5  [25/46]
+  rep 05  [+0.779,+0.026] at +0.403  PASS  server age 18.800000000046566s  -> witness_P_pts_lead_p0.779_p0.026_rep05.json
+[2026-09-09 02:22:43]   restart before rep 6  [26/46]
+  rep 06  [+0.779,+0.026] at +0.403  PASS  server age 18.78000000002794s  -> witness_P_pts_lead_p0.779_p0.026_rep06.json
+[2026-09-09 02:23:09]   restart before rep 7  [27/46]
+  rep 07  [+0.779,+0.026] at +0.403  PASS  server age 18.830000000016298s  -> witness_P_pts_lead_p0.779_p0.026_rep07.json
+[2026-09-09 02:23:36]   restart before rep 8  [28/46]
+  rep 08  [+0.779,+0.026] at +0.403  PASS  server age 19.429999999993015s  -> witness_P_pts_lead_p0.779_p0.026_rep08.json
+[2026-09-09 02:24:02]   restart before rep 9  [29/46]
+  rep 09  [+0.779,+0.026] at +0.403  PASS  server age 19.34000000002561s  -> witness_P_pts_lead_p0.779_p0.026_rep09.json
+[2026-09-09 02:24:29]   restart before rep 10  [30/46]
+  rep 10  [+0.779,+0.026] at +0.403  PASS  server age 19.30999999999767s  -> witness_P_pts_lead_p0.779_p0.026_rep10.json
+[2026-09-09 02:24:56] CELL P_pts/lead [0.026, 0.0] --at-witness  (10 reps)
+[2026-09-09 02:24:56]   why: split 8/10; two repetitions, same F21 defect.
+[2026-09-09 02:24:56]   restart before rep 1  [31/46]
+  rep 01  [+0.026,+0.000] at +0.026  PASS  server age 19.30999999999767s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep01.json
+[2026-09-09 02:25:23]   restart before rep 2  [32/46]
+  rep 02  [+0.026,+0.000] at +0.026  PASS  server age 18.789999999979045s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep02.json
+[2026-09-09 02:25:49]   restart before rep 3  [33/46]
+  rep 03  [+0.026,+0.000] at +0.026  PASS  server age 18.80999999999767s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep03.json
+[2026-09-09 02:26:15]   restart before rep 4  [34/46]
+  rep 04  [+0.026,+0.000] at +0.026  PASS  server age 19.290000000037253s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep04.json
+[2026-09-09 02:26:42]   restart before rep 5  [35/46]
+  rep 05  [+0.026,+0.000] at +0.026  PASS  server age 18.75s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep05.json
+[2026-09-09 02:27:08]   restart before rep 6  [36/46]
+  rep 06  [+0.026,+0.000] at +0.026  PASS  server age 18.789999999979045s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep06.json
+[2026-09-09 02:27:34]   restart before rep 7  [37/46]
+  rep 07  [+0.026,+0.000] at +0.026  PASS  server age 19.389999999955762s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep07.json
+[2026-09-09 02:28:01]   restart before rep 8  [38/46]
+  rep 08  [+0.026,+0.000] at +0.026  PASS  server age 19.339999999967404s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep08.json
+[2026-09-09 02:28:28]   restart before rep 9  [39/46]
+  rep 09  [+0.026,+0.000] at +0.026  PASS  server age 19.30999999999767s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep09.json
+[2026-09-09 02:28:54]   restart before rep 10  [40/46]
+  rep 10  [+0.026,+0.000] at +0.026  PASS  server age 19.410000000032596s  -> witness_P_pts_lead_atwitness_p0.026_p0.000_rep10.json
+[2026-09-09 02:29:21] CELL P_cont/lead [60.0, 42.766] midpoint  (3 reps)
+[2026-09-09 02:29:21]   why: CONTROL, unanimous 10/10 on the shared server.
+[2026-09-09 02:29:21]   restart before rep 1  [41/46]
+  rep 01  [+60.000,+42.766] at +51.383  PASS  server age 20.29999999998836s  -> witness_P_cont_lead_p60.000_p42.766_rep01.json
+[2026-09-09 02:29:49]   restart before rep 2  [42/46]
+  rep 02  [+60.000,+42.766] at +51.383  PASS  server age 20.30999999999767s  -> witness_P_cont_lead_p60.000_p42.766_rep02.json
+[2026-09-09 02:30:17]   restart before rep 3  [43/46]
+  rep 03  [+60.000,+42.766] at +51.383  PASS  server age 20.270000000018626s  -> witness_P_cont_lead_p60.000_p42.766_rep03.json
+[2026-09-09 02:30:44] CELL P_pts3/lead [10.128, 7.715] midpoint  (3 reps)
+[2026-09-09 02:30:44]   why: CONTROL, unanimous 0/10 on the shared server.
+[2026-09-09 02:30:44]   restart before rep 1  [44/46]
+  rep 01  [+10.128,+7.715] at +8.921  FAIL  server age 21.410000000032596s  -> witness_P_pts3_lead_p10.128_p7.715_rep01.json
+[2026-09-09 02:31:13]   restart before rep 2  [45/46]
+  rep 02  [+10.128,+7.715] at +8.921  FAIL  server age 29.520000000018626s  -> witness_P_pts3_lead_p10.128_p7.715_rep02.json
+[2026-09-09 02:31:50]   restart before rep 3  [46/46]
+  rep 03  [+10.128,+7.715] at +8.921  FAIL  server age 29.54999999998836s  -> witness_P_pts3_lead_p10.128_p7.715_rep03.json
+[2026-09-09 02:32:27] all repetitions done; aggregating
+  P_cont  lead        midpoint  [ +60.000, +42.766]  probe 3/3   shared server 10/10
+  P_cont  plate       midpoint  [  +0.026,  +0.000]  probe 2/10   shared server 6/10   SPLIT UNDER PER-REPETITION RESTART
+  P_pts   lead        midpoint  [  +0.779,  +0.026]  probe 10/10   shared server 9/10
+  P_pts   lead        witness   [  +0.026,  +0.000]  probe 10/10   shared server 8/10
+  P_pts3  lead        midpoint  [ +10.128,  +7.715]  probe 0/3   shared server 0/10
+  P_pts3  ped         midpoint  [  +0.779,  +0.026]  probe 10/10   shared server 2/10
+  wrote results/carla/repetition_probe.json
+[2026-09-09 02:32:28] ALL DONE

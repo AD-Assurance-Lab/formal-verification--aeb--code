@@ -1,0 +1,16 @@
+[2026-09-09 02:39:13] restarting CARLA, then sweeping altitude 0.403
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.403: mean 0.06223 -> 0.06286 (3.85% of final), settled at tick 3000 against a 120-tick settle; demand spans 0.3337 m/s^2
+  wrote results/carla/lighting_settle_p0_403.json
+[2026-09-09 02:40:06] restarting CARLA, then sweeping altitude 0.013
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +0.013: mean 0.04336 -> 0.04388 (3.44% of final), settled at tick 3000 against a 120-tick settle; demand spans 0.2727 m/s^2
+  wrote results/carla/lighting_settle_p0_013.json
+[2026-09-09 02:40:59] restarting CARLA, then sweeping altitude 51.383
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  altitude +51.383: mean 0.51276 -> 0.51746 (1.63% of final), settled at tick 2980 against a 120-tick settle; demand spans 0.0300 m/s^2
+  wrote results/carla/lighting_settle_p51_383.json
+[2026-09-09 02:41:44] ALL DONE

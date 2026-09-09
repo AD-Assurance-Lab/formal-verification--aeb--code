@@ -18,7 +18,7 @@ result on the current harness).
 | 5 | falsification baseline | yes | **yes** | search wins on cost, 2/6 reliable, F15 |
 | 6 | in-between gate calibration | yes | **yes** | gate predicts nothing, r = −0.005, F10 |
 | 7 | trench plate, cells 5 and 6 | **yes** | **yes** | ledger 6/6. No arm brakes for the plate except `P_cont`, once. F18, F19 |
-| 8 | harness hardening | partly | partly | see below — **the only item still open** |
+| 8 | harness hardening | partly | partly | per-repetition restart built and adopted (A13, F22). Two pieces left; and F23 opens a new one |
 | 9 | horizon glare ablation | yes | **yes** | illumination not glare, F13 |
 | 10 | conformal coverage | yes | **yes** | separates the arms on the sliver, F14 |
 | 11 | latch-window property, PROTOCOL section 8 dispositions | yes | **yes** | all four contradictions disposed, F17 |
@@ -33,11 +33,22 @@ stays as written and the disjunction is reported beside it. F17.
 artifact; `stop_server` waiting on the process and the VRAM rather than the socket;
 `VERIFY_CONC` set from the worst-case per-job memory rather than the average;
 `expandable_segments`; `enable_postprocess_effects` set explicitly (D-4); the verifyA
-stage takes an explicit scope argument instead of a silent default. Not done: the server
-still restarts per stage rather than per repetition (D-6);
-the branch-and-bound witness search still samples three concrete points per domain; and
+stage takes an explicit scope argument instead of a silent default; **the per-repetition
+server restart (D-6)**, built as `tools/drive_witness.py --rep-index` +
+`tools/merge_witness_reps.py` + `scripts/drive_witness_reps.sh`, adopted as amendment A13
+and validated end to end against a committed ten-repetition cell. Not done: the
+branch-and-bound witness search still samples three concrete points per domain; and
 `a_max` is still read from stop TIME while `r_req = v²/2a` composes with distance, a 3.9%
 difference.
+
+**Item 12, new and ahead of the rest of 8.** F23: `cloudiness = 10.0` leaves a moving
+cloud layer, so scene brightness at the horizon drifts 3.9% with elapsed simulated time
+and never settles. It is the study's independent variable drifting, it is inside every
+capture as a gradient along the pose index, and it is not covered by any rule in the
+`carla-determinism` package. Fixing it means `cloudiness = 0` or a much longer settle plus
+a photometric check on every capture and drive, and both change what the conditions ARE —
+so it needs its own amendment before anything is re-measured. Ranked ahead of the
+remaining item 8 work: it can move a number, and they cannot.
 
 Items 7 and 8 change `capture_campaign.py`, `run_policy.py` and `carla_jobs.py`, which the
 running pipeline invokes on every stage. They wait for it to finish rather than being
@@ -124,8 +135,10 @@ drives. Section 9 calls cell 6 the sleeper, and property A says the sleeper is a
 - Set `enable_postprocess_effects` explicitly. D-4's lesson is precisely not to rely on a
   default that silently un-pins manual exposure, and the preflight cannot check it because
   it is a camera attribute rather than a world setting.
-- Restart the server per repetition rather than per stage (D-6). 170 runs currently share
-  one server inside a witness stage.
+- ~~Restart the server per repetition rather than per stage (D-6). 170 runs currently share
+  one server inside a witness stage.~~ **Done**, and it was not cosmetic: three of the
+  four split cells in the study turned out to be defects the shared server was hiding
+  (F21, F22, F23).
 - Deepen the branch-and-bound witness search past three concrete samples per domain.
 - Resolve `a_max` read from stop TIME (section 3's wording) against stop DISTANCE, which is
   what `r_req = v^2/2a` actually composes with. They differ by 4%.

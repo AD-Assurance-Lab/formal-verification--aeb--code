@@ -1,0 +1,521 @@
+{
+  "cells": [
+    {
+      "policy": "P_cont",
+      "scenario": "lead",
+      "driven_at": "midpoint",
+      "from_deg": 60.0,
+      "to_deg": 42.766,
+      "verdict": "CERTIFIED",
+      "probe_passes": 3,
+      "probe_of": 3,
+      "probe_unanimous": true,
+      "shared_server_passes": 10,
+      "shared_server_of": 10,
+      "shared_server_unanimous": true,
+      "verdict_agrees": true,
+      "prob_a_run_of_n_shows_the_split": null,
+      "server_age_s": {
+        "min": 20.270000000018626,
+        "max": 20.30999999999767
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88,
+          "brake_step": 179,
+          "speed_at_brake_mps": 11.176
+        },
+        {
+          "rep": 2,
+          "passes": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88,
+          "brake_step": 179,
+          "speed_at_brake_mps": 11.176
+        },
+        {
+          "rep": 3,
+          "passes": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88,
+          "brake_step": 179,
+          "speed_at_brake_mps": 11.176
+        }
+      ]
+    },
+    {
+      "policy": "P_cont",
+      "scenario": "plate",
+      "driven_at": "midpoint",
+      "from_deg": 0.026,
+      "to_deg": 0.0,
+      "verdict": "CERTIFIED",
+      "probe_passes": 2,
+      "probe_of": 10,
+      "probe_unanimous": false,
+      "shared_server_passes": 6,
+      "shared_server_of": 10,
+      "shared_server_unanimous": false,
+      "verdict_agrees": true,
+      "prob_a_run_of_n_shows_the_split": 1.0,
+      "server_age_s": {
+        "min": 20.070000000006985,
+        "max": 20.430000000051223
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": false,
+          "peak_demand_mps2": 2.6067,
+          "braked": true
+        },
+        {
+          "rep": 2,
+          "passes": false,
+          "peak_demand_mps2": 2.6052,
+          "braked": true
+        },
+        {
+          "rep": 3,
+          "passes": true,
+          "peak_demand_mps2": 1.914,
+          "braked": false
+        },
+        {
+          "rep": 4,
+          "passes": false,
+          "peak_demand_mps2": 2.6106,
+          "braked": true
+        },
+        {
+          "rep": 5,
+          "passes": false,
+          "peak_demand_mps2": 2.6081,
+          "braked": true
+        },
+        {
+          "rep": 6,
+          "passes": false,
+          "peak_demand_mps2": 2.6155,
+          "braked": true
+        },
+        {
+          "rep": 7,
+          "passes": false,
+          "peak_demand_mps2": 2.6057,
+          "braked": true
+        },
+        {
+          "rep": 8,
+          "passes": false,
+          "peak_demand_mps2": 2.6183,
+          "braked": true
+        },
+        {
+          "rep": 9,
+          "passes": true,
+          "peak_demand_mps2": 1.9044,
+          "braked": false
+        },
+        {
+          "rep": 10,
+          "passes": false,
+          "peak_demand_mps2": 2.6113,
+          "braked": true
+        }
+      ]
+    },
+    {
+      "policy": "P_pts",
+      "scenario": "lead",
+      "driven_at": "midpoint",
+      "from_deg": 0.779,
+      "to_deg": 0.026,
+      "verdict": "FALSIFIED",
+      "probe_passes": 10,
+      "probe_of": 10,
+      "probe_unanimous": true,
+      "shared_server_passes": 9,
+      "shared_server_of": 10,
+      "shared_server_unanimous": false,
+      "verdict_agrees": false,
+      "prob_a_run_of_n_shows_the_split": 1.0,
+      "server_age_s": {
+        "min": 18.760000000009313,
+        "max": 19.429999999993015
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 2,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 3,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 4,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 5,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 6,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 7,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 8,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 9,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 10,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        }
+      ]
+    },
+    {
+      "policy": "P_pts",
+      "scenario": "lead",
+      "driven_at": "witness",
+      "from_deg": 0.026,
+      "to_deg": 0.0,
+      "verdict": "FALSIFIED",
+      "probe_passes": 10,
+      "probe_of": 10,
+      "probe_unanimous": true,
+      "shared_server_passes": 8,
+      "shared_server_of": 10,
+      "shared_server_unanimous": false,
+      "verdict_agrees": false,
+      "prob_a_run_of_n_shows_the_split": 1.0,
+      "server_age_s": {
+        "min": 18.75,
+        "max": 19.410000000032596
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 2,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 3,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 4,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 5,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 6,
+          "passes": true,
+          "min_gap_ft": 378.98,
+          "rest_gap_ft": 378.98,
+          "brake_range_ft": 378.98,
+          "brake_step": 0,
+          "speed_at_brake_mps": 0.0
+        },
+        {
+          "rep": 7,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 8,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 9,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        },
+        {
+          "rep": 10,
+          "passes": true,
+          "min_gap_ft": 325.97,
+          "rest_gap_ft": 325.97,
+          "brake_range_ft": 377.19,
+          "brake_step": 0,
+          "speed_at_brake_mps": 10.936
+        }
+      ]
+    },
+    {
+      "policy": "P_pts3",
+      "scenario": "lead",
+      "driven_at": "midpoint",
+      "from_deg": 10.128,
+      "to_deg": 7.715,
+      "verdict": "FALSIFIED",
+      "probe_passes": 0,
+      "probe_of": 3,
+      "probe_unanimous": true,
+      "shared_server_passes": 0,
+      "shared_server_of": 10,
+      "shared_server_unanimous": true,
+      "verdict_agrees": true,
+      "prob_a_run_of_n_shows_the_split": null,
+      "server_age_s": {
+        "min": 21.410000000032596,
+        "max": 29.54999999998836
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": false,
+          "min_gap_ft": -1.79,
+          "rest_gap_ft": 1.01,
+          "brake_range_ft": -1.16,
+          "brake_step": 285,
+          "speed_at_brake_mps": 17.447
+        },
+        {
+          "rep": 2,
+          "passes": false,
+          "min_gap_ft": -1.93,
+          "rest_gap_ft": null,
+          "brake_range_ft": null,
+          "brake_step": null,
+          "speed_at_brake_mps": null
+        },
+        {
+          "rep": 3,
+          "passes": false,
+          "min_gap_ft": -1.93,
+          "rest_gap_ft": null,
+          "brake_range_ft": null,
+          "brake_step": null,
+          "speed_at_brake_mps": null
+        }
+      ]
+    },
+    {
+      "policy": "P_pts3",
+      "scenario": "ped",
+      "driven_at": "midpoint",
+      "from_deg": 0.779,
+      "to_deg": 0.026,
+      "verdict": "FALSIFIED",
+      "probe_passes": 10,
+      "probe_of": 10,
+      "probe_unanimous": true,
+      "shared_server_passes": 2,
+      "shared_server_of": 10,
+      "shared_server_unanimous": false,
+      "verdict_agrees": false,
+      "prob_a_run_of_n_shows_the_split": 1.0,
+      "server_age_s": {
+        "min": 19.70000000001164,
+        "max": 19.910000000032596
+      },
+      "per_rep": [
+        {
+          "rep": 1,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 2,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 3,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 4,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 5,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 6,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 7,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 8,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 9,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        },
+        {
+          "rep": 10,
+          "passes": true,
+          "min_gap_ft": 325.5,
+          "rest_gap_ft": 325.5,
+          "brake_range_ft": 376.88,
+          "brake_step": 4,
+          "speed_at_brake_mps": 10.925
+        }
+      ]
+    }
+  ],
+  "note": "Each repetition ran in its own process against its own freshly restarted server (D-6), which is the harness the repetition floor is conditional on. A cell whose repetitions disagree here is VOID under the standing rule, not a rate; a cell that was split on the shared server and is unanimous here was measuring the server."
+}

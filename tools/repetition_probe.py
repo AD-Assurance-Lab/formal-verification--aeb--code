@@ -116,9 +116,14 @@ def drive_one(args) -> int:
 
     key = cell_key(args.from_deg, args.to_deg)
     PROBE.mkdir(parents=True, exist_ok=True)
-    out_path = J.claim_output(
-        PROBE / f"{artifact_name(args.policy, args.scenario, args.at_witness)}"
-                f"_{key}_rep{args.rep:02d}.json")
+    # CLAIMED LATE, and only on the path that writes it. The first version claimed it
+    # here, before the --in-process-reps branch decided it was writing somewhere else --
+    # and claim_output DELETES, so an A/B run at --rep 1 silently destroyed repetition 1
+    # of the measurement it was supposed to be compared against. D-9's rule is that a
+    # crashed repetition must leave no artifact; it is not a licence to delete one that
+    # this invocation is never going to replace.
+    out_path = (PROBE / f"{artifact_name(args.policy, args.scenario, args.at_witness)}"
+                        f"_{key}_rep{args.rep:02d}.json")
 
     client, world = J.connect(rendering=True)
     site = J.flattest_site()
@@ -130,21 +135,49 @@ def drive_one(args) -> int:
     for _ in range(J.WEATHER_SETTLE_TICKS):
         world.tick()
     lights = "LowBeam" if mid < 5.0 else "NONE"
+    if args.idle_ticks:
+        for _ in range(args.idle_ticks):
+            world.tick()
+        print(f"  idled {args.idle_ticks} ticks with nothing spawned", flush=True)
 
-    if plate:
-        run = plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights,
-                        place=place_plate)
-        passed = run["passes"]
-    else:
-        run = one_run(world, site, model, w, h, dev, a_max, J.HAZARD_MPH, lights,
-                      scenario=args.scenario, release_r_req_m=r_req_ft / J.FT)
-        run["premature"] = (run["brake_range_ft"] is not None
-                            and run["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE)
+    def drive() -> tuple[dict, bool]:
+        if plate:
+            r = plate_run(world, site, model, w, h, dev, J.PLATE_MPH, lights,
+                          place=place_plate)
+            return r, r["passes"]
+        r = one_run(world, site, model, w, h, dev, a_max, J.HAZARD_MPH, lights,
+                    scenario=args.scenario, release_r_req_m=r_req_ft / J.FT)
+        r["premature"] = (r["brake_range_ft"] is not None
+                          and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE)
         # PROTOCOL section 7's frozen closed-loop pass, and only that. The nuisance
         # condition is property A and is recorded beside the verdict, never inside it.
-        passed = (not run["contact"]) and run["standoff_ok"]
-        run["passes"] = passed
+        ok = (not r["contact"]) and r["standoff_ok"]
+        r["passes"] = ok
+        return r, ok
 
+    if args.in_process_reps:
+        # The A/B. Everything is held fixed except the one thing under test: these
+        # repetitions share a process and a server, and the --rep repetitions do not.
+        seq = []
+        for i in range(args.in_process_reps):
+            r, ok = drive()
+            seq.append(ok)
+            rec = _record(args, cell, mid, lights, r, ok, world, ref_path,
+                          rep=args.rep + i, shared_server=True)
+            (PROBE / "controls").mkdir(parents=True, exist_ok=True)
+            path = J.claim_output(
+                PROBE / "controls" /
+                f"{artifact_name(args.policy, args.scenario, args.at_witness)}"
+                f"_{key}_shared_rep{args.rep + i:02d}.json")
+            path.write_text(json.dumps(rec, indent=2) + "\n")
+            print(f"  shared-server rep {args.rep + i:02d}  "
+                  f"{'PASS' if ok else 'FAIL'}", flush=True)
+        print("  sequence in run order: "
+              + "".join("P" if x else "F" for x in seq), flush=True)
+        return 0
+
+    out_path = J.claim_output(out_path)
+    run, passed = drive()
     record = {
         "policy": args.policy,
         "scenario": args.scenario,
@@ -164,12 +197,29 @@ def drive_one(args) -> int:
         "determinism": J.determinism_provenance(world),
         "provenance": {"git_sha": _git_sha(), "reference_artifact": ref_path.name},
     }
+    record["shared_server"] = False
+    record["idle_ticks"] = args.idle_ticks
     record["server_age_s"] = record["determinism"].get("server_age_s")
     out_path.write_text(json.dumps(record, indent=2) + "\n")
     print(f"  rep {args.rep:02d}  [{args.from_deg:+.3f},{args.to_deg:+.3f}] "
           f"at {mid:+.3f}  {'PASS' if passed else 'FAIL'}  "
           f"server age {record['server_age_s']}s  -> {out_path.name}", flush=True)
     return 0
+
+
+def _record(args, cell, mid, lights, run, passed, world, ref_path, rep, shared_server):
+    det = J.determinism_provenance(world)
+    return {
+        "policy": args.policy, "scenario": args.scenario,
+        "driven_at": "witness" if args.at_witness else "midpoint",
+        "from_deg": args.from_deg, "to_deg": args.to_deg,
+        "driven_at_deg": round(mid, 3), "rep": rep,
+        "verdict": cell["verdict"], "passes": bool(passed), "headlamps": lights,
+        "shared_server": shared_server,
+        "server_age_s": det.get("server_age_s"),
+        "run": run, "determinism": det,
+        "provenance": {"git_sha": _git_sha(), "reference_artifact": ref_path.name},
+    }
 
 
 def _git_sha():
@@ -190,6 +240,15 @@ def report() -> int:
     groups: dict[tuple, list] = {}
     for p in sorted(PROBE.glob("*.json")):
         r = json.loads(p.read_text())
+        if r.get("shared_server"):
+            continue      # a different harness; the A/B, never pooled with it
+        if r.get("idle_ticks"):
+            continue      # a deliberately perturbed control, not a repetition
+        # Both exclusions exist because the first version of this report pooled the
+        # 1,000-idle-tick control in with the repetitions and moved a cell from 10/10 to
+        # 9/10. A diagnostic run silently counted as a measurement is this repository's
+        # most-repeated defect; the controls now also live in their own directory, so the
+        # filter is a second line rather than the only one.
         groups.setdefault(
             (r["policy"], r["scenario"], r["driven_at"], r["from_deg"], r["to_deg"]),
             []).append(r)
@@ -270,6 +329,20 @@ def main() -> int:
     ap.add_argument("--to-deg", type=float)
     ap.add_argument("--rep", type=int)
     ap.add_argument("--at-witness", action="store_true")
+    ap.add_argument(
+        "--idle-ticks", type=int, default=0,
+        help="tick the world this many times after the weather settle and before "
+             "driving, spawning nothing. Separates the two candidate causes of the "
+             "shared-server drift: if the scene brightens with elapsed simulation time "
+             "the idle ticks reproduce it, and if it brightens with spawn/despawn churn "
+             "they do not.")
+    ap.add_argument(
+        "--in-process-reps", type=int, default=None,
+        help="drive this many repetitions in ONE process against ONE server, which is "
+             "exactly what drive_witness.py does. The A/B against --rep: same freshly "
+             "restarted server, same cell, same code, and the only thing varying is "
+             "whether the repetitions share a process. Written to reps numbered from "
+             "--rep, tagged shared_server so nothing merges the two harnesses.")
     args = ap.parse_args()
     if args.report:
         return report()

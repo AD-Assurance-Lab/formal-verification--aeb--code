@@ -62,6 +62,13 @@ def main() -> int:
     ap.add_argument("--scenario", default="lead")
     ap.add_argument("--reps", type=int, default=J.REPS)
     ap.add_argument(
+        "--rep-index", type=int, default=None,
+        help="drive ONE repetition of every sub-interval and write it to its own "
+             "artifact under results/carla/witness_reps/. The shell restarts the "
+             "server between indices, so each repetition of each sub-interval gets an "
+             "independent simulator (D-6) and an independent process, which ten "
+             "repetitions inside one loop do not. Merge with tools/merge_witness_reps.py")
+    ap.add_argument(
         "--at-witness", action="store_true",
         help="drive the EXHIBITED witness illumination of each falsified sub-interval "
              "instead of its midpoint. The default midpoint pass answers 'does the "
@@ -115,8 +122,23 @@ def main() -> int:
     # D-9: claimed before the first run, so a crashed drive leaves no witness artifact
     # rather than an earlier one that every consumer would treat as current.
     _sfx = "_atwitness" if args.at_witness else ""
-    out_path = J.claim_output(
-        OUT / f"witness_{args.policy}_{args.scenario}{_sfx}.json")
+    if args.rep_index is None:
+        out_path = J.claim_output(
+            OUT / f"witness_{args.policy}_{args.scenario}{_sfx}.json")
+    else:
+        # One repetition of every sub-interval, in its own process against its own
+        # freshly restarted server. The shell owns the restarts; this file only has to
+        # not overwrite the other repetitions, which is D-9: a repetition that crashes
+        # must leave no artifact rather than leave the previous repetition's.
+        (OUT / "witness_reps").mkdir(parents=True, exist_ok=True)
+        out_path = J.claim_output(
+            OUT / "witness_reps" /
+            f"witness_{args.policy}_{args.scenario}{_sfx}_rep{args.rep_index:02d}.json")
+        if args.reps != 1:
+            raise SystemExit(
+                f"--rep-index drives one repetition per process; --reps is {args.reps}. "
+                f"Ten repetitions inside one process is the harness this flag exists to "
+                f"replace, and running both at once would report neither.")
     reps = args.reps
 
     carla = J.carla_module()
@@ -311,6 +333,7 @@ def main() -> int:
     payload = {
         "policy": args.policy,
         "scenario": args.scenario,
+        "rep_index": args.rep_index,
         "model_sha256": _prov.get("model_sha256"),
         "provenance": _prov,
         # D-11 is enforceable after the fact only if the artifact says which harness

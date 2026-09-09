@@ -59,9 +59,10 @@ would have changed a published number:
 
 ### The queue
 
-Nine of eleven items in `docs/QUEUE.md` are measured. Remaining: the rest of the harness
-hardening (item 8), and cells 5 and 6, whose drives are done and whose property A
-certificates are computing now.
+Ten of eleven items in `docs/QUEUE.md` are measured. Item 8's largest open piece, the
+per-repetition server restart (D-6), is now built and adopted as A13. What remains of item
+8 is the branch-and-bound witness search depth and the `a_max` time-versus-distance
+reading, and the new open item is F23's cloud modulation.
 
 ## What to read, in order
 
@@ -124,20 +125,41 @@ under the 2.453 limit and all nine cells pass 10/10. The certificate then puts `
 0.98–1.00x of the limit on the two near-horizon sub-intervals, the thinnest margins of any
 arm, which by F17 is a band where a bare pass says nothing.
 
-### 2. The LAP protocol is still unresolved, and it is lab-wide
+### 2. The repetition count is settled here, and the reason is not the one anyone expected
 
-`CARLA_DETERMINISM_PENDING.md` records a genuine conflict: the `carla-determinism`
-package's D-7 says closed-loop numbers remain rates over at least ten repetitions, and the
-steering study's amendment A-4 supersedes that with three laps under a fully enforced
-harness. **This study follows `PROTOCOL.md`, which says ten**, and that is the right
-default while the conflict is open — resolving it needs the package's section 4 amendment
-procedure and it is Zach's call, not a study's.
+**Closed for this repository, 2026-09-09, by amendment A13.** Three repetitions, each in
+its own process against its own freshly restarted server, reported with the margin, and
+repetitions that disagree make the cell **void**. The path is
+`scripts/drive_witness_reps.sh`, validated end to end against a committed ten-repetition
+cell: same verdicts, no void cells, ninety seconds.
 
-Note that a "lap" does not map cleanly onto AEB in any case: a lap is one traversal of all
-the unique scored road, and an AEB cell is a discrete approach to a discrete hazard. What
-does transfer, and is adopted: a fresh server before every measurement stage, one process
-per stage, a fresh vehicle per run, the determinism preflight green on each fresh server,
-and the margin reported with every verdict.
+It was not adopted from the steering study. It was measured here, and the measurement
+found three things the ten-repetition floor had been hiding (F22):
+
+- Of 281 committed ten-repetition cells, **277 are unanimous and 4 are split**, and not
+  one of the four is a draw from a rate.
+- Two of the four were an instrument defect (F21). One is the policy on its own brake
+  threshold, and it stays split on the clean harness, so it is **void** — and it fails
+  harder there, 2/10 rather than the shared server's 6/10.
+- The fourth was the simulator moving underneath the measurement, which is F23 and is the
+  finding with the longest reach.
+
+**F23: CARLA's cloud layer moves under fixed weather.** Every driver here sets
+`cloudiness = 10.0` beside the sun altitude, and the cloud layer drifts, so scene
+brightness at the horizon wanders **3.9% with elapsed simulated time** and never settles
+inside 3,000 ticks. At `cloudiness = 0.0` the same scene settles by tick 20 and holds to
+0.08%. The 120-tick settle is not wrong about what it measured — a day-to-night
+transition — it is blind to a few-percent modulation that is decisive exactly where this
+study's interesting cells are.
+
+**That is still open and it is bigger than the repetition count.** Three fresh servers
+agree with each other because they all sample the same early point of that curve, which
+makes them reproducible and not representative. `capture_campaign.py` settles once and
+then walks its poses, so a single capture sweeps the curve along its own pose index.
+Controlling it means `cloudiness = 0` or a much longer settle plus a photometric check,
+and both change what the conditions ARE. That needs its own amendment and it is Zach's
+call. Nothing published is asserted to be wrong; what is asserted is that the study does
+not currently control its independent variable to better than about 2% at the horizon.
 
 ### 3. What the rebuild costs the paper
 
@@ -168,6 +190,11 @@ Written where they will be read, because each has cost real time here.
   1.00x and 1.05x of threshold the margin carries no information about whether the drive
   holds: a sub-interval certified at 1.0318x crashed 10/10 while four thinner ones drove
   clean (F17). Report the margin, and do not read a bare pass near the threshold as one.
+- **A "fixed" weather is not a static scene.** `cloudiness = 10.0` leaves a moving cloud
+  layer, so the same sun altitude renders 3.9% brighter or darker depending on how long
+  the server has been ticking (F23). Repetitions inside one process sample that curve;
+  repetitions on fresh servers all sample its first few ticks. Neither is the converged
+  scene, and there is no converged scene while the clouds are on.
 - **`carla-determinism` is pinned to a commit, not a tag.** The 1.1.0 API this harness
   needs is pushed but untagged. `scripts/bootstrap_env.sh` now proves the API is present
   rather than only that the package imports.

@@ -55,7 +55,24 @@ SETTLE_TOLERANCE_MPS = 0.15
 # darkness endpoint at 12 ticks makes it 75 percent too bright, and the disturbance
 # family interpolates between endpoints, so that error would land in the verified set.
 WEATHER_SETTLE_TICKS = 120
+# TWO FLOORS, and which one applies is a property of the HARNESS, not a preference.
+#
+# REPS is the floor for repetitions that share a process and a server, which is what a
+# `for _ in range(REPS)` loop inside a driver produces. It stays at ten. Amendment A13
+# did not lower this number; it named the harness under which a lower one is legitimate,
+# and a loop is not that harness.
+#
+# REPS_RESTARTED is the floor for repetitions that each get a stopped server, a fresh
+# launch through the determinism preflight, a new process, a new client and a new
+# vehicle -- tools/drive_witness.py --rep-index driven by scripts/drive_witness_reps.sh.
+# Under it, repetitions of a cell come out identical to the recorded precision (F22), so
+# three is a reproducibility check rather than a sample.
+#
+# Setting REPS to 3 would produce the one combination that is worse than either: three
+# repetitions sharing a server, which is a smaller sample of F23's drift curve. Hence two
+# names.
 REPS = 10
+REPS_RESTARTED = 3
 
 
 def carla_module():

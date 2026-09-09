@@ -99,7 +99,27 @@ deterministic control on/off, the package version and RULES digest, `check_lock(
 server's actual command line read from the running process. See
 `scripts/closed_loop_ledger.py:_determinism_provenance` in the steering repo.
 
-### Unresolved, and it affects the text above this section
+### RESOLVED for this repository, 2026-09-09, by PROTOCOL amendment A13
+
+Three repetitions, each in its own process against its own freshly restarted server, with
+the margin reported and disagreement making a cell void. **Measured here rather than
+inherited from the steering study**, and the measurement is FINDINGS F22: of 281 committed
+ten-repetition cells 277 were unanimous, all four splits had identifiable causes, and none
+of the causes was sampling. Two were a scoring defect (F21), one is a policy on its own
+brake threshold and is now void, and one was the simulator drifting (F23).
+
+D-7's measurement is not disputed and the package is not amended. What A13 disputes is the
+INFERENCE from "frames are never bit-identical" to "therefore ten repetitions with a
+confidence interval", on the grounds that verdict stability rather than frame identity is
+what the floor protected. Lab-wide the conflict stands open; changing D-7 needs the
+package's section 4 procedure and is Zach's call.
+
+**And the repetition count was the smaller half of what this found.** See F23: CARLA's
+cloud layer moves under fixed weather, so scene brightness at the horizon drifts 3.9% with
+elapsed simulated time. That is a candidate lab-wide rule and it is not written into the
+package by a study.
+
+### Superseded text, kept because it is what was believed until 2026-09-09
 
 This file (and D-7 in the `carla-determinism` package, which is hash-locked) says
 closed-loop numbers remain **rates over at least 10 repetitions**. A-4 supersedes that with

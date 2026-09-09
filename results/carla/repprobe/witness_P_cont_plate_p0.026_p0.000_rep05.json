@@ -1,0 +1,68 @@
+{
+  "policy": "P_cont",
+  "scenario": "plate",
+  "driven_at": "midpoint",
+  "from_deg": 0.026,
+  "to_deg": 0.0,
+  "driven_at_deg": 0.013,
+  "rep": 5,
+  "verdict": "CERTIFIED",
+  "passes": false,
+  "headlamps": "LowBeam",
+  "server_age_s": 20.10999999998603,
+  "run": {
+    "signature": {
+      "mean": 0.04334,
+      "sigma": 0.07219,
+      "p01": 0.0,
+      "p99": 0.31765,
+      "frac_dark": 0.59738
+    },
+    "peak_demand_mps2": 2.6081,
+    "nuisance_limit_mps2": 2.4525,
+    "exceeded_nuisance_limit": true,
+    "braked": true,
+    "brake_range_ft": 307.68,
+    "crossed_plate": false,
+    "min_speed_mps_while_moving": 1.031,
+    "passes": false,
+    "plate_present": true,
+    "plate_tiles": 9,
+    "plate_covered_ft": [
+      8.0,
+      12.0
+    ]
+  },
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 20.10999999998603,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  },
+  "provenance": {
+    "git_sha": "fc1984dd7f1f7dd5ff5472f1f2437decff53ce50",
+    "reference_artifact": "witness_P_cont_plate.json"
+  }
+}

@@ -6,6 +6,157 @@ here, never inside the protocol.
 
 ---
 
+## F23 — 2026-09-09, CARLA's cloud layer moves under fixed weather, so "the same illumination" drifts 3.9% with elapsed simulation time
+
+**The scene this study calls a condition is not static.** Held on the brake, camera rigid,
+weather set once, exposure pinned manually, nothing else in the world: the rendered mean
+brightness still wanders.
+
+| sun altitude | mean at the 120-tick settle | range over 3,000 ticks | drift | policy demand spans |
+|---|---|---|---|---|
+| +0.403° (ped split cell) | 0.06209 | 0.06200 – 0.06442 | **3.85%** | **0.334 m/s²** |
+| +0.013° (plate split cell) | 0.04338 | 0.04335 – 0.04486 | 3.44% | 0.273 m/s² |
+| +51.383° (daylight control) | 0.51524 | 0.51276 – 0.52120 | 1.63% | 0.030 m/s² |
+
+The curve rises for roughly 1,200–1,800 ticks and then falls back, at every altitude. That
+is not a settle. Nothing converges; the scene is being modulated.
+
+### It is the clouds, and the attribution is one flag
+
+Every driver in this study sets `cloudiness = 10.0` beside the sun altitude. **CARLA's
+cloud layer moves**, and holding the weather parameters fixed does not hold the sky still.
+Re-run at +0.403° with `cloudiness = 0.0`, everything else identical:
+
+| | cloudiness 10.0 | cloudiness 0.0 |
+|---|---|---|
+| drift over 3,000 ticks | 3.85% | **1.05%**, and all of it in the first 20 ticks |
+| settled by | never, within 3,000 | **tick 20** |
+| flat thereafter | — | 0.08% over the remaining 2,800 ticks |
+| policy demand span | 0.334 m/s² | 0.114 m/s² |
+
+`WEATHER_SETTLE_TICKS = 120` is not wrong about what it measured. Its recorded
+justification is a day-to-night transition, 221 to 42.5, settled by 80 ticks and flat to
+400 — a 5x change resolved to a few percent. The cloud modulation is a few percent, so it
+was inside the noise of the measurement that set the constant, and it is decisive exactly
+where the study's interesting cells are: at the horizon the policy's demand moves eleven
+times more per unit of scene brightness than it does in daylight.
+
+### What this costs, stated plainly
+
+- **The illumination axis has an uncontrolled time-varying component.** Illumination is
+  this study's independent variable. Two measurements of "the same" horizon illumination,
+  taken a minute apart of simulated time, differ by about 2% of scene brightness, and this
+  policy's brake decision is a step function across that.
+- **Capture campaigns sweep the curve within one capture.** `capture_campaign.py` settles
+  once and then walks its poses at 40 ticks each, so pose 1 sits near tick 120 and pose 25
+  near tick 1,120 — different points of the modulation. The certificate's endpoint frames
+  therefore carry a photometric gradient along the pose index that is not part of the
+  declared disturbance family.
+- **More repetitions make it worse, not better.** Repetitions inside one server sample
+  further along the curve. This is the concrete case of the standing rule that a larger
+  sample drawn through a known-bad harness measures the harness.
+
+### What is NOT claimed
+
+That any published verdict is wrong. Nothing here has been re-verified or re-driven at
+`cloudiness = 0`, and the modulation is a few percent where the certified/uncertified
+separation is a factor of two. What is claimed is that the study does not currently
+control its own independent variable to better than about 2% at the horizon, and that the
+gap has never been in any error budget.
+
+**This is not a defect the `carla-determinism` package covers.** D-3 is texture-mip
+streaming and D-4 is the postprocess chain; both are pinned here and both are satisfied.
+This is a third mechanism, it is lab-wide, and it is written up for Zach rather than added
+to a hash-locked file by a study.
+
+---
+
+## F22 — 2026-09-09, what ten repetitions were actually buying: three defects, no rate, and no need for ten
+
+**Disposes:** the four split cells in `docs/PREREGISTRATION_2026-09-09.md`, and the failed
+prediction 4 in that file.
+
+`PROTOCOL.md` section 3 required every closed-loop number to be a failure rate over at
+least ten repetitions with Wilson intervals. Measured across every committed artifact in
+this repository (`tools/repetition_floor.py`, no simulator):
+
+| | |
+|---|---|
+| cells carrying a ten-repetition count | 281 |
+| unanimous | **277** |
+| split | 4 |
+
+A cell passes iff every repetition passes, so only a split cell can be sensitive to the
+repetition count at all. All four splits were then re-driven with a stopped server, a
+fresh launch through the determinism preflight, a new process, a new client, a new vehicle
+and a new camera **before every repetition** — the harness D-6 asks for and QUEUE item 8
+had open — plus two controls that were unanimous.
+
+| cell | ten in one process | ten on ten fresh servers | cause |
+|---|---|---|---|
+| `P_pts` / lead [+0.779°, +0.026°] | 9/10 | **10/10** | F21 scoring defect |
+| `P_pts` / lead at-witness [+0.026°, +0.000°] | 8/10 | **10/10** | F21 scoring defect |
+| `P_pts3` / ped [+0.779°, +0.026°] | 2/10 | **10/10** | F23 cloud drift |
+| `P_cont` / plate [+0.026°, +0.000°] | 6/10 | **2/10, still split** | the policy |
+| CONTROL `P_cont` / lead [+60.000°, +42.766°] | 10/10 | 3/3 | — |
+| CONTROL `P_pts3` / lead [+10.128°, +7.715°] | 0/10 | 0/3 | — |
+
+**Not one of the four was sampling.** Two were an instrument defect, one was the simulator
+moving underneath the measurement, and one is the policy sitting on its own brake
+threshold. A Wilson interval over any of them would have described a failure rate that
+does not exist.
+
+### The three causes, separated by measurement rather than by argument
+
+- **`P_pts3`/ped.** The ten fresh-server repetitions are bit-identical: brake at step 4,
+  376.88 ft, rest at 325.50 ft, scene mean 0.06192–0.06194 every time. The ten in-process
+  repetitions on a freshly restarted server reproduce the split, `PFFPFPPPPP`, and their
+  scene means climb 0.06194 → 0.06251 → 0.06296 → 0.06421 as the runs accumulate. Idling
+  1,000 ticks with nothing spawned reproduces both the drifted brightness (0.06425) and
+  the failure, so the cause follows elapsed simulated time and not spawn churn. F23 names
+  it.
+- **`P_cont`/plate.** Scene means are stable to 3e-5 across all ten fresh-server
+  repetitions and the cell still splits, 2/10, with peak demand bimodal at 1.90–1.91
+  against 2.61–2.62 m/s² and nothing in between. The harness is clean and the policy is
+  not: this is D-10 exactly, a marginal policy amplifying the render floor into a flipped
+  verdict. **The cell is VOID**, and it fails harder on the clean harness than the shared
+  server said (2/10 rather than 6/10).
+- **The two `P_pts` cells.** F21's `rest_gap_ft` defect, fixed, and both are now unanimous.
+
+### The pre-registered prediction that failed, and its disposition
+
+Prediction 4 said `P_pts3`/ped would stay split, on the reasoning that two runs braking at
+377 ft and eight never braking is a knife-edge in the policy. It went 10/10 unanimous. The
+reasoning was wrong in its subject: the knife edge is real, but what crosses it is the
+scene, not the network. The prediction assumed the only thing that could vary between
+repetitions was the policy, which is the assumption F23 falsifies.
+
+Predictions 1, 2 and 3 held: both controls reproduced, both `P_pts` cells went unanimous,
+and the plate cell's failures stopped being contiguous.
+
+### What this settles about the repetition count
+
+The ten-repetition floor came from D-7, which measured that rendering never reaches
+bit-identity and inferred a repetition floor with a confidence interval. The measurement
+stands and the inference does not, in this study:
+
+- Under a per-repetition restart, repetitions of the same cell are not merely close, they
+  are **identical to the recorded precision** — 10/10 at two cells and 3/3 at both
+  controls, matching the sibling steering study's 0 of 48 section-pairs.
+- Where they are not identical, the disagreement was a bug **three times out of four**,
+  and the fourth is a void cell.
+- Ten repetitions sharing a server are worse than three that do not, because they sample
+  further along F23's curve while looking like a larger sample.
+
+So the repetition count buys **detection of a split**, not precision on a rate. Three
+repetitions detect the two split cells here — a 6/10 cell is visible to three repetitions
+80% of the time and a 2/10 cell 53% — and, more to the point, all three causes above were
+found by comparing two harnesses rather than by counting repetitions. Amendment A13
+records the change; `CARLA_DETERMINISM_PENDING.md`'s open conflict with D-7 is resolved
+for this repository and remains open lab-wide.
+
+---
+
 ## F21 — 2026-09-09, the whole of M7 re-driven: 262 of 263 sub-interval drives reproduce, and the one that did not is an instrument defect
 
 Every witness drive in the study was run a second time, on the same committed networks

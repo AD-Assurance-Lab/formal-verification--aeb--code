@@ -53,7 +53,7 @@ already works and we would be competing on cost rather than capability.
 | **Speeds** | 25 mph for the hazard cells. 50 mph for the false-activation cells, per the standard. |
 | **Road** | Dry, straight, one site per scenario, all within one large map chosen by survey. |
 | **Lighting** | The interval from full daylight to darkness under lower beam. Headlamps set per condition. |
-| **Repetitions** | Every closed-loop number is a failure rate over at least 10 runs, reported with Wilson intervals. Never a single run. |
+| **Repetitions** | Every closed-loop number is a verdict over at least 3 repetitions, each in its own process against its own freshly restarted server, reported with its margin. Repetitions that disagree make the cell VOID. Never a single run, and never a rate over repetitions sharing a server. See A13. |
 
 **Excluded, deliberately:** steering intervention, wet or snow surfaces, curves, multiple
 simultaneous actors, forward collision warning, and any condition acting through vehicle
@@ -167,8 +167,8 @@ nor a maximum over a run.
 loop, so the certificate composes into standoff distance analytically. Nothing integrates
 network output over time, so nothing accumulates capture error.
 
-**Closed-loop pass:** no contact and standoff at least `d_margin`, over at least 10
-repetitions.
+**Closed-loop pass:** no contact and standoff at least `d_margin`, over at least 3
+repetitions under the harness section 3 requires (A13).
 
 **Contact is inferred from bounding-box separation and kinematics, never from
 `sensor.other.collision`.** Measured in this lab: a vehicle driven into a stationary car at
@@ -221,9 +221,9 @@ This fallback is recorded now so it is not decided after seeing data.
 |---|---|---|
 | M0 | Specification | This file, locked and tagged |
 | M1 | Map survey | Site set chosen by measured geometry, not by eye. Offline, no simulator |
-| M2 | Harness and primitives | `a_max` and `t_lat` over >= 10 reps; contact detector validated against a deliberate collision; a perfect oracle passes 10/10 and a deliberately late one fails 10/10 |
-| M3 | Expert and collection | The oracle passes 10/10 with standoff >= `d_margin` at both endpoints |
-| M4 | Two policies | **Both policies pass both endpoints 10/10 on both hazard scenarios.** If `P_pts` cannot pass the regulatory tests there is no story |
+| M2 | Harness and primitives | `a_max` and `t_lat` over >= 3 reps; contact detector validated against a deliberate collision; a perfect oracle passes every rep and a deliberately late one fails every rep |
+| M3 | Expert and collection | The oracle passes every rep with standoff >= `d_margin` at both endpoints |
+| M4 | Two policies | **Both policies pass both endpoints on every repetition, on both hazard scenarios.** If `P_pts` cannot pass the regulatory tests there is no story |
 | M5 | Capture check, in-between check | Both pass, with numbers recorded |
 | M6 | Verification | Bounds over `s` in [0,1] per cell, with a witness `s` and a violating width for any falsified cell. **Committed to git before M7** |
 | M7 | Drive the witness | The agreement table |
@@ -666,3 +666,63 @@ Bit-exact closed-loop replay is unreachable even on the corrected harness
 (`carla-determinism` D-7: a scene where nothing moves still renders ~30 differing pixels
 per frame across repetitions), so the corrections shrink the noise and name its source;
 they do not remove it.
+
+### A13. The repetition count: three, each on its own server, and a disagreement is void
+
+**Date:** 2026-09-09. **Requested by:** Zach, on the grounds that the determinism package
+has worked in the sibling steering study. **Measured here before adopting**, because the
+steering result is about a lane-keeper on a lap and this is a braking policy on a discrete
+approach, and the two have no reason to share a floor.
+
+**What changed.** Section 3's repetition line, section 7's closed-loop pass, and the M2,
+M3 and M4 exit criteria. Ten repetitions with Wilson intervals becomes three repetitions,
+each in its own process against its own freshly restarted server, reported with the
+margin, with disagreement making a cell void.
+
+**What did NOT change.** No scenario, property, ledger cell, gate, primitive or criterion.
+No already-collected number is rescored or reinterpreted: everything measured before this
+date stands as collected, on the harness it was collected on, and the artifacts record
+that harness. This amendment governs what is measured next.
+
+**Why, in one line.** The repetitions were never estimating a rate, and ten of them
+sharing a server are worse than three that do not.
+
+The evidence is F22 and F23. Of 281 committed ten-repetition cells, 277 are unanimous and
+4 are split. Every one of the four was re-driven with a stopped server, a fresh launch
+through the determinism preflight, a new process, a new client, a new vehicle and a new
+camera before every repetition, with two unanimous controls beside them. Two of the four
+were an instrument defect (F21). One was the simulator moving underneath the measurement:
+CARLA's cloud layer moves under fixed weather, so scene brightness at the horizon drifts
+3.9% with elapsed simulated time, and repetitions inside one server sample further along
+that curve the more of them you run (F23). The fourth is the policy sitting on its own
+brake threshold, and it stays split on the clean harness, which under the standing rule
+makes it void rather than a 20% failure rate.
+
+Under the per-repetition restart, repetitions of a cell are identical to the recorded
+precision, not merely close. So the repetition count buys DETECTION of a split rather than
+precision on a rate, and a Wilson interval over three such repetitions would be an
+interval on nothing.
+
+**The conditions are not optional, and where they do not hold the answer is ten.** A clean
+server restart before EVERY repetition; one process per repetition; a fresh vehicle and
+camera per repetition; the determinism preflight green on each fresh server; one client
+per port; and the harness recorded in the artifact. `tools/drive_witness.py --rep-index`
+with `tools/merge_witness_reps.py` is the supported path; anything that drives repetitions
+in a loop inside one process is the harness this amendment replaces and keeps the old
+floor.
+
+**What this does not fix, and must not be read as fixing.** F23's cloud modulation is
+still there. Three repetitions on three fresh servers agree with each other because they
+all sample the SAME early point of that curve, which makes them reproducible and does not
+make them representative. Controlling it means either `cloudiness = 0` or a settle long
+enough plus a photometric check on every capture and drive, and both change what the
+conditions ARE. That is a design change, it needs its own amendment, and it is not made
+here.
+
+**Resolves** the conflict `CARLA_DETERMINISM_PENDING.md` records between D-7's
+ten-repetition floor and the steering study's A-4, **for this repository only**. D-7's
+measurement — that a frozen scene never renders bit-identically — is not disputed and is
+not amended. What is disputed is the inference from it to a repetition floor, on the
+grounds that verdict stability rather than frame identity is what the floor protected, and
+that is now measured here. The package is hash-locked and lab-wide; changing D-7 needs its
+section 4 procedure and is Zach's call.
