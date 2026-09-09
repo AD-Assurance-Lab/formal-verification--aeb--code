@@ -592,6 +592,17 @@ SCENARIO_SITE = {
     "any":        {"need_m": 200.0, "sidewalk_both": False},
 }
 
+# THE study site satisfies every scenario at once, and that is a design property rather
+# than an accident of Town01 having only one usable straight. The family knots, the
+# primitives and every drive have to be on the SAME road: the knots calibrate where the
+# illumination axis is split, and a split measured on one road and applied to drives on
+# another is the two-different-experiments failure standing rule 7 is about. Town12 has
+# eighteen sites meeting the union; Town01 had one road and the question never came up.
+SITE_UNION = {
+    "need_m": max(v["need_m"] for v in SCENARIO_SITE.values()),
+    "sidewalk_both": any(v["sidewalk_both"] for v in SCENARIO_SITE.values()),
+}
+
 
 def flattest_site(max_grade_pct: float = 0.5, scenario: str = "any") -> dict:
     """Longest FLAT straight that meets `scenario`'s stated requirements.
@@ -613,28 +624,51 @@ def flattest_site(max_grade_pct: float = 0.5, scenario: str = "any") -> dict:
         raise RuntimeError(
             f"scenario {scenario!r} has no site requirement; add it to SCENARIO_SITE "
             f"rather than letting it inherit one")
-    need_ft = req["need_m"] * FT
     flat = [
         s
-        for s in top_sites(2000)
+        for s in top_sites(5000)
         if s.get("grade_pct") is not None and abs(s["grade_pct"]) <= max_grade_pct
     ]
     if not flat:
         raise RuntimeError(f"no straight on {MAP} flatter than {max_grade_pct}%")
-    ok = [s for s in flat if s["run_ft"] >= need_ft]
-    if req["sidewalk_both"]:
-        ok = [s for s in ok if s.get("sidewalk_both_sides")]
-    if not ok:
+
+    def qualifying(r):
+        out = [s for s in flat if s["run_ft"] >= r["need_m"] * FT]
+        if r["sidewalk_both"]:
+            out = [s for s in out if s.get("sidewalk_both_sides")]
+        return out
+
+    # SELECTED on the union, so every scenario lands on one road, then CHECKED against the
+    # scenario that asked. The check is not redundant: if a future map has no site meeting
+    # the union, the selection has to fail loudly rather than fall back to a road that
+    # happens to suit the caller and silently split the study across two.
+    union = qualifying(SITE_UNION)
+    if not union:
+        longest = max(s["run_ft"] for s in flat)
+        longest_sw = max((s["run_ft"] for s in flat if s.get("sidewalk_both_sides")),
+                         default=0)
         raise RuntimeError(
-            f"no site on {MAP} qualifies for scenario {scenario!r}: needs a flat straight "
-            f"of at least {need_ft:.0f} ft"
+            f"no site on {MAP} serves every scenario: the union needs a flat straight of "
+            f"at least {SITE_UNION['need_m'] * FT:.0f} ft with sidewalk on both sides. "
+            f"Longest flat straight is {longest:.0f} ft, longest with sidewalk both sides "
+            f"is {longest_sw:.0f} ft. Splitting the study across two roads means the "
+            f"family knots calibrate one and the drives happen on another; pick another "
+            f"map rather than relaxing this.")
+    # LONGEST first among the qualifying sites, flattest as the tiebreak. The grade filter
+    # above already decides what "flat enough" means, and inside it grade barely moves the
+    # measurement: 0.08% contributes about 0.16% of a_max, where A3's concern was 1.35%.
+    # Room is the thing that has actually bitten. Sorting flattest-first picked a 1,110 ft
+    # site over a 2,094 ft one to gain 0.07% of grade, leaving eighteen feet of margin on a
+    # 320 m approach -- which is the Town01 situation A14 exists to get out of.
+    union.sort(key=lambda s: (-s["run_ft"], abs(s["grade_pct"])))
+    site = union[0]
+    if site not in qualifying(req):
+        raise RuntimeError(
+            f"the {MAP} study site (road {site['road_id']}, {site['run_ft']:.0f} ft) does "
+            f"not satisfy scenario {scenario!r}, which needs {req['need_m'] * FT:.0f} ft"
             + (" with sidewalk on both sides" if req["sidewalk_both"] else "")
-            + f". Longest flat straight is {max(s['run_ft'] for s in flat):.0f} ft"
-            + (f", longest with sidewalk both sides is "
-               f"{max((s['run_ft'] for s in flat if s.get('sidewalk_both_sides')), default=0):.0f} ft"
-               if req["sidewalk_both"] else "")
-            + ". Pick another map or another scenario; do not relax this silently.")
-    return ok[0]
+            + ". SCENARIO_SITE and SITE_UNION disagree; fix the union, not the caller.")
+    return site
 
 
 def top_sites(n: int = 8) -> list[dict]:

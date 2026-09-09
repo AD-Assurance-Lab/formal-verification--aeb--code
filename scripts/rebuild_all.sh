@@ -218,20 +218,34 @@ if [ "$FROM" = "witness" ]; then
        exit 2 ;;
   esac
   say "witness scope: $SCOPE ($WSCEN)"
+  # A13's harness, not a loop of ten inside one process. scripts/drive_witness_reps.sh
+  # restarts the server, relaunches through the determinism preflight and starts a new
+  # process before EVERY repetition, then merges. Three repetitions is a reproducibility
+  # check, and if they disagree the merge marks the cell VOID and exits non-zero -- which
+  # is a bug to chase, not a rate to report. Every split cell this study has produced
+  # turned out to be a bug: F21, F23, F24.
+  VOIDS=0
   for pol in $POLICIES; do
     for sc in $WSCEN; do
-      fresh_server
-      run "witness_${pol}_${sc}" "$PY" -u tools/drive_witness.py --policy "$pol" --scenario "$sc"
+      say "M7 midpoint  $pol/$sc"
+      bash scripts/drive_witness_reps.sh "$pol" "$sc" 2>&1 | tee -a "$LOG"
+      [ "${PIPESTATUS[0]}" -ne 0 ] && VOIDS=$((VOIDS + 1))
     done
   done
   for pol in $POLICIES; do
     for sc in $WSCEN; do
-      fresh_server
-      run "witness_${pol}_${sc}_atwitness" "$PY" -u tools/drive_witness.py \
-          --policy "$pol" --scenario "$sc" --at-witness
+      say "M7 at-witness  $pol/$sc"
+      bash scripts/drive_witness_reps.sh "$pol" "$sc" --at-witness 2>&1 | tee -a "$LOG"
+      [ "${PIPESTATUS[0]}" -ne 0 ] && VOIDS=$((VOIDS + 1))
     done
   done
   say "M7 complete. python -m study.ledger --check-order"
+  if [ "$VOIDS" -gt 0 ]; then
+    say "$VOIDS drive(s) produced a VOID cell. Under the standing rule that is a BUG"
+    say "until proven otherwise and the cell is not reported until the cause is written"
+    say "down. Do NOT run more repetitions."
+    exit 1
+  fi
   exit 0
 fi
 
