@@ -161,9 +161,9 @@ Hardest first.
 
 ## What we carry that the paper does not need
 
-Each is a sentence, not a section: the brake window stated the controller's way, which is
-worse; the behavioural check as a predictor, which predicts nothing; glare at the horizon,
-which is the light level; and coverage without a certificate on a sliver no verdict counts.
+Each is a sentence, not a section. The brake window stated the controller's way, which is
+worse. The behavioural check as a predictor, which predicts nothing. Glare at the horizon,
+which is the light level. Coverage without a certificate, on a sliver no verdict counts.
 
 Held for the journal version: the sun angle as a second axis. A policy with radar. The speed
 sweep. Fog and steam. The general treatment of matching the statistic to the shape of the

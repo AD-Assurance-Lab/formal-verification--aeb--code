@@ -132,7 +132,7 @@ def main() -> int:
     if violations:
         print(f"\n  REFUTED: {len(violations)} sub-interval(s) certified to latch in time "
               f"produced a CONTACT. The disjunction over the latch window is not a sound "
-              f"predictor of the closed loop, and PROTOCOL section 7 must NOT be amended "
+              f"predictor of the closed loop, and CLAUDE.md section 7 must NOT be amended "
               f"to state property S that way. Margins above.")
     else:
         print("\n  No sub-interval certified to latch in time produced a contact, in any "

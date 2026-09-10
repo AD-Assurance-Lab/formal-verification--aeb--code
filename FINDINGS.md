@@ -1,6 +1,6 @@
 # Findings
 
-Measured results and corrections, newest first. PROTOCOL.md section 8: a measured cell
+Measured results and corrections, newest first. CLAUDE.md section 8: a measured cell
 that contradicts its expectation is a bug until proven otherwise, and findings live
 here, never inside the protocol.
 
@@ -321,6 +321,9 @@ different places.
 
 ## F27 — 2026-09-09, one sub-interval on each map is a verdict about nothing
 
+> **RE-MEASURED on the clean captures, 2026-09-10. See F31, which supersedes the table
+> below: 8 of 29 pieces span nothing, not 1.** The original caution follows.
+>
 > **Re-measure on the clean captures before quoting this.** It was computed on the pre-A16
 > capture set, whose dark knots were contaminated by capture order (F28) and have since
 > changed ninefold. The zero-span sub-interval sits at the darkness end, which is exactly
@@ -378,7 +381,7 @@ stopping rule cannot tell "the chord fits well" from "there is nothing to fit".
 - **No verdict is asserted to be wrong.** The certificate is sound over the family it
   declares. This is about how much of the rendered axis that family represents, which is a
   different question and is the one a reader will ask.
-- **This is the photometric picture only.** PROTOCOL section 4's *behavioural* in-between
+- **This is the photometric picture only.** CLAUDE.md section 4's *behavioural* in-between
   gate, in the policy's own output space, is what section 4 says decides, and it is M5. A
   sub-interval spanning no image distance will trivially pass it too, for the same reason.
 
@@ -488,7 +491,7 @@ caveat the study has carried since A6.
 | tolerance | 0.01 | 0.01 |
 
 **Every sub-interval on Town12 is covered.** The sliver at the horizon that A6 declared
-uncovered, that PROTOCOL excludes from every verdict by construction, and that F19 read as
+uncovered, that CLAUDE.md excludes from every verdict by construction, and that F19 read as
 the place where a certificate is unavailable in principle, sits at 0.0095 here — inside
 tolerance, on the same metric.
 
@@ -512,7 +515,7 @@ a mean brightness of 0.011 against Town01's 0.062 — this road is much darker a
   mechanism is that this particular scene is darker. A6's measurement on Town01 stands as
   a measurement of Town01.
 - **Not that the behavioural gate will pass.** This is the *photometric* in-between check,
-  which is what the knots are bisected on. PROTOCOL section 4's *behavioural* in-between
+  which is what the knots are bisected on. CLAUDE.md section 4's *behavioural* in-between
   gate is M5 and has not run. On Town01 the photometric check passed everywhere and the
   behavioural gate then failed for `P_pts`/ped at [+12.542°, +7.715°] at 1.016, and needed
   A5's repair. The same can happen here.
@@ -547,7 +550,7 @@ rather than quietly dropped.
 the loop calls `world.tick()` and returns the frame that tick produced; a second bare
 `world.tick()` sat at the bottom. `one_run` has never had it. So the false-activation
 driver — cells 5 and 6, and nothing else — ran the closed loop at **10 Hz** where
-`PROTOCOL.md` section 3 fixes 20, with **7.3 ft** of quantization where section 3 states
+`CLAUDE.md` section 3 fixes 20, with **7.3 ft** of quantization where section 3 states
 3.7, holding each throttle command across two physics steps while the PI integral used a
 one-step `dt`.
 
@@ -680,7 +683,7 @@ to a hash-locked file by a study.
 **Disposes:** the four split cells in `docs/PREREGISTRATION_2026-09-09.md`, and the failed
 prediction 4 in that file.
 
-`PROTOCOL.md` section 3 required every closed-loop number to be a failure rate over at
+`CLAUDE.md` section 3 required every closed-loop number to be a failure rate over at
 least ten repetitions with Wilson intervals. Measured across every committed artifact in
 this repository (`tools/repetition_floor.py`, no simulator):
 
@@ -934,7 +937,7 @@ drive level, not only in the certificate (F18).
 ### `P_cont`: the section 9 sleeper, awake, and it IS the plate
 
 > **WITHDRAWN 2026-09-09, see F24.** Everything in this subsection was measured on a
-> driver running at 10 Hz where PROTOCOL section 3 specifies 20. At the specified rate
+> driver running at 10 Hz where CLAUDE.md section 3 specifies 20. At the specified rate
 > `P_cont` does not brake on the plate at +0.013°: it peaks at 2.00–2.18 m/s² against a
 > 2.4525 limit and crosses the plate still moving, ten repetitions out of ten. The text
 > below is left as collected, because a disposition explains a contradiction and does not
@@ -949,7 +952,7 @@ One sub-interval in 102 behaves differently with the steel there:
 
 The plate adds **22%** to the peak demand — 2.221 to 2.711, measured against the control —
 and carries the policy across the standard's threshold. That is false activation in the strict sense — the vehicle brakes *because of
-the steel* — and `P_cont` is the only arm that does it. PROTOCOL §9 named this cell the
+the steel* — and `P_cont` is the only arm that does it. CLAUDE.md section 9 named this cell the
 sleeper on the grounds that the continuum-trained policy sees more braking data and might
 be the more trigger-happy, *"a trade no single-sided test can see"*. It is right, and it
 took a two-sided test at an illumination the standard does not visit to see it.
@@ -962,7 +965,7 @@ already on record predicted it, from different directions:
 
 - **A6.** [+0.026°, +0.000°] is the **uncovered** sub-interval — no step size meets the
   blend tolerance across the horizon discontinuity, so a bound there quantifies over
-  images the renderer does not produce, and PROTOCOL says a CERTIFIED verdict there must
+  images the renderer does not produce, and CLAUDE.md says a CERTIFIED verdict there must
   never be counted as coverage. `record_cells` excludes it, so cell 6 still reads
   *"CERTIFIED in all 16 covered sub-intervals, drove clean in all 16 driven"*. **This is
   the first direct empirical confirmation that the uncovered sliver genuinely cannot be
@@ -1045,7 +1048,7 @@ has nothing to do with the target.
 
 ### Cell 6 was the sleeper, and it is awake
 
-PROTOCOL §9 calls cell 6 the sleeper: `P_cont` sees more braking data than the other arms
+CLAUDE.md section 9 calls cell 6 the sleeper: `P_cont` sees more braking data than the other arms
 and might be the more trigger-happy, a trade no single-sided test can see. It is right,
 in the direction it named and not the magnitude.
 
@@ -1092,7 +1095,7 @@ flagged cells cannot tell a working certificate from one that flags everything.
 
 ## F17 — 2026-09-08, both ledger contradictions are one quantifier — and fixing the quantifier makes the certificate worse
 
-**This is the disposition PROTOCOL section 8 requires**, for both open contradictions. They
+**This is the disposition CLAUDE.md section 8 requires**, for both open contradictions. They
 share a cause, it is in how the property is *stated* rather than in the certificate or the
 vehicle, and it is measured rather than argued (`tools/latch_window.py`,
 `tools/latch_window_report.py`). The repair it suggests was then built and **it fails**,
@@ -1181,7 +1184,7 @@ What settles the cell is the direction of the disagreement rather than a complet
 account. Across cell 1's 390 drives there is **not one contact and not one failure to
 brake**; every disagreement is the certificate being more pessimistic than the vehicle.
 The unsafe direction — certified and then failed — does not occur, in this cell or in any
-other, and that is the property PROTOCOL section 8 is protecting.
+other, and that is the property CLAUDE.md section 8 is protecting.
 
 ### The repair fails, and this is the part worth keeping
 
@@ -1215,7 +1218,7 @@ drive holds, whichever quantifier produced it.
 So the conjunction is not merely conservative. Requiring all twenty-five poses forces the
 certificate away from the knife edge, and **that is what buys the 9-of-9**: property S
 falsified every sub-interval that produced a contact, and the property that is formally
-better aligned with the controller did not. PROTOCOL section 7 stays as written, and the
+better aligned with the controller did not. CLAUDE.md section 7 stays as written, and the
 recommendation to Zach is that the disjunction be reported **beside** property S as the
 quantity the agreement table is entitled to score against — not in place of it.
 
@@ -1289,7 +1292,7 @@ obvious next question.
 
 The first thing a Tier 1 or a reviewer says to this study is *"twenty random samples would
 have found that too"*, and until now the paper had no answer because it had never run the
-search. `tools/falsification_baseline.py` runs three, on `P_pts`/lead, scored on PROTOCOL
+search. `tools/falsification_baseline.py` runs three, on `P_pts`/lead, scored on CLAUDE.md
 section 7's frozen criterion so a nuisance stop cannot count as a find.
 
 | method | simulator runs to first failure | searches that found anything | failing altitudes found | wall clock |
@@ -1432,7 +1435,7 @@ does not. It is worse than that.
 `P_pts3` is trained on all three regulatory lighting conditions — daylight, darkness with
 lower beam, darkness with upper beam — against `P_pts`'s two. Identical architecture,
 recipe, sample count after equalising, and the same seed. It passes **all three** regulatory
-endpoint tests, on both hazard scenarios, 10/10, on PROTOCOL section 7's frozen criterion.
+endpoint tests, on both hazard scenarios, 10/10, on CLAUDE.md section 7's frozen criterion.
 
 Then:
 
@@ -1478,7 +1481,7 @@ margin at the endpoints the standard checks and lost the road between and around
 **This is only visible because both properties were verified.** A study that checked only
 must-brake would have reported `P_pts3` as the better regulatory arm — it certifies more
 sub-intervals than `P_pts` — and shipped a policy that stops dead 250 ft from a pedestrian
-in broad daylight. PROTOCOL section 9 calls property A's cells "the sleeper"; this is the
+in broad daylight. CLAUDE.md section 9 calls property A's cells "the sleeper"; this is the
 sleeper, and it is louder than the cell it was written about.
 
 ### The direction of every disagreement is still safe
@@ -1532,7 +1535,7 @@ latches: once the demand crosses the threshold, braking is commanded at full aut
 never withdrawn. A demand perturbation of 0.0024 m/s² can only matter if it moves which
 STEP the crossing happens on, and at 20 Hz and 11 m/s a step is 0.56 m. So the bound on
 the closed-loop consequence is one control step, not zero — small, but not nothing, and it
-is why the repetition count stays where PROTOCOL section 1 puts it.
+is why the repetition count stays where CLAUDE.md section 1 puts it.
 
 **Recorded for the D-7 versus A-4 question, and not acted on.** `CARLA_DETERMINISM_PENDING`
 flags an unresolved conflict between D-7's floor of ten repetitions and the steering
@@ -1545,7 +1548,7 @@ procedure and it is Zach's call, not a study's.
 
 ## F10 — 2026-09-08, the in-between gate carries no information about the risk it exists to bound
 
-PROTOCOL section 4 requires the in-between check and says the behavioural version is the
+CLAUDE.md section 4 requires the in-between check and says the behavioural version is the
 one that decides whether the disturbance family may be used at all. The certificate
 quantifies over BLENDS; the witness drives happen at RENDERS; the gate is what stands
 between them, and the study has been using it as a pass/fail at 1.0.
@@ -1571,7 +1574,7 @@ in-between check at 0.16 rather than 0.68 is not a statement about how far a cer
 transfers, because transfer is uncorrelated with the number.
 
 The check still has one job it demonstrably does: it caught `[+12.542, +7.715]` at 1.016
-and PROTOCOL section 4's repair fixed it (F7). Detecting a sub-interval where the blend
+and CLAUDE.md section 4's repair fixed it (F7). Detecting a sub-interval where the blend
 can flip a decision *in isolation* is worth having. Predicting where the certificate and
 the vehicle will disagree is a different claim and the gate does not support it.
 
@@ -1594,7 +1597,7 @@ exactly the kind this study keeps finding:
 M7's first pass reported a **CERTIFIED sub-interval that failed when driven** — `P_cont`
 on the lead scenario, `[+0.779, +0.026]`, certified at 1.08x, drove 9/10. That is the
 unsafe direction and the one outcome this study must never wave through, so
-`tools/record_cells.py` refuses to summarise it and PROTOCOL section 8 requires a
+`tools/record_cells.py` refuses to summarise it and CLAUDE.md section 8 requires a
 disposition. Here it is, and the certificate is not at fault.
 
 **The run that "failed" stopped 306 ft from the lead vehicle.** It did not fail to brake;
@@ -1617,7 +1620,7 @@ falsified at 0.03x. Every other failing drive is nuisance braking near the horiz
 
 ### The criterion, and where the drift came from
 
-PROTOCOL section 7 states the closed-loop pass in full: *"no contact and standoff at least
+CLAUDE.md section 7 states the closed-loop pass in full: *"no contact and standoff at least
 `d_margin`, over at least 10 repetitions."* `tools/run_policy.py` adds a third condition,
 `PREMATURE_MULTIPLE`, on the reasoning that *"a policy that stops the moment it starts
 satisfies 'no contact with standoff', but it has not performed AEB, it has performed a
@@ -1641,7 +1644,7 @@ difference between a clean result and a soundness violation.
 ### What it says about the study, beyond the bookkeeping
 
 The near-horizon behaviour of BOTH policies is nuisance braking, not failure to brake.
-That is a property A phenomenon and it is the sleeper PROTOCOL section 9 names: *"6 is the
+That is a property A phenomenon and it is the sleeper CLAUDE.md section 9 names: *"6 is the
 sleeper: `P_cont` sees more braking data and may be the more trigger-happy, which is a
 trade no single-sided test can see."* The property S certificates say the policies brake
 in time; the drives say that near the horizon they brake at 300 ft. Both are true, and
@@ -1651,7 +1654,7 @@ only running both properties makes the pair visible.
 
 ## F8 — 2026-09-07, the verifier was not doing branch and bound, and it cost the negative control
 
-`PROTOCOL.md` section 6 has said "Bounds by **alpha-CROWN with input-space branch and
+`CLAUDE.md` section 6 has said "Bounds by **alpha-CROWN with input-space branch and
 bound** over `s`" since M0. `tools/verify.py` made a single `compute_bounds` call per pose
 over the whole sub-interval and never split anything. On a wide sub-interval that is not a
 certificate about the policy; it is a report on how loose one interval bound is.
@@ -1674,7 +1677,7 @@ the problem.
 Without branch and bound the four property-S cells read `P_pts` 5/16 and 3/16, `P_cont`
 14/16 and 13/16. **The negative control was falsified in two sub-intervals of each
 scenario**, and both were the widest ones — `[-0.961, -29.554]` at 0.90x and 0.25x, and
-`[+0.779, +0.026]`. PROTOCOL section 8 says exactly what to do about that: *"Keep the
+`[+0.779, +0.026]`. CLAUDE.md section 8 says exactly what to do about that: *"Keep the
 negative control alive. If `P_cont` also fails, or `P_pts` also certifies, stop and debug
 rather than narrating it."* The finding underneath that instruction is that a study which
 narrates it would have published "continuum training also fails at dusk" on the strength
@@ -1721,7 +1724,7 @@ was nothing to buy.
 
 ## F7 — 2026-09-07, the in-between gate failed at a covered sub-interval, and section 4's repair worked
 
-The behavioural in-between check is the one PROTOCOL section 4 says decides whether the
+The behavioural in-between check is the one CLAUDE.md section 4 says decides whether the
 disturbance family is usable: does the policy answer a **blended** frame the way it answers
 a **rendered** frame at the same illumination? The certificate quantifies over the blends,
 so a sub-interval that fails this is one where a bound is not a statement about the vehicle.
@@ -1848,7 +1851,7 @@ its verdict being taken at face value.
 
 ## F5 — 2026-09-06, the A12 rebuild: `a_max` was an integration artifact, and the safety budget was 33% too short
 
-**This is the disposition PROTOCOL section 8 requires.** Rebuilding the primitives on the
+**This is the disposition CLAUDE.md section 8 requires.** Rebuilding the primitives on the
 corrected harness moved braking authority from **0.868 g to 0.505 g** at 25 mph, and
 `r_req` at 25 mph with it, from **34.7 ft to 52.0 ft**. A 42% move in the one measured
 number the entire safety budget is derived from is a bug until proven otherwise. It is
@@ -1900,7 +1903,7 @@ CARLA clamps `max_substeps` to 16 and says so only in a warning line, so an arm 
 64 is the 16-substep arm relabelled. The knob saturates before it can demonstrate
 convergence, so the integration step was shrunk the other way instead, by reducing
 `fixed_delta_seconds` at 16 substeps. **These arms are a physics check and not a study
-configuration**; PROTOCOL section 1 fixes the control rate at 20 Hz and every measured
+configuration**; CLAUDE.md section 1 fixes the control rate at 20 Hz and every measured
 cell runs there.
 
 | integration step | a from distance | change |
@@ -1937,7 +1940,7 @@ the first try.
   40% off. The oracle passed 10/10 before and passes 10/10 now, at two different physics.
   Only a check from OUTSIDE the derivation chain could see it, and the one that worked was
   the cheapest available: read one stop two ways and require the readings to agree.
-- **Nothing in PROTOCOL.md above the amendment line changes.** The design, the cells, the
+- **Nothing in CLAUDE.md above the amendment line changes.** The design, the cells, the
   properties and the expectations are untouched; `a_max` is defined there as a
   measurement, and this is that measurement taken correctly. The lock is unmoved at
   `a80d8c8dd458`.
@@ -1971,7 +1974,7 @@ back (`tools/drive_witness.py --policy P_pts --scenario ped`, then P_cont).
 
 ## F3 — 2026-08-25, Iteration 2: standoff is measured AT REST, recorded before the re-run
 
-**Written before any re-run, per PROTOCOL section 8.** The first ped M4 sweep returned
+**Written before any re-run, per CLAUDE.md section 8.** The first ped M4 sweep returned
 `P_pts_ped` 9/10 at darkness. The evidence says the miss is harness semantics, not the
 policy: all ten runs latched at the identical brake range (33.12 ft); nine rested at
 4.43 ft and one at 2.62 ft, and the only varying factor is the walker's crossing phase
@@ -2014,7 +2017,7 @@ The four measurements the F1 audit demanded, all run on a fresh server:
   (`results/carla/family_knots_rgb.json`): 15 sub-intervals against the campaign's
   11, and the uncoverable horizon band widens from [0.143, 0.000] (blue-only error
   0.0386) to **[0.36, 0.00] at error 0.0164**. The committed campaign's knots stand
-  as its record — PROTOCOL section 4 makes the behavioural check the deciding one,
+  as its record — CLAUDE.md section 4 makes the behavioural check the deciding one,
   and it passes for both policies everywhere the family claims coverage — but any
   FUTURE capture campaign must use the RGB knots and the wider exclusion.
 - **Sites re-measured with the fixed-exposure camera** (audit F2's defect): street

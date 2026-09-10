@@ -2,7 +2,7 @@
 
     python tools/gate_behavioural.py --policy P_cont
 
-PROTOCOL sections 4 and 8 both say the check that decides is behavioural. The image
+CLAUDE.md sections 4 and 8 both say the check that decides is behavioural. The image
 versions were run earlier and are necessary but not sufficient: an analytic fog model
 once scored R-squared 0.848 on images while driving a policy 23.8 times harder than the
 real condition, which is exactly why "the pixels are close" does not settle anything.

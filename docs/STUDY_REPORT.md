@@ -1,10 +1,16 @@
 # Formal verification of AEB across illuminations FMVSS 127 does not test
 
 **Complete methodology and results.** WMU AD Assurance Lab. CARLA 0.9.16, Town01, RTX 5090.
-Rebuilt end to end on 2026-09-07/08 under amendment A12 and the corrected determinism
-harness; every number below was measured on that harness and nothing is carried over.
+Rebuilt end to end on 2026-09-07 and 2026-09-08 on the corrected simulator harness. Every
+number below was measured on that harness and nothing is carried over.
 
-Everything here is reproducible from a committed driver. `PROTOCOL.md` is the frozen
+> **This is the small-map study, and it is the one that ran end to end.** It is tagged
+> `town01-final`. The study has since moved to a large map, because the small one had no
+> site long enough for the standard's false-activation test. The method below is unchanged.
+> The map, the sites and every measured number are being taken again, and that rebuild is
+> not finished. Run `python -m study.status` for where it stands.
+
+Everything here is reproducible from a committed driver. `CLAUDE.md` is the frozen
 design; where this report and that file disagree, the protocol is right. `FINDINGS.md` is
 the measured record, `CLAUDE.md` is current belief and holds what
 happens next.
@@ -121,7 +127,7 @@ past it. **One sub-interval cannot meet tolerance at any width**: `[0.026, 0.000
 
 `+10.128` is not from the bisection. The behavioural in-between gate failed at
 `[+12.542, +7.715]` — 1.016 of the decision threshold for `P_pts`/ped, against ≤0.37
-everywhere else covered — and PROTOCOL §4's declared repair is shorter intervals with
+everywhere else covered — and CLAUDE.md section 4's declared repair is shorter intervals with
 rendered interior endpoints. Splitting there took it to 0.268 and 0.368 (F7). The knot file
 records which gate failure caused the split.
 
@@ -203,7 +209,7 @@ the property. A domain that neither certifies nor yields one is UNDECIDED. This 
 ## 11. M4: every arm passes every regulatory test point
 
 All three arms, both hazard scenarios, all three lighting conditions: **10/10**, Wilson
-95% [0.72, 1.00], on PROTOCOL §7's frozen pass criterion. Brake onset 51.9 ft against
+95% [0.72, 1.00], on CLAUDE.md section 7's frozen pass criterion. Brake onset 51.9 ft against
 `r_req` 52.0, standoff 14.3 ft.
 
 **False activation, cells 5 and 6.** All three arms, all three lighting conditions, ten
@@ -275,7 +281,7 @@ narrowed the certified gap and made the driving worse.
 
 ### 13a. What a FALSIFIED verdict was ever entitled to predict (F17)
 
-Two ledger cells contradicted their pre-registration, and PROTOCOL §8 required a written
+Two ledger cells contradicted their pre-registration, and CLAUDE.md section 8 required a written
 disposition before either could be written up. Both have the same cause and it is in how
 the property is *stated*.
 

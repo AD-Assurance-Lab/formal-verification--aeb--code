@@ -17,7 +17,7 @@ only.
 braking site needs 650 ft, so a large map was not a preference here, it was forced.
 
 **Town13 is a large map, so the ego must be tagged `role_name='hero'`** or the server dies
-when a sensor is attached. See PROTOCOL.md section 12.
+when a sensor is attached. See CLAUDE.md section 12.
 
 ## Two things this cannot tell us
 

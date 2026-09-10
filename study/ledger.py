@@ -2,7 +2,7 @@
 
     python -m study.ledger --check-order
 
-PROTOCOL section 8: verdicts are committed to git before the corresponding
+CLAUDE.md section 8: verdicts are committed to git before the corresponding
 closed-loop run — that is what makes a verdict a prediction. tools/verify.py has
 cited this module since M6; it now exists. Beyond ordering it also closes the holes
 an adversarial audit found:
@@ -105,11 +105,11 @@ def check_order() -> list[str]:
                             f"{art_scen!r}, row expects {scenario!r} -- results "
                             f"filed under the wrong ledger cell")
 
-        # PROTOCOL section 9: a falsified cell must record the violating width.
+        # CLAUDE.md section 9: a falsified cell must record the violating width.
         if str(cell.get("fv", "")).upper().startswith("FALSIFIED") \
                 and cell.get("width") is None:
             problems.append(f"cell {cid}: FALSIFIED but no violating width recorded "
-                            f"(PROTOCOL section 9 requires it)")
+                            f"(CLAUDE.md section 9 requires it)")
 
         v_commit = _content_commit(v_path)
         if v_commit is None:

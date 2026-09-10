@@ -67,7 +67,7 @@ every single repetition**.
 
 ## What the answer is allowed to change
 
-The repetition count in `PROTOCOL.md` section 3, through the amendment procedure and not
+The repetition count in `CLAUDE.md` section 3, through the amendment procedure and not
 otherwise. It may not retroactively rescore any committed cell: the ledger rows stand as
 measured, and a disposition explains a contradiction rather than erasing it.
 
@@ -89,7 +89,7 @@ is not.
 loop calls `world.tick()` and returns the frame that tick produced; a second bare
 `world.tick()` sat at the bottom. `one_run` has never had it. So:
 
-- the false-activation driver ran the closed loop at **10 Hz**, where PROTOCOL section 3
+- the false-activation driver ran the closed loop at **10 Hz**, where CLAUDE.md section 3
   fixes the control rate at 20 Hz and states the quantization as 3.7 ft at 50 mph. The
   real quantization was **7.3 ft**;
 - the policy was evaluated on **every other rendered frame**, the intervening one being
@@ -157,7 +157,7 @@ are results, not expectations.
    endpoint on Town12 does not mean the paper is wrong, it means the policy did not train
    on this road, and the honest response is a training problem to fix rather than a result
    to report. **A study whose baseline cannot pass the regulatory test has no story**, in
-   PROTOCOL section 10's own words.
+   CLAUDE.md section 10's own words.
 
 3. **The behavioural in-between gate fails somewhere.** Medium confidence, and it is the
    first thing that can contradict F25. On Town01 the photometric check passed at every

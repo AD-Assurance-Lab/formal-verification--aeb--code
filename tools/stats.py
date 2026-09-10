@@ -1,6 +1,6 @@
 """Confidence intervals for the rates this study reports.
 
-PROTOCOL section 1 and `CLAUDE.md` both say every closed-loop number is a failure rate
+CLAUDE.md section 1 and `CLAUDE.md` both say every closed-loop number is a failure rate
 over at least ten repetitions **reported with Wilson intervals**, and the
 `carla-determinism` package says the same thing from the other direction: D-7 measured
 that bit-exact closed-loop replay is unreachable, *"therefore every closed-loop number

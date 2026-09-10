@@ -2,7 +2,7 @@
 
     python tools/interval_sweep.py
 
-PROTOCOL section 4 declares the family as a linear blend between a rendered daylight
+CLAUDE.md section 4 declares the family as a linear blend between a rendered daylight
 frame and a rendered darkness frame, and says the interior must be validated against
 rendered intermediate illumination rather than assumed. Measured over the full interval
 the blend is wrong by 0.243 of full range at the midpoint, which is not a small error.
@@ -132,7 +132,7 @@ def main() -> int:
         "verdict": "MEASURED",
         "note": (
             "Image space only. A small error is necessary and not sufficient; the "
-            "behavioural check in PROTOCOL section 4 waits for a policy."
+            "behavioural check in CLAUDE.md section 4 waits for a policy."
         ),
         "full_interval_deg": [DAY_ALT, NIGHT_ALT],
         "sweep": rows,

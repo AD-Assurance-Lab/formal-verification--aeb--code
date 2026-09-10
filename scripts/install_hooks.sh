@@ -8,7 +8,7 @@ cat > .git/hooks/pre-commit <<'HOOK'
 # Refuse a commit that moves the frozen protocol without a recorded amendment.
 if ! python3 -m study.protocol_lock --quiet; then
     echo ""
-    echo "Commit refused: PROTOCOL.md changed without a recorded amendment."
+    echo "Commit refused: CLAUDE.md changed without a recorded amendment."
     echo "Append an '### A<n>' entry under '## Amendments', then:"
     echo "    python3 -m study.protocol_lock --accept"
     exit 1

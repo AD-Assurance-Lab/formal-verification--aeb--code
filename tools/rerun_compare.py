@@ -7,7 +7,7 @@ closed-loop stability margin*, not noise to be averaged away: with physics bit-e
 only the render floor left, a policy that is contractive suppresses the perturbation and a
 marginal one amplifies it. So the question a re-drive answers is not "are the numbers the
 same" -- D-7 says they cannot be -- but **does any cell's VERDICT flip**. A cell that
-drove 10/10 and now drives 9/10 has changed its verdict under PROTOCOL section 7's
+drove 10/10 and now drives 9/10 has changed its verdict under CLAUDE.md section 7's
 criterion; a cell that drove 7/10 and now drives 6/10 has not.
 
 And the standing rule is explicit that a flip is a bug rather than a sampling question:

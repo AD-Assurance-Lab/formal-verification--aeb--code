@@ -5,7 +5,7 @@
 Needs no simulator. It reads every committed artifact that carries per-repetition
 records and asks one question: **how many cells did the repetitions disagree about?**
 
-`PROTOCOL.md` section 3 fixes the closed-loop number as a rate over at least ten
+`CLAUDE.md` section 3 fixes the closed-loop number as a rate over at least ten
 repetitions with Wilson intervals, which is the right instrument if the repetitions are
 draws from a distribution. The sibling steering study's amendment A-4 says they are not:
 on a fully enforced harness a repetition is a REPRODUCIBILITY CHECK, and three is enough

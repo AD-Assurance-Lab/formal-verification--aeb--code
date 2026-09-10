@@ -1,4 +1,4 @@
-"""PROTOCOL section 11's figure for the false-activation cells.
+"""CLAUDE.md section 11's figure for the false-activation cells.
 
     python tools/make_plate_figure.py
 

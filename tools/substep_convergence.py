@@ -12,7 +12,7 @@ safety budget is derived from. A12 changed two things at once in `connect()`:
        inherited CARLA's default, 10 x 0.01 s, which at `fixed_delta_seconds = 0.05`
        means the whole 50 ms step was integrated in FIVE substeps.
 
-Either could move a braking number, and PROTOCOL section 8 says a result that
+Either could move a braking number, and CLAUDE.md section 8 says a result that
 contradicts its expectation is a bug until a written disposition rules the candidates
 out. This is that disposition, run as a measurement rather than argued.
 
@@ -58,7 +58,7 @@ MAX_SUBSTEPS_CARLA = 16
 # the other way: shrink the step being subdivided. These arms run at 16 substeps each, so
 # 0.0125 s integrates at 0.78 ms against the study's 3.12 ms.
 #
-# This is a PHYSICS check, not a study configuration. PROTOCOL section 1 fixes the control
+# This is a PHYSICS check, not a study configuration. CLAUDE.md section 1 fixes the control
 # rate at 20 Hz and every measured cell runs at FIXED_DT; these arms exist only to answer
 # "has the vehicle's braking stopped moving with the integrator", and the answer is quoted
 # as evidence for the primitive, never substituted for it.

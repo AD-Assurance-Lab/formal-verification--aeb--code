@@ -1,4 +1,4 @@
-"""PROTOCOL section 11's figure, generated from the result files.
+"""CLAUDE.md section 11's figure, generated from the result files.
 
     python tools/make_figure.py --scenario lead
 
@@ -79,7 +79,7 @@ def load(scenario: str) -> tuple[list[dict], dict]:
                     (r for r in w["cells"]
                      if abs(r["from_deg"] - cell["from_deg"]) < 1e-6), None)
                 if wc is not None:
-                    # PROTOCOL section 7's frozen criterion. See the note in
+                    # CLAUDE.md section 7's frozen criterion. See the note in
                     # tools/record_cells.py: prematurity is property A, not property S.
                     row[pol]["drove"] = wc.get("passes_protocol", wc["passes"])
                     row[pol]["of"] = wc["of"]

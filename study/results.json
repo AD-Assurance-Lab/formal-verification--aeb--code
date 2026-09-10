@@ -1,9 +1,9 @@
 {
-  "_comment": "Measured outcomes against PROTOCOL.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here. RESET 2026-09-06 for the A12 rebuild: every number below M1 was discarded with the artifacts that produced them (A12, FINDINGS F5) and is being re-measured on the corrected harness. The superseded values remain in git history at febefa9.",
+  "_comment": "Measured outcomes against CLAUDE.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here. RESET 2026-09-06 for the A12 rebuild: every number below M1 was discarded with the artifacts that produced them (A12, FINDINGS F5) and is being re-measured on the corrected harness. The superseded values remain in git history at febefa9.",
   "milestones": {
     "M0": {
       "state": "done",
-      "note": "PROTOCOL.md locked and tagged protocol-v1"
+      "note": "CLAUDE.md, the design section, locked and tagged protocol-v1"
     },
     "M1": {
       "state": "done",
@@ -19,11 +19,11 @@
     },
     "M4": {
       "state": "done",
-      "note": "REBUILT with three arms and all THREE FMVSS lighting conditions. Every cell 10/10 on PROTOCOL section 7's frozen pass. P_pts3 brakes at 287.57 ft in daylight on the ped scenario, 10/10 premature and 0 contacts -- a property A defect that section 7's criterion does not fail and that is recorded beside the verdict, never inside it"
+      "note": "REBUILT with three arms and all THREE FMVSS lighting conditions. Every cell 10/10 on CLAUDE.md section 7's frozen pass. P_pts3 brakes at 287.57 ft in daylight on the ped scenario, 10/10 premature and 0 contacts -- a property A defect that section 7's criterion does not fail and that is recorded beside the verdict, never inside it"
     },
     "M5": {
       "state": "done",
-      "note": "REBUILT. All eight behavioural gates pass over the COVERED axis: capture 0.108-0.544, in-between 0.156-0.678. The in-between gate first failed for P_pts/ped at [+12.542, +7.715] deg (1.016); PROTOCOL section 4's repair split it at +10.128 and the halves read 0.268 and 0.368 (FINDINGS F7)"
+      "note": "REBUILT. All eight behavioural gates pass over the COVERED axis: capture 0.108-0.544, in-between 0.156-0.678. The in-between gate first failed for P_pts/ped at [+12.542, +7.715] deg (1.016); CLAUDE.md section 4's repair split it at +10.128 and the halves read 0.268 and 0.368 (FINDINGS F7)"
     },
     "M6": {
       "state": "done",
@@ -31,7 +31,7 @@
     },
     "M7": {
       "state": "done",
-      "note": "REBUILT, then extended to the plate. Twenty-four drives: midpoint and at-witness passes for three arms on lead, ped, plate and the plate-removed control. Hazard agreement: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. Plate agreement: cell 5 (P_pts) 17/17, cell 6 (P_cont) 16/17, P_pts3 17/17. ZERO certified-then-failed on the covered axis in any cell; the study's only one is in the A6-UNCOVERED sliver, which is excluded from every verdict by construction and is the first empirical confirmation that the sliver cannot be certified (F19). All four ledger contradictions carry written dispositions: cells 1 and 3 in F17, cell 5's certificate in F18 and its drive in F19. RE-DRIVEN END TO END on 2026-09-08: 262 of 263 sub-interval verdicts reproduce and 20 of 21 agreement counts are exact; the one flip was an instrument defect (F21). The four cells whose repetitions ever disagreed were then re-driven under amendment A13's harness -- one server, one process, one vehicle per repetition -- and none of the four was sampling: two were F21, one was the simulator drifting (F23), and the sliver plate cell stays split and is therefore VOID, failing 2/10 on the clean harness against the shared server's 6/10 (F22). F24 THEN WITHDREW THE PLATE HALF: plate_run ticked the world twice per control iteration and ran the false-activation loop at 10 Hz where PROTOCOL section 3 specifies 20. At the specified rate P_cont does not brake on the plate at +0.013 deg -- 10/10 pass, peaks 2.00-2.18 against a 2.4525 limit -- so the study's only certified-then-failed sub-interval was a driver defect and the count is now ZERO in every cell. Every plate measurement (cells 5 and 6, F18, F19) was collected at 10 Hz and is not carried into the A14 Town12 rebuild."
+      "note": "REBUILT, then extended to the plate. Twenty-four drives: midpoint and at-witness passes for three arms on lead, ped, plate and the plate-removed control. Hazard agreement: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. Plate agreement: cell 5 (P_pts) 17/17, cell 6 (P_cont) 16/17, P_pts3 17/17. ZERO certified-then-failed on the covered axis in any cell; the study's only one is in the A6-UNCOVERED sliver, which is excluded from every verdict by construction and is the first empirical confirmation that the sliver cannot be certified (F19). All four ledger contradictions carry written dispositions: cells 1 and 3 in F17, cell 5's certificate in F18 and its drive in F19. RE-DRIVEN END TO END on 2026-09-08: 262 of 263 sub-interval verdicts reproduce and 20 of 21 agreement counts are exact; the one flip was an instrument defect (F21). The four cells whose repetitions ever disagreed were then re-driven under amendment A13's harness -- one server, one process, one vehicle per repetition -- and none of the four was sampling: two were F21, one was the simulator drifting (F23), and the sliver plate cell stays split and is therefore VOID, failing 2/10 on the clean harness against the shared server's 6/10 (F22). F24 THEN WITHDREW THE PLATE HALF: plate_run ticked the world twice per control iteration and ran the false-activation loop at 10 Hz where CLAUDE.md section 3 specifies 20. At the specified rate P_cont does not brake on the plate at +0.013 deg -- 10/10 pass, peaks 2.00-2.18 against a 2.4525 limit -- so the study's only certified-then-failed sub-interval was a driver defect and the count is now ZERO in every cell. Every plate measurement (cells 5 and 6, F18, F19) was collected at 10 Hz and is not carried into the A14 Town12 rebuild."
     },
     "M8": {
       "state": "in_progress",
@@ -168,6 +168,6 @@
     "r_req_ft_at_50mph": 185.4,
     "input_w": 128,
     "input_h": 96,
-    "_note": "a_max is read from the stop TIME, as PROTOCOL section 3 defines it; a_max_g_from_distance reads the same stops from the distance covered and is the consistency check that condemned the pre-A12 value (FINDINGS F5)."
+    "_note": "a_max is read from the stop TIME, as CLAUDE.md section 3 defines it; a_max_g_from_distance reads the same stops from the distance covered and is the consistency check that condemned the pre-A12 value (FINDINGS F5)."
   }
 }

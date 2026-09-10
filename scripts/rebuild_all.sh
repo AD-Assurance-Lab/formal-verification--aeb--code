@@ -9,7 +9,7 @@
 # complete.
 #
 # WHAT IT DOES NOT DO. It stops before M7. The witness drives may only run after the
-# verification verdicts are COMMITTED to git (PROTOCOL section 8), and a script that
+# verification verdicts are COMMITTED to git (CLAUDE.md section 8), and a script that
 # committed on your behalf would turn the blind protocol into a formality. Stage `verify`
 # ends by telling you what to commit; `bash scripts/rebuild_all.sh witness` runs the
 # drives afterwards, and tools/drive_witness.py refuses if the verdicts are uncommitted.
@@ -342,7 +342,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       ;;
     gates)
       # M5. The capture check and the in-between check, BEHAVIOURALLY -- in the
-      # policy's own output space, which is the one PROTOCOL section 4 says decides.
+      # policy's own output space, which is the one CLAUDE.md section 4 says decides.
       # BOTH gates. gate_behavioural.py defaults to --gate inbetween, so running it
       # without the flag measures one of the two M5 exit criteria and leaves the other
       # unmeasured while the stage reports success.

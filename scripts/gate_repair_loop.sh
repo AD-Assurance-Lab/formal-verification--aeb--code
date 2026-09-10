@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PROTOCOL section 4's repair, run to convergence or to a hard stop.
+# CLAUDE.md section 4's repair, run to convergence or to a hard stop.
 #
 #   setsid nohup bash scripts/gate_repair_loop.sh > results/gate_repair_stdout.log 2>&1 &
 #
@@ -110,7 +110,7 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   # underneath it. F30 closed F29, so retraining reproduces itself and is put back.
   #
   # It is put back because leaving it out is wrong, not merely untidy. A split adds knots.
-  # PROTOCOL section 5 defines `P_cont` as the arm that sees the continuum, so an axis with
+  # CLAUDE.md section 5 defines `P_cont` as the arm that sees the continuum, so an axis with
   # knots `P_cont` never trained on stops being the section 5 comparison. `P_pts` and
   # `P_pts3` train on the regulatory conditions and do not move -- which is now a CHECK
   # rather than an assumption, and the block below enforces it.

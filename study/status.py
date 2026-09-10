@@ -23,17 +23,17 @@ REPO = Path(__file__).resolve().parent.parent
 RESULTS = REPO / "study" / "results.json"
 
 def _expected_from_protocol() -> dict:
-    """Parse the ledger expectations out of the FROZEN section 9 table.
+    """Parse the ledger expectations out of the FROZEN section 9 table in CLAUDE.md.
 
     A hard-coded duplicate lived here before: editable without tripping the
     protocol lock, which defeats the point of freezing the expectations. The
     frozen table is the single source; if it cannot be parsed, that is an error,
     not a fallback."""
-    text = (REPO / "PROTOCOL.md").read_text()
+    text = (REPO / "CLAUDE.md").read_text()
     frozen, _ = lock.split_protocol(text)
-    start = frozen.find("## 9. The ledger")
+    start = frozen.find("### 9. The ledger")
     section = frozen[start:]
-    end = section.find("\n## ", 1)
+    end = section.find("\n### ", 1)
     section = section[:end] if end != -1 else section
     out = {}
     for line in section.split("\n"):
@@ -44,7 +44,7 @@ def _expected_from_protocol() -> dict:
             out[cid] = (policy, scenario, endpoints, fv_word, witness, conf)
     if len(out) != 6:
         raise SystemExit(
-            f"could not parse the 6 ledger rows from PROTOCOL section 9 (got {len(out)})")
+            f"could not parse the 6 ledger rows from CLAUDE.md section 9 (got {len(out)})")
     return out
 
 
@@ -77,7 +77,7 @@ DISPOSED_CELL = re.compile(r"cell\s+(\d+)\s*\((endpoints|FV|witness)\)")
 def dispositions() -> dict[tuple[str, str], str]:
     """(cell, field) -> the FINDINGS heading that disposes of it.
 
-    PROTOCOL section 8 lets a contradiction be written up once a written disposition
+    Section 8 of the design lets a contradiction be written up once a disposition
     lists the candidate causes ruled out. Nothing recorded that fact, so this report
     would have kept printing "do not write these up" at someone holding the finished
     disposition -- which is the failure mode this repo keeps meeting: a rule that names
@@ -129,12 +129,12 @@ def contradicts(cell_id: str, measured: dict) -> list[str]:
 
 
 def main() -> int:
-    text = (REPO / "PROTOCOL.md").read_text()
+    text = (REPO / "CLAUDE.md").read_text()
     frozen, amendments = lock.split_protocol(text)
     locked = lock.read_lock()
     if lock.digest(frozen) != locked["sha256"]:
         print(
-            "PROTOCOL DRIFT. Refusing to report progress against a design that moved.\n"
+            "DESIGN DRIFT. Refusing to report progress against a design that moved.\n"
             "Run: python -m study.protocol_lock",
             file=sys.stderr,
         )
@@ -143,7 +143,7 @@ def main() -> int:
     n_amend = len(lock.AMENDMENT_ENTRY.findall(amendments))
     results = json.loads(RESULTS.read_text())
 
-    print(f"\nPROTOCOL protocol-v1  {locked['sha256'][:12]}  amendments: {n_amend}")
+    print(f"\nDESIGN  protocol-v1  {locked['sha256'][:12]}  amendments: {n_amend}")
     print("\nMilestones")
     for mid, name in MILESTONE_NAMES.items():
         m = results["milestones"].get(mid, {})
@@ -195,7 +195,7 @@ def main() -> int:
         if open_ones:
             print(
                 "\nDo not write these up as findings. A written disposition must list the\n"
-                "candidate causes ruled out first. See PROTOCOL.md section 8."
+                "candidate causes ruled out first. See CLAUDE.md section 8."
             )
             return 1
         print(

@@ -17,7 +17,7 @@ What this CANNOT answer: whether a stretch is lit. Street lamps are scenery, not
 network, so they are absent from the file. That criterion has to be checked in the
 simulator and is reported as unknown here.
 
-See PROTOCOL.md section 12.
+See CLAUDE.md section 12.
 """
 
 from __future__ import annotations
@@ -31,7 +31,7 @@ from pathlib import Path
 
 M_TO_FT = 3.280839895
 
-# PROTOCOL section 12. A braking site must let the vehicle reach 50 mph and stop.
+# CLAUDE.md section 12. A braking site must let the vehicle reach 50 mph and stop.
 BRAKING_RUN_FT = 650.0
 # Pedestrian scenarios run at 25 mph and need less room, but still a real approach.
 PED_RUN_FT = 500.0

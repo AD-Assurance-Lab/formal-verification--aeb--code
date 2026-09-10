@@ -1,6 +1,6 @@
 """The expert braking law. One definition, used everywhere.
 
-PROTOCOL section 7 states the property the certificate checks: at every pose with range
+CLAUDE.md section 7 states the property the certificate checks: at every pose with range
 to the conflict at most `r_req`, the commanded deceleration is at least `a_max`; and on
 the false-activation scenario it is at most 0.25 g. The label has to be the same shape,
 or the policy is trained against one specification and verified against another.

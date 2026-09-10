@@ -2,7 +2,7 @@
 
     python tools/record_primitives.py
 
-Reads results/carla/braking.json, computes r_req at each test speed per PROTOCOL
+Reads the braking measurement from the map's results folder, computes r_req at each test speed per CLAUDE.md
 section 3, and writes the numbers into study/results.json so `python -m study.status`
 reports them.
 
@@ -76,7 +76,7 @@ def main() -> int:
         budget[f"r_req_ft_at_{mph:g}mph"] = round(rr * FT, 1)
         print(f"  {mph:6.0f}m {rr:9.1f} m {rr * FT:9.1f} ft")
 
-    # The SAME stops read from the distance they covered. PROTOCOL section 3 defines
+    # The SAME stops read from the distance they covered. CLAUDE.md section 3 defines
     # a_max from the stop TIME and that stays the primitive; this is the consistency
     # check that condemned the pre-A12 value, where the two readings differed by 39%
     # because a five-substep integrator could not resolve the brake transient (F5). It
@@ -106,7 +106,7 @@ def main() -> int:
         # three of them went missing from the committed block in the first place.
         "input_w": prev.get("input_w"),
         "input_h": prev.get("input_h"),
-        "_note": ("a_max is read from the stop TIME, as PROTOCOL section 3 defines it; "
+        "_note": ("a_max is read from the stop TIME, as CLAUDE.md section 3 defines it; "
                   "a_max_g_from_distance reads the same stops from the distance covered "
                   "and is the consistency check that condemned the pre-A12 value "
                   "(FINDINGS F5)."),

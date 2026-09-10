@@ -150,7 +150,7 @@ def drive_one(args) -> int:
                     scenario=args.scenario, release_r_req_m=r_req_ft / J.FT)
         r["premature"] = (r["brake_range_ft"] is not None
                           and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE)
-        # PROTOCOL section 7's frozen closed-loop pass, and only that. The nuisance
+        # CLAUDE.md section 7's frozen closed-loop pass, and only that. The nuisance
         # condition is property A and is recorded beside the verdict, never inside it.
         ok = (not r["contact"]) and r["standoff_ok"]
         r["passes"] = ok

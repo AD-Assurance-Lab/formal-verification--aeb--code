@@ -1,6 +1,6 @@
 """The three FMVSS scenario objects, built to the standard's own dimensions.
 
-Imported by the jobs; not run directly. Every constant here traces to PROTOCOL section 2
+Imported by the jobs; not run directly. Every constant here traces to CLAUDE.md section 2
 or to a measurement recorded in the session notes.
 """
 
@@ -118,7 +118,7 @@ def spawn_crossing_pedestrian(world, wp, lateral_m: float = 6.0, height: float =
 
     Driven by direct WalkerControl rather than `controller.ai.walker`. The AI controller
     picks its own path and speed, which makes two runs of the same cell different runs,
-    and PROTOCOL requires determinism.
+    and CLAUDE.md requires determinism.
     """
     carla = J.carla_module()
     bp = world.get_blueprint_library().filter("walker.pedestrian.*")[0]

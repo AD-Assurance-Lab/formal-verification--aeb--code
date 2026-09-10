@@ -7,7 +7,7 @@ them answers alone.
 
 **The gap being measured.** The certificate quantifies over BLENDS -- pixel interpolations
 between two rendered knots. The witness drives happen at RENDERS. Nothing in between is
-guaranteed, and PROTOCOL section 4 knows it: it requires the in-between check and says the
+guaranteed, and CLAUDE.md section 4 knows it: it requires the in-between check and says the
 behavioural version is the one that decides. But the gate is currently used as a pass/fail
 at 1.0, and a pass/fail cannot say whether a value of 0.68 is meaningfully worse than 0.16.
 

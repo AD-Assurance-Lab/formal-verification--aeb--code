@@ -4,7 +4,7 @@
 
 No simulator. Runs on the captured endpoint frames and the saved model.
 
-**The property** (PROTOCOL section 7, property S). At every pose whose range to the
+**The property** (CLAUDE.md section 7, property S). At every pose whose range to the
 conflict is at most `r_req`, and for every illumination `s` in the sub-interval, the
 commanded deceleration must be at least the brake decision threshold. Below it the
 closed-loop controller does not latch, so the vehicle does not brake, so it does not stop.
@@ -18,7 +18,7 @@ network output over `s` in [-1, 1] (the sub-interval's two endpoints, midpoint z
 **with input-space branch and bound**: a domain whose bound does not decide the property
 is bisected and its halves are bounded in turn.
 
-**The branch and bound is not optional, and it was missing.** PROTOCOL section 6 has
+**The branch and bound is not optional, and it was missing.** CLAUDE.md section 6 has
 specified "alpha-CROWN with input-space branch and bound over s" since M0, and until
 2026-09-07 this file made a single `compute_bounds` call per pose over the whole
 sub-interval. On a wide sub-interval that is not a certificate about the policy, it is a
@@ -70,7 +70,7 @@ OUT = J.OUT
 
 
 class Family(nn.Module):
-    """The disturbance as one linear layer, then the student. PROTOCOL section 6."""
+    """The disturbance as one linear layer, then the student. CLAUDE.md section 6."""
 
     def __init__(self, lo: torch.Tensor, hi: torch.Tensor, student: nn.Module):
         super().__init__()
@@ -98,7 +98,7 @@ def prepare(arr: np.ndarray, w: int, h: int) -> torch.Tensor:
 
 def certify_pose(fam, s_template, ptb_cls, prop: str, threshold: float,
                  method: str, max_domains: int, min_width: float, dev=None):
-    """Input-space branch and bound over `s` for ONE pose. PROTOCOL section 6.
+    """Input-space branch and bound over `s` for ONE pose. CLAUDE.md section 6.
 
     Returns (verdict, margin_bound, witness_s, domains_used).
 
@@ -241,14 +241,14 @@ def main() -> int:
     ap.add_argument("--method", default="alpha-CROWN")
     ap.add_argument(
         "--max-domains", type=int, default=32,
-        help="input-space branch-and-bound budget per pose (PROTOCOL section 6)")
+        help="input-space branch-and-bound budget per pose (CLAUDE.md section 6)")
     ap.add_argument(
         "--min-domain-width", type=float, default=2.0 / 64,
         help="stop splitting below this width in s; s spans [-1, 1]")
     ap.add_argument(
         "--property", choices=["S", "A"], default="S",
         help="S: must brake inside r_req. A: must NOT brake on the false-activation "
-             "scenario, upper bound at most 0.25 g, PROTOCOL section 7",
+             "scenario, upper bound at most 0.25 g, CLAUDE.md section 7",
     )
     args = ap.parse_args()
 
@@ -440,7 +440,7 @@ def main() -> int:
         "branch_and_bound": {
             "max_domains_per_pose": args.max_domains,
             "min_domain_width": args.min_domain_width,
-            "note": ("PROTOCOL section 6's input-space branch and bound. Absent from "
+            "note": ("CLAUDE.md section 6's input-space branch and bound. Absent from "
                      "this file until 2026-09-07, which produced FALSIFIED verdicts on "
                      "wide sub-intervals that one bisection certifies (FINDINGS F8)."),
         },
@@ -453,7 +453,7 @@ def main() -> int:
         # says how many pieces certified, this says how much illumination did.
         "coverage_by_span": _span_summary(cells, axis_span),
         "note": (
-            "Property S from PROTOCOL section 7, on the same threshold the closed-loop "
+            "Property S from CLAUDE.md section 7, on the same threshold the closed-loop "
             "controller latches at. CERTIFIED means the lower bound clears it at every "
             "pose inside r_req for every illumination in the sub-interval, under "
             "input-space branch and bound. FALSIFIED means a concrete s was exhibited "

@@ -1,2 +1,4 @@
   loading Town12 (large maps take a while)
   server age 1 min (R-SIM-1 ok)
+
+  capture gate: 20 poses, worst 0.243 m/s^2 = 0.099 of the decision threshold -> PASS

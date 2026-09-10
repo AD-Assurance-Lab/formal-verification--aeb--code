@@ -1,4 +1,4 @@
-"""Per-pose verdicts over the LATCH WINDOW. The disposition PROTOCOL section 8 wants.
+"""Per-pose verdicts over the LATCH WINDOW. The disposition CLAUDE.md section 8 wants.
 
     python tools/latch_window.py --policy P_pts --scenario ped
 
@@ -12,10 +12,10 @@ in both the certificate and the vehicle are being asked different questions.
 at pose `i` under illumination `s`, and `th` for the latch threshold, which
 `run_policy.BRAKE_THRESHOLD_FRACTION` and `verify.py` already share.
 
-    property S, as PROTOCOL section 7 states it and verify.py computes it:
+    property S, as CLAUDE.md section 7 states it and verify.py computes it:
         FORALL i in poses_inside_r_req.  FORALL s in I.  out(i, s) >= th
 
-    what PROTOCOL section 7's CLOSED-LOOP criterion needs:
+    what CLAUDE.md section 7's CLOSED-LOOP criterion needs:
         FORALL s in I.  EXISTS i in latch_window.  out(i, s) >= th
 
 The controller latches once and holds full braking (`run_policy.one_run`), so a single
@@ -70,7 +70,7 @@ OUT = J.OUT
 
 
 class LatchFamily(torch.nn.Module):
-    """max over the latch window's poses, as one ReLU network over `s`. PROTOCOL 6.
+    """max over the latch window's poses, as one ReLU network over `s`. CLAUDE.md section 6.
 
     `Family` in verify.py maps s -> one pose's image -> one output, which gives the
     per-pose property. What the vehicle needs is the DISJUNCTION over the window:
@@ -271,7 +271,7 @@ def main() -> int:
                  "certifies exactly by bounding max over the window. "
                  "`latch_guaranteed` is the weaker EXISTS pose FORALL s, kept because it "
                  "names WHICH pose carries the sub-interval when one does. It is a "
-                 "DISPOSITION instrument for PROTOCOL section 8 and does not change any "
+                 "DISPOSITION instrument for CLAUDE.md section 8 and does not change any "
                  "committed verdict: verify.py and the ledger are untouched."),
     }
     out_path.write_text(json.dumps(payload, indent=2) + "\n")

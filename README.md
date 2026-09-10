@@ -7,11 +7,17 @@
 
 Formal verification of automatic emergency braking under degraded visibility.
 
-**Owner:** Zach. **Status:** **rebuilding.** Amendment A12 discarded every measured
-artifact because the simulator harness was wrong, and the rebuild is under way on the
-corrected one; `python -m study.status` is the live state and `FINDINGS.md` F5 is what
-the rebuild found. The trench-plate cells (5 and 6) are specified and have no harness
-yet. **First milestone:** demo at the automotive technology expo, Novi, October 2026.
+**Owner:** Zach. **Status:** rebuilding on a new map.
+
+The study ran end to end once, on a small map, and that result is complete and tagged
+`town01-final`. It then moved to a large map, because the small one had no site long enough
+for the standard's false-activation test. That rebuild is not finished, and its results so
+far are withdrawn: they were measured against networks that could not be trained again. The
+training was made repeatable on 10 September 2026.
+
+`python -m study.status` is the live state. `CLAUDE.md` is the design, current belief and
+every standing rule. **First milestone:** demo at the automotive technology expo, Novi,
+October 2026.
 
 ## What this is for
 
@@ -62,8 +68,8 @@ The steering study is the parent. Read, in this order:
 - `formal-verification--steering--code/REPRODUCING.md`
 - `lab--future-plans--docs/RESEARCH_DIRECTIONS.md`, entry A1
 
-That repository once had `docs/STATE_OF_PLAY.md`, `docs/TRAPS.md` and `docs/CONSTRAINTS.md`.
-None of them exists now. Its `CLAUDE.md` carries what they held.
+Older notes point into that repository's `docs/` directory. It no longer has one. Its
+`CLAUDE.md` carries what those files held, the same way this repository's does.
 
 ## Risk
 
@@ -86,7 +92,7 @@ python -m study.status                # where the study stands, in the protocol'
 python -m study.ledger --check-order  # the blind protocol, checked against git history
 python tools/survey_maps.py           # choose the test map from map geometry alone
 python tools/condition_signature.py   # were the captures rendered at the illumination asked for
-python tools/make_figure.py           # rebuild PROTOCOL section 11's figure from the results
+python tools/make_figure.py           # rebuild CLAUDE.md section 11's figure from the results
 python tools/tidy.py                  # repo hygiene report
 ```
 
@@ -111,10 +117,10 @@ would turn it into a formality.
 
 ## The result
 
-`docs/STUDY_REPORT.md` is the complete methodology and results in one file. **Its
-measured sections are currently superseded** — see the banner at the top of that file and
-`FINDINGS.md` F5 — because A12's rebuild found that the braking primitive the whole safety
-budget derives from was an artifact of the simulator's default physics substepping.
+`docs/STUDY_REPORT.md` is the complete methodology and results in one file. **It describes
+the small-map study**, which is the one that ran end to end. The rebuild on the large map
+supersedes its map choice and is not finished, so read the report for the method and
+`python -m study.status` for where things stand.
 
 The claim under test is unchanged: a policy that passes both endpoint lighting conditions
 fails between them; the certificate names those illuminations without simulating, and the
@@ -122,16 +128,19 @@ verdicts are committed to version control before any vehicle moves
 (`python -m study.ledger --check-order` verifies that ordering against git).
 
 <p align="center">
-  <img src="docs/figures/dusk_gap.png" width="640" alt="Certified bound against illumination, with the two endpoint test conditions marked and the violation between them">
+  <img src="docs/figures/dusk_gap.svg" width="640" alt="Certified bound against illumination, with the two endpoint test conditions marked and the violation between them">
 </p>
 
-Interactive version: `docs/figures/dusk_gap.html`.
+Interactive version: `docs/figures/dusk_gap.html`. Both come from
+`python tools/make_figure.py` and nothing here is drawn by hand. The image is the vector
+file for that reason: a bitmap sat here for two weeks after the numbers under it changed,
+because no committed tool regenerates one.
 
 ## Layout
 
 | | |
 |---|---|
-| `PROTOCOL.md` | the study design, frozen. Start here |
+| `CLAUDE.md` | the study design, frozen. Start here |
 | `study/` | the lock, the status report, and recorded results |
 | `tools/` | everything runnable |
 | `CLAUDE.md` | **current belief, the standing rules and every working note.** Start here if you are picking this up |

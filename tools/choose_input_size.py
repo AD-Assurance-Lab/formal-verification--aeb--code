@@ -2,7 +2,7 @@
 
     python tools/choose_input_size.py --scenario lead
 
-PROTOCOL section 1 leaves the network input size open, to be fixed at M2 and recorded,
+CLAUDE.md section 1 leaves the network input size open, to be fixed at M2 and recorded,
 and says only that it must be larger than a lane-keeping crop because a pedestrian at
 `r_req` has to survive downsampling. This measures it instead of asserting it.
 

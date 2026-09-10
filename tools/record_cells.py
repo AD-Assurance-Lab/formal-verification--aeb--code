@@ -7,7 +7,7 @@
 found the lead-scenario results recorded under the pedestrian cells — every artifact said
 `scenario: lead` and nothing noticed. `study/ledger.py --check-order` was built to catch
 that after the fact; this removes the step that made it possible. The cell rows come from
-PROTOCOL section 9, the numbers come from the artifacts, and neither is retyped.
+CLAUDE.md section 9, the numbers come from the artifacts, and neither is retyped.
 
 **What it will not do.** It refuses to record a cell as passing if a CERTIFIED
 sub-interval was driven and failed. That is a soundness violation — the certificate
@@ -28,7 +28,7 @@ import carla_jobs as J  # noqa: E402
 OUT = J.OUT
 RESULTS = J.REPO / "study" / "results.json"
 
-# PROTOCOL section 9, and the same mapping study/ledger.py checks artifacts against.
+# CLAUDE.md section 9, and the same mapping study/ledger.py checks artifacts against.
 LEDGER_ROWS = {
     "1": ("P_pts", "ped"),
     "2": ("P_pts", "lead"),
@@ -93,7 +93,7 @@ def cell_row(policy: str, scenario: str) -> dict:
             else:
                 row["note"] = (
                     "NO HARNESS YET. The FMVSS 127 false-activation scenario is specified "
-                    "in PROTOCOL sections 2 and 9. Until it is captured and driven, "
+                    "in CLAUDE.md sections 2 and 9. Until it is captured and driven, "
                     "property A is verified on the no-target control, which is a "
                     "legitimate must-not-brake property and is NOT the standard's "
                     "false-activation scenario.")
@@ -203,7 +203,7 @@ def cell_row(policy: str, scenario: str) -> dict:
     driven = [(c, by_key.get((c["from_deg"], c["to_deg"]))) for c in covered]
     driven = [(c, d) for c, d in driven if d is not None]
 
-    # Scored against PROTOCOL section 7's frozen closed-loop pass -- no contact and
+    # Scored against CLAUDE.md section 7's frozen closed-loop pass -- no contact and
     # standoff at least d_margin -- because that is what property S composes into.
     # Premature braking is a must-NOT-brake condition and belongs to property A; scoring
     # property S against it reported a certified cell as unsound when the run in question
@@ -231,7 +231,7 @@ def cell_row(policy: str, scenario: str) -> dict:
             f"at margin "
             f"{worst[0]['margin_x_threshold']:.2f}x threshold. "
             f"{len(cert_then_failed)} sub-interval(s) in total. This is a soundness "
-            f"failure and PROTOCOL section 8 makes it a bug until a written disposition "
+            f"failure and CLAUDE.md section 8 makes it a bug until a written disposition "
             f"rules out the candidate causes.")
     elif row["fv"] == "FALSIFIED":
         row["witness"] = "FAIL" if fals_then_failed else "PASS"

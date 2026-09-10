@@ -9,7 +9,7 @@ output is a convergence curve for a scene in which **nothing is supposed to be c
 
 ## Why this exists
 
-`PROTOCOL.md` sets `WEATHER_SETTLE_TICKS = 120`, six seconds of simulated time, on the
+`CLAUDE.md` sets `WEATHER_SETTLE_TICKS = 120`, six seconds of simulated time, on the
 reasoning that `world.set_weather()` applies on the next tick and a few frames of margin
 covers it. The write does apply on the next tick. What was never measured is how long the
 RENDERED CONSEQUENCE of that write takes to settle.

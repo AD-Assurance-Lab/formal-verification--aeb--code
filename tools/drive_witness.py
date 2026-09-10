@@ -99,7 +99,7 @@ def main() -> int:
     if not verdicts_path.exists():
         raise SystemExit(f"no verdicts at {verdicts_path}; run tools/verify.py first")
     # A verdict is a prediction only if it is COMMITTED before this drive
-    # (PROTOCOL section 8). The old check accepted any file on disk.
+    # (CLAUDE.md section 8). The old check accepted any file on disk.
     import subprocess as _sp
     rel = str(verdicts_path.relative_to(J.REPO))
     tracked = _sp.run(["git", "ls-files", "--error-unmatch", rel],
@@ -110,7 +110,7 @@ def main() -> int:
         raise SystemExit(
             f"{rel} is {'untracked' if not tracked else 'modified since commit'}: "
             f"commit the verdicts first -- an uncommitted verdict is not a prediction "
-            f"(PROTOCOL section 8; python -m study.ledger --check-order)")
+            f"(CLAUDE.md section 8; python -m study.ledger --check-order)")
     verdicts = json.loads(verdicts_path.read_text())
 
     # require_cuda, not is_available(): the flag is False while CARLA initialises on
@@ -276,7 +276,7 @@ def main() -> int:
         # TWO COUNTS, because they answer two different properties and conflating them
         # made a certified cell look unsound.
         #
-        #   passes_protocol  PROTOCOL section 7's frozen closed-loop pass: "no contact
+        #   passes_protocol  CLAUDE.md section 7's frozen closed-loop pass: "no contact
         #                    and standoff at least d_margin". This is what property S
         #                    composes into, so it is what a property-S verdict is scored
         #                    against.

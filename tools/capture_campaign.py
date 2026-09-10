@@ -13,9 +13,9 @@ knots is not a pair.
 So this does not drive and record. It drives ONCE with rendering off to get the nominal
 state sequence, then replays that sequence by PLACING the actors, once per illumination
 knot. Placement was measured to reproduce a driven frame to 0.000 m and 0.007 of image
-range, so replay is sound here (see results/carla/capture_check.json).
+range, so replay is sound here (see the capture check in the map's results folder).
 
-Knots come from `results/carla/family_knots.json`, measured in amendment A6.
+Knots come from `family_knots.json` in the map's results folder, measured in amendment A6.
 """
 
 from __future__ import annotations
@@ -54,7 +54,7 @@ DISK_HEADROOM_GB = 20.0
 PED_LEAD_MARGIN_M = 8.0
 
 
-# FMVSS 127 as PROTOCOL section 2 records it tests THREE lighting conditions: daylight,
+# FMVSS 127 as CLAUDE.md section 2 records it tests THREE lighting conditions: daylight,
 # darkness with lower beam, and darkness with upper beam. The first two are the endpoints
 # of the certified interval -- an interval has two ends -- and the third is the same
 # darkness with a different headlamp state, which is how tools/carla_jobs.py:job_sites has
@@ -165,7 +165,7 @@ def load_uncovered() -> list[dict]:
 
 def expert_decel(range_m: float, v: float, a_max: float) -> float:
     """Ground-truth braking law. The label, and the same law the oracle uses."""
-    reach = max(0.05, range_m - S.FT * 0 - 1.0)  # 1.0 m standoff, PROTOCOL section 3
+    reach = max(0.05, range_m - S.FT * 0 - 1.0)  # 1.0 m standoff, CLAUDE.md section 3
     return float(min(a_max, max(0.0, v * v / (2.0 * reach))))
 
 
@@ -251,7 +251,7 @@ def nominal_states(world, site, scenario: str, speed_mph: float, a_max_g: float)
                 # For a CROSSING pedestrian it is not. Straight-line distance to the
                 # walker includes their lateral offset, so at "range 10.6 m" the ego was
                 # only 8.7 m from the crossing point while the walker was still 6 m off
-                # to the side, which is visible in the captured frames. PROTOCOL section
+                # to the side, which is visible in the captured frames. CLAUDE.md section
                 # 7 says range to the CONFLICT POINT, and that is what this is.
                 gap_m = to_conflict
             if ped is not None and not released:

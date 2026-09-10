@@ -2,7 +2,7 @@
 
     python tools/train_policies.py --input-w 128 --input-h 96
 
-PROTOCOL section 5. `P_pts` sees only the regulatory test points, which is what a
+CLAUDE.md section 5. `P_pts` sees only the regulatory test points, which is what a
 manufacturer optimising against the test matrix builds. `P_cont` sees the continuum.
 Architecture, recipe, epochs and data volume are identical; the ONLY difference is which
 illumination knots the frames come from. That is what makes any later gap attributable
@@ -12,7 +12,7 @@ Both are trained as teacher then student. The teacher is a distillation source a
 never verified. The student is ReLU-only with no BatchNorm or Dropout, because those
 cause interval-bound explosion, and it is the thing the certificate is computed on.
 
-**Engineering the gap is forbidden** (PROTOCOL section 5). `P_pts` is trained on the
+**Engineering the gap is forbidden** (CLAUDE.md section 5). `P_pts` is trained on the
 regulatory points because that is what the standard incentivises. Weakening it further
 to manufacture a failure would void the result.
 """
@@ -179,7 +179,7 @@ def equalise(sets):
 
     P_pts draws from 2 illumination knots and P_cont from 12, so without this P_cont
     sees six times the frames and any difference between them could be attributed to
-    DATA VOLUME rather than to how the axis was sampled. PROTOCOL section 5 requires
+    DATA VOLUME rather than to how the axis was sampled. CLAUDE.md section 5 requires
     them identical in everything except which knots the frames came from, and this is
     the part that is easy to get wrong silently.
 
@@ -345,7 +345,7 @@ def main() -> int:
         # SEEDED PER ARM, with the same seed for every arm. Previously the RNG was seeded
         # once and the policies were trained in sequence, so P_cont's weight
         # initialisation and shuffling depended on how much randomness P_pts had already
-        # consumed -- the arms were neither independent draws nor matched ones. PROTOCOL
+        # consumed -- the arms were neither independent draws nor matched ones. CLAUDE.md
         # section 5 asks for two policies identical in everything except which knots the
         # frames came from; matched seeds are what makes that true of the initialisation
         # as well as the recipe, and they are the precondition for the seed sweep that

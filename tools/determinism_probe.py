@@ -32,7 +32,7 @@ measured here rather than quoted from Town06. The policy stream gives D-10's ans
 the physics identical, any spread in the commanded deceleration is the network amplifying
 render noise, and a spread comparable to the brake decision threshold means a policy whose
 verdict can flip between repetitions for reasons that have nothing to do with illumination.
-That is the number the repetition count in PROTOCOL section 1 is supposed to be chosen
+That is the number the repetition count in CLAUDE.md section 1 is supposed to be chosen
 against.
 
 **D-9: this probe can fail.** Each repetition writes its OWN artifact path and the compare

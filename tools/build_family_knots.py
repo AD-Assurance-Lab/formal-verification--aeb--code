@@ -2,7 +2,7 @@
 
     python tools/build_family_knots.py [--tol 0.01]
 
-Amendment A5 established that the linear blend in PROTOCOL section 4 is only faithful
+Amendment A5 established that the linear blend in CLAUDE.md section 4 is only faithful
 over sub-intervals, and that the limit is curvature near the horizon rather than width.
 This turns that into the actual knot points: the largest steps whose midpoint blend stays
 within tolerance of the render, walking from daylight down to darkness.
@@ -11,7 +11,7 @@ A knot is forced at sun altitude 0. Straddling intervals floor near 0.03 error h
 short they are, which is a kink rather than curvature, and no step size fixes a kink.
 
 Image space, like everything else about the family so far. The behavioural check that
-decides is in PROTOCOL section 4 and waits for a policy. What this gives is the set of
+decides is in CLAUDE.md section 4 and waits for a policy. What this gives is the set of
 endpoints to render for training and verification, so that work is not done twice.
 """
 
@@ -35,7 +35,7 @@ MAX_STEP = 60.0
 def failing_sub_intervals() -> list[dict]:
     """Covered sub-intervals where the BEHAVIOURAL in-between gate failed.
 
-    PROTOCOL section 4: the check that decides is behavioural, not the image metric this
+    CLAUDE.md section 4: the check that decides is behavioural, not the image metric this
     file bisects on. A sub-interval can sit comfortably inside the image tolerance and
     still move a policy's brake decision, and when it does, section 4's repair is
     "shorter intervals with rendered interior endpoints ... the claim survives; only the
@@ -77,7 +77,7 @@ def main() -> int:
     ap.add_argument(
         "--refine", action="store_true",
         help="do not re-bisect. Split the sub-intervals the BEHAVIOURAL in-between gate "
-             "failed, at their midpoints, and re-measure the halves. PROTOCOL section 4's "
+             "failed, at their midpoints, and re-measure the halves. CLAUDE.md section 4's "
              "repair, applied to the sub-intervals that actually need it")
     args = ap.parse_args()
 
@@ -182,7 +182,7 @@ def main() -> int:
                 "refinements": splits,
                 "renders_used": renders,
                 "note": (
-                    "Refined from a previous knot set by PROTOCOL section 4's repair: a "
+                    "Refined from a previous knot set by CLAUDE.md section 4's repair: a "
                     "sub-interval whose BEHAVIOURAL in-between gate failed is split at "
                     "its midpoint, which becomes a rendered endpoint. The image blend "
                     "metric had already accepted it; the behavioural check is the one "
@@ -259,7 +259,7 @@ def main() -> int:
                 "Endpoints to render for training and verification. A knot is forced at "
                 "the horizon because straddling intervals floor near 0.03 error at any "
                 "width, which is a kink and not curvature. Image space; the behavioural "
-                "check in PROTOCOL section 4 still decides."
+                "check in CLAUDE.md section 4 still decides."
             ),
         }
         (J.OUT / "family_knots.json").write_text(

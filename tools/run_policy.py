@@ -10,7 +10,7 @@ standard is nonetheless unsafe between its test points.
 
 The policy sees the same crop and resolution it was trained on, reads the camera, and
 outputs a deceleration demand. Braking latches once commanded, which is what the
-closed-form standoff bound in PROTOCOL section 7 assumes.
+closed-form standoff bound in CLAUDE.md section 7 assumes.
 
 Pass is no contact AND standoff at least `d_margin`, over at least 10 repetitions,
 measured from bounding-box geometry and never from the collision sensor.
@@ -37,7 +37,7 @@ import stats as ST  # noqa: E402
 from train_policies import Student  # noqa: E402
 
 MODELS = J.MODELS
-# The three lighting conditions FMVSS 127 tests, as PROTOCOL section 2 records them.
+# The three lighting conditions FMVSS 127 tests, as CLAUDE.md section 2 records them.
 # The first two bound the certified interval; the third is the SAME darkness with a
 # different headlamp state, so it is an endpoint TEST and not a point on the family's
 # axis. M4 tested only the first two until 2026-09-07, which made "passes the regulatory
@@ -82,7 +82,7 @@ def preprocess(img, w: int, h: int, dev):
 A9_HEAD_START_M = 8.0
 
 
-# FMVSS 127's nuisance braking limit, taken from the standard and not chosen (PROTOCOL
+# FMVSS 127's nuisance braking limit, taken from the standard and not chosen (CLAUDE.md
 # section 2). Property A certifies the upper bound against it; this is the same number
 # applied to what the vehicle actually commanded.
 NUISANCE_LIMIT_MPS2 = 0.25 * 9.81
@@ -101,7 +101,7 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0,
     no standoff to hold, and the failure is the vehicle deciding to brake for a piece of
     steel lying flat on the road.
 
-    Pass, from PROTOCOL sections 2 and 7:
+    Pass, from CLAUDE.md sections 2 and 7:
       - commanded deceleration never exceeds 0.25 g, the standard's own nuisance limit
       - the vehicle crosses the plate still moving
 
@@ -180,7 +180,7 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0,
             # used to sit here made every iteration advance TWO steps -- and grab_frame
             # then silently discarded the intervening frame as stale.
             #
-            # PROTOCOL section 3 fixes the control rate at 20 Hz and states the resulting
+            # CLAUDE.md section 3 fixes the control rate at 20 Hz and states the resulting
             # quantization as 3.7 ft at 50 mph. This loop was running at 10 Hz, evaluating
             # the policy on every other frame, with a quantization of 7.3 ft. `one_run`
             # has never had the extra tick, so the two hazard scenarios and the
@@ -331,7 +331,7 @@ def one_run(world, site, model, w, h, dev, a_max, speed_mph, lights, gap_m=120.0
 
             sep_now = J.separation_ft(ego, lead)
             min_gap_ft = min(min_gap_ft, sep_now)
-            # d_margin is "required standoff AT REST" (PROTOCOL section 3; FINDINGS
+            # d_margin is "required standoff AT REST" (CLAUDE.md section 3; FINDINGS
             # F3): track separation while stopped separately, because a crossing
             # walker keeps moving after the vehicle has done its job.
             if braking and J.speed_of(ego) < 0.1:
@@ -534,7 +534,7 @@ def main() -> int:
                     and r["brake_range_ft"] > r_req_ft * PREMATURE_MULTIPLE
                 )
             # TWO COUNTS, as in drive_witness.py and for the same reason (FINDINGS F9).
-            # PROTOCOL section 7 defines the closed-loop pass as "no contact and standoff
+            # CLAUDE.md section 7 defines the closed-loop pass as "no contact and standoff
             # at least d_margin", and section 10's M4 criterion is that phrase. The
             # prematurity condition is this file's own addition, for a good reason -- a
             # policy that stops immediately has not performed AEB -- but it is a

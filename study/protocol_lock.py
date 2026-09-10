@@ -1,11 +1,14 @@
-"""The protocol is locked. This is what notices when it is not.
+"""The design is locked. This is what notices when it is not.
 
     python -m study.protocol_lock            check, and print the ledger
     python -m study.protocol_lock --accept   re-lock after a recorded amendment
 
-Everything in PROTOCOL.md above the "## Amendments" heading is frozen. Changing it
-without appending an amendment is the failure mode this guards: study logic in this
-lab has been lost twice, and it was lost by drift rather than by decision.
+Everything in CLAUDE.md above the "## Amendments" heading is frozen. Changing it without
+appending an amendment is the failure mode this guards: study logic in this lab has been
+lost twice, and it was lost by drift rather than by decision.
+
+The design lived in CLAUDE.md until 2026-09-10 and was folded into CLAUDE.md by amendment
+A18. The mechanism is unchanged. Only the file it reads moved.
 """
 
 from __future__ import annotations
@@ -18,18 +21,23 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-PROTOCOL = REPO / "PROTOCOL.md"
+DESIGN_FILE = REPO / "CLAUDE.md"
 LOCK = REPO / "study" / "protocol.lock"
 
 AMENDMENTS_HEADING = "## Amendments"
+# ANCHORED to a line of its own. An unanchored find matched the same words quoted in
+# prose earlier in the file, split there, and froze only the text above the quote --
+# a lock that reports "intact" while guarding almost nothing.
+AMENDMENTS_LINE = re.compile(r"^## Amendments\s*$", re.MULTILINE)
 AMENDMENT_ENTRY = re.compile(r"^### A\d+\b", re.MULTILINE)
 
 
 def split_protocol(text: str) -> tuple[str, str]:
     """Frozen part, amendments part."""
-    idx = text.find(AMENDMENTS_HEADING)
-    if idx == -1:
-        raise SystemExit(f"PROTOCOL.md has no '{AMENDMENTS_HEADING}' heading.")
+    m = AMENDMENTS_LINE.search(text)
+    if m is None:
+        raise SystemExit(f"CLAUDE.md has no '{AMENDMENTS_HEADING}' heading on its own line.")
+    idx = m.start()
     return text[:idx], text[idx:]
 
 
@@ -72,11 +80,11 @@ def write_lock(sha: str, amendments: int, note: str, hashes: list[str]) -> None:
 
 def print_ledger(frozen: str) -> None:
     """Echo the ledger table so the design is in front of you, not one file away."""
-    start = frozen.find("## 9. The ledger")
+    start = frozen.find("### 9. The ledger")
     if start == -1:
         return
     section = frozen[start:]
-    end = section.find("\n## ", 1)  # stop before the next top-level heading
+    end = section.find("\n### ", 1)  # stop before the next design section
     if end != -1:
         section = section[:end]
     rows = [
@@ -84,7 +92,7 @@ def print_ledger(frozen: str) -> None:
         for line in section.split("\n")
         if line.startswith("| ") and not line.startswith("|---")
     ]
-    print("\nThe ledger, from PROTOCOL.md section 9:\n")
+    print("\nThe ledger, from CLAUDE.md section 9:\n")
     for row in rows:
         print("  " + row)
     print(
@@ -104,7 +112,7 @@ def main() -> int:
     ap.add_argument("--quiet", action="store_true", help="suppress the ledger")
     args = ap.parse_args()
 
-    text = PROTOCOL.read_text()
+    text = DESIGN_FILE.read_text()
     frozen, amendments_text = split_protocol(text)
     sha = digest(frozen)
     hashes = amendment_hashes(amendments_text)
@@ -164,7 +172,7 @@ def main() -> int:
         return 0
 
     print(
-        "PROTOCOL DRIFT.\n"
+        "DESIGN DRIFT.\n"
         f"  locked:  {lock['sha256'][:12]}\n"
         f"  current: {sha[:12]}\n",
         file=sys.stderr,

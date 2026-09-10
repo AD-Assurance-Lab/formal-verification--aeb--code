@@ -7,7 +7,7 @@
 Each job writes results/carla/<job>.json and prints a verdict. Jobs are ordered so the
 cheapest thing that can kill the whole plan runs first.
 
-Standing rules this file already obeys, from PROTOCOL.md and hard experience:
+Standing rules this file already obeys, from CLAUDE.md and hard experience:
 
   * the ego is tagged role_name='hero'. Large maps stream terrain around the hero and
     actors outside the streamed area go dormant; attaching a sensor to a dormant one
@@ -46,7 +46,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from paths import REPO, MAP, CAPTURES, OUT, MODELS  # noqa: E402,F401
 
-FIXED_DT = 0.05  # 20 Hz, PROTOCOL section 1
+FIXED_DT = 0.05  # 20 Hz, CLAUDE.md section 1
 MPH = 0.44704  # mph -> m/s
 FT = 3.280839895  # m -> ft
 HAZARD_MPH = 25.0
@@ -577,7 +577,7 @@ def write(job: str, payload: dict) -> None:
 
 # What each scenario's driver actually asks site_transform for, in metres, and whether it
 # needs pavement beside the road. READ FROM HERE by the drivers rather than retyped, and
-# checked by flattest_site rather than assumed: PROTOCOL section 12 used to quote 310 ft,
+# checked by flattest_site rather than assumed: CLAUDE.md section 12 used to quote 310 ft,
 # which was computed from the pre-A12 a_max and was wrong by a factor of three by the time
 # anyone noticed. A14.
 SCENARIO_SITE = {
@@ -965,7 +965,7 @@ def job_braking() -> dict:
         "t_lat_s_worst": round(max(lats), 3) if lats else None,
         "note": (
             "a_max is the WORST average over the stop, not the median. Use the worst. "
-            "a_avg_g is read from the stop TIME (PROTOCOL section 3's definition, "
+            "a_avg_g is read from the stop TIME (CLAUDE.md section 3's definition, "
             "unchanged); a_from_dist_g reads the same stop from the distance and exists "
             "only to prove the two agree. A run where they do not is a FAIL."),
         "substepping": "16 x %.5f s, set explicitly in connect() (D-1)" % (FIXED_DT / 16),
@@ -1024,7 +1024,7 @@ D_MARGIN_M = 1.0  # required standoff at rest. A declared design value, not a fi
 
 
 def r_req_m(v_mps: float, a_max_g: float, t_lat_s: float) -> float:
-    """PROTOCOL section 3. Every term measured except the declared standoff."""
+    """CLAUDE.md section 3. Every term measured except the declared standoff."""
     a = a_max_g * 9.81
     return v_mps * (t_lat_s + FIXED_DT) + v_mps * v_mps / (2.0 * a) + D_MARGIN_M
 
@@ -1034,7 +1034,7 @@ def _approach(world, site, speed_mph, trigger_m, gap_m=140.0):
 
     The oracle reads range from simulator ground truth, so it is a perfect perceiver.
     Braking latches once commanded, which is what the closed-form standoff bound in
-    PROTOCOL section 7 assumes.
+    CLAUDE.md section 7 assumes.
     """
     carla = carla_module()
     target_v = speed_mph * MPH
@@ -1181,7 +1181,7 @@ def job_inbetween() -> dict:
     "dusk". Nothing has ever confirmed that a blend resembles rendered dusk. CARLA can
     render intermediate sun altitudes, so this compares the two at matched poses.
 
-    IMPORTANT: this is an IMAGE-space comparison, and PROTOCOL section 4 says the check
+    IMPORTANT: this is an IMAGE-space comparison, and CLAUDE.md section 4 says the check
     that counts is BEHAVIOURAL, because image fidelity is not the property that
     matters. An analytic fog model once scored R-squared 0.848 on images while driving a
     policy 23.8 times harder than the real condition. So a good score here proves
@@ -1261,7 +1261,7 @@ def job_inbetween() -> dict:
         "worst_normalised_error": worst,
         "note": (
             "IMAGE space only. The check that decides the study is behavioural and "
-            "waits for a policy (PROTOCOL section 4). A low number here is not "
+            "waits for a policy (CLAUDE.md section 4). A low number here is not "
             "evidence the family is valid; a high number is evidence it is not."
         ),
     }
@@ -1426,7 +1426,7 @@ def job_capture_check() -> dict:
     metres below the road on climbs, and one direction's captures were unusable.
 
     This is the IMAGE version of that gate. The one that finally matters compares the
-    POLICY OUTPUT at the same poses and waits for a policy; PROTOCOL section 8 calls
+    POLICY OUTPUT at the same poses and waits for a policy; CLAUDE.md section 8 calls
     that the capture check. A large mismatch here is disqualifying now, and a small one
     is not yet a pass.
     """
@@ -1529,13 +1529,13 @@ def job_capture_check() -> dict:
         "poses": rows,
         "note": (
             "Image space. The gate that decides compares POLICY OUTPUT at the same "
-            "poses and waits for a policy (PROTOCOL section 8). A large error here is "
+            "poses and waits for a policy (CLAUDE.md section 8). A large error here is "
             "disqualifying now; a small one is not yet a pass."
         ),
     }
 
 
-# The two regulatory lighting conditions that bound the certified axis (PROTOCOL 2).
+# The two regulatory lighting conditions that bound the certified axis (CLAUDE.md section 2).
 ENDPOINTS = [
     ("daylight", 60.0, "NONE"),
     ("darkness_lowbeam", -30.0, "LowBeam"),

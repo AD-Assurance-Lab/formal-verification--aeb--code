@@ -57,7 +57,7 @@ REGULATORY = [60.0, -30.0]
 
 
 def _cell_failed(runs) -> bool:
-    """PROTOCOL section 7's frozen closed-loop pass, applied to one sampled altitude.
+    """CLAUDE.md section 7's frozen closed-loop pass, applied to one sampled altitude.
 
     No contact and standoff at least d_margin. Prematurity is deliberately NOT here: it
     is a must-not-brake condition and belongs to property A (FINDINGS F9), and a search

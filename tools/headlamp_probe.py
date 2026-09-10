@@ -24,7 +24,7 @@ LowBeam is bright, HighBeam is in between or dimmer, and LowBeam|HighBeam is the
 of all, then every lamp state applies and the check's premise is what is wrong. If nothing
 moves between the states, the lamp state is not applying and A4 has recurred.
 
-Writes `results/carla/headlamp_probe.json`. Renders only; it drives nothing and decides
+Writes `headlamp_probe.json` into the map's results folder. Renders only; it drives nothing and decides
 nothing.
 """
 
