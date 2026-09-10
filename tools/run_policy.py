@@ -503,7 +503,7 @@ def main() -> int:
     out = {"scenario": args.scenario, "speed_mph": args.speed_mph,
            # The harness this cell ran under. D-11 makes data from a violating harness
            # unusable, which is checkable after the fact only if the cell says which
-           # harness it was (CARLA_DETERMINISM_PENDING.md item 5).
+           # harness it was (CLAUDE.md, the determinism work still owed).
            "determinism": J.determinism_provenance(world),
            "cells": {}}
     sig_records = []

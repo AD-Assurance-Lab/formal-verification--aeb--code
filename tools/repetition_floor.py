@@ -10,7 +10,7 @@ repetitions with Wilson intervals, which is the right instrument if the repetiti
 draws from a distribution. The sibling steering study's amendment A-4 says they are not:
 on a fully enforced harness a repetition is a REPRODUCIBILITY CHECK, and three is enough
 because rep-to-rep verdict disagreement was 0 of 48 section-pairs. That conflict is
-recorded in `CARLA_DETERMINISM_PENDING.md` and this repository has been following the
+recorded in `CLAUDE.md` and this repository has been following the
 ten-repetition reading while it stood.
 
 This measures the same thing here rather than importing the answer, because the sibling

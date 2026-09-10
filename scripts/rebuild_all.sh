@@ -152,7 +152,7 @@ if [ "$FROM" = "verifyA" ]; then
     # makes a plate verdict attributable to the plate.
     #
     # This queued only `none_plate` when the harness landed, which certifies an empty
-    # road and reads as a false-activation certificate. docs/STATE_OF_PLAY.md section 1
+    # road and reads as a false-activation certificate. CLAUDE.md records that
     # already records that exact substitution one level up -- property A on `none` is not
     # the standard's scenario -- and it was made again on the way down.
     if [ "$SCOPE" != "hazard" ] && [ -f "$REPO/results/captures/$CARLA_MAP_NAME/states_plate.json" ]; then

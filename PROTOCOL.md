@@ -6,7 +6,7 @@ Amendments section changes without a recorded amendment. Tagged `protocol-v1`.
 It exists because study logic in this lab has been lost twice, and because many
 sub-experiments will run before this one finishes. When a result and this file disagree
 about what the study is, **this file is right**. Findings go in `FINDINGS.md`, current
-belief goes in `docs/STATE_OF_PLAY.md`, and neither may quietly redefine the design.
+belief goes in `CLAUDE.md` (A18), and neither may quietly redefine the design.
 
 ---
 
@@ -905,3 +905,23 @@ to capture. With both halves in place the `lead` campaign captures −30° at **
 fresh server per knot on cost. That comparison was wrong in the same way: a fresh server
 also starts in daylight and would have needed the darkening step too, so it never bought
 anything ordering does not.
+
+### A18. The working notes are consolidated into `CLAUDE.md`
+
+**Documentation only. No measurement, no criterion and no procedure changes.** It is
+recorded as an amendment because the sentence it edits sits in the frozen part of this
+file, and the only sanctioned way to edit that is here.
+
+**What changed.** Section 0 said current belief goes in `docs/STATE_OF_PLAY.md`. Eleven
+working notes files, 1,891 lines, were rewritten in Simplified Technical English and
+consolidated into `CLAUDE.md`. One file is kept, `docs/ARXIV_NOTES.md`, for the paper
+repository. The originals are in `stale/notes_folded_into_claude_2026-09-10/` and in git
+history.
+
+So current belief now goes in `CLAUDE.md`, and live numbers come from
+`python -m study.status`, which reads the artifacts rather than any prose.
+
+**Why an amendment rather than a stub.** A rule that names a missing file fails in exactly
+the way a satisfied rule looks. This repository has written that down four times. Leaving
+`docs/STATE_OF_PLAY.md` as a redirect would keep section 0 literally true and make it
+misleading, which is the same defect wearing a better hat.

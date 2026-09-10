@@ -59,9 +59,11 @@ either result alone, and it is the reason to run this as a study rather than onl
 The steering study is the parent. Read, in this order:
 
 - `formal-verification--steering--code/CLAUDE.md`
-- `formal-verification--steering--code/docs/STATE_OF_PLAY.md`, sections 0, 0b, 0c
-- `formal-verification--steering--code/docs/TRAPS.md` and `docs/CONSTRAINTS.md`
+- `formal-verification--steering--code/REPRODUCING.md`
 - `lab--future-plans--docs/RESEARCH_DIRECTIONS.md`, entry A1
+
+That repository once had `docs/STATE_OF_PLAY.md`, `docs/TRAPS.md` and `docs/CONSTRAINTS.md`.
+None of them exists now. Its `CLAUDE.md` carries what they held.
 
 ## Risk
 
@@ -132,9 +134,10 @@ Interactive version: `docs/figures/dusk_gap.html`.
 | `PROTOCOL.md` | the study design, frozen. Start here |
 | `study/` | the lock, the status report, and recorded results |
 | `tools/` | everything runnable |
-| `docs/STATE_OF_PLAY.md` | **current belief and what is open.** Start here if you are picking this up |
+| `CLAUDE.md` | **current belief, the standing rules and every working note.** Start here if you are picking this up |
 | `docs/STUDY_REPORT.md` | **complete methodology and results.** Start here for the science |
-| `docs/` | paper outline, session notes, figures |
+| `docs/ARXIV_NOTES.md` | everything the paper repository needs |
+| `docs/` | the pre-registration and the figures |
 | `results/` | outputs. Large artefacts are git-ignored |
 | `stale/` | files on their way out, git-ignored. Inspect and delete |
 

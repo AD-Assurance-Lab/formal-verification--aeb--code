@@ -312,7 +312,7 @@ _LAST_WORLD = None
 def determinism_provenance(world=None) -> dict:
     """The harness a measurement ran under, recorded INTO the artifact.
 
-    `CARLA_DETERMINISM_PENDING.md` adoption item 5: D-11 says data captured under a
+    `CLAUDE.md`, the determinism work still owed: D-11 says data captured under a
     violating harness is not reusable, and that is enforceable after the fact only if the
     artifact says which harness produced it. Nothing in this repo recorded it, so every
     closed-loop number here was, strictly, unauditable -- the stage logs prove the

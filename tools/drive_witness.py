@@ -399,7 +399,7 @@ def main() -> int:
         "provenance": _prov,
         # D-11 is enforceable after the fact only if the artifact says which harness
         # produced it. Read from the running server and the installed package, not from
-        # a constant. CARLA_DETERMINISM_PENDING.md adoption item 5.
+        # a constant. CLAUDE.md, the determinism work still owed.
         "determinism": J.determinism_provenance(world),
         "illumination": illumination,
         "illumination_dense": illumination_dense,

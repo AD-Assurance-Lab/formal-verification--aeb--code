@@ -6,7 +6,7 @@ harness; every number below was measured on that harness and nothing is carried 
 
 Everything here is reproducible from a committed driver. `PROTOCOL.md` is the frozen
 design; where this report and that file disagree, the protocol is right. `FINDINGS.md` is
-the measured record, `docs/STATE_OF_PLAY.md` is current belief, `docs/QUEUE.md` is what
+the measured record, `CLAUDE.md` is current belief and holds what
 happens next.
 
 ---
@@ -427,7 +427,7 @@ illumination in a declared interval, where a driven run samples one.
   ground truth, and 24 of 26 exhibited witnesses sit at rendered knots rather than blends,
   so most falsifications do not rest on the family at all.
 - **No falsification baseline yet**, so the paper cannot yet say what the same failures
-  would have cost to find by searching (`docs/QUEUE.md` item 5).
+  would have cost to find by searching.
 
 ## 17. Defects found, and what caught them
 
@@ -455,7 +455,7 @@ whether the pipeline ran. Three of the last four are *labels* rather than measur
 a scope, a margin's sign, a scenario name — which is the harder class, because the numbers
 underneath are correct and nothing downstream ever disagrees with the label.
 
-The tenth is worth its own sentence, because it is a repeat. `docs/STATE_OF_PLAY.md`
+The tenth is worth its own sentence, because it is a repeat. `CLAUDE.md`
 section 1 already recorded that property A on the no-target control is *not* FMVSS 127's
 false-activation scenario and must never be described as one. The harness built to fix
 that then queued `none_plate` — the plate poses with the plate **removed** — which is the
