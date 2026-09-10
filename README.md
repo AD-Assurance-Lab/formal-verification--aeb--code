@@ -35,13 +35,48 @@ points, testing cannot find it and a proof can.
 The study ran end to end once, on a small map. That result is complete, tagged
 `town01-final`, and written up in `docs/STUDY_REPORT.md`. Read that for the science.
 
-The study moved to a large map for a while, because the small one has no stretch of road
-long enough for the standard's false-activation test. It has moved back, because the large
-map needs a bigger graphics card than this work now assumes.
+The study moved to a large map for a while. The small one has no stretch of road long
+enough for the standard's false-activation test. It has moved back, because the large map
+needs a bigger graphics card than this work now assumes.
 
 So everything is being measured again on the small map, from the camera frames up. Those
 frames predate a fix to the order they are captured in, and their dark end reads 11 times
 too bright. Run `python -m study.status` to see where that stands.
+
+## The large files are not in git
+
+Two things this study needs are too big for git and are on the lab's Hugging Face instead:
+
+> **`AD-Assurance-Lab/aeb-verification-captures`**
+
+| | |
+|---|---|
+| the camera frames | 66 frame sets, 1.4 GB |
+| the trained networks | 6 checkpoints |
+
+**Get them before you run anything that needs them:**
+
+```bash
+pip install huggingface_hub
+hf download AD-Assurance-Lab/aeb-verification-captures \
+    --repo-type dataset --local-dir /tmp/aeb-data
+cp -r /tmp/aeb-data/captures/Town01 results/captures/
+cp -r /tmp/aeb-data/models/Town01   results/models/
+```
+
+**Why they are not in git, and why it matters.** They are large and regenerable, so git
+ignores them. But regenerable is not the same as reproducible. The simulator does not render
+bit-identical frames from one run to the next. So recapturing gives slightly different
+frames, which give different networks, which give different certificates. Every certificate
+names its network by a hash, and those hashes are in the dataset's `MANIFEST.json`.
+
+So: **the study can always be re-run, and today's exact numbers can only be re-derived from
+these files.** If a hash does not match, the certificate and the network are not a pair and
+nothing may be concluded from them together.
+
+Training itself reproduces exactly. Four separate runs from these frames gave byte-identical
+checkpoints, so the networks can be rebuilt from the frames, and everything downstream from
+the networks. The chain only breaks if the frames are lost.
 
 ## Set up
 
@@ -70,9 +105,9 @@ ledger. It reads the artifacts rather than any prose, so it cannot flatter the s
 ## If your graphics card is smaller than the lab machine's
 
 Everything here was measured on a 32 GiB card. On a smaller one, read the section in
-`CLAUDE.md` before you plan any run. The short version: training and every check that needs
-no simulator run anywhere, verification runs one job at a time and its widest cases may not
-fit at all, and the large map probably will not run. The small map is the default now. `CARLA_MAP=Town12` reaches the
+`CLAUDE.md` before you plan any run. The short version. Training and every check that needs no simulator run anywhere.
+Verification runs one job at a time, and its widest cases may not fit at all. The large map
+probably will not run. The small map is the default now. `CARLA_MAP=Town12` reaches the
 large map's artifacts.
 
 ## With the simulator
@@ -128,7 +163,7 @@ pipeline: train, verify, score, report.
 | `study/` | the lock, the status report, the recorded ledger |
 | `tools/` | everything runnable |
 | `scripts/` | multi-stage runs, detached |
-| `results/` | outputs, scoped by map. Large files are git-ignored |
+| `results/` | outputs, scoped by map. Frames and networks are on Hugging Face, see above |
 | `stale/` | on the way out, git-ignored. Never point at anything in here |
 
 ## House rules

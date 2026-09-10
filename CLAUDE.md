@@ -527,6 +527,23 @@ settles (A16, A17, F28).
 - **Never trade experimental quality for speed.** No processor fallback, no lowered
   simulator quality, no cut training. Warn Zach before a run longer than 1 hour.
 
+## The frames and the networks live on Hugging Face
+
+`AD-Assurance-Lab/aeb-verification-captures`, a dataset repository. Git ignores them because
+they are large: 66 frame sets at 1.4 GB, and 6 checkpoints.
+
+The README says how to fetch them. What matters here is why they are kept at all, when the
+tools that make them are committed. **Regenerable is not reproducible.** The simulator does
+not render bit-identical frames twice, so recapturing gives different frames, different
+networks and different certificates. Every certificate names its network by hash and the
+dataset's `MANIFEST.json` carries those hashes.
+
+Training reproduces exactly from a given frame set, so the chain from frames to certificates
+can always be rebuilt. It breaks only if the frames are lost.
+
+If a certificate's `model_sha256` does not match the checkpoint you hold, they are not a
+pair. Do not conclude anything from them together, and do not "fix" it by rerunning one half.
+
 ## Every path is named once, and carries the map
 
 `tools/paths.py` names the frames folder, the results folder and the models folder. It
