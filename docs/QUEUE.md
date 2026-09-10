@@ -55,9 +55,14 @@ would change and why it is not being done unilaterally.
 
 | # | item | why |
 |---|---|---|
-| 17 | Scope `results/carla/` by map, as `results/captures/` now is | F26's cause, twice. An artifact from the old study sits under the exact name the new one looks for. At 03:00 on 2026-09-10, 157 of 179 files there were still Town01's, and `--refine` was about to read ten Town01 gate artifacts as current. Moved aside by hand; the structural fix is not done |
+| 17 | **DONE 2026-09-10.** Scope `results/carla/` and `results/models/` by map, as `results/captures/` already was | F26's cause, twice. `tools/paths.py` is now the one definition of all three, and it imports only the standard library so the two simulator-free modules can share it instead of re-typing the path. The Town01 leftovers are under `results/carla/Town01/`. What is still open is smaller and named in `docs/NEXT_STEPS.md`: no artifact records the map INSIDE the file, so the old files had to be sorted by write time |
 | 18 | Re-measure F27's family fidelity on the CLEAN captures | `family_fidelity_lead.json` was computed on the contaminated pre-A16 captures. The zero-span sub-interval at the darkness end may not survive: its endpoints were 0.0000 apart when both were contaminated, and the dark end has since changed by 9x |
 | 19 | Dispose the false-activation endpoint failure | `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md`. Every arm fails FMVSS 127's own false-activation test at a regulatory condition on Town12, where all nine passed on Town01. A bug until a disposition says otherwise, and it did not stop the pipeline |
+
+**Item 20, closed the day it opened.** F29: training was not reproducible, so no
+measurement downstream of it was either. F30 closed it -- four torch settings, 2.9% slower,
+four trainings byte-identical. `scripts/gate_repair_loop.sh` retrains after a split again,
+guarded by `tools/check_arms_unmoved.py`, which stops the loop if the fixed-knot arms move.
 
 **Also open, and not a study's to decide:** the D-7 amendment request in
 `docs/D7_AMENDMENT_REQUEST.md`. The `carla-determinism` package is hash-locked and lab-wide

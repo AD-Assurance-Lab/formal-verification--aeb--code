@@ -12,44 +12,39 @@ Live state in the protocol's own terms: `python -m study.status`.
 
 ---
 
-## Where the study is, 2026-09-10 09:00 — BLOCKED ON F29
+## Where the study is, 2026-09-10 — F29 is closed, the gates are next
 
-**The Town12 rebuild reached the M5 gates and stopped there, and the reason it stopped is
-not the gates.** It is F29: **training is not reproducible.** Two consecutive trainings of
-`P_pts` at the same seed on byte-identical frames differ in all ten tensors, 77.1% of
-parameters, 133% relative in a head weight. Everything downstream of training — endpoints,
-gates, certificates, drives — is measured against a network that the next run will not
-reproduce.
+**The block is gone.** F29 said training was not reproducible, and everything the study
+measures sits downstream of training. F30 closed it: four torch settings, 2.9% slower, and
+four separate trainings of all three arms now come out byte-identical, checkpoint file
+included. `train_policies.py` records the weight hash in its own report, so the check is a
+file comparison from here on and not a GPU run.
+
+The second blocker went with it. All three artifact directories are scoped by map through
+`tools/paths.py`, which is the single definition and imports nothing but the standard
+library, so the two simulator-free modules share it rather than re-typing the path.
 
 ### Do these in this order
 
-1. **F29. Make training reproducible, or measure what it costs not to be.**
-   `train_policies` seeds torch, random and numpy and sets none of
-   `use_deterministic_algorithms`, `cudnn.deterministic`, `cudnn.benchmark = False`,
-   `CUBLAS_WORKSPACE_CONFIG`. Turn them on, retrain twice, and check the hashes match.
-   Until this closes, **no endpoint verdict, gate result or certificate from this rebuild
-   should be quoted**, and `scripts/gate_repair_loop.sh` must not be run — it splits the
-   axis on gates measured against networks that change between rounds.
+1. **Re-measure the gates**, `scripts/gate_repair_loop.sh`. About 70 minutes per round of
+   twelve, plus a recapture for any round that splits. The loop retrains after a split
+   again, which it had stopped doing while the networks moved; `check_arms_unmoved.py`
+   stops it if the fixed-knot arms ever move, because that is F29 returning.
+2. **Then** verification, the verdicts committed BY HAND to git, then the drives.
+3. **Then** the false-activation contradiction,
+   `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md`. It is unblocked, not answered:
+   its numbers were measured against networks that cannot be reproduced, so it has to be
+   measured again rather than reasoned about.
 
-2. **Queue item 17: scope the results directories by map.** Four near-misses in one night,
-   each one a stale Town01 artifact sitting under exactly the name a Town12 tool asks for:
-   the captures (F26, both regulatory endpoints), `results/carla/` (157 of 179 files, about
-   to be read by `--refine`), the gate artifacts (10 of 12), and `results/models/` (54
-   checkpoints — one of which was hashed twice and nearly closed F29 with the wrong
-   answer). Three were caught by luck or by a return code.
+### What is withdrawn
 
-3. **Then** re-run the gates on reproducible networks, and only then decide whether the
-   dark-end in-between failures are a property of the disturbance family or of the
-   optimiser.
+Every endpoint verdict, gate result and certificate from the overnight rebuild of
+2026-09-10 was measured against a network the next run would not reproduce. They are
+withdrawn, and none of them is evidence about the arms. That includes the pre-registration
+line that all three arms pass all three regulatory lighting conditions 10/10, which now has
+to be measured again.
 
-4. **Then** the two open contradictions can actually be evaluated:
-   `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md` and
-   `..._training_nondeterminism.md`.
-
-### What the rebuild did establish, and what is safe to keep
-
-Solid, and independent of F29 because they are measurements of the instrument rather than
-of a trained network:
+### What survives, because it measures the instrument and not a trained network
 
 - **A14** Town12, on A3's own probe. Town01 had zero sites meeting the plate scenario's own
   320 m requirement; the study site now has 308 m of margin instead of thirteen.
@@ -62,10 +57,11 @@ of a trained network:
   group the agreement is 0.0004 where across groups it read 32.5%.
 - **F25** Town12's axis has no uncovered sliver, at the photometric tolerance.
 - The primitives, the oracles and the contact detector all pass on Town12.
-
-Held from the pre-registration: all three arms pass all three regulatory lighting
-conditions 10/10 on both hazard scenarios — **but see F29 before believing any single
-run of it.**
+- The illumination axis itself: 30 knots and 29 sub-intervals, every one captured in all
+  six scenarios. The five splits that took it from 25 knots were CHOSEN from gates measured
+  against the old networks, so the choice is not evidence. The knots are rendered interior
+  endpoints either way, which is what section 4's repair asks for, so the axis is kept and
+  the gates are measured on it fresh.
 
 ---
 
