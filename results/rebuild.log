@@ -123,3 +123,45 @@ Terminated
 [2026-09-10 15:55:03]     bash scripts/rebuild_all.sh verifyA      # GPU, concurrently
 [2026-09-10 15:55:03] A verdict is a prediction only if it was written down first;
 [2026-09-10 15:55:03] tools/drive_witness.py refuses to run against an uncommitted one.
+[2026-09-10 15:56:02] witness scope: all (lead ped plate none_plate)
+[2026-09-10 15:56:02] M7 midpoint  P_pts/lead
+[2026-09-10 15:56:02] M7 for P_pts/lead midpoint: 3 repetitions, one server each
+[2026-09-10 15:56:02] restart before repetition 1 of 3
+[2026-09-10 15:56:56] repetition 1 done
+[2026-09-10 15:56:56] restart before repetition 2 of 3
+[2026-09-10 15:57:56] repetition 2 done
+[2026-09-10 15:57:56] restart before repetition 3 of 3
+[2026-09-10 15:58:57] repetition 3 done
+[2026-09-10 15:58:57] merging
+  witness_P_pts_lead: 3 repetitions, agreement 10/13, 0 void
+  wrote results/carla/Town01/witness_P_pts_lead.json
+[2026-09-10 15:58:57] merge rc=0
+[2026-09-10 15:58:57] M7 midpoint  P_pts/ped
+[2026-09-10 15:58:57] M7 for P_pts/ped midpoint: 3 repetitions, one server each
+[2026-09-10 15:58:57] restart before repetition 1 of 3
+[2026-09-10 16:00:02] repetition 1 done
+[2026-09-10 16:00:02] restart before repetition 2 of 3
+[2026-09-10 16:01:07] repetition 2 done
+[2026-09-10 16:01:07] restart before repetition 3 of 3
+[2026-09-10 16:02:13] repetition 3 done
+[2026-09-10 16:02:13] merging
+  witness_P_pts_ped: 3 repetitions, agreement 4/13, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped.json
+[2026-09-10 16:02:13] merge rc=0
+[2026-09-10 16:02:13] M7 midpoint  P_pts/plate
+[2026-09-10 16:02:13] M7 for P_pts/plate midpoint: 3 repetitions, one server each
+[2026-09-10 16:02:13] restart before repetition 1 of 3
+[2026-09-10 16:02:36] repetition 1 FAILED rc=1. Tail of results/witness_P_pts_plate_rep1.log:
+no verdicts at /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/verify_P_pts_plate_A.json; run tools/verify.py first
+[2026-09-10 16:02:36] STOPPING. A merge over a missing repetition is a smaller experiment reported
+[2026-09-10 16:02:36] as the one that was asked for.
+[2026-09-10 16:02:36] M7 midpoint  P_pts/none_plate
+[2026-09-10 16:02:36] M7 for P_pts/none_plate midpoint: 3 repetitions, one server each
+[2026-09-10 16:02:36] restart before repetition 1 of 3
+[2026-09-10 16:02:53] repetition 1 FAILED rc=1. Tail of results/witness_P_pts_none_plate_rep1.log:
+no verdicts at /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/verify_P_pts_none_plate_A.json; run tools/verify.py first
+[2026-09-10 16:02:53] STOPPING. A merge over a missing repetition is a smaller experiment reported
+[2026-09-10 16:02:53] as the one that was asked for.
+[2026-09-10 16:02:53] M7 midpoint  P_cont/lead
+[2026-09-10 16:02:53] M7 for P_cont/lead midpoint: 3 repetitions, one server each
+[2026-09-10 16:02:53] restart before repetition 1 of 3

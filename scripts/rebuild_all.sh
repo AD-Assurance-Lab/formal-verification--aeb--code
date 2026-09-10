@@ -237,7 +237,7 @@ if [ "$FROM" = "witness" ]; then
     # none_plate is the CONTROL: the identical approach with no steel on the road. It is
     # in the default scope because a plate result without it is not attributable to the
     # plate, and leaving the control out of "all" is how a control stops getting run.
-    all)    WSCEN="lead ped plate none_plate" ;;
+    all)    WSCEN=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(' '.join(J.WITNESS_SCENARIOS))") ;;   # the MAP decides (A20)
     hazard) WSCEN="lead ped" ;;
     plate)  WSCEN="plate none_plate" ;;
     none_plate) WSCEN="none_plate" ;;

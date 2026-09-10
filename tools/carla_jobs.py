@@ -633,6 +633,12 @@ CAPTURE_SCENARIOS = tuple(
     for x in (s, next(c for c, b in CONTROL_OF.items() if b == s))
 )
 
+# What the DRIVING stages cover: the scenarios in scope, plus the plate's no-target control
+# when the plate is in scope, because a plate result is not attributable to the plate
+# without it. Derived for the same reason CAPTURE_SCENARIOS is: the list was written out in
+# two more places, and both of them still named the plate on a map that cannot host it.
+WITNESS_SCENARIOS = tuple(IN_SCOPE) + (("none_plate",) if "plate" in IN_SCOPE else ())
+
 SITE_UNION = {
     "need_m": max(SCENARIO_SITE[s]["need_m"] for s in IN_SCOPE),
     "sidewalk_both": any(SCENARIO_SITE[s]["sidewalk_both"] for s in IN_SCOPE),
