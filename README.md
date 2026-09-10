@@ -35,9 +35,13 @@ points, testing cannot find it and a proof can.
 The study ran end to end once, on a small map. That result is complete, tagged
 `town01-final`, and written up in `docs/STUDY_REPORT.md`. Read that for the science.
 
-The study then moved to a large map, because the small one had no stretch of road long
-enough for the standard's false-activation test. **That rebuild is not finished.** Run
-`python -m study.status` to see where it is.
+The study moved to a large map for a while, because the small one has no stretch of road
+long enough for the standard's false-activation test. It has moved back, because the large
+map needs a bigger graphics card than this work now assumes.
+
+So everything is being measured again on the small map, from the camera frames up. Those
+frames predate a fix to the order they are captured in, and their dark end reads 11 times
+too bright. Run `python -m study.status` to see where that stands.
 
 ## Set up
 
@@ -68,8 +72,8 @@ ledger. It reads the artifacts rather than any prose, so it cannot flatter the s
 Everything here was measured on a 32 GiB card. On a smaller one, read the section in
 `CLAUDE.md` before you plan any run. The short version: training and every check that needs
 no simulator run anywhere, verification runs one job at a time and its widest cases may not
-fit at all, and the large map probably will not run. Use `CARLA_MAP=Town01`, which is the
-map the completed study used.
+fit at all, and the large map probably will not run. The small map is the default now. `CARLA_MAP=Town12` reaches the
+large map's artifacts.
 
 ## With the simulator
 

@@ -368,22 +368,23 @@ The rule that a contradicted expectation is a fault until disposed is **unchange
 
 ## Where the study is
 
-The training now repeats, which was the block on everything else. Next: measure the
-behavioural check on the lighting range with `scripts/gate_repair_loop.sh`. Then verify,
-write the verdicts to git by hand, then drive with `scripts/overnight_after_verdicts.sh`.
+**The map is the small one again**, because an 8 GiB graphics card cannot run the large
+one. Everything is being measured again on it, from the camera frames up. That map's frames
+predate the capture-order fix, and its dark endpoint reads 11.2 times too bright (F32,
+A19).
 
-**The study ran end to end once, on a small map.** That result is complete and tagged
-`town01-final`, and `docs/STUDY_REPORT.md` describes it. The study then moved to a large
-map, because the small one had no site long enough for the standard's false-activation
-test. That rebuild is not finished.
+Running now, in order: the primitives, the lighting range, the frames, training, the two
+checks, then the certificates. Then the drives.
 
-**Results from the rebuild before 10 September 2026 are withdrawn.** They were measured
-against networks that could not be trained again. Recover them with
-`git show a28f91e^:<path>` if a disposition ever needs them.
+**The false-activation scenario does not fit on this map.** It needs 320 m of junction-free
+lane and the best site is 307 m. Cells 5 and 6 are 13 m short of the standard's geometry.
+Say so beside any number from them, or run them on a machine that fits the large map.
 
-**One question is open.** Every policy brakes for the steel plate at one or more of the
-three lighting conditions the standard tests. On the small map all nine tests passed.
-Measure it again on networks that repeat before you reason about it (F29, F30).
+**The large map's artifacts are still reachable** with `CARLA_MAP=Town12`. Its results are
+withdrawn: they were measured against networks that could not be trained again. Its camera
+frames now read as stale, because the capture stamp learned to see capture order and they
+predate the field. They were captured correctly. Recapture them if that map is picked up
+again.
 
 ---
 
