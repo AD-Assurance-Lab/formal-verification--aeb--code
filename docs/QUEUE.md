@@ -41,6 +41,21 @@ branch-and-bound witness search still samples three concrete points per domain; 
 `a_max` is still read from stop TIME while `r_req = v²/2a` composes with distance, a 3.9%
 difference.
 
+**Items 13-16, from the A14 rebuild's own findings.** None is started; each names what it
+would change and why it is not being done unilaterally.
+
+| # | item | why it is not done yet |
+|---|---|---|
+| 13 | Make the bisection tolerance relative to endpoint distance, or refuse a sub-interval below a span floor (F27) | Either changes what the axis IS, so it needs an amendment. Both maps produced a sub-interval spanning nothing that certifies at 1.9x in every arm |
+| 14 | Report the span beside every verdict, everywhere a count appears (F27) | Small and safe, and it touches `record_cells.py`, which the running rebuild invokes. Queued behind the rebuild rather than edited underneath it |
+| 15 | Render `blend_error` and endpoint distance at the SAME poses (F27) | Needs the simulator. The ratio is the number the family's fidelity claim wants and a first pass at it was wrong; it is queued rather than guessed |
+| 16 | Drop the Wilson interval from `stats.py:rate()` (A13) | Same reason as 14: every rebuild stage is a fresh process importing it, and one rebuild out of two scorers is the drift this repo has lost study logic to twice |
+
+**Also open, and not a study's to decide:** the D-7 amendment request in
+`docs/D7_AMENDMENT_REQUEST.md`. The `carla-determinism` package is hash-locked and lab-wide
+and currently prints "closed-loop numbers are still RATES over >=10 repetitions" on every
+launch of a study that A13 governs.
+
 **Item 12, new and ahead of the rest of 8.** F23: `cloudiness = 10.0` leaves a moving
 cloud layer, so scene brightness at the horizon drifts 3.9% with elapsed simulated time
 and never settles. It is the study's independent variable drifting, it is inside every
