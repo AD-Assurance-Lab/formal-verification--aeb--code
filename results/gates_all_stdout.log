@@ -1,3 +1,25 @@
 [2026-09-10 02:55:08] START gate_capture_P_pts_lead
 [2026-09-10 02:55:56] DONE  gate_capture_P_pts_lead rc=0
 [2026-09-10 02:55:56] START gate_inbetween_P_pts_lead
+[2026-09-10 03:04:48] DONE  gate_inbetween_P_pts_lead rc=1
+[2026-09-10 03:04:48] START gate_capture_P_pts_ped
+[2026-09-10 03:05:37] DONE  gate_capture_P_pts_ped rc=0
+[2026-09-10 03:05:37] START gate_inbetween_P_pts_ped
+[2026-09-10 03:14:50] DONE  gate_inbetween_P_pts_ped rc=1
+[2026-09-10 03:14:50] START gate_capture_P_cont_lead
+[2026-09-10 03:15:39] DONE  gate_capture_P_cont_lead rc=0
+[2026-09-10 03:15:39] START gate_inbetween_P_cont_lead
+[2026-09-10 03:24:45] DONE  gate_inbetween_P_cont_lead rc=0
+[2026-09-10 03:24:45] START gate_capture_P_cont_ped
+[2026-09-10 03:25:34] DONE  gate_capture_P_cont_ped rc=0
+[2026-09-10 03:25:34] START gate_inbetween_P_cont_ped
+[2026-09-10 03:34:56] DONE  gate_inbetween_P_cont_ped rc=1
+[2026-09-10 03:34:56] START gate_capture_P_pts3_lead
+[2026-09-10 03:35:45] DONE  gate_capture_P_pts3_lead rc=0
+[2026-09-10 03:35:45] START gate_inbetween_P_pts3_lead
+[2026-09-10 03:44:56] DONE  gate_inbetween_P_pts3_lead rc=1
+[2026-09-10 03:44:56] START gate_capture_P_pts3_ped
+[2026-09-10 03:45:44] DONE  gate_capture_P_pts3_ped rc=0
+[2026-09-10 03:45:44] START gate_inbetween_P_pts3_ped
+[2026-09-10 03:54:53] DONE  gate_inbetween_P_pts3_ped rc=1
+[2026-09-10 03:55:00] ALL GATES DONE. failed: gate_inbetween_P_pts_lead gate_inbetween_P_pts_ped gate_inbetween_P_cont_ped gate_inbetween_P_pts3_lead gate_inbetween_P_pts3_ped
