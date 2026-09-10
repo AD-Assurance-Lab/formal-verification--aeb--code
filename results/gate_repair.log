@@ -8,3 +8,5 @@
 [2026-09-10 13:08:29]   gate_capture_P_cont_ped rc=0
 [2026-09-10 13:22:10]   gate_inbetween_P_cont_ped rc=1
 [2026-09-10 13:22:59]   gate_capture_P_pts3_lead rc=0
+[2026-09-10 13:36:11]   gate_inbetween_P_pts3_lead rc=0
+[2026-09-10 13:37:01]   gate_capture_P_pts3_ped rc=0

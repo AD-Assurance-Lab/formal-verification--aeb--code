@@ -64,6 +64,14 @@ python tools/make_figure.py          # rebuild the paper's figure from the resul
 Start with `study.status`. It prints the milestones, the safety numbers and the six-cell
 ledger. It reads the artifacts rather than any prose, so it cannot flatter the study.
 
+## If your graphics card is smaller than the lab machine's
+
+Everything here was measured on a 32 GiB card. On a smaller one, read the section in
+`CLAUDE.md` before you plan any run. The short version: training and every check that needs
+no simulator run anywhere, verification runs one job at a time and its widest cases may not
+fit at all, and the large map probably will not run. Use `CARLA_MAP=Town01`, which is the
+map the completed study used.
+
 ## With the simulator
 
 ```bash

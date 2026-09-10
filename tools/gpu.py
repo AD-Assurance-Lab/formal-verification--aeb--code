@@ -24,6 +24,10 @@ wrong in BOTH directions:
     dev = require_cuda()                    # waits, then insists
     dev = require_cuda(allow_cpu=True)      # for tools that genuinely do not need it
     dev = require_cuda(tries=1, wait_s=0)   # nothing racing CARLA; fail fast
+
+`verify_concurrency()` answers the other question a smaller card asks: how many bound
+computations may share it. That number was a constant set for the lab's 32 GiB card, which
+is wrong on any other card and wrong in the expensive direction.
 """
 import time
 
@@ -61,3 +65,39 @@ def require_cuda(tries=12, wait_s=10.0, allow_cpu=False, verbose=True):
         "  If the card is present but every kernel fails, the torch build does not match "
         "its compute capability -- check torch.cuda.get_arch_list() against "
         "torch.cuda.get_device_capability(), and rebuild with scripts/bootstrap_env.sh.")
+
+
+# Measured peak per bound computation, in GiB. It is not uniform: between 3.3 and 8.3
+# depending on the policy and how much branching a sub-interval needs. The safe count comes
+# from the WORST case, because the worst case is what runs out of memory.
+VERIFY_PEAK_GIB = 8.3
+# The simulator holds this much while it is up. Verification runs with it stopped, so this
+# is here to explain why a card that fits one does not fit both.
+CARLA_GIB = 10.5
+
+
+def verify_concurrency(default_if_unknown=1, reserve_gib=2.0):
+    """How many bound computations fit on THIS card, from its real memory.
+
+    This was the constant 3, set when the only card was 32 GiB. On a 12 GiB card that
+    silently asks for 24.9 GiB of peak and dies part way through a stage, after hours. The
+    number is now read from the device.
+
+    Returns at least 1. If one does not fit, it still returns 1 and prints why: a run that
+    cannot fit is a fact about the card, and refusing to start is not this function's call.
+    """
+    try:
+        import torch
+        if not torch.cuda.is_available():
+            return default_if_unknown
+        total = torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
+    except Exception:
+        return default_if_unknown
+    usable = total - reserve_gib
+    n = int(usable // VERIFY_PEAK_GIB)
+    if n < 1:
+        print(f"  NOTE: this card has {total:.1f} GiB. One bound computation peaks at "
+              f"{VERIFY_PEAK_GIB} GiB, so the widest sub-intervals may not fit at all. "
+              f"Running one at a time.")
+        return 1
+    return n

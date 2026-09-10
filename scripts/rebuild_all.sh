@@ -43,11 +43,15 @@ INPUT_W=128
 INPUT_H=96
 SEED=${SEED:-0}
 POLICIES="P_pts P_cont P_pts3"
-# How many bound computations share the card. Peak use is NOT uniform -- measured between
-# 3.3 and 8.3 GiB depending on the policy and how much branching a sub-interval needs --
-# so the safe count is set by the worst case rather than the average: three at 8.3 GiB
-# fit in 31.35 with room, four do not reliably.
-VERIFY_CONC=${VERIFY_CONC:-3}
+# How many bound computations share the card. Peak use is NOT uniform: measured between
+# 3.3 and 8.3 GiB depending on the policy and how much branching a sub-interval needs. The
+# safe count comes from the worst case, because the worst case is what runs out of memory.
+#
+# This was the constant 3, correct for the 32 GiB card it was written on and wrong on any
+# other. It is now read from the device, so a smaller card gets a smaller number instead of
+# dying part way through a stage after hours. Override it if you know better.
+VERIFY_CONC=${VERIFY_CONC:-$("$REPO/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import gpu;print(gpu.verify_concurrency())" 2>/dev/null || echo 1)}
+say_conc() { echo "  verification concurrency: $VERIFY_CONC"; }
 # Fragmentation, not total size, is what actually kills these: the allocator reported
 # 833 MiB "reserved but unallocated" while failing a 954 MiB request.
 export PYTORCH_CUDA_ALLOC_CONF=${PYTORCH_CUDA_ALLOC_CONF:-expandable_segments:True}
@@ -74,7 +78,7 @@ fresh_server() {
 }
 
 stop_server() {
-  # Verification needs no simulator, and CARLA holds about 10.4 GiB of the card's 31.35.
+  # Verification needs no simulator, and CARLA holds about 10.5 GiB while it is up.
   #
   # WAIT FOR THE PROCESS, NOT THE PORT. The first version of this function polled the
   # listening socket, and CARLA closes its socket on SIGTERM without exiting: the port
@@ -136,7 +140,7 @@ if [ "$FROM" = "verifyA" ]; then
   # so this is the stage to run alongside the drives.
   # The four jobs run CONCURRENTLY. They share nothing -- no simulator, no output file,
   # no ordering -- and alpha-CROWN on a 310k-parameter network at batch 1 leaves most of
-  # a 32 GB card idle, so running them in series turns 1 hour of GPU into 4. Each still
+  # a large card idle, so running them in series turns 1 hour of GPU into 4. Each still
   # writes its own log and its own artifact; the wait collects the exit codes.
   stop_server
   say "verifyA scope: $SCOPE"

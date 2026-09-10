@@ -440,27 +440,29 @@ settles (A16, A17, F28).
 
 ## Rules that protect the result
 
-- **Write verification verdicts to git before the matching drive.** That is what makes a
-  verdict a prediction rather than a description. In the parent study, four criteria scored
-  14/14, 7/8, 8/8 and 10/10 when the answer was known, then 2/6, 3/7, 6/10 and 2/4 blind.
-- **Repetitions that disagree make the cell void.** That is a fault until you prove
-  otherwise, and it is never a reason to run more repetitions. More repetitions turn a fault
-  you could have found into a plausible failure rate, and lose it.
-- **Three repetitions need the restart harness**, `scripts/drive_witness_reps.sh`. A loop
-  inside one process is not that harness and keeps ten. That is why `carla_jobs.py` carries
-  two constants.
 - **A result that contradicts a written expectation is a fault until you prove otherwise.**
-  Do not write it up as a finding until a disposition lists the causes you ruled out.
-- **Keep a known-bad control in every experiment.** A model that must fail the conditions it
-  never saw is what catches faults in the specification itself.
+  Do not write it up as a finding until a disposition lists the causes you ruled out. This
+  is the rule that has caught the most real defects in this study.
 - **Train, test and verify over the same disturbance.** If they disagree about it, the
   comparison means nothing.
-- **Read contact from geometry, never from the collision sensor.**
+- **Read contact from geometry, never from the collision sensor.** A car driven into a
+  stationary car at 43 mph ended 8.2 ft inside a body whose contact distance is 19.9 ft.
+  The sensor reported nothing.
 - **Certify against the closed-loop tolerance, not a per-frame corridor.** In the steering
   study the per-frame corridor was about 3.4 times too permissive, and a vehicle left the
   road with every frame inside it.
 - **Never trade experimental quality for speed.** No processor fallback, no lowered
   simulator quality, no cut training. Warn Zach before a run longer than 1 hour.
+
+### Three rules the code still enforces, so you will meet them
+
+They are part of the frozen design in section 8 and section 1, and they are checked in
+code. They are listed here so a refusal is not a surprise, not to argue for them.
+
+- `tools/drive_witness.py` refuses to drive against a verification verdict that is not
+  committed to git. `python -m study.ledger --check-order` checks that ordering afterwards.
+- A cell whose repetitions disagree is recorded as void rather than as a rate.
+- Every experiment carries a control that is expected to fail.
 
 ## Every path is named once, and carries the map
 
@@ -509,6 +511,43 @@ it. It is not production quality. Try things. Do not leave the wreckage behind.
 - `tools/headlamp_probe.py` and `tools/choose_input_size.py` are kept although nothing calls
   them, and the hygiene report flags them. They are how anyone would check the headlamp
   beams and the network input size again.
+
+## If your graphics card is smaller than the lab machine's
+
+Everything measured here ran on a 32 GiB card. Two numbers decide what fits, and both are
+measured rather than guessed.
+
+| what | needs |
+|---|---|
+| the simulator, large map, at Epic quality | about 7.4 GiB, and it leaks to about 10.5 GiB over a long session |
+| one bound computation | 3.3 to 8.3 GiB, depending on the policy and how much the sub-interval branches |
+
+They never need to fit at the same time. Verification runs with the simulator stopped, and
+the pipeline stops it for you.
+
+**On an 8 GiB card**, one bound computation at its worst case does not fit. The pipeline now
+reads the card and runs them one at a time, and says so. The widest sub-intervals may still
+run out of memory. That is a fact about the card, not a fault in the run. Two honest
+responses: verify the narrow sub-intervals and say which ones you could not reach, or borrow
+the big machine for the verification stage only.
+
+**The map is the harder problem.** The study moved off large maps once already. A 12 GiB
+card ran a large map at under 0.6 steps per second, against 720 for a small one (A3). It
+moved back only when a 32 GiB card held 26.5 steps per second (A14). An 8 GiB card is below
+the card that failed the first time.
+
+So on a small card, expect to work on the small map, `CARLA_MAP=Town01`, which is what that
+variable exists for. The complete study is on that map anyway, at the tag `town01-final`.
+Everything except the false-activation test fits there. That scenario needs 320 m of
+junction-free lane and the small map has none, which is the whole reason for the move.
+
+**What does not care about the card.** Training takes about 75 seconds for all three
+policies. Every check that needs no simulator runs anywhere, including the lighting range
+measurement and the whole of `study/`.
+
+**Do not lower the simulator quality to make something fit.** Below Epic the rendering
+measured far worse. Manual exposure lives inside the post-process chain, so turning that off
+measured about 2000 times worse. A run that does not fit is a run that does not fit.
 
 ## The simulator is shared
 
