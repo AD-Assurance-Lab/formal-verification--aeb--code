@@ -1,17 +1,17 @@
-lead: 18 knots (-30.0 to +60.0 deg), 104 poses each, range 60.0 to 2.4 m
+lead: 21 knots (-30.0 to +60.0 deg), 104 poses each, range 60.0 to 2.4 m
   pose pairing: exact
-  image change from -30.0 to +60.0 deg at mid-approach: 113.5 / 255
+  image change from -30.0 to +60.0 deg at mid-approach: 84.0 / 255
 
-ped: 18 knots (-30.0 to +60.0 deg), 104 poses each, range 59.8 to 2.3 m
+ped: 21 knots (-30.0 to +60.0 deg), 104 poses each, range 59.8 to 2.3 m
   pose pairing: exact
-  image change from -30.0 to +60.0 deg at mid-approach: 112.4 / 255
+  image change from -30.0 to +60.0 deg at mid-approach: 87.9 / 255
 
-none: 18 knots (-30.0 to +60.0 deg), 104 poses each, range 60.0 to 2.4 m
+none: 21 knots (-30.0 to +60.0 deg), 104 poses each, range 60.0 to 2.4 m
   pose pairing: exact
-  image change from -30.0 to +60.0 deg at mid-approach: 113.5 / 255
+  image change from -30.0 to +60.0 deg at mid-approach: 84.0 / 255
 
-none_ped: 18 knots (-30.0 to +60.0 deg), 104 poses each, range 59.8 to 2.3 m
+none_ped: 21 knots (-30.0 to +60.0 deg), 104 poses each, range 59.8 to 2.3 m
   pose pairing: exact
-  image change from -30.0 to +60.0 deg at mid-approach: 112.5 / 255
+  image change from -30.0 to +60.0 deg at mid-approach: 87.9 / 255
 
 pairing check: PASS

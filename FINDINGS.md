@@ -6,6 +6,111 @@ here, never inside the protocol.
 
 ---
 
+## F28 — 2026-09-09, the darkness endpoint is 9x brighter when a bright knot was captured before it, and it never decays
+
+**The scene has two stable states for one weather, and capture order picks which.**
+
+Measured at the capture campaign's own pose, same site, same lights, same weather, same
+camera, same manual exposure, on Town12:
+
+| how −30° was reached | mean brightness |
+|---|---|
+| captured first, on a scene that has never been bright | **0.00362** |
+| captured after +60° in the same server session | **0.03416** |
+| a fresh probe, never bright | 0.00393 |
+
+**9.4x, and it does not decay.** After 4,200 ticks of daylight the switch to −30° reads
+0.0741, falls to 0.0343 by tick 120 — and then stays: 0.0342 at 1,200 ticks, 0.0342 at
+6,000. Five minutes of simulated night does not discharge it. This is not a settle that
+needs to be longer. It is hysteresis.
+
+### How it was found, and what it cost to find
+
+The capture stage failed the illumination check with two violations, and neither said what
+was actually wrong:
+
+- *"upper beam 0.0095 vs lower 0.0341, VIOLATION, not brighter"* — the check reasons that
+  more light in the same scene cannot darken it, so a frame that is not brighter means the
+  lamp state never applied (amendment A4). **The high-beam frame was the correct one.** The
+  high-beam campaign captures −30° as its only knot, so it is uncontaminated; the main
+  campaign reaches −30° after twenty brighter knots and is not. The check compared a clean
+  frame against a contaminated one, which is a real inconsistency detected for the wrong
+  stated reason.
+- The cross-campaign check flagged a 32.5% disagreement, which was a separate defect in the
+  check itself (see below).
+
+Ruled out along the way, each by measurement rather than argument: lamp states not applying
+(`NONE` 0.00002, `LowBeam` 0.00359, `HighBeam` 0.00957, both 0.01751 — every state
+applies, and high beam is genuinely 2.7x brighter than low beam at this pose); sweep length
+(two knots reproduces it exactly); camera settle (converges by 80 ticks to 0.0039); weather
+settle (2,000 ticks changes nothing); descent history over a few hundred ticks; street-light
+state (1,307 of 3,885 on, unchanged); level streaming (11,052 lights present from the first
+tick once a hero exists); pose (identical to two decimal places); and the target's presence
+(the no-target control shows the same figure).
+
+Two of my own errors are recorded because they shaped the search. A first frame comparison
+showed cyan lane markings against yellow and looked like two different roads; that was my
+display code showing the capture's BGR buffer as RGB. And the first probe measured an empty
+road at a different point on the site rather than the capture's own pose, which inverted the
+apparent high/low beam relationship and sent the investigation the wrong way for an hour.
+
+### The fix, and why this one
+
+Capture **darkest first**. Ascending altitude means no knot is ever preceded by a brighter
+one, and bright knots are insensitive to what came before them: +60° reads 0.37177 when
+captured after darkness against 0.37138 after a full descending sweep, a difference of
+0.0004. So ordering costs the bright end nothing and gives the dark end a value that is a
+function of its own condition rather than of the campaign's history.
+
+The alternative — a fresh server per knot — is unambiguous and about four and a half hours
+of recapture. Ordering achieves the same thing at no cost, and the two agree on the number:
+0.00360 ordered against 0.00362 on a fresh server.
+
+**It also makes the guard that caught this pass for the right reason.** With the dark knot
+clean the comparison becomes low beam 0.0036 against high beam 0.0095, the upper beam is
+brighter as A4 says it must be, and the check's premise turns out to have been correct all
+along.
+
+### Which state is right
+
+Neither is more physically real; a night scene is not brighter for having been day. What
+decides it is that **0.0036 is reproducible from a defined initial condition and 0.0342 is
+not** — the contaminated value depends on how many knots preceded it, how many poses each
+had, and how fast the machine ran. That is an uncontrolled variable in the study's own
+independent variable, which is the same argument A13 made about repetitions.
+
+### What it means for Town01
+
+Unknown, and not investigated tonight. The Town01 captures were taken in the same
+descending order and the check passed there, which means either the effect is smaller on
+that map or both campaigns were contaminated equally. `results/captures/Town01/` is intact
+behind `town01-final` and the comparison can be made whenever it is worth the time.
+
+---
+
+## F28b — 2026-09-09, the cross-campaign check was comparing two different stretches of road
+
+Found in the same failure and separate from F28. The check compares every capture campaign
+against every other at each knot, on the premise that they *"drive the same site and render
+the same knots; only the target in front of the camera differs"*.
+
+They do not. The hazard scenarios place their target at 120 m and the false-activation
+scenario places its plate at 200 m, so **at the same range to target the ego is eighty
+metres further down the road**. On Town12 that is a different stretch, and the plate
+campaigns read 0.2685 at +60° where the hazard campaigns read 0.3718 — a 32.5%
+disagreement that is the road, not the illumination.
+
+Within a pose group — a scenario and the no-target control that replays its poses — the
+agreement is **0.0004**. The check now compares only within groups and computes the spread
+per group rather than over a merged set, and the same data that failed at 32.5% passes at
+**0.11%** against a 15% threshold.
+
+It passed on Town01 because that site is uniform enough over eighty metres that the
+difference never showed. It is not a tolerance to loosen: the comparison was between two
+different places.
+
+---
+
 ## F27 — 2026-09-09, one sub-interval on each map is a verdict about nothing, and the axis weights sub-intervals 200:1
 
 The axis is bisected until the chord's midpoint error falls under an **absolute** tolerance

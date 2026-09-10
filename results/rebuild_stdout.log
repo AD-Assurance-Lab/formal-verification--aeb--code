@@ -1,22 +1,60 @@
-[2026-09-09 18:18:18] restarting CARLA on 3000
-[2026-09-09 18:18:41] START capture_lead
-[2026-09-09 18:56:34] DONE  capture_lead rc=0
-[2026-09-09 18:56:34] restarting CARLA on 3000
-[2026-09-09 18:56:57] START capture_none
-[2026-09-09 18:57:11] DONE  capture_none rc=1
-[2026-09-09 18:57:11] stopping: capture_none failed. Tail of results/capture_none.log:
-  loading Town12 (large maps take a while)
-  server age 0 min (R-SIM-1 ok)
-Traceback (most recent call last):
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 624, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 601, in main
-    manifest = capture(args.scenario, knots, args.speed_mph, args.plan, args.highbeam)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/capture_campaign.py", line 351, in capture
-    site = J.flattest_site(scenario=scenario)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/carla_jobs.py", line 631, in flattest_site
-    raise RuntimeError(
-RuntimeError: scenario 'none' has no site requirement; add it to SCENARIO_SITE rather than letting it inherit one
+[2026-09-09 18:58:15] restarting CARLA on 3000
+[2026-09-09 18:58:37] START capture_lead
+[2026-09-09 18:58:53] DONE  capture_lead rc=0
+[2026-09-09 18:58:53] restarting CARLA on 3000
+[2026-09-09 18:59:15] START capture_none
+[2026-09-09 19:34:25] DONE  capture_none rc=0
+[2026-09-09 19:34:25] restarting CARLA on 3000
+[2026-09-09 19:34:47] START capture_ped
+[2026-09-09 20:12:00] DONE  capture_ped rc=0
+[2026-09-09 20:12:00] restarting CARLA on 3000
+[2026-09-09 20:12:23] START capture_none_ped
+[2026-09-09 20:48:49] DONE  capture_none_ped rc=0
+[2026-09-09 20:48:49] restarting CARLA on 3000
+[2026-09-09 20:49:11] START capture_plate
+[2026-09-09 21:08:36] DONE  capture_plate rc=0
+[2026-09-09 21:08:36] restarting CARLA on 3000
+[2026-09-09 21:08:58] START capture_none_plate
+[2026-09-09 21:28:23] DONE  capture_none_plate rc=0
+[2026-09-09 21:28:23] restarting CARLA on 3000
+[2026-09-09 21:28:46] START capture_lead_hb
+[2026-09-09 21:30:09] DONE  capture_lead_hb rc=0
+[2026-09-09 21:30:09] restarting CARLA on 3000
+[2026-09-09 21:30:31] START capture_none_hb
+[2026-09-09 21:31:53] DONE  capture_none_hb rc=0
+[2026-09-09 21:31:53] restarting CARLA on 3000
+[2026-09-09 21:32:15] START capture_ped_hb
+[2026-09-09 21:33:39] DONE  capture_ped_hb rc=0
+[2026-09-09 21:33:39] restarting CARLA on 3000
+[2026-09-09 21:34:02] START capture_none_ped_hb
+[2026-09-09 21:35:23] DONE  capture_none_ped_hb rc=0
+[2026-09-09 21:35:23] START pairing
+[2026-09-09 21:35:24] DONE  pairing rc=0
+[2026-09-09 21:35:24] START illumination
+[2026-09-09 21:35:24] DONE  illumination rc=1
+[2026-09-09 21:35:24] stopping: illumination failed. Tail of results/illumination.log:
+cross-campaign agreement (lead, none, none_ped, none_plate, ped, plate)
+  worst per-knot disagreement: 32.5% of the axis span
+     +54.852 deg  spread 0.1164  lead=0.3616, none=0.3616, none_ped=0.3641, none_plate=0.2477, ped=0.3641, plate=0.2478
+     +60.000 deg  spread 0.1053  lead=0.3718, none=0.3714, none_ped=0.3730, none_plate=0.2681, ped=0.3734, plate=0.2685
+     +47.558 deg  spread 0.1043  lead=0.3337, none=0.3337, none_ped=0.3384, none_plate=0.2341, ped=0.3384, plate=0.2341
+  VIOLATION: campaigns rendering the same knot disagree by more than 15% of the axis span. They differ only by the target in front of the camera, which cannot do that.
+  wrote results/captures/Town12/cross_campaign.json
+
+manifest_lead_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0095 vs lower 0.0341  VIOLATION, not brighter
+  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+
+manifest_none_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0095 vs lower 0.0342  VIOLATION, not brighter
+  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+
+manifest_none_ped_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0099 vs lower 0.0245  VIOLATION, not brighter
+  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+
+manifest_ped_hb.json  (upper beam, 1 knot)
+   -30.000 upper 0.0099 vs lower 0.0245  VIOLATION, not brighter
+  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+
+  5 of 10 campaigns consistent

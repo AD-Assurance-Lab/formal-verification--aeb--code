@@ -255,17 +255,35 @@ def cross_campaign(campaigns: dict[str, list[dict]]) -> dict:
     """Compare the campaigns against each other, knot by knot.
 
     This is the only check here that does not rest on an assumption about the renderer.
-    All four campaigns drive the same site and render the same knots; only the target in
-    front of the camera differs, and a target occupies a small part of the frame. So the
-    brightness curves must agree closely, and a knot rendered at the wrong illumination in
-    ONE campaign shows up as that campaign disagreeing with the other three at that knot
-    and nowhere else.
+    Campaigns that share a pose set render the same places at the same knots and differ
+    only by the target in front of the camera, which occupies a small part of the frame.
+    So their brightness curves must agree closely, and a knot rendered at the wrong
+    illumination in ONE campaign shows up as that campaign disagreeing with its partner at
+    that knot and nowhere else.
 
     A no-target control is expected to sit slightly brighter or darker than its scenario
     at the same knot -- there is a car or a pedestrian missing from the frame -- so the
     tolerance is on the scale of the axis, not on the scale of the difference.
+
+    **Only WITHIN a pose group.** The premise is that the campaigns photograph the same
+    places, and across pose groups they do not: the hazard scenarios put their target at
+    120 m and the false-activation scenario puts its plate at 200 m, so at the same RANGE
+    TO TARGET the ego is eighty metres further down the road. On Town12 that is a
+    different stretch with different buildings, and the plate campaigns read 0.268 at +60
+    where the hazard campaigns read 0.372 -- a 32% disagreement that is the road, not the
+    illumination. Within each pose group the agreement is 0.0004.
+
+    Comparing across groups was the original form and it passed on Town01, where the site
+    is uniform enough over eighty metres that it never showed. It is not a tolerance to
+    loosen; the comparison was between two different places.
     """
     names = sorted(campaigns)
+    # Which campaigns share a pose set. A control replays its base scenario's poses --
+    # that is what makes it a control -- so each base and its control are one group.
+    groups: dict[str, list[str]] = {}
+    for name in names:
+        base = {"none": "lead", "none_ped": "ped", "none_plate": "plate"}.get(name, name)
+        groups.setdefault(base, []).append(name)
     by_knot: dict[float, dict[str, float]] = {}
     for name in names:
         for r in campaigns[name]:
@@ -279,15 +297,28 @@ def cross_campaign(campaigns: dict[str, list[dict]]) -> dict:
 
     rows, worst = [], 0.0
     for alt in sorted(by_knot, reverse=True):
-        vals = by_knot[alt]
-        if len(vals) < 2:
+        # Worst disagreement WITHIN any pose group, never across them. Merging the groups
+        # into one dict and taking its range would silently restore the across-group
+        # comparison this exists to remove, so the spread is computed per group and the
+        # worst of those is reported.
+        per_group = {}
+        for base, members in groups.items():
+            got = {m: by_knot[alt][m] for m in members if m in by_knot[alt]}
+            if len(got) > 1:
+                per_group[base] = got
+        if not per_group:
             continue
-        spread = max(vals.values()) - min(vals.values())
+        spreads = {b: max(g.values()) - min(g.values()) for b, g in per_group.items()}
+        worst_base = max(spreads, key=spreads.get)
+        spread = spreads[worst_base]
+        vals = per_group[worst_base]
         frac = spread / span if span > 0 else 1.0
         worst = max(worst, frac)
         rows.append({"sun_altitude_deg": alt, "spread": round(spread, 5),
-                     "frac_of_span": round(frac, 4),
-                     "means": {k: round(v, 5) for k, v in vals.items()}})
+                     "frac_of_span": round(frac, 4), "worst_pose_group": worst_base,
+                     "means": {k: round(v, 5) for k, v in vals.items()},
+                     "all_pose_groups": {b: {k: round(v, 5) for k, v in g.items()}
+                                         for b, g in per_group.items()}})
     return {"campaigns": names, "axis_span": round(span, 5),
             "worst_disagreement_frac": round(worst, 4), "knots": rows}
 

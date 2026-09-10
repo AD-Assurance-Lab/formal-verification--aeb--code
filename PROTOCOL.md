@@ -831,3 +831,46 @@ and it would need the family rebuilt around it.
 +0.403° on Town12 is still there and is still unmodelled. It is now small enough to sit
 below the transient, and it is recorded here so that a future cell sitting on a knife edge
 is read against a known floor rather than against an assumption of zero.
+
+### A16. Capture darkest first, because the dark end remembers the light
+
+**Date:** 2026-09-09. **Requested by:** the measurement, during the A14 rebuild's capture
+stage, which stopped on the illumination check rather than producing this quietly.
+
+**What changed.** `capture_campaign` renders the knots in ascending sun altitude whatever
+order it is handed, and reorders the manifest back to the axis's own direction before
+anything reads it. Nothing else: not the knots, not the conditions, not the endpoints, not
+the scenarios.
+
+**Why.** FINDINGS F28. At the same site, pose, camera, exposure, lights and weather, the
+−30° darkness knot renders at **0.0036** on a scene that has never been bright and
+**0.0342** when a bright knot was captured before it in the same server session — 9.4x —
+and it does not decay: 4,200 ticks of daylight, then 6,000 ticks of night, and it is still
+0.0342. The scene has two stable states for one weather and capture order picks between
+them.
+
+Darkness is one of the two endpoints the disturbance family is built between and one of the
+three lighting conditions FMVSS 127 tests. A study whose endpoint frame depends on how many
+knots preceded it does not control its own independent variable.
+
+**Why ordering rather than a fresh server per knot.** Both work and they agree — 0.00360
+ordered against 0.00362 on a fresh server. Ordering is free; a server per knot is about
+four and a half hours of recapture per campaign set. Bright knots are insensitive to what
+preceded them (+60° reads 0.37177 after darkness against 0.37138 after a full descending
+sweep), so ascending order costs the bright end nothing.
+
+**Which state is correct.** Neither is more physically faithful — a night scene is not
+brighter for having been day earlier. What decides it is that 0.0036 is reproducible from a
+defined initial condition and 0.0342 depends on the number of preceding knots, their pose
+counts and the machine's speed. That is the same argument A13 made about repetitions:
+prefer the measurement that is a function of the condition.
+
+**What it invalidates.** Every capture taken in descending order, which is every capture
+this study has ever made, on both maps. The Town12 set is discarded and recaptured under
+this amendment. The Town01 set stays where it is, behind `town01-final`, unexamined for this
+effect and not to be reused.
+
+**It also repairs a guard rather than relaxing one.** With the dark knot clean the upper
+beam reads 0.0095 against the lower beam's 0.0036, so amendment A4's check — more light in
+the same scene cannot darken it — passes for the reason it was written for. The check was
+correct; the frame it was reading was not.

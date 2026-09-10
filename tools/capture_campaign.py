@@ -391,7 +391,23 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
 
     OUT.mkdir(parents=True, exist_ok=True)
     manifest = []
-    for knot in knots:
+    # DARKEST FIRST, always, whatever order the caller passed. FINDINGS F28: a knot
+    # captured after a brighter one in the same server session renders about 9x brighter
+    # at the dark end than the same knot captured on a scene that has never been bright --
+    # 0.0342 against 0.0036 at -30 deg -- and it does NOT decay. Six thousand ticks of
+    # simulated night leaves it at 0.0342. There are two stable states for one weather,
+    # and which one a frame lands in is decided by capture order rather than by the
+    # condition.
+    #
+    # Ascending altitude means no knot is ever preceded by a brighter one. Bright knots
+    # are insensitive to what came before them (+60 reads 0.37177 after darkness against
+    # 0.37138 after a full sweep), so ordering costs the bright end nothing and gives the
+    # dark end a value that is a function of its own condition.
+    #
+    # The manifest is reordered back to the caller's order below, because the axis checks
+    # and every consumer read it as an axis and an axis has a direction.
+    order = sorted(knots)
+    for knot in order:
         out_path = OUT / f"{capture_stem(scenario, knot, highbeam)}.npz"
         if out_path.exists():
             # Resuming an interrupted campaign is the reason this skip exists and it is a
@@ -546,6 +562,9 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
             f"{len(manifest) - len(signed)} of {len(manifest)} knots carry no "
             "photometric signature, so the axis cannot be checked. Those npz files "
             "predate the guard; delete them and recapture.")
+    # Back into the caller's order before anything reads it as an axis.
+    _pos = {round(k, 3): i for i, k in enumerate(knots)}
+    manifest.sort(key=lambda e: _pos.get(round(e["knot"], 3), 0))
     rep = CS.assert_axis(fresh_records(signed), uncovered=load_uncovered())
     print(f"\n  illumination axis OK: {rep['knots']} knots, span "
           f"{rep['axis_span_mean']:.4f} of full range, worst inversion "

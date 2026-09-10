@@ -1,0 +1,48 @@
+{
+  "map": "Town12",
+  "altitude_deg": -30.0,
+  "scenario": "lead",
+  "at_pose": 0,
+  "where": "capture pose 0 of 104, range 59.95 m",
+  "settle_ticks": 2000,
+  "cloudiness": 0.0,
+  "states": [
+    {
+      "lights": "NONE",
+      "mean": 2e-05,
+      "sigma": 0.00099,
+      "p01": 0.0,
+      "p99": 0.0,
+      "frac_dark": 0.99962
+    },
+    {
+      "lights": "LowBeam",
+      "mean": 0.00359,
+      "sigma": 0.02169,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95425
+    },
+    {
+      "lights": "HighBeam",
+      "mean": 0.00957,
+      "sigma": 0.0309,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.88596
+    },
+    {
+      "lights": "LowBeam|HighBeam",
+      "mean": 0.01751,
+      "sigma": 0.04921,
+      "p01": 0.0,
+      "p99": 0.21961,
+      "frac_dark": 0.84849
+    }
+  ],
+  "low_beam_applies": true,
+  "both_is_brightest": true,
+  "high_over_low": 2.6657,
+  "verdict": "LAMPS APPLY; the check's premise is wrong",
+  "note": "capture_campaign renders the upper-beam condition as HighBeam ALONE, with no low beam. Mean image brightness is dominated by the near road surface, which low beams flood and high beams do not, so high beam alone being dimmer in mean is a geometry result rather than a defect -- IF the lamp states apply at all, which is what this measures."
+}

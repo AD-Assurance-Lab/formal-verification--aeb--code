@@ -1,29 +1,53 @@
-  loading Town01 (large maps take a while)
+  loading Town12 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
   reusing the saved nominal run, 104 states
 
-none_ped: 104 states x 18 knots = 1872 frames, about 1.73 GB raw
-  none_ped_sun+60.000.npz exists, skipping
-  none_ped_sun+42.766.npz exists, skipping
-  none_ped_sun+28.397.npz exists, skipping
-  none_ped_sun+18.743.npz exists, skipping
-  none_ped_sun+12.542.npz exists, skipping
-  none_ped_sun+10.128.npz exists, skipping
-  none_ped_sun+07.715.npz exists, skipping
-  none_ped_sun+05.298.npz exists, skipping
-  none_ped_sun+04.198.npz exists, skipping
-  none_ped_sun+03.525.npz exists, skipping
-  none_ped_sun+01.891.npz exists, skipping
-  none_ped_sun+01.391.npz exists, skipping
-  none_ped_sun+00.779.npz exists, skipping
-  none_ped_sun+00.026.npz exists, skipping
-  none_ped_sun+00.000.npz exists, skipping
-  none_ped_sun-00.961.npz exists, skipping
-  none_ped_sun-29.554.npz exists, skipping
-  none_ped_sun-30.000.npz exists, skipping
+none_ped: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
+    signature: mean 0.3730 sigma 0.1551 p99 0.7608 dark 0.028
+  sun  +60.000: 104 frames,   39.9 MB,  66.6 s
+    signature: mean 0.3641 sigma 0.1537 p99 0.7372 dark 0.027
+  sun  +54.852: 104 frames,   39.5 MB,  87.6 s
+    signature: mean 0.3384 sigma 0.1563 p99 0.6863 dark 0.028
+  sun  +47.558: 104 frames,   38.7 MB,  91.3 s
+    signature: mean 0.3079 sigma 0.1631 p99 0.6588 dark 0.030
+  sun  +41.911: 104 frames,   37.8 MB,  94.0 s
+    signature: mean 0.2815 sigma 0.1664 p99 0.6392 dark 0.033
+  sun  +36.234: 104 frames,   36.8 MB,  94.6 s
+    signature: mean 0.2578 sigma 0.1615 p99 0.6274 dark 0.039
+  sun  +30.151: 104 frames,   35.7 MB,  96.8 s
+    signature: mean 0.2001 sigma 0.1697 p99 0.5765 dark 0.095
+  sun  +22.238: 104 frames,   31.2 MB, 101.4 s
+    signature: mean 0.1776 sigma 0.1537 p99 0.5216 dark 0.119
+  sun  +14.605: 104 frames,   27.7 MB, 100.8 s
+    signature: mean 0.1687 sigma 0.1465 p99 0.5020 dark 0.129
+  sun  +12.342: 104 frames,   25.4 MB, 104.3 s
+    signature: mean 0.1462 sigma 0.1285 p99 0.4431 dark 0.161
+  sun   +8.327: 104 frames,   21.9 MB, 102.9 s
+    signature: mean 0.1345 sigma 0.1193 p99 0.4118 dark 0.186
+  sun   +6.848: 104 frames,   20.7 MB, 103.2 s
+    signature: mean 0.1277 sigma 0.1127 p99 0.4000 dark 0.184
+  sun   +6.051: 104 frames,   20.0 MB, 103.8 s
+    signature: mean 0.1196 sigma 0.1001 p99 0.3843 dark 0.157
+  sun   +4.857: 104 frames,   19.5 MB, 107.0 s
+    signature: mean 0.1086 sigma 0.0952 p99 0.3647 dark 0.190
+  sun   +4.289: 104 frames,   18.6 MB, 106.9 s
+    signature: mean 0.0878 sigma 0.0851 p99 0.3333 dark 0.278
+  sun   +3.315: 104 frames,   16.8 MB, 107.8 s
+    signature: mean 0.0761 sigma 0.0788 p99 0.3098 dark 0.338
+  sun   +2.815: 104 frames,   15.6 MB, 107.9 s
+    signature: mean 0.0573 sigma 0.0679 p99 0.2784 dark 0.442
+  sun   +2.026: 104 frames,   13.3 MB, 106.1 s
+    signature: mean 0.0151 sigma 0.0359 p99 0.1490 dark 0.783
+  sun   +0.024: 104 frames,    6.9 MB, 106.9 s
+    signature: mean 0.0357 sigma 0.0621 p99 0.3333 dark 0.553
+  sun   +0.000: 104 frames,   14.5 MB, 131.0 s
+    signature: mean 0.0245 sigma 0.0607 p99 0.3333 dark 0.727
+  sun  -29.539: 104 frames,    9.8 MB, 124.6 s
+    signature: mean 0.0245 sigma 0.0607 p99 0.3333 dark 0.727
+  sun  -30.000: 104 frames,    9.8 MB, 125.1 s
 
-  illumination axis OK: 18 knots, span 0.4957 of full range, worst inversion 4.1% of span (limit 12%), total 4.1% (limit 25%)
-    recorded: sun fell 60.000 -> 42.766 deg and the frame got BRIGHTER, 0.5109 -> 0.5313 (4.1% of the axis span)
-    recorded: sun fell 0.026 -> 0.000 deg and the frame got BRIGHTER, 0.0356 -> 0.0653 (6.0% of the axis span)  [declared uncovered]
+  illumination axis OK: 21 knots, span 0.3579 of full range, worst inversion 5.7% of span (limit 12%), total 5.7% (limit 25%)
+    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.7% of the axis span)
+  wrote results/captures/Town12/determinism_none_ped.json
 
-  wrote results/captures/manifest_none_ped.json
+  wrote results/captures/Town12/manifest_none_ped.json

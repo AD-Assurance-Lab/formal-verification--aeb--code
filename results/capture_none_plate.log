@@ -1,0 +1,53 @@
+  loading Town12 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  reusing the saved nominal run, 52 states
+
+none_plate: 52 states x 21 knots = 1092 frames, about 1.01 GB raw
+    signature: mean 0.2681 sigma 0.1882 p99 0.7216 dark 0.071
+  sun  +60.000: 52 frames,   19.0 MB,  36.9 s
+    signature: mean 0.2477 sigma 0.1916 p99 0.6980 dark 0.073
+  sun  +54.852: 52 frames,   18.8 MB,  47.7 s
+    signature: mean 0.2341 sigma 0.1915 p99 0.6667 dark 0.079
+  sun  +47.558: 52 frames,   18.5 MB,  48.5 s
+    signature: mean 0.2286 sigma 0.1849 p99 0.6471 dark 0.083
+  sun  +41.911: 52 frames,   18.2 MB,  50.5 s
+    signature: mean 0.2095 sigma 0.1835 p99 0.6196 dark 0.100
+  sun  +36.234: 52 frames,   17.5 MB,  51.2 s
+    signature: mean 0.1900 sigma 0.1762 p99 0.5843 dark 0.124
+  sun  +30.151: 52 frames,   15.8 MB,  52.9 s
+    signature: mean 0.1682 sigma 0.1629 p99 0.5490 dark 0.145
+  sun  +22.238: 52 frames,   13.4 MB,  52.9 s
+    signature: mean 0.1467 sigma 0.1438 p99 0.4902 dark 0.176
+  sun  +14.605: 52 frames,   12.0 MB,  53.3 s
+    signature: mean 0.1418 sigma 0.1347 p99 0.4667 dark 0.159
+  sun  +12.342: 52 frames,   11.4 MB,  54.6 s
+    signature: mean 0.1174 sigma 0.1200 p99 0.4000 dark 0.231
+  sun   +8.327: 52 frames,   10.4 MB,  54.5 s
+    signature: mean 0.1062 sigma 0.1114 p99 0.3725 dark 0.270
+  sun   +6.848: 52 frames,    9.8 MB,  55.1 s
+    signature: mean 0.0987 sigma 0.1058 p99 0.3529 dark 0.298
+  sun   +6.051: 52 frames,    9.4 MB,  55.5 s
+    signature: mean 0.0953 sigma 0.0959 p99 0.3725 dark 0.261
+  sun   +4.857: 52 frames,    9.2 MB,  55.7 s
+    signature: mean 0.0870 sigma 0.0909 p99 0.3569 dark 0.293
+  sun   +4.289: 52 frames,    8.8 MB,  56.1 s
+    signature: mean 0.0702 sigma 0.0806 p99 0.3333 dark 0.380
+  sun   +3.315: 52 frames,    7.8 MB,  56.0 s
+    signature: mean 0.0606 sigma 0.0745 p99 0.3098 dark 0.439
+  sun   +2.815: 52 frames,    7.2 MB,  56.4 s
+    signature: mean 0.0450 sigma 0.0637 p99 0.2706 dark 0.539
+  sun   +2.026: 52 frames,    5.9 MB,  56.3 s
+    signature: mean 0.0122 sigma 0.0357 p99 0.1333 dark 0.827
+  sun   +0.024: 52 frames,    2.8 MB,  55.8 s
+    signature: mean 0.0260 sigma 0.0552 p99 0.2941 dark 0.681
+  sun   +0.000: 52 frames,    6.8 MB,  69.2 s
+    signature: mean 0.0189 sigma 0.0539 p99 0.2941 dark 0.803
+  sun  -29.539: 52 frames,    5.0 MB,  65.1 s
+    signature: mean 0.0189 sigma 0.0539 p99 0.2941 dark 0.803
+  sun  -30.000: 52 frames,    5.0 MB,  65.6 s
+
+  illumination axis OK: 21 knots, span 0.2559 of full range, worst inversion 5.4% of span (limit 12%), total 5.4% (limit 25%)
+    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.4% of the axis span)
+  wrote results/captures/Town12/determinism_none_plate.json
+
+  wrote results/captures/Town12/manifest_none_plate.json

@@ -1,10 +1,11 @@
-  loading Town01 (large maps take a while)
+  loading Town12 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
   reusing the saved nominal run, 104 states
 
 none_ped: 104 states x 1 knots = 104 frames, about 0.10 GB raw
-    signature: mean 0.0503 sigma 0.0904 p99 0.3176 dark 0.675
-  sun  -30.000: 104 frames,   10.0 MB,  41.3 s
-  high beam at sun -30.000: mean 0.0503 p99 0.3176 dark 0.675
+    signature: mean 0.0099 sigma 0.0325 p99 0.1333 dark 0.883
+  sun  -30.000: 104 frames,    3.5 MB,  66.0 s
+  high beam at sun -30.000: mean 0.0099 p99 0.1333 dark 0.883
+  wrote results/captures/Town12/determinism_none_ped_hb.json
 
-  wrote results/captures/manifest_none_ped_hb.json
+  wrote results/captures/Town12/manifest_none_ped_hb.json
