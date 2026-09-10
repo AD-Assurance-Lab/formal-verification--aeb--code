@@ -206,14 +206,26 @@
   {
     "knot": 1.025,
     "file": "none_ped_sun+01.025.npz",
-    "frames": 104,
-    "size_mb": 9.5,
+    "skipped": true,
     "signature": {
       "mean": 0.0336,
       "sigma": 0.0516,
       "p01": 0.0,
       "p99": 0.21961,
       "frac_dark": 0.58403
+    }
+  },
+  {
+    "knot": 0.524,
+    "file": "none_ped_sun+00.524.npz",
+    "frames": 104,
+    "size_mb": 8.1,
+    "signature": {
+      "mean": 0.0235,
+      "sigma": 0.04352,
+      "p01": 0.0,
+      "p99": 0.18039,
+      "frac_dark": 0.67889
     }
   },
   {
@@ -231,14 +243,26 @@
   {
     "knot": 0.012,
     "file": "none_ped_sun+00.012.npz",
-    "frames": 104,
-    "size_mb": 6.9,
+    "skipped": true,
     "signature": {
       "mean": 0.01495,
       "sigma": 0.03569,
       "p01": 0.0,
       "p99": 0.14902,
       "frac_dark": 0.78589
+    }
+  },
+  {
+    "knot": 0.006,
+    "file": "none_ped_sun+00.006.npz",
+    "frames": 104,
+    "size_mb": 6.9,
+    "signature": {
+      "mean": 0.01485,
+      "sigma": 0.03559,
+      "p01": 0.0,
+      "p99": 0.14902,
+      "frac_dark": 0.78709
     }
   },
   {
@@ -256,6 +280,18 @@
   {
     "knot": -14.77,
     "file": "none_ped_sun-14.770.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.00434,
+      "sigma": 0.02606,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95111
+    }
+  },
+  {
+    "knot": -22.154,
+    "file": "none_ped_sun-22.154.npz",
     "frames": 104,
     "size_mb": 2.2,
     "signature": {
@@ -263,7 +299,7 @@
       "sigma": 0.02606,
       "p01": 0.0,
       "p99": 0.08627,
-      "frac_dark": 0.95111
+      "frac_dark": 0.9511
     }
   },
   {
@@ -279,8 +315,33 @@
     }
   },
   {
+    "knot": -29.654,
+    "file": "none_ped_sun-29.654.npz",
+    "frames": 104,
+    "size_mb": 2.2,
+    "signature": {
+      "mean": 0.00434,
+      "sigma": 0.02606,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95111
+    }
+  },
+  {
     "knot": -29.77,
     "file": "none_ped_sun-29.770.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.00434,
+      "sigma": 0.02606,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.9511
+    }
+  },
+  {
+    "knot": -29.885,
+    "file": "none_ped_sun-29.885.npz",
     "frames": 104,
     "size_mb": 2.2,
     "signature": {

@@ -466,3 +466,137 @@ Terminated
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
 [2026-09-10 06:55:01] START capture_lead
+[2026-09-10 07:02:52] DONE  capture_lead rc=0
+[2026-09-10 07:02:52] restarting CARLA on 3000
+Terminated
+  server pid 3786596 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:03:15] START capture_none
+[2026-09-10 07:10:38] DONE  capture_none rc=0
+[2026-09-10 07:10:38] restarting CARLA on 3000
+Terminated
+  server pid 3787096 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:11:00] START capture_ped
+[2026-09-10 07:18:45] DONE  capture_ped rc=0
+[2026-09-10 07:18:45] restarting CARLA on 3000
+Terminated
+  server pid 3787556 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:19:07] START capture_none_ped
+[2026-09-10 07:26:37] DONE  capture_none_ped rc=0
+[2026-09-10 07:26:37] restarting CARLA on 3000
+Terminated
+  server pid 3788044 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:26:59] START capture_plate
+[2026-09-10 07:31:15] DONE  capture_plate rc=0
+[2026-09-10 07:31:15] restarting CARLA on 3000
+Terminated
+  server pid 3788545 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:31:37] START capture_none_plate
+[2026-09-10 07:35:50] DONE  capture_none_plate rc=0
+[2026-09-10 07:35:50] restarting CARLA on 3000
+Terminated
+  server pid 3788985 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:36:13] START capture_lead_hb
+[2026-09-10 07:36:28] DONE  capture_lead_hb rc=0
+[2026-09-10 07:36:28] restarting CARLA on 3000
+Terminated
+  server pid 3789295 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:36:51] START capture_none_hb
+[2026-09-10 07:37:06] DONE  capture_none_hb rc=0
+[2026-09-10 07:37:06] restarting CARLA on 3000
+Terminated
+  server pid 3789594 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:37:28] START capture_ped_hb
+[2026-09-10 07:37:44] DONE  capture_ped_hb rc=0
+[2026-09-10 07:37:44] restarting CARLA on 3000
+Terminated
+  server pid 3789898 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:38:06] START capture_none_ped_hb
+[2026-09-10 07:38:22] DONE  capture_none_ped_hb rc=0
+[2026-09-10 07:38:22] START pairing
+[2026-09-10 07:38:23] DONE  pairing rc=0
+[2026-09-10 07:38:23] START illumination
+[2026-09-10 07:38:23] DONE  illumination rc=0
+[2026-09-10 07:38:23] START train_lead
+[2026-09-10 07:39:37] DONE  train_lead rc=0
+[2026-09-10 07:39:37] START train_ped
+[2026-09-10 07:40:50] DONE  train_ped rc=0
+[2026-09-10 07:40:50] restarting CARLA on 3000
+Terminated
+  server pid 3790513 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:41:13] START endpoints_lead
+[2026-09-10 07:57:29] DONE  endpoints_lead rc=0
+[2026-09-10 07:57:29] restarting CARLA on 3000
+Terminated
+  server pid 3804503 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 07:57:52] START endpoints_ped
+[2026-09-10 08:17:16] DONE  endpoints_ped rc=0
+[2026-09-10 08:17:16] restarting CARLA on 3000
+Terminated
+  server pid 3821674 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 08:17:39] START endpoints_plate
+[2026-09-10 08:36:11] DONE  endpoints_plate rc=0
+[2026-09-10 08:36:11] restarting CARLA on 3000
+Terminated
+  server pid 3839710 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 08:36:34] START gate_capture_P_pts_lead
+[2026-09-10 08:37:00] DONE  gate_capture_P_pts_lead rc=0
+[2026-09-10 08:37:00] restarting CARLA on 3000
+Terminated
+  server pid 3840241 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 08:37:22] START gate_inbetween_P_pts_lead
+[2026-09-10 08:50:23] DONE  gate_inbetween_P_pts_lead rc=1
+[2026-09-10 08:50:23] stopping: gate_inbetween_P_pts_lead failed. Tail of results/gate_inbetween_P_pts_lead.log:
+    sub-interval +0.024 to +0.012, midpoint +0.018
+      max policy difference 1.567 m/s^2 = 0.64 of the decision threshold
+    sub-interval +0.012 to +0.006, midpoint +0.009
+      max policy difference 1.821 m/s^2 = 0.74 of the decision threshold
+    sub-interval +0.006 to +0.000, midpoint +0.003
+      max policy difference 2.969 m/s^2 = 1.21 of the decision threshold
+    sub-interval +0.000 to -14.770, midpoint -7.385
+      max policy difference 1.768 m/s^2 = 0.72 of the decision threshold
+    sub-interval -14.770 to -22.154, midpoint -18.462
+      max policy difference 3.309 m/s^2 = 1.35 of the decision threshold
+    sub-interval -22.154 to -29.539, midpoint -25.846
+      max policy difference 3.318 m/s^2 = 1.36 of the decision threshold
+    sub-interval -29.539 to -29.654, midpoint -29.596
+      max policy difference 3.292 m/s^2 = 1.35 of the decision threshold
+    sub-interval -29.654 to -29.770, midpoint -29.712
+      max policy difference 3.307 m/s^2 = 1.35 of the decision threshold
+    sub-interval -29.770 to -29.885, midpoint -29.828
+      max policy difference 3.286 m/s^2 = 1.34 of the decision threshold
+    sub-interval -29.885 to -30.000, midpoint -29.943
+      max policy difference 3.313 m/s^2 = 1.35 of the decision threshold
+
+  illumination axis OK: 29 midpoints, span 0.3656 of full range
+
+  worst 1.356 of the decision threshold -> FAIL
+  wrote results/carla/gate_inbetween_P_pts.json
+Terminated

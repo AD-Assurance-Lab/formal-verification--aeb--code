@@ -96,6 +96,20 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   fresh
   "$PY" -u tools/build_family_knots.py --refine 2>&1 | tee -a "$LOG"
   [ "${PIPESTATUS[0]}" -ne 0 ] && { say "refine failed"; stop_server; exit 1; }
-  bash scripts/rebuild_all.sh capture 2>&1 | tail -40 | tee -a "$LOG"
-  [ "${PIPESTATUS[0]}" -ne 0 ] && { say "recapture failed"; stop_server; exit 1; }
+  # CAPTURE ONLY. The first version called `rebuild_all.sh capture`, which starts AT
+  # capture and runs every stage AFTER it -- so each round also retrained the policies and
+  # re-ran the endpoints. That is not merely wasteful. FINDINGS F29 measured that training
+  # is not reproducible, so every round measured its gates on DIFFERENT networks: round 1
+  # ran against models trained at 04:35 and round 2 against models trained at 07:39. The
+  # loop was converging against a moving target, and its stopping rule -- does the failing
+  # count fall -- cannot mean anything when the thing being measured changes underneath it.
+  #
+  # DO NOT RUN THIS LOOP AT ALL until F29 is resolved. Splitting an axis on gates measured
+  # against non-reproducible networks is measuring the optimiser, not the family.
+  for sc in lead none ped none_ped plate none_plate; do
+    fresh
+    "$PY" -u tools/capture_campaign.py --scenario "$sc" >"$REPO/results/capture_${sc}.log" 2>&1
+    [ $? -ne 0 ] && { say "capture $sc failed"; tail -5 "$REPO/results/capture_${sc}.log" | tee -a "$LOG"; stop_server; exit 1; }
+    say "  recaptured $sc"
+  done
 done

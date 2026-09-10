@@ -206,14 +206,26 @@
   {
     "knot": 1.025,
     "file": "plate_sun+01.025.npz",
-    "frames": 52,
-    "size_mb": 4.1,
+    "skipped": true,
     "signature": {
       "mean": 0.02622,
       "sigma": 0.04879,
       "p01": 0.0,
       "p99": 0.20784,
       "frac_dark": 0.66877
+    }
+  },
+  {
+    "knot": 0.524,
+    "file": "plate_sun+00.524.npz",
+    "frames": 52,
+    "size_mb": 3.4,
+    "signature": {
+      "mean": 0.01845,
+      "sigma": 0.04175,
+      "p01": 0.0,
+      "p99": 0.16471,
+      "frac_dark": 0.7436
     }
   },
   {
@@ -231,14 +243,26 @@
   {
     "knot": 0.012,
     "file": "plate_sun+00.012.npz",
-    "frames": 52,
-    "size_mb": 2.8,
+    "skipped": true,
     "signature": {
       "mean": 0.01204,
       "sigma": 0.03562,
       "p01": 0.0,
       "p99": 0.13333,
       "frac_dark": 0.82882
+    }
+  },
+  {
+    "knot": 0.006,
+    "file": "plate_sun+00.006.npz",
+    "frames": 52,
+    "size_mb": 2.8,
+    "signature": {
+      "mean": 0.01198,
+      "sigma": 0.03553,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.8295
     }
   },
   {
@@ -256,14 +280,26 @@
   {
     "knot": -14.77,
     "file": "plate_sun-14.770.npz",
-    "frames": 52,
-    "size_mb": 1.1,
+    "skipped": true,
     "signature": {
       "mean": 0.0054,
       "sigma": 0.0309,
       "p01": 0.0,
       "p99": 0.13333,
       "frac_dark": 0.94363
+    }
+  },
+  {
+    "knot": -22.154,
+    "file": "plate_sun-22.154.npz",
+    "frames": 52,
+    "size_mb": 1.1,
+    "signature": {
+      "mean": 0.0054,
+      "sigma": 0.03091,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.94364
     }
   },
   {
@@ -279,8 +315,33 @@
     }
   },
   {
+    "knot": -29.654,
+    "file": "plate_sun-29.654.npz",
+    "frames": 52,
+    "size_mb": 1.1,
+    "signature": {
+      "mean": 0.0054,
+      "sigma": 0.0309,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.94363
+    }
+  },
+  {
     "knot": -29.77,
     "file": "plate_sun-29.770.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.0054,
+      "sigma": 0.03091,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.94364
+    }
+  },
+  {
+    "knot": -29.885,
+    "file": "plate_sun-29.885.npz",
     "frames": 52,
     "size_mb": 1.1,
     "signature": {

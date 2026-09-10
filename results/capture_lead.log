@@ -7,3 +7,40 @@ lead: 104 states x 30 knots = 3120 frames, about 2.88 GB raw
     signature: mean 0.0036 sigma 0.0218 p99 0.0863 dark 0.954
   sun  -29.885: 104 frames,    2.2 MB,  69.6 s
   lead_sun-29.770.npz exists, skipping
+    signature: mean 0.0036 sigma 0.0218 p99 0.0863 dark 0.954
+  sun  -29.654: 104 frames,    2.2 MB,  90.4 s
+  lead_sun-29.539.npz exists, skipping
+    signature: mean 0.0036 sigma 0.0218 p99 0.0863 dark 0.954
+  sun  -22.154: 104 frames,    2.2 MB,  95.8 s
+  lead_sun-14.770.npz exists, skipping
+  lead_sun+00.000.npz exists, skipping
+    signature: mean 0.0139 sigma 0.0326 p99 0.1333 dark 0.792
+  sun   +0.006: 104 frames,    6.9 MB,  99.3 s
+  lead_sun+00.012.npz exists, skipping
+  lead_sun+00.024.npz exists, skipping
+    signature: mean 0.0224 sigma 0.0405 p99 0.1647 dark 0.682
+  sun   +0.524: 104 frames,    8.2 MB, 100.6 s
+  lead_sun+01.025.npz exists, skipping
+  lead_sun+02.026.npz exists, skipping
+  lead_sun+02.815.npz exists, skipping
+  lead_sun+03.315.npz exists, skipping
+  lead_sun+04.289.npz exists, skipping
+  lead_sun+04.857.npz exists, skipping
+  lead_sun+06.051.npz exists, skipping
+  lead_sun+06.848.npz exists, skipping
+  lead_sun+08.327.npz exists, skipping
+  lead_sun+12.342.npz exists, skipping
+  lead_sun+14.605.npz exists, skipping
+  lead_sun+22.238.npz exists, skipping
+  lead_sun+30.151.npz exists, skipping
+  lead_sun+36.234.npz exists, skipping
+  lead_sun+41.911.npz exists, skipping
+  lead_sun+47.558.npz exists, skipping
+  lead_sun+54.852.npz exists, skipping
+  lead_sun+60.000.npz exists, skipping
+
+  illumination axis OK: 30 knots, span 0.3681 of full range, worst inversion 8.5% of span (limit 12%), total 8.5% (limit 25%)
+    recorded: sun fell 0.006 -> 0.000 deg and the frame got BRIGHTER, 0.0139 -> 0.0451 (8.5% of the axis span)
+  wrote results/captures/Town12/determinism_lead.json
+
+  wrote results/captures/Town12/manifest_lead.json

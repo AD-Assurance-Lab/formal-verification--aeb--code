@@ -2,19 +2,25 @@
   server age 0 min (R-SIM-1 ok)
   reusing the saved nominal run, 52 states
 
-none_plate: 52 states x 25 knots = 1300 frames, about 1.20 GB raw
+none_plate: 52 states x 30 knots = 1560 frames, about 1.44 GB raw
   none_plate_sun-30.000.npz exists, skipping
     signature: mean 0.0054 sigma 0.0309 p99 0.1333 dark 0.944
-  sun  -29.770: 52 frames,    1.1 MB,  36.2 s
+  sun  -29.885: 52 frames,    1.1 MB,  36.7 s
+  none_plate_sun-29.770.npz exists, skipping
+    signature: mean 0.0054 sigma 0.0309 p99 0.1333 dark 0.944
+  sun  -29.654: 52 frames,    1.1 MB,  48.1 s
   none_plate_sun-29.539.npz exists, skipping
     signature: mean 0.0054 sigma 0.0309 p99 0.1333 dark 0.944
-  sun  -14.770: 52 frames,    1.1 MB,  47.4 s
+  sun  -22.154: 52 frames,    1.1 MB,  48.9 s
+  none_plate_sun-14.770.npz exists, skipping
   none_plate_sun+00.000.npz exists, skipping
-    signature: mean 0.0120 sigma 0.0356 p99 0.1333 dark 0.829
-  sun   +0.012: 52 frames,    2.8 MB,  47.5 s
+    signature: mean 0.0120 sigma 0.0355 p99 0.1333 dark 0.830
+  sun   +0.006: 52 frames,    2.8 MB,  51.3 s
+  none_plate_sun+00.012.npz exists, skipping
   none_plate_sun+00.024.npz exists, skipping
-    signature: mean 0.0262 sigma 0.0488 p99 0.2078 dark 0.669
-  sun   +1.025: 52 frames,    4.1 MB,  48.3 s
+    signature: mean 0.0185 sigma 0.0418 p99 0.1647 dark 0.744
+  sun   +0.524: 52 frames,    3.4 MB,  52.7 s
+  none_plate_sun+01.025.npz exists, skipping
   none_plate_sun+02.026.npz exists, skipping
   none_plate_sun+02.815.npz exists, skipping
   none_plate_sun+03.315.npz exists, skipping
@@ -33,8 +39,8 @@ none_plate: 52 states x 25 knots = 1300 frames, about 1.20 GB raw
   none_plate_sun+54.852.npz exists, skipping
   none_plate_sun+60.000.npz exists, skipping
 
-  illumination axis OK: 25 knots, span 0.2631 of full range, worst inversion 5.3% of span (limit 12%), total 5.3% (limit 25%)
-    recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0120 -> 0.0260 (5.3% of the axis span)
+  illumination axis OK: 30 knots, span 0.2631 of full range, worst inversion 5.3% of span (limit 12%), total 5.3% (limit 25%)
+    recorded: sun fell 0.006 -> 0.000 deg and the frame got BRIGHTER, 0.0120 -> 0.0260 (5.3% of the axis span)
   wrote results/captures/Town12/determinism_none_plate.json
 
   wrote results/captures/Town12/manifest_none_plate.json

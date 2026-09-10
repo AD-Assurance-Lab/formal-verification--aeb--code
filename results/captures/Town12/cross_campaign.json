@@ -443,6 +443,30 @@
    }
   },
   {
+   "sun_altitude_deg": 0.524,
+   "spread": 1e-05,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "plate",
+   "means": {
+    "none_plate": 0.01846,
+    "plate": 0.01845
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.0224,
+     "none": 0.0224
+    },
+    "ped": {
+     "none_ped": 0.0235,
+     "ped": 0.0235
+    },
+    "plate": {
+     "none_plate": 0.01846,
+     "plate": 0.01845
+    }
+   }
+  },
+  {
    "sun_altitude_deg": 0.024,
    "spread": 1e-05,
    "frac_of_span": 0.0,
@@ -487,6 +511,30 @@
     "plate": {
      "none_plate": 0.01204,
      "plate": 0.01204
+    }
+   }
+  },
+  {
+   "sun_altitude_deg": 0.006,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.01392,
+    "none": 0.01392
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.01392,
+     "none": 0.01392
+    },
+    "ped": {
+     "none_ped": 0.01485,
+     "ped": 0.01485
+    },
+    "plate": {
+     "none_plate": 0.01198,
+     "plate": 0.01198
     }
    }
   },
@@ -539,6 +587,30 @@
    }
   },
   {
+   "sun_altitude_deg": -22.154,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.00362,
+    "none": 0.00362
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.00362,
+     "none": 0.00362
+    },
+    "ped": {
+     "none_ped": 0.00434,
+     "ped": 0.00434
+    },
+    "plate": {
+     "none_plate": 0.0054,
+     "plate": 0.0054
+    }
+   }
+  },
+  {
    "sun_altitude_deg": -29.539,
    "spread": 0.0,
    "frac_of_span": 0.0,
@@ -563,7 +635,55 @@
    }
   },
   {
+   "sun_altitude_deg": -29.654,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.00362,
+    "none": 0.00362
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.00362,
+     "none": 0.00362
+    },
+    "ped": {
+     "none_ped": 0.00434,
+     "ped": 0.00434
+    },
+    "plate": {
+     "none_plate": 0.0054,
+     "plate": 0.0054
+    }
+   }
+  },
+  {
    "sun_altitude_deg": -29.77,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.00362,
+    "none": 0.00362
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.00362,
+     "none": 0.00362
+    },
+    "ped": {
+     "none_ped": 0.00434,
+     "ped": 0.00434
+    },
+    "plate": {
+     "none_plate": 0.0054,
+     "plate": 0.0054
+    }
+   }
+  },
+  {
+   "sun_altitude_deg": -29.885,
    "spread": 0.0,
    "frac_of_span": 0.0,
    "worst_pose_group": "lead",

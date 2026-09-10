@@ -206,14 +206,26 @@
   {
     "knot": 1.025,
     "file": "lead_sun+01.025.npz",
-    "frames": 104,
-    "size_mb": 9.6,
+    "skipped": true,
     "signature": {
       "mean": 0.03233,
       "sigma": 0.04859,
       "p01": 0.0,
       "p99": 0.20784,
       "frac_dark": 0.58785
+    }
+  },
+  {
+    "knot": 0.524,
+    "file": "lead_sun+00.524.npz",
+    "frames": 104,
+    "size_mb": 8.2,
+    "signature": {
+      "mean": 0.0224,
+      "sigma": 0.04046,
+      "p01": 0.0,
+      "p99": 0.16471,
+      "frac_dark": 0.68249
     }
   },
   {
@@ -231,14 +243,26 @@
   {
     "knot": 0.012,
     "file": "lead_sun+00.012.npz",
-    "frames": 104,
-    "size_mb": 6.9,
+    "skipped": true,
     "signature": {
       "mean": 0.014,
       "sigma": 0.03267,
       "p01": 0.0,
       "p99": 0.13333,
       "frac_dark": 0.79057
+    }
+  },
+  {
+    "knot": 0.006,
+    "file": "lead_sun+00.006.npz",
+    "frames": 104,
+    "size_mb": 6.9,
+    "signature": {
+      "mean": 0.01392,
+      "sigma": 0.03257,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.79172
     }
   },
   {
@@ -256,6 +280,18 @@
   {
     "knot": -14.77,
     "file": "lead_sun-14.770.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.00362,
+      "sigma": 0.0218,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95391
+    }
+  },
+  {
+    "knot": -22.154,
+    "file": "lead_sun-22.154.npz",
     "frames": 104,
     "size_mb": 2.2,
     "signature": {
@@ -279,8 +315,33 @@
     }
   },
   {
+    "knot": -29.654,
+    "file": "lead_sun-29.654.npz",
+    "frames": 104,
+    "size_mb": 2.2,
+    "signature": {
+      "mean": 0.00362,
+      "sigma": 0.0218,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95391
+    }
+  },
+  {
     "knot": -29.77,
     "file": "lead_sun-29.770.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.00362,
+      "sigma": 0.0218,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95391
+    }
+  },
+  {
+    "knot": -29.885,
+    "file": "lead_sun-29.885.npz",
     "frames": 104,
     "size_mb": 2.2,
     "signature": {

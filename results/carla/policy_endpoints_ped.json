@@ -17,7 +17,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 29.610000000044238,
+    "server_age_s": 29.669999999983702,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {
@@ -73,7 +73,7 @@
         "sigma": 0.18459,
         "p01": 0.0,
         "p99": 0.6549,
-        "frac_dark": 0.16842
+        "frac_dark": 0.16836
       }
     },
     "P_pts|darkness_lowbeam": {
@@ -89,28 +89,28 @@
       "never_braked": 0,
       "premature_brakes": 10,
       "min_gap_ft": [
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0,
-        239.0
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02,
+        165.02
       ],
       "brake_range_ft": [
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54,
-        276.54
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53,
+        203.53
       ],
       "sun_altitude_deg": -30.0,
       "headlamps": "LowBeam",
@@ -119,7 +119,7 @@
         "sigma": 0.02681,
         "p01": 0.0,
         "p99": 0.1098,
-        "frac_dark": 0.94878
+        "frac_dark": 0.94879
       }
     },
     "P_pts|darkness_highbeam": {
@@ -207,11 +207,11 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.19569,
+        "mean": 0.19568,
         "sigma": 0.18459,
         "p01": 0.0,
         "p99": 0.6549,
-        "frac_dark": 0.16844
+        "frac_dark": 0.16837
       }
     },
     "P_cont|darkness_lowbeam": {
@@ -257,7 +257,7 @@
         "sigma": 0.02681,
         "p01": 0.0,
         "p99": 0.1098,
-        "frac_dark": 0.94878
+        "frac_dark": 0.94879
       }
     },
     "P_cont|darkness_highbeam": {
@@ -269,32 +269,32 @@
         1.0
       ],
       "passes_protocol": 10,
-      "passes_no_nuisance": 0,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
-      "premature_brakes": 10,
+      "premature_brakes": 0,
       "min_gap_ft": [
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24,
+        14.24
       ],
       "brake_range_ft": [
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37,
+        51.37
       ],
       "sun_altitude_deg": -30.0,
       "headlamps": "HighBeam",
@@ -345,8 +345,8 @@
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.19566,
-        "sigma": 0.18463,
+        "mean": 0.19569,
+        "sigma": 0.18464,
         "p01": 0.0,
         "p99": 0.6549,
         "frac_dark": 0.16856
@@ -361,37 +361,37 @@
         1.0
       ],
       "passes_protocol": 10,
-      "passes_no_nuisance": 0,
+      "passes_no_nuisance": 10,
       "never_braked": 0,
-      "premature_brakes": 10,
+      "premature_brakes": 0,
       "min_gap_ft": [
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05,
-        328.05
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22,
+        8.22
       ],
       "brake_range_ft": [
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45,
-        380.45
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04,
+        44.04
       ],
       "sun_altitude_deg": -30.0,
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.00461,
+        "mean": 0.0046,
         "sigma": 0.02681,
         "p01": 0.0,
         "p99": 0.1098,
@@ -447,7 +447,7 @@
   },
   "illumination": {
     "knots": 2,
-    "axis_span_mean": 0.19105,
+    "axis_span_mean": 0.19109,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [],
@@ -464,12 +464,12 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 60.0,
-        "mean": 0.19566,
+        "mean": 0.19569,
         "lamps": false
       },
       {
         "sun_altitude_deg": -30.0,
-        "mean": 0.00461,
+        "mean": 0.0046,
         "lamps": true
       }
     ],
@@ -512,7 +512,7 @@
   "nuisance_braking_cells": {
     "P_pts|darkness_lowbeam": {
       "premature_of": "10/10",
-      "brake_range_ft": 276.54
+      "brake_range_ft": 203.53
     },
     "P_pts|darkness_highbeam": {
       "premature_of": "10/10",
@@ -521,14 +521,6 @@
     "P_cont|darkness_lowbeam": {
       "premature_of": "10/10",
       "brake_range_ft": 353.56
-    },
-    "P_cont|darkness_highbeam": {
-      "premature_of": "10/10",
-      "brake_range_ft": 380.45
-    },
-    "P_pts3|darkness_lowbeam": {
-      "premature_of": "10/10",
-      "brake_range_ft": 380.45
     }
   },
   "note": "M4 needs every cell 10/10. A policy that cannot pass the regulatory endpoints is not the policy a manufacturer would ship, and without it the study has no setup: the claim is that a policy which SATISFIES the standard is unsafe between its test points."
