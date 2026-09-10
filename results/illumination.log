@@ -1,7 +1,7 @@
 
-manifest_lead.json  (21 knots, span 0.3576, worst inversion 8.6% of span)
+manifest_lead.json  (21 knots, span 0.3681, worst inversion 8.4% of span)
     sun deg     mean    sigma      p99  lamps
-     60.000   0.3718   0.1526   0.7333    off
+     60.000   0.3718   0.1527   0.7333    off
      54.852   0.3616   0.1522   0.7098    off
      47.558   0.3337   0.1562   0.6784    off
      41.911   0.2991   0.1677   0.6588    off
@@ -9,32 +9,32 @@ manifest_lead.json  (21 knots, span 0.3576, worst inversion 8.6% of span)
      30.151   0.2407   0.1704   0.6078    off
      22.238   0.1979   0.1690   0.5686    off
      14.605   0.1755   0.1528   0.5137    off
-     12.342   0.1667   0.1455   0.4941    off
+     12.342   0.1666   0.1455   0.4941    off
       8.327   0.1444   0.1273   0.4392    off
       6.848   0.1320   0.1184   0.4078    off
-      6.051   0.1239   0.1123   0.3843    off
+      6.051   0.1239   0.1122   0.3843    off
       4.857   0.1165   0.0982   0.3725     on
-      4.289   0.1061   0.0929   0.3529     on
+      4.289   0.1062   0.0930   0.3529     on
       3.315   0.0859   0.0825   0.3255     on
       2.815   0.0743   0.0762   0.3020     on
       2.026   0.0556   0.0651   0.2588     on
       0.024   0.0142   0.0328   0.1333     on
       0.000   0.0451   0.0665   0.3333     on
-    -29.539   0.0341   0.0670   0.3333     on
-    -30.000   0.0341   0.0670   0.3333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.6% of the axis span)
+    -29.539   0.0036   0.0218   0.0863     on
+    -30.000   0.0036   0.0218   0.0863     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.4% of the axis span)
   OK
 
-manifest_none.json  (21 knots, span 0.3572, worst inversion 8.7% of span)
+manifest_none.json  (21 knots, span 0.3682, worst inversion 8.4% of span)
     sun deg     mean    sigma      p99  lamps
-     60.000   0.3714   0.1531   0.7333    off
+     60.000   0.3718   0.1527   0.7333    off
      54.852   0.3616   0.1522   0.7098    off
      47.558   0.3337   0.1562   0.6784    off
-     41.911   0.2991   0.1677   0.6588    off
+     41.911   0.2991   0.1676   0.6588    off
      36.234   0.2655   0.1758   0.6314    off
      30.151   0.2407   0.1704   0.6078    off
-     22.238   0.1979   0.1689   0.5686    off
-     14.605   0.1755   0.1528   0.5137    off
+     22.238   0.1979   0.1690   0.5686    off
+     14.605   0.1755   0.1527   0.5137    off
      12.342   0.1667   0.1455   0.4941    off
       8.327   0.1444   0.1273   0.4392    off
       6.848   0.1320   0.1184   0.4078    off
@@ -43,22 +43,22 @@ manifest_none.json  (21 knots, span 0.3572, worst inversion 8.7% of span)
       4.289   0.1062   0.0930   0.3529     on
       3.315   0.0859   0.0825   0.3255     on
       2.815   0.0743   0.0762   0.3020     on
-      2.026   0.0557   0.0651   0.2588     on
+      2.026   0.0556   0.0651   0.2588     on
       0.024   0.0142   0.0328   0.1333     on
       0.000   0.0451   0.0666   0.3333     on
-    -29.539   0.0342   0.0670   0.3333     on
-    -30.000   0.0342   0.0670   0.3333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.7% of the axis span)
+    -29.539   0.0036   0.0218   0.0863     on
+    -30.000   0.0036   0.0218   0.0863     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.4% of the axis span)
   OK
 
-manifest_none_ped.json  (21 knots, span 0.3579, worst inversion 5.7% of span)
+manifest_none_ped.json  (21 knots, span 0.3691, worst inversion 5.6% of span)
     sun deg     mean    sigma      p99  lamps
-     60.000   0.3730   0.1551   0.7608    off
+     60.000   0.3734   0.1547   0.7608    off
      54.852   0.3641   0.1537   0.7372    off
      47.558   0.3384   0.1563   0.6863    off
      41.911   0.3079   0.1631   0.6588    off
      36.234   0.2815   0.1664   0.6392    off
-     30.151   0.2578   0.1615   0.6274    off
+     30.151   0.2578   0.1616   0.6274    off
      22.238   0.2001   0.1697   0.5765    off
      14.605   0.1776   0.1537   0.5216    off
      12.342   0.1687   0.1465   0.5020    off
@@ -67,43 +67,43 @@ manifest_none_ped.json  (21 knots, span 0.3579, worst inversion 5.7% of span)
       6.051   0.1277   0.1127   0.4000    off
       4.857   0.1196   0.1001   0.3843     on
       4.289   0.1086   0.0952   0.3647     on
-      3.315   0.0878   0.0851   0.3333     on
+      3.315   0.0878   0.0850   0.3333     on
       2.815   0.0761   0.0788   0.3098     on
       2.026   0.0573   0.0679   0.2784     on
-      0.024   0.0151   0.0359   0.1490     on
+      0.024   0.0151   0.0358   0.1490     on
       0.000   0.0357   0.0621   0.3333     on
-    -29.539   0.0245   0.0607   0.3333     on
-    -30.000   0.0245   0.0607   0.3333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.7% of the axis span)
+    -29.539   0.0043   0.0261   0.0863     on
+    -30.000   0.0043   0.0261   0.0863     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.6% of the axis span)
   OK
 
-manifest_none_plate.json  (21 knots, span 0.2559, worst inversion 5.4% of span)
+manifest_none_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
     sun deg     mean    sigma      p99  lamps
-     60.000   0.2681   0.1882   0.7216    off
-     54.852   0.2477   0.1916   0.6980    off
-     47.558   0.2341   0.1915   0.6667    off
+     60.000   0.2685   0.1879   0.7216    off
+     54.852   0.2478   0.1916   0.6980    off
+     47.558   0.2340   0.1914   0.6667    off
      41.911   0.2286   0.1849   0.6471    off
      36.234   0.2095   0.1835   0.6196    off
      30.151   0.1900   0.1762   0.5843    off
-     22.238   0.1682   0.1629   0.5490    off
-     14.605   0.1467   0.1438   0.4902    off
+     22.238   0.1682   0.1630   0.5490    off
+     14.605   0.1466   0.1438   0.4902    off
      12.342   0.1418   0.1347   0.4667    off
-      8.327   0.1174   0.1200   0.4000    off
+      8.327   0.1173   0.1199   0.4000    off
       6.848   0.1062   0.1114   0.3725    off
       6.051   0.0987   0.1058   0.3529    off
-      4.857   0.0953   0.0959   0.3725     on
+      4.857   0.0953   0.0960   0.3725     on
       4.289   0.0870   0.0909   0.3569     on
-      3.315   0.0702   0.0806   0.3333     on
-      2.815   0.0606   0.0745   0.3098     on
-      2.026   0.0450   0.0637   0.2706     on
+      3.315   0.0701   0.0806   0.3333     on
+      2.815   0.0605   0.0745   0.3098     on
+      2.026   0.0450   0.0638   0.2706     on
       0.024   0.0122   0.0357   0.1333     on
       0.000   0.0260   0.0552   0.2941     on
-    -29.539   0.0189   0.0539   0.2941     on
-    -30.000   0.0189   0.0539   0.2941     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.4% of the axis span)
+    -29.539   0.0054   0.0309   0.1333     on
+    -30.000   0.0054   0.0309   0.1333     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.3% of the axis span)
   OK
 
-manifest_ped.json  (21 knots, span 0.3583, worst inversion 5.7% of span)
+manifest_ped.json  (21 knots, span 0.3690, worst inversion 5.6% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.3734   0.1547   0.7608    off
      54.852   0.3641   0.1537   0.7372    off
@@ -116,67 +116,62 @@ manifest_ped.json  (21 knots, span 0.3583, worst inversion 5.7% of span)
      12.342   0.1687   0.1465   0.5020    off
       8.327   0.1462   0.1285   0.4431    off
       6.848   0.1345   0.1194   0.4118    off
-      6.051   0.1277   0.1127   0.4000    off
+      6.051   0.1276   0.1127   0.4000    off
       4.857   0.1196   0.1001   0.3843     on
       4.289   0.1086   0.0952   0.3647     on
       3.315   0.0878   0.0850   0.3333     on
       2.815   0.0761   0.0788   0.3098     on
       2.026   0.0573   0.0679   0.2784     on
-      0.024   0.0151   0.0359   0.1490     on
+      0.024   0.0151   0.0358   0.1490     on
       0.000   0.0357   0.0621   0.3333     on
-    -29.539   0.0245   0.0607   0.3333     on
-    -30.000   0.0245   0.0607   0.3333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.7% of the axis span)
+    -29.539   0.0043   0.0261   0.0863     on
+    -30.000   0.0043   0.0261   0.0863     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.6% of the axis span)
   OK
 
-manifest_plate.json  (21 knots, span 0.2563, worst inversion 5.4% of span)
+manifest_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.2685   0.1879   0.7216    off
-     54.852   0.2478   0.1916   0.7020    off
-     47.558   0.2341   0.1915   0.6667    off
+     54.852   0.2478   0.1916   0.6980    off
+     47.558   0.2340   0.1914   0.6667    off
      41.911   0.2286   0.1849   0.6471    off
-     36.234   0.2095   0.1835   0.6196    off
-     30.151   0.1899   0.1762   0.5843    off
-     22.238   0.1682   0.1629   0.5490    off
+     36.234   0.2095   0.1834   0.6196    off
+     30.151   0.1900   0.1762   0.5843    off
+     22.238   0.1682   0.1630   0.5490    off
      14.605   0.1466   0.1438   0.4902    off
      12.342   0.1418   0.1347   0.4667    off
-      8.327   0.1174   0.1200   0.4000    off
+      8.327   0.1173   0.1200   0.4000    off
       6.848   0.1062   0.1113   0.3725    off
       6.051   0.0988   0.1058   0.3529    off
-      4.857   0.0953   0.0959   0.3725     on
+      4.857   0.0953   0.0960   0.3725     on
       4.289   0.0870   0.0909   0.3569     on
-      3.315   0.0702   0.0806   0.3333     on
+      3.315   0.0701   0.0805   0.3333     on
       2.815   0.0606   0.0745   0.3098     on
       2.026   0.0450   0.0637   0.2706     on
-      0.024   0.0121   0.0357   0.1333     on
+      0.024   0.0122   0.0357   0.1333     on
       0.000   0.0260   0.0552   0.2941     on
-    -29.539   0.0189   0.0539   0.2941     on
-    -30.000   0.0189   0.0539   0.2941     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0121 -> 0.0260 (5.4% of the axis span)
+    -29.539   0.0054   0.0309   0.1333     on
+    -30.000   0.0054   0.0309   0.1333     on
+  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.3% of the axis span)
   OK
 
 cross-campaign agreement (lead, none, none_ped, none_plate, ped, plate)
-  worst per-knot disagreement: 32.5% of the axis span
-     +54.852 deg  spread 0.1164  lead=0.3616, none=0.3616, none_ped=0.3641, none_plate=0.2477, ped=0.3641, plate=0.2478
-     +60.000 deg  spread 0.1053  lead=0.3718, none=0.3714, none_ped=0.3730, none_plate=0.2681, ped=0.3734, plate=0.2685
-     +47.558 deg  spread 0.1043  lead=0.3337, none=0.3337, none_ped=0.3384, none_plate=0.2341, ped=0.3384, plate=0.2341
-  VIOLATION: campaigns rendering the same knot disagree by more than 15% of the axis span. They differ only by the target in front of the camera, which cannot do that.
+  worst per-knot disagreement: 0.0% of the axis span
+     +60.000 deg  spread 0.0000  lead=0.3718, none=0.3718
+     +54.852 deg  spread 0.0000  lead=0.3616, none=0.3616
+     +47.558 deg  spread 0.0001  lead=0.3337, none=0.3337
   wrote results/captures/Town12/cross_campaign.json
 
 manifest_lead_hb.json  (upper beam, 1 knot)
-   -30.000 upper 0.0095 vs lower 0.0341  VIOLATION, not brighter
-  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+   -30.000 upper 0.0095 vs lower 0.0036  OK, brighter
 
 manifest_none_hb.json  (upper beam, 1 knot)
-   -30.000 upper 0.0095 vs lower 0.0342  VIOLATION, not brighter
-  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+   -30.000 upper 0.0095 vs lower 0.0036  OK, brighter
 
 manifest_none_ped_hb.json  (upper beam, 1 knot)
-   -30.000 upper 0.0099 vs lower 0.0245  VIOLATION, not brighter
-  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+   -30.000 upper 0.0099 vs lower 0.0043  OK, brighter
 
 manifest_ped_hb.json  (upper beam, 1 knot)
-   -30.000 upper 0.0099 vs lower 0.0245  VIOLATION, not brighter
-  VIOLATION: the upper beam is supposed to put MORE light into the same scene. A frame that is not brighter means the lamp state never applied -- amendment A4's auto-exposure failure made headlamps darken the image and read as perfectly normal.
+   -30.000 upper 0.0099 vs lower 0.0043  OK, brighter
 
-  5 of 10 campaigns consistent
+  10 of 10 campaigns consistent

@@ -2,51 +2,51 @@
   server age 0 min (R-SIM-1 ok)
 
 ped: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
-    signature: mean 0.3734 sigma 0.1547 p99 0.7608 dark 0.027
-  sun  +60.000: 104 frames,   40.0 MB,  89.1 s
-    signature: mean 0.3641 sigma 0.1537 p99 0.7372 dark 0.027
-  sun  +54.852: 104 frames,   39.5 MB,  93.4 s
-    signature: mean 0.3384 sigma 0.1563 p99 0.6863 dark 0.028
-  sun  +47.558: 104 frames,   38.7 MB,  96.6 s
-    signature: mean 0.3079 sigma 0.1631 p99 0.6588 dark 0.030
-  sun  +41.911: 104 frames,   37.8 MB,  97.4 s
-    signature: mean 0.2815 sigma 0.1664 p99 0.6392 dark 0.033
-  sun  +36.234: 104 frames,   36.9 MB,  98.2 s
-    signature: mean 0.2578 sigma 0.1616 p99 0.6274 dark 0.039
-  sun  +30.151: 104 frames,   35.7 MB,  99.1 s
-    signature: mean 0.2001 sigma 0.1697 p99 0.5765 dark 0.095
-  sun  +22.238: 104 frames,   31.2 MB, 101.1 s
-    signature: mean 0.1776 sigma 0.1537 p99 0.5216 dark 0.119
-  sun  +14.605: 104 frames,   27.7 MB, 102.5 s
-    signature: mean 0.1687 sigma 0.1465 p99 0.5020 dark 0.129
-  sun  +12.342: 104 frames,   25.5 MB, 103.0 s
-    signature: mean 0.1462 sigma 0.1285 p99 0.4431 dark 0.161
-  sun   +8.327: 104 frames,   21.9 MB, 104.0 s
-    signature: mean 0.1345 sigma 0.1194 p99 0.4118 dark 0.186
-  sun   +6.848: 104 frames,   20.7 MB, 103.4 s
-    signature: mean 0.1277 sigma 0.1127 p99 0.4000 dark 0.183
-  sun   +6.051: 104 frames,   20.0 MB, 105.1 s
-    signature: mean 0.1196 sigma 0.1001 p99 0.3843 dark 0.157
-  sun   +4.857: 104 frames,   19.6 MB, 107.0 s
-    signature: mean 0.1086 sigma 0.0952 p99 0.3647 dark 0.190
-  sun   +4.289: 104 frames,   18.6 MB, 107.0 s
-    signature: mean 0.0878 sigma 0.0850 p99 0.3333 dark 0.278
-  sun   +3.315: 104 frames,   16.9 MB, 107.3 s
-    signature: mean 0.0761 sigma 0.0788 p99 0.3098 dark 0.338
-  sun   +2.815: 104 frames,   15.6 MB, 107.0 s
-    signature: mean 0.0573 sigma 0.0679 p99 0.2784 dark 0.442
-  sun   +2.026: 104 frames,   13.3 MB, 106.6 s
-    signature: mean 0.0151 sigma 0.0359 p99 0.1490 dark 0.784
-  sun   +0.024: 104 frames,    6.9 MB, 105.7 s
+    signature: mean 0.0043 sigma 0.0261 p99 0.0863 dark 0.951
+  sun  -30.000: 104 frames,    2.2 MB,  83.8 s
+    signature: mean 0.0043 sigma 0.0261 p99 0.0863 dark 0.951
+  sun  -29.539: 104 frames,    2.2 MB,  86.8 s
     signature: mean 0.0357 sigma 0.0621 p99 0.3333 dark 0.553
-  sun   +0.000: 104 frames,   14.5 MB, 130.9 s
-    signature: mean 0.0245 sigma 0.0607 p99 0.3333 dark 0.728
-  sun  -29.539: 104 frames,    9.8 MB, 123.8 s
-    signature: mean 0.0245 sigma 0.0607 p99 0.3333 dark 0.727
-  sun  -30.000: 104 frames,    9.8 MB, 124.1 s
+  sun   +0.000: 104 frames,   14.5 MB, 115.9 s
+    signature: mean 0.0151 sigma 0.0358 p99 0.1490 dark 0.784
+  sun   +0.024: 104 frames,    6.9 MB,  95.5 s
+    signature: mean 0.0573 sigma 0.0679 p99 0.2784 dark 0.442
+  sun   +2.026: 104 frames,   13.3 MB,  98.0 s
+    signature: mean 0.0761 sigma 0.0788 p99 0.3098 dark 0.338
+  sun   +2.815: 104 frames,   15.6 MB, 101.2 s
+    signature: mean 0.0878 sigma 0.0850 p99 0.3333 dark 0.278
+  sun   +3.315: 104 frames,   16.8 MB, 102.7 s
+    signature: mean 0.1086 sigma 0.0952 p99 0.3647 dark 0.190
+  sun   +4.289: 104 frames,   18.6 MB, 103.3 s
+    signature: mean 0.1196 sigma 0.1001 p99 0.3843 dark 0.157
+  sun   +4.857: 104 frames,   19.5 MB, 102.4 s
+    signature: mean 0.1276 sigma 0.1127 p99 0.4000 dark 0.184
+  sun   +6.051: 104 frames,   20.0 MB, 102.9 s
+    signature: mean 0.1345 sigma 0.1194 p99 0.4118 dark 0.186
+  sun   +6.848: 104 frames,   20.7 MB, 103.6 s
+    signature: mean 0.1462 sigma 0.1285 p99 0.4431 dark 0.161
+  sun   +8.327: 104 frames,   21.9 MB, 106.4 s
+    signature: mean 0.1687 sigma 0.1465 p99 0.5020 dark 0.130
+  sun  +12.342: 104 frames,   25.4 MB, 105.7 s
+    signature: mean 0.1776 sigma 0.1537 p99 0.5216 dark 0.119
+  sun  +14.605: 104 frames,   27.7 MB, 107.8 s
+    signature: mean 0.2001 sigma 0.1697 p99 0.5765 dark 0.095
+  sun  +22.238: 104 frames,   31.2 MB, 107.4 s
+    signature: mean 0.2578 sigma 0.1616 p99 0.6274 dark 0.039
+  sun  +30.151: 104 frames,   35.7 MB, 108.3 s
+    signature: mean 0.2815 sigma 0.1664 p99 0.6392 dark 0.033
+  sun  +36.234: 104 frames,   36.9 MB, 108.8 s
+    signature: mean 0.3079 sigma 0.1631 p99 0.6588 dark 0.030
+  sun  +41.911: 104 frames,   37.8 MB, 107.0 s
+    signature: mean 0.3384 sigma 0.1563 p99 0.6863 dark 0.028
+  sun  +47.558: 104 frames,   38.7 MB, 108.3 s
+    signature: mean 0.3641 sigma 0.1537 p99 0.7372 dark 0.027
+  sun  +54.852: 104 frames,   39.5 MB, 106.3 s
+    signature: mean 0.3734 sigma 0.1547 p99 0.7608 dark 0.027
+  sun  +60.000: 104 frames,   40.0 MB, 108.3 s
 
-  illumination axis OK: 21 knots, span 0.3583 of full range, worst inversion 5.7% of span (limit 12%), total 5.7% (limit 25%)
-    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.7% of the axis span)
+  illumination axis OK: 21 knots, span 0.3690 of full range, worst inversion 5.6% of span (limit 12%), total 5.6% (limit 25%)
+    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.6% of the axis span)
   wrote results/captures/Town12/determinism_ped.json
 
   wrote results/captures/Town12/manifest_ped.json

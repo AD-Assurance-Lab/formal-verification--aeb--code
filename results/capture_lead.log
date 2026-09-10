@@ -2,3 +2,51 @@
   server age 0 min (R-SIM-1 ok)
 
 lead: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
+    signature: mean 0.0036 sigma 0.0218 p99 0.0863 dark 0.954
+  sun  -30.000: 104 frames,    2.2 MB,  85.8 s
+    signature: mean 0.0036 sigma 0.0218 p99 0.0863 dark 0.954
+  sun  -29.539: 104 frames,    2.2 MB,  88.5 s
+    signature: mean 0.0451 sigma 0.0665 p99 0.3333 dark 0.480
+  sun   +0.000: 104 frames,   14.6 MB, 115.9 s
+    signature: mean 0.0142 sigma 0.0328 p99 0.1333 dark 0.788
+  sun   +0.024: 104 frames,    7.0 MB,  94.9 s
+    signature: mean 0.0556 sigma 0.0651 p99 0.2588 dark 0.447
+  sun   +2.026: 104 frames,   13.4 MB,  98.7 s
+    signature: mean 0.0743 sigma 0.0762 p99 0.3020 dark 0.343
+  sun   +2.815: 104 frames,   15.7 MB,  99.7 s
+    signature: mean 0.0859 sigma 0.0825 p99 0.3255 dark 0.284
+  sun   +3.315: 104 frames,   16.9 MB, 100.6 s
+    signature: mean 0.1062 sigma 0.0930 p99 0.3529 dark 0.199
+  sun   +4.289: 104 frames,   18.7 MB, 100.8 s
+    signature: mean 0.1165 sigma 0.0982 p99 0.3725 dark 0.168
+  sun   +4.857: 104 frames,   19.6 MB, 101.7 s
+    signature: mean 0.1239 sigma 0.1122 p99 0.3843 dark 0.215
+  sun   +6.051: 104 frames,   20.0 MB, 100.5 s
+    signature: mean 0.1320 sigma 0.1184 p99 0.4078 dark 0.195
+  sun   +6.848: 104 frames,   20.7 MB, 102.4 s
+    signature: mean 0.1444 sigma 0.1273 p99 0.4392 dark 0.166
+  sun   +8.327: 104 frames,   21.7 MB, 102.4 s
+    signature: mean 0.1666 sigma 0.1455 p99 0.4941 dark 0.134
+  sun  +12.342: 104 frames,   25.2 MB, 102.2 s
+    signature: mean 0.1755 sigma 0.1528 p99 0.5137 dark 0.124
+  sun  +14.605: 104 frames,   27.4 MB, 103.3 s
+    signature: mean 0.1979 sigma 0.1690 p99 0.5686 dark 0.100
+  sun  +22.238: 104 frames,   30.8 MB, 102.4 s
+    signature: mean 0.2407 sigma 0.1704 p99 0.6078 dark 0.069
+  sun  +30.151: 104 frames,   35.5 MB, 102.9 s
+    signature: mean 0.2655 sigma 0.1758 p99 0.6314 dark 0.046
+  sun  +36.234: 104 frames,   36.7 MB, 102.4 s
+    signature: mean 0.2991 sigma 0.1677 p99 0.6588 dark 0.030
+  sun  +41.911: 104 frames,   37.7 MB, 101.2 s
+    signature: mean 0.3337 sigma 0.1562 p99 0.6784 dark 0.028
+  sun  +47.558: 104 frames,   38.7 MB, 104.3 s
+    signature: mean 0.3616 sigma 0.1522 p99 0.7098 dark 0.027
+  sun  +54.852: 104 frames,   39.5 MB, 103.1 s
+    signature: mean 0.3718 sigma 0.1527 p99 0.7333 dark 0.026
+  sun  +60.000: 104 frames,   40.0 MB, 101.7 s
+
+  illumination axis OK: 21 knots, span 0.3681 of full range, worst inversion 8.4% of span (limit 12%), total 8.4% (limit 25%)
+    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.4% of the axis span)
+  wrote results/captures/Town12/determinism_lead.json
+
+  wrote results/captures/Town12/manifest_lead.json

@@ -1,0 +1,15 @@
+[
+  {
+    "knot": -30.0,
+    "file": "lead_hb_sun-30.000.npz",
+    "frames": 104,
+    "size_mb": 3.6,
+    "signature": {
+      "mean": 0.00949,
+      "sigma": 0.03071,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.88657
+    }
+  }
+]

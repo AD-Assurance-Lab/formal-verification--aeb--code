@@ -4,7 +4,7 @@
 
 none: 104 states x 1 knots = 104 frames, about 0.10 GB raw
     signature: mean 0.0095 sigma 0.0307 p99 0.1333 dark 0.887
-  sun  -30.000: 104 frames,    3.5 MB,  66.9 s
+  sun  -30.000: 104 frames,    3.5 MB,  66.5 s
   high beam at sun -30.000: mean 0.0095 p99 0.1333 dark 0.887
   wrote results/captures/Town12/determinism_none_hb.json
 

@@ -1,13 +1,13 @@
-  loading Town01 (large maps take a while)
+  loading Town12 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
     P_pts / daylight: 10/10 [0.72, 1.00] pass
     P_pts / darkness_lowbeam: 10/10 [0.72, 1.00] pass
-    P_pts / darkness_highbeam: 10/10 [0.72, 1.00] pass
+    P_pts / darkness_highbeam: 10/10 [0.72, 1.00] pass, 10 braked prematurely
     P_cont / daylight: 10/10 [0.72, 1.00] pass
-    P_cont / darkness_lowbeam: 10/10 [0.72, 1.00] pass
-    P_cont / darkness_highbeam: 10/10 [0.72, 1.00] pass
+    P_cont / darkness_lowbeam: 10/10 [0.72, 1.00] pass, 10 braked prematurely
+    P_cont / darkness_highbeam: 10/10 [0.72, 1.00] pass, 10 braked prematurely
     P_pts3 / daylight: 10/10 [0.72, 1.00] pass
-    P_pts3 / darkness_lowbeam: 10/10 [0.72, 1.00] pass
+    P_pts3 / darkness_lowbeam: 10/10 [0.72, 1.00] pass, 10 braked prematurely
     P_pts3 / darkness_highbeam: 10/10 [0.72, 1.00] pass
 
   wrote results/carla/policy_endpoints.json
