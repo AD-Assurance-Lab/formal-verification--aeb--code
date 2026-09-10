@@ -28,3 +28,10 @@ stale/
 
 # Capture campaign output: large, regenerable from tools/capture_campaign.py
 results/captures/*.npz
+
+# The simulator's own stdout. It is append-only, it reaches hundreds of megabytes in a
+# session, and it is regenerable by definition. It was tracked and near-empty at the last
+# push, then `git add -A` committed it seventeen times in one day at 867 MB, and GitHub
+# refused the push. Logs the study reads are small and stay tracked; this one is not one.
+results/carla_server.log
+results/carla_launch.log
