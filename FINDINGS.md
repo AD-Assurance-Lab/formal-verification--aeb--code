@@ -6,6 +6,76 @@ here, never inside the protocol.
 
 ---
 
+## F29 — 2026-09-10, training is not reproducible: the same seed on the same frames gives a different network, and it flips endpoint verdicts
+
+**Two consecutive trainings of `P_pts`, `--seed 7`, identical frames, nothing else
+changed:**
+
+| | |
+|---|---|
+| identical weights | **no** |
+| tensors differing | **10 of 10** |
+| parameters differing | **239,166 of 310,145 — 77.1%** |
+| largest absolute difference | 0.529, in `head.1.weight` |
+| largest relative difference | **133%**, in `head.1.weight` |
+
+That is not floating-point jitter. A 133% relative difference in a head weight is a
+different optimisation trajectory, and the two networks are different models of the same
+data.
+
+### What it did to the study
+
+The gate repair added four knots and `rebuild_all` retrained. **Only `P_cont`'s training set
+changed** — `P_pts` and `P_pts3` train on `[60.0, −30.0]`, `training.json` confirms both
+used exactly that before and after, and the capture stamp guard skipped those two knots, so
+their frames were byte-identical. The endpoint verdicts moved anyway:
+
+| cell | before | after |
+|---|---|---|
+| `P_pts` plate / darkness, upper beam | **0/10**, peak 3.032 | **10/10**, peak 1.079 |
+| `P_pts3` plate / darkness, upper beam | **10/10**, peak 0.556 | **0/10**, peak 3.072 |
+| `P_pts3` lead / darkness, lower beam | 10/10 | **0/10**, on standoff |
+
+A peak commanded deceleration moving by a factor of three on identical training data, and a
+hazard endpoint flipping to 0/10. Both are explained by this.
+
+### Why it goes at the central claim
+
+The study's headline is an **attribution**: the gap between `P_pts` and `P_cont` is caused
+by how the training axis was sampled. That requires the arms to differ *because of the
+sampling*. If retraining one arm on identical data produces a network that fails an endpoint
+the previous one passed, then a difference between two arms trained once each cannot be
+attributed to anything. Every verdict in this study rests on one training run per arm.
+
+It also changes what the seed sweep (`docs/QUEUE.md` item 6) can measure. It was meant to
+measure dispersion *across* seeds; at a fixed seed the run-to-run dispersion is already
+non-zero, so a seed sweep on this harness measures both at once and can separate neither.
+
+### The mechanism, and what is not yet measured
+
+`train_policies` seeds `torch.manual_seed`, `random.seed` and `np.random.seed`. It does not
+set `torch.use_deterministic_algorithms(True)`, `torch.backends.cudnn.deterministic`,
+`torch.backends.cudnn.benchmark = False`, or `CUBLAS_WORKSPACE_CONFIG`. cuDNN picks kernels
+by timing and several backward kernels use atomics, so each step carries a small
+nondeterminism that compounds across epochs. That is consistent with the size of the
+difference but **it is not measured**: nobody has yet turned determinism on and shown the
+difference goes away, or measured what it costs in training time.
+
+### The near-miss that produced this number
+
+The first attempt at this test reported *"identical weights: True"* and would have closed
+the contradiction with the wrong answer. Both training runs had exited **rc=2** — the
+command omitted the required `--input-w` and `--input-h` — and the file being hashed twice
+was a **stale Town01 seed-7 model** left in `results/models/` by the September 7 seed sweep.
+Checking the return code is what caught it.
+
+`results/models/` had **54 stale Town01 checkpoints** in it at that moment, under exactly
+the names a Town12 tool would ask for. That is the F26 pattern for the fourth time tonight,
+after captures, after `results/carla/`, and after the gate artifacts. They are moved to
+`results/models_Town01_superseded/`.
+
+---
+
 ## F28 — 2026-09-09, the darkness endpoint is 9x brighter when a bright knot was captured before it, and it never decays
 
 **The scene has two stable states for one weather, and capture order picks which.**

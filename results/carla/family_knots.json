@@ -21,15 +21,20 @@
     2.815,
     2.026,
     1.025,
+    0.524,
     0.024,
     0.012,
+    0.006,
     0.0,
     -14.77,
+    -22.154,
     -29.539,
+    -29.654,
     -29.77,
+    -29.885,
     -30.0
   ],
-  "sub_intervals": 24,
+  "sub_intervals": 29,
   "sub_interval_detail": [
     {
       "from_deg": 60.0,
@@ -157,15 +162,27 @@
     },
     {
       "from_deg": 1.025,
-      "to_deg": 0.024,
-      "step_deg": 1.001,
-      "blend_error": 0.0078,
+      "to_deg": 0.524,
+      "step_deg": 0.501,
+      "blend_error": 0.0073,
       "covered": true,
       "split_from": [
-        2.026,
+        1.025,
         0.024
       ],
-      "split_because": "P_pts3/lead in-between gate failed at 1.478 of the decision threshold"
+      "split_because": "P_pts3/lead in-between gate failed at 2.580 of the decision threshold"
+    },
+    {
+      "from_deg": 0.524,
+      "to_deg": 0.024,
+      "step_deg": 0.5,
+      "blend_error": 0.0071,
+      "covered": true,
+      "split_from": [
+        1.025,
+        0.024
+      ],
+      "split_because": "P_pts3/lead in-between gate failed at 2.580 of the decision threshold"
     },
     {
       "from_deg": 0.024,
@@ -181,15 +198,27 @@
     },
     {
       "from_deg": 0.012,
+      "to_deg": 0.006,
+      "step_deg": 0.006,
+      "blend_error": 0.0063,
+      "covered": true,
+      "split_from": [
+        0.012,
+        0.0
+      ],
+      "split_because": "P_pts3/lead in-between gate failed at 1.695 of the decision threshold"
+    },
+    {
+      "from_deg": 0.006,
       "to_deg": 0.0,
-      "step_deg": 0.012,
+      "step_deg": 0.006,
       "blend_error": 0.0094,
       "covered": true,
       "split_from": [
-        0.024,
+        0.012,
         0.0
       ],
-      "split_because": "P_pts/lead in-between gate failed at 3.183 of the decision threshold"
+      "split_because": "P_pts3/lead in-between gate failed at 1.695 of the decision threshold"
     },
     {
       "from_deg": 0.0,
@@ -205,39 +234,75 @@
     },
     {
       "from_deg": -14.77,
+      "to_deg": -22.154,
+      "step_deg": 7.384,
+      "blend_error": 0.0042,
+      "covered": true,
+      "split_from": [
+        -14.77,
+        -29.539
+      ],
+      "split_because": "P_pts3/lead in-between gate failed at 1.775 of the decision threshold"
+    },
+    {
+      "from_deg": -22.154,
       "to_deg": -29.539,
-      "step_deg": 14.769,
+      "step_deg": 7.385,
       "blend_error": 0.0043,
       "covered": true,
       "split_from": [
-        0.0,
+        -14.77,
         -29.539
       ],
-      "split_because": "P_pts/lead in-between gate failed at 1.361 of the decision threshold"
+      "split_because": "P_pts3/lead in-between gate failed at 1.775 of the decision threshold"
     },
     {
       "from_deg": -29.539,
-      "to_deg": -29.77,
-      "step_deg": 0.231,
+      "to_deg": -29.654,
+      "step_deg": 0.115,
       "blend_error": 0.0043,
       "covered": true,
       "split_from": [
         -29.539,
-        -30.0
+        -29.77
       ],
-      "split_because": "P_pts/lead in-between gate failed at 3.091 of the decision threshold"
+      "split_because": "P_pts3/lead in-between gate failed at 1.781 of the decision threshold"
+    },
+    {
+      "from_deg": -29.654,
+      "to_deg": -29.77,
+      "step_deg": 0.116,
+      "blend_error": 0.0043,
+      "covered": true,
+      "split_from": [
+        -29.539,
+        -29.77
+      ],
+      "split_because": "P_pts3/lead in-between gate failed at 1.781 of the decision threshold"
     },
     {
       "from_deg": -29.77,
-      "to_deg": -30.0,
-      "step_deg": 0.23,
+      "to_deg": -29.885,
+      "step_deg": 0.115,
       "blend_error": 0.0043,
       "covered": true,
       "split_from": [
-        -29.539,
+        -29.77,
         -30.0
       ],
-      "split_because": "P_pts/lead in-between gate failed at 3.091 of the decision threshold"
+      "split_because": "P_pts3/lead in-between gate failed at 1.787 of the decision threshold"
+    },
+    {
+      "from_deg": -29.885,
+      "to_deg": -30.0,
+      "step_deg": 0.115,
+      "blend_error": 0.0043,
+      "covered": true,
+      "split_from": [
+        -29.77,
+        -30.0
+      ],
+      "split_because": "P_pts3/lead in-between gate failed at 1.787 of the decision threshold"
     }
   ],
   "uncovered": [],
@@ -259,53 +324,67 @@
     3.315,
     2.815,
     2.026,
+    1.025,
     0.024,
+    0.012,
     0.0,
+    -14.77,
     -29.539,
+    -29.77,
     -30.0
   ],
   "refinements": [
     {
-      "from_deg": 2.026,
+      "from_deg": 1.025,
       "to_deg": 0.024,
-      "worst": 1.4782,
+      "worst": 2.5798,
       "policy": "P_pts3",
       "scenario": "lead",
-      "midpoint_deg": 1.025,
-      "blend_error_upper": 0.0092,
-      "blend_error_lower": 0.0078
+      "midpoint_deg": 0.524,
+      "blend_error_upper": 0.0073,
+      "blend_error_lower": 0.0071
     },
     {
-      "from_deg": 0.024,
+      "from_deg": 0.012,
       "to_deg": 0.0,
-      "worst": 3.1835,
-      "policy": "P_pts",
+      "worst": 1.6953,
+      "policy": "P_pts3",
       "scenario": "lead",
-      "midpoint_deg": 0.012,
+      "midpoint_deg": 0.006,
       "blend_error_upper": 0.0063,
       "blend_error_lower": 0.0094
     },
     {
-      "from_deg": 0.0,
+      "from_deg": -14.77,
       "to_deg": -29.539,
-      "worst": 1.3611,
-      "policy": "P_pts",
+      "worst": 1.7748,
+      "policy": "P_pts3",
       "scenario": "lead",
-      "midpoint_deg": -14.77,
-      "blend_error_upper": 0.0082,
+      "midpoint_deg": -22.154,
+      "blend_error_upper": 0.0042,
       "blend_error_lower": 0.0043
     },
     {
       "from_deg": -29.539,
-      "to_deg": -30.0,
-      "worst": 3.0911,
-      "policy": "P_pts",
+      "to_deg": -29.77,
+      "worst": 1.7813,
+      "policy": "P_pts3",
       "scenario": "lead",
-      "midpoint_deg": -29.77,
+      "midpoint_deg": -29.654,
+      "blend_error_upper": 0.0043,
+      "blend_error_lower": 0.0043
+    },
+    {
+      "from_deg": -29.77,
+      "to_deg": -30.0,
+      "worst": 1.7871,
+      "policy": "P_pts3",
+      "scenario": "lead",
+      "midpoint_deg": -29.885,
       "blend_error_upper": 0.0043,
       "blend_error_lower": 0.0043
     }
   ],
-  "renders_used": 17,
+  "renders_used": 23,
   "note": "Refined from a previous knot set by PROTOCOL section 4's repair: a sub-interval whose BEHAVIOURAL in-between gate failed is split at its midpoint, which becomes a rendered endpoint. The image blend metric had already accepted it; the behavioural check is the one that decides. Capture the new knot before re-gating."
 }

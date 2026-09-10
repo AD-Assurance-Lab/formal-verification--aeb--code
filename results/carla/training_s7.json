@@ -1,0 +1,24 @@
+{
+  "input": [
+    128,
+    96
+  ],
+  "device": "cuda",
+  "seed": 7,
+  "policies": {
+    "P_pts": {
+      "samples": 416,
+      "braking_samples": 50,
+      "knots": [
+        -30.0,
+        60.0
+      ],
+      "highbeam_condition": false,
+      "student_params": 310145,
+      "train_mae_mps2": 1.1366,
+      "file": "P_pts_s7_lead.pt"
+    }
+  },
+  "scenario": "lead",
+  "note": "Identical architecture, recipe, epochs and frame count. The ONLY difference is which illumination knots the frames came from. Train MAE is not a result; the result is whether each policy passes the regulatory endpoints closed loop, which is milestone M4."
+}

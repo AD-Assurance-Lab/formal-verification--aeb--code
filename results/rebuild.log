@@ -461,3 +461,8 @@ Terminated
   worst 1.568 of the decision threshold -> FAIL
   wrote results/carla/gate_inbetween_P_pts.json
 Terminated
+[2026-09-10 06:54:39] restarting CARLA on 3000
+  server pid 3785531 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 06:55:01] START capture_lead

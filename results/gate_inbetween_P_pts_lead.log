@@ -5,3 +5,51 @@
     sub-interval +54.852 to +47.558, midpoint +51.205
       max policy difference 0.171 m/s^2 = 0.07 of the decision threshold
     sub-interval +47.558 to +41.911, midpoint +44.734
+      max policy difference 0.207 m/s^2 = 0.08 of the decision threshold
+    sub-interval +41.911 to +36.234, midpoint +39.073
+      max policy difference 0.134 m/s^2 = 0.05 of the decision threshold
+    sub-interval +36.234 to +30.151, midpoint +33.193
+      max policy difference 0.173 m/s^2 = 0.07 of the decision threshold
+    sub-interval +30.151 to +22.238, midpoint +26.194
+      max policy difference 0.435 m/s^2 = 0.18 of the decision threshold
+    sub-interval +22.238 to +14.605, midpoint +18.422
+      max policy difference 0.162 m/s^2 = 0.07 of the decision threshold
+    sub-interval +14.605 to +12.342, midpoint +13.474
+      max policy difference 0.891 m/s^2 = 0.36 of the decision threshold
+    sub-interval +12.342 to +8.327, midpoint +10.335
+      max policy difference 0.586 m/s^2 = 0.24 of the decision threshold
+    sub-interval +8.327 to +6.848, midpoint +7.588
+      max policy difference 0.206 m/s^2 = 0.08 of the decision threshold
+    sub-interval +6.848 to +6.051, midpoint +6.450
+      max policy difference 0.359 m/s^2 = 0.15 of the decision threshold
+    sub-interval +6.051 to +4.857, midpoint +5.454
+      max policy difference 0.588 m/s^2 = 0.24 of the decision threshold
+    sub-interval +4.857 to +4.289, midpoint +4.573
+      max policy difference 0.417 m/s^2 = 0.17 of the decision threshold
+    sub-interval +4.289 to +3.315, midpoint +3.802
+      max policy difference 0.550 m/s^2 = 0.22 of the decision threshold
+    sub-interval +3.315 to +2.815, midpoint +3.065
+      max policy difference 0.426 m/s^2 = 0.17 of the decision threshold
+    sub-interval +2.815 to +2.026, midpoint +2.420
+      max policy difference 0.555 m/s^2 = 0.23 of the decision threshold
+    sub-interval +2.026 to +1.025, midpoint +1.525
+      max policy difference 0.991 m/s^2 = 0.40 of the decision threshold
+    sub-interval +1.025 to +0.024, midpoint +0.524
+      max policy difference 3.839 m/s^2 = 1.57 of the decision threshold
+    sub-interval +0.024 to +0.012, midpoint +0.018
+      max policy difference 2.007 m/s^2 = 0.82 of the decision threshold
+    sub-interval +0.012 to +0.000, midpoint +0.006
+      max policy difference 3.418 m/s^2 = 1.40 of the decision threshold
+    sub-interval +0.000 to -14.770, midpoint -7.385
+      max policy difference 1.637 m/s^2 = 0.67 of the decision threshold
+    sub-interval -14.770 to -29.539, midpoint -22.154
+      max policy difference 2.328 m/s^2 = 0.95 of the decision threshold
+    sub-interval -29.539 to -29.770, midpoint -29.654
+      max policy difference 2.396 m/s^2 = 0.98 of the decision threshold
+    sub-interval -29.770 to -30.000, midpoint -29.885
+      max policy difference 2.369 m/s^2 = 0.97 of the decision threshold
+
+  illumination axis OK: 24 midpoints, span 0.3656 of full range
+
+  worst 1.569 of the decision threshold -> FAIL
+  wrote results/carla/gate_inbetween_P_pts.json

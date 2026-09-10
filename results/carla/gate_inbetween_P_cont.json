@@ -2,41 +2,41 @@
   "policy": "P_cont",
   "scenario": "lead",
   "illumination": {
-    "knots": 20,
-    "axis_span_mean": 0.36549,
+    "knots": 24,
+    "axis_span_mean": 0.3656,
     "min_axis_span": 0.05,
     "span_ok": true,
     "inversions": [
       {
-        "from_deg": 0.012,
-        "to_deg": -14.77,
-        "from_mean": 0.01499,
+        "from_deg": 0.006,
+        "to_deg": -7.385,
+        "from_mean": 0.01489,
         "to_mean": 0.04724,
-        "rise": 0.03225,
-        "frac_of_span": 0.0882,
+        "rise": 0.03235,
+        "frac_of_span": 0.0885,
         "declared_uncovered": false,
-        "detail": "sun fell 0.012 -> -14.770 deg and the frame got BRIGHTER, 0.0150 -> 0.0472 (8.8% of the axis span)"
+        "detail": "sun fell 0.006 -> -7.385 deg and the frame got BRIGHTER, 0.0149 -> 0.0472 (8.8% of the axis span)"
       }
     ],
-    "worst_inversion_frac": 0.0882,
+    "worst_inversion_frac": 0.0885,
     "max_inversion_frac": 0.12,
-    "total_rise_frac": 0.0882,
+    "total_rise_frac": 0.0885,
     "max_total_rise_frac": 0.25,
     "monotone_violations": [],
     "monotone_ok": true,
     "brightest_at_deg": 57.426,
-    "darkest_at_deg": 0.012,
+    "darkest_at_deg": 0.006,
     "extremes_ok": true,
     "lamp_threshold_deg": 5.0,
     "means_by_altitude": [
       {
         "sun_altitude_deg": 57.426,
-        "mean": 0.38048,
+        "mean": 0.38049,
         "lamps": false
       },
       {
         "sun_altitude_deg": 51.205,
-        "mean": 0.37115,
+        "mean": 0.37114,
         "lamps": false
       },
       {
@@ -46,32 +46,32 @@
       },
       {
         "sun_altitude_deg": 39.073,
-        "mean": 0.34359,
+        "mean": 0.3436,
         "lamps": false
       },
       {
         "sun_altitude_deg": 33.193,
-        "mean": 0.3248,
+        "mean": 0.32478,
         "lamps": false
       },
       {
         "sun_altitude_deg": 26.194,
-        "mean": 0.29586,
+        "mean": 0.29587,
         "lamps": false
       },
       {
         "sun_altitude_deg": 18.422,
-        "mean": 0.25198,
+        "mean": 0.25197,
         "lamps": false
       },
       {
         "sun_altitude_deg": 13.474,
-        "mean": 0.20153,
+        "mean": 0.20149,
         "lamps": false
       },
       {
         "sun_altitude_deg": 10.335,
-        "mean": 0.16871,
+        "mean": 0.16872,
         "lamps": false
       },
       {
@@ -81,12 +81,12 @@
       },
       {
         "sun_altitude_deg": 6.45,
-        "mean": 0.13458,
+        "mean": 0.13459,
         "lamps": false
       },
       {
         "sun_altitude_deg": 5.454,
-        "mean": 0.12149,
+        "mean": 0.12148,
         "lamps": false
       },
       {
@@ -96,7 +96,7 @@
       },
       {
         "sun_altitude_deg": 3.802,
-        "mean": 0.1021,
+        "mean": 0.10211,
         "lamps": true
       },
       {
@@ -110,213 +110,306 @@
         "lamps": true
       },
       {
-        "sun_altitude_deg": 1.025,
-        "mean": 0.03459,
+        "sun_altitude_deg": 1.525,
+        "mean": 0.04668,
         "lamps": true
       },
       {
-        "sun_altitude_deg": 0.012,
-        "mean": 0.01499,
+        "sun_altitude_deg": 0.524,
+        "mean": 0.02398,
         "lamps": true
       },
       {
-        "sun_altitude_deg": -14.77,
+        "sun_altitude_deg": 0.018,
+        "mean": 0.01503,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": 0.006,
+        "mean": 0.01489,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": -7.385,
         "mean": 0.04724,
         "lamps": true
       },
       {
-        "sun_altitude_deg": -29.77,
+        "sun_altitude_deg": -22.154,
+        "mean": 0.04724,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": -29.654,
+        "mean": 0.04724,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": -29.885,
         "mean": 0.04724,
         "lamps": true
       }
     ],
     "ok": true
   },
-  "worst_over_covered_sub_intervals": 0.6771,
-  "failing_covered_sub_intervals": [],
+  "worst_over_covered_sub_intervals": 1.6473,
+  "failing_covered_sub_intervals": [
+    {
+      "from_deg": 0.012,
+      "to_deg": 0.0,
+      "midpoint_deg": 0.006,
+      "max_abs_diff_mps2": 3.3074,
+      "mean_abs_diff_mps2": 1.0095,
+      "as_fraction_of_threshold": 1.3513,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": -14.77,
+      "to_deg": -29.539,
+      "midpoint_deg": -22.154,
+      "max_abs_diff_mps2": 4.0318,
+      "mean_abs_diff_mps2": 1.1215,
+      "as_fraction_of_threshold": 1.6473,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": -29.539,
+      "to_deg": -29.77,
+      "midpoint_deg": -29.654,
+      "max_abs_diff_mps2": 4.0185,
+      "mean_abs_diff_mps2": 1.1222,
+      "as_fraction_of_threshold": 1.6418,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": -29.77,
+      "to_deg": -30.0,
+      "midpoint_deg": -29.885,
+      "max_abs_diff_mps2": 4.0238,
+      "mean_abs_diff_mps2": 1.126,
+      "as_fraction_of_threshold": 1.644,
+      "family_uncovered": false
+    }
+  ],
   "decision_threshold_mps2": 2.448,
   "poses_used": 20,
-  "verdict": "PASS",
-  "worst_as_fraction_of_threshold": 0.6771,
+  "verdict": "FAIL",
+  "worst_as_fraction_of_threshold": 1.6473,
   "sub_intervals": [
     {
       "from_deg": 60.0,
       "to_deg": 54.852,
       "midpoint_deg": 57.426,
-      "max_abs_diff_mps2": 0.1169,
-      "mean_abs_diff_mps2": 0.0184,
-      "as_fraction_of_threshold": 0.0478,
+      "max_abs_diff_mps2": 0.0812,
+      "mean_abs_diff_mps2": 0.0266,
+      "as_fraction_of_threshold": 0.0332,
       "family_uncovered": false
     },
     {
       "from_deg": 54.852,
       "to_deg": 47.558,
       "midpoint_deg": 51.205,
-      "max_abs_diff_mps2": 0.1528,
-      "mean_abs_diff_mps2": 0.0272,
-      "as_fraction_of_threshold": 0.0624,
+      "max_abs_diff_mps2": 0.079,
+      "mean_abs_diff_mps2": 0.0294,
+      "as_fraction_of_threshold": 0.0323,
       "family_uncovered": false
     },
     {
       "from_deg": 47.558,
       "to_deg": 41.911,
       "midpoint_deg": 44.734,
-      "max_abs_diff_mps2": 0.1351,
-      "mean_abs_diff_mps2": 0.0267,
-      "as_fraction_of_threshold": 0.0552,
+      "max_abs_diff_mps2": 0.329,
+      "mean_abs_diff_mps2": 0.0491,
+      "as_fraction_of_threshold": 0.1344,
       "family_uncovered": false
     },
     {
       "from_deg": 41.911,
       "to_deg": 36.234,
       "midpoint_deg": 39.073,
-      "max_abs_diff_mps2": 0.0617,
-      "mean_abs_diff_mps2": 0.0128,
-      "as_fraction_of_threshold": 0.0252,
+      "max_abs_diff_mps2": 0.0503,
+      "mean_abs_diff_mps2": 0.0151,
+      "as_fraction_of_threshold": 0.0206,
       "family_uncovered": false
     },
     {
       "from_deg": 36.234,
       "to_deg": 30.151,
       "midpoint_deg": 33.193,
-      "max_abs_diff_mps2": 0.0566,
-      "mean_abs_diff_mps2": 0.0175,
-      "as_fraction_of_threshold": 0.0231,
+      "max_abs_diff_mps2": 0.0563,
+      "mean_abs_diff_mps2": 0.0238,
+      "as_fraction_of_threshold": 0.023,
       "family_uncovered": false
     },
     {
       "from_deg": 30.151,
       "to_deg": 22.238,
       "midpoint_deg": 26.194,
-      "max_abs_diff_mps2": 0.0917,
-      "mean_abs_diff_mps2": 0.0279,
-      "as_fraction_of_threshold": 0.0375,
+      "max_abs_diff_mps2": 0.1473,
+      "mean_abs_diff_mps2": 0.0316,
+      "as_fraction_of_threshold": 0.0602,
       "family_uncovered": false
     },
     {
       "from_deg": 22.238,
       "to_deg": 14.605,
       "midpoint_deg": 18.422,
-      "max_abs_diff_mps2": 0.1274,
-      "mean_abs_diff_mps2": 0.0311,
-      "as_fraction_of_threshold": 0.0521,
+      "max_abs_diff_mps2": 0.2128,
+      "mean_abs_diff_mps2": 0.048,
+      "as_fraction_of_threshold": 0.0869,
       "family_uncovered": false
     },
     {
       "from_deg": 14.605,
       "to_deg": 12.342,
       "midpoint_deg": 13.474,
-      "max_abs_diff_mps2": 0.0979,
-      "mean_abs_diff_mps2": 0.0265,
-      "as_fraction_of_threshold": 0.04,
+      "max_abs_diff_mps2": 0.1584,
+      "mean_abs_diff_mps2": 0.0484,
+      "as_fraction_of_threshold": 0.0647,
       "family_uncovered": false
     },
     {
       "from_deg": 12.342,
       "to_deg": 8.327,
       "midpoint_deg": 10.335,
-      "max_abs_diff_mps2": 0.1665,
-      "mean_abs_diff_mps2": 0.0429,
-      "as_fraction_of_threshold": 0.068,
+      "max_abs_diff_mps2": 0.217,
+      "mean_abs_diff_mps2": 0.0791,
+      "as_fraction_of_threshold": 0.0887,
       "family_uncovered": false
     },
     {
       "from_deg": 8.327,
       "to_deg": 6.848,
       "midpoint_deg": 7.588,
-      "max_abs_diff_mps2": 0.0786,
-      "mean_abs_diff_mps2": 0.0235,
-      "as_fraction_of_threshold": 0.0321,
+      "max_abs_diff_mps2": 0.0827,
+      "mean_abs_diff_mps2": 0.0251,
+      "as_fraction_of_threshold": 0.0338,
       "family_uncovered": false
     },
     {
       "from_deg": 6.848,
       "to_deg": 6.051,
       "midpoint_deg": 6.45,
-      "max_abs_diff_mps2": 0.0631,
-      "mean_abs_diff_mps2": 0.0153,
-      "as_fraction_of_threshold": 0.0258,
+      "max_abs_diff_mps2": 0.1557,
+      "mean_abs_diff_mps2": 0.032,
+      "as_fraction_of_threshold": 0.0636,
       "family_uncovered": false
     },
     {
       "from_deg": 6.051,
       "to_deg": 4.857,
       "midpoint_deg": 5.454,
-      "max_abs_diff_mps2": 0.1046,
-      "mean_abs_diff_mps2": 0.0314,
-      "as_fraction_of_threshold": 0.0427,
+      "max_abs_diff_mps2": 0.2077,
+      "mean_abs_diff_mps2": 0.0505,
+      "as_fraction_of_threshold": 0.0849,
       "family_uncovered": false
     },
     {
       "from_deg": 4.857,
       "to_deg": 4.289,
       "midpoint_deg": 4.573,
-      "max_abs_diff_mps2": 0.0659,
-      "mean_abs_diff_mps2": 0.0252,
-      "as_fraction_of_threshold": 0.0269,
+      "max_abs_diff_mps2": 0.1047,
+      "mean_abs_diff_mps2": 0.0418,
+      "as_fraction_of_threshold": 0.0428,
       "family_uncovered": false
     },
     {
       "from_deg": 4.289,
       "to_deg": 3.315,
       "midpoint_deg": 3.802,
-      "max_abs_diff_mps2": 0.098,
-      "mean_abs_diff_mps2": 0.0323,
-      "as_fraction_of_threshold": 0.04,
+      "max_abs_diff_mps2": 0.1375,
+      "mean_abs_diff_mps2": 0.0501,
+      "as_fraction_of_threshold": 0.0562,
       "family_uncovered": false
     },
     {
       "from_deg": 3.315,
       "to_deg": 2.815,
       "midpoint_deg": 3.065,
-      "max_abs_diff_mps2": 0.1959,
-      "mean_abs_diff_mps2": 0.0573,
-      "as_fraction_of_threshold": 0.08,
+      "max_abs_diff_mps2": 0.2825,
+      "mean_abs_diff_mps2": 0.0805,
+      "as_fraction_of_threshold": 0.1154,
       "family_uncovered": false
     },
     {
       "from_deg": 2.815,
       "to_deg": 2.026,
       "midpoint_deg": 2.42,
-      "max_abs_diff_mps2": 0.2464,
-      "mean_abs_diff_mps2": 0.0628,
-      "as_fraction_of_threshold": 0.1007,
+      "max_abs_diff_mps2": 0.3095,
+      "mean_abs_diff_mps2": 0.1077,
+      "as_fraction_of_threshold": 0.1265,
       "family_uncovered": false
     },
     {
       "from_deg": 2.026,
+      "to_deg": 1.025,
+      "midpoint_deg": 1.525,
+      "max_abs_diff_mps2": 0.5837,
+      "mean_abs_diff_mps2": 0.176,
+      "as_fraction_of_threshold": 0.2385,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": 1.025,
       "to_deg": 0.024,
-      "midpoint_deg": 1.025,
-      "max_abs_diff_mps2": 1.4087,
-      "mean_abs_diff_mps2": 0.5018,
-      "as_fraction_of_threshold": 0.5755,
+      "midpoint_deg": 0.524,
+      "max_abs_diff_mps2": 0.9151,
+      "mean_abs_diff_mps2": 0.2937,
+      "as_fraction_of_threshold": 0.3739,
       "family_uncovered": false
     },
     {
       "from_deg": 0.024,
+      "to_deg": 0.012,
+      "midpoint_deg": 0.018,
+      "max_abs_diff_mps2": 0.4092,
+      "mean_abs_diff_mps2": 0.1335,
+      "as_fraction_of_threshold": 0.1672,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": 0.012,
       "to_deg": 0.0,
-      "midpoint_deg": 0.012,
-      "max_abs_diff_mps2": 1.6572,
-      "mean_abs_diff_mps2": 0.4347,
-      "as_fraction_of_threshold": 0.6771,
+      "midpoint_deg": 0.006,
+      "max_abs_diff_mps2": 3.3074,
+      "mean_abs_diff_mps2": 1.0095,
+      "as_fraction_of_threshold": 1.3513,
       "family_uncovered": false
     },
     {
       "from_deg": 0.0,
+      "to_deg": -14.77,
+      "midpoint_deg": -7.385,
+      "max_abs_diff_mps2": 1.1009,
+      "mean_abs_diff_mps2": 0.4188,
+      "as_fraction_of_threshold": 0.4498,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": -14.77,
       "to_deg": -29.539,
-      "midpoint_deg": -14.77,
-      "max_abs_diff_mps2": 1.4317,
-      "mean_abs_diff_mps2": 0.56,
-      "as_fraction_of_threshold": 0.585,
+      "midpoint_deg": -22.154,
+      "max_abs_diff_mps2": 4.0318,
+      "mean_abs_diff_mps2": 1.1215,
+      "as_fraction_of_threshold": 1.6473,
       "family_uncovered": false
     },
     {
       "from_deg": -29.539,
+      "to_deg": -29.77,
+      "midpoint_deg": -29.654,
+      "max_abs_diff_mps2": 4.0185,
+      "mean_abs_diff_mps2": 1.1222,
+      "as_fraction_of_threshold": 1.6418,
+      "family_uncovered": false
+    },
+    {
+      "from_deg": -29.77,
       "to_deg": -30.0,
-      "midpoint_deg": -29.77,
-      "max_abs_diff_mps2": 0.4571,
-      "mean_abs_diff_mps2": 0.2088,
-      "as_fraction_of_threshold": 0.1867,
+      "midpoint_deg": -29.885,
+      "max_abs_diff_mps2": 4.0238,
+      "mean_abs_diff_mps2": 1.126,
+      "as_fraction_of_threshold": 1.644,
       "family_uncovered": false
     }
   ],
