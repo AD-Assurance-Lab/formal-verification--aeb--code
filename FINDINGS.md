@@ -6,6 +6,51 @@ here, never inside the protocol.
 
 ---
 
+## F31 — 2026-09-10, on clean frames, 8 of the 29 pieces of the lighting range span nothing
+
+The lighting range is cut in half again and again until the middle of a piece is close
+enough to the straight line across it. The rule uses a fixed distance. It has no idea how
+much light the piece covers. So it can make a piece across which the scene does not change
+at all, and the certificate for that piece says nothing.
+
+The first measurement of this found one such piece (F27). It used camera frames that were
+later found to be wrong at the dark end (F28). This is the same measurement on clean
+frames, over the refined range of 29 pieces.
+
+| | first measurement | now |
+|---|---|---|
+| pieces | 20 | 29 |
+| pieces that span nothing | 1 | **8** |
+| smallest distance between the two ends | 0.000229 | **0.000029** |
+| largest | 0.046794 | 0.046783 |
+| largest over smallest | 204 | **1613** |
+| middle value | 0.021705 | 0.017662 |
+
+**Two of the eight are 7.4 degrees of sun angle wide.** The pieces from -14.770 to -22.154
+and from -22.154 to -29.539 are among the widest on the range in degrees. In light they are
+two of the emptiest. Below about -14 degrees the sun is far under the horizon, the scene is
+lit by the headlamps alone, and it stops changing.
+
+### Why this matters more than the count
+
+The count of pieces is not a measure of coverage, and neither is the width in degrees. The
+two disagree, and they disagree most at the dark end, which is where this study's
+interesting results are. A tool that reports the width in degrees beside every verdict is
+better than one that reports nothing. It is still the wrong quantity.
+
+Eight pieces of 29 is 28 percent of every count this study reports. Each one certifies
+easily, because it is easy to bound a set whose members are all one picture.
+
+### What to do
+
+Report the distance in light beside every verdict, not the width in degrees. The tool that
+measures it is `tools/family_fidelity.py` and it needs no simulator.
+
+Whether to stop making such pieces is a change to what the lighting range IS, so it needs
+an amendment. It is queue item 13 and it is not this session's to make.
+
+---
+
 ## F30 — 2026-09-10, F29 closes: four torch settings make the training reproducible, and they cost 2.9%
 
 F29 measured that the same seed on the same frames gives a different network. It left

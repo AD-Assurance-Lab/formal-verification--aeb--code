@@ -1,0 +1,274 @@
+{
+  "scenario": "lead",
+  "map": "Town12",
+  "floor": 0.002,
+  "sub_intervals": 29,
+  "spans_nothing": 8,
+  "distance_min": 2.9e-05,
+  "distance_max": 0.046783,
+  "distance_median": 0.017662,
+  "rows": [
+    {
+      "from_deg": -29.77,
+      "to_deg": -29.885,
+      "width_deg": 0.115,
+      "endpoint_distance": 2.9e-05,
+      "blend_error_one_pose": 0.0043,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": -22.154,
+      "to_deg": -29.539,
+      "width_deg": 7.385,
+      "endpoint_distance": 4e-05,
+      "blend_error_one_pose": 0.0043,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": -29.885,
+      "to_deg": -30.0,
+      "width_deg": 0.115,
+      "endpoint_distance": 4e-05,
+      "blend_error_one_pose": 0.0043,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": -29.654,
+      "to_deg": -29.77,
+      "width_deg": 0.116,
+      "endpoint_distance": 4.7e-05,
+      "blend_error_one_pose": 0.0043,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": -29.539,
+      "to_deg": -29.654,
+      "width_deg": 0.115,
+      "endpoint_distance": 5e-05,
+      "blend_error_one_pose": 0.0043,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": -14.77,
+      "to_deg": -22.154,
+      "width_deg": 7.384,
+      "endpoint_distance": 6e-05,
+      "blend_error_one_pose": 0.0042,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 0.012,
+      "to_deg": 0.006,
+      "width_deg": 0.006,
+      "endpoint_distance": 0.00022,
+      "blend_error_one_pose": 0.0063,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 0.024,
+      "to_deg": 0.012,
+      "width_deg": 0.012,
+      "endpoint_distance": 0.000262,
+      "blend_error_one_pose": 0.0063,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 0.524,
+      "to_deg": 0.024,
+      "width_deg": 0.5,
+      "endpoint_distance": 0.008504,
+      "blend_error_one_pose": 0.0071,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 6.848,
+      "to_deg": 6.051,
+      "width_deg": 0.797,
+      "endpoint_distance": 0.009536,
+      "blend_error_one_pose": 0.0098,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 1.025,
+      "to_deg": 0.524,
+      "width_deg": 0.501,
+      "endpoint_distance": 0.010175,
+      "blend_error_one_pose": 0.0073,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 4.857,
+      "to_deg": 4.289,
+      "width_deg": 0.568,
+      "endpoint_distance": 0.010388,
+      "blend_error_one_pose": 0.01,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 3.315,
+      "to_deg": 2.815,
+      "width_deg": 0.5,
+      "endpoint_distance": 0.011811,
+      "blend_error_one_pose": 0.0074,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 8.327,
+      "to_deg": 6.848,
+      "width_deg": 1.479,
+      "endpoint_distance": 0.014109,
+      "blend_error_one_pose": 0.0076,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 14.605,
+      "to_deg": 12.342,
+      "width_deg": 2.263,
+      "endpoint_distance": 0.017662,
+      "blend_error_one_pose": 0.0096,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 2.815,
+      "to_deg": 2.026,
+      "width_deg": 0.789,
+      "endpoint_distance": 0.019146,
+      "blend_error_one_pose": 0.0078,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 60.0,
+      "to_deg": 54.852,
+      "width_deg": 5.148,
+      "endpoint_distance": 0.020001,
+      "blend_error_one_pose": 0.0097,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 4.289,
+      "to_deg": 3.315,
+      "width_deg": 0.974,
+      "endpoint_distance": 0.020536,
+      "blend_error_one_pose": 0.0079,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 6.051,
+      "to_deg": 4.857,
+      "width_deg": 1.194,
+      "endpoint_distance": 0.022874,
+      "blend_error_one_pose": 0.0072,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 2.026,
+      "to_deg": 1.025,
+      "width_deg": 1.001,
+      "endpoint_distance": 0.023743,
+      "blend_error_one_pose": 0.0092,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 47.558,
+      "to_deg": 41.911,
+      "width_deg": 5.647,
+      "endpoint_distance": 0.02731,
+      "blend_error_one_pose": 0.0098,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 41.911,
+      "to_deg": 36.234,
+      "width_deg": 5.677,
+      "endpoint_distance": 0.027876,
+      "blend_error_one_pose": 0.0077,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 36.234,
+      "to_deg": 30.151,
+      "width_deg": 6.083,
+      "endpoint_distance": 0.029868,
+      "blend_error_one_pose": 0.0098,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 54.852,
+      "to_deg": 47.558,
+      "width_deg": 7.294,
+      "endpoint_distance": 0.029967,
+      "blend_error_one_pose": 0.0079,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 12.342,
+      "to_deg": 8.327,
+      "width_deg": 4.015,
+      "endpoint_distance": 0.030535,
+      "blend_error_one_pose": 0.0098,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 0.006,
+      "to_deg": 0.0,
+      "width_deg": 0.006,
+      "endpoint_distance": 0.032924,
+      "blend_error_one_pose": 0.0094,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 22.238,
+      "to_deg": 14.605,
+      "width_deg": 7.633,
+      "endpoint_distance": 0.037517,
+      "blend_error_one_pose": 0.0079,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -14.77,
+      "width_deg": 14.77,
+      "endpoint_distance": 0.043542,
+      "blend_error_one_pose": 0.0082,
+      "covered": true,
+      "poses": 104
+    },
+    {
+      "from_deg": 30.151,
+      "to_deg": 22.238,
+      "width_deg": 7.913,
+      "endpoint_distance": 0.046783,
+      "blend_error_one_pose": 0.0078,
+      "covered": true,
+      "poses": 104
+    }
+  ],
+  "note": "endpoint_distance is the mean absolute per-pixel difference between the two endpoint frame SETS, over the whole captured pose set, on the 0-1 scale. blend_error_one_pose is carried from the knot file for reference and is NOT the same measurement: it is one frame at a fixed empty-road pose. Do not form a ratio of the two."
+}

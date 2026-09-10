@@ -49,3 +49,11 @@
     sub-interval -14.770 to -22.154, midpoint -18.462
       max policy difference 4.478 m/s^2 = 1.83 of the decision threshold
     sub-interval -22.154 to -29.539, midpoint -25.846
+      max policy difference 4.472 m/s^2 = 1.83 of the decision threshold
+    sub-interval -29.539 to -29.654, midpoint -29.596
+      max policy difference 4.464 m/s^2 = 1.82 of the decision threshold
+    sub-interval -29.654 to -29.770, midpoint -29.712
+      max policy difference 4.482 m/s^2 = 1.83 of the decision threshold
+    sub-interval -29.770 to -29.885, midpoint -29.828
+      max policy difference 4.484 m/s^2 = 1.83 of the decision threshold
+    sub-interval -29.885 to -30.000, midpoint -29.943
