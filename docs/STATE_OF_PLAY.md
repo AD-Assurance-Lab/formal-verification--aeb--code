@@ -12,7 +12,64 @@ Live state in the protocol's own terms: `python -m study.status`.
 
 ---
 
-## Where the study is, 2026-09-09
+## Where the study is, 2026-09-10 09:00 — BLOCKED ON F29
+
+**The Town12 rebuild reached the M5 gates and stopped there, and the reason it stopped is
+not the gates.** It is F29: **training is not reproducible.** Two consecutive trainings of
+`P_pts` at the same seed on byte-identical frames differ in all ten tensors, 77.1% of
+parameters, 133% relative in a head weight. Everything downstream of training — endpoints,
+gates, certificates, drives — is measured against a network that the next run will not
+reproduce.
+
+### Do these in this order
+
+1. **F29. Make training reproducible, or measure what it costs not to be.**
+   `train_policies` seeds torch, random and numpy and sets none of
+   `use_deterministic_algorithms`, `cudnn.deterministic`, `cudnn.benchmark = False`,
+   `CUBLAS_WORKSPACE_CONFIG`. Turn them on, retrain twice, and check the hashes match.
+   Until this closes, **no endpoint verdict, gate result or certificate from this rebuild
+   should be quoted**, and `scripts/gate_repair_loop.sh` must not be run — it splits the
+   axis on gates measured against networks that change between rounds.
+
+2. **Queue item 17: scope the results directories by map.** Four near-misses in one night,
+   each one a stale Town01 artifact sitting under exactly the name a Town12 tool asks for:
+   the captures (F26, both regulatory endpoints), `results/carla/` (157 of 179 files, about
+   to be read by `--refine`), the gate artifacts (10 of 12), and `results/models/` (54
+   checkpoints — one of which was hashed twice and nearly closed F29 with the wrong
+   answer). Three were caught by luck or by a return code.
+
+3. **Then** re-run the gates on reproducible networks, and only then decide whether the
+   dark-end in-between failures are a property of the disturbance family or of the
+   optimiser.
+
+4. **Then** the two open contradictions can actually be evaluated:
+   `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md` and
+   `..._training_nondeterminism.md`.
+
+### What the rebuild did establish, and what is safe to keep
+
+Solid, and independent of F29 because they are measurements of the instrument rather than
+of a trained network:
+
+- **A14** Town12, on A3's own probe. Town01 had zero sites meeting the plate scenario's own
+  320 m requirement; the study site now has 308 m of margin instead of thirteen.
+- **A15** cloudiness zero. **A16/A17** capture darkest-first and darken before the nominal
+  run. **F28**: the darkness endpoint renders 9.4x brighter if a bright knot preceded it,
+  and never decays.
+- **F26** the capture stamp guard, which then paid for itself: a refine recaptured 4 knots
+  and skipped 21, six minutes instead of forty.
+- **F28b** the cross-campaign check compared two different stretches of road; within a pose
+  group the agreement is 0.0004 where across groups it read 32.5%.
+- **F25** Town12's axis has no uncovered sliver, at the photometric tolerance.
+- The primitives, the oracles and the contact detector all pass on Town12.
+
+Held from the pre-registration: all three arms pass all three regulatory lighting
+conditions 10/10 on both hazard scenarios — **but see F29 before believing any single
+run of it.**
+
+---
+
+## Where the study was, 2026-09-09
 
 **The study moved to Town12 and is rebuilding.** Amendments A13, A14 and A15 landed in one
 day and each one came from a measurement rather than a preference:
