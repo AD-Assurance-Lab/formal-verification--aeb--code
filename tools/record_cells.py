@@ -25,7 +25,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 RESULTS = J.REPO / "study" / "results.json"
 
 # PROTOCOL section 9, and the same mapping study/ledger.py checks artifacts against.

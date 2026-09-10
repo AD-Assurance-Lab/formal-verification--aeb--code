@@ -66,7 +66,7 @@ def main() -> int:
     if len(control) != len(images):
         raise SystemExit("control and scenario have different pose counts")
 
-    b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+    b = json.loads((J.OUT / "braking.json").read_text())
     v = J.HAZARD_MPH * J.MPH
     rr = J.r_req_m(v, b["a_max_g_worst"], b["t_lat_s_worst"] or 0.2)
 
@@ -108,7 +108,7 @@ def main() -> int:
         "  away, for scale. Choose the smallest input that still resolves it, since\n"
         "  every extra pixel costs the verifier ReLU neurons.\n"
     )
-    (J.REPO / "results" / "carla" / f"input_size_{args.scenario}.json").write_text(
+    (J.OUT / f"input_size_{args.scenario}.json").write_text(
         json.dumps(
             {
                 "r_req_m": round(rr, 2),

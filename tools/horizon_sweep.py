@@ -48,7 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 CAPTURES = J.CAPTURES
 
 # Fine through the band the certificates and the drives both single out, coarse outside it

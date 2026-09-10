@@ -28,7 +28,7 @@ import carla_jobs as J  # noqa: E402
 
 DAY_ALT, NIGHT_ALT = 60.0, -30.0
 WIDTHS = [90.0, 45.0, 22.5, 11.25, 5.625]
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 def main() -> int:
@@ -139,7 +139,7 @@ def main() -> int:
     }
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "interval_sweep.json").write_text(json.dumps(payload, indent=2) + "\n")
-    print("\n  wrote results/carla/interval_sweep.json")
+    print(f"\n  wrote {(J.OUT / 'interval_sweep.json').relative_to(J.REPO)}")
     return 0
 
 

@@ -45,9 +45,11 @@ fresh() { stop_server; bash tools/carla_launch.sh >>"$REPO/results/carla_launch.
 
 count_failing() {
   "$PY" - <<'PY'
-import json, pathlib
+import json, pathlib, sys
+sys.path.insert(0, 'tools')
+from paths import OUT            # map-scoped; a flat path here reads the OLD map's gates
 bad = set()
-for p in pathlib.Path('results/carla').glob('gate_inbetween_*.json'):
+for p in OUT.glob('gate_inbetween_*.json'):
     d = json.loads(p.read_text())
     for c in d['sub_intervals']:
         if c['as_fraction_of_threshold'] > 1.0 and not c.get('family_uncovered'):

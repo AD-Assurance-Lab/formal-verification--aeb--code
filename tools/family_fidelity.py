@@ -41,7 +41,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 from capture_campaign import capture_stem  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 def main() -> int:

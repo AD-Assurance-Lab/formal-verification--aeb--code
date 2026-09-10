@@ -41,7 +41,7 @@ import condition_signature as CS  # noqa: E402
 from run_policy import load_policy, preprocess, BRAKE_THRESHOLD_FRACTION  # noqa: E402
 
 CAPTURES = J.CAPTURES
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 POSES_NEAR_RREQ = 20
 
 
@@ -383,7 +383,7 @@ def main() -> int:
         json.dumps(payload, indent=2) + "\n"
     )
     print(f"\n  worst {worst:.3f} of the decision threshold -> {payload['verdict']}")
-    print(f"  wrote results/carla/gate_inbetween_{args.policy}{_sfx}.json")
+    print(f"  wrote {(J.OUT / f'gate_inbetween_{args.policy}{_sfx}.json').relative_to(J.REPO)}")
     # A FAILING GATE MUST FAIL THE STAGE. This returned 0 whatever the verdict, so on
     # 2026-09-07 two of the four in-between gates came back FAIL and scripts/rebuild_all.sh
     # carried straight on into verification -- an M5 exit criterion failing while the

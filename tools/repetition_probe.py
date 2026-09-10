@@ -47,7 +47,7 @@ from gpu import require_cuda  # noqa: E402
 import carla_jobs as J  # noqa: E402
 from run_policy import load_policy, one_run, plate_run, PREMATURE_MULTIPLE  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 PROBE = OUT / "repprobe"
 
 

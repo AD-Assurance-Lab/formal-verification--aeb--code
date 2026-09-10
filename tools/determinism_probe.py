@@ -58,7 +58,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 SPEED_STEPS = 150     # scripted acceleration, command changes EVERY step
 BRAKE_STEP = 150      # then full brake, latched
 MAX_STEPS = 400
@@ -264,7 +264,7 @@ def main() -> int:
                   f"{rep['policy_demand_max_spread_mps2']:.6f} m/s^2 = "
                   f"{rep['demand_spread_as_fraction_of_threshold']:.6f} of the brake "
                   f"decision threshold")
-        print(f"\n  wrote results/carla/determinism_probe.json")
+        print(f"\n  wrote {(OUT / 'determinism_probe.json').relative_to(J.REPO)}")
         return 0
 
     ap.error("give --rep N or --compare")

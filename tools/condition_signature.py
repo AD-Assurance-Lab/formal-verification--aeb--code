@@ -71,13 +71,12 @@ from pathlib import Path
 
 import numpy as np
 
-REPO = Path(__file__).resolve().parent.parent
-# Map-scoped, and read from the environment rather than imported, because this module
-# deliberately has no CARLA dependency -- it must run on a machine with no simulator and
-# no carla package, which importing carla_jobs would break. The default matches
-# carla_jobs.MAP; both read CARLA_MAP. F26.
-import os as _os
-CAPTURES = REPO / "results" / "captures" / _os.environ.get("CARLA_MAP", "Town12")
+# Map-scoped, from tools/paths.py, which is stdlib-only. This module deliberately has no
+# CARLA dependency -- it must run on a machine with no simulator and no carla package,
+# which importing carla_jobs would break -- and it used to re-type the path for that
+# reason. Re-typing a path is the defect (F26), not the cure for it.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from paths import REPO, CAPTURES, OUT  # noqa: E402
 
 # Sun altitude at or above which the capture campaign leaves the headlamps off.
 # Kept here rather than imported so this module has no CARLA dependency and can be run
@@ -245,7 +244,7 @@ def _campaign_records(manifest_path: Path) -> list[dict]:
 
 
 def _uncovered() -> list[dict]:
-    path = REPO / "results" / "carla" / "family_knots.json"
+    path = OUT / "family_knots.json"
     if not path.exists():
         return []
     return json.loads(path.read_text()).get("uncovered", [])

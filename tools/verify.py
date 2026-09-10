@@ -66,7 +66,7 @@ import carla_jobs as J  # noqa: E402
 from run_policy import load_policy, BRAKE_THRESHOLD_FRACTION  # noqa: E402
 
 CAPTURES = J.CAPTURES
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 class Family(nn.Module):
@@ -379,7 +379,7 @@ def main() -> int:
             flush=True,
         )
 
-    _prov = _provenance(str(J.REPO / "results" / "models" /
+    _prov = _provenance(str(J.MODELS /
                             f"{args.policy}_{args.policy_scenario}.pt"))
     payload = {
         "policy": args.policy,

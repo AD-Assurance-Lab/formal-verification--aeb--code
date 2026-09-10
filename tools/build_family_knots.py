@@ -53,7 +53,7 @@ def failing_sub_intervals() -> list[dict]:
                        and abs(u["to_deg"] - r["to_deg"]) < 1e-6 for u in unc)
 
     out: dict[tuple, dict] = {}
-    for path in sorted((J.REPO / "results" / "carla").glob("gate_inbetween_*.json")):
+    for path in sorted((J.OUT).glob("gate_inbetween_*.json")):
         d = json.loads(path.read_text())
         # Derived from the per-sub-interval rows rather than read from a summary field.
         # The field is newer than some artifacts, and a gate run that predates it would
@@ -135,7 +135,7 @@ def main() -> int:
                       "nothing to refine")
                 return 0
             prev = json.loads(
-                (J.REPO / "results" / "carla" / "family_knots.json").read_text())
+                (J.OUT / "family_knots.json").read_text())
             knots = list(prev["knots_sun_altitude_deg"])
             detail = list(prev["sub_interval_detail"])
             splits = []
@@ -188,12 +188,12 @@ def main() -> int:
                     "metric had already accepted it; the behavioural check is the one "
                     "that decides. Capture the new knot before re-gating."),
             }
-            (J.REPO / "results" / "carla" / "family_knots.json").write_text(
+            (J.OUT / "family_knots.json").write_text(
                 json.dumps(payload, indent=2) + "\n")
             print(f"\n  {len(splits)} sub-interval(s) split, now "
                   f"{len(knots) - 1} sub-intervals, {renders} renders")
             print(f"  knots: {knots}")
-            print("  wrote results/carla/family_knots.json")
+            print(f"  wrote {(J.OUT / 'family_knots.json').relative_to(J.REPO)}")
             return 0
 
         knots = [DAY_ALT]
@@ -262,7 +262,7 @@ def main() -> int:
                 "check in PROTOCOL section 4 still decides."
             ),
         }
-        (J.REPO / "results" / "carla" / "family_knots.json").write_text(
+        (J.OUT / "family_knots.json").write_text(
             json.dumps(payload, indent=2) + "\n"
         )
         bad = [d for d in detail if not d["covered"]]
@@ -272,7 +272,7 @@ def main() -> int:
             print(f"  UNCOVERED: {d['from_deg']:+.3f} to {d['to_deg']:+.3f} "
                   f"({d['step_deg']:.3f} deg) errs at {d['blend_error']:.4f} against a "
                   f"{args.tol} tolerance -- declared uncovered, never quietly spanned")
-        print("  wrote results/carla/family_knots.json")
+        print(f"  wrote {(J.OUT / 'family_knots.json').relative_to(J.REPO)}")
     finally:
         if cam is not None:
             cam.stop()

@@ -30,7 +30,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 FIGS = J.REPO / "docs" / "figures"
 ARMS = [("P_pts", "#eb6834"), ("P_pts3", "#8a5cd6"), ("P_cont", "#2a78d6")]
 

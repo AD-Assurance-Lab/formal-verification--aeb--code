@@ -37,16 +37,15 @@ import sys
 import time
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-OUT = REPO / "results" / "carla"
-
-# Overridable by CARLA_MAP for one reason: the Town01 artifacts are the only place the
-# open plate defect (F22/F24) can be settled, and once the Town12 rebuild lands that
-# evidence is gone. Measurement code reads this constant; nothing hard-codes a map.
+# EVERY path this study writes to comes from tools/paths.py, which is the only place any
+# of them is spelled out, and all three are scoped by map. See that module for the defect
+# they exist to stop. CARLA_MAP overrides the map; nothing here hard-codes one.
 # A14: Town12. A3 had moved this to Town01 because large maps did not run on an RTX 4070;
 # on the 5090 Town12 holds 26.5 ticks/s flat at 7 GB, and Town01 has ZERO sites meeting the
 # false-activation scenario's own 320 m requirement against Town12's thirty.
-MAP = os.environ.get("CARLA_MAP", "Town12")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from paths import REPO, MAP, CAPTURES, OUT, MODELS  # noqa: E402,F401
+
 FIXED_DT = 0.05  # 20 Hz, PROTOCOL section 1
 MPH = 0.44704  # mph -> m/s
 FT = 3.280839895  # m -> ft
@@ -76,12 +75,6 @@ WEATHER_SETTLE_TICKS = 120
 # contacts the same cell does not produce on a fresh server.
 CLOUDINESS = 0.0
 
-# WHERE THE FRAMES LIVE, in one place and scoped by map. Eleven modules had this path
-# re-typed as a literal, which is the shape of defect this repository keeps writing down --
-# and it bit exactly as predicted: F26. The captures directory was flat and keyed on
-# scenario and sun altitude, so a campaign on a new map silently reused every frame set
-# whose knot happened to coincide with an old one, including both regulatory endpoints.
-CAPTURES = REPO / "results" / "captures" / MAP
 # TWO FLOORS, and which one applies is a property of the HARNESS, not a preference.
 #
 # REPS is the floor for repetitions that share a process and a server, which is what a
@@ -579,7 +572,7 @@ def write(job: str, payload: dict) -> None:
     if isinstance(payload, dict) and "determinism" not in payload:
         payload = {**payload, "determinism": determinism_provenance(_LAST_WORLD)}
     (OUT / f"{job}.json").write_text(json.dumps(payload, indent=2) + "\n")
-    print(f"  wrote results/carla/{job}.json")
+    print(f"  wrote {(OUT / f'{job}.json').relative_to(REPO)}")
 
 
 # What each scenario's driver actually asks site_transform for, in metres, and whether it
@@ -1693,7 +1686,7 @@ def main() -> int:
             print(f"  {i}. [{'x' if done else ' '}] {name:<9} {JOBS[name][1]}")
         print(
             "\n  Relaunch the server before a measurement run. Set CARLA_PORT if it is\n"
-            "  not on 2000. [x] means a result file exists in results/carla/.\n"
+            f"  not on 2000. [x] means a result file exists in {OUT.relative_to(REPO)}/.\n"
         )
         return 0
 

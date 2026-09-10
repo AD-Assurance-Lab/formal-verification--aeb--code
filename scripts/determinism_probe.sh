@@ -20,6 +20,8 @@ export CARLA_PORT=${CARLA_PORT:-3000}
 export CARLA_TAKEOVER=1
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH
+# The results directory is map-scoped. Read the name from the module, never retyped.
+CARLA_MAP_NAME=$("$PY" -c "import sys;sys.path.insert(0,'tools');import paths;print(paths.MAP)")
 
 REPS=${1:-3}
 POLICY=${2:-P_cont}
@@ -32,7 +34,7 @@ say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
 # Stale artifacts from an earlier probe would be silently reused by --compare if a
 # repetition failed to write. Clear them first so "missing" means missing.
-rm -f "$REPO"/results/carla/determinism_rep*.json
+rm -f "$REPO"/results/carla/"$CARLA_MAP_NAME"/determinism_rep*.json
 
 for i in $(seq 1 "$REPS"); do
   say "restarting CARLA for rep $i"

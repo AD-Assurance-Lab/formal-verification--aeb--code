@@ -66,7 +66,7 @@ import carla_jobs as J  # noqa: E402
 import verify as V  # noqa: E402
 
 CAPTURES = J.CAPTURES
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 class LatchFamily(torch.nn.Module):

@@ -43,7 +43,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 ARMS = ["P_pts", "P_cont", "P_pts3"]
 
 
@@ -175,7 +175,7 @@ def main() -> int:
                   f"   ({p['certified_range_x']} vs {p['certified_range_y']})")
         if not entry["paired_seeds"]:
             print("  no seed has all arms verified yet")
-    print(f"\n  wrote results/carla/seed_sweep.json")
+    print(f"\n  wrote {(J.OUT / 'seed_sweep.json').relative_to(J.REPO)}")
     return 0
 
 

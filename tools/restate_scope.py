@@ -50,7 +50,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 WHY_A_SIDECAR = (
     "Corrected scope for artifacts written before verify.py stated it properly. This is "
     "a SIDECAR because study.ledger proves the blind protocol by matching an artifact's "

@@ -14,10 +14,13 @@ from __future__ import annotations
 
 import json
 import statistics
+import sys
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-BRAKING = REPO / "results" / "carla" / "braking.json"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from paths import REPO, OUT  # noqa: E402
+
+BRAKING = OUT / "braking.json"
 RESULTS = REPO / "study" / "results.json"
 
 G = 9.81

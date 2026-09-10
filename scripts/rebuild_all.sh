@@ -29,9 +29,11 @@ cd "$(dirname "$0")/.."
 REPO=$PWD
 PY="$REPO/.venv/bin/python"
 export CARLA_PORT=${CARLA_PORT:-3000}
-# The map is carla_jobs.MAP unless CARLA_MAP overrides it, and the shell needs it
-# too now that captures are map-scoped (F26). Read from the module, never retyped.
-CARLA_MAP_NAME=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(J.MAP)")
+# The map is paths.MAP unless CARLA_MAP overrides it, and the shell needs it too now
+# that the captures, the results and the models are all map-scoped (F26, queue item 17).
+# Read from the module, never retyped. tools/paths.py imports nothing but the standard
+# library, so this costs no simulator and no torch.
+CARLA_MAP_NAME=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import paths;print(paths.MAP)")
 export CARLA_TAKEOVER=1        # this script owns the port for the duration
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH               # ROS leaks in through it; see scripts/bootstrap_env.sh
@@ -184,7 +186,7 @@ fi
 
 if [ "$FROM" = "analysis" ]; then
   # Everything that turns committed results into a number or a picture someone quotes.
-  # No simulator: these read results/carla/*.json and the captured frames. They live in a
+  # No simulator: these read results/carla/<map>/*.json and the captured frames. They live in a
   # stage rather than in anyone's shell history because standing rule 8 is that a number
   # in a paper comes from a committed invocation, and tools/tidy.py reported three of
   # these as dead code because genuinely nothing referenced them.
@@ -398,7 +400,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       say ""
       say "M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:"
       say "    python tools/record_cells.py --write"
-      say "    git add results/carla/verify_*.json study/results.json && git commit"
+      say "    git add results/carla/$CARLA_MAP_NAME/verify_*.json study/results.json && git commit"
       say "    bash scripts/rebuild_all.sh witness      # simulator"
       say "    bash scripts/rebuild_all.sh verifyA      # GPU, concurrently"
       say "A verdict is a prediction only if it was written down first;"

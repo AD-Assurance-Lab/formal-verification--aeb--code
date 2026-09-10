@@ -36,7 +36,7 @@ import condition_signature as CS  # noqa: E402
 import stats as ST  # noqa: E402
 from train_policies import Student  # noqa: E402
 
-MODELS = J.REPO / "results" / "models"
+MODELS = J.MODELS
 # The three lighting conditions FMVSS 127 tests, as PROTOCOL section 2 records them.
 # The first two bound the certified interval; the third is the SAME darkness with a
 # different headlamp state, so it is an endpoint TEST and not a point on the family's
@@ -226,7 +226,7 @@ def plate_run(world, site, model, w, h, dev, speed_mph, lights, gap_m=200.0,
 
 def a_max_threshold(dev=None):
     """The latch threshold the closed loop uses, read from the measured primitive."""
-    b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+    b = json.loads((J.OUT / "braking.json").read_text())
     return b["a_max_g_worst"] * 9.81 * BRAKE_THRESHOLD_FRACTION
 
 
@@ -450,8 +450,8 @@ def main() -> int:
     dev = require_cuda()
     _sfx = "" if args.scenario == "lead" else f"_{args.scenario}"
     out_path = J.claim_output(                              # D-9
-        J.REPO / "results" / "carla" / f"policy_endpoints{_sfx}.json")
-    b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+        J.OUT / f"policy_endpoints{_sfx}.json")
+    b = json.loads((J.OUT / "braking.json").read_text())
     a_max = b["a_max_g_worst"] * 9.81
     client, world = J.connect(rendering=True)
     site = J.flattest_site(scenario=args.scenario)
@@ -495,7 +495,7 @@ def main() -> int:
             "approached in lane at 50 mph. PASS is crossing it without braking and "
             "without ever commanding more than the standard's 0.25 g nuisance limit. "
             "This is the ONLY scenario in the study that passes by not stopping.")
-        path = J.claim_output(J.REPO / "results" / "carla" / "policy_endpoints_plate.json")
+        path = J.claim_output(J.OUT / "policy_endpoints_plate.json")
         path.write_text(json.dumps(out, indent=2) + "\n")
         print(f"\n  wrote {path.relative_to(J.REPO)}")
         return 0

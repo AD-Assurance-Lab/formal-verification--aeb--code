@@ -41,7 +41,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 def _key(c):
@@ -209,7 +209,7 @@ def main() -> int:
     print(f"  point-biserial r = {payload['point_biserial_gate_vs_disagreement']}")
     print(f"  certified-then-failed: {len(unsafe)}")
     print(f"\n  {payload['interpretation']}")
-    print(f"\n  wrote results/carla/gate_calibration.json")
+    print(f"\n  wrote {(J.OUT / 'gate_calibration.json').relative_to(J.REPO)}")
     return 0
 
 

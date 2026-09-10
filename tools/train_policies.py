@@ -20,13 +20,23 @@ to manufacture a failure would void the result.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import sys
+import time
 from pathlib import Path
 
-import numpy as np
-import torch
-import torch.nn as nn
+# BEFORE torch is imported. cuBLAS reads this variable when it creates its handle, which
+# happens at the first matmul, and a handle already created never re-reads it. Setting it
+# in main() is too late and fails silently: torch.use_deterministic_algorithms then raises
+# at the first affected kernel instead. This is the value CUDA >= 10.2 documents for a
+# deterministic workspace.
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
+import torch.nn as nn  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -35,9 +45,9 @@ import carla_jobs as J  # noqa: E402
 from expert_law import label_decel  # noqa: E402
 
 CAPTURES = J.CAPTURES
-MODELS = J.REPO / "results" / "models"
+MODELS = J.MODELS
 
-_b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+_b = json.loads((J.OUT / "braking.json").read_text())
 A_MAX_MPS2 = _b["a_max_g_worst"] * 9.81
 R_REQ_M = J.r_req_m(J.HAZARD_MPH * J.MPH, _b["a_max_g_worst"], _b["t_lat_s_worst"] or 0.2)
 
@@ -186,6 +196,62 @@ def equalise(sets):
     return out
 
 
+def make_deterministic() -> dict:
+    """Pin every source of run-to-run drift inside torch, and say what was pinned.
+
+    FINDINGS F29. Seeding torch, random and numpy is NOT enough on CUDA. Two consecutive
+    trainings of P_pts at seed 0, on byte-identical frames, differed in all ten tensors
+    and 77.1% of parameters, and endpoint verdicts flipped with them. The seeds were
+    correct; the kernels underneath them were free to choose a different algorithm and a
+    different reduction order on each run.
+
+    Three separate mechanisms, and all three have to be closed:
+
+      * cuDNN benchmarking picks a convolution algorithm by timing candidates on the
+        first call, so the algorithm depends on what else the GPU was doing. Different
+        algorithm, different summation order, different rounding.
+      * Several kernels have no deterministic implementation at all unless asked.
+      * cuBLAS reduction order depends on its workspace, which is why
+        CUBLAS_WORKSPACE_CONFIG is set at the top of this file, before torch is
+        imported.
+
+    `use_deterministic_algorithms(True)` RAISES on an operation with no deterministic
+    kernel rather than degrading quietly. That is the behaviour we want: a training run
+    that cannot reproduce itself should fail, not produce a network nobody can
+    re-measure.
+    """
+    torch.use_deterministic_algorithms(True)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    return {
+        "use_deterministic_algorithms": True,
+        "cudnn_deterministic": bool(torch.backends.cudnn.deterministic),
+        "cudnn_benchmark": bool(torch.backends.cudnn.benchmark),
+        "cublas_workspace_config": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+        "torch": torch.__version__,
+        "cuda": torch.version.cuda,
+        "finding": "F29",
+    }
+
+
+def weights_sha256(state_dict) -> str:
+    """Hash the WEIGHTS, in a fixed key order, not the file that holds them.
+
+    A file hash also covers the container. If two trainings ever produce the same numbers
+    inside a differently packed archive, a file hash calls that a difference and sends the
+    next reader after a defect that is not there. This hash answers exactly the question
+    F29 asks: are the two networks the same network?
+    """
+    h = hashlib.sha256()
+    for k in sorted(state_dict):
+        t = state_dict[k].detach().cpu().contiguous()
+        h.update(k.encode())
+        h.update(str(tuple(t.shape)).encode())
+        h.update(str(t.dtype).encode())
+        h.update(t.numpy().tobytes())
+    return h.hexdigest()
+
+
 def class_weights(y, a_max: float):
     """The step label is heavily imbalanced: only poses inside r_req are positive.
 
@@ -236,6 +302,13 @@ def main() -> int:
                     help="seeds EVERY arm identically, so the arms are matched draws")
     ap.add_argument("--policies", nargs="+", default=list(POLICY_ARMS),
                     choices=list(POLICY_ARMS))
+    ap.add_argument("--scratch", type=Path, default=None,
+                    help="write the checkpoints and the report HERE instead of into "
+                         "results/. For the F29 repeat test: train twice and compare, "
+                         "without overwriting the study's own models.")
+    ap.add_argument("--allow-nondeterministic", action="store_true",
+                    help="run WITHOUT the F29 determinism pins. For measuring what they "
+                         "cost, and for nothing else. The report records which was used.")
     args = ap.parse_args()
 
     # require_cuda, not is_available(): the flag is False while CARLA initialises on
@@ -245,10 +318,19 @@ def main() -> int:
     dev = require_cuda()
     # Seed every RNG in use: weight init and torch.randperm were nondeterministic,
     # so "retrain, re-verify, re-drive" (A10) could not be reproduced (audit F12).
+    # Seeding is necessary and NOT sufficient on CUDA -- see make_deterministic and F29.
     import random as _random
-    MODELS.mkdir(parents=True, exist_ok=True)
+    determinism = (
+        {"use_deterministic_algorithms": False, "finding": "F29", "note":
+         "--allow-nondeterministic: this run does not reproduce and nothing measured "
+         "from it may be quoted"}
+        if args.allow_nondeterministic else make_deterministic()
+    )
+    models_dir = args.scratch if args.scratch else MODELS
+    models_dir.mkdir(parents=True, exist_ok=True)
     report = {"input": [args.input_w, args.input_h], "device": dev, "seed": args.seed,
-              "policies": {}}
+              "determinism": determinism, "policies": {}}
+    started = time.perf_counter()
 
     names = args.policies
     raw = [
@@ -289,7 +371,7 @@ def main() -> int:
         # so every downstream tool can address it by passing --policy P_pts_s3 and none of
         # them need to learn what a seed is.
         tag = "" if args.seed == 0 else f"_s{args.seed}"
-        path = MODELS / f"{name}{tag}_{args.scenario}.pt"
+        path = models_dir / f"{name}{tag}_{args.scenario}.pt"
         torch.save(
             {"state_dict": student.state_dict(),
              "input": [args.input_w, args.input_h],
@@ -303,7 +385,12 @@ def main() -> int:
                 nn.functional.l1_loss(student(x.to(dev)), y.to(dev)).item()
             )
         params = sum(p.numel() for p in student.parameters())
+        # The hash of the WEIGHTS, recorded beside the run that made them. This is the
+        # F29 test made routine: any two trainings that claim the same seed and the same
+        # frames can be compared by reading two JSON files, with no GPU and no rerun.
+        wsha = weights_sha256(student.state_dict())
         print(f"  {name}: student {params} params, train MAE {err:.4f} m/s^2 -> {path.name}")
+        print(f"    weights_sha256 {wsha}")
         report["policies"][name] = {
             "samples": len(x),
             "braking_samples": int((y > A_MAX_MPS2 * 0.5).sum()),
@@ -312,9 +399,12 @@ def main() -> int:
             "student_params": params,
             "train_mae_mps2": round(err, 4),
             "file": path.name,
+            "weights_sha256": wsha,
+            "file_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
         }
 
     report["scenario"] = args.scenario
+    report["wall_seconds"] = round(time.perf_counter() - started, 1)
     report["note"] = (
         "Identical architecture, recipe, epochs and frame count. The ONLY difference is "
         "which illumination knots the frames came from. Train MAE is not a result; the "
@@ -327,9 +417,10 @@ def main() -> int:
     # policy_endpoints{suffix}.json and gate_*{suffix}.json elsewhere here.
     suffix = "" if args.scenario == "lead" else f"_{args.scenario}"
     suffix += "" if args.seed == 0 else f"_s{args.seed}"
-    path = J.REPO / "results" / "carla" / f"training{suffix}.json"
+    path = (models_dir if args.scratch
+            else J.OUT) / f"training{suffix}.json"
     path.write_text(json.dumps(report, indent=2) + "\n")
-    print(f"\n  wrote {path.relative_to(J.REPO)}")
+    print(f"\n  wrote {path}  ({report['wall_seconds']:.0f} s)")
     return 0
 
 

@@ -40,7 +40,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import carla_jobs as J  # noqa: E402
 
-OUT = J.REPO / "results" / "carla" / "substep_convergence.json"
+OUT = J.OUT / "substep_convergence.json"
 
 # Substeps per 0.05 s step. 5 is what CARLA's default (10 x 0.01 s) actually delivers at
 # this fixed_delta; 16 is what connect() sets today.

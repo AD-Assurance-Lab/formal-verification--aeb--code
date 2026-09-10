@@ -33,7 +33,7 @@ import stats as ST  # noqa: E402
 from run_policy import (load_policy, one_run, plate_run,  # noqa: E402
                         PREMATURE_MULTIPLE)
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 
@@ -389,7 +389,7 @@ def main() -> int:
     # The model that was LOADED, not the scenario name. For the plate cells those differ
     # -- there is no P_pts_plate.pt -- and hashing a path that does not exist yields a
     # null model_sha256, which silently disables study.ledger's model-binding check.
-    _prov = _provenance(str(J.REPO / "results" / "models" /
+    _prov = _provenance(str(J.MODELS /
                             f"{args.policy}_{'lead' if plate else args.scenario}.pt"))
     payload = {
         "policy": args.policy,

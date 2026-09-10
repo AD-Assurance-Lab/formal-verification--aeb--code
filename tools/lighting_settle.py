@@ -60,7 +60,7 @@ import carla_jobs as J  # noqa: E402
 import condition_signature as CS  # noqa: E402
 from run_policy import load_policy, preprocess  # noqa: E402
 
-OUT = J.REPO / "results" / "carla"
+OUT = J.OUT
 
 
 def main() -> int:

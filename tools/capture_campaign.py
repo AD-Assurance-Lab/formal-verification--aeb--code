@@ -132,7 +132,7 @@ def load_knots() -> list[float]:
     against; what has to be checked is the metric the file was MADE with, which the
     file now states.
     """
-    path = J.REPO / "results" / "carla" / "family_knots.json"
+    path = J.OUT / "family_knots.json"
     if not path.exists():
         raise SystemExit("run tools/build_family_knots.py first (writes the knots)")
     payload = json.loads(path.read_text())
@@ -154,7 +154,7 @@ def load_uncovered() -> list[dict]:
     rather than read as "everything is covered" -- a missing coverage record must never
     default to full coverage.
     """
-    path = J.REPO / "results" / "carla" / "family_knots.json"
+    path = J.OUT / "family_knots.json"
     payload = json.loads(path.read_text())
     if "sub_interval_detail" not in payload:
         raise SystemExit(
@@ -349,7 +349,7 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     global LAST_DETERMINISM
     LAST_DETERMINISM = J.determinism_provenance(world)
     site = J.flattest_site(scenario=scenario)
-    b = json.loads((J.REPO / "results" / "carla" / "braking.json").read_text())
+    b = json.loads((J.OUT / "braking.json").read_text())
 
     spawn_tf, _ = J.site_transform(world, site, along=10.0, need_m=LEAD_GAP_M + 80.0)
 
