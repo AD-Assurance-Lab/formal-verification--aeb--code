@@ -51,6 +51,14 @@ would change and why it is not being done unilaterally.
 | 15 | Render `blend_error` and endpoint distance at the SAME poses (F27) | Needs the simulator. The ratio is the number the family's fidelity claim wants and a first pass at it was wrong; it is queued rather than guessed |
 | 16 | Drop the Wilson interval from `stats.py:rate()` (A13) | Same reason as 14: every rebuild stage is a fresh process importing it, and one rebuild out of two scorers is the drift this repo has lost study logic to twice |
 
+**Items 17-19, from the overnight rebuild.**
+
+| # | item | why |
+|---|---|---|
+| 17 | Scope `results/carla/` by map, as `results/captures/` now is | F26's cause, twice. An artifact from the old study sits under the exact name the new one looks for. At 03:00 on 2026-09-10, 157 of 179 files there were still Town01's, and `--refine` was about to read ten Town01 gate artifacts as current. Moved aside by hand; the structural fix is not done |
+| 18 | Re-measure F27's family fidelity on the CLEAN captures | `family_fidelity_lead.json` was computed on the contaminated pre-A16 captures. The zero-span sub-interval at the darkness end may not survive: its endpoints were 0.0000 apart when both were contaminated, and the dark end has since changed by 9x |
+| 19 | Dispose the false-activation endpoint failure | `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md`. Every arm fails FMVSS 127's own false-activation test at a regulatory condition on Town12, where all nine passed on Town01. A bug until a disposition says otherwise, and it did not stop the pipeline |
+
 **Also open, and not a study's to decide:** the D-7 amendment request in
 `docs/D7_AMENDMENT_REQUEST.md`. The `carla-determinism` package is hash-locked and lab-wide
 and currently prints "closed-loop numbers are still RATES over >=10 repetitions" on every

@@ -128,7 +128,12 @@ different places.
 
 ---
 
-## F27 — 2026-09-09, one sub-interval on each map is a verdict about nothing, and the axis weights sub-intervals 200:1
+## F27 — 2026-09-09, one sub-interval on each map is a verdict about nothing
+
+> **Re-measure on the clean captures before quoting this.** It was computed on the pre-A16
+> capture set, whose dark knots were contaminated by capture order (F28) and have since
+> changed ninefold. The zero-span sub-interval sits at the darkness end, which is exactly
+> where that contamination was largest, so the headline may not survive. Queue item 18., and the axis weights sub-intervals 200:1
 
 The axis is bisected until the chord's midpoint error falls under an **absolute** tolerance
 of 0.01. That rule has no notion of how much illumination an interval spans, so nothing

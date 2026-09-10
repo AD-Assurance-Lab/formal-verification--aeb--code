@@ -473,3 +473,6 @@ Terminated
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
 Terminated
+  server pid 3717560 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
