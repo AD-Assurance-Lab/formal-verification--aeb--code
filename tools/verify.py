@@ -189,6 +189,40 @@ def _provenance(model_path=None):
         p["model_sha256"] = hashlib.sha256(open(model_path, "rb").read()).hexdigest()
     return p
 
+def _span_summary(cells: list[dict], axis_span: float) -> dict:
+    """How much of the axis each verdict covers, not how many pieces carry it.
+
+    FINDINGS F27: the bisection stops on an absolute chord tolerance, so it can produce a
+    sub-interval across which almost nothing changes -- and on both maps it did, at the
+    darkness end, where the two endpoint frame sets are the same image to within the render
+    floor. That cell certifies comfortably, because bounding a family whose members are all
+    one image is easy, and it inflates every certified count by exactly one.
+
+    The uncovered sliver is excluded here for the same reason it is excluded from the
+    counts: a bound over a blend that does not represent rendered reality is not coverage.
+    """
+    covered = [c for c in cells if not c.get("family_uncovered")]
+    total = sum(c["span_deg"] for c in covered)
+    by = {v: sum(c["span_deg"] for c in covered if c["verdict"] == v)
+          for v in ("CERTIFIED", "FALSIFIED", "UNDECIDED")}
+    return {
+        "axis_deg": round(axis_span, 4),
+        "covered_axis_deg": round(total, 4),
+        "certified_deg": round(by["CERTIFIED"], 4),
+        "falsified_deg": round(by["FALSIFIED"], 4),
+        "undecided_deg": round(by["UNDECIDED"], 4),
+        "certified_fraction": round(by["CERTIFIED"] / total, 5) if total else None,
+        "falsified_fraction": round(by["FALSIFIED"] / total, 5) if total else None,
+        "undecided_fraction": round(by["UNDECIDED"] / total, 5) if total else None,
+        "widest_deg": round(max((c["span_deg"] for c in covered), default=0.0), 4),
+        "narrowest_deg": round(min((c["span_deg"] for c in covered), default=0.0), 4),
+        "note": ("Degrees of sun altitude. A count of sub-intervals and a span of axis "
+                 "are different statistics and this study reports both (F27). The span "
+                 "here is in DEGREES; F27 also measures it photometrically, where the "
+                 "ratio between the widest and narrowest sub-interval is larger still."),
+    }
+
+
 def main() -> int:
     import warnings
 
@@ -288,6 +322,9 @@ def main() -> int:
     }
 
     cells = []
+    # The whole axis, endpoint to endpoint, so each sub-interval's share of it is a
+    # fraction and not a bare number of degrees nobody can scale.
+    axis_span = knots[0] - knots[-1]
     for hi_alt, lo_alt in zip(knots[:-1], knots[1:]):
         # A6 declares the horizon sliver UNCOVERED: no step size meets the blend
         # tolerance across the discontinuity, so a bound over that blend quantifies over
@@ -349,6 +386,14 @@ def main() -> int:
                 **({"family_uncovered": True} if family_uncovered else {}),
                 "from_deg": hi_alt,
                 "to_deg": lo_alt,
+                # FINDINGS F27. A count of sub-intervals weights them equally, and they
+                # are not equal: the bisection stops on an ABSOLUTE chord tolerance, so on
+                # Town12 the widest sub-interval spans 128 times the narrowest in degrees
+                # and 204 times in photometric distance. "Certified 16 of 16" is a count of
+                # that kind. The span travels with every verdict from here so a reader
+                # never has to go and find it.
+                "span_deg": round(hi_alt - lo_alt, 4),
+                "span_fraction_of_axis": round((hi_alt - lo_alt) / axis_span, 5),
                 "worst_bound_mps2": round(worst_lb, 4) if worst_lb is not None else None,
                 "threshold_mps2": round(threshold, 4),
                 "margin_x_threshold": (round(worst_lb / threshold, 4)
@@ -402,6 +447,11 @@ def main() -> int:
         "cells": cells,
         "falsified": [c for c in cells if c["verdict"] == "FALSIFIED"],
         "undecided": [c for c in cells if c["verdict"] == "UNDECIDED"],
+        # The same three verdicts weighted by how much of the axis each one covers, over
+        # the COVERED axis only -- A6's uncovered sliver is excluded here exactly as it is
+        # excluded from the counts. Report both. They answer different questions: the count
+        # says how many pieces certified, this says how much illumination did.
+        "coverage_by_span": _span_summary(cells, axis_span),
         "note": (
             "Property S from PROTOCOL section 7, on the same threshold the closed-loop "
             "controller latches at. CERTIFIED means the lower bound clears it at every "
@@ -416,9 +466,17 @@ def main() -> int:
     path.write_text(json.dumps(payload, indent=2) + "\n")
     n_bad = len(payload["falsified"])
     n_und = len(payload["undecided"])
+    _span = payload["coverage_by_span"]
     print(
         f"\n  {len(cells) - n_bad - n_und}/{len(cells)} sub-intervals certified, "
         f"{n_bad} falsified with an exhibited witness, {n_und} undecided"
+    )
+    print(
+        f"  by SPAN over the covered axis ({_span['covered_axis_deg']:.3f} deg): "
+        f"{_span['certified_deg']:.3f} deg certified "
+        f"({100 * _span['certified_fraction']:.1f}%), "
+        f"{_span['falsified_deg']:.3f} falsified, "
+        f"{_span['undecided_deg']:.3f} undecided  [F27]"
     )
     print(f"  wrote {path.relative_to(J.REPO)}")
     return 0

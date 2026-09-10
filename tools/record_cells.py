@@ -139,6 +139,22 @@ def cell_row(policy: str, scenario: str) -> dict:
             f"{v['cells'][-1]['to_deg']:g}); "
             f"{len(uncovered)} uncovered sub-interval(s) excluded")
     row["certified_of_covered"] = f"{len(covered) - len(fals)}/{len(covered)}"
+    # FINDINGS F27: that fraction counts pieces of axis as if they were equal, and on the
+    # refined Town12 axis the widest sub-interval is 2,462 times the narrowest in degrees.
+    # The span goes beside the count, never instead of it -- they answer different
+    # questions, and a reader who sees only one of them cannot tell which.
+    _covered_deg = sum(c["from_deg"] - c["to_deg"] for c in covered)
+    _cert_deg = sum(c["from_deg"] - c["to_deg"] for c in covered
+                    if c["verdict"] != "FALSIFIED")
+    if _covered_deg:
+        row["certified_span_deg"] = round(_cert_deg, 3)
+        row["covered_span_deg"] = round(_covered_deg, 3)
+        row["certified_fraction_of_span"] = round(_cert_deg / _covered_deg, 4)
+        row["span_note"] = (
+            f"{row['certified_of_covered']} sub-intervals is "
+            f"{100 * _cert_deg / _covered_deg:.1f}% of the covered axis by span. "
+            f"The two disagree whenever the bisection made pieces of very different "
+            f"widths, which an absolute chord tolerance does (F27).")
     # WHICH END IS DANGEROUS DEPENDS ON THE PROPERTY, and this took the minimum for both.
     #   S  margin = lower bound / threshold, and a pass needs >= 1. The worst is the MIN.
     #   A  margin = upper bound / threshold, and a pass needs <= 1. The worst is the MAX.
