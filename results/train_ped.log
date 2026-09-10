@@ -1,57 +1,57 @@
-  before equalising: {'P_pts': 416, 'P_cont': 6032, 'P_pts3': 624} frames
+  before equalising: {'P_pts': 416, 'P_cont': 2912, 'P_pts3': 624} frames
 
-P_pts: 6032 samples from 2 knots, 750 braking
-    P_pts teacher epoch   0  mse 7.15234
-    P_pts teacher epoch  10  mse 0.34422
-    P_pts teacher epoch  20  mse 0.22142
-    P_pts teacher epoch  30  mse 0.02248
-    P_pts teacher epoch  40  mse 0.00043
-    P_pts teacher epoch  50  mse 0.00138
-    P_pts teacher epoch  59  mse 0.00021
-    P_pts student epoch   0  mse 5.11080
-    P_pts student epoch  10  mse 0.04717
-    P_pts student epoch  20  mse 0.04081
-    P_pts student epoch  30  mse 0.00180
-    P_pts student epoch  40  mse 0.00912
-    P_pts student epoch  50  mse 0.00461
-    P_pts student epoch  59  mse 0.01071
-  P_pts: student 310145 params, train MAE 0.0434 m/s^2 -> P_pts_ped.pt
-    weights_sha256 f00cf03399f0b0309b025788dd5c5c98096d228d81dbe3e3143136f2777e736b
+P_pts: 2912 samples from 2 knots, 350 braking
+    P_pts teacher epoch   0  mse 6.84798
+    P_pts teacher epoch  10  mse 0.82597
+    P_pts teacher epoch  20  mse 0.03138
+    P_pts teacher epoch  30  mse 0.00096
+    P_pts teacher epoch  40  mse 0.44655
+    P_pts teacher epoch  50  mse 0.00189
+    P_pts teacher epoch  59  mse 0.01683
+    P_pts student epoch   0  mse 5.95278
+    P_pts student epoch  10  mse 0.80923
+    P_pts student epoch  20  mse 0.06845
+    P_pts student epoch  30  mse 0.02153
+    P_pts student epoch  40  mse 0.04176
+    P_pts student epoch  50  mse 0.01734
+    P_pts student epoch  59  mse 0.06382
+  P_pts: student 310145 params, train MAE 0.1086 m/s^2 -> P_pts_ped.pt
+    weights_sha256 f46bb3bb27c9ed2059b50ef8fcd07952af8f45b8d3d6d4d036746a066bccc28e
 
-P_cont: 6032 samples from 29 knots, 725 braking
-    P_cont teacher epoch   0  mse 6.86478
-    P_cont teacher epoch  10  mse 0.56542
-    P_cont teacher epoch  20  mse 0.16452
-    P_cont teacher epoch  30  mse 0.14189
-    P_cont teacher epoch  40  mse 0.12455
-    P_cont teacher epoch  50  mse 0.16247
-    P_cont teacher epoch  59  mse 0.06872
-    P_cont student epoch   0  mse 4.44751
-    P_cont student epoch  10  mse 0.42311
-    P_cont student epoch  20  mse 0.11965
-    P_cont student epoch  30  mse 0.06068
-    P_cont student epoch  40  mse 0.03533
-    P_cont student epoch  50  mse 0.02582
-    P_cont student epoch  59  mse 0.02513
-  P_cont: student 310145 params, train MAE 0.0993 m/s^2 -> P_cont_ped.pt
-    weights_sha256 e2449f171bffe13a4ef85aef25dfe1874704f1a0cff932fcc229697c25d3fa6f
+P_cont: 2912 samples from 14 knots, 350 braking
+    P_cont teacher epoch   0  mse 7.09433
+    P_cont teacher epoch  10  mse 1.87076
+    P_cont teacher epoch  20  mse 0.92965
+    P_cont teacher epoch  30  mse 0.11621
+    P_cont teacher epoch  40  mse 0.27284
+    P_cont teacher epoch  50  mse 0.11011
+    P_cont teacher epoch  59  mse 0.11333
+    P_cont student epoch   0  mse 6.29176
+    P_cont student epoch  10  mse 1.54065
+    P_cont student epoch  20  mse 0.57317
+    P_cont student epoch  30  mse 0.21694
+    P_cont student epoch  40  mse 0.08736
+    P_cont student epoch  50  mse 0.03581
+    P_cont student epoch  59  mse 0.04728
+  P_cont: student 310145 params, train MAE 0.1089 m/s^2 -> P_cont_ped.pt
+    weights_sha256 319bfcd38350605b7e97cfc525d9367a5cdbd06484a12585d641c9c305e74649
 
-P_pts3: 6032 samples from 2 knots, 725 braking
-    P_pts3 teacher epoch   0  mse 7.28741
-    P_pts3 teacher epoch  10  mse 0.76081
-    P_pts3 teacher epoch  20  mse 0.00584
-    P_pts3 teacher epoch  30  mse 0.00374
-    P_pts3 teacher epoch  40  mse 0.00101
-    P_pts3 teacher epoch  50  mse 0.01009
-    P_pts3 teacher epoch  59  mse 0.11136
-    P_pts3 student epoch   0  mse 5.27444
-    P_pts3 student epoch  10  mse 0.08754
-    P_pts3 student epoch  20  mse 0.01892
-    P_pts3 student epoch  30  mse 0.00534
-    P_pts3 student epoch  40  mse 0.04103
-    P_pts3 student epoch  50  mse 0.02529
-    P_pts3 student epoch  59  mse 0.02190
-  P_pts3: student 310145 params, train MAE 0.1007 m/s^2 -> P_pts3_ped.pt
-    weights_sha256 ffc748a44b900c98c76ae72a5df21ccf726b0103fac051ea4060f2071eb460b0
+P_pts3: 2912 samples from 2 knots, 350 braking
+    P_pts3 teacher epoch   0  mse 7.40169
+    P_pts3 teacher epoch  10  mse 1.60657
+    P_pts3 teacher epoch  20  mse 1.26056
+    P_pts3 teacher epoch  30  mse 0.28380
+    P_pts3 teacher epoch  40  mse 0.00268
+    P_pts3 teacher epoch  50  mse 0.26471
+    P_pts3 teacher epoch  59  mse 0.00089
+    P_pts3 student epoch   0  mse 6.81666
+    P_pts3 student epoch  10  mse 1.00100
+    P_pts3 student epoch  20  mse 0.14637
+    P_pts3 student epoch  30  mse 0.05166
+    P_pts3 student epoch  40  mse 0.23130
+    P_pts3 student epoch  50  mse 0.02914
+    P_pts3 student epoch  59  mse 0.03003
+  P_pts3: student 310145 params, train MAE 0.0496 m/s^2 -> P_pts3_ped.pt
+    weights_sha256 880f260b3e3e82e21bbc0d0665f5d0dd466e649415f932617d2fae6f1642947f
 
-  wrote /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/training_ped.json  (77 s)
+  wrote /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/training_ped.json  (38 s)

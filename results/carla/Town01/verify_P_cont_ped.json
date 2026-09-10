@@ -1,0 +1,309 @@
+{
+  "policy": "P_cont",
+  "scenario": "ped",
+  "model_sha256": "35f74663b42614a06cf49db53e620b79b9bb84ac5f144a06cd6a9c944d302dc5",
+  "provenance": {
+    "timestamp": "2026-09-10T15:55:02-04:00",
+    "git_sha": "2e9215e4a5ab84fd0b70bd7a0566a3a9bbcc7da0",
+    "model_sha256": "35f74663b42614a06cf49db53e620b79b9bb84ac5f144a06cd6a9c944d302dc5"
+  },
+  "property": "S",
+  "method": "alpha-CROWN",
+  "threshold_mps2": 2.476,
+  "r_req_m": 15.846,
+  "scope": {
+    "poses_verified": 25,
+    "poses_available": 104,
+    "pose_range_m": [
+      2.267,
+      15.677
+    ],
+    "selection": "range <= r_req",
+    "r_req_m": 15.846
+  },
+  "poses_inside_r_req": 25,
+  "branch_and_bound": {
+    "max_domains_per_pose": 32,
+    "min_domain_width": 0.03125,
+    "note": "CLAUDE.md section 6's input-space branch and bound. Absent from this file until 2026-09-07, which produced FALSIFIED verdicts on wide sub-intervals that one bisection certifies (FINDINGS F8)."
+  },
+  "cells": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 39.977,
+      "span_deg": 20.023,
+      "span_fraction_of_axis": 0.22248,
+      "worst_bound_mps2": 4.3795,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.7688,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 96,
+      "witness_s": null,
+      "witness_range_m": 6.178,
+      "seconds": 39.5
+    },
+    {
+      "from_deg": 39.977,
+      "to_deg": 26.523,
+      "span_deg": 13.454,
+      "span_fraction_of_axis": 0.14949,
+      "worst_bound_mps2": 4.1623,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.681,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 96,
+      "witness_s": null,
+      "witness_range_m": 6.178,
+      "seconds": 41.7
+    },
+    {
+      "from_deg": 26.523,
+      "to_deg": 17.484,
+      "span_deg": 9.039,
+      "span_fraction_of_axis": 0.10043,
+      "worst_bound_mps2": 4.2519,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.7172,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 96,
+      "witness_s": null,
+      "witness_range_m": 6.178,
+      "seconds": 44.4
+    },
+    {
+      "from_deg": 17.484,
+      "to_deg": 10.084,
+      "span_deg": 7.4,
+      "span_fraction_of_axis": 0.08222,
+      "worst_bound_mps2": 3.9666,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.602,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 79,
+      "witness_s": null,
+      "witness_range_m": 15.677,
+      "seconds": 44.1
+    },
+    {
+      "from_deg": 10.084,
+      "to_deg": 5.99,
+      "span_deg": 4.094,
+      "span_fraction_of_axis": 0.04549,
+      "worst_bound_mps2": 2.7605,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.1149,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 27,
+      "witness_pose": 80,
+      "witness_s": null,
+      "witness_range_m": 15.118,
+      "seconds": 46.9
+    },
+    {
+      "from_deg": 5.99,
+      "to_deg": 4.375,
+      "span_deg": 1.615,
+      "span_fraction_of_axis": 0.01794,
+      "worst_bound_mps2": 4.3846,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.7708,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 80,
+      "witness_s": null,
+      "witness_range_m": 15.118,
+      "seconds": 37.2
+    },
+    {
+      "from_deg": 4.375,
+      "to_deg": 2.967,
+      "span_deg": 1.408,
+      "span_fraction_of_axis": 0.01564,
+      "worst_bound_mps2": 4.1303,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.6681,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 79,
+      "witness_s": null,
+      "witness_range_m": 15.677,
+      "seconds": 34.1
+    },
+    {
+      "from_deg": 2.967,
+      "to_deg": 1.465,
+      "span_deg": 1.502,
+      "span_fraction_of_axis": 0.01669,
+      "worst_bound_mps2": 2.6781,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.0816,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 75,
+      "witness_pose": 79,
+      "witness_s": null,
+      "witness_range_m": 15.677,
+      "seconds": 112.3
+    },
+    {
+      "from_deg": 1.465,
+      "to_deg": 0.241,
+      "span_deg": 1.224,
+      "span_fraction_of_axis": 0.0136,
+      "worst_bound_mps2": 2.492,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.0064,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 77,
+      "witness_pose": 80,
+      "witness_s": null,
+      "witness_range_m": 15.118,
+      "seconds": 121.7
+    },
+    {
+      "family_uncovered": true,
+      "from_deg": 0.241,
+      "to_deg": 0.0,
+      "span_deg": 0.241,
+      "span_fraction_of_axis": 0.00268,
+      "worst_bound_mps2": 2.5428,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.027,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 85,
+      "witness_pose": 87,
+      "witness_s": null,
+      "witness_range_m": 11.207,
+      "seconds": 137.6
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -1.422,
+      "span_deg": 1.422,
+      "span_fraction_of_axis": 0.0158,
+      "worst_bound_mps2": 3.859,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.5585,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 79,
+      "witness_s": null,
+      "witness_range_m": 15.677,
+      "seconds": 22.4
+    },
+    {
+      "from_deg": -1.422,
+      "to_deg": -29.561,
+      "span_deg": 28.139,
+      "span_fraction_of_axis": 0.31266,
+      "worst_bound_mps2": 2.5761,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.0404,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 43,
+      "witness_pose": 88,
+      "witness_s": null,
+      "witness_range_m": 10.648,
+      "seconds": 33.4
+    },
+    {
+      "from_deg": -29.561,
+      "to_deg": -30.0,
+      "span_deg": 0.439,
+      "span_fraction_of_axis": 0.00488,
+      "worst_bound_mps2": 4.4905,
+      "threshold_mps2": 2.476,
+      "margin_x_threshold": 1.8136,
+      "verdict": "CERTIFIED",
+      "poses": {
+        "CERTIFIED": 25,
+        "FALSIFIED": 0,
+        "UNDECIDED": 0
+      },
+      "bab_domains": 25,
+      "witness_pose": 82,
+      "witness_s": null,
+      "witness_range_m": 14.001,
+      "seconds": 10.9
+    }
+  ],
+  "falsified": [],
+  "undecided": [],
+  "coverage_by_span": {
+    "axis_deg": 90.0,
+    "covered_axis_deg": 89.759,
+    "certified_deg": 89.759,
+    "falsified_deg": 0,
+    "undecided_deg": 0,
+    "certified_fraction": 1.0,
+    "falsified_fraction": 0.0,
+    "undecided_fraction": 0.0,
+    "widest_deg": 28.139,
+    "narrowest_deg": 0.439,
+    "note": "Degrees of sun altitude. A count of sub-intervals and a span of axis are different statistics and this study reports both (F27). The span here is in DEGREES; F27 also measures it photometrically, where the ratio between the widest and narrowest sub-interval is larger still."
+  },
+  "note": "Property S from CLAUDE.md section 7, on the same threshold the closed-loop controller latches at. CERTIFIED means the lower bound clears it at every pose inside r_req for every illumination in the sub-interval, under input-space branch and bound. FALSIFIED means a concrete s was exhibited whose actual output violates it. UNDECIDED means neither, at the stated budget, and is reported as itself rather than as a falsification. WRITTEN BEFORE ANY DRIVING; that ordering is what makes these predictions."
+}

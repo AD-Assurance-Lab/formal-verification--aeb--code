@@ -16,76 +16,61 @@
   },
   "policies": {
     "P_pts": {
-      "samples": 6032,
-      "braking_samples": 750,
+      "samples": 2912,
+      "braking_samples": 350,
       "knots": [
         -30.0,
         60.0
       ],
       "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.0132,
+      "train_mae_mps2": 0.0197,
       "file": "P_pts_lead.pt",
-      "weights_sha256": "8db83a221ba9927450b5e6789b514caf557a7111774908ce525aaf9b893a8db7",
-      "file_sha256": "33d315647e744e0db39885627708c12416c7572c35631cdef052b9cd7d9000f1"
+      "weights_sha256": "2b2a637dd24a9fc2bd4e050f8d8b8486f035919914b2be8a0c760fe83882f33f",
+      "file_sha256": "330c10aec29b060c73e990bc12365385f8d7fd6bce5b356c9382ab4599b83bbf"
     },
     "P_cont": {
-      "samples": 6032,
-      "braking_samples": 725,
+      "samples": 2912,
+      "braking_samples": 350,
       "knots": [
         -30.0,
         -29.56100082397461,
-        -29.554000854492188,
         -1.4220000505447388,
-        -0.9610000252723694,
         0.0,
-        0.026000000536441803,
         0.2409999966621399,
-        0.7789999842643738,
-        1.3910000324249268,
         1.465000033378601,
-        1.8910000324249268,
         2.9670000076293945,
-        3.5250000953674316,
-        4.197999954223633,
         4.375,
-        5.297999858856201,
         5.989999771118164,
-        7.715000152587891,
         10.083999633789062,
-        10.128000259399414,
-        12.541999816894531,
         17.483999252319336,
-        18.743000030517578,
         26.523000717163086,
-        28.39699935913086,
         39.97700119018555,
-        42.76599884033203,
         60.0
       ],
       "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.0989,
+      "train_mae_mps2": 0.0383,
       "file": "P_cont_lead.pt",
-      "weights_sha256": "688610b7eb898ae8f00d562af8b5f1669e2fd0ea2dee37e2e10b88fdcf72dab8",
-      "file_sha256": "90bd8178a0610e9abfe26202486c9235f8e0850700199ade6d03722003b449c3"
+      "weights_sha256": "a5b1ab9b711a4d3cf211214fb3054db1be06799108398bfeeb27e999b35901fb",
+      "file_sha256": "39479751a017bc8dd83c1f65e96c10cc64c390832e3d7ab9b3d60aeb6ea6795f"
     },
     "P_pts3": {
-      "samples": 6032,
-      "braking_samples": 725,
+      "samples": 2912,
+      "braking_samples": 350,
       "knots": [
         -30.0,
         60.0
       ],
       "highbeam_condition": true,
       "student_params": 310145,
-      "train_mae_mps2": 0.0296,
+      "train_mae_mps2": 0.03,
       "file": "P_pts3_lead.pt",
-      "weights_sha256": "be8276c2b0f7d1ed2f3ffaf02226c9acd4d9304bd77dd2e578e843e581daa55a",
-      "file_sha256": "3697eb9e2c23863c2cea1946f5e5d8e2bd4df079fecaeba06740756a20d5fc24"
+      "weights_sha256": "0d5368a060f10c93e65574159f455516d467180b560e21c79cb2bb12afd4b355",
+      "file_sha256": "9df9da2dc3456376b9ea84f2ab53a071dcfa70df16bd91b7d4941f23ee66ec9f"
     }
   },
   "scenario": "lead",
-  "wall_seconds": 77.1,
+  "wall_seconds": 37.7,
   "note": "Identical architecture, recipe, epochs and frame count. The ONLY difference is which illumination knots the frames came from. Train MAE is not a result; the result is whether each policy passes the regulatory endpoints closed loop, which is milestone M4."
 }
