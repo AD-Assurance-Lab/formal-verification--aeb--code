@@ -456,3 +456,16 @@ Terminated
   server pid 3651181 on port 3000, 15 s old
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 3652807 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+==> CARLA_TAKEOVER: stopping whatever holds 3000
+Terminated
+    SIGTERM did not clear it after 60 s; SIGKILL
+  server pid 3653515 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+Terminated

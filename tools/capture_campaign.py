@@ -359,6 +359,23 @@ def capture(scenario: str, knots: list[float], speed_mph: float, dry_run: bool,
     # entire reason for replaying rather than driving. Pairing that holds only within
     # one invocation is not a guarantee.
     OUT.mkdir(parents=True, exist_ok=True)
+    # DARKEN THE WORLD BEFORE ANYTHING ELSE HAPPENS IN IT. A16 orders the knots darkest
+    # first so no knot is preceded by a brighter one, and that is necessary but not
+    # sufficient: CARLA starts a session in daylight, and `nominal_states` DRIVES the
+    # scenario to record its poses before any knot is captured. Driving in the default
+    # daylight charges the scene exactly as a bright knot does, and the first dark knot
+    # then renders 9x too bright (F28) -- which is what the first attempt at A16 measured,
+    # 0.0341 at -30 deg with -30 captured first.
+    #
+    # Setting the darkest knot here, before the nominal run and before the state loop,
+    # means the session is never brighter than the darkest thing it is about to capture.
+    _w = world.get_weather()
+    _w.sun_altitude_angle = min(knots)
+    _w.cloudiness = J.CLOUDINESS
+    _w.precipitation = 0.0
+    world.set_weather(_w)
+    for _ in range(J.WEATHER_SETTLE_TICKS):
+        world.tick()
     # The no-target control MUST replay the lead poses, or it is not a control: the
     # whole point is to isolate what the target contributes at an identical pose.
     base = J.CONTROL_OF.get(scenario, scenario)

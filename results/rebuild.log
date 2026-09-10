@@ -177,3 +177,14 @@ manifest_ped_hb.json  (upper beam, 1 knot)
 
   5 of 10 campaigns consistent
 Terminated
+[2026-09-09 22:20:00] restarting CARLA on 3000
+  server pid 3651870 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-09 22:20:22] START capture_lead
+Terminated
+[2026-09-09 22:34:13] restarting CARLA on 3000
+  server pid 3654171 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-09 22:34:35] START capture_lead

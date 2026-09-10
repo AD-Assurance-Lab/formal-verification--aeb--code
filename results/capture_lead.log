@@ -1,32 +1,4 @@
   loading Town12 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
-  reusing the saved nominal run, 104 states
 
 lead: 104 states x 21 knots = 2184 frames, about 2.01 GB raw
-  lead_sun+60.000.npz exists, skipping
-  lead_sun+54.852.npz exists, skipping
-  lead_sun+47.558.npz exists, skipping
-  lead_sun+41.911.npz exists, skipping
-  lead_sun+36.234.npz exists, skipping
-  lead_sun+30.151.npz exists, skipping
-  lead_sun+22.238.npz exists, skipping
-  lead_sun+14.605.npz exists, skipping
-  lead_sun+12.342.npz exists, skipping
-  lead_sun+08.327.npz exists, skipping
-  lead_sun+06.848.npz exists, skipping
-  lead_sun+06.051.npz exists, skipping
-  lead_sun+04.857.npz exists, skipping
-  lead_sun+04.289.npz exists, skipping
-  lead_sun+03.315.npz exists, skipping
-  lead_sun+02.815.npz exists, skipping
-  lead_sun+02.026.npz exists, skipping
-  lead_sun+00.024.npz exists, skipping
-  lead_sun+00.000.npz exists, skipping
-  lead_sun-29.539.npz exists, skipping
-  lead_sun-30.000.npz exists, skipping
-
-  illumination axis OK: 21 knots, span 0.3576 of full range, worst inversion 8.6% of span (limit 12%), total 8.6% (limit 25%)
-    recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.6% of the axis span)
-  wrote results/captures/Town12/determinism_lead.json
-
-  wrote results/captures/Town12/manifest_lead.json

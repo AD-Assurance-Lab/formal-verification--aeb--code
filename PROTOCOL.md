@@ -874,3 +874,34 @@ effect and not to be reused.
 beam reads 0.0095 against the lower beam's 0.0036, so amendment A4's check — more light in
 the same scene cannot darken it — passes for the reason it was written for. The check was
 correct; the frame it was reading was not.
+
+### A17. A16 was half a fix: the nominal run drives in daylight before any knot is captured
+
+**Date:** 2026-09-09, an hour after A16. **Requested by:** the measurement that A16's own
+change failed to produce.
+
+**Why this is a new entry and not an edit to A16.** Amendments are append-only and
+`study.protocol_lock` refused the edit, which is the guard doing its job. A16 is left
+exactly as it was written, including the part of it that turned out to be insufficient.
+
+**What A16 got right.** Capture darkest first. No knot is then preceded by a brighter one,
+and bright knots are insensitive to what came before them.
+
+**What it missed.** Ordering the knots is necessary and not sufficient. `nominal_states`
+**drives the scenario to record its poses before any knot is captured**, and CARLA starts a
+session in daylight, so the nominal run charges the scene exactly as a bright knot does.
+Measured: with A16's ordering in place and nothing else, the `lead` campaign still captured
+−30° at **0.0341**, the contaminated value.
+
+It looked correct in testing because the campaigns used to check it were `none`, which
+replays saved poses and never drives. The scenario that drives is the one that breaks it.
+
+**What changed.** `capture()` sets the weather to `min(knots)` before the nominal run and
+before the state loop, so the session is never brighter than the darkest thing it is about
+to capture. With both halves in place the `lead` campaign captures −30° at **0.0036** and
++60° at 0.3718, matching every other measurement of that knot.
+
+**And it removes the argument for the expensive alternative.** A16 preferred ordering over a
+fresh server per knot on cost. That comparison was wrong in the same way: a fresh server
+also starts in daylight and would have needed the darkening step too, so it never bought
+anything ordering does not.

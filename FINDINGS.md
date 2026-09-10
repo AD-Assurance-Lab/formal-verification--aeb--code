@@ -54,17 +54,34 @@ display code showing the capture's BGR buffer as RGB. And the first probe measur
 road at a different point on the site rather than the capture's own pose, which inverted the
 apparent high/low beam relationship and sent the investigation the wrong way for an hour.
 
-### The fix, and why this one
+### The fix, and the half of it the first attempt missed
 
-Capture **darkest first**. Ascending altitude means no knot is ever preceded by a brighter
+Capture **darkest first**, *and darken the world before the nominal run*. Ordering alone is
+necessary and not sufficient, which the first attempt measured the hard way: with the knots
+ordered ascending the `lead` campaign still produced 0.0341 at −30°, because
+`nominal_states` **drives the scenario to record its poses before any knot is captured**,
+and CARLA starts a session in daylight. Driving the nominal run under the default weather
+charges the scene exactly as a bright knot does.
+
+`capture()` now sets the weather to `min(knots)` before the nominal run and before the
+state loop, so the session is never brighter than the darkest thing it is about to capture.
+With both halves in place the `lead` campaign — the one that drives — captures −30° at
+**0.0036**, and +60° at 0.3718, matching every other measurement of it.
+
+This is why the earlier `none` tests looked clean and `lead` did not: `none` replays saved
+poses and never drives, so nothing charged the scene before its first knot.
+
+### Why ordering rather than a fresh server per knot Ascending altitude means no knot is ever preceded by a brighter
 one, and bright knots are insensitive to what came before them: +60° reads 0.37177 when
 captured after darkness against 0.37138 after a full descending sweep, a difference of
 0.0004. So ordering costs the bright end nothing and gives the dark end a value that is a
 function of its own condition rather than of the campaign's history.
 
 The alternative — a fresh server per knot — is unambiguous and about four and a half hours
-of recapture. Ordering achieves the same thing at no cost, and the two agree on the number:
-0.00360 ordered against 0.00362 on a fresh server.
+of recapture. It would ALSO have needed the darken-first step, because a fresh server starts
+in daylight too, so it buys nothing extra. Ordering plus darkening achieves the same thing
+at no cost, and the two agree on the number: 0.00360 ordered against 0.00362 on a fresh
+server.
 
 **It also makes the guard that caught this pass for the right reason.** With the dark knot
 clean the comparison becomes low beam 0.0036 against high beam 0.0095, the upper beam is
