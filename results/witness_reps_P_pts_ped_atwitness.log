@@ -1,0 +1,11 @@
+[2026-09-10 16:24:11] M7 for P_pts/ped --at-witness: 3 repetitions, one server each
+[2026-09-10 16:24:11] restart before repetition 1 of 3
+[2026-09-10 16:25:09] repetition 1 done
+[2026-09-10 16:25:09] restart before repetition 2 of 3
+[2026-09-10 16:26:08] repetition 2 done
+[2026-09-10 16:26:08] restart before repetition 3 of 3
+[2026-09-10 16:27:07] repetition 3 done
+[2026-09-10 16:27:07] merging
+  witness_P_pts_ped_atwitness: 3 repetitions, agreement 2/10, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped_atwitness.json
+[2026-09-10 16:27:07] merge rc=0

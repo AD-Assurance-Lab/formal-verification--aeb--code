@@ -1,2 +1,13 @@
 [2026-09-10 16:02:53] M7 for P_cont/lead midpoint: 3 repetitions, one server each
 [2026-09-10 16:02:53] restart before repetition 1 of 3
+[2026-09-10 16:09:47] M7 for P_cont/lead midpoint: 3 repetitions, one server each
+[2026-09-10 16:09:47] restart before repetition 1 of 3
+[2026-09-10 16:10:47] repetition 1 done
+[2026-09-10 16:10:47] restart before repetition 2 of 3
+[2026-09-10 16:11:48] repetition 2 done
+[2026-09-10 16:11:48] restart before repetition 3 of 3
+[2026-09-10 16:12:49] repetition 3 done
+[2026-09-10 16:12:49] merging
+  witness_P_cont_lead: 3 repetitions, agreement 13/13, 0 void
+  wrote results/carla/Town01/witness_P_cont_lead.json
+[2026-09-10 16:12:49] merge rc=0

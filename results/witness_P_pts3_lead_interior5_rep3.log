@@ -1,0 +1,74 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+  interior sweep: 13 sub-intervals x 5 illuminations = 65 points, 1 repetition(s) each
+     +60.000 to  +39.977  mid +57.998  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +60.000 to  +39.977  mid +53.993  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +60.000 to  +39.977  mid +49.989  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +60.000 to  +39.977  mid +45.984  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +60.000 to  +39.977  mid +41.979  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +38.632  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +35.941  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +33.250  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +30.559  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +27.868  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +25.619  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +23.811  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +22.004  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +20.196  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +18.388  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +17.484 to  +10.084  mid +16.744  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +17.484 to  +10.084  mid +15.264  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +17.484 to  +10.084  mid +13.784  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +17.484 to  +10.084  mid +12.304  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +17.484 to  +10.084  mid +10.824  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +10.084 to   +5.990  mid  +9.675  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +10.084 to   +5.990  mid  +8.856  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+     +10.084 to   +5.990  mid  +8.037  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+     +10.084 to   +5.990  mid  +7.218  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+     +10.084 to   +5.990  mid  +6.399  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +5.990 to   +4.375  mid  +5.829  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +5.990 to   +4.375  mid  +5.506  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +5.990 to   +4.375  mid  +5.183  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +5.990 to   +4.375  mid  +4.860  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +5.990 to   +4.375  mid  +4.537  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +4.375 to   +2.967  mid  +4.234  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +4.375 to   +2.967  mid  +3.953  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +4.375 to   +2.967  mid  +3.671  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +4.375 to   +2.967  mid  +3.389  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +4.375 to   +2.967  mid  +3.108  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +2.967 to   +1.465  mid  +2.817  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +2.967 to   +1.465  mid  +2.516  predicted FALSIFIED  drove 1/1 [0.21, 1.00]  DISAGREE
+      +2.967 to   +1.465  mid  +2.216  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +2.967 to   +1.465  mid  +1.916  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +2.967 to   +1.465  mid  +1.615  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +1.465 to   +0.241  mid  +1.343  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +1.465 to   +0.241  mid  +1.098  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +1.465 to   +0.241  mid  +0.853  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +1.465 to   +0.241  mid  +0.608  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +1.465 to   +0.241  mid  +0.363  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.241 to   +0.000  mid  +0.217  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.241 to   +0.000  mid  +0.169  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.241 to   +0.000  mid  +0.120  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.241 to   +0.000  mid  +0.072  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.241 to   +0.000  mid  +0.024  predicted FALSIFIED  drove 0/1 [0.00, 0.79]  agree
+      +0.000 to   -1.422  mid  -0.142  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.000 to   -1.422  mid  -0.427  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.000 to   -1.422  mid  -0.711  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.000 to   -1.422  mid  -0.995  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.000 to   -1.422  mid  -1.280  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid  -4.236  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid  -9.864  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid -15.492  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid -21.119  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid -26.747  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.605  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.693  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.780  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.868  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.956  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+
+  illumination axis OK: 13 midpoints, span 0.4669 of full range
+  dense sweep recorded: 65 illuminations, monotone_ok=True, span 0.4748
+
+  certificate agrees with driving in 45/65 sub-intervals
+  wrote results/carla/Town01/witness_reps/witness_P_pts3_lead_interior5_rep03.json

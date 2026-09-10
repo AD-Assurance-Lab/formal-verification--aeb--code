@@ -1,0 +1,10 @@
+[2026-09-10 16:28:22] M7 for P_cont/ped --at-witness: 3 repetitions, one server each
+[2026-09-10 16:28:22] restart before repetition 1 of 3
+[2026-09-10 16:28:48] repetition 1 done
+[2026-09-10 16:28:48] restart before repetition 2 of 3
+[2026-09-10 16:29:13] repetition 2 done
+[2026-09-10 16:29:13] restart before repetition 3 of 3
+[2026-09-10 16:29:38] repetition 3 done
+[2026-09-10 16:29:38] merging
+no per-repetition artifacts matching witness_P_cont_ped_atwitness_rep*.json
+[2026-09-10 16:29:38] merge rc=1  -- VOID cells present, see above

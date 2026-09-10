@@ -4,8 +4,8 @@
   "rep_index": 2,
   "model_sha256": "0f9c43371d323de5d17fa1feb25f274d4f8033cb1e6d66034950bfa25b8f3969",
   "provenance": {
-    "timestamp": "2026-09-10T16:01:07-04:00",
-    "git_sha": "9f6c2d412e602332de24ca1c10f7cee5cfd341e3",
+    "timestamp": "2026-09-10T16:08:41-04:00",
+    "git_sha": "768f07ecb6576010d773929f5a42a4b85ad6bbd8",
     "model_sha256": "0f9c43371d323de5d17fa1feb25f274d4f8033cb1e6d66034950bfa25b8f3969"
   },
   "determinism": {
@@ -24,7 +24,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 57.57999999995809,
+    "server_age_s": 57.60999999998603,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {
@@ -71,7 +71,7 @@
       },
       {
         "sun_altitude_deg": 33.25,
-        "mean": 0.51311,
+        "mean": 0.51312,
         "lamps": false
       },
       {
@@ -81,7 +81,7 @@
       },
       {
         "sun_altitude_deg": 13.784,
-        "mean": 0.3978,
+        "mean": 0.39781,
         "lamps": false
       },
       {
@@ -177,7 +177,7 @@
         "sigma": 0.21773,
         "p01": 0.0,
         "p99": 0.89804,
-        "frac_dark": 0.01942
+        "frac_dark": 0.01941
       },
       "agrees": true
     },
@@ -219,8 +219,8 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51311,
-        "sigma": 0.25242,
+        "mean": 0.51312,
+        "sigma": 0.25241,
         "p01": 0.0,
         "p99": 0.99608,
         "frac_dark": 0.02038
@@ -311,11 +311,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.3978,
+        "mean": 0.39781,
         "sigma": 0.25185,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.03751
+        "frac_dark": 0.0375
       },
       "agrees": false
     },
@@ -361,7 +361,7 @@
         "sigma": 0.22609,
         "p01": 0.0,
         "p99": 0.97647,
-        "frac_dark": 0.05998
+        "frac_dark": 0.05999
       },
       "agrees": false
     },
@@ -407,7 +407,7 @@
         "sigma": 0.19984,
         "p01": 0.0,
         "p99": 0.93333,
-        "frac_dark": 0.0948
+        "frac_dark": 0.09482
       },
       "agrees": false
     },
@@ -499,7 +499,7 @@
         "sigma": 0.13609,
         "p01": 0.0,
         "p99": 0.65098,
-        "frac_dark": 0.20563
+        "frac_dark": 0.20557
       },
       "agrees": false
     },
@@ -591,7 +591,7 @@
         "sigma": 0.07561,
         "p01": 0.0,
         "p99": 0.33333,
-        "frac_dark": 0.54546
+        "frac_dark": 0.54544
       },
       "agrees": true
     },
@@ -634,10 +634,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.07346,
-        "sigma": 0.09562,
+        "sigma": 0.09561,
         "p01": 0.0,
         "p99": 0.35294,
-        "frac_dark": 0.46284
+        "frac_dark": 0.46282
       },
       "agrees": false
     },

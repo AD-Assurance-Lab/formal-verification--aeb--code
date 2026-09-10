@@ -38,10 +38,19 @@ K=5 SCOPE=hazard bash scripts/interior_sweep.sh 2>&1 | tee -a "$LOG"
 IH=${PIPESTATUS[0]}
 say "interior/hazard finished rc=$IH"
 
-say "=== 3/3  interior sweep, plate scenarios, K=5 ==="
-K=5 SCOPE=plate bash scripts/interior_sweep.sh 2>&1 | tee -a "$LOG"
-IP=${PIPESTATUS[0]}
-say "interior/plate finished rc=$IP"
+# THE PLATE PHASE ONLY RUNS WHERE THE PLATE SCENARIO EXISTS. Amendment A20 defers it on
+# maps whose longest straight is under the 320 m it needs, and this called it by name
+# anyway: it drove three repetitions into a scenario with no site and no frames before
+# anyone noticed. Ask the module, as every other stage now does.
+if "$REPO/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;sys.exit(0 if 'plate' in J.IN_SCOPE else 1)"; then
+  say "=== 3/3  interior sweep, plate scenarios, K=5 ==="
+  K=5 SCOPE=plate bash scripts/interior_sweep.sh 2>&1 | tee -a "$LOG"
+  IP=${PIPESTATUS[0]}
+  say "interior/plate finished rc=$IP"
+else
+  IP=0
+  say "=== 3/3  SKIPPED: the plate scenario is not in scope on this map (A20) ==="
+fi
 
 say "=== reports ==="
 "$REPO/.venv/bin/python" tools/interior_report.py --interior 5 2>&1 | tee -a "$LOG"

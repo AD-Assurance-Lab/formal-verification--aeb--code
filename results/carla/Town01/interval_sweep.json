@@ -1,0 +1,113 @@
+{
+  "verdict": "MEASURED",
+  "note": "Image space only. A small error is necessary and not sufficient; the behavioural check in CLAUDE.md section 4 waits for a policy.",
+  "full_interval_deg": [
+    60.0,
+    -30.0
+  ],
+  "sweep": [
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": 50.0,
+      "crosses_horizon": false,
+      "mae_0_255": 1.23,
+      "mae_normalised": 0.0048
+    },
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": 35.0,
+      "crosses_horizon": false,
+      "mae_0_255": 1.87,
+      "mae_normalised": 0.0073
+    },
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": 20.0,
+      "crosses_horizon": false,
+      "mae_0_255": 3.18,
+      "mae_normalised": 0.0125
+    },
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": 5.0,
+      "crosses_horizon": true,
+      "mae_0_255": 14.96,
+      "mae_normalised": 0.0587
+    },
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": -10.0,
+      "crosses_horizon": false,
+      "mae_0_255": 1.05,
+      "mae_normalised": 0.0041
+    },
+    {
+      "kind": "fixed_width_moving_centre",
+      "width_deg": 11.25,
+      "centre_deg": -25.0,
+      "crosses_horizon": false,
+      "mae_0_255": 1.06,
+      "mae_normalised": 0.0041
+    },
+    {
+      "kind": "moving_width_centred_15",
+      "width_deg": 90.0,
+      "endpoints_deg": [
+        60.0,
+        -30.0
+      ],
+      "midpoint_deg": 15.0,
+      "mae_0_255": 42.98,
+      "mae_normalised": 0.1685
+    },
+    {
+      "kind": "moving_width_centred_15",
+      "width_deg": 45.0,
+      "endpoints_deg": [
+        37.5,
+        -7.5
+      ],
+      "midpoint_deg": 15.0,
+      "mae_0_255": 36.08,
+      "mae_normalised": 0.1415
+    },
+    {
+      "kind": "moving_width_centred_15",
+      "width_deg": 22.5,
+      "endpoints_deg": [
+        26.25,
+        3.75
+      ],
+      "midpoint_deg": 15.0,
+      "mae_0_255": 16.95,
+      "mae_normalised": 0.0665
+    },
+    {
+      "kind": "moving_width_centred_15",
+      "width_deg": 11.25,
+      "endpoints_deg": [
+        20.625,
+        9.375
+      ],
+      "midpoint_deg": 15.0,
+      "mae_0_255": 3.9,
+      "mae_normalised": 0.0153
+    },
+    {
+      "kind": "moving_width_centred_15",
+      "width_deg": 5.625,
+      "endpoints_deg": [
+        17.8125,
+        12.1875
+      ],
+      "midpoint_deg": 15.0,
+      "mae_0_255": 1.91,
+      "mae_normalised": 0.0075
+    }
+  ]
+}

@@ -84,5 +84,5 @@ say "merging"
 "$PY" tools/merge_witness_reps.py --policy "$POLICY" --scenario "$SCENARIO" \
     "${EXTRA[@]}" 2>&1 | tee -a "$LOG"
 rc=${PIPESTATUS[0]}
-say "merge rc=$rc$([ "$rc" -ne 0 ] && echo '  -- VOID cells present, see above')"
+say "merge rc=$rc$([ "$rc" -ne 0 ] && echo '  -- see above; VOID cells or a merge failure')"
 exit "$rc"

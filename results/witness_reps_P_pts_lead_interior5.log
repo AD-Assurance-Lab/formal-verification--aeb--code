@@ -1,0 +1,11 @@
+[2026-09-10 16:33:33] M7 for P_pts/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 16:33:33] restart before repetition 1 of 3
+[2026-09-10 16:36:49] repetition 1 done
+[2026-09-10 16:36:49] restart before repetition 2 of 3
+[2026-09-10 16:40:06] repetition 2 done
+[2026-09-10 16:40:06] restart before repetition 3 of 3
+[2026-09-10 16:43:22] repetition 3 done
+[2026-09-10 16:43:22] merging
+  witness_P_pts_lead_interior5: 3 repetitions, agreement 51/65, 0 void
+  wrote results/carla/Town01/witness_P_pts_lead_interior5.json
+[2026-09-10 16:43:22] merge rc=0

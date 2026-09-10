@@ -1,0 +1,433 @@
+{
+  "policy": "P_pts3",
+  "scenario": "lead",
+  "rep_index": 2,
+  "model_sha256": "9df9da2dc3456376b9ea84f2ab53a071dcfa70df16bd91b7d4941f23ee66ec9f",
+  "provenance": {
+    "timestamp": "2026-09-10T16:31:06-04:00",
+    "git_sha": "768f07ecb6576010d773929f5a42a4b85ad6bbd8",
+    "model_sha256": "9df9da2dc3456376b9ea84f2ab53a071dcfa70df16bd91b7d4941f23ee66ec9f"
+  },
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 36.55999999999767,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  },
+  "illumination": {
+    "knots": 7,
+    "axis_span_mean": 0.29659,
+    "min_axis_span": 0.05,
+    "span_ok": true,
+    "inversions": [
+      {
+        "from_deg": 10.084,
+        "to_deg": 10.084,
+        "from_mean": 0.35026,
+        "to_mean": 0.35028,
+        "rise": 2e-05,
+        "frac_of_span": 0.0001,
+        "declared_uncovered": false,
+        "detail": "sun fell 10.084 -> 10.084 deg and the frame got BRIGHTER, 0.3503 -> 0.3503 (0.0% of the axis span)"
+      }
+    ],
+    "worst_inversion_frac": 0.0001,
+    "max_inversion_frac": 0.12,
+    "total_rise_frac": 0.0001,
+    "max_total_rise_frac": 0.25,
+    "monotone_violations": [],
+    "monotone_ok": true,
+    "brightest_at_deg": 10.084,
+    "darkest_at_deg": 0.241,
+    "extremes_ok": true,
+    "lamp_threshold_deg": 5.0,
+    "means_by_altitude": [
+      {
+        "sun_altitude_deg": 10.084,
+        "mean": 0.35026,
+        "lamps": false
+      },
+      {
+        "sun_altitude_deg": 10.084,
+        "mean": 0.35028,
+        "lamps": false
+      },
+      {
+        "sun_altitude_deg": 5.183,
+        "mean": 0.25169,
+        "lamps": false
+      },
+      {
+        "sun_altitude_deg": 4.375,
+        "mean": 0.2409,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": 2.967,
+        "mean": 0.18365,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": 1.465,
+        "mean": 0.1135,
+        "lamps": true
+      },
+      {
+        "sun_altitude_deg": 0.241,
+        "mean": 0.05369,
+        "lamps": true
+      }
+    ],
+    "ok": true
+  },
+  "illumination_dense": null,
+  "agreement": "2/7",
+  "cells": [
+    {
+      "from_deg": 17.484,
+      "to_deg": 10.084,
+      "midpoint_deg": 10.084,
+      "driven_at_deg": 10.084,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": 1.0,
+      "verdict": "FALSIFIED",
+      "passes": 1,
+      "of": 1,
+      "rate": 1.0,
+      "wilson_95": [
+        0.2065,
+        1.0
+      ],
+      "passes_protocol": 1,
+      "passes_no_nuisance": 1,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 0,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.89
+        }
+      ],
+      "min_gap_ft": [
+        14.32
+      ],
+      "headlamps": "NONE",
+      "signature": {
+        "mean": 0.35026,
+        "sigma": 0.23812,
+        "p01": 0.0,
+        "p99": 0.98431,
+        "frac_dark": 0.04931
+      },
+      "agrees": false
+    },
+    {
+      "from_deg": 10.084,
+      "to_deg": 5.99,
+      "midpoint_deg": 10.084,
+      "driven_at_deg": 10.084,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": -1.0,
+      "verdict": "FALSIFIED",
+      "passes": 1,
+      "of": 1,
+      "rate": 1.0,
+      "wilson_95": [
+        0.2065,
+        1.0
+      ],
+      "passes_protocol": 1,
+      "passes_no_nuisance": 1,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 0,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 14.32,
+          "rest_gap_ft": 14.32,
+          "brake_range_ft": 51.88
+        }
+      ],
+      "min_gap_ft": [
+        14.32
+      ],
+      "headlamps": "NONE",
+      "signature": {
+        "mean": 0.35028,
+        "sigma": 0.23813,
+        "p01": 0.0,
+        "p99": 0.98431,
+        "frac_dark": 0.0493
+      },
+      "agrees": false
+    },
+    {
+      "from_deg": 5.99,
+      "to_deg": 4.375,
+      "midpoint_deg": 5.183,
+      "driven_at_deg": 5.183,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": 0.0,
+      "verdict": "FALSIFIED",
+      "passes": 1,
+      "of": 1,
+      "rate": 1.0,
+      "wilson_95": [
+        0.2065,
+        1.0
+      ],
+      "passes_protocol": 1,
+      "passes_no_nuisance": 1,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 0,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 12.48,
+          "rest_gap_ft": 12.48,
+          "brake_range_ft": 50.05
+        }
+      ],
+      "min_gap_ft": [
+        12.48
+      ],
+      "headlamps": "NONE",
+      "signature": {
+        "mean": 0.25169,
+        "sigma": 0.19982,
+        "p01": 0.0,
+        "p99": 0.93333,
+        "frac_dark": 0.09468
+      },
+      "agrees": false
+    },
+    {
+      "from_deg": 4.375,
+      "to_deg": 2.967,
+      "midpoint_deg": 4.375,
+      "driven_at_deg": 4.375,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": -1.0,
+      "verdict": "FALSIFIED",
+      "passes": 1,
+      "of": 1,
+      "rate": 1.0,
+      "wilson_95": [
+        0.2065,
+        1.0
+      ],
+      "passes_protocol": 1,
+      "passes_no_nuisance": 1,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 0,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 12.48,
+          "rest_gap_ft": 12.48,
+          "brake_range_ft": 50.05
+        }
+      ],
+      "min_gap_ft": [
+        12.48
+      ],
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.2409,
+        "sigma": 0.17993,
+        "p01": 0.0,
+        "p99": 0.8902,
+        "frac_dark": 0.11233
+      },
+      "agrees": false
+    },
+    {
+      "from_deg": 2.967,
+      "to_deg": 1.465,
+      "midpoint_deg": 2.967,
+      "driven_at_deg": 2.967,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": -1.0,
+      "verdict": "FALSIFIED",
+      "passes": 1,
+      "of": 1,
+      "rate": 1.0,
+      "wilson_95": [
+        0.2065,
+        1.0
+      ],
+      "passes_protocol": 1,
+      "passes_no_nuisance": 1,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 0,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": true,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 6.97,
+          "rest_gap_ft": 6.97,
+          "brake_range_ft": 44.55
+        }
+      ],
+      "min_gap_ft": [
+        6.97
+      ],
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.18365,
+        "sigma": 0.15285,
+        "p01": 0.0,
+        "p99": 0.7451,
+        "frac_dark": 0.16546
+      },
+      "agrees": false
+    },
+    {
+      "from_deg": 1.465,
+      "to_deg": 0.241,
+      "midpoint_deg": 1.465,
+      "driven_at_deg": 1.465,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": -1.0,
+      "verdict": "FALSIFIED",
+      "passes": 0,
+      "of": 1,
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.7935
+      ],
+      "passes_protocol": 0,
+      "passes_no_nuisance": 0,
+      "never_braked": 0,
+      "contacts": 1,
+      "standoff_short": 1,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": true,
+          "standoff_ok": false,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": -0.07,
+          "rest_gap_ft": 0.22,
+          "brake_range_ft": 18.87
+        }
+      ],
+      "min_gap_ft": [
+        -0.07
+      ],
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.1135,
+        "sigma": 0.11649,
+        "p01": 0.0,
+        "p99": 0.54118,
+        "frac_dark": 0.27843
+      },
+      "agrees": true
+    },
+    {
+      "from_deg": 0.241,
+      "to_deg": 0.0,
+      "midpoint_deg": 0.241,
+      "driven_at_deg": 0.241,
+      "driven_at": "witness",
+      "interior_of": null,
+      "witness_s": -1.0,
+      "verdict": "FALSIFIED",
+      "passes": 0,
+      "of": 1,
+      "rate": 0.0,
+      "wilson_95": [
+        0.0,
+        0.7935
+      ],
+      "passes_protocol": 0,
+      "passes_no_nuisance": 0,
+      "never_braked": 0,
+      "contacts": 0,
+      "standoff_short": 1,
+      "premature": 0,
+      "runs": [
+        {
+          "contact": false,
+          "standoff_ok": false,
+          "premature": false,
+          "braked": true,
+          "min_gap_ft": 0.06,
+          "rest_gap_ft": 0.4,
+          "brake_range_ft": 7.86
+        }
+      ],
+      "min_gap_ft": [
+        0.06
+      ],
+      "headlamps": "LowBeam",
+      "signature": {
+        "mean": 0.05369,
+        "sigma": 0.07926,
+        "p01": 0.0,
+        "p99": 0.3451,
+        "frac_dark": 0.51333
+      },
+      "agrees": true
+    }
+  ],
+  "note": "Driven at each falsified sub-interval's EXHIBITED witness illumination -- the concrete s whose actual network output violates the property. That illumination is a rendered knot here, not a blend. The companion midpoint pass (witness_*.json) drives every sub-interval, certified ones included, because a test that only visits flagged cells cannot tell a working certificate from one that flags everything.",
+  "driven_at": "witness"
+}

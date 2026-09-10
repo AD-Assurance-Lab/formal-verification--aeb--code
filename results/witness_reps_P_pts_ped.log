@@ -9,3 +9,14 @@
   witness_P_pts_ped: 3 repetitions, agreement 4/13, 0 void
   wrote results/carla/Town01/witness_P_pts_ped.json
 [2026-09-10 16:02:13] merge rc=0
+[2026-09-10 16:06:31] M7 for P_pts/ped midpoint: 3 repetitions, one server each
+[2026-09-10 16:06:31] restart before repetition 1 of 3
+[2026-09-10 16:07:37] repetition 1 done
+[2026-09-10 16:07:37] restart before repetition 2 of 3
+[2026-09-10 16:08:42] repetition 2 done
+[2026-09-10 16:08:42] restart before repetition 3 of 3
+[2026-09-10 16:09:47] repetition 3 done
+[2026-09-10 16:09:47] merging
+  witness_P_pts_ped: 3 repetitions, agreement 4/13, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped.json
+[2026-09-10 16:09:47] merge rc=0

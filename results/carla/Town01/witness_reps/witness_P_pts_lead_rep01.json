@@ -4,8 +4,8 @@
   "rep_index": 1,
   "model_sha256": "330c10aec29b060c73e990bc12365385f8d7fd6bce5b356c9382ab4599b83bbf",
   "provenance": {
-    "timestamp": "2026-09-10T15:56:56-04:00",
-    "git_sha": "9f6c2d412e602332de24ca1c10f7cee5cfd341e3",
+    "timestamp": "2026-09-10T16:04:30-04:00",
+    "git_sha": "768f07ecb6576010d773929f5a42a4b85ad6bbd8",
     "model_sha256": "330c10aec29b060c73e990bc12365385f8d7fd6bce5b356c9382ab4599b83bbf"
   },
   "determinism": {
@@ -24,7 +24,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 53.5800000000163,
+    "server_age_s": 53.26000000000931,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {
@@ -45,9 +45,9 @@
       {
         "from_deg": 0.12,
         "to_deg": -0.711,
-        "from_mean": 0.04878,
+        "from_mean": 0.04877,
         "to_mean": 0.07345,
-        "rise": 0.02467,
+        "rise": 0.02468,
         "frac_of_span": 0.0529,
         "declared_uncovered": true,
         "detail": "sun fell 0.120 -> -0.711 deg and the frame got BRIGHTER, 0.0488 -> 0.0735 (5.3% of the axis span)"
@@ -66,37 +66,37 @@
     "means_by_altitude": [
       {
         "sun_altitude_deg": 49.989,
-        "mean": 0.5155,
+        "mean": 0.51549,
         "lamps": false
       },
       {
         "sun_altitude_deg": 33.25,
-        "mean": 0.51314,
+        "mean": 0.51316,
         "lamps": false
       },
       {
         "sun_altitude_deg": 22.004,
-        "mean": 0.46861,
+        "mean": 0.46859,
         "lamps": false
       },
       {
         "sun_altitude_deg": 13.784,
-        "mean": 0.39776,
+        "mean": 0.39777,
         "lamps": false
       },
       {
         "sun_altitude_deg": 8.037,
-        "mean": 0.31814,
+        "mean": 0.31812,
         "lamps": false
       },
       {
         "sun_altitude_deg": 5.183,
-        "mean": 0.25163,
+        "mean": 0.25159,
         "lamps": false
       },
       {
         "sun_altitude_deg": 3.671,
-        "mean": 0.21139,
+        "mean": 0.21134,
         "lamps": true
       },
       {
@@ -111,7 +111,7 @@
       },
       {
         "sun_altitude_deg": 0.12,
-        "mean": 0.04878,
+        "mean": 0.04877,
         "lamps": true
       },
       {
@@ -165,7 +165,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
+          "brake_range_ft": 51.89
         }
       ],
       "min_gap_ft": [
@@ -173,11 +173,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.5155,
+        "mean": 0.51549,
         "sigma": 0.21781,
         "p01": 0.0,
         "p99": 0.89804,
-        "frac_dark": 0.01938
+        "frac_dark": 0.01937
       },
       "agrees": true
     },
@@ -219,11 +219,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.51314,
-        "sigma": 0.25239,
+        "mean": 0.51316,
+        "sigma": 0.25238,
         "p01": 0.0,
         "p99": 0.99608,
-        "frac_dark": 0.02039
+        "frac_dark": 0.02038
       },
       "agrees": true
     },
@@ -265,11 +265,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.46861,
-        "sigma": 0.2626,
+        "mean": 0.46859,
+        "sigma": 0.26261,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.02598
+        "frac_dark": 0.02599
       },
       "agrees": true
     },
@@ -303,7 +303,7 @@
           "braked": true,
           "min_gap_ft": 14.32,
           "rest_gap_ft": 14.32,
-          "brake_range_ft": 51.88
+          "brake_range_ft": 51.89
         }
       ],
       "min_gap_ft": [
@@ -311,11 +311,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.39776,
+        "mean": 0.39777,
         "sigma": 0.25182,
         "p01": 0.0,
         "p99": 0.99216,
-        "frac_dark": 0.03748
+        "frac_dark": 0.03749
       },
       "agrees": false
     },
@@ -347,21 +347,21 @@
           "standoff_ok": true,
           "premature": false,
           "braked": true,
-          "min_gap_ft": -1.66,
-          "rest_gap_ft": 61.08,
-          "brake_range_ft": 13.45
+          "min_gap_ft": -1.93,
+          "rest_gap_ft": 115.89,
+          "brake_range_ft": 96.36
         }
       ],
       "min_gap_ft": [
-        -1.66
+        -1.93
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.31814,
-        "sigma": 0.22608,
+        "mean": 0.31812,
+        "sigma": 0.22607,
         "p01": 0.0,
         "p99": 0.97647,
-        "frac_dark": 0.06008
+        "frac_dark": 0.06004
       },
       "agrees": true
     },
@@ -403,11 +403,11 @@
       ],
       "headlamps": "NONE",
       "signature": {
-        "mean": 0.25163,
-        "sigma": 0.19982,
+        "mean": 0.25159,
+        "sigma": 0.19985,
         "p01": 0.0,
         "p99": 0.93333,
-        "frac_dark": 0.09483
+        "frac_dark": 0.09488
       },
       "agrees": true
     },
@@ -449,11 +449,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.21139,
-        "sigma": 0.1668,
+        "mean": 0.21134,
+        "sigma": 0.16677,
         "p01": 0.0,
         "p99": 0.82353,
-        "frac_dark": 0.13917
+        "frac_dark": 0.13916
       },
       "agrees": true
     },
@@ -496,10 +496,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.15045,
-        "sigma": 0.13606,
+        "sigma": 0.13608,
         "p01": 0.0,
         "p99": 0.65098,
-        "frac_dark": 0.20555
+        "frac_dark": 0.20569
       },
       "agrees": true
     },
@@ -542,10 +542,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.08261,
-        "sigma": 0.09829,
+        "sigma": 0.09827,
         "p01": 0.0,
         "p99": 0.44314,
-        "frac_dark": 0.3745
+        "frac_dark": 0.37437
       },
       "agrees": false
     },
@@ -587,11 +587,11 @@
       ],
       "headlamps": "LowBeam",
       "signature": {
-        "mean": 0.04878,
+        "mean": 0.04877,
         "sigma": 0.07562,
         "p01": 0.0,
         "p99": 0.33333,
-        "frac_dark": 0.54567
+        "frac_dark": 0.54569
       },
       "agrees": false
     },
@@ -634,10 +634,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.07345,
-        "sigma": 0.09561,
+        "sigma": 0.0956,
         "p01": 0.0,
         "p99": 0.35294,
-        "frac_dark": 0.46284
+        "frac_dark": 0.46286
       },
       "agrees": true
     },
@@ -680,10 +680,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.05806,
-        "sigma": 0.09595,
+        "sigma": 0.09594,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65325
+        "frac_dark": 0.65324
       },
       "agrees": true
     },
@@ -726,10 +726,10 @@
       "headlamps": "LowBeam",
       "signature": {
         "mean": 0.05806,
-        "sigma": 0.09594,
+        "sigma": 0.09595,
         "p01": 0.0,
         "p99": 0.3451,
-        "frac_dark": 0.65326
+        "frac_dark": 0.65324
       },
       "agrees": true
     }

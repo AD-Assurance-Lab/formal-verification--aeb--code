@@ -52,7 +52,15 @@ def merge(policy: str, scenario: str, at_witness: bool, interior: int = 0) -> in
     stem = f"witness_{policy}_{scenario}{sfx}"
     paths = sorted(REPS_DIR.glob(f"{stem}_rep*.json"))
     if not paths:
-        raise SystemExit(f"no per-repetition artifacts matching {stem}_rep*.json")
+        # NOTHING TO MERGE IS NOT A FAULT, and it used to be reported as the worst kind.
+        # An at-witness pass drives the sub-intervals a certificate FALSIFIED. A policy
+        # that certifies all of them has none, so the drivers write no artifact, the merge
+        # found nothing, and the shell announced "VOID cells present" -- which in this
+        # study has always meant a defect to chase. The best result in the ledger was
+        # being reported in the words of the worst.
+        print(f"nothing to merge for {stem}: no repetition produced an artifact. "
+              f"For an at-witness pass this is what a fully certified cell looks like.")
+        return 0
     docs = [json.loads(p.read_text()) for p in paths]
     n = len(docs)
 

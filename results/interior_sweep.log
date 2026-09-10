@@ -1,0 +1,79 @@
+[2026-09-10 16:33:33] interior sweep: K=5 per sub-interval, scope hazard (lead ped), policies P_pts P_cont P_pts3
+[2026-09-10 16:33:33] === P_pts / lead ===
+[2026-09-10 16:33:33] M7 for P_pts/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 16:33:33] restart before repetition 1 of 3
+[2026-09-10 16:36:49] repetition 1 done
+[2026-09-10 16:36:49] restart before repetition 2 of 3
+[2026-09-10 16:40:06] repetition 2 done
+[2026-09-10 16:40:06] restart before repetition 3 of 3
+[2026-09-10 16:43:22] repetition 3 done
+[2026-09-10 16:43:22] merging
+  witness_P_pts_lead_interior5: 3 repetitions, agreement 51/65, 0 void
+  wrote results/carla/Town01/witness_P_pts_lead_interior5.json
+[2026-09-10 16:43:22] merge rc=0
+[2026-09-10 16:43:22] === P_pts / ped ===
+[2026-09-10 16:43:22] M7 for P_pts/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 16:43:22] restart before repetition 1 of 3
+[2026-09-10 16:47:09] repetition 1 done
+[2026-09-10 16:47:09] restart before repetition 2 of 3
+[2026-09-10 16:50:54] repetition 2 done
+[2026-09-10 16:50:54] restart before repetition 3 of 3
+[2026-09-10 16:54:41] repetition 3 done
+[2026-09-10 16:54:41] merging
+  witness_P_pts_ped_interior5: 3 repetitions, agreement 24/65, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped_interior5.json
+[2026-09-10 16:54:41] merge rc=0
+[2026-09-10 16:54:41] === P_cont / lead ===
+[2026-09-10 16:54:41] M7 for P_cont/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 16:54:41] restart before repetition 1 of 3
+[2026-09-10 16:58:05] repetition 1 done
+[2026-09-10 16:58:05] restart before repetition 2 of 3
+[2026-09-10 17:01:27] repetition 2 done
+[2026-09-10 17:01:27] restart before repetition 3 of 3
+[2026-09-10 17:04:51] repetition 3 done
+[2026-09-10 17:04:51] merging
+  witness_P_cont_lead_interior5: 3 repetitions, agreement 65/65, 0 void
+  wrote results/carla/Town01/witness_P_cont_lead_interior5.json
+[2026-09-10 17:04:51] merge rc=0
+[2026-09-10 17:04:51] === P_cont / ped ===
+[2026-09-10 17:04:51] M7 for P_cont/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 17:04:51] restart before repetition 1 of 3
+[2026-09-10 17:08:41] repetition 1 done
+[2026-09-10 17:08:41] restart before repetition 2 of 3
+[2026-09-10 17:12:30] repetition 2 done
+[2026-09-10 17:12:30] restart before repetition 3 of 3
+[2026-09-10 17:16:20] repetition 3 done
+[2026-09-10 17:16:20] merging
+  witness_P_cont_ped_interior5: 3 repetitions, agreement 65/65, 0 void
+  wrote results/carla/Town01/witness_P_cont_ped_interior5.json
+[2026-09-10 17:16:20] merge rc=0
+[2026-09-10 17:16:20] === P_pts3 / lead ===
+[2026-09-10 17:16:20] M7 for P_pts3/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 17:16:20] restart before repetition 1 of 3
+[2026-09-10 17:19:53] repetition 1 done
+[2026-09-10 17:19:53] restart before repetition 2 of 3
+[2026-09-10 17:23:19] repetition 2 done
+[2026-09-10 17:23:19] restart before repetition 3 of 3
+[2026-09-10 17:26:48] repetition 3 done
+[2026-09-10 17:26:48] merging
+  witness_P_pts3_lead_interior5: 3 repetitions, agreement 45/65, 0 void
+  wrote results/carla/Town01/witness_P_pts3_lead_interior5.json
+[2026-09-10 17:26:48] merge rc=0
+[2026-09-10 17:26:48] === P_pts3 / ped ===
+[2026-09-10 17:26:48] M7 for P_pts3/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 17:26:48] restart before repetition 1 of 3
+[2026-09-10 17:29:50] repetition 1 done
+[2026-09-10 17:29:50] restart before repetition 2 of 3
+[2026-09-10 17:32:49] repetition 2 done
+[2026-09-10 17:32:49] restart before repetition 3 of 3
+[2026-09-10 17:35:48] repetition 3 done
+[2026-09-10 17:35:48] merging
+  witness_P_pts3_ped_interior5: 3 repetitions, agreement 40/65, 0 void
+  wrote results/carla/Town01/witness_P_pts3_ped_interior5.json
+[2026-09-10 17:35:48] merge rc=0
+[2026-09-10 17:35:48] sweep complete
+[2026-09-10 17:35:48] no void cells
+[2026-09-10 17:35:48] interior sweep: K=5 per sub-interval, scope plate (plate none_plate), policies P_pts P_cont P_pts3
+[2026-09-10 17:35:48] === P_pts / plate ===
+[2026-09-10 17:35:48] M7 for P_pts/plate --interior 5: 3 repetitions, one server each
+[2026-09-10 17:35:48] restart before repetition 1 of 3

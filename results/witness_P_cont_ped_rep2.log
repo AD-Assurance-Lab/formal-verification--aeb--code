@@ -1,0 +1,20 @@
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+     +60.000 to  +39.977  mid +49.989  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +39.977 to  +26.523  mid +33.250  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +26.523 to  +17.484  mid +22.004  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +17.484 to  +10.084  mid +13.784  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     +10.084 to   +5.990  mid  +8.037  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +5.990 to   +4.375  mid  +5.183  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +4.375 to   +2.967  mid  +3.671  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +2.967 to   +1.465  mid  +2.216  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +1.465 to   +0.241  mid  +0.853  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.241 to   +0.000  mid  +0.120  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      +0.000 to   -1.422  mid  -0.711  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+      -1.422 to  -29.561  mid -15.492  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+     -29.561 to  -30.000  mid -29.780  predicted CERTIFIED  drove 1/1 [0.21, 1.00]  agree
+
+  illumination axis OK: 13 midpoints, span 0.4666 of full range
+
+  certificate agrees with driving in 13/13 sub-intervals
+  wrote results/carla/Town01/witness_reps/witness_P_cont_ped_rep02.json

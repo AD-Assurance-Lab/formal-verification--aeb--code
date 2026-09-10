@@ -1,43 +1,231 @@
-[2026-09-10 15:56:01] === 1/3  M7: the witness drives, A13 harness ===
-[2026-09-10 15:56:02] witness scope: all (lead ped plate none_plate)
-[2026-09-10 15:56:02] M7 midpoint  P_pts/lead
-[2026-09-10 15:56:02] M7 for P_pts/lead midpoint: 3 repetitions, one server each
-[2026-09-10 15:56:02] restart before repetition 1 of 3
-[2026-09-10 15:56:56] repetition 1 done
-[2026-09-10 15:56:56] restart before repetition 2 of 3
-[2026-09-10 15:57:56] repetition 2 done
-[2026-09-10 15:57:56] restart before repetition 3 of 3
-[2026-09-10 15:58:57] repetition 3 done
-[2026-09-10 15:58:57] merging
+[2026-09-10 16:03:36] === 1/3  M7: the witness drives, A13 harness ===
+[2026-09-10 16:03:37] witness scope: all (lead ped)
+[2026-09-10 16:03:37] M7 midpoint  P_pts/lead
+[2026-09-10 16:03:37] M7 for P_pts/lead midpoint: 3 repetitions, one server each
+[2026-09-10 16:03:37] restart before repetition 1 of 3
+[2026-09-10 16:04:30] repetition 1 done
+[2026-09-10 16:04:30] restart before repetition 2 of 3
+[2026-09-10 16:05:31] repetition 2 done
+[2026-09-10 16:05:31] restart before repetition 3 of 3
+[2026-09-10 16:06:31] repetition 3 done
+[2026-09-10 16:06:31] merging
   witness_P_pts_lead: 3 repetitions, agreement 10/13, 0 void
   wrote results/carla/Town01/witness_P_pts_lead.json
-[2026-09-10 15:58:57] merge rc=0
-[2026-09-10 15:58:57] M7 midpoint  P_pts/ped
-[2026-09-10 15:58:57] M7 for P_pts/ped midpoint: 3 repetitions, one server each
-[2026-09-10 15:58:57] restart before repetition 1 of 3
-[2026-09-10 16:00:02] repetition 1 done
-[2026-09-10 16:00:02] restart before repetition 2 of 3
-[2026-09-10 16:01:07] repetition 2 done
-[2026-09-10 16:01:07] restart before repetition 3 of 3
-[2026-09-10 16:02:13] repetition 3 done
-[2026-09-10 16:02:13] merging
+[2026-09-10 16:06:31] merge rc=0
+[2026-09-10 16:06:31] M7 midpoint  P_pts/ped
+[2026-09-10 16:06:31] M7 for P_pts/ped midpoint: 3 repetitions, one server each
+[2026-09-10 16:06:31] restart before repetition 1 of 3
+[2026-09-10 16:07:37] repetition 1 done
+[2026-09-10 16:07:37] restart before repetition 2 of 3
+[2026-09-10 16:08:42] repetition 2 done
+[2026-09-10 16:08:42] restart before repetition 3 of 3
+[2026-09-10 16:09:47] repetition 3 done
+[2026-09-10 16:09:47] merging
   witness_P_pts_ped: 3 repetitions, agreement 4/13, 0 void
   wrote results/carla/Town01/witness_P_pts_ped.json
-[2026-09-10 16:02:13] merge rc=0
-[2026-09-10 16:02:13] M7 midpoint  P_pts/plate
-[2026-09-10 16:02:13] M7 for P_pts/plate midpoint: 3 repetitions, one server each
-[2026-09-10 16:02:13] restart before repetition 1 of 3
-[2026-09-10 16:02:36] repetition 1 FAILED rc=1. Tail of results/witness_P_pts_plate_rep1.log:
-no verdicts at /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/verify_P_pts_plate_A.json; run tools/verify.py first
-[2026-09-10 16:02:36] STOPPING. A merge over a missing repetition is a smaller experiment reported
-[2026-09-10 16:02:36] as the one that was asked for.
-[2026-09-10 16:02:36] M7 midpoint  P_pts/none_plate
-[2026-09-10 16:02:36] M7 for P_pts/none_plate midpoint: 3 repetitions, one server each
-[2026-09-10 16:02:36] restart before repetition 1 of 3
-[2026-09-10 16:02:53] repetition 1 FAILED rc=1. Tail of results/witness_P_pts_none_plate_rep1.log:
-no verdicts at /home/za/ad-assurance--workspace/formal-verification--aeb--code/results/carla/Town01/verify_P_pts_none_plate_A.json; run tools/verify.py first
-[2026-09-10 16:02:53] STOPPING. A merge over a missing repetition is a smaller experiment reported
-[2026-09-10 16:02:53] as the one that was asked for.
-[2026-09-10 16:02:53] M7 midpoint  P_cont/lead
-[2026-09-10 16:02:53] M7 for P_cont/lead midpoint: 3 repetitions, one server each
-[2026-09-10 16:02:53] restart before repetition 1 of 3
+[2026-09-10 16:09:47] merge rc=0
+[2026-09-10 16:09:47] M7 midpoint  P_cont/lead
+[2026-09-10 16:09:47] M7 for P_cont/lead midpoint: 3 repetitions, one server each
+[2026-09-10 16:09:47] restart before repetition 1 of 3
+[2026-09-10 16:10:47] repetition 1 done
+[2026-09-10 16:10:47] restart before repetition 2 of 3
+[2026-09-10 16:11:48] repetition 2 done
+[2026-09-10 16:11:48] restart before repetition 3 of 3
+[2026-09-10 16:12:49] repetition 3 done
+[2026-09-10 16:12:49] merging
+  witness_P_cont_lead: 3 repetitions, agreement 13/13, 0 void
+  wrote results/carla/Town01/witness_P_cont_lead.json
+[2026-09-10 16:12:49] merge rc=0
+[2026-09-10 16:12:49] M7 midpoint  P_cont/ped
+[2026-09-10 16:12:49] M7 for P_cont/ped midpoint: 3 repetitions, one server each
+[2026-09-10 16:12:49] restart before repetition 1 of 3
+[2026-09-10 16:13:55] repetition 1 done
+[2026-09-10 16:13:55] restart before repetition 2 of 3
+[2026-09-10 16:15:02] repetition 2 done
+[2026-09-10 16:15:02] restart before repetition 3 of 3
+[2026-09-10 16:16:08] repetition 3 done
+[2026-09-10 16:16:08] merging
+  witness_P_cont_ped: 3 repetitions, agreement 13/13, 0 void
+  wrote results/carla/Town01/witness_P_cont_ped.json
+[2026-09-10 16:16:08] merge rc=0
+[2026-09-10 16:16:08] M7 midpoint  P_pts3/lead
+[2026-09-10 16:16:08] M7 for P_pts3/lead midpoint: 3 repetitions, one server each
+[2026-09-10 16:16:08] restart before repetition 1 of 3
+[2026-09-10 16:17:11] repetition 1 done
+[2026-09-10 16:17:11] restart before repetition 2 of 3
+[2026-09-10 16:18:13] repetition 2 done
+[2026-09-10 16:18:13] restart before repetition 3 of 3
+[2026-09-10 16:19:16] repetition 3 done
+[2026-09-10 16:19:16] merging
+  witness_P_pts3_lead: 3 repetitions, agreement 10/13, 0 void
+  wrote results/carla/Town01/witness_P_pts3_lead.json
+[2026-09-10 16:19:16] merge rc=0
+[2026-09-10 16:19:16] M7 midpoint  P_pts3/ped
+[2026-09-10 16:19:16] M7 for P_pts3/ped midpoint: 3 repetitions, one server each
+[2026-09-10 16:19:16] restart before repetition 1 of 3
+[2026-09-10 16:20:12] repetition 1 done
+[2026-09-10 16:20:12] restart before repetition 2 of 3
+[2026-09-10 16:21:08] repetition 2 done
+[2026-09-10 16:21:08] restart before repetition 3 of 3
+[2026-09-10 16:22:04] repetition 3 done
+[2026-09-10 16:22:04] merging
+  witness_P_pts3_ped: 3 repetitions, agreement 8/13, 0 void
+  wrote results/carla/Town01/witness_P_pts3_ped.json
+[2026-09-10 16:22:04] merge rc=0
+[2026-09-10 16:22:04] M7 at-witness  P_pts/lead
+[2026-09-10 16:22:04] M7 for P_pts/lead --at-witness: 3 repetitions, one server each
+[2026-09-10 16:22:04] restart before repetition 1 of 3
+[2026-09-10 16:22:46] repetition 1 done
+[2026-09-10 16:22:46] restart before repetition 2 of 3
+[2026-09-10 16:23:28] repetition 2 done
+[2026-09-10 16:23:28] restart before repetition 3 of 3
+[2026-09-10 16:24:11] repetition 3 done
+[2026-09-10 16:24:11] merging
+  witness_P_pts_lead_atwitness: 3 repetitions, agreement 4/7, 0 void
+  wrote results/carla/Town01/witness_P_pts_lead_atwitness.json
+[2026-09-10 16:24:11] merge rc=0
+[2026-09-10 16:24:11] M7 at-witness  P_pts/ped
+[2026-09-10 16:24:11] M7 for P_pts/ped --at-witness: 3 repetitions, one server each
+[2026-09-10 16:24:11] restart before repetition 1 of 3
+[2026-09-10 16:25:09] repetition 1 done
+[2026-09-10 16:25:09] restart before repetition 2 of 3
+[2026-09-10 16:26:08] repetition 2 done
+[2026-09-10 16:26:08] restart before repetition 3 of 3
+[2026-09-10 16:27:07] repetition 3 done
+[2026-09-10 16:27:07] merging
+  witness_P_pts_ped_atwitness: 3 repetitions, agreement 2/10, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped_atwitness.json
+[2026-09-10 16:27:07] merge rc=0
+[2026-09-10 16:27:07] M7 at-witness  P_cont/lead
+[2026-09-10 16:27:07] M7 for P_cont/lead --at-witness: 3 repetitions, one server each
+[2026-09-10 16:27:07] restart before repetition 1 of 3
+[2026-09-10 16:27:32] repetition 1 done
+[2026-09-10 16:27:32] restart before repetition 2 of 3
+[2026-09-10 16:27:57] repetition 2 done
+[2026-09-10 16:27:57] restart before repetition 3 of 3
+[2026-09-10 16:28:22] repetition 3 done
+[2026-09-10 16:28:22] merging
+no per-repetition artifacts matching witness_P_cont_lead_atwitness_rep*.json
+[2026-09-10 16:28:22] merge rc=1  -- VOID cells present, see above
+[2026-09-10 16:28:22] M7 at-witness  P_cont/ped
+[2026-09-10 16:28:22] M7 for P_cont/ped --at-witness: 3 repetitions, one server each
+[2026-09-10 16:28:22] restart before repetition 1 of 3
+[2026-09-10 16:28:48] repetition 1 done
+[2026-09-10 16:28:48] restart before repetition 2 of 3
+[2026-09-10 16:29:13] repetition 2 done
+[2026-09-10 16:29:13] restart before repetition 3 of 3
+[2026-09-10 16:29:38] repetition 3 done
+[2026-09-10 16:29:38] merging
+no per-repetition artifacts matching witness_P_cont_ped_atwitness_rep*.json
+[2026-09-10 16:29:38] merge rc=1  -- VOID cells present, see above
+[2026-09-10 16:29:38] M7 at-witness  P_pts3/lead
+[2026-09-10 16:29:38] M7 for P_pts3/lead --at-witness: 3 repetitions, one server each
+[2026-09-10 16:29:38] restart before repetition 1 of 3
+[2026-09-10 16:30:22] repetition 1 done
+[2026-09-10 16:30:22] restart before repetition 2 of 3
+[2026-09-10 16:31:06] repetition 2 done
+[2026-09-10 16:31:06] restart before repetition 3 of 3
+[2026-09-10 16:31:50] repetition 3 done
+[2026-09-10 16:31:50] merging
+  witness_P_pts3_lead_atwitness: 3 repetitions, agreement 2/7, 0 void
+  wrote results/carla/Town01/witness_P_pts3_lead_atwitness.json
+[2026-09-10 16:31:50] merge rc=0
+[2026-09-10 16:31:50] M7 at-witness  P_pts3/ped
+[2026-09-10 16:31:50] M7 for P_pts3/ped --at-witness: 3 repetitions, one server each
+[2026-09-10 16:31:50] restart before repetition 1 of 3
+[2026-09-10 16:32:25] repetition 1 done
+[2026-09-10 16:32:25] restart before repetition 2 of 3
+[2026-09-10 16:32:59] repetition 2 done
+[2026-09-10 16:32:59] restart before repetition 3 of 3
+[2026-09-10 16:33:33] repetition 3 done
+[2026-09-10 16:33:33] merging
+  witness_P_pts3_ped_atwitness: 3 repetitions, agreement 0/5, 0 void
+  wrote results/carla/Town01/witness_P_pts3_ped_atwitness.json
+[2026-09-10 16:33:33] merge rc=0
+[2026-09-10 16:33:33] M7 complete.
+[2026-09-10 16:33:33] 2 drive(s) produced a VOID cell. Under the standing rule that is a BUG
+[2026-09-10 16:33:33] until proven otherwise and the cell is not reported until the cause is written
+[2026-09-10 16:33:33] down. Do NOT run more repetitions.
+[2026-09-10 16:33:33] M7 finished rc=1  (void cells or a failed drive)
+[2026-09-10 16:33:33] === 2/3  interior sweep, hazard scenarios, K=5 ===
+[2026-09-10 16:33:33] interior sweep: K=5 per sub-interval, scope hazard (lead ped), policies P_pts P_cont P_pts3
+[2026-09-10 16:33:33] === P_pts / lead ===
+[2026-09-10 16:33:33] M7 for P_pts/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 16:33:33] restart before repetition 1 of 3
+[2026-09-10 16:36:49] repetition 1 done
+[2026-09-10 16:36:49] restart before repetition 2 of 3
+[2026-09-10 16:40:06] repetition 2 done
+[2026-09-10 16:40:06] restart before repetition 3 of 3
+[2026-09-10 16:43:22] repetition 3 done
+[2026-09-10 16:43:22] merging
+  witness_P_pts_lead_interior5: 3 repetitions, agreement 51/65, 0 void
+  wrote results/carla/Town01/witness_P_pts_lead_interior5.json
+[2026-09-10 16:43:22] merge rc=0
+[2026-09-10 16:43:22] === P_pts / ped ===
+[2026-09-10 16:43:22] M7 for P_pts/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 16:43:22] restart before repetition 1 of 3
+[2026-09-10 16:47:09] repetition 1 done
+[2026-09-10 16:47:09] restart before repetition 2 of 3
+[2026-09-10 16:50:54] repetition 2 done
+[2026-09-10 16:50:54] restart before repetition 3 of 3
+[2026-09-10 16:54:41] repetition 3 done
+[2026-09-10 16:54:41] merging
+  witness_P_pts_ped_interior5: 3 repetitions, agreement 24/65, 0 void
+  wrote results/carla/Town01/witness_P_pts_ped_interior5.json
+[2026-09-10 16:54:41] merge rc=0
+[2026-09-10 16:54:41] === P_cont / lead ===
+[2026-09-10 16:54:41] M7 for P_cont/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 16:54:41] restart before repetition 1 of 3
+[2026-09-10 16:58:05] repetition 1 done
+[2026-09-10 16:58:05] restart before repetition 2 of 3
+[2026-09-10 17:01:27] repetition 2 done
+[2026-09-10 17:01:27] restart before repetition 3 of 3
+[2026-09-10 17:04:51] repetition 3 done
+[2026-09-10 17:04:51] merging
+  witness_P_cont_lead_interior5: 3 repetitions, agreement 65/65, 0 void
+  wrote results/carla/Town01/witness_P_cont_lead_interior5.json
+[2026-09-10 17:04:51] merge rc=0
+[2026-09-10 17:04:51] === P_cont / ped ===
+[2026-09-10 17:04:51] M7 for P_cont/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 17:04:51] restart before repetition 1 of 3
+[2026-09-10 17:08:41] repetition 1 done
+[2026-09-10 17:08:41] restart before repetition 2 of 3
+[2026-09-10 17:12:30] repetition 2 done
+[2026-09-10 17:12:30] restart before repetition 3 of 3
+[2026-09-10 17:16:20] repetition 3 done
+[2026-09-10 17:16:20] merging
+  witness_P_cont_ped_interior5: 3 repetitions, agreement 65/65, 0 void
+  wrote results/carla/Town01/witness_P_cont_ped_interior5.json
+[2026-09-10 17:16:20] merge rc=0
+[2026-09-10 17:16:20] === P_pts3 / lead ===
+[2026-09-10 17:16:20] M7 for P_pts3/lead --interior 5: 3 repetitions, one server each
+[2026-09-10 17:16:20] restart before repetition 1 of 3
+[2026-09-10 17:19:53] repetition 1 done
+[2026-09-10 17:19:53] restart before repetition 2 of 3
+[2026-09-10 17:23:19] repetition 2 done
+[2026-09-10 17:23:19] restart before repetition 3 of 3
+[2026-09-10 17:26:48] repetition 3 done
+[2026-09-10 17:26:48] merging
+  witness_P_pts3_lead_interior5: 3 repetitions, agreement 45/65, 0 void
+  wrote results/carla/Town01/witness_P_pts3_lead_interior5.json
+[2026-09-10 17:26:48] merge rc=0
+[2026-09-10 17:26:48] === P_pts3 / ped ===
+[2026-09-10 17:26:48] M7 for P_pts3/ped --interior 5: 3 repetitions, one server each
+[2026-09-10 17:26:48] restart before repetition 1 of 3
+[2026-09-10 17:29:50] repetition 1 done
+[2026-09-10 17:29:50] restart before repetition 2 of 3
+[2026-09-10 17:32:49] repetition 2 done
+[2026-09-10 17:32:49] restart before repetition 3 of 3
+[2026-09-10 17:35:48] repetition 3 done
+[2026-09-10 17:35:48] merging
+  witness_P_pts3_ped_interior5: 3 repetitions, agreement 40/65, 0 void
+  wrote results/carla/Town01/witness_P_pts3_ped_interior5.json
+[2026-09-10 17:35:48] merge rc=0
+[2026-09-10 17:35:48] sweep complete
+[2026-09-10 17:35:48] no void cells
+[2026-09-10 17:35:48] interior/hazard finished rc=0
+[2026-09-10 17:35:48] === 3/3  interior sweep, plate scenarios, K=5 ===
+[2026-09-10 17:35:48] interior sweep: K=5 per sub-interval, scope plate (plate none_plate), policies P_pts P_cont P_pts3
+[2026-09-10 17:35:48] === P_pts / plate ===
+[2026-09-10 17:35:48] M7 for P_pts/plate --interior 5: 3 repetitions, one server each
+[2026-09-10 17:35:48] restart before repetition 1 of 3
