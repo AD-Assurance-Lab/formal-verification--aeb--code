@@ -608,9 +608,34 @@ for _control, _base in CONTROL_OF.items():
 # illumination axis is split, and a split measured on one road and applied to drives on
 # another is the two-different-experiments failure standing rule 7 is about. Town12 has
 # eighteen sites meeting the union; Town01 had one road and the question never came up.
+# WHICH SCENARIOS THIS MAP RUNS, in one place, because it was re-typed in seven (A20).
+#
+# The false-activation scenario asks for 320 m of junction-free lane. Town01's longest flat
+# straight is 307 m, so it cannot host that scenario, and the site union is what noticed:
+# the union takes the WORST requirement over every scenario, so the plate's 320 m set the
+# bar for the pedestrian scenario too and no site on the map qualified for anything.
+#
+# The union is now taken over the scenarios in scope rather than over all of them. On
+# Town01 that is the two hazard scenarios, which need 200 m with pavement both sides and
+# which the map serves with room. The plate cells are deferred, not redefined: the ledger
+# still has six rows and cells 5 and 6 stay unmeasured until a map that fits them is used.
+HAZARD_SCENARIOS = ("lead", "ped")
+ALL_SCENARIOS = ("lead", "ped", "plate")
+SCENARIOS_BY_MAP = {
+    "Town01": HAZARD_SCENARIOS,     # 307 m of straight; the plate needs 320
+}
+IN_SCOPE = tuple(SCENARIOS_BY_MAP.get(MAP, ALL_SCENARIOS))
+
+# Every scenario a capture campaign runs: the ones in scope and the no-target control that
+# replays each one's poses. Derived, never listed, for the reason CONTROL_OF records.
+CAPTURE_SCENARIOS = tuple(
+    x for s in IN_SCOPE
+    for x in (s, next(c for c, b in CONTROL_OF.items() if b == s))
+)
+
 SITE_UNION = {
-    "need_m": max(v["need_m"] for v in SCENARIO_SITE.values()),
-    "sidewalk_both": any(v["sidewalk_both"] for v in SCENARIO_SITE.values()),
+    "need_m": max(SCENARIO_SITE[s]["need_m"] for s in IN_SCOPE),
+    "sidewalk_both": any(SCENARIO_SITE[s]["sidewalk_both"] for s in IN_SCOPE),
 }
 
 

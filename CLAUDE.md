@@ -366,19 +366,46 @@ Writing verdicts down before driving is still the right habit. Nothing enforces 
 The rule that a contradicted expectation is a fault until disposed is **unchanged**.
 
 
+### A20. The site requirement is taken over the scenarios in scope
+
+The site check takes the WORST requirement over every scenario, so the false-activation
+scenario's 320 m set the bar for the crossing pedestrian too. On the small map, whose
+longest flat straight is 307 m, that meant no site qualified for anything and the study
+could not start at all.
+
+The union is now taken over the scenarios **in scope on this map**, which
+`carla_jobs.IN_SCOPE` names in one place. On the small map that is the two hazard
+scenarios, needing 200 m with pavement both sides, which nine of its sites provide.
+
+**The plate cells are deferred, not redefined.** The ledger in section 9 still has six rows.
+Cells 5 and 6 stay unmeasured until the study runs on a map that fits them. A map that
+cannot host a scenario is not a reason to weaken the scenario.
+
+**Why not another map.** The only other surveyed map with a long enough straight has
+pavement on none of its eleven sites, so the crossing pedestrian cannot happen there at all.
+The large map fits everything and needs a graphics card this work no longer assumes.
+
+**What this study is now.** Four cells on the small map: the crossing pedestrian and the
+stopped lead vehicle, for the policy trained on the test points and for the policy trained
+on the continuum. Cell 1 is the study and cells 3 and 4 are its control, so the claim and
+its control both survive. This is a preliminary study and it does not pretend to be the
+last word.
+
 ## Where the study is
 
-**The map is the small one again**, because an 8 GiB graphics card cannot run the large
-one. Everything is being measured again on it, from the camera frames up. That map's frames
-predate the capture-order fix, and its dark endpoint reads 11.2 times too bright (F32,
-A19).
+**Four cells on the small map**, being measured from the camera frames up. The crossing
+pedestrian and the stopped lead vehicle, for the policy trained on the test points and for
+the policy trained on the continuum. Cell 1 is the study and cells 3 and 4 are its control,
+so the claim and its control both survive.
 
-Running now, in order: the primitives, the lighting range, the frames, training, the two
-checks, then the certificates. Then the drives.
+Everything is measured again because that map's frames predate the capture-order fix, and
+its dark endpoint reads 11.2 times too bright (F32, A19).
 
-**The false-activation scenario does not fit on this map.** It needs 320 m of junction-free
-lane and the best site is 307 m. Cells 5 and 6 are 13 m short of the standard's geometry.
-Say so beside any number from them, or run them on a machine that fits the large map.
+**Cells 5 and 6 are deferred.** The false-activation scenario needs 320 m of junction-free
+lane and this map's longest straight is 307 m. The ledger keeps all six rows and those two
+stay unmeasured until the study runs on a map that fits them (A20).
+
+**This is a preliminary study.** It is not the last word on any of it.
 
 **The large map's artifacts are still reachable** with `CARLA_MAP=Town12`. Its results are
 withdrawn: they were measured against networks that could not be trained again. Its camera
@@ -537,11 +564,19 @@ measured rather than guessed.
 
 | what | needs |
 |---|---|
-| the simulator, large map, at Epic quality | about 7.4 GiB, and it leaks to about 10.5 GiB over a long session |
+| the simulator | 13 to 15 GiB on a 32 GiB card, every map, and it leaks over a long session |
 | one bound computation | 3.3 to 8.3 GiB, depending on the policy and how much the sub-interval branches |
 
 They never need to fit at the same time. Verification runs with the simulator stopped, and
 the pipeline stops it for you.
+
+**That simulator figure does not predict a smaller card.** Measured here: 13.7 GiB for the
+small map, 13.2 for the mid-size one, 14.8 for the large one, all on a 32 GiB card. The
+engine sizes its pools to the card it finds, and a 12 GiB card ran a large map at 9.5 GiB.
+So memory is not what decides. **Speed is**, and there the measurements are clear: on a
+12 GiB card the small map ran at 720 steps per second and a large map at under 0.6.
+
+Measure your own card before planning a campaign on it. Do not carry these numbers over.
 
 **On an 8 GiB card**, one bound computation at its worst case does not fit. The pipeline now
 reads the card and runs them one at a time, and says so. The widest sub-intervals may still
@@ -554,10 +589,9 @@ card ran a large map at under 0.6 steps per second, against 720 for a small one 
 moved back only when a 32 GiB card held 26.5 steps per second (A14). An 8 GiB card is below
 the card that failed the first time.
 
-So on a small card, expect to work on the small map, `CARLA_MAP=Town01`, which is what that
-variable exists for. The complete study is on that map anyway, at the tag `town01-final`.
-Everything except the false-activation test fits there. That scenario needs 320 m of
-junction-free lane and the small map has none, which is the whole reason for the move.
+The small map is the default and it is the one a smaller card should use. Everything except
+the false-activation test fits there. That scenario needs 320 m of junction-free lane and
+the map's longest straight is 307 m (A20).
 
 **What does not care about the card.** Training takes about 75 seconds for all three
 policies. Every check that needs no simulator runs anywhere, including the lighting range

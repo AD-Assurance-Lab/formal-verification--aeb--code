@@ -47,3 +47,23 @@
     sub-interval +0.000 to -14.770, midpoint -7.385
       max policy difference 1.401 m/s^2 = 0.57 of the decision threshold
     sub-interval -14.770 to -22.154, midpoint -18.462
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/gate_behavioural.py", line 286, in render_at
+    J.grab_frame(world, images)
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/carla_jobs.py", line 254, in grab_frame
+    frame_id = world.tick()
+               ^^^^^^^^^^^^
+RuntimeError: time-out of 600000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:3000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/gate_behavioural.py", line 397, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/gate_behavioural.py", line 310, in main
+    rendered = render_at(mid, order)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/gate_behavioural.py", line 292, in render_at
+    cam.stop()
+RuntimeError: close: Bad file descriptor [system:9]

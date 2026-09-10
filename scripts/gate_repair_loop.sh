@@ -32,6 +32,7 @@ export CARLA_TAKEOVER=1
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH
 MAX_ROUNDS=${MAX_ROUNDS:-3}
+CAP_SCEN=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(' '.join(J.CAPTURE_SCENARIOS))")
 INPUT_W=${INPUT_W:-128}
 INPUT_H=${INPUT_H:-96}
 LOG=$REPO/results/gate_repair.log
@@ -114,7 +115,7 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   # knots `P_cont` never trained on stops being the section 5 comparison. `P_pts` and
   # `P_pts3` train on the regulatory conditions and do not move -- which is now a CHECK
   # rather than an assumption, and the block below enforces it.
-  for sc in lead none ped none_ped plate none_plate; do
+  for sc in $CAP_SCEN; do
     fresh
     "$PY" -u tools/capture_campaign.py --scenario "$sc" >"$REPO/results/capture_${sc}.log" 2>&1
     [ $? -ne 0 ] && { say "capture $sc failed"; tail -5 "$REPO/results/capture_${sc}.log" | tee -a "$LOG"; stop_server; exit 1; }

@@ -34,6 +34,10 @@ export CARLA_PORT=${CARLA_PORT:-3000}
 # Read from the module, never retyped. tools/paths.py imports nothing but the standard
 # library, so this costs no simulator and no torch.
 CARLA_MAP_NAME=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import paths;print(paths.MAP)")
+# WHICH SCENARIOS THIS MAP RUNS (A20). Read from the module, never retyped: this list was
+# spelled out in seven places and Town01 cannot host the plate scenario.
+CAP_SCEN=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(' '.join(J.CAPTURE_SCENARIOS))")
+HAZ_SCEN=$("$PWD/.venv/bin/python" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;print(' '.join(J.IN_SCOPE))")
 export CARLA_TAKEOVER=1        # this script owns the port for the duration
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH               # ROS leaks in through it; see scripts/bootstrap_env.sh
@@ -127,7 +131,7 @@ FROM=${1:-jobs}
 # Scope for the verifyA stage. DEFAULT IS EVERYTHING, deliberately: standing rule 7 says a
 # default that quietly measures less is the worst kind, because the result still looks
 # finished. Narrowing is opt-in, is echoed, and is written into the stage log.
-SCOPE=${2:-all}
+SCOPE=${2:-all}   # verifyA and witness scope; the MAP decides which scenarios exist (A20)
 
 if [ "$FROM" = "verifyA" ]; then
   case "$SCOPE" in
@@ -297,7 +301,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # Order matters and is not cosmetic: the no-target controls REPLAY the poses of
       # the scenario they control (A10), so `none` needs `lead` on disk and `none_ped`
       # needs `ped`. capture_campaign refuses if you get it wrong.
-      for sc in lead none ped none_ped plate none_plate; do
+      for sc in $CAP_SCEN; do
         fresh_server
         run "capture_${sc}" "$PY" -u tools/capture_campaign.py --scenario "$sc"
       done
@@ -305,7 +309,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # illumination, different headlamp state, so it is a training condition and an
       # endpoint test rather than a point on the axis, and it is filed where the family's
       # globs cannot reach it.
-      for sc in lead none ped none_ped; do
+      for sc in $CAP_SCEN; do
         fresh_server
         run "capture_${sc}_hb" "$PY" -u tools/capture_campaign.py --scenario "$sc" --highbeam
       done
@@ -339,7 +343,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # hand on 2026-09-08 while this loop covered two of the three scenarios -- a stage
       # that reports success having measured less than the study contains. Standing rule
       # 8: the exact invocation that produced a committed number is a script in the repo.
-      for sc in lead ped plate; do
+      for sc in $HAZ_SCEN; do
         fresh_server
         run "endpoints_${sc}" "$PY" -u tools/run_policy.py --all --scenario "$sc"
       done
