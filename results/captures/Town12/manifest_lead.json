@@ -2,8 +2,7 @@
   {
     "knot": 60.0,
     "file": "lead_sun+60.000.npz",
-    "frames": 104,
-    "size_mb": 40.0,
+    "skipped": true,
     "signature": {
       "mean": 0.37176,
       "sigma": 0.15266,
@@ -15,8 +14,7 @@
   {
     "knot": 54.852,
     "file": "lead_sun+54.852.npz",
-    "frames": 104,
-    "size_mb": 39.5,
+    "skipped": true,
     "signature": {
       "mean": 0.36158,
       "sigma": 0.15224,
@@ -28,8 +26,7 @@
   {
     "knot": 47.558,
     "file": "lead_sun+47.558.npz",
-    "frames": 104,
-    "size_mb": 38.7,
+    "skipped": true,
     "signature": {
       "mean": 0.33365,
       "sigma": 0.15618,
@@ -41,8 +38,7 @@
   {
     "knot": 41.911,
     "file": "lead_sun+41.911.npz",
-    "frames": 104,
-    "size_mb": 37.7,
+    "skipped": true,
     "signature": {
       "mean": 0.29909,
       "sigma": 0.16767,
@@ -54,8 +50,7 @@
   {
     "knot": 36.234,
     "file": "lead_sun+36.234.npz",
-    "frames": 104,
-    "size_mb": 36.7,
+    "skipped": true,
     "signature": {
       "mean": 0.26547,
       "sigma": 0.1758,
@@ -67,8 +62,7 @@
   {
     "knot": 30.151,
     "file": "lead_sun+30.151.npz",
-    "frames": 104,
-    "size_mb": 35.5,
+    "skipped": true,
     "signature": {
       "mean": 0.24068,
       "sigma": 0.17041,
@@ -80,8 +74,7 @@
   {
     "knot": 22.238,
     "file": "lead_sun+22.238.npz",
-    "frames": 104,
-    "size_mb": 30.8,
+    "skipped": true,
     "signature": {
       "mean": 0.19789,
       "sigma": 0.169,
@@ -93,8 +86,7 @@
   {
     "knot": 14.605,
     "file": "lead_sun+14.605.npz",
-    "frames": 104,
-    "size_mb": 27.4,
+    "skipped": true,
     "signature": {
       "mean": 0.17547,
       "sigma": 0.15279,
@@ -106,8 +98,7 @@
   {
     "knot": 12.342,
     "file": "lead_sun+12.342.npz",
-    "frames": 104,
-    "size_mb": 25.2,
+    "skipped": true,
     "signature": {
       "mean": 0.16665,
       "sigma": 0.14552,
@@ -119,8 +110,7 @@
   {
     "knot": 8.327,
     "file": "lead_sun+08.327.npz",
-    "frames": 104,
-    "size_mb": 21.7,
+    "skipped": true,
     "signature": {
       "mean": 0.14442,
       "sigma": 0.12734,
@@ -132,8 +122,7 @@
   {
     "knot": 6.848,
     "file": "lead_sun+06.848.npz",
-    "frames": 104,
-    "size_mb": 20.7,
+    "skipped": true,
     "signature": {
       "mean": 0.13197,
       "sigma": 0.11839,
@@ -145,8 +134,7 @@
   {
     "knot": 6.051,
     "file": "lead_sun+06.051.npz",
-    "frames": 104,
-    "size_mb": 20.0,
+    "skipped": true,
     "signature": {
       "mean": 0.12388,
       "sigma": 0.11224,
@@ -158,8 +146,7 @@
   {
     "knot": 4.857,
     "file": "lead_sun+04.857.npz",
-    "frames": 104,
-    "size_mb": 19.6,
+    "skipped": true,
     "signature": {
       "mean": 0.11651,
       "sigma": 0.09816,
@@ -171,8 +158,7 @@
   {
     "knot": 4.289,
     "file": "lead_sun+04.289.npz",
-    "frames": 104,
-    "size_mb": 18.7,
+    "skipped": true,
     "signature": {
       "mean": 0.10617,
       "sigma": 0.09295,
@@ -184,8 +170,7 @@
   {
     "knot": 3.315,
     "file": "lead_sun+03.315.npz",
-    "frames": 104,
-    "size_mb": 16.9,
+    "skipped": true,
     "signature": {
       "mean": 0.08587,
       "sigma": 0.08251,
@@ -197,8 +182,7 @@
   {
     "knot": 2.815,
     "file": "lead_sun+02.815.npz",
-    "frames": 104,
-    "size_mb": 15.7,
+    "skipped": true,
     "signature": {
       "mean": 0.07434,
       "sigma": 0.07618,
@@ -210,8 +194,7 @@
   {
     "knot": 2.026,
     "file": "lead_sun+02.026.npz",
-    "frames": 104,
-    "size_mb": 13.4,
+    "skipped": true,
     "signature": {
       "mean": 0.05561,
       "sigma": 0.06507,
@@ -221,10 +204,22 @@
     }
   },
   {
+    "knot": 1.025,
+    "file": "lead_sun+01.025.npz",
+    "frames": 104,
+    "size_mb": 9.6,
+    "signature": {
+      "mean": 0.03233,
+      "sigma": 0.04859,
+      "p01": 0.0,
+      "p99": 0.20784,
+      "frac_dark": 0.58785
+    }
+  },
+  {
     "knot": 0.024,
     "file": "lead_sun+00.024.npz",
-    "frames": 104,
-    "size_mb": 7.0,
+    "skipped": true,
     "signature": {
       "mean": 0.01416,
       "sigma": 0.03283,
@@ -234,10 +229,22 @@
     }
   },
   {
+    "knot": 0.012,
+    "file": "lead_sun+00.012.npz",
+    "frames": 104,
+    "size_mb": 6.9,
+    "signature": {
+      "mean": 0.014,
+      "sigma": 0.03267,
+      "p01": 0.0,
+      "p99": 0.13333,
+      "frac_dark": 0.79057
+    }
+  },
+  {
     "knot": 0.0,
     "file": "lead_sun+00.000.npz",
-    "frames": 104,
-    "size_mb": 14.6,
+    "skipped": true,
     "signature": {
       "mean": 0.04509,
       "sigma": 0.06655,
@@ -247,8 +254,33 @@
     }
   },
   {
+    "knot": -14.77,
+    "file": "lead_sun-14.770.npz",
+    "frames": 104,
+    "size_mb": 2.2,
+    "signature": {
+      "mean": 0.00362,
+      "sigma": 0.0218,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95391
+    }
+  },
+  {
     "knot": -29.539,
     "file": "lead_sun-29.539.npz",
+    "skipped": true,
+    "signature": {
+      "mean": 0.00362,
+      "sigma": 0.0218,
+      "p01": 0.0,
+      "p99": 0.08627,
+      "frac_dark": 0.95391
+    }
+  },
+  {
+    "knot": -29.77,
+    "file": "lead_sun-29.770.npz",
     "frames": 104,
     "size_mb": 2.2,
     "signature": {
@@ -262,8 +294,7 @@
   {
     "knot": -30.0,
     "file": "lead_sun-30.000.npz",
-    "frames": 104,
-    "size_mb": 2.2,
+    "skipped": true,
     "signature": {
       "mean": 0.00362,
       "sigma": 0.0218,

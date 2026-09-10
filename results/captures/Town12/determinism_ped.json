@@ -1,6 +1,6 @@
 {
   "manifest": "manifest_ped.json",
-  "knots": 21,
+  "knots": 25,
   "determinism": {
     "package": "carla-determinism",
     "package_version": "1.0.0",
@@ -17,7 +17,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 29.0,
+    "server_age_s": 28.989999999990687,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

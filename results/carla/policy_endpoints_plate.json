@@ -12,20 +12,43 @@
       ],
       "braked": 0,
       "exceeded_limit": 0,
-      "peak_demand_mps2": 1.4225,
+      "peak_demand_mps2": 2.3267,
       "nuisance_limit_mps2": 2.4525,
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "runs": [
         {
           "signature": {
-            "mean": 0.19572,
+            "mean": 0.19573,
             "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16859
+            "frac_dark": 0.16853
           },
-          "peak_demand_mps2": 1.3959,
+          "peak_demand_mps2": 2.2562,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19563,
+            "sigma": 0.18463,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16853
+          },
+          "peak_demand_mps2": 2.2551,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -46,9 +69,842 @@
             "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
+            "frac_dark": 0.16843
+          },
+          "peak_demand_mps2": 2.3066,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19564,
+            "sigma": 0.18463,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16863
+          },
+          "peak_demand_mps2": 2.2882,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19576,
+            "sigma": 0.1846,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16843
+          },
+          "peak_demand_mps2": 2.2857,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19569,
+            "sigma": 0.1846,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16882
+          },
+          "peak_demand_mps2": 2.2516,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19569,
+            "sigma": 0.1846,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16843
+          },
+          "peak_demand_mps2": 2.243,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19566,
+            "sigma": 0.18462,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16875
+          },
+          "peak_demand_mps2": 2.2612,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19563,
+            "sigma": 0.18463,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16867
+          },
+          "peak_demand_mps2": 2.3267,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19567,
+            "sigma": 0.1846,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16844
+          },
+          "peak_demand_mps2": 2.2908,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        }
+      ]
+    },
+    "P_pts|darkness_lowbeam": {
+      "passes": 10,
+      "of": 10,
+      "rate": 1.0,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ],
+      "braked": 0,
+      "exceeded_limit": 0,
+      "peak_demand_mps2": 1.1861,
+      "nuisance_limit_mps2": 2.4525,
+      "sun_altitude_deg": -30.0,
+      "headlamps": "LowBeam",
+      "runs": [
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67305
+          },
+          "peak_demand_mps2": 1.0957,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.673
+          },
+          "peak_demand_mps2": 1.0946,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.673
+          },
+          "peak_demand_mps2": 1.1858,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67302
+          },
+          "peak_demand_mps2": 1.1229,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67304
+          },
+          "peak_demand_mps2": 1.1861,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67302
+          },
+          "peak_demand_mps2": 1.1333,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67301
+          },
+          "peak_demand_mps2": 1.12,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67303
+          },
+          "peak_demand_mps2": 1.1337,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67303
+          },
+          "peak_demand_mps2": 1.1526,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67302
+          },
+          "peak_demand_mps2": 1.1537,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        }
+      ]
+    },
+    "P_pts|darkness_highbeam": {
+      "passes": 10,
+      "of": 10,
+      "rate": 1.0,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ],
+      "braked": 0,
+      "exceeded_limit": 0,
+      "peak_demand_mps2": 1.0792,
+      "nuisance_limit_mps2": 2.4525,
+      "sun_altitude_deg": -30.0,
+      "headlamps": "HighBeam",
+      "runs": [
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66674
+          },
+          "peak_demand_mps2": 1.0284,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66674
+          },
+          "peak_demand_mps2": 1.0227,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.6668
+          },
+          "peak_demand_mps2": 1.0343,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03787,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66675
+          },
+          "peak_demand_mps2": 1.0545,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66676
+          },
+          "peak_demand_mps2": 1.0535,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66679
+          },
+          "peak_demand_mps2": 1.0502,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66676
+          },
+          "peak_demand_mps2": 1.0607,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03721,
+            "sigma": 0.07316,
+            "p01": 0.0,
+            "p99": 0.36471,
+            "frac_dark": 0.66745
+          },
+          "peak_demand_mps2": 1.0792,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66674
+          },
+          "peak_demand_mps2": 1.0588,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03787,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66673
+          },
+          "peak_demand_mps2": 1.0526,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        }
+      ]
+    },
+    "P_cont|daylight": {
+      "passes": 10,
+      "of": 10,
+      "rate": 1.0,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ],
+      "braked": 0,
+      "exceeded_limit": 0,
+      "peak_demand_mps2": 1.0849,
+      "nuisance_limit_mps2": 2.4525,
+      "sun_altitude_deg": 60.0,
+      "headlamps": "NONE",
+      "runs": [
+        {
+          "signature": {
+            "mean": 0.19562,
+            "sigma": 0.18461,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16848
+          },
+          "peak_demand_mps2": 1.0612,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19576,
+            "sigma": 0.18461,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16858
+          },
+          "peak_demand_mps2": 1.0465,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19575,
+            "sigma": 0.18462,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16853
+          },
+          "peak_demand_mps2": 1.0386,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19575,
+            "sigma": 0.18462,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16839
+          },
+          "peak_demand_mps2": 1.0849,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19566,
+            "sigma": 0.18463,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16868
+          },
+          "peak_demand_mps2": 1.0689,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.1956,
+            "sigma": 0.18462,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16868
+          },
+          "peak_demand_mps2": 1.0687,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19567,
+            "sigma": 0.18459,
+            "p01": 0.0,
+            "p99": 0.6549,
             "frac_dark": 0.1685
           },
-          "peak_demand_mps2": 1.3988,
+          "peak_demand_mps2": 1.038,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -69,32 +925,9 @@
             "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16841
+            "frac_dark": 0.16857
           },
-          "peak_demand_mps2": 1.4026,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.363,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19567,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16844
-          },
-          "peak_demand_mps2": 1.4012,
+          "peak_demand_mps2": 1.0571,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -111,82 +944,13 @@
         },
         {
           "signature": {
-            "mean": 0.19567,
-            "sigma": 0.18461,
+            "mean": 0.19576,
+            "sigma": 0.1846,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16868
+            "frac_dark": 0.16839
           },
-          "peak_demand_mps2": 1.4055,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19573,
-            "sigma": 0.18458,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16859
-          },
-          "peak_demand_mps2": 1.3825,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19566,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16861
-          },
-          "peak_demand_mps2": 1.3996,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.363,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.1957,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16845
-          },
-          "peak_demand_mps2": 1.4225,
+          "peak_demand_mps2": 1.0556,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -207,773 +971,9 @@
             "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.1686
+            "frac_dark": 0.16862
           },
-          "peak_demand_mps2": 1.4201,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19568,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16833
-          },
-          "peak_demand_mps2": 1.3935,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        }
-      ]
-    },
-    "P_pts|darkness_lowbeam": {
-      "passes": 9,
-      "of": 10,
-      "rate": 0.9,
-      "wilson_95": [
-        0.5958,
-        0.9821
-      ],
-      "braked": 1,
-      "exceeded_limit": 1,
-      "peak_demand_mps2": 2.5,
-      "nuisance_limit_mps2": 2.4525,
-      "sun_altitude_deg": -30.0,
-      "headlamps": "LowBeam",
-      "runs": [
-        {
-          "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94879
-          },
-          "peak_demand_mps2": 2.3955,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00437,
-            "sigma": 0.02599,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.95118
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3955,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.5,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 194.16,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.085,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
-            "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
-          },
-          "peak_demand_mps2": 2.3954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        }
-      ]
-    },
-    "P_pts|darkness_highbeam": {
-      "passes": 0,
-      "of": 10,
-      "rate": 0.0,
-      "wilson_95": [
-        0.0,
-        0.2775
-      ],
-      "braked": 10,
-      "exceeded_limit": 10,
-      "peak_demand_mps2": 3.0316,
-      "nuisance_limit_mps2": 2.4525,
-      "sun_altitude_deg": -30.0,
-      "headlamps": "HighBeam",
-      "runs": [
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0235,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0276,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0284,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0242,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0198,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0223,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0206,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00929,
-            "sigma": 0.03017,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88808
-          },
-          "peak_demand_mps2": 3.0236,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0316,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.0239,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 388.58,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.037,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        }
-      ]
-    },
-    "P_cont|daylight": {
-      "passes": 10,
-      "of": 10,
-      "rate": 1.0,
-      "wilson_95": [
-        0.7225,
-        1.0
-      ],
-      "braked": 0,
-      "exceeded_limit": 0,
-      "peak_demand_mps2": 2.242,
-      "nuisance_limit_mps2": 2.4525,
-      "sun_altitude_deg": 60.0,
-      "headlamps": "NONE",
-      "runs": [
-        {
-          "signature": {
-            "mean": 0.1957,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16829
-          },
-          "peak_demand_mps2": 2.2249,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19571,
-            "sigma": 0.18463,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16858
-          },
-          "peak_demand_mps2": 2.242,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19567,
-            "sigma": 0.18463,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16866
-          },
-          "peak_demand_mps2": 2.2315,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.1957,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16841
-          },
-          "peak_demand_mps2": 2.1942,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19566,
-            "sigma": 0.18462,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16835
-          },
-          "peak_demand_mps2": 2.1954,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19577,
-            "sigma": 0.18462,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16867
-          },
-          "peak_demand_mps2": 2.2057,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19573,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16852
-          },
-          "peak_demand_mps2": 2.2262,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.363,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19575,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16845
-          },
-          "peak_demand_mps2": 2.2181,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19568,
-            "sigma": 0.18461,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16845
-          },
-          "peak_demand_mps2": 2.2194,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19563,
-            "sigma": 0.18464,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.1686
-          },
-          "peak_demand_mps2": 2.2235,
+          "peak_demand_mps2": 1.0366,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1000,20 +1000,20 @@
       ],
       "braked": 0,
       "exceeded_limit": 0,
-      "peak_demand_mps2": 1.7903,
+      "peak_demand_mps2": 1.392,
       "nuisance_limit_mps2": 2.4525,
       "sun_altitude_deg": -30.0,
       "headlamps": "LowBeam",
       "runs": [
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67299
           },
-          "peak_demand_mps2": 1.6454,
+          "peak_demand_mps2": 1.3892,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1030,13 +1030,13 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67301
           },
-          "peak_demand_mps2": 1.6273,
+          "peak_demand_mps2": 1.3775,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1053,13 +1053,13 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67306
           },
-          "peak_demand_mps2": 1.6454,
+          "peak_demand_mps2": 1.3682,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1076,13 +1076,13 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03118,
+            "sigma": 0.06724,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38431,
+            "frac_dark": 0.67418
           },
-          "peak_demand_mps2": 1.6423,
+          "peak_demand_mps2": 1.3696,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1099,13 +1099,13 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67304
           },
-          "peak_demand_mps2": 1.6423,
+          "peak_demand_mps2": 1.3691,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1122,13 +1122,13 @@
         },
         {
           "signature": {
-            "mean": 0.00437,
-            "sigma": 0.02599,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.95118
+            "p99": 0.38824,
+            "frac_dark": 0.67307
           },
-          "peak_demand_mps2": 1.6423,
+          "peak_demand_mps2": 1.3739,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1145,13 +1145,13 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67302
           },
-          "peak_demand_mps2": 1.6454,
+          "peak_demand_mps2": 1.3739,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1168,13 +1168,214 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67302
           },
-          "peak_demand_mps2": 1.7903,
+          "peak_demand_mps2": 1.392,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67301
+          },
+          "peak_demand_mps2": 1.3747,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03166,
+            "sigma": 0.06802,
+            "p01": 0.0,
+            "p99": 0.38824,
+            "frac_dark": 0.67301
+          },
+          "peak_demand_mps2": 1.3081,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.363,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        }
+      ]
+    },
+    "P_cont|darkness_highbeam": {
+      "passes": 10,
+      "of": 10,
+      "rate": 1.0,
+      "wilson_95": [
+        0.7225,
+        1.0
+      ],
+      "braked": 0,
+      "exceeded_limit": 0,
+      "peak_demand_mps2": 1.4373,
+      "nuisance_limit_mps2": 2.4525,
+      "sun_altitude_deg": -30.0,
+      "headlamps": "HighBeam",
+      "runs": [
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.6668
+          },
+          "peak_demand_mps2": 1.4365,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03787,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66673
+          },
+          "peak_demand_mps2": 1.4373,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66674
+          },
+          "peak_demand_mps2": 1.3962,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66678
+          },
+          "peak_demand_mps2": 1.4299,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66682
+          },
+          "peak_demand_mps2": 1.4277,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.03786,
+            "sigma": 0.07419,
+            "p01": 0.0,
+            "p99": 0.37255,
+            "frac_dark": 0.66675
+          },
+          "peak_demand_mps2": 1.3619,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1191,13 +1392,13 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.37255,
+            "frac_dark": 0.66677
           },
-          "peak_demand_mps2": 1.6423,
+          "peak_demand_mps2": 1.4045,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1214,13 +1415,13 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.37255,
+            "frac_dark": 0.66674
           },
-          "peak_demand_mps2": 1.6458,
+          "peak_demand_mps2": 1.4182,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1234,40 +1435,23 @@
             8.0,
             12.0
           ]
-        }
-      ]
-    },
-    "P_cont|darkness_highbeam": {
-      "passes": 0,
-      "of": 10,
-      "rate": 0.0,
-      "wilson_95": [
-        0.0,
-        0.2775
-      ],
-      "braked": 10,
-      "exceeded_limit": 10,
-      "peak_demand_mps2": 3.284,
-      "nuisance_limit_mps2": 2.4525,
-      "sun_altitude_deg": -30.0,
-      "headlamps": "HighBeam",
-      "runs": [
+        },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66677
           },
-          "peak_demand_mps2": 3.2827,
+          "peak_demand_mps2": 1.4139,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -1277,204 +1461,20 @@
         },
         {
           "signature": {
-            "mean": 0.00929,
-            "sigma": 0.03017,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88808
+            "p99": 0.37255,
+            "frac_dark": 0.66673
           },
-          "peak_demand_mps2": 3.2824,
+          "peak_demand_mps2": 1.4035,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2838,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2829,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2837,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2838,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88528
-          },
-          "peak_demand_mps2": 3.2836,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2834,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.2834,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
-            "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
-          },
-          "peak_demand_mps2": 3.284,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": true,
-          "braked": true,
-          "brake_range_ft": 175.84,
-          "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.081,
-          "passes": false,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -1494,20 +1494,20 @@
       ],
       "braked": 0,
       "exceeded_limit": 0,
-      "peak_demand_mps2": 1.4128,
+      "peak_demand_mps2": 1.5283,
       "nuisance_limit_mps2": 2.4525,
       "sun_altitude_deg": 60.0,
       "headlamps": "NONE",
       "runs": [
         {
           "signature": {
-            "mean": 0.19571,
-            "sigma": 0.18461,
+            "mean": 0.19572,
+            "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16842
+            "frac_dark": 0.16852
           },
-          "peak_demand_mps2": 1.3238,
+          "peak_demand_mps2": 1.5161,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1524,13 +1524,59 @@
         },
         {
           "signature": {
-            "mean": 0.19566,
-            "sigma": 0.18463,
+            "mean": 0.19561,
+            "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16864
+            "frac_dark": 0.16853
           },
-          "peak_demand_mps2": 1.3152,
+          "peak_demand_mps2": 1.5006,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19568,
+            "sigma": 0.18462,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16845
+          },
+          "peak_demand_mps2": 1.5029,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19564,
+            "sigma": 0.18465,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16863
+          },
+          "peak_demand_mps2": 1.4784,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1548,35 +1594,12 @@
         {
           "signature": {
             "mean": 0.19578,
-            "sigma": 0.18461,
+            "sigma": 0.18462,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16836
+            "frac_dark": 0.16845
           },
-          "peak_demand_mps2": 1.3141,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19569,
-            "sigma": 0.18464,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16867
-          },
-          "peak_demand_mps2": 1.2949,
+          "peak_demand_mps2": 1.4621,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1594,12 +1617,12 @@
         {
           "signature": {
             "mean": 0.19573,
-            "sigma": 0.18462,
+            "sigma": 0.18463,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16845
+            "frac_dark": 0.16879
           },
-          "peak_demand_mps2": 1.4128,
+          "peak_demand_mps2": 1.4221,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1616,13 +1639,13 @@
         },
         {
           "signature": {
-            "mean": 0.19565,
-            "sigma": 0.18464,
+            "mean": 0.19572,
+            "sigma": 0.18463,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16869
+            "frac_dark": 0.16845
           },
-          "peak_demand_mps2": 1.3,
+          "peak_demand_mps2": 1.4796,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1640,12 +1663,35 @@
         {
           "signature": {
             "mean": 0.1957,
+            "sigma": 0.18465,
+            "p01": 0.0,
+            "p99": 0.6549,
+            "frac_dark": 0.16878
+          },
+          "peak_demand_mps2": 1.5283,
+          "nuisance_limit_mps2": 2.4525,
+          "exceeded_nuisance_limit": false,
+          "braked": false,
+          "brake_range_ft": null,
+          "crossed_plate": true,
+          "min_speed_mps_while_moving": 20.027,
+          "passes": true,
+          "plate_present": true,
+          "plate_tiles": 9,
+          "plate_covered_ft": [
+            8.0,
+            12.0
+          ]
+        },
+        {
+          "signature": {
+            "mean": 0.19565,
             "sigma": 0.18464,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16834
+            "frac_dark": 0.16869
           },
-          "peak_demand_mps2": 1.318,
+          "peak_demand_mps2": 1.5003,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1663,58 +1709,12 @@
         {
           "signature": {
             "mean": 0.19567,
-            "sigma": 0.18465,
+            "sigma": 0.1846,
             "p01": 0.0,
             "p99": 0.6549,
-            "frac_dark": 0.16872
+            "frac_dark": 0.16843
           },
-          "peak_demand_mps2": 1.3319,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19576,
-            "sigma": 0.18462,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.1686
-          },
-          "peak_demand_mps2": 1.3158,
-          "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
-          "plate_present": true,
-          "plate_tiles": 9,
-          "plate_covered_ft": [
-            8.0,
-            12.0
-          ]
-        },
-        {
-          "signature": {
-            "mean": 0.19576,
-            "sigma": 0.18463,
-            "p01": 0.0,
-            "p99": 0.6549,
-            "frac_dark": 0.16872
-          },
-          "peak_demand_mps2": 1.3046,
+          "peak_demand_mps2": 1.506,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": false,
           "braked": false,
@@ -1741,26 +1741,26 @@
       ],
       "braked": 10,
       "exceeded_limit": 10,
-      "peak_demand_mps2": 3.188,
+      "peak_demand_mps2": 3.019,
       "nuisance_limit_mps2": 2.4525,
       "sun_altitude_deg": -30.0,
       "headlamps": "LowBeam",
       "runs": [
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94879
+            "p99": 0.38824,
+            "frac_dark": 0.67305
           },
-          "peak_demand_mps2": 2.8532,
+          "peak_demand_mps2": 2.8384,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1771,19 +1771,19 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67302
           },
-          "peak_demand_mps2": 2.8549,
+          "peak_demand_mps2": 3.019,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 585.45,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.092,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1794,19 +1794,19 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67302
           },
-          "peak_demand_mps2": 2.8549,
+          "peak_demand_mps2": 2.8309,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1817,19 +1817,19 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67301
           },
-          "peak_demand_mps2": 2.8462,
+          "peak_demand_mps2": 2.842,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1840,19 +1840,19 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67304
           },
-          "peak_demand_mps2": 2.8552,
+          "peak_demand_mps2": 2.8428,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1863,19 +1863,19 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.673
           },
-          "peak_demand_mps2": 2.8462,
+          "peak_demand_mps2": 2.8172,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1886,19 +1886,19 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67303
           },
-          "peak_demand_mps2": 3.188,
+          "peak_demand_mps2": 2.8485,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 556.47,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.012,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1909,19 +1909,19 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67303
           },
-          "peak_demand_mps2": 2.8532,
+          "peak_demand_mps2": 2.8285,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1932,19 +1932,19 @@
         },
         {
           "signature": {
-            "mean": 0.0046,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67302
           },
-          "peak_demand_mps2": 2.8552,
+          "peak_demand_mps2": 2.8439,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1955,19 +1955,19 @@
         },
         {
           "signature": {
-            "mean": 0.00461,
-            "sigma": 0.02681,
+            "mean": 0.03166,
+            "sigma": 0.06802,
             "p01": 0.0,
-            "p99": 0.1098,
-            "frac_dark": 0.94878
+            "p99": 0.38824,
+            "frac_dark": 0.67301
           },
-          "peak_demand_mps2": 2.8462,
+          "peak_demand_mps2": 2.8329,
           "nuisance_limit_mps2": 2.4525,
           "exceeded_nuisance_limit": true,
           "braked": true,
-          "brake_range_ft": 146.5,
+          "brake_range_ft": 573.15,
           "crossed_plate": false,
-          "min_speed_mps_while_moving": 1.083,
+          "min_speed_mps_while_moving": 1.068,
           "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
@@ -1979,36 +1979,36 @@
       ]
     },
     "P_pts3|darkness_highbeam": {
-      "passes": 10,
+      "passes": 0,
       "of": 10,
-      "rate": 1.0,
+      "rate": 0.0,
       "wilson_95": [
-        0.7225,
-        1.0
+        0.0,
+        0.2775
       ],
-      "braked": 0,
-      "exceeded_limit": 0,
-      "peak_demand_mps2": 0.5559,
+      "braked": 10,
+      "exceeded_limit": 10,
+      "peak_demand_mps2": 3.072,
       "nuisance_limit_mps2": 2.4525,
       "sun_altitude_deg": -30.0,
       "headlamps": "HighBeam",
       "runs": [
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66675
           },
-          "peak_demand_mps2": 0.5326,
+          "peak_demand_mps2": 3.072,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2018,20 +2018,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66673
           },
-          "peak_demand_mps2": 0.5337,
+          "peak_demand_mps2": 3.0376,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2041,20 +2041,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66674
           },
-          "peak_demand_mps2": 0.5294,
+          "peak_demand_mps2": 3.0045,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2064,20 +2064,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.6667
           },
-          "peak_demand_mps2": 0.5554,
+          "peak_demand_mps2": 3.0456,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2087,20 +2087,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66677
           },
-          "peak_demand_mps2": 0.5544,
+          "peak_demand_mps2": 3.0521,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2110,20 +2110,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.6667
           },
-          "peak_demand_mps2": 0.5294,
+          "peak_demand_mps2": 3.0298,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2133,20 +2133,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66677
           },
-          "peak_demand_mps2": 0.5559,
+          "peak_demand_mps2": 3.0425,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2156,20 +2156,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66672
           },
-          "peak_demand_mps2": 0.5559,
+          "peak_demand_mps2": 3.025,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2179,20 +2179,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03786,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66677
           },
-          "peak_demand_mps2": 0.5294,
+          "peak_demand_mps2": 3.0321,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [
@@ -2202,20 +2202,20 @@
         },
         {
           "signature": {
-            "mean": 0.00974,
-            "sigma": 0.03123,
+            "mean": 0.03787,
+            "sigma": 0.07419,
             "p01": 0.0,
-            "p99": 0.13333,
-            "frac_dark": 0.88527
+            "p99": 0.37255,
+            "frac_dark": 0.66673
           },
-          "peak_demand_mps2": 0.5294,
+          "peak_demand_mps2": 3.0303,
           "nuisance_limit_mps2": 2.4525,
-          "exceeded_nuisance_limit": false,
-          "braked": false,
-          "brake_range_ft": null,
-          "crossed_plate": true,
-          "min_speed_mps_while_moving": 20.027,
-          "passes": true,
+          "exceeded_nuisance_limit": true,
+          "braked": true,
+          "brake_range_ft": 366.55,
+          "crossed_plate": false,
+          "min_speed_mps_while_moving": 1.022,
+          "passes": false,
           "plate_present": true,
           "plate_tiles": 9,
           "plate_covered_ft": [

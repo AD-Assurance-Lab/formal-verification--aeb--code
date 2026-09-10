@@ -419,6 +419,30 @@
    }
   },
   {
+   "sun_altitude_deg": 1.025,
+   "spread": 3e-05,
+   "frac_of_span": 0.0001,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.03233,
+    "none": 0.0323
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.03233,
+     "none": 0.0323
+    },
+    "ped": {
+     "none_ped": 0.0336,
+     "ped": 0.0336
+    },
+    "plate": {
+     "none_plate": 0.02621,
+     "plate": 0.02622
+    }
+   }
+  },
+  {
    "sun_altitude_deg": 0.024,
    "spread": 1e-05,
    "frac_of_span": 0.0,
@@ -439,6 +463,30 @@
     "plate": {
      "none_plate": 0.01217,
      "plate": 0.01218
+    }
+   }
+  },
+  {
+   "sun_altitude_deg": 0.012,
+   "spread": 1e-05,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.014,
+    "none": 0.01401
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.014,
+     "none": 0.01401
+    },
+    "ped": {
+     "none_ped": 0.01495,
+     "ped": 0.01494
+    },
+    "plate": {
+     "none_plate": 0.01204,
+     "plate": 0.01204
     }
    }
   },
@@ -467,7 +515,55 @@
    }
   },
   {
+   "sun_altitude_deg": -14.77,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.00362,
+    "none": 0.00362
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.00362,
+     "none": 0.00362
+    },
+    "ped": {
+     "none_ped": 0.00434,
+     "ped": 0.00434
+    },
+    "plate": {
+     "none_plate": 0.0054,
+     "plate": 0.0054
+    }
+   }
+  },
+  {
    "sun_altitude_deg": -29.539,
+   "spread": 0.0,
+   "frac_of_span": 0.0,
+   "worst_pose_group": "lead",
+   "means": {
+    "lead": 0.00362,
+    "none": 0.00362
+   },
+   "all_pose_groups": {
+    "lead": {
+     "lead": 0.00362,
+     "none": 0.00362
+    },
+    "ped": {
+     "none_ped": 0.00434,
+     "ped": 0.00434
+    },
+    "plate": {
+     "none_plate": 0.0054,
+     "plate": 0.0054
+    }
+   }
+  },
+  {
+   "sun_altitude_deg": -29.77,
    "spread": 0.0,
    "frac_of_span": 0.0,
    "worst_pose_group": "lead",

@@ -3,8 +3,7 @@
   reusing the saved nominal run, 104 states
 
 ped: 104 states x 1 knots = 104 frames, about 0.10 GB raw
-    signature: mean 0.0099 sigma 0.0325 p99 0.1333 dark 0.883
-  sun  -30.000: 104 frames,    3.6 MB,  68.3 s
+  ped_hb_sun-30.000.npz exists, skipping
   high beam at sun -30.000: mean 0.0099 p99 0.1333 dark 0.883
   wrote results/captures/Town12/determinism_ped_hb.json
 

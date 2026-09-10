@@ -1,5 +1,5 @@
 
-manifest_lead.json  (21 knots, span 0.3681, worst inversion 8.4% of span)
+manifest_lead.json  (25 knots, span 0.3681, worst inversion 8.5% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.3718   0.1527   0.7333    off
      54.852   0.3616   0.1522   0.7098    off
@@ -18,14 +18,18 @@ manifest_lead.json  (21 knots, span 0.3681, worst inversion 8.4% of span)
       3.315   0.0859   0.0825   0.3255     on
       2.815   0.0743   0.0762   0.3020     on
       2.026   0.0556   0.0651   0.2588     on
+      1.025   0.0323   0.0486   0.2078     on
       0.024   0.0142   0.0328   0.1333     on
+      0.012   0.0140   0.0327   0.1333     on
       0.000   0.0451   0.0665   0.3333     on
+    -14.770   0.0036   0.0218   0.0863     on
     -29.539   0.0036   0.0218   0.0863     on
+    -29.770   0.0036   0.0218   0.0863     on
     -30.000   0.0036   0.0218   0.0863     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.4% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0140 -> 0.0451 (8.4% of the axis span)
   OK
 
-manifest_none.json  (21 knots, span 0.3682, worst inversion 8.4% of span)
+manifest_none.json  (25 knots, span 0.3682, worst inversion 8.4% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.3718   0.1527   0.7333    off
      54.852   0.3616   0.1522   0.7098    off
@@ -44,14 +48,18 @@ manifest_none.json  (21 knots, span 0.3682, worst inversion 8.4% of span)
       3.315   0.0859   0.0825   0.3255     on
       2.815   0.0743   0.0762   0.3020     on
       2.026   0.0556   0.0651   0.2588     on
+      1.025   0.0323   0.0485   0.2078     on
       0.024   0.0142   0.0328   0.1333     on
+      0.012   0.0140   0.0327   0.1333     on
       0.000   0.0451   0.0666   0.3333     on
+    -14.770   0.0036   0.0218   0.0863     on
     -29.539   0.0036   0.0218   0.0863     on
+    -29.770   0.0036   0.0218   0.0863     on
     -30.000   0.0036   0.0218   0.0863     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0142 -> 0.0451 (8.4% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0140 -> 0.0451 (8.4% of the axis span)
   OK
 
-manifest_none_ped.json  (21 knots, span 0.3691, worst inversion 5.6% of span)
+manifest_none_ped.json  (25 knots, span 0.3691, worst inversion 5.6% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.3734   0.1547   0.7608    off
      54.852   0.3641   0.1537   0.7372    off
@@ -70,14 +78,18 @@ manifest_none_ped.json  (21 knots, span 0.3691, worst inversion 5.6% of span)
       3.315   0.0878   0.0850   0.3333     on
       2.815   0.0761   0.0788   0.3098     on
       2.026   0.0573   0.0679   0.2784     on
+      1.025   0.0336   0.0516   0.2196     on
       0.024   0.0151   0.0358   0.1490     on
+      0.012   0.0149   0.0357   0.1490     on
       0.000   0.0357   0.0621   0.3333     on
+    -14.770   0.0043   0.0261   0.0863     on
     -29.539   0.0043   0.0261   0.0863     on
+    -29.770   0.0043   0.0261   0.0863     on
     -30.000   0.0043   0.0261   0.0863     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.6% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0149 -> 0.0357 (5.6% of the axis span)
   OK
 
-manifest_none_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
+manifest_none_plate.json  (25 knots, span 0.2631, worst inversion 5.3% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.2685   0.1879   0.7216    off
      54.852   0.2478   0.1916   0.6980    off
@@ -96,14 +108,18 @@ manifest_none_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
       3.315   0.0701   0.0806   0.3333     on
       2.815   0.0605   0.0745   0.3098     on
       2.026   0.0450   0.0638   0.2706     on
+      1.025   0.0262   0.0488   0.2078     on
       0.024   0.0122   0.0357   0.1333     on
+      0.012   0.0120   0.0356   0.1333     on
       0.000   0.0260   0.0552   0.2941     on
+    -14.770   0.0054   0.0309   0.1333     on
     -29.539   0.0054   0.0309   0.1333     on
+    -29.770   0.0054   0.0309   0.1333     on
     -30.000   0.0054   0.0309   0.1333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.3% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0120 -> 0.0260 (5.3% of the axis span)
   OK
 
-manifest_ped.json  (21 knots, span 0.3690, worst inversion 5.6% of span)
+manifest_ped.json  (25 knots, span 0.3690, worst inversion 5.6% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.3734   0.1547   0.7608    off
      54.852   0.3641   0.1537   0.7372    off
@@ -122,14 +138,18 @@ manifest_ped.json  (21 knots, span 0.3690, worst inversion 5.6% of span)
       3.315   0.0878   0.0850   0.3333     on
       2.815   0.0761   0.0788   0.3098     on
       2.026   0.0573   0.0679   0.2784     on
+      1.025   0.0336   0.0516   0.2196     on
       0.024   0.0151   0.0358   0.1490     on
+      0.012   0.0149   0.0357   0.1490     on
       0.000   0.0357   0.0621   0.3333     on
+    -14.770   0.0043   0.0261   0.0863     on
     -29.539   0.0043   0.0261   0.0863     on
+    -29.770   0.0043   0.0261   0.0863     on
     -30.000   0.0043   0.0261   0.0863     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0151 -> 0.0357 (5.6% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0149 -> 0.0357 (5.6% of the axis span)
   OK
 
-manifest_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
+manifest_plate.json  (25 knots, span 0.2631, worst inversion 5.3% of span)
     sun deg     mean    sigma      p99  lamps
      60.000   0.2685   0.1879   0.7216    off
      54.852   0.2478   0.1916   0.6980    off
@@ -148,11 +168,15 @@ manifest_plate.json  (21 knots, span 0.2631, worst inversion 5.3% of span)
       3.315   0.0701   0.0805   0.3333     on
       2.815   0.0606   0.0745   0.3098     on
       2.026   0.0450   0.0637   0.2706     on
+      1.025   0.0262   0.0488   0.2078     on
       0.024   0.0122   0.0357   0.1333     on
+      0.012   0.0120   0.0356   0.1333     on
       0.000   0.0260   0.0552   0.2941     on
+    -14.770   0.0054   0.0309   0.1333     on
     -29.539   0.0054   0.0309   0.1333     on
+    -29.770   0.0054   0.0309   0.1333     on
     -30.000   0.0054   0.0309   0.1333     on
-  recorded: sun fell 0.024 -> 0.000 deg and the frame got BRIGHTER, 0.0122 -> 0.0260 (5.3% of the axis span)
+  recorded: sun fell 0.012 -> 0.000 deg and the frame got BRIGHTER, 0.0120 -> 0.0260 (5.3% of the axis span)
   OK
 
 cross-campaign agreement (lead, none, none_ped, none_plate, ped, plate)
