@@ -153,8 +153,10 @@ the headlamp beams and it is how anyone would check that measurement again.
   can be 200 times wider than another, and a count of verdicts treats them as equal. (F27)
 - Measure the family fidelity again. The last measurement used camera pictures that we now
   know were wrong at the dark end. (F27, F28)
-- Send the amendment request in `docs/D7_AMENDMENT_REQUEST.md` to the shared determinism
-  package. It still prints a rule this study no longer follows.
+- DONE 2026-09-10. The amendment request is in the determinism package, at
+  `docs/amendment-requests/2026-09-10-D7-repetition-floor-from-aeb.md`. Nothing in that
+  package changed: the rule, the lock and section 4 are untouched, and the amendment is
+  Zach's to make. The launcher still prints the old rule until he makes it.
 
 ---
 
