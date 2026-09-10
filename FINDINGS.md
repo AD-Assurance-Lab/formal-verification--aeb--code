@@ -46,6 +46,17 @@ stopping rule cannot tell "the chord fits well" from "there is nothing to fit".
   sub-interval spanning 0.047 the same as one spanning 0.0002, a factor of two hundred.
   Every "certified N of M" in this study is a count of that kind, and the span belongs
   beside it.
+
+  Checked against the Town01 certificates as published, at `town01-final`. The zero-span
+  cell is **CERTIFIED in every arm**, and comfortably — margin 1.89x for `P_cont`/lead,
+  1.94x for `P_cont`/ped, 1.94x for `P_pts`/lead — because bounding a family whose members
+  are all one image is easy. So it inflates every certified count by exactly one, and it
+  does so with a healthy-looking margin.
+
+  The sharpest instance is the arm the paper's claim is about. **`P_pts`/lead certifies 4
+  of 17 sub-intervals, and one of those four spans no illumination change at all.** A
+  quarter of the certified evidence for the policy the study exists to falsify is a cell
+  about nothing.
 - **No verdict is asserted to be wrong.** The certificate is sound over the family it
   declares. This is about how much of the rendered axis that family represents, which is a
   different question and is the one a reader will ask.
