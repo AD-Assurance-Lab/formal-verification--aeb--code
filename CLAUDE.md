@@ -28,6 +28,14 @@ lost twice, both times by drift rather than by decision.
 
 See `README.md` for what this repository is, and `docs/PAPER_OUTLINE.md` for the write-up.
 
+## How to write to Zach
+
+Simplified Technical English, in chat and in summaries. Short sentences, one idea each,
+active voice, common words. **Do not use a finding or amendment number on its own** -- F29
+and A15 mean nothing in conversation. Say what the thing is, then give the number in
+brackets. The workspace `CLAUDE.md` has the full rule. The numbers stay in `FINDINGS.md`
+and `PROTOCOL.md`; this is about how the work is explained.
+
 ## Repo hygiene
 
 Public repository, proof of concept. The bar is **an outsider can follow it**, not
