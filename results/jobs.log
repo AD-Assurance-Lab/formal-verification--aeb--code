@@ -1,12 +1,12 @@
 
 === smoke: load the map, tag hero, attach a sensor, survive
   loading Town01 (large maps take a while)
-  server age 6 min (R-SIM-1 ok)
+  server age 0 min (R-SIM-1 ok)
   verdict: PASS
   wrote results/carla/Town01/smoke.json
 
 === sites: photograph candidate straights day and night, settle lighting
-  server age 6 min (R-SIM-1 ok)
+  server age 0 min (R-SIM-1 ok)
     site 0: 1007 ft
     site 1: 758 ft
     site 2: 736 ft
@@ -17,6 +17,110 @@
   wrote results/carla/Town01/sites.json
 
 === braking: measure a_max and t_lat over 10 reps at each speed
-  server age 6 min (R-SIM-1 ok)
-  ERROR: no site on Town01 serves every scenario: the union needs a flat straight of at least 1050 ft with sidewalk on both sides. Longest flat straight is 1007 ft, longest with sidewalk both sides is 1007 ft. Splitting the study across two roads means the family knots calibrate one and the drives happen on another; pick another map rather than relaxing this.
+  server age 1 min (R-SIM-1 ok)
+    site 1007 ft, grade 0.0%, 20 runs
+    25 mph rep 1/10: v0 25.5 mph, stop 45 ft, 0.5048 g
+    25 mph rep 2/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 3/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 4/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 5/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 6/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 7/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 8/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 9/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    25 mph rep 10/10: v0 25.5 mph, stop 45 ft, 0.5054 g
+    50 mph rep 1/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 2/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 3/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 4/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 5/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 6/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 7/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 8/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 9/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+    50 mph rep 10/10: v0 50.7 mph, stop 119 ft, 0.6699 g
+  verdict: PASS
   wrote results/carla/Town01/braking.json
+
+=== contact: validate the contact detector against a deliberate crash
+  server age 1 min (R-SIM-1 ok)
+  verdict: PASS
+  wrote results/carla/Town01/contact.json
+
+=== oracle: perfect oracle 10/10, late oracle 0/10
+  server age 1 min (R-SIM-1 ok)
+    perfect 25 mph rep 1/10: min gap 14.0 ft
+    perfect 25 mph rep 2/10: min gap 14.0 ft
+    perfect 25 mph rep 3/10: min gap 14.0 ft
+    perfect 25 mph rep 4/10: min gap 14.0 ft
+    perfect 25 mph rep 5/10: min gap 14.0 ft
+    perfect 25 mph rep 6/10: min gap 14.0 ft
+    perfect 25 mph rep 7/10: min gap 14.0 ft
+    perfect 25 mph rep 8/10: min gap 14.0 ft
+    perfect 25 mph rep 9/10: min gap 14.0 ft
+    perfect 25 mph rep 10/10: min gap 14.0 ft
+    late 25 mph rep 1/10: min gap 0.1 ft
+    late 25 mph rep 2/10: min gap 0.1 ft
+    late 25 mph rep 3/10: min gap 0.1 ft
+    late 25 mph rep 4/10: min gap 0.1 ft
+    late 25 mph rep 5/10: min gap 0.1 ft
+    late 25 mph rep 6/10: min gap 0.1 ft
+    late 25 mph rep 7/10: min gap 0.1 ft
+    late 25 mph rep 8/10: min gap 0.1 ft
+    late 25 mph rep 9/10: min gap 0.1 ft
+    late 25 mph rep 10/10: min gap 0.1 ft
+  verdict: PASS
+  wrote results/carla/Town01/oracle.json
+
+=== pedestrian: oracle check on the crossing-pedestrian scenario
+  server age 1 min (R-SIM-1 ok)
+    perfect rep 1/10: min gap 13.1 ft
+    perfect rep 2/10: min gap 13.1 ft
+    perfect rep 3/10: min gap 13.1 ft
+    perfect rep 4/10: min gap 13.1 ft
+    perfect rep 5/10: min gap 13.1 ft
+    perfect rep 6/10: min gap 13.1 ft
+    perfect rep 7/10: min gap 13.1 ft
+    perfect rep 8/10: min gap 13.1 ft
+    perfect rep 9/10: min gap 13.1 ft
+    perfect rep 10/10: min gap 13.1 ft
+    late rep 1/10: min gap -2.2 ft
+    late rep 2/10: min gap -2.2 ft
+    late rep 3/10: min gap -2.2 ft
+    late rep 4/10: min gap -2.2 ft
+    late rep 5/10: min gap -2.2 ft
+    late rep 6/10: min gap -2.2 ft
+    late rep 7/10: min gap -2.2 ft
+    late rep 8/10: min gap -2.2 ft
+    late rep 9/10: min gap -2.2 ft
+    late rep 10/10: min gap -2.2 ft
+  verdict: PASS
+  wrote results/carla/Town01/pedestrian.json
+
+=== capture_check: does a placed frame match a driven frame
+  server age 1 min (R-SIM-1 ok)
+    drove past 5 sample poses
+    pose 0: image 0.0113, placement 0.000 m
+    pose 1: image 0.0109, placement 0.000 m
+    pose 2: image 0.0108, placement 0.000 m
+    pose 3: image 0.0106, placement 0.000 m
+    pose 4: image 0.0114, placement 0.000 m
+  verdict: MEASURED
+  wrote results/carla/Town01/capture_check.json
+
+=== inbetween: does a day/night blend resemble rendered dusk (image space)
+  server age 1 min (R-SIM-1 ok)
+    rendering s=0.00
+    rendering s=0.20
+    rendering s=0.40
+    rendering s=0.50
+    rendering s=0.60
+    rendering s=0.80
+    rendering s=1.00
+  verdict: MEASURED
+  wrote results/carla/Town01/inbetween.json
+
+=== expert: M3: the expert drives correctly at both regulatory endpoints
+  server age 1 min (R-SIM-1 ok)
+    daylight: 10/10 pass, min gap 14.0 ft
+    darkness_lowbeam: 10/10 pass, min gap 14.0 ft

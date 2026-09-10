@@ -1,26 +1,2 @@
-[2026-09-10 13:51:29] restarting CARLA on 3000
-[2026-09-10 13:51:44] START jobs
-[2026-09-10 13:57:58] DONE  jobs rc=1
-[2026-09-10 13:57:58] stopping: jobs failed. Tail of results/jobs.log:
-
-=== smoke: load the map, tag hero, attach a sensor, survive
-  loading Town01 (large maps take a while)
-  server age 6 min (R-SIM-1 ok)
-  verdict: PASS
-  wrote results/carla/Town01/smoke.json
-
-=== sites: photograph candidate straights day and night, settle lighting
-  server age 6 min (R-SIM-1 ok)
-    site 0: 1007 ft
-    site 1: 758 ft
-    site 2: 736 ft
-    site 3: 736 ft
-    site 4: 734 ft
-    site 5: 518 ft
-  verdict: PASS
-  wrote results/carla/Town01/sites.json
-
-=== braking: measure a_max and t_lat over 10 reps at each speed
-  server age 6 min (R-SIM-1 ok)
-  ERROR: no site on Town01 serves every scenario: the union needs a flat straight of at least 1050 ft with sidewalk on both sides. Longest flat straight is 1007 ft, longest with sidewalk both sides is 1007 ft. Splitting the study across two roads means the family knots calibrate one and the drives happen on another; pick another map rather than relaxing this.
-  wrote results/carla/Town01/braking.json
+[2026-09-10 14:07:48] restarting CARLA on 3000
+[2026-09-10 14:08:04] START jobs

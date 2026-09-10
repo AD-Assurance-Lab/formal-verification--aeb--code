@@ -570,8 +570,9 @@ measured rather than guessed.
 They never need to fit at the same time. Verification runs with the simulator stopped, and
 the pipeline stops it for you.
 
-**That simulator figure does not predict a smaller card.** Measured here: 13.7 GiB for the
-small map, 13.2 for the mid-size one, 14.8 for the large one, all on a 32 GiB card. The
+**That simulator figure does not predict a smaller card.** Measured here against a clean
+baseline of 498 MiB: 13.7 GiB for the small map, 13.5 for the mid-size one, 14.8 for the
+large one, all on a 32 GiB card. The
 engine sizes its pools to the card it finds, and a 12 GiB card ran a large map at 9.5 GiB.
 So memory is not what decides. **Speed is**, and there the measurements are clear: on a
 12 GiB card the small map ran at 720 steps per second and a large map at under 0.6.

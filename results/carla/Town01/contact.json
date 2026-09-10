@@ -1,8 +1,8 @@
 {
   "verdict": "PASS",
-  "map": "Carla/Maps/Town01",
-  "frames_received": 100,
-  "note": "server survived a sensor attach on a large map with the hero tag",
+  "min_separation_ft": -1.37,
+  "collision_sensor_events": 124,
+  "note": "PASS requires the geometry detector to register contact. The sensor event count is recorded only to document whether it agreed; the study does not depend on it either way.",
   "determinism": {
     "package": "carla-determinism",
     "package_version": "1.0.0",
@@ -19,7 +19,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 18.400000000023283,
+    "server_age_s": 48.59999999997672,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {
@@ -28,7 +28,7 @@
       "substepping": true,
       "max_substeps": 16,
       "max_substep_delta_time": 0.003125,
-      "no_rendering_mode": false
+      "no_rendering_mode": true
     }
   }
 }

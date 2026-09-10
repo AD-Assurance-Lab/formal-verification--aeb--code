@@ -1,6 +1,242 @@
 {
-  "verdict": "ERROR",
-  "error": "no site on Town01 serves every scenario: the union needs a flat straight of at least 1050 ft with sidewalk on both sides. Longest flat straight is 1007 ft, longest with sidewalk both sides is 1007 ft. Splitting the study across two roads means the family knots calibrate one and the drives happen on another; pick another map rather than relaxing this.",
+  "verdict": "PASS",
+  "implausible_runs": 0,
+  "runs_below_commanded_speed": 0,
+  "internally_inconsistent_runs": 0,
+  "a_from_dist_g_worst": 0.4863,
+  "site_run_ft": 1006.8,
+  "site_grade_pct": 0.0,
+  "site_xy": [
+    -0.03,
+    -9.96
+  ],
+  "a_max_g_worst": 0.5048,
+  "a_max_g_median": 0.5877,
+  "t_lat_s_worst": 0.15,
+  "note": "a_max is the WORST average over the stop, not the median. Use the worst. a_avg_g is read from the stop TIME (CLAUDE.md section 3's definition, unchanged); a_from_dist_g reads the same stop from the distance and exists only to prove the two agree. A run where they do not is a FAIL.",
+  "substepping": "16 x 0.00313 s, set explicitly in connect() (D-1)",
+  "runs": [
+    {
+      "v0_mph": 25.48,
+      "stop_ft": 44.61,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5048,
+      "a_from_dist_g": 0.4863,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 0
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 1
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 2
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 3
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.7,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4865,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 4
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.7,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4865,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 5
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 6
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 7
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 8
+    },
+    {
+      "v0_mph": 25.51,
+      "stop_ft": 44.71,
+      "stop_s": 2.3,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.5054,
+      "a_from_dist_g": 0.4864,
+      "grade_pct": 0.01,
+      "speed_mph": 25.0,
+      "rep": 9
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 0
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.83,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 1
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 2
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 3
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 4
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 5
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.83,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 6
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.83,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 7
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.83,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 8
+    },
+    {
+      "v0_mph": 50.72,
+      "stop_ft": 118.84,
+      "stop_s": 3.45,
+      "t_lat_s": 0.15,
+      "a_avg_g": 0.6699,
+      "a_from_dist_g": 0.7234,
+      "grade_pct": 0.0,
+      "speed_mph": 50.0,
+      "rep": 9
+    }
+  ],
   "determinism": {
     "package": "carla-determinism",
     "package_version": "1.0.0",
@@ -17,7 +253,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 389.4400000000023,
+    "server_age_s": 47.26000000000931,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

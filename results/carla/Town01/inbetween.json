@@ -1,0 +1,64 @@
+{
+  "verdict": "MEASURED",
+  "interval": {
+    "day_sun_alt": 60.0,
+    "night_sun_alt": -30.0
+  },
+  "blend_vs_rendered": [
+    {
+      "s": 0.2,
+      "mean_abs_error_0_255": 29.71,
+      "mean_abs_error_normalised": 0.1165
+    },
+    {
+      "s": 0.4,
+      "mean_abs_error_0_255": 45.28,
+      "mean_abs_error_normalised": 0.1776
+    },
+    {
+      "s": 0.5,
+      "mean_abs_error_0_255": 42.99,
+      "mean_abs_error_normalised": 0.1686
+    },
+    {
+      "s": 0.6,
+      "mean_abs_error_0_255": 31.58,
+      "mean_abs_error_normalised": 0.1238
+    },
+    {
+      "s": 0.8,
+      "mean_abs_error_0_255": 24.31,
+      "mean_abs_error_normalised": 0.0953
+    }
+  ],
+  "worst_normalised_error": 0.1776,
+  "note": "IMAGE space only. The check that decides the study is behavioural and waits for a policy (CLAUDE.md section 4). A low number here is not evidence the family is valid; a high number is evidence it is not.",
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 72.46000000002095,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  }
+}
