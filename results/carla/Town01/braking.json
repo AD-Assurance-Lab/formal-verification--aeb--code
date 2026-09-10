@@ -62,22 +62,22 @@
     },
     {
       "v0_mph": 25.51,
-      "stop_ft": 44.7,
+      "stop_ft": 44.71,
       "stop_s": 2.3,
       "t_lat_s": 0.15,
       "a_avg_g": 0.5054,
-      "a_from_dist_g": 0.4865,
+      "a_from_dist_g": 0.4864,
       "grade_pct": 0.01,
       "speed_mph": 25.0,
       "rep": 4
     },
     {
       "v0_mph": 25.51,
-      "stop_ft": 44.7,
+      "stop_ft": 44.71,
       "stop_s": 2.3,
       "t_lat_s": 0.15,
       "a_avg_g": 0.5054,
-      "a_from_dist_g": 0.4865,
+      "a_from_dist_g": 0.4864,
       "grade_pct": 0.01,
       "speed_mph": 25.0,
       "rep": 5
@@ -128,7 +128,7 @@
     },
     {
       "v0_mph": 50.72,
-      "stop_ft": 118.84,
+      "stop_ft": 118.83,
       "stop_s": 3.45,
       "t_lat_s": 0.15,
       "a_avg_g": 0.6699,
@@ -139,7 +139,7 @@
     },
     {
       "v0_mph": 50.72,
-      "stop_ft": 118.83,
+      "stop_ft": 118.84,
       "stop_s": 3.45,
       "t_lat_s": 0.15,
       "a_avg_g": 0.6699,
@@ -194,7 +194,7 @@
     },
     {
       "v0_mph": 50.72,
-      "stop_ft": 118.83,
+      "stop_ft": 118.84,
       "stop_s": 3.45,
       "t_lat_s": 0.15,
       "a_avg_g": 0.6699,
@@ -205,7 +205,7 @@
     },
     {
       "v0_mph": 50.72,
-      "stop_ft": 118.83,
+      "stop_ft": 118.84,
       "stop_s": 3.45,
       "t_lat_s": 0.15,
       "a_avg_g": 0.6699,
@@ -216,7 +216,7 @@
     },
     {
       "v0_mph": 50.72,
-      "stop_ft": 118.83,
+      "stop_ft": 118.84,
       "stop_s": 3.45,
       "t_lat_s": 0.15,
       "a_avg_g": 0.6699,
@@ -253,7 +253,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 47.26000000000931,
+    "server_age_s": 46.29000000003725,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

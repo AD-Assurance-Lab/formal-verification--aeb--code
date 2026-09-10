@@ -7,17 +7,17 @@
   "blend_vs_rendered": [
     {
       "s": 0.2,
-      "mean_abs_error_0_255": 29.71,
+      "mean_abs_error_0_255": 29.72,
       "mean_abs_error_normalised": 0.1165
     },
     {
       "s": 0.4,
-      "mean_abs_error_0_255": 45.28,
+      "mean_abs_error_0_255": 45.3,
       "mean_abs_error_normalised": 0.1776
     },
     {
       "s": 0.5,
-      "mean_abs_error_0_255": 42.99,
+      "mean_abs_error_0_255": 43.0,
       "mean_abs_error_normalised": 0.1686
     },
     {
@@ -49,7 +49,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 72.46000000002095,
+    "server_age_s": 71.0800000000163,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

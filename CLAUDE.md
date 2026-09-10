@@ -391,6 +391,23 @@ on the continuum. Cell 1 is the study and cells 3 and 4 are its control, so the 
 its control both survive. This is a preliminary study and it does not pretend to be the
 last word.
 
+### A21. A19's reason for recapturing the frames was wrong
+
+A19 said every frame had to be captured again because the small map's dark endpoint was
+contaminated by capture order, reading 11.2 times brighter than the large map's.
+
+**That inference was wrong and F33 measures why.** Recapturing the same knots on the same
+map under the corrected order reproduces the old values to within one percent, dark end
+included. The 11.2 times is two different roads: the small map's site has street lighting
+at 3.25 with the headlamps off, and the large map's site is among its darkest.
+
+A19's decision is unaffected. The study is on the small map because the large one needs a
+graphics card this work no longer assumes, and cells 5 and 6 are deferred because the map is
+307 m against the 320 m they need. Only the frames sentence was wrong.
+
+The recapture went ahead anyway and was worth it. It was cheap, and the frames now carry a
+harness stamp where the old ones carried none.
+
 ## Where the study is
 
 **Four cells on the small map**, being measured from the camera frames up. The crossing
@@ -398,8 +415,9 @@ pedestrian and the stopped lead vehicle, for the policy trained on the test poin
 the policy trained on the continuum. Cell 1 is the study and cells 3 and 4 are its control,
 so the claim and its control both survive.
 
-Everything is measured again because that map's frames predate the capture-order fix, and
-its dark endpoint reads 11.2 times too bright (F32, A19).
+Everything is measured again because the old artifacts predate the current harness. The
+frames themselves were fine: recapturing them reproduces the old values to within one
+percent, which corrects a wrong finding of mine from earlier today (F33, A21).
 
 **Cells 5 and 6 are deferred.** The false-activation scenario needs 320 m of junction-free
 lane and this map's longest straight is 307 m. The ledger keeps all six rows and those two

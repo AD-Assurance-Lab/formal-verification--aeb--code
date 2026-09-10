@@ -66,7 +66,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 107.81,
+      "mean_brightness": 107.83,
       "image": "site01_day.png"
     },
     {
@@ -214,7 +214,7 @@
       ],
       "lanes": 2,
       "condition": "day",
-      "mean_brightness": 91.64,
+      "mean_brightness": 91.61,
       "image": "site05_day.png"
     },
     {
@@ -250,7 +250,7 @@
       ],
       "lanes": 2,
       "condition": "night_highbeam",
-      "mean_brightness": 16.97,
+      "mean_brightness": 16.98,
       "image": "site05_night_highbeam.png"
     }
   ],
@@ -270,7 +270,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 44.77000000001863,
+    "server_age_s": 43.850000000034925,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

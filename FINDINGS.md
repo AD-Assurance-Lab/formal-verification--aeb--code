@@ -6,6 +6,64 @@ here, never inside the protocol.
 
 ---
 
+## F33 — 2026-09-10, F32 was wrong: the old map's dark end is not contaminated, it is a lit road
+
+**This corrects F32, written four hours earlier, and it is a mistake this repository had
+already written down once.**
+
+### What F32 claimed
+
+That the small map's camera frames were contaminated by capture order, because its darkness
+knot read 11.2 times brighter than the same knot on the large map, and because the
+capture-order fix (A16, A17) is not an ancestor of that study's tag.
+
+### The direct test, which F32 did not run
+
+Recapture the same knots on the same map under the corrected order, and compare against the
+frames the old order produced.
+
+| knot | old order | corrected order | ratio |
+|---|---|---|---|
+| +60.000 | 0.50637 | 0.50527 | 1.00 |
+| 0.000 | 0.06652 | 0.06624 | 1.00 |
+| **-30.000** | **0.04063** | **0.04022** | **1.00** |
+
+**The dark end reproduces to within one percent.** Capture order is not what makes it
+bright, on this map. The frames were not contaminated.
+
+### What the 11.2x actually is
+
+Two different roads. The small map's study site carries street lighting measured at 3.25
+with the headlamps off; the large map's site is among its darkest. A road with lamps on it
+is brighter at night than a road without, which is not a defect in anything.
+
+### The error, and why it should have been obvious
+
+F32 compared **two different stretches of road on two different maps** and attributed the
+difference to a process change. That is precisely F28b, where a cross-campaign check
+compared two different stretches of road and read 32.5% disagreement where the true
+within-site agreement was 0.0004.
+
+The available controlled comparison was the same site under the two capture orders. It cost
+nine minutes and it was not run before the finding was written.
+
+**One true thing survives from F32.** The capture-order fix really does postdate that
+study's tag. That was worth checking. It just does not imply what F32 said it implied.
+
+### What it changes, and what it does not
+
+**A19 stands.** The study moved back to the small map because the large one needs a graphics
+card this work no longer assumes, and that reasoning is untouched. A19's *stated reason* for
+recapturing every frame is wrong and A21 corrects it.
+
+The recapture is not wasted. It was cheap, and the frames now carry a harness stamp under
+the current rules where the old ones carried none at all.
+
+**Nothing downstream was thrown away on this account**, because nothing downstream had been
+measured yet when the mistake was found.
+
+---
+
 ## F32 — 2026-09-10, the old map's dark endpoint is 11 times too bright, and the fix for it postdates that study
 
 The study is moving back to the small map, because the next person has an 8 GiB graphics

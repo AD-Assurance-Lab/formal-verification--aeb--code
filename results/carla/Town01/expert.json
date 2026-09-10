@@ -1,0 +1,81 @@
+{
+  "verdict": "PASS",
+  "r_req_ft": 52.0,
+  "endpoints": {
+    "daylight": {
+      "sun_altitude": 60.0,
+      "lights": "NONE",
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99
+      ],
+      "mean_brightness": 129.07,
+      "sample": "daylight.png"
+    },
+    "darkness_lowbeam": {
+      "sun_altitude": -30.0,
+      "lights": "LowBeam",
+      "passes": 10,
+      "of": 10,
+      "min_gap_ft": [
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99,
+        13.99
+      ],
+      "mean_brightness": 8.59,
+      "sample": "darkness_lowbeam.png"
+    }
+  },
+  "gap_spread_ft_across_lighting": 0.0,
+  "one_tick_of_travel_ft": 1.83,
+  "worst_standoff_ft": 13.99,
+  "required_standoff_ft": 3.28,
+  "outcomes_agree_across_lighting": true,
+  "agreement_tolerance_ft": 2.0166666666586006,
+  "note": "The oracle uses ground-truth range, so agreement across lighting is the expected result and confirms nothing couples illumination into the physics or the harness. A real DIFFERENCE would be the finding. Compared against one control tick of travel, which is what the run-to-run variation is.",
+  "determinism": {
+    "package": "carla-determinism",
+    "package_version": "1.0.0",
+    "rules_digest": "bed0851fb1571d9e65be70c6872e9f00e54ac6fbd120c4e2991469a7d457fc4a",
+    "rules_lock_violations": [],
+    "deterministic_control": true,
+    "server_port": 3000,
+    "server_cmdline": [
+      "/home/za/carla/CarlaUE4/Binaries/Linux/CarlaUE4-Linux-Shipping",
+      "CarlaUE4",
+      "-carla-rpc-port=3000",
+      "-RenderOffScreen",
+      "-quality-level=Epic",
+      "-notexturestreaming",
+      ""
+    ],
+    "server_age_s": 87.10000000003492,
+    "notexturestreaming": true,
+    "quality_level": "Epic",
+    "world_settings": {
+      "synchronous_mode": true,
+      "fixed_delta_seconds": 0.05,
+      "substepping": true,
+      "max_substeps": 16,
+      "max_substep_delta_time": 0.003125,
+      "no_rendering_mode": false
+    }
+  }
+}

@@ -160,12 +160,12 @@
     }
   },
   "primitives": {
-    "a_max_g": 0.499,
-    "a_max_g_from_distance": 0.4832,
+    "a_max_g": 0.5048,
+    "a_max_g_from_distance": 0.4863,
     "t_lat_s": 0.15,
     "d_margin_ft": 3.28,
-    "r_req_ft_at_25mph": 52.5,
-    "r_req_ft_at_50mph": 185.4,
+    "r_req_ft_at_25mph": 52.0,
+    "r_req_ft_at_50mph": 183.4,
     "input_w": 128,
     "input_h": 96,
     "_note": "a_max is read from the stop TIME, as CLAUDE.md section 3 defines it; a_max_g_from_distance reads the same stops from the distance covered and is the consistency check that condemned the pre-A12 value (FINDINGS F5)."

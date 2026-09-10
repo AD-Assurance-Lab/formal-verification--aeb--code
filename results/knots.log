@@ -1,26 +1,20 @@
-  loading Town12 (large maps take a while)
+  loading Town01 (large maps take a while)
   server age 0 min (R-SIM-1 ok)
-    knot   60.00 ->   54.85  step   5.15 deg  error 0.0097
-    knot   54.85 ->   47.56  step   7.29 deg  error 0.0079
-    knot   47.56 ->   41.91  step   5.65 deg  error 0.0098
-    knot   41.91 ->   36.23  step   5.68 deg  error 0.0077
-    knot   36.23 ->   30.15  step   6.08 deg  error 0.0098
-    knot   30.15 ->   22.24  step   7.91 deg  error 0.0078
-    knot   22.24 ->   14.61  step   7.63 deg  error 0.0079
-    knot   14.61 ->   12.34  step   2.26 deg  error 0.0096
-    knot   12.34 ->    8.33  step   4.02 deg  error 0.0098
-    knot    8.33 ->    6.85  step   1.48 deg  error 0.0076
-    knot    6.85 ->    6.05  step   0.80 deg  error 0.0098
-    knot    6.05 ->    4.86  step   1.19 deg  error 0.0072
-    knot    4.86 ->    4.29  step   0.57 deg  error 0.0100
-    knot    4.29 ->    3.32  step   0.97 deg  error 0.0079
-    knot    3.32 ->    2.82  step   0.50 deg  error 0.0074
-    knot    2.82 ->    2.03  step   0.79 deg  error 0.0078
-    knot    2.03 ->    0.02  step   2.00 deg  error 0.0094
-    knot    0.02 ->    0.00  step   0.02 deg  error 0.0095
-    knot    0.00 ->  -29.54  step  29.54 deg  error 0.0082
-    knot  -29.54 ->  -30.00  step   0.46 deg  error 0.0043
+    knot   60.00 ->   39.98  step  20.02 deg  error 0.0093
+    knot   39.98 ->   26.52  step  13.45 deg  error 0.0099
+    knot   26.52 ->   17.48  step   9.04 deg  error 0.0096
+    knot   17.48 ->   10.08  step   7.40 deg  error 0.0098
+    knot   10.08 ->    5.99  step   4.09 deg  error 0.0092
+    knot    5.99 ->    4.38  step   1.62 deg  error 0.0099
+    knot    4.38 ->    2.97  step   1.41 deg  error 0.0098
+    knot    2.97 ->    1.46  step   1.50 deg  error 0.0099
+    knot    1.46 ->    0.24  step   1.22 deg  error 0.0089
+    knot    0.24 ->    0.00  step   0.24 deg  error 0.0161
+    knot    0.00 ->   -1.42  step   1.42 deg  error 0.0099
+    knot   -1.42 ->  -29.56  step  28.14 deg  error 0.0081
+    knot  -29.56 ->  -30.00  step   0.44 deg  error 0.0041
 
-  20 sub-intervals, 223 renders
-  knots: [60.0, 54.852, 47.558, 41.911, 36.234, 30.151, 22.238, 14.605, 12.342, 8.327, 6.848, 6.051, 4.857, 4.289, 3.315, 2.815, 2.026, 0.024, 0.0, -29.539, -30.0]
-  wrote results/carla/family_knots.json
+  13 sub-intervals, 136 renders
+  knots: [60.0, 39.977, 26.523, 17.484, 10.084, 5.99, 4.375, 2.967, 1.465, 0.241, 0.0, -1.422, -29.561, -30.0]
+  UNCOVERED: +0.241 to +0.000 (0.241 deg) errs at 0.0161 against a 0.01 tolerance -- declared uncovered, never quietly spanned
+  wrote results/carla/Town01/family_knots.json

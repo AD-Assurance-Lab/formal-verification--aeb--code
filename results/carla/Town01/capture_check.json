@@ -5,19 +5,19 @@
   "poses": [
     {
       "pose": 0,
-      "mae_0_255": 2.89,
+      "mae_0_255": 2.87,
       "mae_normalised": 0.0113,
       "position_error_m": 0.0
     },
     {
       "pose": 1,
-      "mae_0_255": 2.77,
+      "mae_0_255": 2.78,
       "mae_normalised": 0.0109,
       "position_error_m": 0.0
     },
     {
       "pose": 2,
-      "mae_0_255": 2.76,
+      "mae_0_255": 2.74,
       "mae_normalised": 0.0108,
       "position_error_m": 0.0
     },
@@ -51,7 +51,7 @@
       "-notexturestreaming",
       ""
     ],
-    "server_age_s": 64.11999999999534,
+    "server_age_s": 63.03000000002794,
     "notexturestreaming": true,
     "quality_level": "Epic",
     "world_settings": {

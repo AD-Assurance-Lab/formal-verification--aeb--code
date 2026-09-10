@@ -2,217 +2,183 @@
   {
     "knot": 60.0,
     "file": "lead_sun+60.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 36.8,
     "signature": {
-      "mean": 0.50637,
-      "sigma": 0.18267,
+      "mean": 0.50527,
+      "sigma": 0.18011,
       "p01": 0.05098,
-      "p99": 0.76863,
-      "frac_dark": 0.0056
+      "p99": 0.74902,
+      "frac_dark": 0.00634
     }
   },
   {
-    "knot": 42.766,
-    "file": "lead_sun+42.766.npz",
-    "skipped": true,
+    "knot": 39.977,
+    "file": "lead_sun+39.977.npz",
+    "frames": 104,
+    "size_mb": 38.8,
     "signature": {
-      "mean": 0.52821,
-      "sigma": 0.22566,
+      "mean": 0.5288,
+      "sigma": 0.22931,
       "p01": 0.05098,
-      "p99": 0.96471,
-      "frac_dark": 0.00555
+      "p99": 0.98039,
+      "frac_dark": 0.00604
     }
   },
   {
-    "knot": 28.397,
-    "file": "lead_sun+28.397.npz",
-    "skipped": true,
+    "knot": 26.523,
+    "file": "lead_sun+26.523.npz",
+    "frames": 104,
+    "size_mb": 38.6,
     "signature": {
-      "mean": 0.51819,
-      "sigma": 0.25717,
+      "mean": 0.50622,
+      "sigma": 0.25656,
       "p01": 0.05098,
       "p99": 0.99216,
-      "frac_dark": 0.00695
+      "frac_dark": 0.00801
     }
   },
   {
-    "knot": 18.743,
-    "file": "lead_sun+18.743.npz",
-    "skipped": true,
+    "knot": 17.484,
+    "file": "lead_sun+17.484.npz",
+    "frames": 104,
+    "size_mb": 37.0,
     "signature": {
-      "mean": 0.45788,
-      "sigma": 0.25653,
+      "mean": 0.44435,
+      "sigma": 0.25567,
       "p01": 0.0,
-      "p99": 0.98824,
-      "frac_dark": 0.01166
+      "p99": 0.99216,
+      "frac_dark": 0.01438
     }
   },
   {
-    "knot": 12.542,
-    "file": "lead_sun+12.542.npz",
-    "skipped": true,
+    "knot": 10.084,
+    "file": "lead_sun+10.084.npz",
+    "frames": 104,
+    "size_mb": 33.7,
     "signature": {
-      "mean": 0.40332,
-      "sigma": 0.24654,
-      "p01": 0.0,
-      "p99": 0.98824,
-      "frac_dark": 0.01943
-    }
-  },
-  {
-    "knot": 10.128,
-    "file": "lead_sun+10.128.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.36922,
-      "sigma": 0.23423,
+      "mean": 0.35853,
+      "sigma": 0.23419,
       "p01": 0.0,
       "p99": 0.98431,
-      "frac_dark": 0.02359
+      "frac_dark": 0.02738
     }
   },
   {
-    "knot": 7.715,
-    "file": "lead_sun+07.715.npz",
-    "skipped": true,
+    "knot": 5.99,
+    "file": "lead_sun+05.990.npz",
+    "frames": 104,
+    "size_mb": 26.5,
     "signature": {
-      "mean": 0.33658,
-      "sigma": 0.22424,
+      "mean": 0.2719,
+      "sigma": 0.20258,
       "p01": 0.0,
-      "p99": 0.96863,
-      "frac_dark": 0.03117
+      "p99": 0.94902,
+      "frac_dark": 0.05168
     }
   },
   {
-    "knot": 5.298,
-    "file": "lead_sun+05.298.npz",
-    "skipped": true,
+    "knot": 4.375,
+    "file": "lead_sun+04.375.npz",
+    "frames": 104,
+    "size_mb": 23.5,
     "signature": {
-      "mean": 0.26172,
-      "sigma": 0.20147,
+      "mean": 0.22514,
+      "sigma": 0.17447,
       "p01": 0.0,
-      "p99": 0.92157,
-      "frac_dark": 0.06249
+      "p99": 0.86667,
+      "frac_dark": 0.09874
     }
   },
   {
-    "knot": 4.198,
-    "file": "lead_sun+04.198.npz",
-    "skipped": true,
+    "knot": 2.967,
+    "file": "lead_sun+02.967.npz",
+    "frames": 104,
+    "size_mb": 20.5,
     "signature": {
-      "mean": 0.22953,
-      "sigma": 0.17218,
+      "mean": 0.17379,
+      "sigma": 0.14921,
       "p01": 0.0,
-      "p99": 0.84706,
-      "frac_dark": 0.09096
+      "p99": 0.73333,
+      "frac_dark": 0.14931
     }
   },
   {
-    "knot": 3.525,
-    "file": "lead_sun+03.525.npz",
-    "skipped": true,
+    "knot": 1.465,
+    "file": "lead_sun+01.465.npz",
+    "frames": 104,
+    "size_mb": 15.4,
     "signature": {
-      "mean": 0.21019,
-      "sigma": 0.16491,
+      "mean": 0.10388,
+      "sigma": 0.11284,
       "p01": 0.0,
-      "p99": 0.78431,
-      "frac_dark": 0.11126
+      "p99": 0.53333,
+      "frac_dark": 0.28858
     }
   },
   {
-    "knot": 1.891,
-    "file": "lead_sun+01.891.npz",
-    "skipped": true,
+    "knot": 0.241,
+    "file": "lead_sun+00.241.npz",
+    "frames": 104,
+    "size_mb": 9.4,
     "signature": {
-      "mean": 0.13553,
-      "sigma": 0.13022,
+      "mean": 0.04595,
+      "sigma": 0.07292,
       "p01": 0.0,
-      "p99": 0.6,
-      "frac_dark": 0.2102
-    }
-  },
-  {
-    "knot": 1.391,
-    "file": "lead_sun+01.391.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.10821,
-      "sigma": 0.11583,
-      "p01": 0.0,
-      "p99": 0.52941,
-      "frac_dark": 0.27568
-    }
-  },
-  {
-    "knot": 0.779,
-    "file": "lead_sun+00.779.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.07576,
-      "sigma": 0.09718,
-      "p01": 0.0,
-      "p99": 0.43922,
-      "frac_dark": 0.40541
-    }
-  },
-  {
-    "knot": 0.026,
-    "file": "lead_sun+00.026.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.0377,
-      "sigma": 0.06739,
-      "p01": 0.0,
-      "p99": 0.3098,
-      "frac_dark": 0.63562
+      "p99": 0.33725,
+      "frac_dark": 0.55218
     }
   },
   {
     "knot": 0.0,
     "file": "lead_sun+00.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 14.2,
     "signature": {
-      "mean": 0.06652,
-      "sigma": 0.08269,
+      "mean": 0.06624,
+      "sigma": 0.08123,
       "p01": 0.0,
       "p99": 0.3451,
-      "frac_dark": 0.42573
+      "frac_dark": 0.40352
     }
   },
   {
-    "knot": -0.961,
-    "file": "lead_sun-00.961.npz",
-    "skipped": true,
+    "knot": -1.422,
+    "file": "lead_sun-01.422.npz",
+    "frames": 104,
+    "size_mb": 12.7,
     "signature": {
-      "mean": 0.04957,
-      "sigma": 0.07186,
+      "mean": 0.04851,
+      "sigma": 0.07137,
       "p01": 0.0,
       "p99": 0.29412,
-      "frac_dark": 0.53566
+      "frac_dark": 0.54559
     }
   },
   {
-    "knot": -29.554,
-    "file": "lead_sun-29.554.npz",
-    "skipped": true,
+    "knot": -29.561,
+    "file": "lead_sun-29.561.npz",
+    "frames": 104,
+    "size_mb": 8.7,
     "signature": {
-      "mean": 0.04063,
-      "sigma": 0.07149,
+      "mean": 0.04022,
+      "sigma": 0.07118,
       "p01": 0.0,
       "p99": 0.29412,
-      "frac_dark": 0.66173
+      "frac_dark": 0.66432
     }
   },
   {
     "knot": -30.0,
     "file": "lead_sun-30.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 8.7,
     "signature": {
-      "mean": 0.04063,
-      "sigma": 0.07149,
+      "mean": 0.04022,
+      "sigma": 0.07118,
       "p01": 0.0,
       "p99": 0.29412,
-      "frac_dark": 0.66173
+      "frac_dark": 0.66429
     }
   }
 ]

@@ -124,3 +124,5 @@
   server age 1 min (R-SIM-1 ok)
     daylight: 10/10 pass, min gap 14.0 ft
     darkness_lowbeam: 10/10 pass, min gap 14.0 ft
+  verdict: PASS
+  wrote results/carla/Town01/expert.json
