@@ -1,19 +1,17 @@
-# Formal verification of AEB across illuminations FMVSS 127 does not test
+# Formal verification of braking across lighting the standard does not test
 
 **Complete methodology and results.** WMU AD Assurance Lab. CARLA 0.9.16, Town01, RTX 5090.
-Rebuilt end to end on 2026-09-07 and 2026-09-08 on the corrected simulator harness. Every
-number below was measured on that harness and nothing is carried over.
+Measured end to end on 2026-09-10, on the rebuilt harness, with training that reproduces
+byte for byte. Every number below comes from that run and nothing is carried over.
 
-> **This is the small-map study, and it is the one that ran end to end.** It is tagged
-> `town01-final`. The study has since moved to a large map, because the small one had no
-> site long enough for the standard's false-activation test. The method below is unchanged.
-> The map, the sites and every measured number are being taken again, and that rebuild is
-> not finished. Run `python -m study.status` for where it stands.
+**Four ledger cells.** The crossing pedestrian and the stopped lead vehicle. Each for two
+policies: one trained on the regulatory test points, one on the whole lighting range.
+The false-activation cells need 320 m of junction-free lane and this map's longest straight
+is 307 m, so they are deferred rather than measured (A20).
 
-Everything here is reproducible from a committed driver. `CLAUDE.md` is the frozen
-design; where this report and that file disagree, the protocol is right. `FINDINGS.md` is
-the measured record, `CLAUDE.md` is current belief and holds what
-happens next.
+Everything here is reproducible from a committed driver. `CLAUDE.md` holds the frozen
+design, and where this report and the design disagree, the design is right. `FINDINGS.md`
+is the measured record. `python -m study.status` is the live state.
 
 ---
 
@@ -68,11 +66,11 @@ FMVSS No. 127, compliance 1 September 2029. What the standard supplies:
 | Element | Value used |
 |---|---|
 | Stopped lead vehicle, crossing pedestrian | The two hazard scenarios |
-| False activation | Steel trench plate, 8 × 12 ft × 1 in, 50 mph — built and driven, §11 |
+| False activation | Steel trench plate, 8 × 12 ft × 1 in, 50 mph, built and driven, §11 |
 | Nuisance braking limit | **0.25 g**, the threshold in property A |
 | Lighting conditions | Daylight; darkness lower beam; darkness upper beam |
 
-The first two lighting conditions bound the certified interval — an interval has two ends.
+The first two lighting conditions bound the certified interval, an interval has two ends.
 The third is the *same* darkness with a different headlamp state, so it is a training
 condition and an endpoint test rather than a point on the axis. All three are tested at
 M4 and all three are available to the regulatory-matrix arms.
@@ -86,7 +84,7 @@ r_req  =  v (t_lat + dt)  +  v² / (2 a_max)  +  d_margin
 | term | value | how |
 |---|---|---|
 | `a_max` | **0.505 g** | worst average deceleration over 20 full-brake stops |
-| — cross-check | 0.486 g | the same stops read from DISTANCE rather than time |
+|, cross-check | 0.486 g | the same stops read from DISTANCE rather than time |
 | `t_lat` | **0.150 s** | brake command to deceleration onset |
 | `dt` | 0.05 s | control period |
 | `d_margin` | 1.0 m | declared, not fitted |
@@ -98,7 +96,7 @@ the whole 50 ms step in five substeps, which cannot resolve a brake transient, a
 resulting stop is impossible on its own terms: read from its duration it decelerates at
 0.868 g, read from the distance it covered, 0.623 g. Setting the default explicitly today,
 on the new GPU and through the acknowledged-control path, reproduces 0.8678 to four
-decimals — so neither the hardware nor the determinism fixes are in it. A four-fold finer
+decimals, so neither the hardware nor the determinism fixes are in it. A four-fold finer
 integration now moves `a_max` by 2.0%.
 
 `job_braking` reads every stop both ways and fails when they disagree by more than 10%.
@@ -126,8 +124,8 @@ past it. **One sub-interval cannot meet tolerance at any width**: `[0.026, 0.000
 0.0163. It is declared **uncovered** and excluded from every claim, count and figure.
 
 `+10.128` is not from the bisection. The behavioural in-between gate failed at
-`[+12.542, +7.715]` — 1.016 of the decision threshold for `P_pts`/ped, against ≤0.37
-everywhere else covered — and CLAUDE.md section 4's declared repair is shorter intervals with
+`[+12.542, +7.715]`, 1.016 of the decision threshold for `P_pts`/ped, against ≤0.37
+everywhere else covered, and CLAUDE.md section 4's declared repair is shorter intervals with
 rendered interior endpoints. Splitting there took it to 0.268 and 0.368 (F7). The knot file
 records which gate failure caused the split.
 
@@ -135,14 +133,14 @@ records which gate failure caused the split.
 
 Measured photometrically at every knot (F6): brightness **peaks near +43°, not +60**, and
 **spikes at exactly 0.000°**. Both are the renderer, not the harness, and the second is
-amendment A6's horizon discontinuity seen through a completely different statistic — two
+amendment A6's horizon discontinuity seen through a completely different statistic, two
 measurements sharing no code agreeing on where the sky model breaks.
 
 ## 7. Capture
 
 The campaign drives **once** with rendering off to get a nominal state sequence, then
-replays it by placing the actors, once per knot. Four scenarios — `lead`, `ped`, and their
-no-target controls — at 18 knots, plus a darkness/upper-beam capture of each, filed under a
+replays it by placing the actors, once per knot. Four scenarios, `lead`, `ped`, and their
+no-target controls, at 18 knots, plus a darkness/upper-beam capture of each, filed under a
 prefix the family's globs cannot match.
 
 | check | result |
@@ -206,175 +204,136 @@ the property. A domain that neither certifies nor yields one is UNDECIDED. This 
 | Capture gate, behavioural | 0.070 – 0.419 of the decision threshold |
 | In-between gate, behavioural, over covered sub-intervals | 0.208 – 0.456 |
 
-## 11. M4: every arm passes every regulatory test point
+## 11. Every policy passes every regulatory test point
 
-All three arms, both hazard scenarios, all three lighting conditions: **10/10**, Wilson
-95% [0.72, 1.00], on CLAUDE.md section 7's frozen pass criterion. Brake onset 51.9 ft against
-`r_req` 52.0, standoff 14.3 ft.
+All three policies, both hazard scenarios, all three lighting conditions the standard
+tests: **10 of 10 in every one of eighteen cells**. Standoff 14.32 ft against a required
+3.28.
 
-**False activation, cells 5 and 6.** All three arms, all three lighting conditions, ten
-runs each on an ASTM A36 plate tiled to exactly 8.0 × 12.0 ft and approached at 50 mph:
-**9 of 9 cells 10/10**, peak commanded deceleration 0.030–0.375 m/s² against the standard's
-0.25 g limit of 2.453. Nobody brakes for the plate.
+Every stop on the lead scenario is 14.32 ft, identical across all three policies. That is
+not one network: their weight hashes differ. The brake latches, and its trigger is a
+threshold read once per control step. At 25 mph that puts stopping distances on a 1.83 ft
+grid, and all three policies cross the threshold on the same step. On the pedestrian
+scenario they land on different steps, 14.21, 15.85 and 17.53 ft, which is the same
+mechanism resolving differently.
 
-One defect is recorded beside the verdict rather than inside it: `P_pts3` on the pedestrian
-scenario in daylight brakes at **287.6 ft** and stops 250 ft short, ten runs of ten. That
-is nuisance braking — a must-NOT-brake condition, which is property A — and §7's criterion
-does not fail on it.
+**By the standard's own procedure these policies cannot be told apart.** That is the setup
+for everything after it.
 
-## 12. M6: certificates over the interval
+**The false-activation cells are deferred on this map.** That scenario needs 320 m of
+junction-free lane and this map's longest straight is 307 m (A20). Ledger cells 5 and 6 are
+unmeasured, not failed.
 
-Covered sub-intervals (16 of 17; the horizon sliver is excluded):
+## 12. Certificates over the range
 
-| arm | lead certified | falsified width | ped certified | falsified width |
+Thirteen sub-intervals, twelve of them covered; the horizon sliver [+0.241, 0.000] is
+declared uncovered and excluded from every verdict.
+
+| policy | lead certified | falsified width | ped certified | falsified width |
 |---|---|---|---|---|
-| `P_pts` | 4/16 | 50.32° | 4/16 | 48.27° |
-| `P_pts3` | 6/16 | 43.02° | 3/16 | 43.70° |
-| `P_cont` | **16/16** | 0.00° | **15/16** | 0.75° |
+| points-trained | 6/12 | 17.24 deg | 3/12 | 55.84 deg |
+| three-condition | 6/12 | 17.24 deg | 8/12 | 21.76 deg |
+| **continuum-trained** | **12/12** | 0.00 deg | **12/12** | 0.00 deg |
 
-Those are seed 0. Over **ten matched seeds** (F16), `P_cont` beats both regulatory arms on
-10 of 10 pairs, p = 0.002, ranges disjoint — while `P_pts3` and `P_pts` are
-indistinguishable from each other (p = 0.45 and 0.75, ranges overlapping). The separation
-is robust. The individual widths are single draws from a distribution spanning 4.5° to
-57.9°, and should never be quoted alone.
+**Zero undecided in all six**, so the branch and bound resolved every sub-interval rather
+than running out of budget.
 
-**Adding the third regulatory lighting condition does not close the gap**, and over ten
-seeds it does not reliably narrow it either. A policy trained on every lighting condition FMVSS 127
-tests is still falsified across roughly 43° of the axis, while the continuum-trained
-control certifies essentially all of it. The gap is not an artifact of having sampled two
-of three points.
+**A count of pieces is not a measure of coverage.** The same certificates by span of
+illumination: 80.8% for the points-trained policy on lead, where the count says 50%. The
+two disagree because the bisection stops on an absolute tolerance and makes pieces of very
+different widths (F27, F31). Both are reported; neither replaces the other.
 
-## 13. M7: driving the illuminations the certificate names
+**The two point-trained policies falsify the same six pieces on lead**, a contiguous band
+from +17.484 down to +0.241 degrees, dusk descending to the horizon. They are different
+networks with different weights. A shared failure region across different weights points at
+where the training sampled the range, not at one network's quirks.
 
-Two passes. **Midpoint**: every sub-interval, certified ones included, because a test that
-only visits flagged cells cannot tell a working certificate from one that flags
-everything. **At-witness**: the concrete `s` the certificate exhibited for each falsified
-sub-interval, because §10 says *drive the witness* and the midpoint is not the witness.
+## 13. Driving the illuminations the certificate names
 
-| arm | agreement | contacts | premature |
+Three passes, three repetitions each, every repetition in its own process against its own
+freshly restarted server.
+
+**Midpoint**, every sub-interval including the certified ones, because a test that only
+visits flagged cells cannot tell a working certificate from one that flags everything.
+**At-witness**, the exact illumination each falsified sub-interval exhibits. **Interior**,
+five illuminations per sub-interval, 65 per cell.
+
+| policy | scenario | midpoint agreement | crashes at witnesses | interior crashes of 65 |
+|---|---|---|---|---|
+| points | lead | 10/13 | 4 of 7 | **21** |
+| points | pedestrian | 4/13 | 2 of 10 | 9 |
+| three-condition | lead | 10/13 | 2 of 7 | 15 |
+| three-condition | pedestrian | 8/13 | 0 of 5 | 25 |
+| continuum | lead | **13/13** | nothing falsified | **0** |
+| continuum | pedestrian | **13/13** | nothing falsified | **0** |
+
+**Zero certified-then-failed across 78 witness drives and 390 interior drives. Zero void.**
+Nothing the certificate cleared went on to crash, and all three repetitions agreed in every
+cell.
+
+### Where the failures actually are
+
+Driving 65 illuminations across the range, brightest first, X marking a crash:
+
+```
+  points-trained,  lead: .....................XXXXXXXXXXXXXXXXXXXX..X.....................
+  three-condition, lead: ......................XX.............XXXXXXXXXXXXX...............
+  points-trained,  ped : ...................XXX......................XXXXXX...............
+  continuum,       both: .................................................................
+```
+
+On lead the driven failures span **+8.856 to +0.608 degrees**, inside a certificate warning
+from +17.484 to 0.000. The bound brackets the truth and is conservative on both sides,
+which is the direction a sound bound must err in.
+
+**On the pedestrian scenario the failures are two disjoint pockets** with survivable
+lighting between them. Anything that brackets a single failure edge will find one and miss
+the other. That matters for anyone who writes a boundary search.
+
+**The certificate is coarser than the behaviour it bounds.** The two point-trained policies
+produce identical certificates on lead and crash in different places, four pieces against
+two. A FALSIFIED verdict is not a claim that the policy crashes throughout that piece.
+
+**And the bound does not predict which falsified piece crashes.** Pieces whose worst bound
+is 1.93 and 1.62 crash; pieces at 1.55, 1.53 and -0.18 drive clean.
+
+## 13a. The matrix is discrete, not badly sampled
+
+Training on **all three lighting conditions the standard tests** cuts lead crashes from 21
+of 65 to 15 of 65. It moves the failure band very little, and it does not approach the
+continuum policy's zero.
+
+The obvious objection to "you undersampled the lighting range" is "then sample the matrix
+properly". This is the answer to it.
+
+## 13b. The sliver the certificate cannot reach
+
+The family provably cannot represent [+0.241, 0.000], so no certificate is available there
+by construction. A distribution-free coverage statement is, over 40 rendered illuminations
+drawn from that piece:
+
+| policy | conformal lower bound | clears the 2.476 threshold | calibration illuminations below it |
 |---|---|---|---|
-| `P_cont` / lead | **17/17** | **0** | **0** |
-| `P_cont` / ped | 15/17 | **0** | **0** |
-| `P_pts3` / lead | 11/17 | 40 | 0 |
-| `P_pts` / lead | 5/17 | 10 | 20 |
-| `P_pts3` / ped | 5/17 | 18 | 32 |
-| `P_pts` / ped | 4/17 | 0 | 40 |
+| continuum | **3.909 m/s2** | yes, 1.58x | **0 of 40** |
+| points | 1.322 m/s2 | **no**, 0.53x | **40 of 40** |
 
-**Nothing was certified and then failed** on the covered axis, in any cell, at either the
-midpoints or the exhibited witnesses. For a safety tool that is the direction that matters.
-The single exception in the whole study is in the A6-**uncovered** sliver, which the
-protocol excludes from every verdict precisely because a bound there is not evidence
-(§13b, F19).
+This is not a for-all statement. The certificate quantifies over every illumination in a
+piece; this quantifies over a randomly drawn one and attaches a probability. They are
+different claims and must never be reported as the same one.
 
-**The continuum-trained control drives the entire axis with zero contacts and zero nuisance
-stops on both scenarios.** Neither regulatory-matrix arm does.
+## 13c. The repair that looks right and is not
 
-**The at-witness pass earns its place.** `P_pts`/lead drives 0/10 with ten contacts at
-+7.715°, the illumination its certificate exhibited, while the midpoint of that same
-sub-interval drives clean. Across the arms, 8 of 53 driven witnesses fail the frozen
-criterion and 78 contacts occur at them.
+A latching controller does not need the property to hold at every pose. It needs, for every
+illumination, SOME pose in the latch window where it brakes in time. Stating the property
+as that disjunction is the obvious repair for the conservatism above.
 
-**`P_pts3` is the result nobody would have guessed from the certificates.** It certifies
-*more* of the axis than `P_pts` (6/16 against 4/16 on lead) and crashes **four times as
-often** when driven: 40 contacts against 10. Training against the full regulatory matrix
-narrowed the certified gap and made the driving worse.
+Measured over 78 driven sub-intervals: 59 are latch-guaranteed by the disjunction, and
+**one of those produced contact in 3 of 6 runs**. One unsound cell is enough. The
+disjunction is not a sound predictor of the closed loop, and section 7 stays as written.
 
-### 13a. What a FALSIFIED verdict was ever entitled to predict (F17)
-
-Two ledger cells contradicted their pre-registration, and CLAUDE.md section 8 required a written
-disposition before either could be written up. Both have the same cause and it is in how
-the property is *stated*.
-
-Property S is a conjunction — the bound must clear at **every** one of the 25 poses inside
-`r_req`, for every illumination in the sub-interval. The controller latches once and holds
-full braking, so what the closed loop needs is a disjunction: at every illumination,
-**some** pose in the latch window clears. The first implies the second and not the
-converse, so a FALSIFIED property S is not on its own a prediction that the drive fails.
-Cell 1's `witness: expected FAIL` was reading it as one.
-
-The **latch window** is derived from the primitives and never from the drives: the worst
-measured stop at 25 mph is 44.71 ft, which already carries `t_lat`, plus `d_margin`
-3.28 ft, so a latch at 47.99 ft or more stops in time — poses 79–80 on the pedestrian
-approach and 79–81 on the lead one. The drives agree without having been used: latch to
-rest is **37.56 ft in all 610** non-premature braking runs, against 39.10 ft of predicted
-braking travel.
-
-That disposes of cell 3 outright. `P_cont`/ped is falsified at pose 87, **36.77 ft** —
-past the last range at which a latch could still meet `d_margin` — while the vehicle
-latches at pose 79, 51.4 ft, in all seventeen sub-intervals including both falsified ones.
-Certifying the disjunction, `P_cont` latches in time **17/17 on both scenarios**, at
-1.06–2.10×.
-
-**The obvious repair then fails, and that is the useful part.** Stating property S as the
-disjunction is formally better aligned with the controller, so it should certify the same
-crashes. It does not:
-
-| | property S (conjunction) | disjunction over the latch window |
-|---|---|---|
-| sub-intervals driven | 102 | 102 |
-| producing a contact | 9 | 9 |
-| flagged by the certificate | **9 of 9** | **8 of 9** |
-
-The miss is `P_pts`/lead over [+7.715°, +5.298°], certified to latch in time at **1.0318×**,
-whose endpoint drove **10 contacts in 10 runs, 9 never braking, ending 1.93 ft inside the
-lead vehicle**. On the captured frames the certificate is right — poses 79–81 give 1.568,
-2.345 and 2.563 against a 2.476 threshold — and the whole approach there sits within ±5%
-of the threshold, so the live-rendered drive lands on the other side of it. **The margin
-does not separate them either**: four sub-intervals certified more thinly (1.0000×,
-1.0033×, 1.0231×, 1.0250×) drove clean.
-
-Requiring all twenty-five poses forces the certificate away from that knife edge, and that
-is what buys the 9-of-9. §7 stays as written; the disjunction is reported beside it as the
-quantity the agreement table is entitled to score against, not in place of it.
-
-### 13b. Cells 5 and 6: the trench plate (F18)
-
-FMVSS 127's false-activation scenario — an ASTM A36 plate tiled to 8.0 × 12.0 ft,
-approached in lane at 50 mph — with property A over **52 poses from 2.179 to 59.178 m**
-against the standard's 0.25 g limit, and the control that makes it attributable: the same
-poses with the plate **removed**.
-
-| arm | plate | worst covered | plate removed |
-|---|---|---|---|
-| `P_cont` | **16/16 certified** | 0.9825× | 16/16, worst 0.9850× |
-| `P_pts3` | 15/16 | 1.3634× | 15/16, worst 1.3652× |
-| `P_pts` | 15/16 | 2.0872× | 15/16, worst 2.0775× |
-
-**Every verdict is identical with the plate present and removed, every bound within 0.5%.**
-No arm's braking is attributable to the plate; the falsifications are the near-horizon
-illumination effect of F13, which appears equally on an empty road. All nine endpoint
-cells cross the plate 10/10 without braking, peak demand 0.030–0.375 m/s².
-
-**Cell 6 was §9's named sleeper and it is awake.** `P_cont` is the loudest arm on the
-plate at the endpoints — 0.082–0.375 m/s² against the others' 0.030–0.066 — and its
-certificate carries the thinnest margins of any arm, 0.9825× and 0.9963×. By §13a that is
-a band where a bare pass carries no information. **Cell 6 closes as certified with
-essentially no margin**, which is the result rather than a comfortable pass: the
-continuum-trained policy buys its clean must-brake record with a must-not-brake budget it
-very nearly spends.
-
-**Driving them (F19).** Six drives, 17 sub-intervals, 10 repetitions — 1,020 runs — plus
-the control with no steel on the road. Agreement `P_pts` 17/17, `P_pts3` 17/17, `P_cont`
-16/17.
-
-`P_pts` commands about **2% of the nuisance limit at all three lighting conditions the
-standard tests** (0.034, 0.056, 0.037 m/s²) and **138% of it at +0.403°** (3.381), an
-illumination between them. That is **60× its worst test point**, and with the plate
-removed the same illumination gives 3.382 — 0.06% away. The violation is the light, not
-the steel, and FMVSS 127's own false-activation procedure cannot see it.
-
-`P_cont` is the one arm where the plate itself matters, in one sub-interval: at +0.013° it
-peaks at **2.711 (110.5% of the limit, 7/10) with the plate** and **2.221 (90.6%, 10/10)
-without** — the steel adds 22% over the control and carries it over. It is the only
-place on the whole axis, in any arm, where the plate changes a verdict; below the limit
-the plate-to-control differences are run-to-run variation on demands far under it. That is §9's named sleeper, and it
-took a two-sided test at an illumination outside the standard to see it.
-
-That sub-interval is also **the only certified-then-failed cell in the study** — certified
-at 0.9963×, driven at 1.105×. It is the A6-**uncovered** sub-interval, excluded from cell
-6's verdict by construction, and its margin sits inside the band §13a measured as carrying
-no information. Both were on record before the drive. It is the first direct empirical
-confirmation that the uncovered sliver genuinely cannot be certified.
+This is now measured twice, on two harnesses with different training, with the same answer
+(F17, F35). Nine sub-intervals are falsified for the frozen property, latch-guaranteed, and
+drive clean. The conservatism gap is real; this is not its repair.
 
 ## 14. What the harness itself measures
 
@@ -394,8 +353,8 @@ repetition of every M4 cell agreeing to 0.1 ft.
 **The in-between gate does not predict certificate transfer** (F10). Over 96 covered
 sub-intervals joining a certificate, a gate value and a witness drive on the same network,
 the correlation between the gate value and certificate/drive disagreement is **r = −0.005**.
-The gate detects a sub-interval where a blend can flip a decision in isolation — it caught
-`[+12.542, +7.715]` and §4's repair fixed it — and it is *not* evidence that a certificate
+The gate detects a sub-interval where a blend can flip a decision in isolation, it caught
+`[+12.542, +7.715]` and §4's repair fixed it, and it is *not* evidence that a certificate
 transfers to a rendered drive. The paper must not present it as such.
 
 ## 15. Cost
@@ -421,8 +380,8 @@ illumination in a declared interval, where a driven run samples one.
   not yet computed, so the cells are not closed.
 - **The attribution is swept; the driving numbers are not.** Ten matched seeds establish
   that `P_cont` certifies more of the axis than either regulatory arm on 10 of 10 pairs,
-  p = 0.002, with disjoint ranges (F16). Every *driving* number here — contacts, nuisance
-  stops, agreement rates — and all of property A are seed-0 measurements, and the sweep
+  p = 0.002, with disjoint ranges (F16). Every *driving* number here, contacts, nuisance
+  stops, agreement rates, and all of property A are seed-0 measurements, and the sweep
   says nothing about their stability. Driving ten seeds is about 20 hours of simulator
   time.
 - **The falsified WIDTH is a single draw.** It ranges 4.5° to 57.9° across seeds on the
@@ -457,14 +416,13 @@ looked entirely reasonable.
 
 Twelve defects. **Six were found only because a number was compared against another number
 that should have matched it**, and none would have been caught by a test that checked
-whether the pipeline ran. Three of the last four are *labels* rather than measurements —
-a scope, a margin's sign, a scenario name — which is the harder class, because the numbers
+whether the pipeline ran. Three of the last four are *labels* rather than measurements, a scope, a margin's sign, a scenario name, which is the harder class, because the numbers
 underneath are correct and nothing downstream ever disagrees with the label.
 
 The tenth is worth its own sentence, because it is a repeat. `CLAUDE.md`
 section 1 already recorded that property A on the no-target control is *not* FMVSS 127's
 false-activation scenario and must never be described as one. The harness built to fix
-that then queued `none_plate` — the plate poses with the plate **removed** — which is the
+that then queued `none_plate`, the plate poses with the plate **removed**, which is the
 same substitution one level down, in a script written the same week by someone who had
 just written the warning. A rule stated in prose does not survive contact with a shell
 loop; the fix is that the loop now queues `plate` and keeps `none_plate` beside it as the
@@ -484,13 +442,13 @@ bash scripts/rebuild_all.sh analysis     # every number and figure a reader quot
 python -m study.status
 ```
 
-Both `verifyA` and `witness` take an explicit scope argument — `all` (the default),
+Both `verifyA` and `witness` take an explicit scope argument, `all` (the default),
 `hazard`, `plate`, `none_plate`. The default is the whole thing on purpose: a flag that
 narrows scope is passed explicitly or it is not passed, because a default that quietly
 measures less still produces a result that looks finished.
 
 `analysis` is the stage that exists because `tools/tidy.py` found three tools nothing
-referenced — including `record_primitives.py`, which derives the safety budget every
+referenced, including `record_primitives.py`, which derives the safety budget every
 certificate composes with. A number in this report comes from a committed invocation or
 it does not go in.
 
