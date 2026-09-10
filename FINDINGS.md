@@ -6,6 +6,58 @@ here, never inside the protocol.
 
 ---
 
+## F34 — 2026-09-10, the training globbed the frame directory, so one policy trained on two campaigns at once
+
+Scoping the results directories by map (F26, queue item 17) stopped a campaign reading
+another MAP's frames. Nothing stopped it reading another CAMPAIGN's frames on the same map.
+
+### What happened
+
+The rebuild measured a lighting range of 14 knots on the small map and captured frames for
+them. An earlier campaign on that map had measured a different range and left its frames in
+the same directory. Nothing removes them.
+
+`train_policies.load()` took `CAPTURES.glob(f"{scenario}_sun*.npz")`, so the continuum
+policy trained on **29 knots**: the 14 this campaign measured and 15 from the earlier one.
+
+| | before the guard | after |
+|---|---|---|
+| knots the continuum policy saw | **29** | 14 |
+| samples per policy | 6032 | 2912 |
+
+**The fifteen carry no harness stamp**, because they predate the stamp. There is no way to
+tell what harness made them, and rule D-11 says data from a harness you cannot identify is
+not reusable.
+
+### The part that reaches every arm
+
+The sample equaliser sizes every policy to the largest, so that the arms differ only in
+which knots the frames came from. The contaminated continuum set was the largest, so the
+two point-trained arms were **oversampled to match a training set they never saw**. All
+three arms were 6032 samples because one of them was reading an old campaign.
+
+That is not a small error in one arm. It is the comparison the whole study rests on.
+
+### The fix
+
+`load()` now takes the axis from `family_knots.json` and keeps only frames whose knot is on
+it and which carry a harness stamp. It prints what it skipped and why, because a silent
+filter is the other half of this defect.
+
+The 90 off-axis frame sets are moved out of the captures directory.
+
+### Why the capture guard did not catch it
+
+It does its job and its job is narrower. The stamp guard decides whether to RECAPTURE a
+knot the current axis asks for. It never looks at files for knots the current axis does not
+ask for, because from its point of view they are not part of this campaign. They were part
+of the training set anyway, because training asked the directory rather than the axis.
+
+**A guard that answers "should I remake this file" does not answer "should I read this
+file".** Those are different questions and this study only had the first one.
+
+---
+
 ## F33 — 2026-09-10, F32 was wrong: the old map's dark end is not contaminated, it is a lit road
 
 **This corrects F32, written four hours earlier, and it is a mistake this repository had

@@ -6,3 +6,39 @@ none: 104 states x 14 knots = 1456 frames, about 1.34 GB raw
   none_sun-30.000.npz exists but belongs to a different campaign (no harness stamp; predates F26); recapturing
     signature: mean 0.0402 sigma 0.0712 p99 0.2941 dark 0.664
   sun  -30.000: 104 frames,    8.8 MB,  42.2 s
+    signature: mean 0.0402 sigma 0.0712 p99 0.2941 dark 0.664
+  sun  -29.561: 104 frames,    8.8 MB,  42.2 s
+    signature: mean 0.0485 sigma 0.0714 p99 0.2941 dark 0.545
+  sun   -1.422: 104 frames,   12.7 MB,  53.4 s
+  none_sun+00.000.npz exists but belongs to a different campaign (no harness stamp; predates F26); recapturing
+    signature: mean 0.0663 sigma 0.0812 p99 0.3451 dark 0.403
+  sun   +0.000: 104 frames,   14.2 MB,  53.9 s
+    signature: mean 0.0459 sigma 0.0729 p99 0.3372 dark 0.552
+  sun   +0.241: 104 frames,    9.4 MB,  35.1 s
+    signature: mean 0.1039 sigma 0.1128 p99 0.5333 dark 0.288
+  sun   +1.465: 104 frames,   15.4 MB,  34.9 s
+    signature: mean 0.1738 sigma 0.1492 p99 0.7333 dark 0.149
+  sun   +2.967: 104 frames,   20.4 MB,  35.1 s
+    signature: mean 0.2251 sigma 0.1744 p99 0.8667 dark 0.099
+  sun   +4.375: 104 frames,   23.5 MB,  34.7 s
+    signature: mean 0.2720 sigma 0.2026 p99 0.9490 dark 0.052
+  sun   +5.990: 104 frames,   26.5 MB,  31.4 s
+    signature: mean 0.3590 sigma 0.2342 p99 0.9843 dark 0.027
+  sun  +10.084: 104 frames,   33.8 MB,  29.2 s
+    signature: mean 0.4444 sigma 0.2557 p99 0.9922 dark 0.014
+  sun  +17.484: 104 frames,   37.1 MB,  27.9 s
+    signature: mean 0.5063 sigma 0.2565 p99 0.9922 dark 0.008
+  sun  +26.523: 104 frames,   38.6 MB,  27.2 s
+    signature: mean 0.5289 sigma 0.2293 p99 0.9804 dark 0.006
+  sun  +39.977: 104 frames,   38.8 MB,  27.2 s
+  none_sun+60.000.npz exists but belongs to a different campaign (no harness stamp; predates F26); recapturing
+    signature: mean 0.5054 sigma 0.1801 p99 0.7490 dark 0.006
+  sun  +60.000: 104 frames,   36.7 MB,  26.7 s
+
+  illumination axis OK: 14 knots, span 0.4886 of full range, worst inversion 4.8% of span (limit 12%), total 4.8% (limit 25%)
+    recorded: sun fell 60.000 -> 39.977 deg and the frame got BRIGHTER, 0.5054 -> 0.5289 (4.8% of the axis span)
+    recorded: sun fell 0.241 -> 0.000 deg and the frame got BRIGHTER, 0.0459 -> 0.0663 (4.2% of the axis span)  [declared uncovered]
+    recorded: sun fell -29.561 -> -30.000 deg and the frame got BRIGHTER, 0.0402 -> 0.0402 (0.0% of the axis span)
+  wrote results/captures/Town01/determinism_none.json
+
+  wrote results/captures/Town01/manifest_none.json

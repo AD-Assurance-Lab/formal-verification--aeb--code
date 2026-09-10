@@ -140,6 +140,39 @@ def load(scenario: str, knots: list[float] | None, w: int, h: int,
         # not match "{x}_hb_sun*", so these only ever arrive when asked for.
         sources += sorted(CAPTURES.glob(f"{scenario}_hb_sun*.npz"))
         sources += sorted(CAPTURES.glob(f"{ctrl}_hb_sun*.npz"))
+    # THE AXIS IS THE TRAINING SET, and a glob is not the axis.
+    #
+    # This globbed every frame file in the directory. A capture campaign leaves the frames
+    # for the axis it measured, and a LATER campaign on the same map measures a different
+    # axis and leaves its own beside them. Nothing removes the first set. Measured on
+    # 2026-09-10: the directory held 14 frame sets for the current axis and 15 from an
+    # earlier one, and the continuum policy trained on all 29 -- fifteen of them captured
+    # by a harness that left no stamp, which rule D-11 says may not be reused.
+    #
+    # It is the same defect as F26 one level down. Scoping the directory by map stopped
+    # one campaign reading another MAP's frames; nothing stopped it reading another
+    # CAMPAIGN's frames on the same map.
+    on_axis = {round(float(k), 3) for k in
+               json.loads((J.OUT / "family_knots.json").read_text())
+               ["knots_sun_altitude_deg"]}
+    kept, dropped = [], []
+    for path in sources:
+        z = np.load(path)
+        k = round(float(z["sun_altitude_deg"]), 3)
+        if k not in on_axis:
+            dropped.append((path.name, "not on the measured axis"))
+        elif "harness" not in z.files:
+            dropped.append((path.name, "no harness stamp; predates F26"))
+        else:
+            kept.append(path)
+    if dropped:
+        print(f"  SKIPPED {len(dropped)} frame set(s) that are not this campaign's:")
+        for name, why in dropped[:6]:
+            print(f"    {name}  ({why})")
+        if len(dropped) > 6:
+            print(f"    ... and {len(dropped) - 6} more")
+    sources = kept
+
     for path in sources:
         d = np.load(path)
         knot = float(d["sun_altitude_deg"])

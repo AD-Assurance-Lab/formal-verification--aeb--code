@@ -2,217 +2,183 @@
   {
     "knot": 60.0,
     "file": "none_ped_sun+60.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 36.6,
     "signature": {
-      "mean": 0.51087,
-      "sigma": 0.18699,
+      "mean": 0.51037,
+      "sigma": 0.1852,
       "p01": 0.05098,
-      "p99": 0.76863,
-      "frac_dark": 0.00618
+      "p99": 0.75294,
+      "frac_dark": 0.00704
     }
   },
   {
-    "knot": 42.766,
-    "file": "none_ped_sun+42.766.npz",
-    "skipped": true,
+    "knot": 39.977,
+    "file": "none_ped_sun+39.977.npz",
+    "frames": 104,
+    "size_mb": 38.7,
     "signature": {
-      "mean": 0.53128,
-      "sigma": 0.22952,
+      "mean": 0.53057,
+      "sigma": 0.23532,
       "p01": 0.05098,
-      "p99": 0.96471,
-      "frac_dark": 0.00603
+      "p99": 0.98039,
+      "frac_dark": 0.0067
     }
   },
   {
-    "knot": 28.397,
-    "file": "none_ped_sun+28.397.npz",
-    "skipped": true,
+    "knot": 26.523,
+    "file": "none_ped_sun+26.523.npz",
+    "frames": 104,
+    "size_mb": 38.5,
     "signature": {
-      "mean": 0.52229,
-      "sigma": 0.25778,
+      "mean": 0.51138,
+      "sigma": 0.25696,
       "p01": 0.05098,
       "p99": 0.99216,
-      "frac_dark": 0.00779
+      "frac_dark": 0.00885
     }
   },
   {
-    "knot": 18.743,
-    "file": "none_ped_sun+18.743.npz",
-    "skipped": true,
+    "knot": 17.484,
+    "file": "none_ped_sun+17.484.npz",
+    "frames": 104,
+    "size_mb": 37.0,
     "signature": {
-      "mean": 0.46054,
-      "sigma": 0.25594,
+      "mean": 0.44717,
+      "sigma": 0.25509,
+      "p01": 0.0,
+      "p99": 0.99216,
+      "frac_dark": 0.01491
+    }
+  },
+  {
+    "knot": 10.084,
+    "file": "none_ped_sun+10.084.npz",
+    "frames": 104,
+    "size_mb": 33.8,
+    "signature": {
+      "mean": 0.36118,
+      "sigma": 0.23376,
       "p01": 0.0,
       "p99": 0.98824,
-      "frac_dark": 0.01233
+      "frac_dark": 0.0266
     }
   },
   {
-    "knot": 12.542,
-    "file": "none_ped_sun+12.542.npz",
-    "skipped": true,
+    "knot": 5.99,
+    "file": "none_ped_sun+05.990.npz",
+    "frames": 104,
+    "size_mb": 26.3,
     "signature": {
-      "mean": 0.40387,
-      "sigma": 0.24596,
+      "mean": 0.27132,
+      "sigma": 0.20248,
       "p01": 0.0,
-      "p99": 0.98824,
-      "frac_dark": 0.01945
+      "p99": 0.94902,
+      "frac_dark": 0.05014
     }
   },
   {
-    "knot": 10.128,
-    "file": "none_ped_sun+10.128.npz",
-    "skipped": true,
+    "knot": 4.375,
+    "file": "none_ped_sun+04.375.npz",
+    "frames": 104,
+    "size_mb": 23.6,
     "signature": {
-      "mean": 0.37115,
-      "sigma": 0.2339,
+      "mean": 0.22325,
+      "sigma": 0.17414,
       "p01": 0.0,
-      "p99": 0.98431,
-      "frac_dark": 0.02321
+      "p99": 0.86667,
+      "frac_dark": 0.10046
     }
   },
   {
-    "knot": 7.715,
-    "file": "none_ped_sun+07.715.npz",
-    "skipped": true,
+    "knot": 2.967,
+    "file": "none_ped_sun+02.967.npz",
+    "frames": 104,
+    "size_mb": 20.5,
     "signature": {
-      "mean": 0.33609,
-      "sigma": 0.22374,
+      "mean": 0.17222,
+      "sigma": 0.14853,
       "p01": 0.0,
-      "p99": 0.96863,
-      "frac_dark": 0.03124
+      "p99": 0.73333,
+      "frac_dark": 0.15124
     }
   },
   {
-    "knot": 5.298,
-    "file": "none_ped_sun+05.298.npz",
-    "skipped": true,
+    "knot": 1.465,
+    "file": "none_ped_sun+01.465.npz",
+    "frames": 104,
+    "size_mb": 15.5,
     "signature": {
-      "mean": 0.26117,
-      "sigma": 0.20143,
+      "mean": 0.10219,
+      "sigma": 0.11144,
       "p01": 0.0,
-      "p99": 0.92157,
-      "frac_dark": 0.06193
+      "p99": 0.53333,
+      "frac_dark": 0.28702
     }
   },
   {
-    "knot": 4.198,
-    "file": "none_ped_sun+04.198.npz",
-    "skipped": true,
+    "knot": 0.241,
+    "file": "none_ped_sun+00.241.npz",
+    "frames": 104,
+    "size_mb": 9.5,
     "signature": {
-      "mean": 0.22805,
-      "sigma": 0.17181,
+      "mean": 0.0439,
+      "sigma": 0.07047,
       "p01": 0.0,
-      "p99": 0.84706,
-      "frac_dark": 0.09247
-    }
-  },
-  {
-    "knot": 3.525,
-    "file": "none_ped_sun+03.525.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.20847,
-      "sigma": 0.16446,
-      "p01": 0.0,
-      "p99": 0.78431,
-      "frac_dark": 0.1137
-    }
-  },
-  {
-    "knot": 1.891,
-    "file": "none_ped_sun+01.891.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.13368,
-      "sigma": 0.12923,
-      "p01": 0.0,
-      "p99": 0.6,
-      "frac_dark": 0.21235
-    }
-  },
-  {
-    "knot": 1.391,
-    "file": "none_ped_sun+01.391.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.1065,
-      "sigma": 0.11442,
-      "p01": 0.0,
-      "p99": 0.52941,
-      "frac_dark": 0.27481
-    }
-  },
-  {
-    "knot": 0.779,
-    "file": "none_ped_sun+00.779.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.0738,
-      "sigma": 0.09537,
-      "p01": 0.0,
-      "p99": 0.43922,
-      "frac_dark": 0.40148
-    }
-  },
-  {
-    "knot": 0.026,
-    "file": "none_ped_sun+00.026.npz",
-    "skipped": true,
-    "signature": {
-      "mean": 0.03559,
-      "sigma": 0.06464,
-      "p01": 0.0,
-      "p99": 0.30196,
-      "frac_dark": 0.64292
+      "p99": 0.33333,
+      "frac_dark": 0.55704
     }
   },
   {
     "knot": 0.0,
     "file": "none_ped_sun+00.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 14.2,
     "signature": {
-      "mean": 0.0653,
-      "sigma": 0.08133,
+      "mean": 0.06497,
+      "sigma": 0.07984,
       "p01": 0.0,
-      "p99": 0.3451,
-      "frac_dark": 0.42527
+      "p99": 0.35294,
+      "frac_dark": 0.40455
     }
   },
   {
-    "knot": -0.961,
-    "file": "none_ped_sun-00.961.npz",
-    "skipped": true,
+    "knot": -1.422,
+    "file": "none_ped_sun-01.422.npz",
+    "frames": 104,
+    "size_mb": 12.7,
     "signature": {
-      "mean": 0.04875,
-      "sigma": 0.0701,
+      "mean": 0.04768,
+      "sigma": 0.06959,
       "p01": 0.0,
       "p99": 0.28627,
-      "frac_dark": 0.53292
+      "frac_dark": 0.54239
     }
   },
   {
-    "knot": -29.554,
-    "file": "none_ped_sun-29.554.npz",
-    "skipped": true,
+    "knot": -29.561,
+    "file": "none_ped_sun-29.561.npz",
+    "frames": 104,
+    "size_mb": 8.8,
     "signature": {
-      "mean": 0.04006,
-      "sigma": 0.06968,
+      "mean": 0.03964,
+      "sigma": 0.06936,
       "p01": 0.0,
       "p99": 0.28627,
-      "frac_dark": 0.65669
+      "frac_dark": 0.65923
     }
   },
   {
     "knot": -30.0,
     "file": "none_ped_sun-30.000.npz",
-    "skipped": true,
+    "frames": 104,
+    "size_mb": 8.8,
     "signature": {
-      "mean": 0.04006,
-      "sigma": 0.06968,
+      "mean": 0.03964,
+      "sigma": 0.06936,
       "p01": 0.0,
       "p99": 0.28627,
-      "frac_dark": 0.65666
+      "frac_dark": 0.65923
     }
   }
 ]

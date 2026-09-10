@@ -26,3 +26,61 @@ Terminated
   determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
   D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
 [2026-09-10 14:24:26] START capture_none
+[2026-09-10 14:32:50] DONE  capture_none rc=0
+[2026-09-10 14:32:50] restarting CARLA on 3000
+Terminated
+  server pid 3924876 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:33:12] START capture_ped
+[2026-09-10 14:41:45] DONE  capture_ped rc=0
+[2026-09-10 14:41:45] restarting CARLA on 3000
+Terminated
+  server pid 3925589 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:42:07] START capture_none_ped
+[2026-09-10 14:50:19] DONE  capture_none_ped rc=0
+[2026-09-10 14:50:19] restarting CARLA on 3000
+Terminated
+  server pid 3927064 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:50:42] START capture_lead_hb
+[2026-09-10 14:51:27] DONE  capture_lead_hb rc=0
+[2026-09-10 14:51:27] restarting CARLA on 3000
+Terminated
+  server pid 3927500 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:51:49] START capture_none_hb
+[2026-09-10 14:52:34] DONE  capture_none_hb rc=0
+[2026-09-10 14:52:34] restarting CARLA on 3000
+Terminated
+  server pid 3927943 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:52:56] START capture_ped_hb
+[2026-09-10 14:53:40] DONE  capture_ped_hb rc=0
+[2026-09-10 14:53:40] restarting CARLA on 3000
+Terminated
+  server pid 3928313 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:54:03] START capture_none_ped_hb
+[2026-09-10 14:54:47] DONE  capture_none_ped_hb rc=0
+[2026-09-10 14:54:47] START pairing
+[2026-09-10 14:54:49] DONE  pairing rc=0
+[2026-09-10 14:54:49] START illumination
+[2026-09-10 14:54:49] DONE  illumination rc=0
+[2026-09-10 14:54:49] START train_lead
+[2026-09-10 14:56:08] DONE  train_lead rc=0
+[2026-09-10 14:56:08] START train_ped
+[2026-09-10 14:57:26] DONE  train_ped rc=0
+[2026-09-10 14:57:26] restarting CARLA on 3000
+Terminated
+  server pid 3929181 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 14:57:48] START endpoints_lead
+Terminated

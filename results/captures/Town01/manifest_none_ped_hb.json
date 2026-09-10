@@ -3,13 +3,13 @@
     "knot": -30.0,
     "file": "none_ped_hb_sun-30.000.npz",
     "frames": 104,
-    "size_mb": 10.0,
+    "size_mb": 9.9,
     "signature": {
-      "mean": 0.05033,
-      "sigma": 0.09041,
+      "mean": 0.04993,
+      "sigma": 0.09013,
       "p01": 0.0,
       "p99": 0.31765,
-      "frac_dark": 0.67465
+      "frac_dark": 0.67731
     }
   }
 ]
