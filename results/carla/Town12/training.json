@@ -5,6 +5,15 @@
   ],
   "device": "cuda",
   "seed": 0,
+  "determinism": {
+    "use_deterministic_algorithms": true,
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "cublas_workspace_config": ":4096:8",
+    "torch": "2.13.0+cu130",
+    "cuda": "13.0",
+    "finding": "F29"
+  },
   "policies": {
     "P_pts": {
       "samples": 6240,
@@ -15,8 +24,10 @@
       ],
       "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.092,
-      "file": "P_pts_lead.pt"
+      "train_mae_mps2": 0.1084,
+      "file": "P_pts_lead.pt",
+      "weights_sha256": "9f44ee6bcb6d55bd663fffc1b331bef2e3e3b3324e25746495f4f4698c2c3f46",
+      "file_sha256": "59d473f8a0712d1042d862ffd4a35989164df70779ad06586a8b75c83be75579"
     },
     "P_cont": {
       "samples": 6240,
@@ -55,8 +66,10 @@
       ],
       "highbeam_condition": false,
       "student_params": 310145,
-      "train_mae_mps2": 0.2292,
-      "file": "P_cont_lead.pt"
+      "train_mae_mps2": 0.0885,
+      "file": "P_cont_lead.pt",
+      "weights_sha256": "41031e9ae959a988194a028dba13bd3985d0ff977162b9e88e7d65f354aa4d2b",
+      "file_sha256": "e0c62af732aa701a8aa62cbf77cb7d22d7e6b5ecc325e9f78bd306a6f90f6196"
     },
     "P_pts3": {
       "samples": 6240,
@@ -67,10 +80,13 @@
       ],
       "highbeam_condition": true,
       "student_params": 310145,
-      "train_mae_mps2": 0.1419,
-      "file": "P_pts3_lead.pt"
+      "train_mae_mps2": 0.0997,
+      "file": "P_pts3_lead.pt",
+      "weights_sha256": "11da3f53b90089116e59f6a62c3d058afc751e8d70560e2729ae4afa85b7db78",
+      "file_sha256": "dce18cff65c4ed65a96992b937da8d84efd7fadad14845acb7cd3f7628ab0255"
     }
   },
   "scenario": "lead",
+  "wall_seconds": 74.2,
   "note": "Identical architecture, recipe, epochs and frame count. The ONLY difference is which illumination knots the frames came from. Train MAE is not a result; the result is whether each policy passes the regulatory endpoints closed loop, which is milestone M4."
 }

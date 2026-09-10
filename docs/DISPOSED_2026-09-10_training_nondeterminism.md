@@ -1,3 +1,27 @@
+# DISPOSED 2026-09-10: the same seed on the same frames produces a different policy
+
+**Closed by FINDINGS F30 on 2026-09-10.** The cause is CUDA kernel selection and reduction
+order, not the seeds. Four settings close it and cost 2.9% of training time. Two trainings
+of all three arms are now byte-identical, checkpoint file included.
+
+The three decisive tests this file asked for were run, in the order it set:
+
+1. **Train twice and compare the hashes.** Done, to a scratch directory, so it no longer
+   collides with anything reading `results/models/`. Without the pins, all three arms
+   differ in 74.7 to 79.9% of their parameters.
+2. **Turn determinism on and see what it costs.** 2.9%. It closes completely.
+3. **Then decide what the seed sweep measures.** It can now measure seed dispersion alone,
+   which was the point of it.
+
+The endpoint verdicts in the table below were measured against networks that cannot be
+reproduced, so they are withdrawn rather than explained. They are not evidence about the
+arms. `docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md` is unblocked by this and is
+**not** answered by it: it has to be measured again on reproducible networks.
+
+The original file follows, unchanged.
+
+---
+
 # OPEN: the same seed on the same frames produces a different policy, and endpoint verdicts flip
 
 **Measured 2026-09-10 between 02:43 and 05:29 on Town12. Not a finding — no disposition.**

@@ -32,6 +32,8 @@ export CARLA_TAKEOVER=1
 export PATH="$REPO/.venv/bin:$PATH"
 unset PYTHONPATH
 MAX_ROUNDS=${MAX_ROUNDS:-3}
+INPUT_W=${INPUT_W:-128}
+INPUT_H=${INPUT_H:-96}
 LOG=$REPO/results/gate_repair.log
 say() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 
@@ -98,20 +100,37 @@ for round in $(seq 1 "$MAX_ROUNDS"); do
   fresh
   "$PY" -u tools/build_family_knots.py --refine 2>&1 | tee -a "$LOG"
   [ "${PIPESTATUS[0]}" -ne 0 ] && { say "refine failed"; stop_server; exit 1; }
-  # CAPTURE ONLY. The first version called `rebuild_all.sh capture`, which starts AT
-  # capture and runs every stage AFTER it -- so each round also retrained the policies and
-  # re-ran the endpoints. That is not merely wasteful. FINDINGS F29 measured that training
-  # is not reproducible, so every round measured its gates on DIFFERENT networks: round 1
-  # ran against models trained at 04:35 and round 2 against models trained at 07:39. The
-  # loop was converging against a moving target, and its stopping rule -- does the failing
-  # count fall -- cannot mean anything when the thing being measured changes underneath it.
+  # CAPTURE, THEN RETRAIN. Not `rebuild_all.sh capture`, which starts at capture and runs
+  # every stage after it, the endpoints included.
   #
-  # DO NOT RUN THIS LOOP AT ALL until F29 is resolved. Splitting an axis on gates measured
-  # against non-reproducible networks is measuring the optimiser, not the family.
+  # Retraining was removed from this loop on 2026-09-10 because F29 made it poison: every
+  # round then measured its gates on DIFFERENT networks -- round 1 against models trained at
+  # 04:35, round 2 against models trained at 07:39 -- and the stopping rule, does the
+  # failing count fall, cannot mean anything when the thing being measured changes
+  # underneath it. F30 closed F29, so retraining reproduces itself and is put back.
+  #
+  # It is put back because leaving it out is wrong, not merely untidy. A split adds knots.
+  # PROTOCOL section 5 defines `P_cont` as the arm that sees the continuum, so an axis with
+  # knots `P_cont` never trained on stops being the section 5 comparison. `P_pts` and
+  # `P_pts3` train on the regulatory conditions and do not move -- which is now a CHECK
+  # rather than an assumption, and the block below enforces it.
   for sc in lead none ped none_ped plate none_plate; do
     fresh
     "$PY" -u tools/capture_campaign.py --scenario "$sc" >"$REPO/results/capture_${sc}.log" 2>&1
     [ $? -ne 0 ] && { say "capture $sc failed"; tail -5 "$REPO/results/capture_${sc}.log" | tee -a "$LOG"; stop_server; exit 1; }
     say "  recaptured $sc"
   done
+  stop_server                          # training wants the card CARLA is holding
+  for sc in lead ped; do
+    "$PY" -u tools/train_policies.py --input-w "$INPUT_W" --input-h "$INPUT_H" \
+        --scenario "$sc" >"$REPO/results/train_${sc}.log" 2>&1 \
+      || { say "training $sc failed"; tail -5 "$REPO/results/train_${sc}.log" | tee -a "$LOG"; exit 1; }
+    say "  retrained $sc"
+  done
+  # THE GUARD. `P_pts` and `P_pts3` trained on frames that did not change, so their weights
+  # must not change either. If they do, the determinism pins are not holding, and every gate
+  # this loop is about to measure is measuring the optimiser again. That is F29 returning,
+  # and the loop stops rather than produce numbers.
+  "$PY" tools/check_arms_unmoved.py "$round" 2>&1 | tee -a "$LOG"
+  [ "${PIPESTATUS[0]}" -ne 0 ] && { say "STOPPING: F29 is back. See the line above."; exit 3; }
 done

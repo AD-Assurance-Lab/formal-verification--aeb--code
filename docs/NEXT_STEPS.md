@@ -97,7 +97,7 @@ Both are written up in `docs/`. Neither can be answered before step 1.
 lighting conditions the standard tests. On Town01 all nine tests passed.
 See `OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md`.
 
-**The changing verdicts.** See `OPEN_CONTRADICTION_2026-09-10_training_nondeterminism.md`.
+**The changing verdicts.** See `DISPOSED_2026-09-10_training_nondeterminism.md`.
 Step 1 should answer this one.
 
 ---

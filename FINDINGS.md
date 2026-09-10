@@ -6,6 +6,82 @@ here, never inside the protocol.
 
 ---
 
+## F30 — 2026-09-10, F29 closes: four torch settings make the training reproducible, and they cost 2.9%
+
+F29 measured that the same seed on the same frames gives a different network. It left
+three things unmeasured, and this is all three.
+
+### 1. The weights, not the behaviour
+
+F29 inferred the difference from flipped endpoint verdicts. The direct test had never
+run, because it would have overwritten the models the gate repair loop was reading.
+`train_policies.py --scratch` now writes to a directory of its own, so it can.
+
+Three arms, `lead`, `--seed 0`, the same frames, nothing else changed, **without** the
+pins:
+
+| arm | tensors differing | parameters differing | largest absolute difference | train MAE, run 1 vs run 2 |
+|---|---|---|---|---|
+| `P_pts` | 10 of 10 | 231,538 of 310,145 — **74.7%** | 2.001 | 0.2105 vs **0.1267** |
+| `P_cont` | 10 of 10 | 247,758 of 310,145 — **79.9%** | 1.157 | 0.0941 vs 0.1135 |
+| `P_pts3` | 10 of 10 | 231,611 of 310,145 — **74.7%** | 2.017 | 0.0905 vs 0.0767 |
+
+A training error moving 40% between two runs of the same command is the same defect F29
+saw from the far end, and it is every arm, not one.
+
+### 2. The mechanism, and that closing it works
+
+Seeding `torch`, `random` and `numpy` is necessary and **not sufficient on CUDA**. Three
+mechanisms sit underneath the seeds:
+
+- cuDNN picks a convolution algorithm by timing candidates on the first call, so the
+  algorithm depends on what else the card was doing. A different algorithm sums in a
+  different order.
+- Several kernels have no deterministic implementation unless one is demanded.
+- cuBLAS reduction order depends on its workspace.
+
+Four settings close all three: `CUBLAS_WORKSPACE_CONFIG=:4096:8` **before torch is
+imported**, then `torch.use_deterministic_algorithms(True)`,
+`torch.backends.cudnn.deterministic = True` and `torch.backends.cudnn.benchmark = False`.
+
+With them on, the same test:
+
+| arm | tensors differing | parameters differing | checkpoint file |
+|---|---|---|---|
+| `P_pts` | **0 of 10** | **0 of 310,145** | byte-identical |
+| `P_cont` | **0 of 10** | **0 of 310,145** | byte-identical |
+| `P_pts3` | **0 of 10** | **0 of 310,145** | byte-identical |
+
+The `.pt` files hash the same as well, so `sha256sum` on the checkpoint is a valid check
+here and not only on the weights inside it.
+
+### 3. What it costs
+
+**2.9%.** Two runs of all three arms took 71.8 s and 73.4 s without the pins, 74.0 s and
+75.4 s with them. That is the whole price, and it buys back every measurement downstream
+of training.
+
+### Where the environment variable has to go
+
+`CUBLAS_WORKSPACE_CONFIG` is read when cuBLAS creates its handle, at the first matmul.
+Setting it in `main()` is too late, and the failure is not an error message about the
+variable: `use_deterministic_algorithms` raises later at the first affected kernel
+instead. It is set at the top of `train_policies.py`, above `import torch`.
+
+### What this does NOT settle
+
+Reproducibility is not correctness. The networks are now the same network on every run,
+which makes the endpoint verdicts, the gates and the certificates measurable again. It
+says nothing about **which** network the recipe should produce, and one seed is still one
+draw. The seed sweep can now measure seed dispersion alone, which was its point (queue
+item 6, [[F16]]).
+
+Both open contradictions were blocked on this and are now unblocked, not answered:
+`docs/OPEN_CONTRADICTION_2026-09-10_plate_endpoints.md` and the training one, which this
+finding closes.
+
+---
+
 ## F29 — 2026-09-10, training is not reproducible: the same seed on the same frames gives a different network, and it flips endpoint verdicts
 
 **Two consecutive trainings of `P_pts`, `--seed 7`, identical frames, nothing else
