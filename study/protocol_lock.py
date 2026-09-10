@@ -30,6 +30,8 @@ AMENDMENTS_HEADING = "## Amendments"
 # a lock that reports "intact" while guarding almost nothing.
 AMENDMENTS_LINE = re.compile(r"^## Amendments\s*$", re.MULTILINE)
 AMENDMENT_ENTRY = re.compile(r"^### A\d+\b", re.MULTILINE)
+# The first top-level heading AFTER the amendments heading ends the section.
+SECTION_END = re.compile(r"^(?!## Amendments)## ", re.MULTILINE)
 
 
 def split_protocol(text: str) -> tuple[str, str]:
@@ -56,8 +58,14 @@ def amendment_hashes(amendments_text: str) -> list[str]:
     amendment could be rewritten wholesale and the lock stayed green. Hashing each
     block pins them: an edit to a recorded amendment fails the check; appending a
     new one is the only change that passes."""
-    starts = [m.start() for m in AMENDMENT_ENTRY.finditer(amendments_text)]
-    blocks = [amendments_text[a:b] for a, b in zip(starts, starts[1:] + [len(amendments_text)])]
+    # The LAST amendment used to run to end of file, so every line written after the
+    # amendments -- the standing rules, the hygiene notes -- was inside its hash. Editing a
+    # rule then reported "amendment tampering" against an amendment nobody had touched.
+    # Stop the section at the next top-level heading instead.
+    end = SECTION_END.search(amendments_text)
+    section = amendments_text[:end.start()] if end else amendments_text
+    starts = [m.start() for m in AMENDMENT_ENTRY.finditer(section)]
+    blocks = [section[a:b] for a, b in zip(starts, starts[1:] + [len(section)])]
     return [digest(b) for b in blocks]
 
 

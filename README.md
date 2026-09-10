@@ -1,160 +1,133 @@
 # formal-verification--aeb--code
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB.svg?logo=python&logoColor=white)](tools/)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB.svg?logo=python&logoColor=white)](tools/)
 [![CARLA 0.9.16](https://img.shields.io/badge/CARLA-0.9.16-orange.svg)](https://carla.org)
-[![Verifier: α-CROWN](https://img.shields.io/badge/Verifier-%CE%B1--CROWN%20%2B%20BaB-8A2BE2.svg)](https://github.com/Verified-Intelligence/auto_LiRPA)
 
-Formal verification of automatic emergency braking under degraded visibility.
-
-**Owner:** Zach. **Status:** rebuilding on a new map.
-
-The study ran end to end once, on a small map, and that result is complete and tagged
-`town01-final`. It then moved to a large map, because the small one had no site long enough
-for the standard's false-activation test. That rebuild is not finished, and its results so
-far are withdrawn: they were measured against networks that could not be trained again. The
-training was made repeatable on 10 September 2026.
-
-`python -m study.status` is the live state. `CLAUDE.md` is the design, current belief and
-every standing rule. **First milestone:** demo at the automotive technology expo, Novi,
-October 2026.
-
-## What this is for
-
-Certify that an AEB function meets its stopping requirement across a declared range of
-illumination and contrast degradation, without running the test fleet.
-
-The commercial artifact is one sentence:
-
-> Here is the certified illumination and contrast envelope in which your pedestrian AEB
-> meets its stopping requirement, computed without running the test fleet.
-
-## Why AEB, and why first
-
-1. **Regulatory anchor with a date.** FMVSS No. 127 (final rule, 89 FR 39686, May 9,
-   2024, docket NHTSA-2023-0021) mandates AEB including pedestrian detection in darkness
-   for light vehicles, compliance 1 September 2029 (small-volume 2030); Euro NCAP already
-   scores night pedestrian AEB. Verified against the published rule 2026-08-25. The
-   light-vehicle rule does not cover truck platforms; heavy-vehicle AEB is separate
-   rulemaking.
-2. **We already have the hard half.** The steering study established that night and shadows
-   break a perception model that is fine in clear weather. That is exactly the condition the
-   regulation targets.
-3. **The hazard is localized by construction.** In lane keeping the safety threshold is a
-   *sustained* error, and the peak statistic is dimensionally wrong for it. In AEB the hazard
-   is a single event, so the peak should be the right quantity here.
-
-## The scientific bet
-
-If the peak statistic works for AEB and fails for lane keeping, the two results together
-state a general principle: **match the certified statistic to the temporal structure of the
-failure**, demonstrated with both failure modes of getting it wrong. That is stronger than
-either result alone, and it is the reason to run this as a study rather than only as a demo.
-
-## Scope
-
-- A braking policy, a closed-loop AEB harness, and longitudinal dynamics, which the steering
-  study deliberately held fixed.
-- A safety specification **derived from primitives**, the way `delta_tol = 0.0120` was
-  derived from lane width, vehicle width, wheelbase, speed and a 1.85 s reaction horizon.
-  Candidate primitives here: stopping distance, minimum TTC, impact speed.
-- The specification is a document and should be written before any code.
-
-## Prior art in this lab
-
-The steering study is the parent. Read, in this order:
-
-- `formal-verification--steering--code/CLAUDE.md`
-- `formal-verification--steering--code/REPRODUCING.md`
-- `lab--future-plans--docs/RESEARCH_DIRECTIONS.md`, entry A1
-
-Older notes point into that repository's `docs/` directory. It no longer has one. Its
-`CLAUDE.md` carries what those files held, the same way this repository's does.
-
-## Risk
-
-The build is larger than it looks and the expo date is fixed. If it slips, the expo demo
-falls back to the twelve canonical steering cells plus the occlusion result. Decide that
-fallback early rather than late.
+Proving that an emergency braking system is safe in lighting the safety test never checks.
 
 ---
 
-## Running this
+## Start here
 
-The repository is public and is a **proof of concept**, not production code. It is meant to
-be readable by someone outside the lab.
+**The problem.** A federal standard tells makers to test emergency braking in three lighting
+conditions: daylight, darkness with the low beam, and darkness with the high beam. Three
+conditions. Real driving has every level in between, and dusk is not one of the three.
 
-**Without a simulator**, which is most of what exists today:
+**The question.** Can a braking system pass all three tests and still fail at a light level
+between them?
+
+**The method.** Take two photographs of the same road, one in daylight and one at night,
+from the same camera position. Blend them. The blend gives every light level in between. A
+verification tool then proves, for the whole blended range at once, whether the network ever
+fails to brake. It does that without driving a single mile. Where it says the network fails,
+we drive that exact light level in the simulator and see whether it really does.
+
+**The result so far.** Yes, a policy can pass all three tests and fail between them. Trained
+on only the tested conditions, a policy is falsified over about 50 degrees of sun angle and
+does hit the pedestrian. Trained on the whole range, it certifies clean.
+
+**Why anyone cares.** A test campaign samples points. If the failure lives between the
+points, testing cannot find it and a proof can.
+
+## Where things stand
+
+The study ran end to end once, on a small map. That result is complete, tagged
+`town01-final`, and written up in `docs/STUDY_REPORT.md`. Read that for the science.
+
+The study then moved to a large map, because the small one had no stretch of road long
+enough for the standard's false-activation test. **That rebuild is not finished.** Run
+`python -m study.status` to see where it is.
+
+## Set up
 
 ```bash
-python -m study.protocol_lock         # confirm the frozen design has not moved
-python -m study.status                # where the study stands, in the protocol's terms
-python -m study.ledger --check-order  # the blind protocol, checked against git history
-python tools/survey_maps.py           # choose the test map from map geometry alone
-python tools/condition_signature.py   # were the captures rendered at the illumination asked for
-python tools/make_figure.py           # rebuild CLAUDE.md section 11's figure from the results
-python tools/tidy.py                  # repo hygiene report
+bash scripts/bootstrap_env.sh     # builds .venv, and proves a graphics kernel runs
 ```
 
-`tools/survey_maps.py` needs a CARLA **installation** for its map files, but not a running
-server. Point it anywhere with `--carla`.
+It refuses to finish if the environment is wrong, which is deliberate. Three real defects hid
+in this step before, and each one let the tools run while producing nothing usable.
 
-**With a simulator:**
+## Run something today, with no simulator
+
+Most of the repository works without CARLA, and this is the fastest way in.
 
 ```bash
-bash scripts/bootstrap_env.sh         # builds .venv and PROVES a CUDA kernel runs
-bash tools/carla_launch.sh            # THE launcher; the determinism flags are launch-time
-bash scripts/rebuild_all.sh           # the whole study, M2 to M6, in dependency order
-bash scripts/rebuild_all.sh witness   # M7, after the verdicts are committed
-python tools/carla_jobs.py --list     # what is queued, in dependency order
-python tools/probe_memory.py --help   # why a map is or is not usable on this hardware
+python -m study.protocol_lock        # is the study design unchanged?
+python -m study.status               # where does the study stand, in its own terms
+python -m study.ledger --check-order # were verdicts written down before the drives?
+python tools/family_fidelity.py      # how much light does each piece of the range span?
+python tools/tidy.py                 # repository health
+python tools/make_figure.py          # rebuild the paper's figure from the results
 ```
 
-`scripts/rebuild_all.sh` stops before M7 deliberately. The verification verdicts have to
-be committed to git before the corresponding drive, because that ordering is what makes a
-verdict a prediction rather than a description, and a script that committed them for you
-would turn it into a formality.
+Start with `study.status`. It prints the milestones, the safety numbers and the six-cell
+ledger. It reads the artifacts rather than any prose, so it cannot flatter the study.
 
-## The result
+## With the simulator
 
-`docs/STUDY_REPORT.md` is the complete methodology and results in one file. **It describes
-the small-map study**, which is the one that ran end to end. The rebuild on the large map
-supersedes its map choice and is not finished, so read the report for the method and
-`python -m study.status` for where things stand.
+```bash
+bash tools/carla_launch.sh                # the only launcher. The flags matter
+python tools/carla_jobs.py --list         # what is queued, in dependency order
+bash scripts/rebuild_all.sh               # the study, in order, up to verification
+bash scripts/rebuild_all.sh witness       # the drives, after the verdicts are committed
+```
 
-The claim under test is unchanged: a policy that passes both endpoint lighting conditions
-fails between them; the certificate names those illuminations without simulating, and the
-verdicts are committed to version control before any vehicle moves
-(`python -m study.ledger --check-order` verifies that ordering against git).
+`rebuild_all.sh` stops before the drives on purpose. The verdicts have to be written to git
+first, because that is what makes a verdict a prediction rather than a description.
 
-<p align="center">
-  <img src="docs/figures/dusk_gap.svg" width="640" alt="Certified bound against illumination, with the two endpoint test conditions marked and the violation between them">
-</p>
+## Read in this order
 
-Interactive version: `docs/figures/dusk_gap.html`. Both come from
-`python tools/make_figure.py` and nothing here is drawn by hand. The image is the vector
-file for that reason: a bitmap sat here for two weeks after the numbers under it changed,
-because no committed tool regenerates one.
+1. **`CLAUDE.md`.** The study design, then the rules. The design is locked, and
+   `python -m study.protocol_lock` fails if it changes without a recorded amendment.
+2. **The determinism section of `CLAUDE.md`.** Read this before you run anything that
+   measures. The simulator and the graphics card both produce results that look right and
+   do not reproduce. Every rule there was written after a defect got past every other check.
+3. **`docs/STUDY_REPORT.md`.** The complete method and the small-map results.
+4. **`FINDINGS.md`.** Newest first. Every measured result and every correction. Nothing is
+   ever removed from it.
+
+`docs/ARXIV_NOTES.md` serves the paper repository and you can leave it alone until the
+paper comes up.
+
+## A good first project
+
+**Measure how much the result depends on the training seed.**
+
+The headline is an attribution: the gap between the two policies is caused by how the
+lighting range was sampled. That claim needs the policies to differ because of the sampling,
+and today it rests on one training run each. A reviewer will ask.
+
+The training now repeats exactly, so a sweep over seeds measures seed spread and nothing
+else. `tools/train_policies.py --seed N` and `tools/seed_sweep_report.py` already exist.
+Train about twenty seeds per policy, verify each, and report the spread of certified count
+and falsified width with a rank test.
+
+It is self-contained, it needs no new design decision, and it walks you through the whole
+pipeline: train, verify, score, report.
 
 ## Layout
 
 | | |
 |---|---|
-| `CLAUDE.md` | the study design, frozen. Start here |
-| `study/` | the lock, the status report, and recorded results |
+| `CLAUDE.md` | the design, locked, then every rule. Read first |
+| `FINDINGS.md` | the measured record, newest first. Append only |
+| `docs/STUDY_REPORT.md` | the complete method and results |
+| `docs/ARXIV_NOTES.md` | for the paper repository |
+| `study/` | the lock, the status report, the recorded ledger |
 | `tools/` | everything runnable |
-| `CLAUDE.md` | **current belief, the standing rules and every working note.** Start here if you are picking this up |
-| `docs/STUDY_REPORT.md` | **complete methodology and results.** Start here for the science |
-| `docs/ARXIV_NOTES.md` | everything the paper repository needs |
-| `docs/` | the pre-registration and the figures |
-| `results/` | outputs. Large artefacts are git-ignored |
-| `stale/` | files on their way out, git-ignored. Inspect and delete |
+| `scripts/` | multi-stage runs, detached |
+| `results/` | outputs, scoped by map. Large files are git-ignored |
+| `stale/` | on the way out, git-ignored. Never point at anything in here |
 
-## Housekeeping
+## House rules
 
-Before pushing anything you want read by someone else, run `python tools/tidy.py`. Delete
-nothing by hand in anger: move it to `stale/` instead, look at it later, then remove it.
-Anything that was ever committed stays in git history, so parking a file loses nothing.
+Run `python tools/tidy.py` before you push anything meant to be read.
+
+Delete nothing in anger. Move it to `stale/` and let Zach empty it. Anything ever committed
+stays in git history, so parking a file loses nothing.
+
+Book the simulator before you use it. Several people and another project share it.
 
 ## License
 

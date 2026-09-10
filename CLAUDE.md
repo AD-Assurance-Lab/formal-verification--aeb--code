@@ -262,8 +262,8 @@ required and still not sufficient.
 ## Amendments
 
 Append here. Never edit a recorded entry. The full text of the first seventeen, with the
-measurement behind each, is at the git tag `protocol-v1` and in `PROTOCOL.md` at commit
-`61b73d9`.
+measurement behind each, is at the git tag `protocol-v1`. That file no longer exists in
+the working tree, by design.
 
 ### A1. Units, gate names, and site selection restored
 Miles per hour, feet and g throughout. The two checks get plain names. Site selection had
@@ -339,97 +339,128 @@ again from here.
 
 ---
 
-## Where the study is, 10 September 2026
+## Where the study is
 
-The training now repeats, which was the block. Next: measure the behavioural check on the
-lighting range with `scripts/gate_repair_loop.sh`. Then verify, write the verdicts to git by
-hand, then drive with `scripts/overnight_after_verdicts.sh`.
+The training now repeats, which was the block on everything else. Next: measure the
+behavioural check on the lighting range with `scripts/gate_repair_loop.sh`. Then verify,
+write the verdicts to git by hand, then drive with `scripts/overnight_after_verdicts.sh`.
 
-**Withdrawn.** Every endpoint verdict, check result and certificate from the overnight run
-of 10 September is withdrawn. They were measured against networks that cannot be made again.
-That includes the written prediction that all three policies pass all three lighting
-conditions the standard tests. Recover them with `git show a28f91e^:<path>` if a disposition
-ever needs them.
+**The study ran end to end once, on a small map.** That result is complete and tagged
+`town01-final`, and `docs/STUDY_REPORT.md` describes it. The study then moved to a large
+map, because the small one had no site long enough for the standard's false-activation
+test. That rebuild is not finished.
 
-**Open.** Every policy brakes for the steel plate at one or more of the three lighting
-conditions the standard tests. On the old map all nine tests passed. Measure it again on
-networks that repeat before you reason about it (F29 causes it, F30 fixes it).
+**Results from the rebuild before 10 September 2026 are withdrawn.** They were measured
+against networks that could not be trained again. Recover them with
+`git show a28f91e^:<path>` if a disposition ever needs them.
 
-**The completed study is the old map**, at the git tag `town01-final`, written up in
-`docs/STUDY_REPORT.md`. The rebuild on the new map is not finished.
+**One question is open.** Every policy brakes for the steel plate at one or more of the
+three lighting conditions the standard tests. On the small map all nine tests passed.
+Measure it again on networks that repeat before you reason about it (F29, F30).
 
-## Repository hygiene
+---
 
-This is a public repository and a proof of concept. The bar is that an outsider can follow
-it. It is not production quality. Try things. Do not leave the wreckage behind.
+# Rules
 
-- Delete nothing in anger. Move it to `stale/`, which git ignores. Zach inspects it and
-  empties it, often the same day, so never write a pointer INTO `stale/`. Point at git
-  history instead. Anything ever committed is recoverable from there.
-- Run `python tools/tidy.py` before you push anything meant to be read. It never deletes.
-- Push often. GitHub is the backup.
-- Keep `README.md` honest about what runs without a simulator. Most readers have none.
-- Do not add continuous integration, formatters or linters.
-- `tools/headlamp_probe.py` and `tools/choose_input_size.py` are kept although nothing calls
-  them, and the hygiene report flags them. They measured the headlamp beams and the network
-  input size. They are how anyone would check those numbers again.
+Everything below is a measured result, not a preference. Each rule exists because breaking
+it cost this lab time, and each says what it cost.
 
-## Write the specification before any code
+## Determinism. Do not break these
 
-The deliverable that unblocks the rest is a safety specification built from primitives. The
-steering study did this. Its tolerance came from lane width, vehicle width, wheelbase, speed
-and a reaction horizon, with no fitted parameter. Do the same here. It is a document. It
-needs no simulator. Expo pressure will tempt you to skip it.
+**This section is not optional and it is not advice.** The simulator and the graphics card
+both produce results that look right and are not reproducible. Every rule here was measured
+after a defect got past every other check.
 
-## The statistic is a hypothesis
-
-The working expectation is that the peak is the correct statistic for braking, because the
-hazard is one event. For lane keeping the peak was wrong, because that threshold described a
-sustained error.
-
-This is the scientific bet of the repository. Test it blind. If it fails, the failure is the
-result. Do not lean on the steering study for it. Over there the comparable figure is
-withdrawn and the paper says the question is open.
-
-## Standing rules
-
-Each is a measured result, not a preference. Each exists because breaking it cost time.
-Section 8 already carries the blind order and section 1 the repetition count. These are the
-rest.
-
-- Train on the parameterised family. Test closed loop on points from that family's axis.
-  Verify over the same range. If training and verification disagree about the disturbance,
-  the comparison means nothing.
-- Three repetitions depend on the restart harness, `scripts/drive_witness_reps.sh`. A loop
-  inside one process is not that harness and keeps ten. That is why `carla_jobs.py` carries
-  two constants.
-- Keep a known-bad control in every experiment. A model that must fail the conditions it
-  never saw is what catches specification faults.
-- Apply disturbances at full sensor resolution, before crop and downsampling. Never to the
-  network input.
-- Certify against the closed-loop tolerance, not a per-frame corridor. In the steering study
-  the per-frame corridor was about 3.4 times too permissive, and a vehicle left the road
-  with every frame inside it.
-- Width is the capacity lever for the verifiable network. It must still drive closed loop.
-- Depend on the bound library from upstream through pip. Do not vendor it.
-- Never trade experimental quality for speed. No processor fallback, no lowered simulator
-  quality, no cut training. Warn Zach before a run longer than 1 hour.
-- The blind order in section 8 is worth its measurement: four criteria in the parent study
-  scored 14/14, 7/8, 8/8 and 10/10 in sample, then 2/6, 3/7, 6/10 and 2/4 blind.
-
-## Training must repeat, and four settings make it
+### The training must repeat
 
 Seeding the three random number generators is necessary. On the graphics card it is not
-enough. The convolution library picks an algorithm by timing it. Some operations have no
-repeatable version unless one is demanded. The matrix library sums in an order that follows
-its workspace.
+enough. Three things sit underneath the seeds:
 
-Set the workspace variable before the machine learning library is imported. Setting it later
-fails quietly. Then demand repeatable operations and turn off algorithm timing.
+- the convolution library picks an algorithm by timing it. The choice then depends on what
+  else the card was doing;
+- several operations have no repeatable version unless one is demanded;
+- the matrix library sums in an order that follows the size of its workspace.
 
-Without them, three quarters of every policy's numbers moved between two runs of one
+`tools/train_policies.py` closes all three. Set the workspace variable **before** the
+machine learning library is imported. Setting it later fails quietly, and the failure
+arrives much later as an error about a different kernel.
+
+Without these, three quarters of every policy's numbers moved between two runs of one
 command, and endpoint verdicts flipped with them (F29). With them, four separate runs gave
-the same file, byte for byte, at a cost of 3 percent (F30).
+the same file, byte for byte, for 3 percent more time (F30).
+
+The training report records a hash of the weights. Two runs that claim the same seed can be
+compared by reading two small files. `--scratch DIR` trains into a folder of its own.
+
+### Two simulator faults, and this study has not fixed them yet
+
+Do not start the rework without talking to Zach. Another study is finishing the reference
+version of the fix.
+
+**The control command races the world step.** A fixed step lines up the step, not the queue
+of commands feeding it. It only bites where the command changes, which in a closed loop is
+every step. Three runs of one scripted sequence, feedback cut, finished 60 metres apart.
+
+**The engine loads textures in the background.** Which version is in memory when a frame
+renders depends on load timing, not on the state of the world. Turning texture streaming off
+cut the renderer's noise by 168 times.
+
+Neither shows up in a result. Both give trajectories that look right.
+
+The fix is `pip install carla-determinism`. Bind the client, run the preflight, and route
+every control command through it. Launch with texture streaming off and quality at Epic. Do
+not turn off the post-process effects, because manual exposure lives in that chain.
+
+Still owed here, and nothing fails if it is skipped. That is why it is written down.
+
+1. Route every control command through one choke point.
+2. Restart the server before every repetition.
+3. Record the harness in every cell. Record unknown as null, never as false.
+4. Make the blind-order check run on every commit.
+
+**Frames captured under the old harness cannot be reused.** Capture them again. Do not
+reweight or filter them.
+
+### Two simulator traps that keep biting
+
+**A read or a placement next to a write does not see that write.** Weather, spectator
+transforms and sensor delivery all apply on the next step. Nothing raises an error when you
+get this wrong. Never read back state you just wrote. Construct it.
+
+**A fixed weather is not a static scene.** The cloud layer moves, so scene brightness at the
+horizon drifts with elapsed simulated time and never settles. Light is this study's
+independent variable, so the independent variable is what drifts. Cloud cover is now zero
+(A15, F23).
+
+Match sensor frames on the identifier the world step returns. Never swallow a missing frame.
+
+Take the camera frames darkest first, and darken the world before the practice run. A dark
+frame comes out nine times too bright if a bright frame was taken first, and it never
+settles (A16, A17, F28).
+
+## Rules that protect the result
+
+- **Write verification verdicts to git before the matching drive.** That is what makes a
+  verdict a prediction rather than a description. In the parent study, four criteria scored
+  14/14, 7/8, 8/8 and 10/10 when the answer was known, then 2/6, 3/7, 6/10 and 2/4 blind.
+- **Repetitions that disagree make the cell void.** That is a fault until you prove
+  otherwise, and it is never a reason to run more repetitions. More repetitions turn a fault
+  you could have found into a plausible failure rate, and lose it.
+- **Three repetitions need the restart harness**, `scripts/drive_witness_reps.sh`. A loop
+  inside one process is not that harness and keeps ten. That is why `carla_jobs.py` carries
+  two constants.
+- **A result that contradicts a written expectation is a fault until you prove otherwise.**
+  Do not write it up as a finding until a disposition lists the causes you ruled out.
+- **Keep a known-bad control in every experiment.** A model that must fail the conditions it
+  never saw is what catches faults in the specification itself.
+- **Train, test and verify over the same disturbance.** If they disagree about it, the
+  comparison means nothing.
+- **Read contact from geometry, never from the collision sensor.**
+- **Certify against the closed-loop tolerance, not a per-frame corridor.** In the steering
+  study the per-frame corridor was about 3.4 times too permissive, and a vehicle left the
+  road with every frame inside it.
+- **Never trade experimental quality for speed.** No processor fallback, no lowered
+  simulator quality, no cut training. Warn Zach before a run longer than 1 hour.
 
 ## Every path is named once, and carries the map
 
@@ -437,9 +468,8 @@ the same file, byte for byte, at a cost of 3 percent (F30).
 imports nothing but the standard library, so the tools that must run without a simulator can
 share it. Do not type a path out again. That is the fault, not the cure.
 
-Old files used to sit under the exact names the new tools ask for. Nothing raised an error.
-This happened four times in one night, and once it nearly gave a wrong answer about whether
-the training repeats.
+Files from an old map used to sit under the exact names the new tools ask for, and nothing
+raised an error. That happened four times in one night.
 
 ## A count of pieces is not a measure of coverage
 
@@ -455,50 +485,30 @@ Width in degrees and distance in light disagree, and they disagree most at the d
 Report the distance in light beside every verdict. `tools/family_fidelity.py` measures it
 and needs no simulator.
 
-## Two simulator faults, still not fixed here
+## The statistic is a hypothesis
 
-Measured in the steering study. Both affect every simulator study in this lab. Do not start
-the rework without talking to Zach.
+The working expectation is that the peak is the correct statistic for braking, because the
+hazard is one event. For lane keeping the peak was wrong, because that threshold described a
+sustained error.
 
-**The control command races the world step.** A fixed step lines up the step, not the queue
-of commands feeding it. It only bites where the command changes, which in a closed loop is
-every step. Three runs of one scripted sequence, feedback cut, finished 60 metres apart.
+This is the scientific bet of the repository. Test it blind. If it fails, the failure is the
+result.
 
-**The engine loads textures in the background**, so which version is in memory when a frame
-renders depends on load timing. Turning texture streaming off cut the renderer's noise by
-168 times.
+## Working in this repository
 
-Neither shows up in a result. Both give trajectories that look right. Frames captured under
-the old harness cannot be reused, so capture them again rather than reweight them.
+This is a public repository and a proof of concept. The bar is that an outsider can follow
+it. It is not production quality. Try things. Do not leave the wreckage behind.
 
-The fix is `pip install carla-determinism`. Bind the client, run the preflight, and route
-every control command through it. Launch with texture streaming off and quality at Epic. Do
-not turn off the post-process effects, because manual exposure lives in that chain.
-
-Still owed, and nothing fails if it is skipped. That is why it is written down.
-
-1. Route every control command through one choke point.
-2. Restart the server before every repetition.
-3. Record the harness in every cell. Record unknown as null, never as false.
-4. Make the blind-order check run on every commit.
-
-## Two simulator rules that keep biting
-
-**A read or a placement next to a write does not see that write.** Weather, spectator
-transforms and sensor delivery all apply on the next step. Nothing raises an error when you
-get this wrong.
-
-**A fixed weather is not a static scene.** The cloud layer moves, so scene brightness at the
-horizon drifts with elapsed simulated time and never settles. Light is this study's
-independent variable, so the independent variable is what drifts. Cloud cover is now zero
-(A15, F23).
-
-Never read back state you just wrote. Construct it. Match sensor frames on the identifier
-the world step returns. Never swallow a missing frame.
-
-Take the camera frames darkest first, and darken the world before the practice run. A dark
-frame comes out nine times too bright if a bright frame was taken first, and it never
-settles (A16, A17, F28).
+- Delete nothing in anger. Move it to `stale/`, which git ignores. Zach inspects it and
+  empties it, often the same day, so never write a pointer INTO `stale/`. Point at git
+  history instead. Anything ever committed is recoverable from there.
+- Run `python tools/tidy.py` before you push anything meant to be read. It never deletes.
+- Push often. GitHub is the backup.
+- Keep `README.md` honest about what runs without a simulator. Most readers have none.
+- Do not add continuous integration, formatters or linters.
+- `tools/headlamp_probe.py` and `tools/choose_input_size.py` are kept although nothing calls
+  them, and the hygiene report flags them. They are how anyone would check the headlamp
+  beams and the network input size again.
 
 ## The simulator is shared
 
@@ -506,35 +516,12 @@ settles (A16, A17, F28).
 - Relaunch the server before every measurement run. It leaks about 10.5 GiB over 11 hours.
 - Use the non-default port on the lab machine. Check before you assume 2000.
 - Detach long runs with `setsid nohup`. The harness kills foreground jobs.
+- One client at a time. A second script asking for the world just times out, and that looks
+  exactly like a dead server.
 - A pattern kill matches your own command line. Use bracket patterns or process numbers.
-- `grep` block-buffers into a file. Use `--line-buffered`, or a healthy run looks stalled.
-- A wait loop on a command-line match can match itself. Wait on a process number or a result
-  file. This cost an hour.
-- `tail` buffers too. Do not pipe a job you want to watch.
-- One client at a time in synchronous mode. A second script asking for the world just times
-  out, and that looks exactly like a dead server.
+- `grep` and `tail` both buffer. Use `--line-buffered`, and never pipe a job you want to
+  watch, or a healthy run looks stalled.
 - Look at the data, not only at the statistics. Two faults passed every numeric check and
   were obvious in one frame. One was an exposure six stops too fast, which the clipping
   check called healthy. One was a pedestrian measured at 10.6 m who stood 6 m to the side.
   Export a frame and open it.
-
-## What the steering study learned, for this one
-
-- **Check the instrument before you say a number failed to repeat.** A new measurement that
-  disagrees with an old one is a claim about two instruments, and the new one is not
-  automatically right. The steering study nearly withdrew a correct published number that
-  way.
-- **Check each guard on the tool that makes the published numbers.** That missing guard
-  lived only in the diagnostic tool, for a whole study. "The study enforces the rule" was
-  true and useless.
-- **Watch the summarising code as hard as the experiment.** Two errors sat in summarising
-  scripts and both would have inverted a conclusion. Both were found by working a number out
-  by hand.
-- **Distillation error is not a proxy for driving.** The arm with the best distillation error
-  of three had the worst driving record. Screen with the cheap measure. Never decide with it.
-- **The spread between training runs is intrinsic**, and combining models does not beat it.
-  Plan for 20 to 60 runs to see a 20 percent effect. Comparing settings at 3 to 6 measures
-  noise.
-- **Bound width does not track driving quality**, so do not choose models on it. And check
-  what the criterion varies over: two steering cells looked undecided for a whole study
-  because the search used one global value where the criterion varies per pose.

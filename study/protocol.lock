@@ -19,9 +19,9 @@
     "205b76e6da12ff1da167ed97093f8a7c0340dd9990697473aef956053749abbf",
     "003eaaf1b65099a66185dec0cb4b574de59869948354994612ffa3274b28730b",
     "c2b0b14d34fb39f39e86502f17ab0489e2841477fd80815e3484cba67274cb25",
-    "163b2d5860a3a5fa265e9760ca17fad070b9c7b8fb15ff87b12dfe5c115a3b14"
+    "841288c4413a2d778042b295705b9e744d4188ff3fb7c5b8c070037d5117fb3d"
   ],
-  "note": "Re-baselined 2026-09-10 by amendment A18, when the design moved from PROTOCOL.md into CLAUDE.md and the recorded amendments were rewritten in shorter form. This is the ONE event that re-baselines the lock. The superseded baseline is kept below, the original text is at the git tag protocol-v1 and in stale/protocol_folded_into_claude_2026-09-10/, and the append-only rule applies again from here.",
+  "note": "Re-baselined 2026-09-10 by amendment A18, when the design moved from PROTOCOL.md into CLAUDE.md and the recorded amendments were rewritten in shorter form. This is the ONE event that re-baselines the lock. The superseded baseline is kept below, the original text is at the git tag protocol-v1 and in stale/protocol_folded_into_claude_2026-09-10/, and the append-only rule applies again from here. Amendment hashes recomputed 2026-09-10 after a defect was fixed in amendment_hashes(): the LAST amendment's block ran to end of file, so every rule written after the amendments section was inside its hash. Only A18 moved, and its text is byte-identical across the change. The frozen design digest did not move.",
   "superseded": {
     "file": "PROTOCOL.md",
     "sha256": "e165ad5637bd0b2e0922312730123870594b8065d53aabf92f885bd81ddee226",
