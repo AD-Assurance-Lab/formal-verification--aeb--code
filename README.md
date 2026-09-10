@@ -55,7 +55,6 @@ Most of the repository works without CARLA, and this is the fastest way in.
 ```bash
 python -m study.protocol_lock        # is the study design unchanged?
 python -m study.status               # where does the study stand, in its own terms
-python -m study.ledger --check-order # were verdicts written down before the drives?
 python tools/family_fidelity.py      # how much light does each piece of the range span?
 python tools/tidy.py                 # repository health
 python tools/make_figure.py          # rebuild the paper's figure from the results

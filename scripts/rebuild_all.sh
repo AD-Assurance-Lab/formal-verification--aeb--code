@@ -262,7 +262,7 @@ if [ "$FROM" = "witness" ]; then
       [ "${PIPESTATUS[0]}" -ne 0 ] && VOIDS=$((VOIDS + 1))
     done
   done
-  say "M7 complete. python -m study.ledger --check-order"
+  say "M7 complete."
   if [ "$VOIDS" -gt 0 ]; then
     say "$VOIDS drive(s) produced a VOID cell. Under the standing rule that is a BUG"
     say "until proven otherwise and the cell is not reported until the cause is written"

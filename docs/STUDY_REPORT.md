@@ -481,7 +481,6 @@ bash scripts/rebuild_all.sh witness      # M7; refuses if the verdicts are uncom
 bash scripts/determinism_probe.sh        # D-8
 bash scripts/seed_sweep.sh               # the attribution at n = 10, GPU only
 bash scripts/rebuild_all.sh analysis     # every number and figure a reader quotes
-python -m study.ledger --check-order     # the blind protocol, checked against git
 python -m study.status
 ```
 

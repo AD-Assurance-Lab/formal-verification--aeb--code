@@ -26,14 +26,14 @@ set from the one the code selects and this script REFUSES to touch it, because t
 real defect and not a labelling one.
 
 **IT WRITES A SIDECAR AND NEVER TOUCHES A VERIFICATION ARTIFACT.** The first version
-rewrote the scope field in place, which was wrong in a way worth recording: `study.ledger`
+rewrote the scope field in place, which was wrong in a way worth recording: the order check
 proves the blind protocol by finding the earliest commit whose blob equals the artifact's
 CURRENT content, so a metadata-only rewrite of 66 committed verdicts moved all of them
 after their own witness drives and `--check-order` reported *"verdict committed AFTER the
 witness drive -- postdiction is not prediction"* on every hazard cell. The ordering
 evidence was intact; rewriting the files to correct a label destroyed it.
 
-That is the failure `study.ledger`'s own docstring names about the A10 retrain, met from
+That is the failure the order check named about the A10 retrain, met from
 the other side. **Committed evidence is immutable and corrections go beside it.**
 `verify.py` emits the correct scope for every new run; this covers the historical ones.
 """
@@ -53,7 +53,7 @@ import carla_jobs as J  # noqa: E402
 OUT = J.OUT
 WHY_A_SIDECAR = (
     "Corrected scope for artifacts written before verify.py stated it properly. This is "
-    "a SIDECAR because study.ledger proves the blind protocol by matching an artifact's "
+    "a SIDECAR because the blind protocol matched an artifact's "
     "current bytes to the earliest commit carrying them: rewriting a committed verdict "
     "to fix a label moves it after its own witness drive and breaks the ordering proof. "
     "The verdicts, bounds, margins and witnesses in those files are correct and untouched."

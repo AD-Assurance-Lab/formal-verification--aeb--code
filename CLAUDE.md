@@ -71,7 +71,7 @@ and a certificate must. Anything else is a case where testing already works.
 | Speeds | 25 mph for the hazard cells. 50 mph for the false-activation cells, per the standard |
 | Road | Dry, straight, one site per scenario, all inside one large map chosen by survey |
 | Lighting | From full daylight to darkness under lower beam. Headlamps set per condition |
-| Repetitions | At least 3, each in its own process against its own freshly restarted server, reported with the margin. Repetitions that disagree make the cell void. Never a single run (A13) |
+| Repetitions | At least 3, each in its own process against its own freshly restarted server, reported with the margin. Never a single run (A13, A19) |
 
 Excluded on purpose: steering, wet or snow surfaces, curves, several actors at once, the
 warning stage, and anything acting through vehicle dynamics rather than perception.
@@ -189,13 +189,9 @@ sensor reported nothing.
 - **The capture check.** Deceleration measured on a captured still frame must match what the
   vehicle commanded at the same spot, before any bound is computed on it.
 - **The in-between check.** Section 4.
-- **Write verdicts to git before the matching drive.** That is what makes a verdict a
-  prediction.
 - **A measured cell that contradicts its written expectation is a fault until you prove
   otherwise.** Do not write it up as a finding until a disposition lists the causes ruled
   out.
-- **Keep the negative control alive.** If the continuum policy also fails, or the
-  points-trained policy also certifies, stop and debug rather than narrating it.
 
 ### 9. The ledger
 
@@ -254,8 +250,10 @@ The posted limit is not a criterion. We command every speed, so geometry alone c
 site. Where a limit is reported, read it from the map file, never from the simulator's own
 call, which returns the nearest sign prop.
 
-Large maps were unusable on the older card and are usable on this one. The hero tag is still
-required and still not sufficient.
+Large maps need a large graphics card. A 12 GiB card ran one at under 0.6 steps per second
+against 720 for a small map. A 32 GiB card held 26.5. The study runs on the small map
+(A19), and the false-activation scenario does not fit there: its best site is 307 m against
+the 320 m that scenario needs. The hero tag is still required and still not sufficient.
 
 ---
 
@@ -338,6 +336,35 @@ re-baseline is visible in the artifact and not only in a commit message. Append-
 again from here.
 
 ---
+
+### A19. The map returns to the small one, and three requirements are dropped
+
+**The map.** The study returns to the small map. The large one needs a graphics card the
+next person does not have: a 12 GiB card ran it at under 0.6 steps per second against 720
+for the small map, and the machine she has is smaller still.
+
+**What that costs, stated plainly.** The false-activation scenario needs 320 m of
+junction-free lane. The small map's best site is 307 m. So cells 5 and 6 cannot be run to
+the standard's own geometry there, and that is the reason the study left this map in the
+first place (A14). Either run them 13 m short and say so beside every number, or run them
+on the large map on a machine that fits it. Do not quietly shorten the requirement.
+
+**And the frames must be captured again.** The capture-order fix (A16, A17) postdates the
+small map's study, so its dark endpoint was captured under the order F28 measured as wrong.
+It reads 11.2 times brighter than the same knot captured correctly, where daylight and the
+horizon differ by 1.4 and 1.5 (F32). The dark frame is one of the two ends of the certified
+range, so nothing downstream of it survives. Capture, train, check, certify and drive again.
+
+**Three requirements are dropped**, at Zach's direction:
+
+- verdicts no longer have to be committed to git before the matching drive. The refusal in
+  `drive_witness.py` is removed and `study/ledger.py` is deleted;
+- repetitions that disagree no longer make a cell void by rule;
+- an experiment no longer has to carry a control that is expected to fail.
+
+Writing verdicts down before driving is still the right habit. Nothing enforces it now.
+The rule that a contradicted expectation is a fault until disposed is **unchanged**.
+
 
 ## Where the study is
 
@@ -453,16 +480,6 @@ settles (A16, A17, F28).
   road with every frame inside it.
 - **Never trade experimental quality for speed.** No processor fallback, no lowered
   simulator quality, no cut training. Warn Zach before a run longer than 1 hour.
-
-### Three rules the code still enforces, so you will meet them
-
-They are part of the frozen design in section 8 and section 1, and they are checked in
-code. They are listed here so a refusal is not a surprise, not to argue for them.
-
-- `tools/drive_witness.py` refuses to drive against a verification verdict that is not
-  committed to git. `python -m study.ledger --check-order` checks that ordering afterwards.
-- A cell whose repetitions disagree is recorded as void rather than as a rate.
-- Every experiment carries a control that is expected to fail.
 
 ## Every path is named once, and carries the map
 

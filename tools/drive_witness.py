@@ -98,19 +98,10 @@ def main() -> int:
                            else f"verify_{args.policy}_{args.scenario}.json")
     if not verdicts_path.exists():
         raise SystemExit(f"no verdicts at {verdicts_path}; run tools/verify.py first")
-    # A verdict is a prediction only if it is COMMITTED before this drive
-    # (CLAUDE.md section 8). The old check accepted any file on disk.
-    import subprocess as _sp
-    rel = str(verdicts_path.relative_to(J.REPO))
-    tracked = _sp.run(["git", "ls-files", "--error-unmatch", rel],
-                      capture_output=True, cwd=str(J.REPO)).returncode == 0
-    dirty = _sp.run(["git", "status", "--porcelain", "--", rel],
-                    capture_output=True, text=True, cwd=str(J.REPO)).stdout.strip()
-    if not tracked or dirty:
-        raise SystemExit(
-            f"{rel} is {'untracked' if not tracked else 'modified since commit'}: "
-            f"commit the verdicts first -- an uncommitted verdict is not a prediction "
-            f"(CLAUDE.md section 8; python -m study.ledger --check-order)")
+    # This used to refuse to drive against a verdict that was not committed to git, on
+    # the grounds that a verdict is a prediction only if it was written down first. That
+    # requirement was removed on 2026-09-10 (A19). Writing verdicts down before driving is
+    # still the right habit and nothing here enforces it.
     verdicts = json.loads(verdicts_path.read_text())
 
     # require_cuda, not is_available(): the flag is False while CARLA initialises on
@@ -388,7 +379,7 @@ def main() -> int:
 
     # The model that was LOADED, not the scenario name. For the plate cells those differ
     # -- there is no P_pts_plate.pt -- and hashing a path that does not exist yields a
-    # null model_sha256, which silently disables study.ledger's model-binding check.
+    # null model_sha256, which silently disabled the old model-binding check.
     _prov = _provenance(str(J.MODELS /
                             f"{args.policy}_{'lead' if plate else args.scenario}.pt"))
     payload = {

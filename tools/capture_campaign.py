@@ -82,6 +82,12 @@ def capture_harness() -> dict:
         "rules_digest": det.get("rules_digest"),
         "notexturestreaming": det.get("notexturestreaming"),
         "quality_level": det.get("quality_level"),
+        # THE ORDER THE KNOTS WERE CAPTURED IN, which decides what is in a dark frame.
+        # This field was missing and its absence cost the study a map. The small map's
+        # frames carried a valid-looking stamp for everything else while its dark endpoint
+        # read 11.2 times too bright, because they were taken brightest first (F28, F32).
+        # A stamp that cannot see the one thing that ruined the frames is not a guard.
+        "capture_order": "darkest_first",
     }
 
 

@@ -33,8 +33,10 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 
-# A14: Town12. Measurement code reads this; nothing hard-codes a map.
-MAP = os.environ.get("CARLA_MAP", "Town12")
+# A19: back to Town01. The large map needs a graphics card this study no longer assumes.
+# Measurement code reads this constant; nothing hard-codes a map. Override with CARLA_MAP,
+# which is how the Town12 artifacts stay reachable.
+MAP = os.environ.get("CARLA_MAP", "Town01")
 
 CAPTURES = REPO / "results" / "captures" / MAP   # rendered frames, .npz + manifests
 OUT = REPO / "results" / "carla" / MAP           # every measured artifact, as JSON

@@ -549,7 +549,7 @@ def claim_output(path):
     jobs died on CUDA out-of-memory. One of them, verify_P_cont_lead, had produced a
     perfectly good artifact eleven hours earlier on a DIFFERENT set of policies, and that
     file stayed on disk: 17 cells, correct schema, branch-and-bound block present,
-    indistinguishable from a fresh one to every consumer. `study/ledger.py --check-order`
+    indistinguishable from a fresh one to every consumer. the blind-order check (removed, A19)
     would have validated it and `make_figure.py` would have plotted it.
 
     Unlinking first turns that silent substitution into an obvious absence.

@@ -42,7 +42,7 @@ with "our bound did not clear". FALSIFIED now requires a CONCRETE `s` whose actu
 output violates the property -- an exhibited witness, not a failure to prove. The witness
 is the single frame worth driving, and driving it is M7.
 
-**The verdicts are written before any driving.** `python -m study.ledger --check-order`
+**The verdicts are written before any driving.** That ordering
 checks that against git history. That ordering is the whole reason a verdict counts as a
 prediction rather than a description.
 """

@@ -47,7 +47,6 @@ say "=== reports ==="
 "$REPO/.venv/bin/python" tools/interior_report.py --interior 5 2>&1 | tee -a "$LOG"
 "$REPO/.venv/bin/python" tools/family_fidelity.py --scenario lead 2>&1 | tail -6 | tee -a "$LOG"
 "$REPO/.venv/bin/python" -m study.status 2>&1 | head -30 | tee -a "$LOG"
-"$REPO/.venv/bin/python" -m study.ledger --check-order 2>&1 | tail -3 | tee -a "$LOG"
 
 # Leave the simulator free. It is shared, and whoever gets in first tomorrow should not
 # find 7 GB held by a run that finished at four in the morning.

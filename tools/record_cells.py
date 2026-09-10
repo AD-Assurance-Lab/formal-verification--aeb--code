@@ -5,7 +5,7 @@
 
 **Why this is a tool.** The ledger cells were filled in by hand, and a 2026-08-25 audit
 found the lead-scenario results recorded under the pedestrian cells — every artifact said
-`scenario: lead` and nothing noticed. `study/ledger.py --check-order` was built to catch
+`scenario: lead` and nothing noticed. A separate order check was built to catch
 that after the fact; this removes the step that made it possible. The cell rows come from
 CLAUDE.md section 9, the numbers come from the artifacts, and neither is retyped.
 
@@ -28,7 +28,7 @@ import carla_jobs as J  # noqa: E402
 OUT = J.OUT
 RESULTS = J.REPO / "study" / "results.json"
 
-# CLAUDE.md section 9, and the same mapping study/ledger.py checks artifacts against.
+# CLAUDE.md section 9. The order check that also read this mapping was removed (A19).
 LEDGER_ROWS = {
     "1": ("P_pts", "ped"),
     "2": ("P_pts", "lead"),
@@ -186,7 +186,7 @@ def cell_row(policy: str, scenario: str) -> dict:
     # and reported a SOUNDNESS VIOLATION in the negative control -- the single most
     # alarming thing this study can print -- purely from the mismatch.
     #
-    # study/ledger.py has checked this since the F1 audit. record_cells did not, so it
+    # The removed order check did this since the F1 audit. record_cells did not, so it
     # could manufacture the finding that ledger.py would later refuse to validate.
     vm, wm = v.get("model_sha256"), w.get("model_sha256")
     if vm and wm and vm != wm:
@@ -282,7 +282,7 @@ def main() -> int:
     if args.write:
         RESULTS.write_text(json.dumps(data, indent=2) + "\n")
         print(f"\n  wrote {RESULTS.relative_to(J.REPO)}")
-        print("  now: python -m study.status && python -m study.ledger --check-order")
+        print("  now: python -m study.status")
     else:
         print("\n  (dry run; pass --write to update study/results.json)")
     return 0
