@@ -6,6 +6,52 @@ here, never inside the protocol.
 
 ---
 
+## F32 — 2026-09-10, the old map's dark endpoint is 11 times too bright, and the fix for it postdates that study
+
+The study is moving back to the small map, because the next person has an 8 GiB graphics
+card and the large map needs more. That raised a question nobody had asked: are the small
+map's camera frames still usable?
+
+**They are not.** The capture-order fix (A16) and its second half (A17) are **not** ancestors
+of the tag `town01-final`. So every frame in that study was taken under the order that F28
+measured as wrong.
+
+The same knots, on both maps, mean brightness over the captured pose set:
+
+| sun altitude | small map | large map | ratio |
+|---|---|---|---|
+| +60.000 | 0.50637 | 0.37176 | 1.4x |
+| 0.000 | 0.06652 | 0.04509 | 1.5x |
+| **-30.000** | **0.04063** | **0.00362** | **11.2x** |
+
+Daylight and the horizon differ by about half again, which is two different roads with
+different street lighting. **Darkness differs by an order of magnitude**, at exactly the
+knot the capture order contaminates, and F28 measured that defect at 9.4x on its own.
+
+Two maps is not a controlled comparison, so this does not prove the whole 11.2x is capture
+order. It does not have to. The capture-order fix postdates the tag, so the defect applied,
+and the dark endpoint is the one place it lands.
+
+### What it means
+
+**The dark endpoint is one of the two ends of the certified range.** Every certificate in
+that study is a bound over a blend between a daylight frame and this frame. If the dark end
+is far too bright, the family is not the family the design describes, and the interior is
+wrong everywhere, not only at the end.
+
+So the small-map study cannot simply be picked up again. Its frames have to be captured
+again under the corrected order, and everything downstream of them has to be measured again:
+training, the two checks, the certificates and the drives.
+
+**It also reaches the paper**, whose every measured number comes from that study.
+
+### What is NOT affected
+
+The instrument. The braking and latency measurements, the contact detector, the oracles and
+the site survey do not depend on the dark frames.
+
+---
+
 ## F31 — 2026-09-10, on clean frames, 8 of the 29 pieces of the lighting range span nothing
 
 The lighting range is cut in half again and again until the middle of a piece is close
