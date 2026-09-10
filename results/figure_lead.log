@@ -1,0 +1,5 @@
+
+  lead: 13 sub-intervals, 12 covered
+  P_pts   certified 6/12 covered, falsified width 17.24 deg, driven clean 8/12, certified-then-failed 0
+  P_cont  certified 12/12 covered, falsified width 0.00 deg, driven clean 12/12, certified-then-failed 0
+  wrote docs/figures/dusk_gap.{html,svg,} and dusk_gap_data.json

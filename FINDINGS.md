@@ -6,6 +6,60 @@ here, never inside the protocol.
 
 ---
 
+## F35 — 2026-09-10, cell 1's contradiction recurs on the rebuilt harness, and F17's repair fails again
+
+Ledger cell 1, the points-trained policy on the crossing pedestrian, was pre-registered to
+FAIL its witness drive. It passed, on the small map in September and again now on the
+rebuilt harness with training that reproduces byte for byte.
+
+The disposition (F17) says the cause is that the certified property and the closed-loop
+criterion do not quantify over the same thing. That mechanism does not depend on a map or a
+harness, so it transfers. **Its evidence table does not**, because those numbers came from a
+study that has since been rebuilt. This records the same test on this run's own data.
+
+### The contradiction, measured again
+
+| | old study | this run |
+|---|---|---|
+| falsified width, cell 1 | 48.271 deg | **55.843 deg** |
+| drives at the certificate's own witnesses | all passed | **2 of 10 crash** |
+| drives at sub-interval midpoints | all passed | **1 of 13 crashes** |
+
+The one crash at a midpoint is the sliver at the horizon, which no verdict counts. So the
+witness column still reads PASS and the contradiction still stands.
+
+**This run is not identical to the old one and does not need to be.** Two of ten witnesses
+now crash where none did before, which narrows the gap between the certificate and the
+vehicle without closing it.
+
+### The repair fails again, on fresh data
+
+F17's more useful half was that stating the property as a disjunction over the latch window,
+which is what a latching controller actually needs, is **worse**. Re-measured here over 78
+driven sub-intervals:
+
+| | |
+|---|---|
+| sub-intervals driven | 78 |
+| latch guaranteed by the disjunction | 59 |
+| of those, produced a CONTACT | **1** |
+| falsified for the frozen property, latch guaranteed, drove clean | 9 |
+
+**One sub-interval certified to latch in time produced contact in 3 of 6 runs**: the
+three-condition policy on lead over [+10.084, +5.990], at 1.0339 times the threshold. A
+single unsound cell is enough. The disjunction is not a sound predictor of the closed loop
+and the design's section 7 must not be restated that way.
+
+That is now measured twice, on two harnesses, with different training. It is the same answer.
+
+### What this does not settle
+
+Nine sub-intervals are falsified for the frozen property, latch guaranteed, and drive clean.
+That is the conservatism gap, and it is the reason the disjunction looked attractive. The
+gap is real. The repair for it is still not this one.
+
+---
+
 ## F34 — 2026-09-10, the training globbed the frame directory, so one policy trained on two campaigns at once
 
 Scoping the results directories by map (F26, queue item 17) stopped a campaign reading

@@ -1,0 +1,10 @@
+
+  72 covered sub-intervals across 6 policy-scenario pairs
+  gate when they agree:    {'n': 54, 'min': 0.0182, 'median': 0.1197, 'max': 0.5806, 'mean': 0.1603}
+  gate when they disagree: {'n': 18, 'min': 0.037, 'median': 0.1041, 'max': 0.8578, 'mean': 0.2151}
+  point-biserial r = 0.149
+  certified-then-failed: 0
+
+  The gate does NOT predict disagreement (r_pb = 0.15). It passes everything it is asked about and carries no information about the risk it exists to bound. The paper should say that plainly rather than presenting the gate as evidence the family transfers.
+
+  wrote results/carla/Town01/gate_calibration.json

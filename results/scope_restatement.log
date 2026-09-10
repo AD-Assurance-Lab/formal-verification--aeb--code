@@ -1,0 +1,9 @@
+  verify_P_cont_lead.json: property S, 25 poses over 2.398-15.817 m
+  verify_P_cont_ped.json: property S, 25 poses over 2.267-15.677 m
+  verify_P_pts3_lead.json: property S, 25 poses over 2.398-15.817 m
+  verify_P_pts3_ped.json: property S, 25 poses over 2.267-15.677 m
+  verify_P_pts_lead.json: property S, 25 poses over 2.398-15.817 m
+  verify_P_pts_ped.json: property S, 25 poses over 2.267-15.677 m
+
+  wrote results/carla/Town01/scope_restatement.json
+  6 artifact(s) restated, 0 already correct, 0 refused

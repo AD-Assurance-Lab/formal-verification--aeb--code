@@ -1,0 +1,112 @@
+
+== P_pts / lead   latch guaranteed 7/13   window poses [79, 80, 81] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.9 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     0      51.9 ft
+[ +26.523, +17.484]  CERTIFIED    True        3       0     0      51.9 ft
+[ +17.484, +10.084]  FALSIFIED    True        6       0     0      51.9 ft
+[ +10.084,  +5.990]  FALSIFIED   False        6       3     0      51.9 ft
+[  +5.990,  +4.375]  FALSIFIED   False        6       6     0      26.2 ft
+[  +4.375,  +2.967]  FALSIFIED   False        6       6     0       9.7 ft
+[  +2.967,  +1.465]  FALSIFIED   False        6       0     0       7.9 ft
+[  +1.465,  +0.241]  FALSIFIED   False        6       0     0       7.9 ft
+[  +0.241,  +0.000]  FALSIFIED   False        6       0     6     307.8 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     0      51.9 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      51.9 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.9 ft
+
+== P_pts / ped   latch guaranteed 4/13   window poses [79, 80] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.4 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     0      51.4 ft
+[ +26.523, +17.484]  FALSIFIED   False        6       0     0      44.1 ft
+[ +17.484, +10.084]  FALSIFIED   False        6       0     0      42.3 ft
+[ +10.084,  +5.990]  FALSIFIED   False        6       3     0      38.6 ft
+[  +5.990,  +4.375]  FALSIFIED    True        6       0     0      49.6 ft
+[  +4.375,  +2.967]  FALSIFIED   False        6       0     0      47.8 ft
+[  +2.967,  +1.465]  FALSIFIED   False        6       0     0      38.6 ft
+[  +1.465,  +0.241]  FALSIFIED   False        6       0     3      23.9 ft
+[  +0.241,  +0.000]  FALSIFIED   False        6       6     0      12.9 ft
+[  +0.000,  -1.422]  FALSIFIED   False        6       0     0      34.9 ft
+[  -1.422, -29.561]  FALSIFIED   False        6       0     0      38.6 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.4 ft
+
+== P_cont / lead   latch guaranteed 13/13   window poses [79, 80, 81] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.9 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     0      51.9 ft
+[ +26.523, +17.484]  CERTIFIED    True        3       0     0      51.9 ft
+[ +17.484, +10.084]  CERTIFIED    True        3       0     0      51.9 ft
+[ +10.084,  +5.990]  CERTIFIED    True        3       0     0      50.0 ft
+[  +5.990,  +4.375]  CERTIFIED    True        3       0     0      51.9 ft
+[  +4.375,  +2.967]  CERTIFIED    True        3       0     0      51.9 ft
+[  +2.967,  +1.465]  CERTIFIED    True        3       0     0      51.9 ft
+[  +1.465,  +0.241]  CERTIFIED    True        3       0     0      51.9 ft
+[  +0.241,  +0.000]  CERTIFIED    True        3       0     3     247.9 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     0      51.9 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      51.9 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.9 ft
+
+== P_cont / ped   latch guaranteed 13/13   window poses [79, 80] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.4 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     0      51.4 ft
+[ +26.523, +17.484]  CERTIFIED    True        3       0     0      51.4 ft
+[ +17.484, +10.084]  CERTIFIED    True        3       0     0      51.4 ft
+[ +10.084,  +5.990]  CERTIFIED    True        3       0     0      51.4 ft
+[  +5.990,  +4.375]  CERTIFIED    True        3       0     0      51.4 ft
+[  +4.375,  +2.967]  CERTIFIED    True        3       0     0      51.4 ft
+[  +2.967,  +1.465]  CERTIFIED    True        3       0     0      51.4 ft
+[  +1.465,  +0.241]  CERTIFIED    True        3       0     0      51.4 ft
+[  +0.241,  +0.000]  CERTIFIED    True        3       0     0      51.4 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     0      51.4 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      53.3 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      53.3 ft
+
+== P_pts3 / lead   latch guaranteed 9/13   window poses [79, 80, 81] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.9 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     0      51.9 ft
+[ +26.523, +17.484]  CERTIFIED    True        3       0     0      53.7 ft
+[ +17.484, +10.084]  FALSIFIED    True        6       0     0      51.9 ft
+[ +10.084,  +5.990]  FALSIFIED    True        6       3     0      51.9 ft
+[  +5.990,  +4.375]  FALSIFIED    True        6       0     0      50.0 ft
+[  +4.375,  +2.967]  FALSIFIED   False        6       0     0      48.2 ft
+[  +2.967,  +1.465]  FALSIFIED   False        6       3     0      18.9 ft
+[  +1.465,  +0.241]  FALSIFIED   False        6       6     0      11.5 ft
+[  +0.241,  +0.000]  FALSIFIED   False        6       0     0       7.9 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     0      51.9 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      51.9 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.9 ft
+
+== P_pts3 / ped   latch guaranteed 13/13   window poses [79, 80] (range >= 47.99 ft)
+          sub-interval         FV  latch?   drives contact  prem latest brake
+[ +60.000, +39.977]  CERTIFIED    True        3       0     0      51.4 ft
+[ +39.977, +26.523]  CERTIFIED    True        3       0     3     263.9 ft
+[ +26.523, +17.484]  FALSIFIED    True        6       0     6     263.9 ft
+[ +17.484, +10.084]  FALSIFIED    True        6       0     6     263.9 ft
+[ +10.084,  +5.990]  FALSIFIED    True        6       0     6     263.9 ft
+[  +5.990,  +4.375]  CERTIFIED    True        3       0     0      51.4 ft
+[  +4.375,  +2.967]  CERTIFIED    True        3       0     0      89.9 ft
+[  +2.967,  +1.465]  CERTIFIED    True        3       0     3     384.1 ft
+[  +1.465,  +0.241]  FALSIFIED    True        6       0     6     384.1 ft
+[  +0.241,  +0.000]  FALSIFIED    True        6       0     6     384.1 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     3     380.5 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      51.4 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.4 ft
+
+==============================================================================
+driven sub-intervals: 78   latch guaranteed 59   not guaranteed 19
+sub-intervals producing a CONTACT: 8
+    P_pts/lead [+10.084,+5.990] FV FALSIFIED  latch_in_time=False at 0.8468x  3 contacts in 6 runs
+    P_pts/lead [+5.990,+4.375] FV FALSIFIED  latch_in_time=False at 0.8665x  6 contacts in 6 runs
+    P_pts/lead [+4.375,+2.967] FV FALSIFIED  latch_in_time=False at 0.7447x  6 contacts in 6 runs
+    P_pts/ped [+10.084,+5.990] FV FALSIFIED  latch_in_time=False at 0.0451x  3 contacts in 6 runs
+    P_pts/ped [+0.241,+0.000] FV FALSIFIED  latch_in_time=False at -1.0609x  6 contacts in 6 runs
+    P_pts3/lead [+10.084,+5.990] FV FALSIFIED  latch_in_time=True at 1.0339x  3 contacts in 6 runs
+    P_pts3/lead [+2.967,+1.465] FV FALSIFIED  latch_in_time=False at 0.0481x  3 contacts in 6 runs
+    P_pts3/lead [+1.465,+0.241] FV FALSIFIED  latch_in_time=False at -0.0561x  6 contacts in 6 runs
+
+  REFUTED: 1 sub-interval(s) certified to latch in time produced a CONTACT. The disjunction over the latch window is not a sound predictor of the closed loop, and CLAUDE.md section 7 must NOT be amended to state property S that way. Margins above.
+  FALSIFIED for property S, latch guaranteed, drove without contact: 9 sub-intervals
+  wrote results/carla/Town01/latch_window_report.json

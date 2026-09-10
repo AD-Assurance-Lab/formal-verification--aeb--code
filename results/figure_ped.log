@@ -1,0 +1,5 @@
+
+  ped: 13 sub-intervals, 12 covered
+  P_pts   certified 3/12 covered, falsified width 55.84 deg, driven clean 12/12, certified-then-failed 0
+  P_cont  certified 12/12 covered, falsified width 0.00 deg, driven clean 12/12, certified-then-failed 0
+  wrote docs/figures/dusk_gap_ped.{html,svg,} and dusk_gap_data_ped.json

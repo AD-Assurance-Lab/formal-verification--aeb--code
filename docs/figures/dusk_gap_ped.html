@@ -60,9 +60,9 @@
   <p class="sub">A camera-only AEB policy on the crossing pedestrian scenario, certified over every
   illumination between two mandated test conditions, then driven at the illuminations the
   certificate names. Required braking range 52.0 ft; 25 poses inside it;
-  17 sub-intervals of sun altitude.</p>
+  13 sub-intervals of sun altitude.</p>
 
-  <p class="lede"><b>P_pts</b> passes both regulatory lighting conditions and is falsified across <b>48.3°</b> of sun altitude between them. <b>P_cont</b>, identical but for how the illumination axis was sampled, is falsified across 0.8°.</p>
+  <p class="lede"><b>P_pts</b> passes both regulatory lighting conditions and is falsified across <b>55.8°</b> of sun altitude between them. <b>P_cont</b>, identical but for how the illumination axis was sampled, is falsified across 0.0°.</p>
 
   <div class="legend">
     <span class="key"><span class="sw" style="background:var(--series-1)"></span>
@@ -100,8 +100,8 @@
       <li><b>The control is what makes it mean something.</b> The two policies share
       architecture, training recipe and sample count. Only the illumination levels they saw
       differ, so the gap is attributable to how that axis was sampled.</li>
-      <li><b>Certificate against driving:</b> P_pts 4/17, P_cont 15/17 sub-intervals agree. Nothing was certified and then failed.</li>
-      <li><b>1 sub-interval is declared uncovered</b> (+0.026° to +0.000°). The blend cannot represent the horizon at any width, so a bound there quantifies over images the simulator would never render. Drawn hatched, and excluded from every count on this page.</li>
+      <li><b>Certificate against driving:</b> P_pts 4/13, P_cont 13/13 sub-intervals agree. Nothing was certified and then failed.</li>
+      <li><b>1 sub-interval is declared uncovered</b> (+0.241° to +0.000°). The blend cannot represent the horizon at any width, so a bound there quantifies over images the simulator would never render. Drawn hatched, and excluded from every count on this page.</li>
       <li><b>Scope.</b> Simulation only, one map, one site, one speed, one vehicle, camera
       only. This is a subset of FMVSS 127 scenarios and is not a compliance
       demonstration.</li>
@@ -114,7 +114,7 @@
 <div id="tip" role="status"></div>
 
 <script>
-const D = [{"mid": "+51.38", "unc": false, "pts": 1.9253, "ptsD": 10, "ptsN": 10, "cont": 1.562, "contD": 10, "contN": 10}, {"mid": "+35.58", "unc": false, "pts": 1.4215, "ptsD": 10, "ptsN": 10, "cont": 1.5593, "contD": 10, "contN": 10}, {"mid": "+23.57", "unc": false, "pts": 1.0791, "ptsD": 10, "ptsN": 10, "cont": 1.6093, "contD": 10, "contN": 10}, {"mid": "+15.64", "unc": false, "pts": 0.6961, "ptsD": 10, "ptsN": 10, "cont": 1.6739, "contD": 10, "contN": 10}, {"mid": "+11.34", "unc": false, "pts": 0.228, "ptsD": 10, "ptsN": 10, "cont": 1.6382, "contD": 10, "contN": 10}, {"mid": "+8.92", "unc": false, "pts": 0.1661, "ptsD": 10, "ptsN": 10, "cont": 1.3141, "contD": 10, "contN": 10}, {"mid": "+6.51", "unc": false, "pts": 0.318, "ptsD": 10, "ptsN": 10, "cont": 1.5245, "contD": 10, "contN": 10}, {"mid": "+4.75", "unc": false, "pts": 0.8644, "ptsD": 10, "ptsN": 10, "cont": 1.734, "contD": 10, "contN": 10}, {"mid": "+3.86", "unc": false, "pts": 0.7124, "ptsD": 10, "ptsN": 10, "cont": 1.751, "contD": 10, "contN": 10}, {"mid": "+2.71", "unc": false, "pts": -0.1601, "ptsD": 10, "ptsN": 10, "cont": 1.437, "contD": 10, "contN": 10}, {"mid": "+1.64", "unc": false, "pts": 0.006, "ptsD": 10, "ptsN": 10, "cont": 1.7349, "contD": 10, "contN": 10}, {"mid": "+1.08", "unc": false, "pts": 0.0434, "ptsD": 10, "ptsN": 10, "cont": 1.2116, "contD": 10, "contN": 10}, {"mid": "+0.4", "unc": false, "pts": -0.0917, "ptsD": 10, "ptsN": 10, "cont": -0.1443, "contD": 10, "contN": 10}, {"mid": "+0.01", "unc": true, "pts": -1.0228, "ptsD": 10, "ptsN": 10, "cont": -0.9628, "contD": 10, "contN": 10}, {"mid": "-0.48", "unc": false, "pts": 0.3265, "ptsD": 10, "ptsN": 10, "cont": 1.8684, "contD": 10, "contN": 10}, {"mid": "-15.26", "unc": false, "pts": 0.355, "ptsD": 10, "ptsN": 10, "cont": 1.0142, "contD": 10, "contN": 10}, {"mid": "-29.78", "unc": false, "pts": 1.9658, "ptsD": 10, "ptsN": 10, "cont": 1.9387, "contD": 10, "contN": 10}];
+const D = [{"mid": "+49.99", "unc": false, "pts": 1.6764, "ptsD": 3, "ptsN": 3, "cont": 1.7688, "contD": 3, "contN": 3}, {"mid": "+33.25", "unc": false, "pts": 1.302, "ptsD": 3, "ptsN": 3, "cont": 1.681, "contD": 3, "contN": 3}, {"mid": "+22", "unc": false, "pts": 0.6683, "ptsD": 3, "ptsN": 3, "cont": 1.7172, "contD": 3, "contN": 3}, {"mid": "+13.78", "unc": false, "pts": -0.0512, "ptsD": 3, "ptsN": 3, "cont": 1.602, "contD": 3, "contN": 3}, {"mid": "+8.04", "unc": false, "pts": -0.0709, "ptsD": 3, "ptsN": 3, "cont": 1.1149, "contD": 3, "contN": 3}, {"mid": "+5.18", "unc": false, "pts": 0.5302, "ptsD": 3, "ptsN": 3, "cont": 1.7708, "contD": 3, "contN": 3}, {"mid": "+3.67", "unc": false, "pts": 0.4015, "ptsD": 3, "ptsN": 3, "cont": 1.6681, "contD": 3, "contN": 3}, {"mid": "+2.22", "unc": false, "pts": -0.4562, "ptsD": 3, "ptsN": 3, "cont": 1.0816, "contD": 3, "contN": 3}, {"mid": "+0.85", "unc": false, "pts": -0.8371, "ptsD": 3, "ptsN": 3, "cont": 1.0064, "contD": 3, "contN": 3}, {"mid": "+0.12", "unc": true, "pts": -1.3614, "ptsD": 0, "ptsN": 3, "cont": 1.027, "contD": 3, "contN": 3}, {"mid": "-0.71", "unc": false, "pts": 0.0386, "ptsD": 3, "ptsN": 3, "cont": 1.5585, "contD": 3, "contN": 3}, {"mid": "-15.49", "unc": false, "pts": 0.0135, "ptsD": 3, "ptsN": 3, "cont": 1.0404, "contD": 3, "contN": 3}, {"mid": "-29.78", "unc": false, "pts": 1.6919, "ptsD": 3, "ptsN": 3, "cont": 1.8136, "contD": 3, "contN": 3}];
 const tip = document.getElementById('tip');
 const fmt = v => (v < 0 ? "−" : "") + Math.abs(v).toFixed(2);
 

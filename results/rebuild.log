@@ -312,3 +312,114 @@ no per-repetition artifacts matching witness_P_cont_ped_atwitness_rep*.json
 [2026-09-10 16:33:33] 2 drive(s) produced a VOID cell. Under the standing rule that is a BUG
 [2026-09-10 16:33:33] until proven otherwise and the cell is not reported until the cause is written
 [2026-09-10 16:33:33] down. Do NOT run more repetitions.
+[2026-09-10 17:37:49] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+[2026-09-10 17:37:49]   CARLA stopped; GPU now at 420 MiB
+[2026-09-10 17:37:49] START gate_calibration
+[2026-09-10 17:37:49] DONE  gate_calibration rc=0
+[2026-09-10 17:37:49] START conformal_P_pts
+[2026-09-10 17:47:50] DONE  conformal_P_pts rc=1
+[2026-09-10 17:47:50] stopping: conformal_P_pts failed. Tail of results/conformal_P_pts.log:
+  defaulting to the declared-uncovered sub-interval [+0.241, +0.000] deg
+Traceback (most recent call last):
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/conformal_coverage.py", line 226, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/conformal_coverage.py", line 126, in main
+    client, world = J.connect(rendering=True)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/za/ad-assurance--workspace/formal-verification--aeb--code/tools/carla_jobs.py", line 167, in connect
+    world = client.get_world()
+            ^^^^^^^^^^^^^^^^^^
+RuntimeError: time-out of 600000ms while waiting for the simulator, make sure the simulator is ready and connected to 127.0.0.1:3000
+[2026-09-10 17:48:36] restarting CARLA on 3000
+  server pid 143056 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 17:48:51] START conformal_P_pts
+[2026-09-10 17:54:27] DONE  conformal_P_pts rc=0
+[2026-09-10 17:54:27] START conformal_P_cont
+[2026-09-10 18:00:03] DONE  conformal_P_cont rc=0
+[2026-09-10 18:00:03] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+Terminated
+[2026-09-10 18:00:43]   SIGTERM did not stop it after 40 s; SIGKILL
+[2026-09-10 18:00:45]   CARLA stopped; GPU now at 420 MiB
+[2026-09-10 18:00:45] START gate_calibration
+[2026-09-10 18:00:46] DONE  gate_calibration rc=0
+[2026-09-10 18:00:46] START latch_window_P_pts_lead
+[2026-09-10 18:02:26] DONE  latch_window_P_pts_lead rc=0
+[2026-09-10 18:02:26] START latch_window_P_pts_ped
+[2026-09-10 18:03:54] DONE  latch_window_P_pts_ped rc=0
+[2026-09-10 18:03:54] START latch_window_P_cont_lead
+[2026-09-10 18:06:57] DONE  latch_window_P_cont_lead rc=0
+[2026-09-10 18:06:57] START latch_window_P_cont_ped
+[2026-09-10 18:09:20] DONE  latch_window_P_cont_ped rc=0
+[2026-09-10 18:09:20] START latch_window_P_pts3_lead
+[2026-09-10 18:11:09] DONE  latch_window_P_pts3_lead rc=0
+[2026-09-10 18:11:09] START latch_window_P_pts3_ped
+[2026-09-10 18:13:31] DONE  latch_window_P_pts3_ped rc=0
+[2026-09-10 18:13:31] START latch_window_report
+[2026-09-10 18:13:31] DONE  latch_window_report rc=1
+[2026-09-10 18:13:31] stopping: latch_window_report failed. Tail of results/latch_window_report.log:
+[ +10.084,  +5.990]  FALSIFIED    True        6       0     6     263.9 ft
+[  +5.990,  +4.375]  CERTIFIED    True        3       0     0      51.4 ft
+[  +4.375,  +2.967]  CERTIFIED    True        3       0     0      89.9 ft
+[  +2.967,  +1.465]  CERTIFIED    True        3       0     3     384.1 ft
+[  +1.465,  +0.241]  FALSIFIED    True        6       0     6     384.1 ft
+[  +0.241,  +0.000]  FALSIFIED    True        6       0     6     384.1 ft
+[  +0.000,  -1.422]  CERTIFIED    True        3       0     3     380.5 ft
+[  -1.422, -29.561]  CERTIFIED    True        3       0     0      51.4 ft
+[ -29.561, -30.000]  CERTIFIED    True        3       0     0      51.4 ft
+
+==============================================================================
+driven sub-intervals: 78   latch guaranteed 59   not guaranteed 19
+sub-intervals producing a CONTACT: 8
+    P_pts/lead [+10.084,+5.990] FV FALSIFIED  latch_in_time=False at 0.8468x  3 contacts in 6 runs
+    P_pts/lead [+5.990,+4.375] FV FALSIFIED  latch_in_time=False at 0.8665x  6 contacts in 6 runs
+    P_pts/lead [+4.375,+2.967] FV FALSIFIED  latch_in_time=False at 0.7447x  6 contacts in 6 runs
+    P_pts/ped [+10.084,+5.990] FV FALSIFIED  latch_in_time=False at 0.0452x  3 contacts in 6 runs
+    P_pts/ped [+0.241,+0.000] FV FALSIFIED  latch_in_time=False at -1.0608x  6 contacts in 6 runs
+    P_pts3/lead [+10.084,+5.990] FV FALSIFIED  latch_in_time=True at 1.0339x  3 contacts in 6 runs
+    P_pts3/lead [+2.967,+1.465] FV FALSIFIED  latch_in_time=False at 0.0481x  3 contacts in 6 runs
+    P_pts3/lead [+1.465,+0.241] FV FALSIFIED  latch_in_time=False at -0.0561x  6 contacts in 6 runs
+
+  REFUTED: 1 sub-interval(s) certified to latch in time produced a CONTACT. The disjunction over the latch window is not a sound predictor of the closed loop, and CLAUDE.md section 7 must NOT be amended to state property S that way. Margins above.
+  FALSIFIED for property S, latch guaranteed, drove without contact: 9 sub-intervals
+  wrote results/carla/Town01/latch_window_report.json
+[2026-09-10 18:14:06] restarting CARLA on 3000
+  server pid 144646 on port 3000, 15 s old
+  determinism preflight OK (lock intact; D-3/D-5 verified on the live server)
+  D-7 floor remains: closed-loop numbers are still RATES over >=10 repetitions
+[2026-09-10 18:14:21] START conformal_P_pts
+[2026-09-10 18:19:58] DONE  conformal_P_pts rc=0
+[2026-09-10 18:19:58] START conformal_P_cont
+[2026-09-10 18:25:35] DONE  conformal_P_cont rc=0
+[2026-09-10 18:25:35] stopping CARLA: the next stage is GPU-only and the server is holding VRAM
+Terminated
+[2026-09-10 18:26:15]   SIGTERM did not stop it after 40 s; SIGKILL
+[2026-09-10 18:26:17]   CARLA stopped; GPU now at 420 MiB
+[2026-09-10 18:26:17] START gate_calibration
+[2026-09-10 18:26:18] DONE  gate_calibration rc=0
+[2026-09-10 18:26:18] START latch_window_P_pts_lead
+[2026-09-10 18:27:59] DONE  latch_window_P_pts_lead rc=0
+[2026-09-10 18:27:59] START latch_window_P_pts_ped
+[2026-09-10 18:29:26] DONE  latch_window_P_pts_ped rc=0
+[2026-09-10 18:29:26] START latch_window_P_cont_lead
+[2026-09-10 18:32:30] DONE  latch_window_P_cont_lead rc=0
+[2026-09-10 18:32:30] START latch_window_P_cont_ped
+[2026-09-10 18:34:53] DONE  latch_window_P_cont_ped rc=0
+[2026-09-10 18:34:53] START latch_window_P_pts3_lead
+[2026-09-10 18:36:42] DONE  latch_window_P_pts3_lead rc=0
+[2026-09-10 18:36:42] START latch_window_P_pts3_ped
+[2026-09-10 18:39:03] DONE  latch_window_P_pts3_ped rc=0
+[2026-09-10 18:39:03] START latch_window_report
+[2026-09-10 18:39:03] DONE  latch_window_report rc=1  (a reported result, not a crash; see the log)
+[2026-09-10 18:39:03] START scope_restatement
+[2026-09-10 18:39:04] DONE  scope_restatement rc=0
+[2026-09-10 18:39:04] START figure_lead
+[2026-09-10 18:39:04] DONE  figure_lead rc=0
+[2026-09-10 18:39:04] START figure_ped
+[2026-09-10 18:39:04] DONE  figure_ped rc=0
+[2026-09-10 18:39:04]   skipping figure_plate: the plate scenario is not in scope on this map (A20)
+[2026-09-10 18:39:04] START record_cells
+[2026-09-10 18:39:04] DONE  record_cells rc=0
+[2026-09-10 18:39:04] analysis complete (rc=0). python -m study.status

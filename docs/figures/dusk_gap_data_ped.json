@@ -4,476 +4,372 @@
   "threshold_mps2": 2.476,
   "r_req_m": 15.846,
   "poses_inside_r_req": 25,
-  "sub_intervals": 17,
-  "sub_intervals_covered": 16,
+  "sub_intervals": 13,
+  "sub_intervals_covered": 12,
   "sub_intervals_uncovered": 1,
   "agreement": {
-   "P_pts": "4/17",
-   "P_cont": "15/17"
+   "P_pts": "4/13",
+   "P_cont": "13/13"
   },
   "model_sha256": {
-   "P_pts": "21c05e5f8ffb6ecabcda43b6811d8458bbd089ff62fe7ee0a9c94537df691dec",
-   "P_cont": "06050078db8010bfa25299f0dcb106b98586e09751f4411393b118b29fe23c94"
+   "P_pts": "0f9c43371d323de5d17fa1feb25f274d4f8033cb1e6d66034950bfa25b8f3969",
+   "P_cont": "35f74663b42614a06cf49db53e620b79b9bb84ac5f144a06cd6a9c944d302dc5"
   }
  },
  "summary": {
   "P_pts": {
-   "certified": 4,
-   "of_covered": 16,
-   "falsified_width_deg": 48.271,
-   "clean_drives": 16,
-   "driven_cells": 16,
+   "certified": 3,
+   "of_covered": 12,
+   "falsified_width_deg": 55.843,
+   "clean_drives": 12,
+   "driven_cells": 12,
    "certified_then_failed": 0,
-   "falsified_then_drove_clean": 12
+   "falsified_then_drove_clean": 9
   },
   "P_cont": {
-   "certified": 15,
-   "of_covered": 16,
-   "falsified_width_deg": 0.753,
-   "clean_drives": 16,
-   "driven_cells": 16,
+   "certified": 12,
+   "of_covered": 12,
+   "falsified_width_deg": 0,
+   "clean_drives": 12,
+   "driven_cells": 12,
    "certified_then_failed": 0,
-   "falsified_then_drove_clean": 1
+   "falsified_then_drove_clean": 0
   }
  },
  "rows": [
   {
    "from_deg": 60.0,
-   "to_deg": 42.766,
-   "mid_deg": 51.383,
+   "to_deg": 39.977,
+   "mid_deg": 49.989,
    "family_uncovered": false,
    "P_pts": {
-    "margin": 1.9253,
+    "margin": 1.6764,
     "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 13.442,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0
    },
    "P_cont": {
-    "margin": 1.562,
+    "margin": 1.7688,
     "verdict": "CERTIFIED",
-    "witness_range_m": 5.619,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 6.178,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0
    }
   },
   {
-   "from_deg": 42.766,
-   "to_deg": 28.397,
-   "mid_deg": 35.581,
+   "from_deg": 39.977,
+   "to_deg": 26.523,
+   "mid_deg": 33.25,
    "family_uncovered": false,
    "P_pts": {
-    "margin": 1.4215,
+    "margin": 1.302,
     "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 11.207,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0
    },
    "P_cont": {
-    "margin": 1.5593,
+    "margin": 1.681,
     "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 6.178,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0
    }
   },
   {
-   "from_deg": 28.397,
-   "to_deg": 18.743,
-   "mid_deg": 23.57,
+   "from_deg": 26.523,
+   "to_deg": 17.484,
+   "mid_deg": 22.004,
    "family_uncovered": false,
    "P_pts": {
-    "margin": 1.0791,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.6093,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 18.743,
-   "to_deg": 12.542,
-   "mid_deg": 15.642,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.6961,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.6739,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 12.542,
-   "to_deg": 10.128,
-   "mid_deg": 11.335,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.228,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 12.324,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.6382,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 10.128,
-   "to_deg": 7.715,
-   "mid_deg": 8.921,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.1661,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 4.502,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.3141,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 7.715,
-   "to_deg": 5.298,
-   "mid_deg": 6.506,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.318,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 2.826,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.5245,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 5.061,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 5.298,
-   "to_deg": 4.198,
-   "mid_deg": 4.748,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.8644,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.734,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 3.384,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 4.198,
-   "to_deg": 3.525,
-   "mid_deg": 3.862,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.7124,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.751,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 5.619,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 3.525,
-   "to_deg": 1.891,
-   "mid_deg": 2.708,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": -0.1601,
+    "margin": 0.6683,
     "verdict": "FALSIFIED",
     "witness_range_m": 15.118,
-    "drove": 10,
-    "of": 10,
+    "drove": 3,
+    "of": 3,
     "agrees": false,
     "premature": 0,
     "contacts": 0
    },
    "P_cont": {
-    "margin": 1.437,
+    "margin": 1.7172,
     "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 6.178,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0
    }
   },
   {
-   "from_deg": 1.891,
-   "to_deg": 1.391,
-   "mid_deg": 1.641,
+   "from_deg": 17.484,
+   "to_deg": 10.084,
+   "mid_deg": 13.784,
    "family_uncovered": false,
    "P_pts": {
-    "margin": 0.006,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.7349,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 1.391,
-   "to_deg": 0.779,
-   "mid_deg": 1.085,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.0434,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 14.001,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 10,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.2116,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 0.779,
-   "to_deg": 0.026,
-   "mid_deg": 0.403,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": -0.0917,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 10,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": -0.1443,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 11.207,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": 0.026,
-   "to_deg": 0.0,
-   "mid_deg": 0.013,
-   "family_uncovered": true,
-   "P_pts": {
-    "margin": -1.0228,
+    "margin": -0.0512,
     "verdict": "FALSIFIED",
     "witness_range_m": 13.442,
-    "drove": 10,
-    "of": 10,
+    "drove": 3,
+    "of": 3,
     "agrees": false,
-    "premature": 10,
+    "premature": 0,
     "contacts": 0
    },
    "P_cont": {
-    "margin": -0.9628,
+    "margin": 1.602,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 10.084,
+   "to_deg": 5.99,
+   "mid_deg": 8.037,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": -0.0709,
     "verdict": "FALSIFIED",
-    "witness_range_m": 11.207,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 13.442,
+    "drove": 3,
+    "of": 3,
     "agrees": false,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.1149,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.118,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 5.99,
+   "to_deg": 4.375,
+   "mid_deg": 5.183,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": 0.5302,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 2.267,
+    "drove": 3,
+    "of": 3,
+    "agrees": false,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.7708,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.118,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 4.375,
+   "to_deg": 2.967,
+   "mid_deg": 3.671,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": 0.4015,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": false,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.6681,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 2.967,
+   "to_deg": 1.465,
+   "mid_deg": 2.216,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": -0.4562,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": false,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.0816,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 1.465,
+   "to_deg": 0.241,
+   "mid_deg": 0.853,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": -0.8371,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
+    "agrees": false,
+    "premature": 3,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.0064,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 15.118,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": 0.241,
+   "to_deg": 0.0,
+   "mid_deg": 0.12,
+   "family_uncovered": true,
+   "P_pts": {
+    "margin": -1.3614,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 10.648,
+    "drove": 0,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 3
+   },
+   "P_cont": {
+    "margin": 1.027,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 11.207,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
     "premature": 0,
     "contacts": 0
    }
   },
   {
    "from_deg": 0.0,
-   "to_deg": -0.961,
-   "mid_deg": -0.48,
+   "to_deg": -1.422,
+   "mid_deg": -0.711,
    "family_uncovered": false,
    "P_pts": {
-    "margin": 0.3265,
+    "margin": 0.0386,
     "verdict": "FALSIFIED",
-    "witness_range_m": 13.442,
-    "drove": 10,
-    "of": 10,
-    "agrees": false,
-    "premature": 10,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.8684,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 2.267,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": -0.961,
-   "to_deg": -29.554,
-   "mid_deg": -15.257,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 0.355,
-    "verdict": "FALSIFIED",
-    "witness_range_m": 13.442,
-    "drove": 10,
-    "of": 10,
+    "witness_range_m": 15.677,
+    "drove": 3,
+    "of": 3,
     "agrees": false,
     "premature": 0,
     "contacts": 0
    },
    "P_cont": {
-    "margin": 1.0142,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 8.413,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   }
-  },
-  {
-   "from_deg": -29.554,
-   "to_deg": -30.0,
-   "mid_deg": -29.777,
-   "family_uncovered": false,
-   "P_pts": {
-    "margin": 1.9658,
-    "verdict": "CERTIFIED",
-    "witness_range_m": 7.295,
-    "drove": 10,
-    "of": 10,
-    "agrees": true,
-    "premature": 0,
-    "contacts": 0
-   },
-   "P_cont": {
-    "margin": 1.9387,
+    "margin": 1.5585,
     "verdict": "CERTIFIED",
     "witness_range_m": 15.677,
-    "drove": 10,
-    "of": 10,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": -1.422,
+   "to_deg": -29.561,
+   "mid_deg": -15.492,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": 0.0135,
+    "verdict": "FALSIFIED",
+    "witness_range_m": 10.648,
+    "drove": 3,
+    "of": 3,
+    "agrees": false,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.0404,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 10.648,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   }
+  },
+  {
+   "from_deg": -29.561,
+   "to_deg": -30.0,
+   "mid_deg": -29.78,
+   "family_uncovered": false,
+   "P_pts": {
+    "margin": 1.6919,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 10.648,
+    "drove": 3,
+    "of": 3,
+    "agrees": true,
+    "premature": 0,
+    "contacts": 0
+   },
+   "P_cont": {
+    "margin": 1.8136,
+    "verdict": "CERTIFIED",
+    "witness_range_m": 14.001,
+    "drove": 3,
+    "of": 3,
     "agrees": true,
     "premature": 0,
     "contacts": 0

@@ -1,0 +1,50 @@
+  defaulting to the declared-uncovered sub-interval [+0.241, +0.000] deg
+  server age 6 min (R-SIM-1 ok)
+      sun  +0.24033  min demand over 25 poses   4.350  >= threshold
+      sun  +0.23638  min demand over 25 poses   4.343  >= threshold
+      sun  +0.22535  min demand over 25 poses   4.341  >= threshold
+      sun  +0.22510  min demand over 25 poses   4.338  >= threshold
+      sun  +0.21997  min demand over 25 poses   4.296  >= threshold
+      sun  +0.21437  min demand over 25 poses   4.290  >= threshold
+      sun  +0.20803  min demand over 25 poses   4.315  >= threshold
+      sun  +0.20663  min demand over 25 poses   4.304  >= threshold
+      sun  +0.19662  min demand over 25 poses   4.300  >= threshold
+      sun  +0.19600  min demand over 25 poses   4.289  >= threshold
+      sun  +0.17585  min demand over 25 poses   4.265  >= threshold
+      sun  +0.17581  min demand over 25 poses   4.248  >= threshold
+      sun  +0.17388  min demand over 25 poses   4.257  >= threshold
+      sun  +0.16592  min demand over 25 poses   4.280  >= threshold
+      sun  +0.16522  min demand over 25 poses   4.265  >= threshold
+      sun  +0.16162  min demand over 25 poses   4.273  >= threshold
+      sun  +0.15676  min demand over 25 poses   4.222  >= threshold
+      sun  +0.15597  min demand over 25 poses   4.218  >= threshold
+      sun  +0.15351  min demand over 25 poses   4.221  >= threshold
+      sun  +0.14831  min demand over 25 poses   4.166  >= threshold
+      sun  +0.14620  min demand over 25 poses   4.124  >= threshold
+      sun  +0.13101  min demand over 25 poses   4.130  >= threshold
+      sun  +0.13049  min demand over 25 poses   4.150  >= threshold
+      sun  +0.12661  min demand over 25 poses   4.143  >= threshold
+      sun  +0.11709  min demand over 25 poses   4.111  >= threshold
+      sun  +0.10187  min demand over 25 poses   4.078  >= threshold
+      sun  +0.09373  min demand over 25 poses   4.049  >= threshold
+      sun  +0.09247  min demand over 25 poses   4.064  >= threshold
+      sun  +0.08623  min demand over 25 poses   4.029  >= threshold
+      sun  +0.07477  min demand over 25 poses   4.004  >= threshold
+      sun  +0.07223  min demand over 25 poses   4.004  >= threshold
+      sun  +0.06502  min demand over 25 poses   3.988  >= threshold
+      sun  +0.04233  min demand over 25 poses   3.974  >= threshold
+      sun  +0.03256  min demand over 25 poses   3.973  >= threshold
+      sun  +0.02995  min demand over 25 poses   3.971  >= threshold
+      sun  +0.00987  min demand over 25 poses   3.960  >= threshold
+      sun  +0.00809  min demand over 25 poses   3.922  >= threshold
+      sun  +0.00683  min demand over 25 poses   3.903  >= threshold
+      sun  +0.00398  min demand over 25 poses   3.906  >= threshold
+      sun  +0.00066  min demand over 25 poses   3.912  >= threshold
+
+  n = 40, alpha = 0.05, using the k = 2 smallest score
+  conformal lower bound 3.9060 m/s^2 = 1.58x the decision threshold -> CLEARS
+  empirically 0/40 sampled illuminations fell below it
+
+  For an illumination drawn uniformly at random from [+0.000, +0.241] degrees of sun altitude, the policy's minimum commanded deceleration over the poses inside r_req is at least 3.9060 m/s^2 with probability at least 95%. THIS IS NOT A FOR-ALL STATEMENT. The certificate quantifies over every illumination in a sub-interval; this quantifies over a random one and attaches a probability. They are different claims and must never be reported as the same one.
+
+  wrote results/carla/Town01/conformal_P_cont_p0.241_p0.000.json

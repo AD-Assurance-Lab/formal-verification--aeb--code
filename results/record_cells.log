@@ -1,0 +1,47 @@
+
+cell 1  P_pts / ped
+  endpoints                  PASS both
+  fv                         FALSIFIED
+  width                      55.843   (was 48.271)
+  witness                    PASS
+  certified_of_covered       3/12   (was 4/16)
+  agreement                  4/13   (was 4/17)
+  margin_worst_x_threshold   -0.8371   (was -0.1601)
+  note: FALSIFIED over 55.843 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10
+
+cell 2  P_pts / lead
+  endpoints                  PASS both
+  fv                         FALSIFIED
+  width                      17.243   (was 50.32)
+  witness                    FAIL
+  certified_of_covered       6/12   (was 4/16)
+  agreement                  10/13   (was 5/17)
+  margin_worst_x_threshold   -0.0459   (was -0.0007)
+  note: FALSIFIED over 17.243 deg; 4 of 6 falsified sub-intervals failed when driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10
+
+cell 3  P_cont / ped
+  endpoints                  PASS both
+  fv                         CERTIFIED   (was FALSIFIED)
+  witness                    PASS
+  certified_of_covered       12/12   (was 15/16)
+  agreement                  13/13   (was 15/17)
+  margin_worst_x_threshold   1.0064   (was -0.1443)
+  note: CERTIFIED in all 12 covered sub-intervals; drove clean in all 12 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10
+
+cell 4  P_cont / lead
+  endpoints                  PASS both
+  fv                         CERTIFIED
+  witness                    PASS
+  certified_of_covered       12/12   (was 16/16)
+  agreement                  13/13   (was 17/17)
+  margin_worst_x_threshold   1.0325   (was 1.008)
+  note: CERTIFIED in all 12 covered sub-intervals; drove clean in all 12 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10
+
+cell 5  P_pts / plate
+  note: NO HARNESS YET. The FMVSS 127 false-activation scenario is specified in CLAUDE.md sections 2 and 9. Until it is captured and driven, property A is verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario.
+
+cell 6  P_cont / plate
+  note: NO HARNESS YET. The FMVSS 127 false-activation scenario is specified in CLAUDE.md sections 2 and 9. Until it is captured and driven, property A is verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario.
+
+  wrote study/results.json
+  now: python -m study.status

@@ -113,6 +113,20 @@ stop_server() {
   say "  CARLA stopped; GPU now at ${used:-unknown} MiB"
 }
 
+run_result() {   # run <name> <cmd...>  -- a non-zero exit is a RESULT, not a crash
+  # Some tools signal a measured negative through their exit code. latch_window_report
+  # exits non-zero when the latch-window disjunction is REFUTED, which is a finding about
+  # the property and not a fault in the tool. `run` exits the stage on any non-zero, so a
+  # refutation aborted the analysis before the figures and the ledger ever ran, and the
+  # `|| fail=1` written after it could never fire. Record it and carry on.
+  local name=$1; shift
+  say "START $name"
+  "$@" >"$REPO/results/${name}.log" 2>&1
+  local rc=$?
+  say "DONE  $name rc=$rc$([ "$rc" -ne 0 ] && echo '  (a reported result, not a crash; see the log)')"
+  return 0
+}
+
 run() {   # run <name> <cmd...>
   local name=$1; shift
   say "START $name"
@@ -194,27 +208,41 @@ fi
 
 if [ "$FROM" = "analysis" ]; then
   # Everything that turns committed results into a number or a picture someone quotes.
-  # No simulator: these read results/carla/<map>/*.json and the captured frames. They live in a
-  # stage rather than in anyone's shell history because standing rule 8 is that a number
-  # in a paper comes from a committed invocation, and tools/tidy.py reported three of
-  # these as dead code because genuinely nothing referenced them.
-  stop_server
+  # They live in a stage rather than in anyone's shell history because standing rule 8 is
+  # that a number in a paper comes from a committed invocation, and tools/tidy.py reported
+  # three of these as dead code because genuinely nothing referenced them.
+  #
+  # MOST of these need no simulator. Conformal coverage DOES: it draws illuminations inside
+  # the uncovered sliver and RENDERS them, because the whole point is a statement about
+  # renders where the blend cannot be trusted. This stage used to stop the server and then
+  # run it anyway, so it waited out the full ten minute connect timeout and failed the
+  # stage. The comment above it said "no simulator" and had said so for as long as the tool
+  # had been in the list, which is how nobody noticed: the stage had never run end to end.
   fail=0
-  run gate_calibration   "$PY" -u tools/gate_calibration.py   || fail=1
+  fresh_server
   for pol in P_pts P_cont; do
     run "conformal_${pol}" "$PY" -u tools/conformal_coverage.py --policy "$pol" || fail=1
   done
+  stop_server
+  run gate_calibration   "$PY" -u tools/gate_calibration.py   || fail=1
   for pol in $POLICIES; do
     for sc in lead ped; do
       run "latch_window_${pol}_${sc}" "$PY" -u tools/latch_window.py \
           --policy "$pol" --scenario "$sc" || fail=1
     done
   done
-  run latch_window_report "$PY" -u tools/latch_window_report.py || fail=1
+  run_result latch_window_report "$PY" -u tools/latch_window_report.py
   run scope_restatement   "$PY" -u tools/restate_scope.py --write || fail=1
   run figure_lead  "$PY" -u tools/make_figure.py --scenario lead || fail=1
   run figure_ped   "$PY" -u tools/make_figure.py --scenario ped  || fail=1
-  run figure_plate "$PY" -u tools/make_plate_figure.py || fail=1
+  # The plate figure needs plate results, and a map that cannot host the scenario has none
+  # (A20). Ask, do not assume: this is the same list that was written out by hand in four
+  # other places and wrong in three of them.
+  if "$PY" -c "import sys;sys.path.insert(0,'tools');import carla_jobs as J;sys.exit(0 if 'plate' in J.IN_SCOPE else 1)"; then
+    run figure_plate "$PY" -u tools/make_plate_figure.py || fail=1
+  else
+    say "  skipping figure_plate: the plate scenario is not in scope on this map (A20)"
+  fi
   run record_cells "$PY" -u tools/record_cells.py --write || fail=1
   say "analysis complete (rc=$fail). python -m study.status"
   exit $fail

@@ -1,5 +1,5 @@
 {
-  "_comment": "Measured outcomes against CLAUDE.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here. RESET 2026-09-06 for the A12 rebuild: every number below M1 was discarded with the artifacts that produced them (A12, FINDINGS F5) and is being re-measured on the corrected harness. The superseded values remain in git history at febefa9.",
+  "_comment": "Measured outcomes against the design in CLAUDE.md. Nothing here redefines the design; it only records what was observed. Off-ledger exploration goes in FINDINGS.md, never here. RESET 2026-09-10 for the return to Town01 (A19, A20): every number is measured on the rebuilt harness with training that reproduces byte for byte, and nothing is carried over from the large-map rebuild, whose results are withdrawn.",
   "milestones": {
     "M0": {
       "state": "done",
@@ -7,35 +7,35 @@
     },
     "M1": {
       "state": "done",
-      "note": "Town01 (A3). Lit/unlit resolved (A4): site 1 unlit at 4.5, site 3 lit at 25.7 mean brightness, night lamps off"
+      "note": "Town01, chosen by measured geometry. Study site road 15, 1007 ft flat, pavement both sides, street lighting 3.25 with the lamps off. The false-activation scenario needs 320 m and this map's longest straight is 307 m, so ledger cells 5 and 6 are deferred (A20)."
     },
     "M2": {
       "state": "done",
-      "note": "REBUILT on the corrected harness. a_max 0.505 g (was 0.868 g -- an integration artifact, FINDINGS F5), t_lat 0.150 s over 10 reps/speed, r_req 52.0 ft at 25 mph; contact detector validated on a deliberate crash; lead oracle 10/10 perfect and 0/10 late; pedestrian oracle 10/10 and 0/10"
+      "note": "Measured again 2026-09-10 on the rebuilt harness. Peak braking 0.5048 g read from stop time, 0.4863 g read from distance covered, which is the 3.7% consistency question that stays open. Latency 0.150 s. Required range 52.0 ft at 25 mph. Contact detector validated on a deliberate crash. Both oracles 10/10 correct and 0/10 late, every repetition identical to the recorded precision."
     },
     "M3": {
       "state": "done",
-      "note": "REBUILT. Expert 10/10 at both regulatory endpoints, 14.0 ft standoff at each; capture check places a frame to 0.000 m and 0.010 of image range; scenario objects rebuilt and both oracle checks pass"
+      "note": "Expert passes 10/10 at both regulatory endpoints. Camera frames recaptured under the current rules, darkest first, cloud cover zero, and every frame set now carries a harness stamp recording map, cloud cover, settle, rules digest, texture streaming, quality level and capture order."
     },
     "M4": {
       "state": "done",
-      "note": "REBUILT with three arms and all THREE FMVSS lighting conditions. Every cell 10/10 on CLAUDE.md section 7's frozen pass. P_pts3 brakes at 287.57 ft in daylight on the ped scenario, 10/10 premature and 0 contacts -- a property A defect that section 7's criterion does not fail and that is recorded beside the verdict, never inside it"
+      "note": "All three policies pass all three lighting conditions the standard tests, on both hazard scenarios, 10/10 in every one of eighteen cells. By the standard's own procedure the policies cannot be told apart. Training reproduces byte for byte and all three arms train on 2912 samples from the measured axis (F30, F34)."
     },
     "M5": {
       "state": "done",
-      "note": "REBUILT. All eight behavioural gates pass over the COVERED axis: capture 0.108-0.544, in-between 0.156-0.678. The in-between gate first failed for P_pts/ped at [+12.542, +7.715] deg (1.016); CLAUDE.md section 4's repair split it at +10.128 and the halves read 0.268 and 0.368 (FINDINGS F7)"
+      "note": "All twelve behavioural checks pass over the covered range. Worst covered values: capture 0.8206, in-between 0.8578, both against a threshold of 1.0. Three in-between checks exceed the threshold only inside the uncovered sliver at the horizon, which is excluded from every verdict by construction."
     },
     "M6": {
       "state": "done",
-      "note": "REBUILT. Property S over the covered axis: P_pts 4/16 and 4/16, P_cont 16/16 and 15/16, P_pts3 6/16 and 3/16. Zero undecided across all six. The third regulatory lighting condition NARROWS the falsified band (50.3 -> 43.0 deg on lead) and does not close it. Committed before any driving. Property A over the covered axis: P_cont 16/16 and 15/16, P_pts 14/16 and 12/16, P_pts3 16/16 and 1/16 -- the pedestrian arm of P_pts3 is falsified over 89.22 of the 90 degree axis, and the drives exhibit exactly that. Property A over the FMVSS 127 false-activation scenario, all three arms, 52 poses from 2.179 to 59.178 m: P_cont 16/16 covered, P_pts and P_pts3 15/16. Every verdict is identical with the plate REMOVED and every bound within 0.5%, so no falsification is attributable to the plate (F18)"
+      "note": "Six certificates over the covered range, committed to git before any driving. Continuum-trained 12/12 on both scenarios. Points-trained 6/12 on lead, falsified over 17.24 deg, and 3/12 on pedestrian, falsified over 55.84 deg. Three-condition 6/12 and 8/12. Zero undecided in all six. The two point-trained arms falsify the SAME six pieces on lead, a contiguous band from +17.484 to +0.241 deg."
     },
     "M7": {
       "state": "done",
-      "note": "REBUILT, then extended to the plate. Twenty-four drives: midpoint and at-witness passes for three arms on lead, ped, plate and the plate-removed control. Hazard agreement: cell 4 (P_cont/lead) 17/17, cell 3 (P_cont/ped) 15/17, cell 2 (P_pts/lead) 5/17, cell 1 (P_pts/ped) 4/17. Plate agreement: cell 5 (P_pts) 17/17, cell 6 (P_cont) 16/17, P_pts3 17/17. ZERO certified-then-failed on the covered axis in any cell; the study's only one is in the A6-UNCOVERED sliver, which is excluded from every verdict by construction and is the first empirical confirmation that the sliver cannot be certified (F19). All four ledger contradictions carry written dispositions: cells 1 and 3 in F17, cell 5's certificate in F18 and its drive in F19. RE-DRIVEN END TO END on 2026-09-08: 262 of 263 sub-interval verdicts reproduce and 20 of 21 agreement counts are exact; the one flip was an instrument defect (F21). The four cells whose repetitions ever disagreed were then re-driven under amendment A13's harness -- one server, one process, one vehicle per repetition -- and none of the four was sampling: two were F21, one was the simulator drifting (F23), and the sliver plate cell stays split and is therefore VOID, failing 2/10 on the clean harness against the shared server's 6/10 (F22). F24 THEN WITHDREW THE PLATE HALF: plate_run ticked the world twice per control iteration and ran the false-activation loop at 10 Hz where CLAUDE.md section 3 specifies 20. At the specified rate P_cont does not brake on the plate at +0.013 deg -- 10/10 pass, peaks 2.00-2.18 against a 2.4525 limit -- so the study's only certified-then-failed sub-interval was a driver defect and the count is now ZERO in every cell. Every plate measurement (cells 5 and 6, F18, F19) was collected at 10 Hz and is not carried into the A14 Town12 rebuild."
+      "note": "Complete. 78 witness drives and 390 interior drives, three repetitions each with its own restarted server. ZERO certified-then-failed and zero void. Driven at 65 light levels: continuum 0 crashes on both scenarios, three-condition 15 and 25, points 21 and 9. On lead the driven failures span +8.856 to +0.608 deg inside a certificate warning from +17.484 to 0.000, so the bound brackets the truth and is conservative both sides. On pedestrian the failures are TWO DISJOINT POCKETS."
     },
     "M8": {
       "state": "in_progress",
-      "note": "Report rewritten and both figures regenerated from the rebuilt results (dusk_gap, dusk_gap_ped, plate_gap). Remaining: the Novi demo, and formal-verification--aeb--arxiv, whose every measured number predates the A12 rebuild -- its figures/make_data.py is the only sanctioned path in"
+      "note": "Report and figures regenerated from these results. Remaining: the Novi demo, and the paper repository, whose every measured number predates this rebuild."
     }
   },
   "cells": {
@@ -43,48 +43,59 @@
       "endpoints": "PASS both",
       "fv": "FALSIFIED",
       "witness": "PASS",
-      "width": 48.271,
-      "note": "FALSIFIED over 48.271 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "artifact": "results/carla/verify_P_pts_ped.json",
+      "width": 55.843,
+      "note": "FALSIFIED over 55.843 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
+      "artifact": "results/carla/Town01/verify_P_pts_ped.json",
       "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
-      "certified_of_covered": "4/16",
-      "margin_worst_x_threshold": -0.1601,
-      "margin_best_x_threshold": 1.9658,
+      "certified_of_covered": "3/12",
+      "certified_span_deg": 33.916,
+      "covered_span_deg": 89.759,
+      "certified_fraction_of_span": 0.3779,
+      "span_note": "3/12 sub-intervals is 37.8% of the covered axis by span. The two disagree whenever the bisection made pieces of very different widths, which an absolute chord tolerance does (F27).",
+      "margin_worst_x_threshold": -0.8371,
+      "margin_best_x_threshold": 1.6919,
       "margin_direction": "property S: bound / threshold, pass needs >= 1, worst is the lowest",
-      "witness_artifact": "results/carla/witness_P_pts_ped.json",
-      "agreement": "4/17",
-      "nuisance_braking_sub_intervals": 3
+      "witness_artifact": "results/carla/Town01/witness_P_pts_ped.json",
+      "agreement": "4/13",
+      "nuisance_braking_sub_intervals": 1
     },
     "2": {
       "endpoints": "PASS both",
       "fv": "FALSIFIED",
       "witness": "FAIL",
-      "width": 50.32,
-      "note": "FALSIFIED over 50.320 deg; 1 of 12 falsified sub-intervals failed when driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "artifact": "results/carla/verify_P_pts_lead.json",
+      "width": 17.243,
+      "note": "FALSIFIED over 17.243 deg; 4 of 6 falsified sub-intervals failed when driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
+      "artifact": "results/carla/Town01/verify_P_pts_lead.json",
       "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
-      "certified_of_covered": "4/16",
-      "margin_worst_x_threshold": -0.0007,
-      "margin_best_x_threshold": 1.9369,
+      "certified_of_covered": "6/12",
+      "certified_span_deg": 72.516,
+      "covered_span_deg": 89.759,
+      "certified_fraction_of_span": 0.8079,
+      "span_note": "6/12 sub-intervals is 80.8% of the covered axis by span. The two disagree whenever the bisection made pieces of very different widths, which an absolute chord tolerance does (F27).",
+      "margin_worst_x_threshold": -0.0459,
+      "margin_best_x_threshold": 1.9232,
       "margin_direction": "property S: bound / threshold, pass needs >= 1, worst is the lowest",
-      "witness_artifact": "results/carla/witness_P_pts_lead.json",
-      "agreement": "5/17",
-      "nuisance_braking_sub_intervals": 1
+      "witness_artifact": "results/carla/Town01/witness_P_pts_lead.json",
+      "agreement": "10/13",
+      "nuisance_braking_sub_intervals": 0
     },
     "3": {
       "endpoints": "PASS both",
-      "fv": "FALSIFIED",
+      "fv": "CERTIFIED",
       "witness": "PASS",
-      "width": 0.753,
-      "note": "FALSIFIED over 0.753 deg; every falsified sub-interval nonetheless drove clean, so every disagreement is conservative | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "artifact": "results/carla/verify_P_cont_ped.json",
-      "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
-      "certified_of_covered": "15/16",
-      "margin_worst_x_threshold": -0.1443,
-      "margin_best_x_threshold": 1.9387,
+      "width": null,
+      "note": "CERTIFIED in all 12 covered sub-intervals; drove clean in all 12 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
+      "artifact": "results/carla/Town01/verify_P_cont_ped.json",
+      "certified_of_covered": "12/12",
+      "certified_span_deg": 89.759,
+      "covered_span_deg": 89.759,
+      "certified_fraction_of_span": 1.0,
+      "span_note": "12/12 sub-intervals is 100.0% of the covered axis by span. The two disagree whenever the bisection made pieces of very different widths, which an absolute chord tolerance does (F27).",
+      "margin_worst_x_threshold": 1.0064,
+      "margin_best_x_threshold": 1.8136,
       "margin_direction": "property S: bound / threshold, pass needs >= 1, worst is the lowest",
-      "witness_artifact": "results/carla/witness_P_cont_ped.json",
-      "agreement": "15/17",
+      "witness_artifact": "results/carla/Town01/witness_P_cont_ped.json",
+      "agreement": "13/13",
       "nuisance_braking_sub_intervals": 0
     },
     "4": {
@@ -92,71 +103,47 @@
       "fv": "CERTIFIED",
       "witness": "PASS",
       "width": null,
-      "note": "CERTIFIED in all 16 covered sub-intervals; drove clean in all 16 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "artifact": "results/carla/verify_P_cont_lead.json",
-      "certified_of_covered": "16/16",
-      "margin_worst_x_threshold": 1.008,
-      "margin_best_x_threshold": 1.9235,
+      "note": "CERTIFIED in all 12 covered sub-intervals; drove clean in all 12 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
+      "artifact": "results/carla/Town01/verify_P_cont_lead.json",
+      "certified_of_covered": "12/12",
+      "certified_span_deg": 89.759,
+      "covered_span_deg": 89.759,
+      "certified_fraction_of_span": 1.0,
+      "span_note": "12/12 sub-intervals is 100.0% of the covered axis by span. The two disagree whenever the bisection made pieces of very different widths, which an absolute chord tolerance does (F27).",
+      "margin_worst_x_threshold": 1.0325,
+      "margin_best_x_threshold": 1.9197,
       "margin_direction": "property S: bound / threshold, pass needs >= 1, worst is the lowest",
-      "witness_artifact": "results/carla/witness_P_cont_lead.json",
-      "agreement": "17/17",
+      "witness_artifact": "results/carla/Town01/witness_P_cont_lead.json",
+      "agreement": "13/13",
       "nuisance_braking_sub_intervals": 0
     },
     "5": {
-      "endpoints": "PASS both",
-      "fv": "FALSIFIED",
-      "witness": "FAIL",
-      "width": 0.753,
-      "note": "FALSIFIED over 0.753 deg; 1 of 1 falsified sub-intervals failed when driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "criterion": "crossed the plate without braking and never exceeded the standard's 0.25 g nuisance limit",
-      "artifact": "results/carla/verify_P_pts_plate_A.json",
-      "control_artifact": "results/carla/verify_P_pts_none_plate_A.json",
-      "attributable_to_plate": [],
-      "falsified_with_plate_removed_too": [
-        "[+0.026,+0.000] 3.831x vs 3.846x without",
-        "[+0.779,+0.026] 2.087x vs 2.078x without"
-      ],
-      "width_note": "total width of the falsified sub-intervals over the covered axis, degrees of sun altitude (axis 60 to -30); 1 uncovered sub-interval(s) excluded",
-      "certified_of_covered": "15/16",
-      "margin_worst_x_threshold": 2.0872,
-      "margin_best_x_threshold": -0.0021,
-      "margin_direction": "property A: bound / threshold, pass needs <= 1, worst is the highest",
-      "witness_artifact": "results/carla/witness_P_pts_plate.json",
-      "agreement": "17/17",
-      "nuisance_braking_sub_intervals": 0
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
+      "width": null,
+      "note": "NO HARNESS YET. The FMVSS 127 false-activation scenario is specified in CLAUDE.md sections 2 and 9. Until it is captured and driven, property A is verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
     },
     "6": {
-      "endpoints": "PASS both",
-      "fv": "CERTIFIED",
-      "witness": "PASS",
+      "endpoints": null,
+      "fv": null,
+      "witness": null,
       "width": null,
-      "note": "CERTIFIED in all 16 covered sub-intervals; drove clean in all 16 driven | endpoints darkness_highbeam 10/10, darkness_lowbeam 10/10, daylight 10/10",
-      "criterion": "crossed the plate without braking and never exceeded the standard's 0.25 g nuisance limit",
-      "artifact": "results/carla/verify_P_cont_plate_A.json",
-      "control_artifact": "results/carla/verify_P_cont_none_plate_A.json",
-      "attributable_to_plate": [],
-      "falsified_with_plate_removed_too": [],
-      "certified_of_covered": "16/16",
-      "margin_worst_x_threshold": 0.9825,
-      "margin_best_x_threshold": 0.0256,
-      "margin_direction": "property A: bound / threshold, pass needs <= 1, worst is the highest",
-      "witness_artifact": "results/carla/witness_P_cont_plate.json",
-      "agreement": "16/17",
-      "nuisance_braking_sub_intervals": 0
+      "note": "NO HARNESS YET. The FMVSS 127 false-activation scenario is specified in CLAUDE.md sections 2 and 9. Until it is captured and driven, property A is verified on the no-target control, which is a legitimate must-not-brake property and is NOT the standard's false-activation scenario."
     }
   },
   "gates": {
     "capture_check": {
       "state": "done",
-      "value": 0.544,
+      "value": 0.8206,
       "threshold": 1.0,
-      "note": "BEHAVIOURAL, worst of the four policy-scenario pairs: policy output on a placed frame against the same policy driving through that spot. 0.108 / 0.112 / 0.331 / 0.544"
+      "note": "BEHAVIOURAL, worst of the six policy-scenario pairs: policy output on a placed frame against the same policy driving through that spot. 0.0694 / 0.1028 / 0.3188 / 0.5275 / 0.5417 / 0.8206"
     },
     "in_between_check": {
       "state": "done",
-      "value": 0.678,
+      "value": 0.8578,
       "threshold": 1.0,
-      "note": "BEHAVIOURAL, worst over COVERED sub-intervals of the four pairs: 0.156 / 0.222 / 0.506 / 0.678. A sub-interval the knot measurement declares uncovered is excluded from the coverage claim and so cannot fail a gate about that claim"
+      "note": "BEHAVIOURAL, worst COVERED sub-interval of the six pairs: policy response to the blended frame against its response to the rendered frame at the same pose. 0.4151 / 0.4495 / 0.4848 / 0.5779 / 0.5806 / 0.8578. Three pairs exceed the threshold only inside the uncovered sliver at the horizon, which no verdict counts."
     }
   },
   "primitives": {

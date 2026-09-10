@@ -1,0 +1,51 @@
+  defaulting to the declared-uncovered sub-interval [+0.241, +0.000] deg
+  loading Town01 (large maps take a while)
+  server age 0 min (R-SIM-1 ok)
+      sun  +0.24033  min demand over 25 poses   1.472  BELOW
+      sun  +0.23638  min demand over 25 poses   1.472  BELOW
+      sun  +0.22535  min demand over 25 poses   1.464  BELOW
+      sun  +0.22510  min demand over 25 poses   1.464  BELOW
+      sun  +0.21997  min demand over 25 poses   1.462  BELOW
+      sun  +0.21437  min demand over 25 poses   1.459  BELOW
+      sun  +0.20803  min demand over 25 poses   1.459  BELOW
+      sun  +0.20663  min demand over 25 poses   1.462  BELOW
+      sun  +0.19662  min demand over 25 poses   1.445  BELOW
+      sun  +0.19600  min demand over 25 poses   1.444  BELOW
+      sun  +0.17585  min demand over 25 poses   1.430  BELOW
+      sun  +0.17581  min demand over 25 poses   1.431  BELOW
+      sun  +0.17388  min demand over 25 poses   1.429  BELOW
+      sun  +0.16592  min demand over 25 poses   1.422  BELOW
+      sun  +0.16522  min demand over 25 poses   1.422  BELOW
+      sun  +0.16162  min demand over 25 poses   1.422  BELOW
+      sun  +0.15676  min demand over 25 poses   1.416  BELOW
+      sun  +0.15597  min demand over 25 poses   1.415  BELOW
+      sun  +0.15351  min demand over 25 poses   1.417  BELOW
+      sun  +0.14831  min demand over 25 poses   1.413  BELOW
+      sun  +0.14620  min demand over 25 poses   1.414  BELOW
+      sun  +0.13101  min demand over 25 poses   1.402  BELOW
+      sun  +0.13049  min demand over 25 poses   1.403  BELOW
+      sun  +0.12661  min demand over 25 poses   1.400  BELOW
+      sun  +0.11709  min demand over 25 poses   1.398  BELOW
+      sun  +0.10187  min demand over 25 poses   1.380  BELOW
+      sun  +0.09373  min demand over 25 poses   1.370  BELOW
+      sun  +0.09247  min demand over 25 poses   1.374  BELOW
+      sun  +0.08623  min demand over 25 poses   1.371  BELOW
+      sun  +0.07477  min demand over 25 poses   1.365  BELOW
+      sun  +0.07223  min demand over 25 poses   1.369  BELOW
+      sun  +0.06502  min demand over 25 poses   1.364  BELOW
+      sun  +0.04233  min demand over 25 poses   1.347  BELOW
+      sun  +0.03256  min demand over 25 poses   1.340  BELOW
+      sun  +0.02995  min demand over 25 poses   1.338  BELOW
+      sun  +0.00987  min demand over 25 poses   1.324  BELOW
+      sun  +0.00809  min demand over 25 poses   1.322  BELOW
+      sun  +0.00683  min demand over 25 poses   1.323  BELOW
+      sun  +0.00398  min demand over 25 poses   1.320  BELOW
+      sun  +0.00066  min demand over 25 poses   1.315  BELOW
+
+  n = 40, alpha = 0.05, using the k = 2 smallest score
+  conformal lower bound 1.3204 m/s^2 = 0.53x the decision threshold -> DOES NOT CLEAR
+  empirically 40/40 sampled illuminations fell below it
+
+  For an illumination drawn uniformly at random from [+0.000, +0.241] degrees of sun altitude, the policy's minimum commanded deceleration over the poses inside r_req is at least 1.3204 m/s^2 with probability at least 95%. THIS IS NOT A FOR-ALL STATEMENT. The certificate quantifies over every illumination in a sub-interval; this quantifies over a random one and attaches a probability. They are different claims and must never be reported as the same one.
+
+  wrote results/carla/Town01/conformal_P_pts_p0.241_p0.000.json

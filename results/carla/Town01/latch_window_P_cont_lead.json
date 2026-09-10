@@ -1,0 +1,1143 @@
+{
+  "policy": "P_cont",
+  "scenario": "lead",
+  "provenance": {
+    "timestamp": "2026-09-10T18:32:29-04:00",
+    "git_sha": "83deb91b5cee994a44dea4a7d3afe20bd5846e05",
+    "model_sha256": "39479751a017bc8dd83c1f65e96c10cc64c390832e3d7ab9b3d60aeb6ea6795f"
+  },
+  "threshold_mps2": 2.476,
+  "r_req_ft": 51.99,
+  "latch_window": {
+    "speed_mph": 25.0,
+    "worst_stop_ft": 44.71,
+    "median_stop_ft": 44.71,
+    "d_margin_ft": 3.28,
+    "r_latch_min_ft": 47.99,
+    "poses": [
+      79,
+      80,
+      81
+    ],
+    "note": "A latch at range >= r_latch_min stops with at least d_margin to spare on the worst measured stop. Derived from braking.json alone; the drives are not consulted."
+  },
+  "probed_poses": [
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85
+  ],
+  "sub_intervals_latch_guaranteed": "13/13",
+  "sub_intervals_latch_in_time": "13/13",
+  "cells": [
+    {
+      "from_deg": 60.0,
+      "to_deg": 39.977,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.6549,
+        "margin_x_threshold": 1.88,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.547,
+          "margin_x_threshold": 1.8364,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6284,
+          "margin_x_threshold": 1.8693,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6548,
+          "margin_x_threshold": 1.8799,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7331,
+          "margin_x_threshold": 1.9115,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8301,
+          "margin_x_threshold": 1.9507,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8462,
+          "margin_x_threshold": 1.9572,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7953,
+          "margin_x_threshold": 1.9367,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 9.0
+    },
+    {
+      "from_deg": 39.977,
+      "to_deg": 26.523,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.6985,
+        "margin_x_threshold": 1.8976,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5276,
+          "margin_x_threshold": 1.8285,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5954,
+          "margin_x_threshold": 1.8559,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6952,
+          "margin_x_threshold": 1.8963,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8205,
+          "margin_x_threshold": 1.9469,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.9306,
+          "margin_x_threshold": 1.9913,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8996,
+          "margin_x_threshold": 1.9788,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.915,
+          "margin_x_threshold": 1.985,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 7.4
+    },
+    {
+      "from_deg": 26.523,
+      "to_deg": 17.484,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.8172,
+        "margin_x_threshold": 1.9455,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5376,
+          "margin_x_threshold": 1.8326,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6457,
+          "margin_x_threshold": 1.8763,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8179,
+          "margin_x_threshold": 1.9458,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8051,
+          "margin_x_threshold": 1.9406,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8948,
+          "margin_x_threshold": 1.9769,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.9375,
+          "margin_x_threshold": 1.9941,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8996,
+          "margin_x_threshold": 1.9788,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 7.5
+    },
+    {
+      "from_deg": 17.484,
+      "to_deg": 10.084,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.6488,
+        "margin_x_threshold": 1.8775,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.4467,
+          "margin_x_threshold": 1.7959,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5202,
+          "margin_x_threshold": 1.8256,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6491,
+          "margin_x_threshold": 1.8776,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6278,
+          "margin_x_threshold": 1.869,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.676,
+          "margin_x_threshold": 1.8885,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.748,
+          "margin_x_threshold": 1.9176,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8429,
+          "margin_x_threshold": 1.9559,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 9.8
+    },
+    {
+      "from_deg": 10.084,
+      "to_deg": 5.99,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 3.9382,
+        "margin_x_threshold": 1.5905,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.7246,
+          "margin_x_threshold": 1.5043,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.8704,
+          "margin_x_threshold": 1.5631,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.9653,
+          "margin_x_threshold": 1.6015,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.9321,
+          "margin_x_threshold": 1.5881,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.0332,
+          "margin_x_threshold": 1.6289,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.0951,
+          "margin_x_threshold": 1.6539,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.1824,
+          "margin_x_threshold": 1.6891,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 8.3
+    },
+    {
+      "from_deg": 5.99,
+      "to_deg": 4.375,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.7041,
+        "margin_x_threshold": 1.8998,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.3845,
+          "margin_x_threshold": 1.7708,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.705,
+          "margin_x_threshold": 1.9002,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7061,
+          "margin_x_threshold": 1.9006,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6445,
+          "margin_x_threshold": 1.8758,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7528,
+          "margin_x_threshold": 1.9195,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7692,
+          "margin_x_threshold": 1.9261,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8271,
+          "margin_x_threshold": 1.9495,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 8.0
+    },
+    {
+      "from_deg": 4.375,
+      "to_deg": 2.967,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.5859,
+        "margin_x_threshold": 1.8521,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.3931,
+          "margin_x_threshold": 1.7742,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5094,
+          "margin_x_threshold": 1.8212,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5855,
+          "margin_x_threshold": 1.8519,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.4723,
+          "margin_x_threshold": 1.8062,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6657,
+          "margin_x_threshold": 1.8843,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7033,
+          "margin_x_threshold": 1.8995,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7367,
+          "margin_x_threshold": 1.913,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 8.5
+    },
+    {
+      "from_deg": 2.967,
+      "to_deg": 1.465,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 3.1546,
+        "margin_x_threshold": 1.274,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 2.8862,
+          "margin_x_threshold": 1.1657,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 2.9786,
+          "margin_x_threshold": 1.203,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.1522,
+          "margin_x_threshold": 1.2731,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.1941,
+          "margin_x_threshold": 1.29,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.3377,
+          "margin_x_threshold": 1.348,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.2575,
+          "margin_x_threshold": 1.3156,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.3079,
+          "margin_x_threshold": 1.336,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 8.5
+    },
+    {
+      "from_deg": 1.465,
+      "to_deg": 0.241,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 3.9947,
+        "margin_x_threshold": 1.6133,
+        "witness_s": null,
+        "domains": 5
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.8073,
+          "margin_x_threshold": 1.5377,
+          "witness_s": null,
+          "domains": 5
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.1218,
+          "margin_x_threshold": 1.6647,
+          "witness_s": null,
+          "domains": 5
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.9935,
+          "margin_x_threshold": 1.6129,
+          "witness_s": null,
+          "domains": 5
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.9975,
+          "margin_x_threshold": 1.6145,
+          "witness_s": null,
+          "domains": 5
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.2056,
+          "margin_x_threshold": 1.6985,
+          "witness_s": null,
+          "domains": 5
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.7261,
+          "margin_x_threshold": 1.5049,
+          "witness_s": null,
+          "domains": 5
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.791,
+          "margin_x_threshold": 1.5311,
+          "witness_s": null,
+          "domains": 5
+        }
+      },
+      "seconds": 40.9
+    },
+    {
+      "from_deg": 0.241,
+      "to_deg": 0.0,
+      "family_uncovered": true,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 3.3893,
+        "margin_x_threshold": 1.3688,
+        "witness_s": null,
+        "domains": 5
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.2584,
+          "margin_x_threshold": 1.316,
+          "witness_s": null,
+          "domains": 5
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.3974,
+          "margin_x_threshold": 1.3721,
+          "witness_s": null,
+          "domains": 5
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.3848,
+          "margin_x_threshold": 1.367,
+          "witness_s": null,
+          "domains": 5
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.2858,
+          "margin_x_threshold": 1.327,
+          "witness_s": null,
+          "domains": 5
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.869,
+          "margin_x_threshold": 1.5626,
+          "witness_s": null,
+          "domains": 5
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.4493,
+          "margin_x_threshold": 1.3931,
+          "witness_s": null,
+          "domains": 5
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.884,
+          "margin_x_threshold": 1.5686,
+          "witness_s": null,
+          "domains": 5
+        }
+      },
+      "seconds": 38.3
+    },
+    {
+      "from_deg": 0.0,
+      "to_deg": -1.422,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 4.6073,
+        "margin_x_threshold": 1.8607,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.4212,
+          "margin_x_threshold": 1.7856,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.3799,
+          "margin_x_threshold": 1.7689,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6039,
+          "margin_x_threshold": 1.8594,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5805,
+          "margin_x_threshold": 1.8499,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.4972,
+          "margin_x_threshold": 1.8163,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.6638,
+          "margin_x_threshold": 1.8836,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.5249,
+          "margin_x_threshold": 1.8275,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 7.8
+    },
+    {
+      "from_deg": -1.422,
+      "to_deg": -29.561,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 3.695,
+        "margin_x_threshold": 1.4923,
+        "witness_s": null,
+        "domains": 3
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.7426,
+          "margin_x_threshold": 1.5115,
+          "witness_s": null,
+          "domains": 3
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.5719,
+          "margin_x_threshold": 1.4426,
+          "witness_s": null,
+          "domains": 3
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.413,
+          "margin_x_threshold": 1.3784,
+          "witness_s": null,
+          "domains": 3
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.5836,
+          "margin_x_threshold": 1.4473,
+          "witness_s": null,
+          "domains": 3
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.6026,
+          "margin_x_threshold": 1.455,
+          "witness_s": null,
+          "domains": 3
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.4693,
+          "margin_x_threshold": 1.4012,
+          "witness_s": null,
+          "domains": 3
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 3.3659,
+          "margin_x_threshold": 1.3594,
+          "witness_s": null,
+          "domains": 3
+        }
+      },
+      "seconds": 24.5
+    },
+    {
+      "from_deg": -29.561,
+      "to_deg": -30.0,
+      "family_uncovered": false,
+      "latch_guaranteed": true,
+      "certified_window_poses": [
+        79,
+        80,
+        81
+      ],
+      "disjunction": {
+        "verdict": "CERTIFIED",
+        "bound_mps2": 5.0153,
+        "margin_x_threshold": 2.0255,
+        "witness_s": null,
+        "domains": 1
+      },
+      "deepest_certified_pose": 85,
+      "per_pose": {
+        "79": {
+          "range_ft": 51.89,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.9335,
+          "margin_x_threshold": 1.9925,
+          "witness_s": null,
+          "domains": 1
+        },
+        "80": {
+          "range_ft": 50.06,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 5.0153,
+          "margin_x_threshold": 2.0255,
+          "witness_s": null,
+          "domains": 1
+        },
+        "81": {
+          "range_ft": 48.23,
+          "in_window": true,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.7532,
+          "margin_x_threshold": 1.9197,
+          "witness_s": null,
+          "domains": 1
+        },
+        "82": {
+          "range_ft": 46.39,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.9175,
+          "margin_x_threshold": 1.986,
+          "witness_s": null,
+          "domains": 1
+        },
+        "83": {
+          "range_ft": 44.56,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.9,
+          "margin_x_threshold": 1.9789,
+          "witness_s": null,
+          "domains": 1
+        },
+        "84": {
+          "range_ft": 42.73,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8909,
+          "margin_x_threshold": 1.9753,
+          "witness_s": null,
+          "domains": 1
+        },
+        "85": {
+          "range_ft": 40.89,
+          "in_window": false,
+          "verdict": "CERTIFIED",
+          "bound_mps2": 4.8167,
+          "margin_x_threshold": 1.9453,
+          "witness_s": null,
+          "domains": 1
+        }
+      },
+      "seconds": 4.3
+    }
+  ],
+  "note": "Property S is FORALL pose FORALL s. The closed-loop criterion needs FORALL s EXISTS pose in the latch window, which `disjunction` certifies exactly by bounding max over the window. `latch_guaranteed` is the weaker EXISTS pose FORALL s, kept because it names WHICH pose carries the sub-interval when one does. It is a DISPOSITION instrument for CLAUDE.md section 8 and does not change any committed verdict: verify.py and the ledger are untouched."
+}
