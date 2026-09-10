@@ -1,72 +1,65 @@
-# OPEN: every arm fails the FMVSS 127 false-activation test at a regulatory condition
+# OPEN: every policy brakes for the steel plate at a condition the standard tests
 
-**Measured 2026-09-10 02:43 on Town12, under A14/A15/A16/A17. Not a finding.** The standing
-rule is that a result contradicting a pre-registered expectation is a bug until proven
-otherwise, and is not written up as a finding until a written disposition lists the
-candidate causes that were ruled out. This file is the contradiction; the disposition is
-not written and the work is not done.
+Measured 10 September 2026. **Not a finding.** A result that contradicts a written
+prediction is a fault until somebody proves otherwise. It is not written up until a
+disposition lists the causes ruled out. This file is the contradiction.
 
-## What was expected
+## Read this first
 
-`docs/PREREGISTRATION_2026-09-09.md`, prediction 2, committed before any of this was
-measured: *"All three arms pass all three regulatory endpoints, 10/10."*
+**The numbers below are withdrawn.** They were measured against networks that cannot be made
+again, because the training did not repeat (F29). The fix landed the same day (F30). The old
+files are in `stale/nonreproducible_pre_F30_2026-09-10/`.
 
-## What was measured
+So this file states a question. Measure it again on networks that repeat.
 
-The **hazard** endpoints held it exactly. Eighteen cells, three arms × three lighting
-conditions × two scenarios, every one 10/10:
+## Predicted, then measured
 
-| arm | lead: day / low / high | ped: day / low / high |
-|---|---|---|
-| `P_pts` | 10/10 · 10/10 · 10/10 | 10/10 · 10/10 · 10/10 |
-| `P_cont` | 10/10 · 10/10 · 10/10 | 10/10 · 10/10 · 10/10 |
-| `P_pts3` | 10/10 · 10/10 · 10/10 | 10/10 · 10/10 · 10/10 |
+The prediction, written before any of this: all three policies pass all three regulatory
+endpoints, ten times out of ten.
 
-The **false-activation** endpoints did not. Limit 2.4525 m/s²:
+The hazard endpoints held it exactly. Eighteen cells, every one ten of ten.
 
-| arm | daylight | darkness, lower beam | darkness, upper beam |
+The false-activation endpoints did not. The limit is 2.4525 m/s².
+
+| policy | daylight | dark, lower beam | dark, upper beam |
 |---|---|---|---|
-| `P_pts` | 10/10, peak 1.42 | 9/10, peak 2.50 | **0/10, peak 3.03** |
-| `P_cont` | 10/10, peak 2.24 | 10/10, peak 1.79 | **0/10, peak 3.28** |
-| `P_pts3` | 10/10, peak 1.41 | **0/10, peak 3.19** | 10/10, peak 0.56 |
+| points-trained | 10/10, peak 1.42 | 9/10, peak 2.50 | **0/10, peak 3.03** |
+| continuum-trained | 10/10, peak 2.24 | 10/10, peak 1.79 | **0/10, peak 3.28** |
+| three-condition | 10/10, peak 1.41 | **0/10, peak 3.19** | 10/10, peak 0.56 |
 
-On Town01 all nine passed 10/10. Every arm now brakes for a steel plate at at least one
-condition the standard tests.
+On the old map all nine passed.
 
-## Why this matters more than a moved number
+## Why it would matter, if it survives
 
-The study's setup sentence is that the arms are indistinguishable by the standard's own
-procedure. That still holds on the hazard side and it is now false on the
-false-activation side: FMVSS 127's own test **does** separate them, and it fails all three.
+The study's setup sentence is that the standard's own procedure cannot tell the policies
+apart. That still holds for the hazard scenes. It would be false here: the standard's own
+test would separate them, and fail all three.
 
-It also inverts a published claim. F19 and section 9 treated false activation as the
-sleeper — the thing `P_cont` might do and the others would not. Here it is every arm, at
-the endpoints, before any interior is considered.
+It would also invert a published claim. Earlier work treated false activation as the thing
+one policy might do and the others would not. Here it is every policy, at the endpoints,
+before any interior is considered.
 
-## Candidate causes, none ruled out
+## Causes to rule out, none ruled out
 
-1. **The night frames changed by 9x.** A16/A17 made the darkness captures 0.0036 where they
-   were 0.0342 (F28). The policies are trained on these, so every arm's night behaviour is
-   trained on a much darker image set than any previous arm in this study. The plate is
-   steel and headlamp-lit, so at night it may be one of the few bright things in frame.
-   **This is the first thing to check, and it is checkable**: the Town01 policies never saw
-   frames this dark.
-2. **The road.** Town12's site is four lanes with sidewalks; Town01's was two. The plate
-   subtends a different fraction of a differently-lit scene.
-3. **The upper/lower beam split.** `P_pts3` fails lower beam and passes upper; the other two
-   do the reverse. That is not one physical story, and a mechanism that produces opposite
-   failures in different arms is more likely to be a threshold interacting with training
-   than a property of the plate.
-4. **The plate itself.** Nine tiles covering 8.0 × 12.0 ft against a specified 8.0 × 12.0,
-   so placement is exact. Its material and reflectance under Town12's headlamp rendering
-   have not been examined.
-5. **A real result.** Camera-only AEB false-activating on steel at night is a plausible
-   failure and would be worth reporting. It is listed last deliberately: it is the most
-   interesting explanation and therefore the one to accept only after the others are dead.
+1. **The training did not repeat.** Now fixed. Exclude it first. It can explain the whole
+   table on its own.
+2. **The night frames changed by nine times.** The capture order fix made the dark captures
+   much darker. The plate is steel and lit by the headlamps, so at night it may be one of
+   the few bright things in frame.
+3. **The road.** The new site is four lanes with pavements. The old one was two. The plate
+   covers a different fraction of a differently lit scene.
+4. **The beam split.** One policy fails on lower beam and passes on upper. The other two do
+   the reverse. That is not one physical story. Opposite failures in different policies look
+   more like a threshold meeting training than a property of the plate.
+5. **The plate.** Nine tiles covering exactly 8.0 by 12.0 feet, so the placement is right.
+   Nobody has looked at how its material renders under these headlamps.
+6. **A real result.** A camera-only braking system firing on steel at night is plausible and
+   worth reporting. It is last on purpose: it is the most interesting explanation, so accept
+   it only after the others are dead.
 
 ## What must not happen
 
-The plate endpoints must not be quietly dropped from the endpoint criterion so the study
-proceeds. PROTOCOL section 10's M4 criterion names the hazard scenarios, so the pipeline
-did not stop — which means this could pass unnoticed into the paper as an unexamined
-regression. That is the reason this file exists.
+Do not quietly drop the plate endpoints from the criterion so the study can proceed. The
+pipeline did not stop here, because the milestone criterion names only the hazard scenes. So
+this could pass unnoticed into the paper as an unexamined regression. That is why this file
+exists.

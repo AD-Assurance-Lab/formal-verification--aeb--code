@@ -1,74 +1,53 @@
-# The steering preprint is finished. What that settles for this study, and what it does not
+# The steering preprint is finished. What that settles here
 
-Written 2026-09-09, reading `formal-verification--steering--arxiv` at the point Zach called
-it done and started fussing over figure placement. The companion note in the AEB paper
-repo, `NOTES_FROM_STEERING_PREPRINT.md`, covers the citation and the terminology. This one
-is about **scope**: what the finished paper means for what is worth doing here.
+Written 9 September 2026. This is about scope: what the finished paper means for what is
+worth doing here.
 
-## What transfers, and is now a settled question rather than an open one
+## Settled, and no longer open
 
-**1. Repetitions are a reproducibility check and the paper says so in one sentence.** The
-whole of the steering paper's treatment is: *"A test case is one policy under one
-condition, driven three independent laps as an internal reproducibility check and certified
-as a unit."* No Wilson intervals appear anywhere in it. This study spent its
-ten-repetition budget on something the paper it feeds does not report. Amendment A13 closes
-that here, and F22 is the measurement that justified it rather than importing the answer.
+**Repetitions check that a result repeats.** The steering paper says so in one sentence and
+prints no confidence intervals anywhere. This study spent its ten-repetition budget on
+something the paper it feeds does not report. Three repetitions are the rule here now, and
+we measured that ourselves rather than importing the answer.
 
-**2. The message is one sentence and everything serves it.** The steering paper's is
-*endpoints are not where these policies break; they break between the conditions anyone
-tests*, decided after a rewrite that consolidated ten result subsections into five. Its
-claim has two halves that do not depend on each other: one from driving with no verifier
-involved, one from the certificate. **This study has both halves and a stronger version of
-the claim**, because the endpoints were chosen by a federal standard rather than by us.
-Anything that does not serve that sentence is a journal-version item.
+**The message is one sentence, and everything serves it.** The steering message is that
+these policies do not break at the endpoints. They break between the conditions anyone
+tests. This study has the same claim in a stronger form, because a federal standard chose
+the endpoints and we did not. Anything that does not serve that sentence is a journal item.
 
-**3. High-level limitations, deliberately.** The steering paper's Limitations is one
-paragraph of structural limits, on the reasoning that an early-stage result should not
-create a permanent record of implementation specifics that will be trivial in months.
-Specifics that are load-bearing for an argument stay where that argument is made. **F23 is
-load-bearing and belongs in the methodology or wherever the illumination axis is defined,
-not in a limitations tally.**
+**Limitations stay high level.** An early result should not create a permanent record of
+implementation detail that will be trivial in months. Detail that carries an argument stays
+where the argument is made. The moving clouds belong where the lighting range is defined,
+not in a limitations tally.
 
-**4. The provenance gate is a deliverable, not a nicety.** `figures/check_data.py` runs 388
-checks of every figure coordinate and prose number against the code repo, and where the
-paper stopped quoting a number the check now asserts the underlying fact from the artifact
-instead of the string. The AEB paper has `figures/make_data.py` and no equivalent gate.
+**A provenance check is a deliverable.** The steering figures tool runs 388 checks of every
+figure number against the code. This study's paper has no equivalent.
 
-**5. Two numbers the steering paper had to withdraw are warnings for this one.** Figure 9,
-peak-versus-sustained, is withdrawn because its only two candidate datasets were both from
-superseded generations and disagreed with each other and with the committed certificate.
-`interp_check` is withdrawn because its measurement predates the determinism harness and
-its artifact no longer exists at HEAD. **This study's scientific bet is that the peak is
-the right statistic for AEB.** It cannot lean on the steering study for that: over there
-the comparable measurement is withdrawn and the paper says the question is open.
+**Two withdrawn numbers are warnings.** The steering peak-versus-sustained figure is
+withdrawn, because its two candidate datasets came from superseded generations and disagreed
+with each other. Its interpolation check is withdrawn, because the measurement predates the
+determinism harness. **This study's scientific bet is that the peak is the right statistic
+for braking.** It cannot lean on the steering study for that. Over there the comparable
+measurement is withdrawn and the paper says the question is open.
 
-## What does NOT transfer
+## Does not carry over
 
-- **"A lap" as the unit.** A lap is one traversal of the unique scored road and it fails if
-  any scored span departs. An AEB sub-interval is its own condition and its own verdict, so
-  sub-intervals are not repetitions of each other. The AEB analogue of a lap is **one
-  traversal of every scored sub-interval**, which is what `--rep-index` drives and what the
-  server restart brackets.
-- **The steering study's cell counts, widths and ratios.** The width ratio does not even
-  carry between that paper's own two maps, 3.0x on Town04 and 2.0x on Town06.
-- **Its harness clean bill.** The steering study measured D-3 and D-4 and pinned them. F23
-  is a third mechanism that neither study had looked for, and it is present in both.
+- **The lap as the unit.** A lap is one traversal of the scored road. A piece of this
+  study's lighting range is its own condition and its own verdict, so the pieces are not
+  repetitions of each other. The analogue of a lap here is one traversal of every scored
+  piece.
+- **The steering cell counts and width ratios.** They do not even carry between that paper's
+  own two maps.
+- **Its clean bill on the harness.** Moving clouds are a third mechanism neither study
+  looked for, and both have it.
 
-## What this means for the AEB paper right now
+## What this means for the paper right now
 
-`formal-verification--aeb--arxiv/STATUS.md` lists three blocking items, and **all three
-were written against the pre-A12 numbers**: `34.7 ft`, `33.58 ft` brake onset, `6/11` and
-`8/11` certified, two policies rather than three. Every one of those changed in the rebuild
-and again in the plate extension. Its Table 4, which its own status calls "the whole study
-on one page", is stale in every row.
+The paper repo lists three blocking items. All three were written against numbers that the
+rebuild has since changed. Its main table is stale in every row.
 
-So the order is not the one that file gives:
+So the order is not the one that file gives.
 
-1. **Re-run `figures/make_data.py` against the current artifacts.** It is the only
-   sanctioned path in and nothing there should be regenerated by hand. Until it runs, a
-   co-author read of Table 4 is a read of the wrong table.
-2. **Decide F23 before re-measuring anything on the back of it.** It is the one open item
-   that can still move a number, and it is Zach's call because both candidate fixes change
-   what the conditions are.
-3. Then the citation checks, which are unaffected by any of this and can happen in
-   parallel.
+1. Run the figures data tool against the current results. It is the only sanctioned way in.
+   Until it runs, reading that table is reading the wrong table.
+2. Then the citation checks, which nothing here affects.

@@ -57,3 +57,9 @@
     sub-interval -29.770 to -29.885, midpoint -29.828
       max policy difference 4.484 m/s^2 = 1.83 of the decision threshold
     sub-interval -29.885 to -30.000, midpoint -29.943
+      max policy difference 4.481 m/s^2 = 1.83 of the decision threshold
+
+  illumination axis OK: 29 midpoints, span 0.3656 of full range
+
+  worst 1.832 of the decision threshold -> FAIL
+  wrote results/carla/Town12/gate_inbetween_P_pts.json
