@@ -116,11 +116,11 @@ large map's artifacts.
 bash tools/carla_launch.sh                # the only launcher. The flags matter
 python tools/carla_jobs.py --list         # what is queued, in dependency order
 bash scripts/rebuild_all.sh               # the study, in order, up to verification
-bash scripts/rebuild_all.sh witness       # the drives, after the verdicts are committed
+bash scripts/rebuild_all.sh witness       # the drives
 ```
 
-`rebuild_all.sh` stops before the drives on purpose. The verdicts have to be written to git
-first, because that is what makes a verdict a prediction rather than a description.
+`rebuild_all.sh` stops before the drives so that verification and driving run as separate
+steps. Verdicts do not have to be committed first.
 
 ## Read in this order
 

@@ -2,8 +2,8 @@
 
     python tools/drive_witness.py --policy P_pts
 
-Reads `results/carla/verify_<policy>_<scenario>.json`, which must already be committed to
-git: the verdicts are predictions only if they were written down before the driving. Then
+Reads `results/carla/verify_<policy>_<scenario>.json`. The verdicts do not have to be
+committed first; that is reserved for demonstrations of a settled method. Then
 for every sub-interval, certified and falsified alike, it drives the closed loop at that
 sub-interval's midpoint sun altitude, ten repetitions, and reports the pass rate.
 

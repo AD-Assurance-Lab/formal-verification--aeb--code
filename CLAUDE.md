@@ -362,7 +362,9 @@ range, so nothing downstream of it survives. Capture, train, check, certify and 
 - repetitions that disagree no longer make a cell void by rule;
 - an experiment no longer has to carry a control that is expected to fail.
 
-Writing verdicts down before driving is still the right habit. Nothing enforces it now.
+The lab is in an exploratory phase. Do not commit verdicts before driving, and do not
+propose it. Committing verdicts first belongs to demonstrations of a settled method to a user
+or customer, not to exploratory studies.
 The rule that a contradicted expectation is a fault until disposed is **unchanged**.
 
 
@@ -489,7 +491,6 @@ Still owed here, and nothing fails if it is skipped. That is why it is written d
 1. Route every control command through one choke point.
 2. Restart the server before every repetition.
 3. Record the harness in every cell. Record unknown as null, never as false.
-4. Make the blind-order check run on every commit.
 
 **Frames captured under the old harness cannot be reused.** Capture them again. Do not
 reweight or filter them.

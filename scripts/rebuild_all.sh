@@ -8,16 +8,15 @@
 # 5.6% of the lap, and the certificate, the agreement rate and the write-up all read as
 # complete.
 #
-# WHAT IT DOES NOT DO. It stops before M7. The witness drives may only run after the
-# verification verdicts are COMMITTED to git (CLAUDE.md section 8), and a script that
-# committed on your behalf would turn the blind protocol into a formality. Stage `verify`
-# ends by telling you what to commit; `bash scripts/rebuild_all.sh witness` runs the
-# drives afterwards, and tools/drive_witness.py refuses if the verdicts are uncommitted.
+# WHAT IT DOES NOT DO. It stops before M7, so verification and the witness drives run
+# as separate steps. `bash scripts/rebuild_all.sh witness` runs the drives. Verdicts do
+# not have to be committed first: the lab is exploratory, and committing verdicts before
+# driving is reserved for demonstrations of a settled method.
 #
 # Usage:
 #   bash scripts/rebuild_all.sh              # from the beginning, up to and incl. verify
 #   bash scripts/rebuild_all.sh capture      # start at a stage
-#   bash scripts/rebuild_all.sh witness      # M7, after the verdicts are committed
+#   bash scripts/rebuild_all.sh witness      # M7, the witness drives
 #   CARLA_PORT=3000 bash scripts/rebuild_all.sh
 #
 # Every simulator stage gets a FRESH SERVER. Not one server for a group of stages: the
@@ -249,7 +248,7 @@ if [ "$FROM" = "analysis" ]; then
 fi
 
 if [ "$FROM" = "witness" ]; then
-  # M7. Refuses to run until the verdicts are committed; that refusal is the protocol.
+  # M7. The witness drives. Runs whether or not the verdicts are committed.
   #
   # TWO PASSES, answering different questions.
   #   midpoint    every sub-interval, certified ones included, at its midpoint. The
@@ -398,7 +397,7 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       # Property A is deliberately NOT here. It is the expensive half -- 104 poses per
       # sub-interval against property S's 25, measured at ~3.7 h against ~50 min -- and
       # it has no witness drive, so nothing waits on it. Running it in this stage would
-      # put four hours of work in front of the commit that lets the drives start, for no
+      # put four hours of work in front of the drives, for no
       # reason. `bash scripts/rebuild_all.sh verifyA` runs it, and it can run at the same
       # time as `witness`: one wants the GPU, the other wants the simulator.
       # Concurrent, but in BATCHES of $VERIFY_CONC and with the simulator stopped first.
@@ -434,13 +433,10 @@ for i in $(seq $start $((${#STAGES[@]} - 1))); do
       done
       [ $vfail -ne 0 ] && { say "stopping: a property S job failed"; exit 1; }
       say ""
-      say "M6 property S done. COMMIT THE VERDICTS BEFORE DRIVING:"
+      say "M6 property S done. Next:"
       say "    python tools/record_cells.py --write"
-      say "    git add results/carla/$CARLA_MAP_NAME/verify_*.json study/results.json && git commit"
       say "    bash scripts/rebuild_all.sh witness      # simulator"
       say "    bash scripts/rebuild_all.sh verifyA      # GPU, concurrently"
-      say "A verdict is a prediction only if it was written down first;"
-      say "tools/drive_witness.py refuses to run against an uncommitted one."
       ;;
   esac
 done
